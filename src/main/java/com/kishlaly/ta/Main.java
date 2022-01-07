@@ -29,19 +29,18 @@ public class Main {
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                //THREE_DISPLAYS_BUY,
+                THREE_DISPLAYS_BUY,
                 //THREE_DISPLAYS_SELL
-                THREE_DISPLAYS_TYPE_2_BUY
         };
 
         //buildCache(timeframes, tasks, false);
         //checkCache(timeframes, tasks);
 
-        run(timeframes, tasks);
+        //run(timeframes, tasks);
 
         //Context.screenOneDay = "2020-09";
         //Context.screenTwoDay = "2020-09-28";
-        //test(timeframes, tasks);
+        test(timeframes, tasks);
 
         // проверить стратегию:
         // на первом экране

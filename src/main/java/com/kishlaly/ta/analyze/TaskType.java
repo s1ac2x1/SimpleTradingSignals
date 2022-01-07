@@ -2,7 +2,6 @@ package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
-import com.kishlaly.ta.analyze.tasks.ThreeDisplaysType2;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
@@ -40,17 +39,6 @@ public enum TaskType {
             }},
             ThreeDisplays::buySignal
     ),
-    THREE_DISPLAYS_TYPE_2_BUY(
-            new HashMap<Integer, Timeframe>() {{
-                put(1, WEEK);
-                put(2, DAY);
-            }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH});
-            }},
-            ThreeDisplaysType2::buySignal
-    ),
     THREE_DISPLAYS_SELL(
             new HashMap<Integer, Timeframe>() {{
                 put(1, WEEK);
@@ -61,17 +49,6 @@ public enum TaskType {
                 put(2, new Indicator[]{EMA13, MACD, STOCH});
             }},
             ThreeDisplays::sellSignal
-    ),
-    THREE_DISPLAYS_TYPE_2_SELL(
-            new HashMap<Integer, Timeframe>() {{
-                put(1, WEEK);
-                put(2, DAY);
-            }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH});
-            }},
-            ThreeDisplaysType2::sellSignal
     );
 
     TaskType(final Map<Integer, Timeframe> timeframes,
