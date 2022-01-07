@@ -20,7 +20,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        //Context.singleSymbol = "SCHW";
+        Context.singleSymbol = "AAPL";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -39,7 +39,7 @@ public class Main {
         //run(timeframes, tasks);
 
         //Context.screenOneDay = "2020-09";
-        //Context.screenTwoDay = "2020-09-28";
+        //Context.screenTwoDay = "2021-11-15";
         test(timeframes, tasks);
 
         // сделать тест открытий позиций по стратегиям

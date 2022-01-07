@@ -31,7 +31,7 @@ public class ThreeDisplays {
     public static class Config {
         public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 3;
         public static int multiplier = 2; // для поиска аномально длинных баров
-        public static int STOCH_OVERSOLD = 40;
+        public static int STOCH_OVERSOLD = 35;
         public static int STOCH_OVERBOUGHT = 70;
     }
 
@@ -143,8 +143,9 @@ public class ThreeDisplays {
         Stoch stoch3 = screenTwoStochastic.get(screenTwoStochastic.size() - 3);
         Stoch stoch2 = screenTwoStochastic.get(screenTwoStochastic.size() - 2);
         Stoch stoch1 = screenTwoStochastic.get(screenTwoStochastic.size() - 1);
-        // %D повышается
-        boolean ascendingStochastic = stoch3.getSlowD() < stoch2.getSlowD() && stoch2.getSlowD() < stoch1.getSlowD();
+
+        // %D повышается (достаточно, чтобы последний был больше прошлых двух)
+        boolean ascendingStochastic = stoch1.getSlowD() > stoch2.getSlowD() && stoch1.getSlowD() > stoch3.getSlowD();
         if (!ascendingStochastic) {
             Log.recordCode(Codes.STOCH_NOT_ASCENDING, screen1);
             Log.addDebugLine("Стохастик %D не растет на втором экране");
@@ -352,8 +353,8 @@ public class ThreeDisplays {
         Stoch stoch3 = screenTwoStochastic.get(screenTwoStochastic.size() - 3);
         Stoch stoch2 = screenTwoStochastic.get(screenTwoStochastic.size() - 2);
         Stoch stoch1 = screenTwoStochastic.get(screenTwoStochastic.size() - 1);
-        // %D снижается
-        boolean ascendingStochastic = stoch3.getSlowD() > stoch2.getSlowD() && stoch2.getSlowD() > stoch1.getSlowD();
+        // %D снижается (достаточно, чтобы последний был ниже прошлых двух)
+        boolean ascendingStochastic = stoch1.getSlowD() < stoch2.getSlowD() && stoch1.getSlowD() < stoch3.getSlowD();
         if (!ascendingStochastic) {
             Log.recordCode(Codes.STOCH_NOT_DESCENDING, screen2);
             Log.addDebugLine("Стохастик %D не снижается на втором экране");
