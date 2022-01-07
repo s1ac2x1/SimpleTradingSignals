@@ -1,11 +1,16 @@
 package com.kishlaly.ta;
 
+import com.kishlaly.ta.model.Quote;
+
+import java.util.List;
+
+import static com.kishlaly.ta.cache.CacheReader.loadQuotesFromCache;
+
 public class Test {
 
     public static void main(String[] args) throws Exception {
-        int count = 7;
-        int div = count / 2;
-        System.out.println(div);
+        List<Quote> quotes = loadQuotesFromCache("MCK");
+
     }
 
 }

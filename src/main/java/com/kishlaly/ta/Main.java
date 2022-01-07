@@ -20,7 +20,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        Context.singleSymbol = "SCHW";
+        //Context.singleSymbol = "SCHW";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -42,11 +42,7 @@ public class Main {
         //Context.screenTwoDay = "2020-09-28";
         test(timeframes, tasks);
 
-        // проверить стратегию:
-        // на первом экране
-        //    1) последная котировка открывается ниже и закрывается выше ЕМА26
-        //    2) последние две гистограммы MACD растут
-        // на втором экране все проверки для второго экрана из ThreeDisplays
+        // сделать тест открытий позиций по стратегиям
 
         // [D] INFO 4 Mar 2021
         // BK https://drive.google.com/file/d/14PlpZMZV7lwsIwP2V7bww0LKSVjdn70Q/view?usp=sharing и https://drive.google.com/file/d/1-a0ZtMuLQyuamez_402v6YkViNWzY6RS/view?usp=sharing

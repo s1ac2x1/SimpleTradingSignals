@@ -12,7 +12,7 @@ public class Context {
     public static ApiSource api;
     public static double parallelRequests = 10;
     public static double limitPerMinute = 75;
-    public static Timeframe timeframe;
+    public static Timeframe timeframe = Timeframe.DAY; // по умолчению для тестов
     public static String source;
     public static String singleSymbol;
 
