@@ -1,0 +1,10 @@
+/build
+.gradle
+gradlew
+/gradle
+gradlew.bat
+quotes.json
+t.json
+temp
+tests.txt
+/.idea
