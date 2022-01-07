@@ -7,8 +7,6 @@ import com.kishlaly.ta.utils.Context;
 import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.*;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
-import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -31,21 +29,19 @@ public class Main {
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                THREE_DISPLAYS_BUY,
+                //THREE_DISPLAYS_BUY,
                 //THREE_DISPLAYS_SELL
+                THREE_DISPLAYS_TYPE_2_BUY
         };
 
         //buildCache(timeframes, tasks, false);
         //checkCache(timeframes, tasks);
 
-        //run(timeframes, tasks);
+        run(timeframes, tasks);
 
-        //Context.day = "2021-11-12";
-        test(timeframes, tasks);
-
-        // если усилить проверку тренда на первом экране требованием, чтобы последние N quote.low не снижались/поднимались последовательно?
-        // потому что часто сигналы на втором экране в точке, за которой следует легкий разворот (опасность срабатывания столплоса)
-        // как было у SCHW 12 NOVEMBER 2021
+        //Context.screenOneDay = "2020-09";
+        //Context.screenTwoDay = "2020-09-28";
+        //test(timeframes, tasks);
 
         // проверить стратегию:
         // на первом экране

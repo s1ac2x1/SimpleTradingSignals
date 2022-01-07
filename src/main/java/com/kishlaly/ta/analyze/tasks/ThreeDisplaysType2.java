@@ -25,8 +25,14 @@ import static com.kishlaly.ta.utils.Context.minimumBarsCount;
  * MACD (12 26 9 close) на втором экране
  * EMA13 (close) на втором экране
  * STOCH (14 1 3 close) на втором экране
+ * <p>
+ * на первом экране (пример сигнала на покупку)
+ * 1) предпоследняя котировка открывается и закрывается ниже ЕМА26
+ * 2) последная котировка открывается ниже и закрывается выше ЕМА26
+ * 3) последние две гистограммы MACD растут
+ * на втором экране все проверки для второго экрана из ThreeDisplays
  */
-public class ThreeDisplays {
+public class ThreeDisplaysType2 {
 
     public static class Config {
         public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 3;
@@ -84,36 +90,33 @@ public class ThreeDisplays {
         List<Stoch> screenTwoStochastic = screen2.indicators.get(Indicator.STOCH);
         screenTwoStochastic = screenTwoStochastic.subList(screenTwoStochastic.size() - minimumBarsCount, screenTwoStochastic.size());
 
-        if (Context.screenTwoDay != null && !screen2.quotes.get(screen2.quotes.size() - 1).getNativeDate().contains(Context.screenTwoDay)) {
+        if (Context.screenOneDay != null && !screen1Quotes.get(minimumBarsCount - 1).getMyDate().contains(Context.screenOneDay)) {
+            return null;
+        }
+        if (Context.screenTwoDay != null && !screen2Quotes.get(minimumBarsCount - 1).getMyDate().contains(Context.screenTwoDay)) {
             return null;
         }
 
         // первый экран
 
-        // проверка тренда
-        boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, NUMBER_OF_EMA26_VALUES_TO_CHECK);
-        //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen1); плохая проверка
-        if (!uptrendCheckOnMultipleBars) {
-            Log.recordCode(Codes.NO_UPTREND, screen1);
-            Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
+        // предпоследняя котировка открывается и закрывается ниже ЕМА26
+        Quote prelastQuote = screen1Quotes.get(minimumBarsCount - 2);
+        EMA prelastEMA = screenOneEMA26.get(minimumBarsCount - 2);
+        boolean opensAndClosesBelowEMA = prelastQuote.getOpen() < prelastEMA.getValue() && prelastQuote.getClose() < prelastEMA.getValue();
+        if (!opensAndClosesBelowEMA) {
+            Log.recordCode(Codes.PRE_LAST_QUOTE_NOT_BELOW_EMA, screen2);
+            Log.addDebugLine("Предпоследняя котировка не ниже ЕМА26");
             return null;
         }
 
-        // На первом экране последние 4 Quote.low не должны понижаться
-        // (эта проверка уже есть в Functions.isUptrend, но пусть тут тоже будет)
-        Quote q4 = screen1Quotes.get(minimumBarsCount - 4);
-        Quote q3 = screen1Quotes.get(minimumBarsCount - 3);
-        Quote q2 = screen1Quotes.get(minimumBarsCount - 2);
+        // последная котировка открывается ниже и закрывается выше ЕМА26
         Quote q1 = screen1Quotes.get(minimumBarsCount - 1);
-        if (q4.getLow() >= q3.getLow() && q3.getLow() >= q2.getLow() && q2.getLow() >= q1.getLow()) {
-            // допустимо только, если последний столбик зеленый
-            if (q1.getClose() < q1.getOpen()) {
-                Log.recordCode(Codes.UPTREND_FAILING, screen1);
-                Log.addDebugLine("Последние 4 столбика на первом экране понижаются");
-                return null;
-            } else {
-                Log.addDebugLine("Последние 4 столбика на первом экране понижаются, но крайний правый закрылся выше открытия");
-            }
+        EMA ema1 = screenOneEMA26.get(minimumBarsCount - 1);
+        boolean opensBelowAndClosesAfterEMA = q1.getOpen() < ema1.getValue() && q1.getClose() > ema1.getValue();
+        if (!opensBelowAndClosesAfterEMA) {
+            Log.recordCode(Codes.LAST_QUOTE_FAILED_OPEN_BELOW_AND_CLOSE_ABOVE_EMA, screen2);
+            Log.addDebugLine("Предпоследняя котировка не открылась ниже и не закрылась выше ЕМА26");
+            return null;
         }
 
         // второй экран
@@ -249,6 +252,7 @@ public class ThreeDisplays {
         return quote1;
     }
 
+    // TODO обновить
     public static Quote sellSignal(SymbolData screen1, SymbolData screen2) {
 
         if (screen1.quotes.isEmpty()) {

@@ -30,6 +30,7 @@ public class Context {
     public static Timeframe logTimeframe2;
 
     // для тестирования на истоирческих данных
-    public static String day; // вида YYYY-mm-dd
+    public static String screenOneDay; // вида YYYY-mm-dd
+    public static String screenTwoDay; // вида YYYY-mm-dd
 
 }
