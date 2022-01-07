@@ -40,7 +40,7 @@ public class Main {
 
         //run(timeframes, tasks);
 
-        Context.day = "2021-11-12";
+        //Context.day = "2021-11-12";
         test(timeframes, tasks);
 
         // если усилить проверку тренда на первом экране требованием, чтобы последние N quote.low не снижались/поднимались последовательно?

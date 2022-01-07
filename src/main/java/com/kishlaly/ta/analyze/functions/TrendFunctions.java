@@ -8,13 +8,13 @@ import com.kishlaly.ta.model.indicators.MACD;
 
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class TrendFunctions {
 
     // подразумевается, что размер коллекций равен Context.minimumBarsCount
     // Главные правила проверки:
     // 1. Как минимум пловина из N последних баров должна быть правильного цвета (зеленые на восходящем тренде или красные на нисходящем)
-    // TODO пробую заменить пункт 1 на фильтрацию последовательного спуска/подъема quote.low/high для всех N баров
     // 2. ЕМА должна расти последовательно
     // 3. если гистограмма MACD не растет последовательно - нормально
     //    главное, чтобы она не спускалась последовательно при росте ЕМА
@@ -29,7 +29,7 @@ public class TrendFunctions {
         return abstractTrendCheckOnMultipleBars(
                 symbolData,
                 barsToCheck,
-                (quote, nextQuote) -> quote.getLow() < nextQuote.getLow(),
+                quote -> quote.getOpen() < quote.getClose(),
                 (next, curr) -> next <= curr,
                 (curr, next) -> curr < next,
                 (curr, next) -> curr > next
@@ -42,7 +42,7 @@ public class TrendFunctions {
         return abstractTrendCheckOnMultipleBars(
                 symbolData,
                 barsToCheck,
-                (quote, nextQuote) -> quote.getHigh() > nextQuote.getHigh(),
+                quote -> quote.getOpen() > quote.getClose(),
                 (next, curr) -> next >= curr,
                 (curr, next) -> curr > next,
                 (curr, next) -> curr < next
@@ -72,7 +72,7 @@ public class TrendFunctions {
     private static boolean abstractTrendCheckOnMultipleBars(
             SymbolData symbolData,
             int barsToCheck,
-            BiFunction<Quote, Quote, Boolean> barShadowCorrectMovement,
+            Function<Quote, Boolean> barCorrectColor,
             BiFunction<Double, Double, Boolean> emaMoveCheck,
             BiFunction<Double, Double, Boolean> histogramCheck1,
             BiFunction<Double, Double, Boolean> histogramCheck2
@@ -84,10 +84,14 @@ public class TrendFunctions {
         List<MACD> macd = symbolData.indicators.get(Indicator.MACD);
         macd = macd.subList(macd.size() - 100, macd.size());
 
-        for (int i = quotes.size() - barsToCheck; i < quotes.size() - 1; i++) {
-            if (!barShadowCorrectMovement.apply(quotes.get(i), quotes.get(i + 1))) {
-                return false;
+        int barsWithCorrectColors = 0;
+        for (int i = quotes.size() - barsToCheck; i < quotes.size(); i++) {
+            if (barCorrectColor.apply(quotes.get(i))) {
+                barsWithCorrectColors++;
             }
+        }
+        if (barsWithCorrectColors < barsToCheck / 2) {
+            return false;
         }
 
         for (int i = ema.size() - barsToCheck; i < ema.size() - 1; i++) {
