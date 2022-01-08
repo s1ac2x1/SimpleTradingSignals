@@ -100,7 +100,9 @@ public class TaskTester {
     /**
      * Простое тестирование длинных позиций
      * TP на верхней границе канала Кельтнера
-     * SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой (TODO реализовать)
+     * SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой
+     * (TODO реализовать)
+     *
      *
      * TODO адаптировать для коротких позиций тоже
      *
@@ -178,6 +180,7 @@ public class TaskTester {
                     if (profit > 0 || loss > 0) {
                         result.setPositionDuration(closePositionQuote.getTimestamp() - signal.getTimestamp());
                     }
+                    // TODO заполнить другие поля
                 }
                 historicalTesting.addSignalResult(signal, result);
             }
