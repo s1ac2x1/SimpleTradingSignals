@@ -41,19 +41,15 @@ public class HistoricalTesting {
     }
 
     public static class Result {
+
         private boolean closed;
+        private String closedDate;
+        private long positionDuration;
+
         private boolean profitable;
         private double profit;
         private double loss;
-        private long timeDiff;
-
-        public boolean isProfitable() {
-            return this.profitable;
-        }
-
-        public void setProfitable(final boolean profitable) {
-            this.profitable = profitable;
-        }
+        private String stopLossQuote;
 
         public boolean isClosed() {
             return this.closed;
@@ -61,6 +57,30 @@ public class HistoricalTesting {
 
         public void setClosed(final boolean closed) {
             this.closed = closed;
+        }
+
+        public String getClosedDate() {
+            return this.closedDate;
+        }
+
+        public void setClosedDate(final String closedDate) {
+            this.closedDate = closedDate;
+        }
+
+        public long getPositionDuration() {
+            return this.positionDuration;
+        }
+
+        public void setPositionDuration(final long positionDuration) {
+            this.positionDuration = positionDuration;
+        }
+
+        public boolean isProfitable() {
+            return this.profitable;
+        }
+
+        public void setProfitable(final boolean profitable) {
+            this.profitable = profitable;
         }
 
         public double getProfit() {
@@ -79,12 +99,12 @@ public class HistoricalTesting {
             this.loss = loss;
         }
 
-        public long getTimeDiff() {
-            return this.timeDiff;
+        public String getStopLossQuote() {
+            return this.stopLossQuote;
         }
 
-        public void setTimeDiff(final long timeDiff) {
-            this.timeDiff = timeDiff;
+        public void setStopLossQuote(final String stopLossQuote) {
+            this.stopLossQuote = stopLossQuote;
         }
     }
 

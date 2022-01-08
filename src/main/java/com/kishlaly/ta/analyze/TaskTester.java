@@ -176,7 +176,7 @@ public class TaskTester {
                     result.setProfit(profit);
                     result.setLoss(loss);
                     if (profit > 0 || loss > 0) {
-                        result.setTimeDiff(closePositionQuote.getTimestamp() - signal.getTimestamp());
+                        result.setPositionDuration(closePositionQuote.getTimestamp() - signal.getTimestamp());
                     }
                 }
                 historicalTesting.addSignalResult(signal, result);
