@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
+import static com.kishlaly.ta.model.HistoricalTesting.Result;
 import static com.kishlaly.ta.utils.Clean.clear;
 
 public class TaskTester {
@@ -57,13 +58,15 @@ public class TaskTester {
                         System.out.println(e.getMessage());
                     }
                     if (!signals.isEmpty()) {
-                        historicalTestings.add(new HistoricalTesting(forTesting, signals));
+                        HistoricalTesting testing = new HistoricalTesting(forTesting, signals);
+                        calculateStatistics(testing);
+                        historicalTestings.add(testing);
                         String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
-                        Set<String> signalDates = readableOutput.get(key);
-                        if (signalDates == null) {
-                            signalDates = new LinkedHashSet<>();
+                        Set<String> signalResults = readableOutput.get(key);
+                        if (signalResults == null) {
+                            signalResults = new LinkedHashSet<>();
                         }
-                        Set<String> finalSignalDates = signalDates;
+                        Set<String> finalSignalResults = signalResults;
                         signals.forEach(signal -> {
                             String date = signal.getMyDate();
                             ZonedDateTime parsedDate = ZonedDateTime.parse(date);
@@ -71,9 +74,11 @@ public class TaskTester {
                             if (screen2.timeframe == Timeframe.HOUR) {
                                 date += " " + parsedDate.getHour() + ":" + parsedDate.getMinute();
                             }
-                            finalSignalDates.add(date);
+                            Result result = testing.getResult(signal);
+                            String line = date + " --- " + result.isProfitable();
+                            finalSignalResults.add(line);
                         });
-                        readableOutput.put(key, signalDates);
+                        readableOutput.put(key, signalResults);
                     }
                     clear(screen1);
                     clear(screen2);
@@ -90,66 +95,92 @@ public class TaskTester {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        calculateStatistics(historicalTestings);
     }
 
-    private static void calculateStatistics(List<HistoricalTesting> historicalTestings) {
-        historicalTestings.forEach(historicalTesting -> {
-            SymbolData data = historicalTesting.getData();
-            List<Quote> quotes = data.quotes;
-            data.indicators.put(Indicator.KELTNER, IndicatorUtils.buildKeltnerChannels(quotes));
-            List<Quote> signals = historicalTesting.getSignals();
-            signals.forEach(signal -> {
-                // найти индекс этой котировки в списке
-                int signalIndex = -1;
-                for (int i = 0; i < quotes.size(); i++) {
-                    if (quotes.get(i).getTimestamp().compareTo(signal.getTimestamp()) == 0) {
-                        signalIndex = i;
+    /**
+     * Простое тестирование длинных позиций
+     * TP на верхней границе канала Кельтнера
+     * SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой (TODO реализовать)
+     *
+     * TODO адаптировать для коротких позиций тоже
+     *
+     * @param historicalTesting
+     */
+    private static void calculateStatistics(HistoricalTesting historicalTesting) {
+        SymbolData data = historicalTesting.getData();
+        List<Quote> quotes = data.quotes;
+        data.indicators.put(Indicator.KELTNER, IndicatorUtils.buildKeltnerChannels(quotes));
+        List<Quote> signals = historicalTesting.getSignals();
+        // TODO remove
+        signals = signals.subList(1, 2);
+        // ---
+        signals.forEach(signal -> {
+            // найти индекс этой котировки в списке
+            int signalIndex = -1;
+            for (int i = 0; i < quotes.size(); i++) {
+                if (quotes.get(i).getTimestamp().compareTo(signal.getTimestamp()) == 0) {
+                    signalIndex = i;
+                    break;
+                }
+            }
+            if (signalIndex - 1 >= 2) {
+                Keltner keltner = (Keltner) data.indicators.get(Indicator.KELTNER).get(signalIndex);
+                double openingPrice = signal.getClose() + 0.07;
+                double openPositionSize = Context.lots * openingPrice;
+                double takeProfit = keltner.getTop();
+                Quote currentQuote = signal;
+                Quote prevQuote = quotes.get(signalIndex - 1);
+                int index = signalIndex;
+                do {
+                    if (prevQuote.getLow() > currentQuote.getLow()) {
+                        break;
+                    } else {
+                        index--;
+                        currentQuote = quotes.get(index);
+                        prevQuote = quotes.get(index - 1);
+                    }
+                } while (index > 2);
+                double stopLoss = currentQuote.getLow() - 0.27;
+                int startPositionIndex = signalIndex;
+                double profit = 0;
+                double loss = 0;
+                boolean profitable = false;
+                Quote closePositionQuote = null;
+                while (startPositionIndex < quotes.size()) {
+                    startPositionIndex++;
+                    Quote nextQuote = quotes.get(startPositionIndex);
+                    if (takeProfit > nextQuote.getLow() && takeProfit < nextQuote.getHigh()) {
+                        // закрылся по TP
+                        double closingPositionSize = Context.lots * takeProfit;
+                        profit = closingPositionSize - openPositionSize;
+                        profitable = true;
+                        closePositionQuote = nextQuote;
                         break;
                     }
+                    if (stopLoss > nextQuote.getLow() && stopLoss < nextQuote.getHigh()) {
+                        // закрылся по SL
+                        double closingPositionSize = Context.lots * stopLoss;
+                        loss = openPositionSize - closingPositionSize;
+                        closePositionQuote = nextQuote;
+                        break;
+                    }
+                    // TODO собрать разную статистику:
+                    // колчество сигналов по символу, сколько закрылось по TP / SL в числах и процентах
+                    // среднее расстояние между входом и выходом из сделки
+                    // напечатать все вместе
                 }
-                if (signalIndex - 1 >= 2) {
-                    Keltner keltner = (Keltner) data.indicators.get(Indicator.KELTNER).get(signalIndex);
-                    double openingPrice = signal.getClose() + 0.07;
-                    double openPositionSize = Context.lots * openingPrice;
-                    double takeProfit = keltner.getTop();
-                    Quote currentQuote = signal;
-                    Quote prevQuote = quotes.get(signalIndex - 1);
-                    int index = signalIndex;
-                    do {
-                        if (prevQuote.getLow() > currentQuote.getLow()) {
-                            break;
-                        } else {
-                            index--;
-                            currentQuote = quotes.get(index);
-                            prevQuote = quotes.get(index - 1);
-                        }
-                    } while (index > 2);
-                    double stopLoss = currentQuote.getLow() - 0.27;
-                    int startPositionIndex = signalIndex;
-                    while (startPositionIndex < quotes.size()) {
-                        startPositionIndex++;
-                        Quote nextQuote = quotes.get(startPositionIndex);
-                        if (takeProfit > nextQuote.getLow() && takeProfit < nextQuote.getHigh()) {
-                            // закрылся по TP
-                            double closingPositionSize = Context.lots * takeProfit;
-                            double profit = closingPositionSize - openPositionSize;
-                            System.out.println(profit);
-                            break;
-                        }
-                        if (stopLoss > nextQuote.getLow() && stopLoss < nextQuote.getHigh()) {
-                            // закрылся по SL
-                            double closingPositionSize = Context.lots * stopLoss;
-                            double loss = closingPositionSize - openPositionSize;
-                            System.out.println(loss);
-                        }
-                        // TODO собрать разную статистику:
-                        // колчество сигналов по символу, сколько закрылось по TP / SL в числах и процентах
-                        // среднее расстояние между входом и выходом из сделки
-                        // напечатать все вместе
+                Result result = new Result();
+                if (closePositionQuote != null) {
+                    result.setClosed(true);
+                    result.setProfitable(profitable);
+                    result.setProfit(profit);
+                    result.setLoss(loss);
+                    if (profit > 0 || loss > 0) {
+                        result.setTimeDiff(closePositionQuote.getTimestamp() - signal.getTimestamp());
                     }
                 }
-            });
+                historicalTesting.addSignalResult(signal, result);
+            }
         });
     }
 
