@@ -1,6 +1,5 @@
 package com.kishlaly.ta.analyze;
 
-import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.kishlaly.ta.model.HistoricalTesting;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
@@ -99,7 +98,7 @@ public class TaskTester {
             SymbolData data = historicalTesting.getData();
             List<Quote> quotes = data.quotes;
             data.indicators.put(Indicator.KELTNER, IndicatorUtils.buildKeltnerChannels(quotes));
-            List<Quote> signals = historicalTesting.getEntries();
+            List<Quote> signals = historicalTesting.getSignals();
             signals.forEach(signal -> {
                 // найти индекс этой котировки в списке
                 int signalIndex = -1;

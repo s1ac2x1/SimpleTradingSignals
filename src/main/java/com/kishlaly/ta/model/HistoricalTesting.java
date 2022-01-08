@@ -6,11 +6,11 @@ import java.util.List;
 public class HistoricalTesting {
 
     private SymbolData data;
-    private List<Quote> entries = new ArrayList<>();
+    private List<Quote> signals = new ArrayList<>();
 
-    public HistoricalTesting(final SymbolData data, final List<Quote> entries) {
+    public HistoricalTesting(final SymbolData data, final List<Quote> signals) {
         this.data = data;
-        this.entries = entries;
+        this.signals = signals;
     }
 
     public SymbolData getData() {
@@ -21,11 +21,11 @@ public class HistoricalTesting {
         this.data = data;
     }
 
-    public List<Quote> getEntries() {
-        return this.entries;
+    public List<Quote> getSignals() {
+        return this.signals;
     }
 
-    public void setEntries(final List<Quote> entries) {
-        this.entries = entries;
+    public void setSignals(final List<Quote> signals) {
+        this.signals = signals;
     }
 }
