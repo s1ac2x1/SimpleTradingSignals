@@ -14,12 +14,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 import static com.kishlaly.ta.model.HistoricalTesting.Result;
+import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Clean.clear;
+import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 
 public class TaskTester {
 
@@ -70,20 +73,38 @@ public class TaskTester {
                         if (signalResults == null) {
                             signalResults = new LinkedHashSet<>();
                         }
+                        signalResults.add(formatTestingSummary(testing));
                         Set<String> finalSignalResults = signalResults;
-                        // TODO remove
-                        signals = signals.subList(1, 2);
-                        // ---
                         signals.forEach(signal -> {
-                            String date = signal.getMyDate();
-                            ZonedDateTime parsedDate = ZonedDateTime.parse(date);
-                            date = parsedDate.getDayOfMonth() + " " + parsedDate.getMonth() + " " + parsedDate.getYear();
+                            String signalDate = signal.getMyDate();
+                            ZonedDateTime parsedDate = ZonedDateTime.parse(signalDate);
+                            signalDate = parsedDate.getDayOfMonth() + " " + parsedDate.getMonth() + " " + parsedDate.getYear();
                             if (screen2.timeframe == Timeframe.HOUR) {
-                                date += " " + parsedDate.getHour() + ":" + parsedDate.getMinute();
+                                signalDate += " " + parsedDate.getHour() + ":" + parsedDate.getMinute();
                             }
                             Result result = testing.getResult(signal);
-                            String line = date + " --- " + result.isProfitable();
-                            finalSignalResults.add(line);
+                            String line = "";
+                            if (!result.isClosed()) {
+                                line += " NOT CLOSED";
+                            } else {
+                                line += result.isProfitable() ? "PROFIT" : "LOSS";
+                                line += System.lineSeparator();
+                                line += "\t\tDuration " + result.getPositionDuration(screen2.timeframe);
+                                String endDate = getBarTimeInMyZone(result.getClosedTimestamp(), exchangeTimezome).toString();
+                                ZonedDateTime parsed = ZonedDateTime.parse(endDate);
+                                String parsedEndDate = parsed.getDayOfMonth() + " " + parsed.getMonth() + " " + parsed.getYear();
+                                if (screen2.timeframe == Timeframe.HOUR) {
+                                    parsedEndDate += " " + parsed.getHour() + ":" + parsed.getMinute();
+                                }
+                                line += " [till " + parsedEndDate + "]";
+                                line += System.lineSeparator();
+                                if (result.isProfitable()) {
+                                    line += "\t\tprofit: " + result.getProfit();
+                                } else {
+                                    line += "\t\tloss: " + result.getLoss();
+                                }
+                            }
+                            finalSignalResults.add(signalDate + " --- " + line);
                         });
                         readableOutput.put(key, signalResults);
                     }
@@ -104,13 +125,36 @@ public class TaskTester {
         }
     }
 
+    private static String formatTestingSummary(HistoricalTesting testing) {
+        String result = "";
+        result += "TP/SL = " + testing.getProfitablePositions() + "/" + testing.getLossPositions() + System.lineSeparator();
+        long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
+        long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
+        long averagePositionDurationSeconds = testing.getAveragePositionDurationSeconds();
+        switch (testing.getData().timeframe) {
+            case DAY:
+                int minPositionDurationDays = (int) TimeUnit.SECONDS.toDays(minPositionDurationSeconds);
+                int maxPositionDurationDays = (int) TimeUnit.SECONDS.toDays(maxPositionDurationSeconds);
+                int avgPositionDurationDays = (int) TimeUnit.SECONDS.toDays(averagePositionDurationSeconds);
+                result += "\tmin/max/avg duration = " + minPositionDurationDays + "/" + maxPositionDurationDays + "/" + avgPositionDurationDays + System.lineSeparator();
+                break;
+            case HOUR:
+                int minPositionDurationHours = (int) TimeUnit.SECONDS.toHours(minPositionDurationSeconds);
+                int maxPositionDurationHours = (int) TimeUnit.SECONDS.toHours(maxPositionDurationSeconds);
+                int avgPositionDurationHours = (int) TimeUnit.SECONDS.toHours(averagePositionDurationSeconds);
+                result += "\tmin/max/avg duration = " + minPositionDurationHours + "/" + maxPositionDurationHours + "/" + avgPositionDurationHours + System.lineSeparator();
+                break;
+        }
+        result += "\tmax/avg profit: " + testing.getMaxProfit() + "/" + testing.getAvgProfit() + System.lineSeparator();
+        result += "\tmax/avg loss: " + testing.getMaxLoss() + "/" + testing.getAvgLoss() + System.lineSeparator();
+        return result;
+    }
+
     /**
      * Простое тестирование длинных позиций
      * TP на верхней границе канала Кельтнера
      * SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой
-     * (TODO реализовать)
-     *
-     *
+     * <p>
      * TODO адаптировать для коротких позиций тоже
      *
      * @param historicalTesting
@@ -120,9 +164,6 @@ public class TaskTester {
         List<Quote> quotes = data.quotes;
         data.indicators.put(Indicator.KELTNER, IndicatorUtils.buildKeltnerChannels(quotes));
         List<Quote> signals = historicalTesting.getSignals();
-        // TODO remove
-        signals = signals.subList(1, 2);
-        // ---
         signals.forEach(signal -> {
             // найти индекс этой котировки в списке
             int signalIndex = -1;
@@ -132,24 +173,14 @@ public class TaskTester {
                     break;
                 }
             }
-            if (signalIndex - 1 >= 2) {
+            if (signalIndex > 11) {
                 Keltner keltner = (Keltner) data.indicators.get(Indicator.KELTNER).get(signalIndex);
                 double openingPrice = signal.getClose() + 0.07;
                 double openPositionSize = Context.lots * openingPrice;
                 double takeProfit = keltner.getTop();
-                Quote currentQuote = signal;
-                Quote prevQuote = quotes.get(signalIndex - 1);
-                int index = signalIndex;
-                do {
-                    if (prevQuote.getLow() > currentQuote.getLow()) {
-                        break;
-                    } else {
-                        index--;
-                        currentQuote = quotes.get(index);
-                        prevQuote = quotes.get(index - 1);
-                    }
-                } while (index > 2);
-                double stopLoss = currentQuote.getLow() - 0.27;
+                // SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой
+                Quote quoteWithMinimalLow = quotes.subList(signalIndex - 10, signalIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
+                double stopLoss = quoteWithMinimalLow.getLow() - 0.27;
                 int startPositionIndex = signalIndex;
                 double profit = 0;
                 double loss = 0;
@@ -180,14 +211,12 @@ public class TaskTester {
                 }
                 Result result = new Result();
                 if (closePositionQuote != null) {
+                    result.setOpenedTimestamp(signal.getTimestamp());
+                    result.setClosedTimestamp(closePositionQuote.getTimestamp());
                     result.setClosed(true);
                     result.setProfitable(profitable);
                     result.setProfit(profit);
                     result.setLoss(loss);
-                    if (profit > 0 || loss > 0) {
-                        result.setPositionDuration(closePositionQuote.getTimestamp() - signal.getTimestamp());
-                    }
-                    // TODO заполнить другие поля
                 }
                 historicalTesting.addSignalResult(signal, result);
             }

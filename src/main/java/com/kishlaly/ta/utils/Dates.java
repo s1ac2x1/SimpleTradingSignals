@@ -1,6 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.Timeframe;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -85,7 +86,24 @@ public class Dates {
         return exchangeZonedDateTime;
     }
 
+    public static String getDuration(Timeframe timeframe, long start, long end) {
+        ZoneId timezone = ZoneId.of(Context.myTimezone);
+        LocalDateTime startDate = LocalDateTime.ofInstant(Instant.ofEpochSecond(start), timezone);
+        LocalDateTime endDate = LocalDateTime.ofInstant(Instant.ofEpochSecond(end), timezone);
+        switch (timeframe) {
+            case WEEK:
+                return ChronoUnit.WEEKS.between(startDate, endDate) + " weeks";
+            case DAY:
+                return ChronoUnit.DAYS.between(startDate, endDate) + " days";
+            case HOUR:
+                return ChronoUnit.HOURS.between(startDate, endDate) + " hours";
+            default:
+                return "";
+        }
+    }
+
     public static void main(String[] args) {
+        System.out.println(getDuration(Timeframe.DAY, 1632749400, 1633008600));
     }
 
 }

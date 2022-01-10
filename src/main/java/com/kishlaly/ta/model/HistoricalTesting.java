@@ -1,5 +1,8 @@
 package com.kishlaly.ta.model;
 
+import com.kishlaly.ta.utils.Dates;
+import com.kishlaly.ta.utils.Numbers;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,16 +43,52 @@ public class HistoricalTesting {
         return signalsResults.get(signal);
     }
 
+    public long getProfitablePositions() {
+        return signalsResults.entrySet().stream().filter(entry -> entry.getValue().isProfitable()).count();
+    }
+
+    public long getLossPositions() {
+        return signalsResults.entrySet().stream().filter(entry -> !entry.getValue().isProfitable()).count();
+    }
+
+    public long getAveragePositionDurationSeconds() {
+        return (long) signalsResults.entrySet().stream().mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).average().getAsDouble();
+    }
+
+    public long getMinPositionDurationSeconds() {
+        return signalsResults.entrySet().stream().mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).min().getAsLong();
+    }
+
+    public long getMaxPositionDurationSeconds() {
+        return signalsResults.entrySet().stream().mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).max().getAsLong();
+    }
+
+    public double getMaxProfit() {
+        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getProfit()).max().getAsDouble());
+    }
+
+    public double getAvgProfit() {
+        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getProfit()).average().getAsDouble());
+    }
+
+    public double getMaxLoss() {
+        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getLoss()).max().getAsDouble());
+    }
+
+    public double getAvgLoss() {
+        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getLoss()).average().getAsDouble());
+    }
+
     public static class Result {
 
+        private long openedTimestamp;
+        private long closedTimestamp;
+
         private boolean closed;
-        private String closedDate;
-        private long positionDuration;
 
         private boolean profitable;
         private double profit;
         private double loss;
-        private String stopLossQuote;
 
         public boolean isClosed() {
             return this.closed;
@@ -59,20 +98,15 @@ public class HistoricalTesting {
             this.closed = closed;
         }
 
-        public String getClosedDate() {
-            return this.closedDate;
+        public String getPositionDuration(Timeframe timeframe) {
+            if (closed) {
+                return Dates.getDuration(timeframe, openedTimestamp, closedTimestamp);
+            }
+            return "";
         }
 
-        public void setClosedDate(final String closedDate) {
-            this.closedDate = closedDate;
-        }
-
-        public long getPositionDuration() {
-            return this.positionDuration;
-        }
-
-        public void setPositionDuration(final long positionDuration) {
-            this.positionDuration = positionDuration;
+        public long getPositionDurationInSeconds(Timeframe timeframe) {
+            return closedTimestamp - openedTimestamp;
         }
 
         public boolean isProfitable() {
@@ -84,7 +118,7 @@ public class HistoricalTesting {
         }
 
         public double getProfit() {
-            return this.profit;
+            return Numbers.round(this.profit);
         }
 
         public void setProfit(final double profit) {
@@ -92,19 +126,27 @@ public class HistoricalTesting {
         }
 
         public double getLoss() {
-            return this.loss;
+            return Numbers.round(this.loss);
         }
 
         public void setLoss(final double loss) {
             this.loss = loss;
         }
 
-        public String getStopLossQuote() {
-            return this.stopLossQuote;
+        public long getOpenedTimestamp() {
+            return this.openedTimestamp;
         }
 
-        public void setStopLossQuote(final String stopLossQuote) {
-            this.stopLossQuote = stopLossQuote;
+        public void setOpenedTimestamp(final long openedTimestamp) {
+            this.openedTimestamp = openedTimestamp;
+        }
+
+        public long getClosedTimestamp() {
+            return this.closedTimestamp;
+        }
+
+        public void setClosedTimestamp(final long closedTimestamp) {
+            this.closedTimestamp = closedTimestamp;
         }
     }
 
