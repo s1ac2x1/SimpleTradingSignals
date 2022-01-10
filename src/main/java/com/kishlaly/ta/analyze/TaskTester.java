@@ -88,6 +88,12 @@ public class TaskTester {
                                 line += " NOT CLOSED";
                             } else {
                                 line += result.isProfitable() ? "PROFIT" : "LOSS";
+                                if (result.isGapUp()) {
+                                    line += " gap up";
+                                }
+                                if (result.isGapDown()) {
+                                    line += " gap down";
+                                }
                                 line += System.lineSeparator();
                                 line += "\t\tDuration " + result.getPositionDuration(screen2.timeframe);
                                 String endDate = getBarTimeInMyZone(result.getClosedTimestamp(), exchangeTimezome).toString();
@@ -204,6 +210,8 @@ public class TaskTester {
                 double profit = 0;
                 double loss = 0;
                 boolean profitable = false;
+                boolean caughtGapUp = false;
+                boolean caughtGapDown = false;
                 Quote closePositionQuote = null;
                 while (startPositionIndex < quotes.size()) {
                     startPositionIndex++;
@@ -211,25 +219,36 @@ public class TaskTester {
                     boolean tpInsideBar = nextQuote.getLow() < takeProfit && nextQuote.getHigh() > takeProfit;
                     boolean tpAtHigh = nextQuote.getHigh() == takeProfit;
                     boolean gapUp = nextQuote.getOpen() > takeProfit;
+                    // закрылся по TP
                     if (tpInsideBar || tpAtHigh || gapUp) {
-                        // закрылся по TP
-                        double closingPositionSize = gapUp ? Context.lots * nextQuote.getOpen() : Context.lots * takeProfit;
+                        if (gapUp) {
+                            takeProfit = nextQuote.getOpen();
+                        }
+                        double closingPositionSize = Context.lots * takeProfit;
                         profit = closingPositionSize - openPositionSize;
                         profitable = true;
                         closePositionQuote = nextQuote;
+                        caughtGapUp = gapUp;
                         break;
                     }
-                    // TODO нужно учитывать гэпы вниз
-                    if (stopLoss > nextQuote.getLow() && stopLoss < nextQuote.getHigh()) {
-                        // закрылся по SL
+                    boolean slInsideBar = nextQuote.getLow() < stopLoss && nextQuote.getHigh() > stopLoss;
+                    boolean slAtLow = nextQuote.getLow() == stopLoss;
+                    boolean gapDown = nextQuote.getOpen() < stopLoss;
+                    // закрылся по SL
+                    if (slInsideBar || slAtLow || gapDown) {
+                        if (gapDown) {
+                            stopLoss = nextQuote.getOpen();
+                        }
                         double closingPositionSize = Context.lots * stopLoss;
                         loss = openPositionSize - closingPositionSize;
                         closePositionQuote = nextQuote;
+                        caughtGapDown = gapDown;
                         break;
                     }
                     // TODO собрать разную статистику:
                     // колчество сигналов по символу, сколько закрылось по TP / SL в числах и процентах
                     // среднее расстояние между входом и выходом из сделки
+                    // количество гэпов на профите и лоссе
                     // напечатать все вместе
                 }
                 Result result = new Result();
@@ -240,6 +259,8 @@ public class TaskTester {
                     result.setProfitable(profitable);
                     result.setProfit(profit);
                     result.setLoss(loss);
+                    result.setGapUp(caughtGapUp);
+                    result.setGapDown(caughtGapDown);
                 }
                 historicalTesting.addSignalResult(signal, result);
             }

@@ -96,6 +96,9 @@ public class HistoricalTesting {
         private double profit;
         private double loss;
 
+        private boolean gapUp;
+        private boolean gapDown;
+
         public boolean isClosed() {
             return this.closed;
         }
@@ -153,6 +156,22 @@ public class HistoricalTesting {
 
         public void setClosedTimestamp(final long closedTimestamp) {
             this.closedTimestamp = closedTimestamp;
+        }
+
+        public boolean isGapUp() {
+            return this.gapUp;
+        }
+
+        public void setGapUp(final boolean gapUp) {
+            this.gapUp = gapUp;
+        }
+
+        public boolean isGapDown() {
+            return this.gapDown;
+        }
+
+        public void setGapDown(final boolean gapDown) {
+            this.gapDown = gapDown;
         }
     }
 
