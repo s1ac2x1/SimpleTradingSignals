@@ -188,8 +188,8 @@ public class TaskTester {
         if (resultWithMaxLoss != null) {
             maxLossPositionRange = " [" + formatDate(testing.getData().timeframe, resultWithMaxLoss.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithMaxLoss.getClosedTimestamp()) + "]";
         }
-        result += "\tmax profit = " + testing.getMaxProfit() + maxProfitPositionRange + System.lineSeparator();
-        result += "\tmax loss = " + testing.getMaxLoss() + maxLossPositionRange + System.lineSeparator();
+        result += "\tmax profit = " + testing.getMaxProfit() + maxProfitPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
+        result += "\tmax loss = " + testing.getMaxLoss() + maxLossPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
         result += "\tavg profit / loss = " + testing.getAvgProfit() + " / " + testing.getAvgLoss() + System.lineSeparator();
         return result;
     }
