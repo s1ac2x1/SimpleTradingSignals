@@ -106,9 +106,9 @@ public class TaskTester {
                                 line += " [till " + parsedEndDate + "]";
                                 line += System.lineSeparator();
                                 if (result.isProfitable()) {
-                                    line += "\t\tprofit: " + result.getProfit(); // TODO в процентах ROI
+                                    line += "\t\tprofit: " + result.getProfit(); // TODO сюда ROI % вместо числа
                                 } else {
-                                    line += "\t\tloss: " + result.getLoss(); // TODO в процентах ROI
+                                    line += "\t\tloss: " + result.getLoss(); // TODO сюда ROI % вместо числа
                                 }
                             }
                             finalSignalResults.add(signalDate + " --- " + line);
