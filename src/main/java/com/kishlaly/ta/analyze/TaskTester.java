@@ -151,7 +151,7 @@ public class TaskTester {
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + System.lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
-        // TODO move to method
+        // TODO move to method (with lambda receiver)
         Result resultWithLongestPosition = testing.searchSignalByPositionDuration(maxPositionDurationSeconds);
         String longestPositionRange = "";
         if (resultWithLongestPosition != null) {
@@ -176,14 +176,14 @@ public class TaskTester {
                 result += "\tavg duration = " + avgPositionDurationHours + " hours" + System.lineSeparator();
                 break;
         }
-        // TODO move to method
-        Result resultWithMaxProfit = testing.searchSignalByPositionDuration(maxPositionDurationSeconds);
+        // TODO move to method (with lambda receiver)
+        Result resultWithMaxProfit = testing.searchSignalByMaxProfit();
         String maxProfitPositionRange = "";
         if (resultWithMaxProfit != null) {
             maxProfitPositionRange = " [" + formatDate(testing.getData().timeframe, resultWithMaxProfit.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithMaxProfit.getClosedTimestamp()) + "]";
         }
-        // TODO move to method
-        Result resultWithMaxLoss = testing.searchSignalByPositionDuration(maxPositionDurationSeconds);
+        // TODO move to method (with lambda receiver)
+        Result resultWithMaxLoss = testing.searchSignalByMaxLoss();
         String maxLossPositionRange = "";
         if (resultWithMaxLoss != null) {
             maxLossPositionRange = " [" + formatDate(testing.getData().timeframe, resultWithMaxLoss.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithMaxLoss.getClosedTimestamp()) + "]";

@@ -93,6 +93,24 @@ public class HistoricalTesting {
         }
     }
 
+    public Result searchSignalByMaxProfit() {
+        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getProfit() == getMaxProfit()).findFirst();
+        if (first.isPresent()) {
+            return first.get().getValue();
+        } else {
+            return null;
+        }
+    }
+
+    public Result searchSignalByMaxLoss() {
+        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getLoss() == getMaxLoss()).findFirst();
+        if (first.isPresent()) {
+            return first.get().getValue();
+        } else {
+            return null;
+        }
+    }
+
     public static class Result {
 
         private long openedTimestamp;
