@@ -8,6 +8,7 @@ import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.Keltner;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.IndicatorUtils;
+import com.kishlaly.ta.utils.Numbers;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -144,6 +145,10 @@ public class TaskTester {
     private static String formatTestingSummary(HistoricalTesting testing) {
         String result = "";
         result += "TP/SL = " + testing.getProfitablePositions() + "/" + testing.getLossPositions() + System.lineSeparator();
+        double balance = testing.getTotalProfit() - testing.getTotalLoss();
+        balance = balance - balance / 100 * 10;
+        result += "\tTotal balance (minus 10% commissions) = " + Numbers.round(balance) + System.lineSeparator();
+        result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + System.lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
         Result resultWithLongestPosition = testing.searchSignalByPositionDuration(maxPositionDurationSeconds);
@@ -170,8 +175,8 @@ public class TaskTester {
                 result += "\tavg duration = " + avgPositionDurationHours + " hours" + System.lineSeparator();
                 break;
         }
-        result += "\tmax/avg profit: " + testing.getMaxProfit() + "/" + testing.getAvgProfit() + System.lineSeparator();
-        result += "\tmax/avg loss: " + testing.getMaxLoss() + "/" + testing.getAvgLoss() + System.lineSeparator();
+        result += "\tavg profit / loss = " + testing.getAvgProfit() + " / " + testing.getAvgLoss() + System.lineSeparator();
+        result += "\tmax profit / loss = " + testing.getMaxProfit() + " / " + testing.getMaxLoss() + System.lineSeparator();
         return result;
     }
 
