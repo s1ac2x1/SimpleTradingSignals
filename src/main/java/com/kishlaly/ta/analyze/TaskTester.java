@@ -59,7 +59,11 @@ public class TaskTester {
                     }
                     if (!signals.isEmpty()) {
                         HistoricalTesting testing = new HistoricalTesting(forTesting, signals);
-                        calculateStatistics(testing);
+                        try {
+                            calculateStatistics(testing);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
                         historicalTestings.add(testing);
                         String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
                         Set<String> signalResults = readableOutput.get(key);
@@ -67,6 +71,9 @@ public class TaskTester {
                             signalResults = new LinkedHashSet<>();
                         }
                         Set<String> finalSignalResults = signalResults;
+                        // TODO remove
+                        signals = signals.subList(1, 2);
+                        // ---
                         signals.forEach(signal -> {
                             String date = signal.getMyDate();
                             ZonedDateTime parsedDate = ZonedDateTime.parse(date);

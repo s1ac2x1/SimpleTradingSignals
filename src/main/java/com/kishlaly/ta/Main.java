@@ -7,6 +7,8 @@ import com.kishlaly.ta.utils.Context;
 import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.*;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
+import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -21,6 +23,7 @@ public class Main {
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
         Context.singleSymbol = "MCK";
+        //Context.singleSymbol = "ABT";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -42,10 +45,23 @@ public class Main {
         //Context.screenTwoDay = "2021-11-15";
         test(timeframes, tasks);
 
-        // сделать тест открытий позиций по стратегиям
+        // сделать тест открытий позиций по стратегиям, собрать статистику по стратегиям
+
+        // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
+        // первый экран - подумать
+        // второй экран -
+        //    перепроданность ниже 20 у трех значений медленной линии стохастика и она повышается
+        //    последние три столбика гистограммы повышаются
+        //    два из трех последних баров зеленые
+        //    последние два бара повышаются (quote.low & quote.high)
+        //    последние два бара полностью ниже ЕМА13
+        // вход на 7 центов выше закрытия последнего бара
+        // TP на середине верхней половины канала Кельтнера
 
         // [D] INFO 4 Mar 2021
         // BK https://drive.google.com/file/d/14PlpZMZV7lwsIwP2V7bww0LKSVjdn70Q/view?usp=sharing и https://drive.google.com/file/d/1-a0ZtMuLQyuamez_402v6YkViNWzY6RS/view?usp=sharing
+
+        // когда будет готова система тестирования на исторических данных со статистикой, попробовать разные значения индикаторов, например, ЕМА 14 на втором экране
 
         // добавить в дивергенции расчет EFI, тогда, может быть, не придется фильтровать по SECOND_BOTTOM_RATIO ?
         // если EFI покажет правильную дивергенцию, которая подтверждает сигналы МАСD, то стоит обратить на это внимание
