@@ -208,6 +208,7 @@ public class TaskTester {
                 while (startPositionIndex < quotes.size()) {
                     startPositionIndex++;
                     Quote nextQuote = quotes.get(startPositionIndex);
+                    // TODO нужно учитывать гэпы вверх
                     if (takeProfit > nextQuote.getLow() && takeProfit < nextQuote.getHigh()) {
                         // закрылся по TP
                         double closingPositionSize = Context.lots * takeProfit;
@@ -216,6 +217,7 @@ public class TaskTester {
                         closePositionQuote = nextQuote;
                         break;
                     }
+                    // TODO нужно учитывать гэпы вниз
                     if (stopLoss > nextQuote.getLow() && stopLoss < nextQuote.getHigh()) {
                         // закрылся по SL
                         double closingPositionSize = Context.lots * stopLoss;
