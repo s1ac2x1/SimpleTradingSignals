@@ -4,11 +4,8 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
-import static com.kishlaly.ta.analyze.TaskType.*;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
-import static com.kishlaly.ta.cache.CacheReader.checkCache;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -22,8 +19,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        Context.singleSymbol = "MCK";
-        //Context.singleSymbol = "ABT";
+        Context.singleSymbol = "AAPL";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -46,6 +42,7 @@ public class Main {
         test(timeframes, tasks);
 
         // сделать тест открытий позиций по стратегиям, собрать статистику по стратегиям
+        // причесать код открытия поизций
 
         // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
         // первый экран - подумать
@@ -64,6 +61,7 @@ public class Main {
         // когда будет готова система тестирования на исторических данных со статистикой
         // попробовать разные значения индикаторов, например, ЕМА 14 на втором экране
         // а так же тестировать точки входа и выхода, например, 75% от верхней границы канала
+        // и проверить скользящий стоплосс, например, по середней линии канала
 
         // добавить в дивергенции расчет EFI, тогда, может быть, не придется фильтровать по SECOND_BOTTOM_RATIO ?
         // если EFI покажет правильную дивергенцию, которая подтверждает сигналы МАСD, то стоит обратить на это внимание

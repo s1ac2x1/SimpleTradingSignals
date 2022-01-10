@@ -3,10 +3,7 @@ package com.kishlaly.ta.model;
 import com.kishlaly.ta.utils.Dates;
 import com.kishlaly.ta.utils.Numbers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class HistoricalTesting {
 
@@ -77,6 +74,15 @@ public class HistoricalTesting {
 
     public double getAvgLoss() {
         return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getLoss()).average().getAsDouble());
+    }
+
+    public Result searchSignalByPositionDuration(long duration) {
+        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getPositionDurationInSeconds(data.timeframe) == duration).findFirst();
+        if (first.isPresent()) {
+            return first.get().getValue();
+        } else {
+            return null;
+        }
     }
 
     public static class Result {

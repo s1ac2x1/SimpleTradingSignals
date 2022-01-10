@@ -99,9 +99,9 @@ public class TaskTester {
                                 line += " [till " + parsedEndDate + "]";
                                 line += System.lineSeparator();
                                 if (result.isProfitable()) {
-                                    line += "\t\tprofit: " + result.getProfit();
+                                    line += "\t\tprofit: " + result.getProfit(); // TODO в процентах ROI
                                 } else {
-                                    line += "\t\tloss: " + result.getLoss();
+                                    line += "\t\tloss: " + result.getLoss(); // TODO в процентах ROI
                                 }
                             }
                             finalSignalResults.add(signalDate + " --- " + line);
@@ -125,24 +125,43 @@ public class TaskTester {
         }
     }
 
+    private static String formatDate(Timeframe timeframe, long timestamp) {
+        String date = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
+        ZonedDateTime parsedDate = ZonedDateTime.parse(date);
+        date = parsedDate.getDayOfMonth() + " " + parsedDate.getMonth() + " " + parsedDate.getYear();
+        if (timeframe == Timeframe.HOUR) {
+            date += " " + parsedDate.getHour() + ":" + parsedDate.getMinute();
+        }
+        return date;
+    }
+
     private static String formatTestingSummary(HistoricalTesting testing) {
         String result = "";
         result += "TP/SL = " + testing.getProfitablePositions() + "/" + testing.getLossPositions() + System.lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
+        Result resultWithLongestPosition = testing.searchSignalByPositionDuration(maxPositionDurationSeconds);
+        String longestPositionRange = "";
+        if (resultWithLongestPosition != null) {
+            longestPositionRange = "[" + formatDate(testing.getData().timeframe, resultWithLongestPosition.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithLongestPosition.getClosedTimestamp()) + "]";
+        }
         long averagePositionDurationSeconds = testing.getAveragePositionDurationSeconds();
         switch (testing.getData().timeframe) {
             case DAY:
                 int minPositionDurationDays = (int) TimeUnit.SECONDS.toDays(minPositionDurationSeconds);
                 int maxPositionDurationDays = (int) TimeUnit.SECONDS.toDays(maxPositionDurationSeconds);
                 int avgPositionDurationDays = (int) TimeUnit.SECONDS.toDays(averagePositionDurationSeconds);
-                result += "\tmin/max/avg duration = " + minPositionDurationDays + "/" + maxPositionDurationDays + "/" + avgPositionDurationDays + System.lineSeparator();
+                result += "\tmin duration = " + minPositionDurationDays + " days" + System.lineSeparator();
+                result += "\tmax duration = " + maxPositionDurationDays + " days " + longestPositionRange + System.lineSeparator(); // TODO сюда диапазон
+                result += "\tavg duration = " + avgPositionDurationDays + " days" + System.lineSeparator();
                 break;
             case HOUR:
                 int minPositionDurationHours = (int) TimeUnit.SECONDS.toHours(minPositionDurationSeconds);
                 int maxPositionDurationHours = (int) TimeUnit.SECONDS.toHours(maxPositionDurationSeconds);
                 int avgPositionDurationHours = (int) TimeUnit.SECONDS.toHours(averagePositionDurationSeconds);
-                result += "\tmin/max/avg duration = " + minPositionDurationHours + "/" + maxPositionDurationHours + "/" + avgPositionDurationHours + System.lineSeparator();
+                result += "\tmin duration = " + minPositionDurationHours + " hours" + System.lineSeparator();
+                result += "\tmax duration = " + maxPositionDurationHours + " hours" + System.lineSeparator(); // TODO сюда диапазон
+                result += "\tavg duration = " + avgPositionDurationHours + " hours" + System.lineSeparator();
                 break;
         }
         result += "\tmax/avg profit: " + testing.getMaxProfit() + "/" + testing.getAvgProfit() + System.lineSeparator();
