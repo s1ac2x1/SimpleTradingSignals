@@ -19,7 +19,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        Context.singleSymbol = "AAPL";
+        Context.singleSymbol = "MCK";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},

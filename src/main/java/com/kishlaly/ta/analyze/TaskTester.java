@@ -152,7 +152,7 @@ public class TaskTester {
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
         // TODO move to method (with lambda receiver)
-        Result resultWithLongestPosition = testing.searchSignalByPositionDuration(maxPositionDurationSeconds);
+        Result resultWithLongestPosition = testing.searchSignalByLongestPosition();
         String longestPositionRange = "";
         if (resultWithLongestPosition != null) {
             longestPositionRange = "[" + formatDate(testing.getData().timeframe, resultWithLongestPosition.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithLongestPosition.getClosedTimestamp()) + "]";

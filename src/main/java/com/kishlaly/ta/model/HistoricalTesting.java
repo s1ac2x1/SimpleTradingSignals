@@ -84,8 +84,8 @@ public class HistoricalTesting {
         return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getLoss()).sum());
     }
 
-    public Result searchSignalByPositionDuration(long duration) {
-        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getPositionDurationInSeconds(data.timeframe) == duration).findFirst();
+    public Result searchSignalByLongestPosition() {
+        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getPositionDurationInSeconds(data.timeframe) == getMaxPositionDurationSeconds()).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {
