@@ -151,6 +151,7 @@ public class TaskTester {
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + System.lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
+        // TODO move to method
         Result resultWithLongestPosition = testing.searchSignalByPositionDuration(maxPositionDurationSeconds);
         String longestPositionRange = "";
         if (resultWithLongestPosition != null) {
@@ -163,7 +164,7 @@ public class TaskTester {
                 int maxPositionDurationDays = (int) TimeUnit.SECONDS.toDays(maxPositionDurationSeconds);
                 int avgPositionDurationDays = (int) TimeUnit.SECONDS.toDays(averagePositionDurationSeconds);
                 result += "\tmin duration = " + minPositionDurationDays + " days" + System.lineSeparator();
-                result += "\tmax duration = " + maxPositionDurationDays + " days " + longestPositionRange + System.lineSeparator(); // TODO сюда диапазон
+                result += "\tmax duration = " + maxPositionDurationDays + " days " + longestPositionRange + System.lineSeparator();
                 result += "\tavg duration = " + avgPositionDurationDays + " days" + System.lineSeparator();
                 break;
             case HOUR:
@@ -175,8 +176,21 @@ public class TaskTester {
                 result += "\tavg duration = " + avgPositionDurationHours + " hours" + System.lineSeparator();
                 break;
         }
+        // TODO move to method
+        Result resultWithMaxProfit = testing.searchSignalByPositionDuration(maxPositionDurationSeconds);
+        String maxProfitPositionRange = "";
+        if (resultWithMaxProfit != null) {
+            maxProfitPositionRange = " [" + formatDate(testing.getData().timeframe, resultWithMaxProfit.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithMaxProfit.getClosedTimestamp()) + "]";
+        }
+        // TODO move to method
+        Result resultWithMaxLoss = testing.searchSignalByPositionDuration(maxPositionDurationSeconds);
+        String maxLossPositionRange = "";
+        if (resultWithMaxLoss != null) {
+            maxLossPositionRange = " [" + formatDate(testing.getData().timeframe, resultWithMaxLoss.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithMaxLoss.getClosedTimestamp()) + "]";
+        }
+        result += "\tmax profit = " + testing.getMaxProfit() + maxProfitPositionRange + System.lineSeparator();
+        result += "\tmax loss = " + testing.getMaxLoss() + maxLossPositionRange + System.lineSeparator();
         result += "\tavg profit / loss = " + testing.getAvgProfit() + " / " + testing.getAvgLoss() + System.lineSeparator();
-        result += "\tmax profit / loss = " + testing.getMaxProfit() + " / " + testing.getMaxLoss() + System.lineSeparator();
         return result;
     }
 
