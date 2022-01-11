@@ -5,6 +5,8 @@ import com.kishlaly.ta.model.Quote;
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -53,6 +55,7 @@ public class Quotes {
                 System.out.println(e);
             }
         });
+        Collections.sort(weeklyQuotes, Comparator.comparing(Quote::getTimestamp));
         return weeklyQuotes;
     }
 

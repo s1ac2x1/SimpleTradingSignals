@@ -22,7 +22,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        //Context.singleSymbol = "MCK";
+        Context.singleSymbol = "MCK";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -38,13 +38,15 @@ public class Main {
         //buildCache(timeframes, tasks, false);
         //checkCache(timeframes, tasks);
 
-        run(timeframes, tasks);
+        //run(timeframes, tasks);
 
         //Context.screenOneDay = "2020-09";
         //Context.screenTwoDay = "2021-11-15";
         //test(timeframes, tasks);
 
-        // зачем выгружать недельные котировки? если агрегировать дневные просто?
+        // проверить, как работают индикаторы для недельных агрегированных котировок (изменил длину бара на 1440 минут)
+        // если все отлично - убрать загрузку недельных котировок (и их индикаторов) из API, оставив только дневные
+
         // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
 
         // сделать тест открытий позиций по стратегиям, собрать статистику по стратегиям
