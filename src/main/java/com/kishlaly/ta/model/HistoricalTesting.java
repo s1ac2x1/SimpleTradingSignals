@@ -90,18 +90,20 @@ public class HistoricalTesting {
                 .mapToDouble(entry -> entry.getValue().getProfit()).average().getAsDouble());
     }
 
+    // find the max of negative number
     public double getMinLoss() {
         return Numbers.round(signalsResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getLoss()).min().getAsDouble());
+                .mapToDouble(entry -> entry.getValue().getLoss()).max().getAsDouble());
     }
 
+    // find the min of negative number
     public double getMaxLoss() {
         return Numbers.round(signalsResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getLoss()).max().getAsDouble());
+                .mapToDouble(entry -> entry.getValue().getLoss()).min().getAsDouble());
     }
 
     public double getAvgLoss() {
