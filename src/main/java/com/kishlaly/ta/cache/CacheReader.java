@@ -11,6 +11,7 @@ import com.kishlaly.ta.model.indicators.Stoch;
 import com.kishlaly.ta.utils.Bars;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.IndicatorUtils;
+import com.kishlaly.ta.utils.Quotes;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.indicators.EMAIndicator;
 import org.ta4j.core.indicators.StochasticOscillatorDIndicator;
@@ -125,6 +126,9 @@ public class CacheReader {
                             Files.readAllBytes(Paths.get(getFolder() + "/" + symbol + "_quotes.txt"))),
                     new TypeToken<ArrayList<Quote>>() {
                     }.getType());
+            if (Context.timeframe == Timeframe.WEEK) {
+                quotes = Quotes.dailyToWeekly(quotes);
+            }
             Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
             return quotes;
         } catch (IOException e) {
@@ -228,16 +232,14 @@ public class CacheReader {
         screen.timeframe = timeframeIndicators.timeframe;
         screen.quotes = loadQuotesFromCache(symbol);
         Arrays.stream(timeframeIndicators.indicators).forEach(indicator -> {
-            List data = Context.timeframe == Timeframe.WEEK
-                    ? loadIndicatorFromCache(symbol, indicator)
-                    : calculateIndicatorFromCachedQuotes(symbol, indicator);
+            List data = calculateIndicatorFromCachedQuotes(symbol, indicator);
             screen.indicators.put(indicator, data);
         });
         return screen;
     }
 
     public static String getFolder() {
-        return Context.outputFolder + "/cache/" + Context.timeframe.name().toLowerCase();
+        return Context.outputFolder + "/cache/" + Context.aggregationTimeframe.name().toLowerCase();
     }
 
     public static void clearCacheFolder(String name) {

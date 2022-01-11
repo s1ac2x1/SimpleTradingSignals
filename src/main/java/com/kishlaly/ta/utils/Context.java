@@ -13,6 +13,7 @@ public class Context {
     public static double parallelRequests = 10;
     public static double limitPerMinute = 75;
     public static Timeframe timeframe = Timeframe.DAY; // по умолчению для тестов
+    public static Timeframe aggregationTimeframe = Timeframe.DAY; // на основе этого таймфрема агрегируются другие котировки
     public static String source;
     public static String singleSymbol;
 

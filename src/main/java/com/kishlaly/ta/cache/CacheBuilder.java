@@ -47,10 +47,6 @@ public class CacheBuilder {
                     symbols.set(getMissedSymbols());
                 }
                 cacheQuotes(symbols.get());
-                // подразумевается, что недельный таймфрейм бывает только у первого экрана
-                if (Context.timeframe == Timeframe.WEEK) {
-                    cacheIndicators(symbols.get(), task.getIndicatorsForScreen(1));
-                }
 
                 // screen 2
                 Context.timeframe = screens[1];
@@ -169,7 +165,10 @@ public class CacheBuilder {
                             && request.getTimeframe() == Context.timeframe
                             && request.getSymbols().containsAll(chunk)).findFirst();
                     if (!existingRequest.isPresent()) {
-                        requests.offer(new LoadRequest(CacheType.QUOTE, Context.timeframe, chunk));
+                        // предполагается, что нужно загрузать только дневные котировки
+                        if (Context.timeframe == Timeframe.DAY) {
+                            requests.offer(new LoadRequest(CacheType.QUOTE, Context.timeframe, chunk));
+                        }
                     } else {
                         System.out.println("Already in the queue: " + chunk.size() + " " + Context.timeframe.name() + " QUOTE");
                     }
