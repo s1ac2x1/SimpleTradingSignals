@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class Quotes {
 
-    public static List<Quote> convertToWeekly(List<Quote> dailyQuotes) {
+    public static List<Quote> dailyToWeekly(List<Quote> dailyQuotes) {
         List<Quote> weeklyQuotes = new ArrayList<>();
         AtomicBoolean foundMonday = new AtomicBoolean(false);
         AtomicBoolean foundFriday = new AtomicBoolean(false);

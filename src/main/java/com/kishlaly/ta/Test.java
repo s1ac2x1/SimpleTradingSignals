@@ -17,7 +17,7 @@ public class Test {
 
     public static void main(String[] args) {
         List<Quote> dailyQuotes = loadQuotesFromCache("MCK");
-        List<Quote> weeklyQuotes = Quotes.convertToWeekly(dailyQuotes);
+        List<Quote> weeklyQuotes = Quotes.dailyToWeekly(dailyQuotes);
         Context.timeframe = Timeframe.WEEK;
         BarSeries bars = Bars.build(weeklyQuotes);
         EMAIndicator ema26 = IndicatorUtils.buildEMA(bars, 26);
