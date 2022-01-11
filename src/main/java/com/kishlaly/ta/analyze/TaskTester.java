@@ -140,7 +140,7 @@ public class TaskTester {
     private static String formatTestingSummary(HistoricalTesting testing) {
         String result = "";
         result += "TP/SL = " + testing.getProfitablePositions() + "/" + testing.getLossPositions() + System.lineSeparator();
-        double balance = testing.getTotalProfit() - testing.getTotalLoss();
+        double balance = testing.getTotalProfit() + testing.getTotalLoss(); // loss is negative
         balance = balance - balance / 100 * 10;
         result += "\tTotal balance (minus 10% commissions) = " + Numbers.round(balance) + System.lineSeparator();
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + System.lineSeparator();
@@ -254,7 +254,7 @@ public class TaskTester {
                             stopLoss = nextQuote.getOpen();
                         }
                         double closingPositionSize = Context.lots * stopLoss;
-                        loss = openPositionSize - closingPositionSize;
+                        loss = closingPositionSize - openPositionSize;
                         closePositionQuote = nextQuote;
                         caughtGapDown = gapDown;
                         roi = Numbers.roi(openPositionSize, closingPositionSize);
