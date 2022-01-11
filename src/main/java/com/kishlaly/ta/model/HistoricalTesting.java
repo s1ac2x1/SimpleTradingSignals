@@ -60,12 +60,20 @@ public class HistoricalTesting {
         return signalsResults.entrySet().stream().mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).max().getAsLong();
     }
 
+    public double getMinProfit() {
+        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getProfit()).min().getAsDouble());
+    }
+
     public double getMaxProfit() {
         return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getProfit()).max().getAsDouble());
     }
 
     public double getAvgProfit() {
         return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getProfit()).average().getAsDouble());
+    }
+
+    public double getMinLoss() {
+        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getLoss()).min().getAsDouble());
     }
 
     public double getMaxLoss() {
@@ -93,8 +101,8 @@ public class HistoricalTesting {
         }
     }
 
-    public Result searchSignalByMaxProfit() {
-        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getProfit() == getMaxProfit()).findFirst();
+    public Result searchSignalByProfit(double value) {
+        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getProfit() == value).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {
@@ -102,8 +110,8 @@ public class HistoricalTesting {
         }
     }
 
-    public Result searchSignalByMaxLoss() {
-        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getLoss() == getMaxLoss()).findFirst();
+    public Result searchSignalByLoss(double value) {
+        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getLoss() == value).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {

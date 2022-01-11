@@ -166,10 +166,10 @@ public class TaskTester {
                 result += "\tavg duration = " + avgPositionDurationHours + " hours" + System.lineSeparator();
                 break;
         }
-        String maxProfitPositionRange = formatRange(testing, t -> t.searchSignalByMaxProfit());
-        String maxLossPositionRange = formatRange(testing, t -> t.searchSignalByMaxLoss());
-        result += "\tmax profit = " + testing.searchSignalByMaxProfit().getRoi() + "% " + maxProfitPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
-        result += "\tmax loss = " + testing.searchSignalByMaxLoss().getRoi() + "% " + maxLossPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
+        result += "\tmin profit = " + testing.searchSignalByProfit(testing.getMinProfit()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByProfit(t.getMinProfit())) + System.lineSeparator();
+        result += "\tmax profit = " + testing.searchSignalByProfit(testing.getMaxProfit()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByProfit(t.getMaxProfit())) + System.lineSeparator();
+        result += "\tmin loss = " + testing.searchSignalByLoss(testing.getMinLoss()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByLoss(t.getMinLoss())) + System.lineSeparator();
+        result += "\tmax loss = " + testing.searchSignalByLoss(testing.getMaxLoss()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByLoss(t.getMaxLoss())) + System.lineSeparator();
         result += "\tavg profit / loss = " + testing.getAvgProfit() + " / " + testing.getAvgLoss() + System.lineSeparator();
         return result;
     }
@@ -237,7 +237,7 @@ public class TaskTester {
                         }
                         double closingPositionSize = Context.lots * takeProfit;
                         profit = closingPositionSize - openPositionSize;
-                        roi = (closingPositionSize - openPositionSize) / closingPositionSize * 100;
+                        roi = Numbers.roi(openPositionSize, closingPositionSize);
                         profitable = true;
                         closePositionQuote = nextQuote;
                         caughtGapUp = gapUp;
@@ -257,7 +257,7 @@ public class TaskTester {
                         loss = openPositionSize - closingPositionSize;
                         closePositionQuote = nextQuote;
                         caughtGapDown = gapDown;
-                        roi = (closingPositionSize - openPositionSize) / closingPositionSize * 100;
+                        roi = Numbers.roi(openPositionSize, closingPositionSize);
                         closePositionPrice = stopLoss;
                         closePositionCost = closingPositionSize;
                         break;
