@@ -29,7 +29,7 @@ import static com.kishlaly.ta.utils.Context.minimumBarsCount;
 public class ThreeDisplays {
 
     public static class Config {
-        public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 3;
+        public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 3; // 3 дает меньше сигналов, но они надежнее
         public static int multiplier = 2; // для поиска аномально длинных баров
         public static int STOCH_OVERSOLD = 35;
         public static int STOCH_OVERBOUGHT = 70;

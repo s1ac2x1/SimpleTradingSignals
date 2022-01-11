@@ -6,6 +6,7 @@ import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -39,11 +40,9 @@ public class Main {
 
         //Context.screenOneDay = "2020-09";
         //Context.screenTwoDay = "2021-11-15";
-        try {
-            test(timeframes, tasks);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        test(timeframes, tasks);
+
+        // [D] TER - 24 JUNE 2021 --- PROFIT 3.3% 5 days [till 29 JUNE 2021] почему не 23???
 
         // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
 
