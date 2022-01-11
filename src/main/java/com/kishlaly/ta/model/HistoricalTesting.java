@@ -61,35 +61,59 @@ public class HistoricalTesting {
     }
 
     public double getMinProfit() {
-        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getProfit()).min().getAsDouble());
+        return Numbers.round(signalsResults.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().isProfitable())
+                .mapToDouble(entry -> entry.getValue().getProfit()).min().getAsDouble());
     }
 
     public double getMaxProfit() {
-        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getProfit()).max().getAsDouble());
+        return Numbers.round(signalsResults.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().isProfitable())
+                .mapToDouble(entry -> entry.getValue().getProfit()).max().getAsDouble());
     }
 
     public double getAvgProfit() {
-        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getProfit()).average().getAsDouble());
+        return Numbers.round(signalsResults.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().isProfitable())
+                .mapToDouble(entry -> entry.getValue().getProfit()).average().getAsDouble());
     }
 
     public double getMinLoss() {
-        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getLoss()).min().getAsDouble());
+        return Numbers.round(signalsResults.entrySet()
+                .stream()
+                .filter(entry -> !entry.getValue().isProfitable())
+                .mapToDouble(entry -> entry.getValue().getLoss()).min().getAsDouble());
     }
 
     public double getMaxLoss() {
-        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getLoss()).max().getAsDouble());
+        return Numbers.round(signalsResults.entrySet()
+                .stream()
+                .filter(entry -> !entry.getValue().isProfitable())
+                .mapToDouble(entry -> entry.getValue().getLoss()).max().getAsDouble());
     }
 
     public double getAvgLoss() {
-        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getLoss()).average().getAsDouble());
+        return Numbers.round(signalsResults.entrySet()
+                .stream()
+                .filter(entry -> !entry.getValue().isProfitable())
+                .mapToDouble(entry -> entry.getValue().getLoss()).average().getAsDouble());
     }
 
     public double getTotalProfit() {
-        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getProfit()).sum());
+        return Numbers.round(signalsResults.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().isProfitable())
+                .mapToDouble(entry -> entry.getValue().getProfit()).sum());
     }
 
     public double getTotalLoss() {
-        return Numbers.round(signalsResults.entrySet().stream().mapToDouble(entry -> entry.getValue().getLoss()).sum());
+        return Numbers.round(signalsResults.entrySet()
+                .stream()
+                .filter(entry -> !entry.getValue().isProfitable())
+                .mapToDouble(entry -> entry.getValue().getLoss()).sum());
     }
 
     public Result searchSignalByLongestPosition() {
@@ -102,7 +126,9 @@ public class HistoricalTesting {
     }
 
     public Result searchSignalByProfit(double value) {
-        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getProfit() == value).findFirst();
+        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet()
+                .stream()
+                .filter(entrySet -> entrySet.getValue().isProfitable() && entrySet.getValue().getProfit() == value).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {
@@ -111,7 +137,9 @@ public class HistoricalTesting {
     }
 
     public Result searchSignalByLoss(double value) {
-        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getLoss() == value).findFirst();
+        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet()
+                .stream()
+                .filter(entrySet -> !entrySet.getValue().isProfitable() && entrySet.getValue().getLoss() == value).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {
