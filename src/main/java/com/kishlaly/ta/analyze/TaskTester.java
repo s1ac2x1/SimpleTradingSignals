@@ -17,6 +17,7 @@ import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Function;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
@@ -152,11 +153,7 @@ public class TaskTester {
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
         // TODO move to method (with lambda receiver)
-        Result resultWithLongestPosition = testing.searchSignalByLongestPosition();
-        String longestPositionRange = "";
-        if (resultWithLongestPosition != null) {
-            longestPositionRange = "[" + formatDate(testing.getData().timeframe, resultWithLongestPosition.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithLongestPosition.getClosedTimestamp()) + "]";
-        }
+        String longestPositionRange = formatRange(testing, t -> t.searchSignalByLongestPosition());
         long averagePositionDurationSeconds = testing.getAveragePositionDurationSeconds();
         switch (testing.getData().timeframe) {
             case DAY:
@@ -176,22 +173,21 @@ public class TaskTester {
                 result += "\tavg duration = " + avgPositionDurationHours + " hours" + System.lineSeparator();
                 break;
         }
-        // TODO move to method (with lambda receiver)
-        Result resultWithMaxProfit = testing.searchSignalByMaxProfit();
-        String maxProfitPositionRange = "";
-        if (resultWithMaxProfit != null) {
-            maxProfitPositionRange = " [" + formatDate(testing.getData().timeframe, resultWithMaxProfit.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithMaxProfit.getClosedTimestamp()) + "]";
-        }
-        // TODO move to method (with lambda receiver)
-        Result resultWithMaxLoss = testing.searchSignalByMaxLoss();
-        String maxLossPositionRange = "";
-        if (resultWithMaxLoss != null) {
-            maxLossPositionRange = " [" + formatDate(testing.getData().timeframe, resultWithMaxLoss.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, resultWithMaxLoss.getClosedTimestamp()) + "]";
-        }
-        result += "\tmax profit = " + testing.getMaxProfit() + maxProfitPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
-        result += "\tmax loss = " + testing.getMaxLoss() + maxLossPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
+        String maxProfitPositionRange = formatRange(testing, t -> t.searchSignalByMaxProfit());
+        String maxLossPositionRange = formatRange(testing, t -> t.searchSignalByMaxLoss());
+        result += "\tmax profit = " + testing.getMaxProfit() + " " + maxProfitPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
+        result += "\tmax loss = " + testing.getMaxLoss() + " " + maxLossPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
         result += "\tavg profit / loss = " + testing.getAvgProfit() + " / " + testing.getAvgLoss() + System.lineSeparator();
         return result;
+    }
+
+    private static String formatRange(HistoricalTesting testing, Function<HistoricalTesting, Result> function) {
+        Result result = function.apply(testing);
+        String output = "";
+        if (result != null) {
+            output = "[" + formatDate(testing.getData().timeframe, result.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, result.getClosedTimestamp()) + "]";
+        }
+        return output;
     }
 
     /**
