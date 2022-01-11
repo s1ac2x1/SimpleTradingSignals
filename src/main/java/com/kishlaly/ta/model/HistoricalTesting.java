@@ -49,15 +49,24 @@ public class HistoricalTesting {
     }
 
     public long getAveragePositionDurationSeconds() {
-        return (long) signalsResults.entrySet().stream().mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).average().getAsDouble();
+        return (long) signalsResults.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().isClosed())
+                .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).average().getAsDouble();
     }
 
     public long getMinPositionDurationSeconds() {
-        return signalsResults.entrySet().stream().mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).min().getAsLong();
+        return signalsResults.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().isClosed())
+                .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).min().getAsLong();
     }
 
     public long getMaxPositionDurationSeconds() {
-        return signalsResults.entrySet().stream().mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).max().getAsLong();
+        return signalsResults.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().isClosed())
+                .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).max().getAsLong();
     }
 
     public double getMinProfit() {
