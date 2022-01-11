@@ -116,6 +116,11 @@ public class HistoricalTesting {
         private long openedTimestamp;
         private long closedTimestamp;
 
+        private double openPositionPrice;
+        private double openPositionCost;
+        private double closePositionPrice;
+        private double closePositionCost;
+
         private boolean closed;
 
         private boolean profitable;
@@ -199,6 +204,46 @@ public class HistoricalTesting {
 
         public void setGapDown(final boolean gapDown) {
             this.gapDown = gapDown;
+        }
+
+        public double getRoi() {
+            return this.roi;
+        }
+
+        public void setRoi(final double roi) {
+            this.roi = roi;
+        }
+
+        public double getOpenPositionPrice() {
+            return this.openPositionPrice;
+        }
+
+        public void setOpenPositionPrice(final double openPositionPrice) {
+            this.openPositionPrice = openPositionPrice;
+        }
+
+        public double getOpenPositionCost() {
+            return this.openPositionCost;
+        }
+
+        public void setOpenPositionCost(final double openPositionCost) {
+            this.openPositionCost = openPositionCost;
+        }
+
+        public double getClosePositionPrice() {
+            return this.closePositionPrice;
+        }
+
+        public void setClosePositionPrice(final double closePositionPrice) {
+            this.closePositionPrice = closePositionPrice;
+        }
+
+        public double getClosePositionCost() {
+            return this.closePositionCost;
+        }
+
+        public void setClosePositionCost(final double closePositionCost) {
+            this.closePositionCost = closePositionCost;
         }
     }
 

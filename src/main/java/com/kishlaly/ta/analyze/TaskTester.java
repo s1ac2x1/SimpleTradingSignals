@@ -89,15 +89,15 @@ public class TaskTester {
                             if (!result.isClosed()) {
                                 line += " NOT CLOSED";
                             } else {
-                                line += result.isProfitable() ? "PROFIT" : "LOSS";
+                                line += result.isProfitable() ? "PROFIT " : "LOSS ";
+                                line += result.getRoi() + "%";
                                 if (result.isGapUp()) {
                                     line += " gap up";
                                 }
                                 if (result.isGapDown()) {
                                     line += " gap down";
                                 }
-                                line += System.lineSeparator();
-                                line += "\t\tDuration " + result.getPositionDuration(screen2.timeframe);
+                                line += " " + result.getPositionDuration(screen2.timeframe);
                                 String endDate = getBarTimeInMyZone(result.getClosedTimestamp(), exchangeTimezome).toString();
                                 ZonedDateTime parsed = ZonedDateTime.parse(endDate);
                                 String parsedEndDate = parsed.getDayOfMonth() + " " + parsed.getMonth() + " " + parsed.getYear();
@@ -105,12 +105,6 @@ public class TaskTester {
                                     parsedEndDate += " " + parsed.getHour() + ":" + parsed.getMinute();
                                 }
                                 line += " [till " + parsedEndDate + "]";
-                                line += System.lineSeparator();
-                                if (result.isProfitable()) {
-                                    line += "\t\tprofit: " + result.getProfit(); // TODO сюда ROI % вместо числа
-                                } else {
-                                    line += "\t\tloss: " + result.getLoss(); // TODO сюда ROI % вместо числа
-                                }
                             }
                             finalSignalResults.add(signalDate + " --- " + line);
                         });
@@ -152,7 +146,6 @@ public class TaskTester {
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + System.lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
-        // TODO move to method (with lambda receiver)
         String longestPositionRange = formatRange(testing, t -> t.searchSignalByLongestPosition());
         long averagePositionDurationSeconds = testing.getAveragePositionDurationSeconds();
         switch (testing.getData().timeframe) {
@@ -175,8 +168,8 @@ public class TaskTester {
         }
         String maxProfitPositionRange = formatRange(testing, t -> t.searchSignalByMaxProfit());
         String maxLossPositionRange = formatRange(testing, t -> t.searchSignalByMaxLoss());
-        result += "\tmax profit = " + testing.getMaxProfit() + " " + maxProfitPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
-        result += "\tmax loss = " + testing.getMaxLoss() + " " + maxLossPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
+        result += "\tmax profit = " + testing.searchSignalByMaxProfit().getRoi() + "% " + maxProfitPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
+        result += "\tmax loss = " + testing.searchSignalByMaxLoss().getRoi() + "% " + maxLossPositionRange + System.lineSeparator(); // TODO сюда ROI % вместо числа
         result += "\tavg profit / loss = " + testing.getAvgProfit() + " / " + testing.getAvgLoss() + System.lineSeparator();
         return result;
     }
@@ -227,6 +220,9 @@ public class TaskTester {
                 boolean profitable = false;
                 boolean caughtGapUp = false;
                 boolean caughtGapDown = false;
+                double roi = 0;
+                double closePositionPrice = 0;
+                double closePositionCost = 0;
                 Quote closePositionQuote = null;
                 while (startPositionIndex < quotes.size()) {
                     startPositionIndex++;
@@ -241,9 +237,12 @@ public class TaskTester {
                         }
                         double closingPositionSize = Context.lots * takeProfit;
                         profit = closingPositionSize - openPositionSize;
+                        roi = (closingPositionSize - openPositionSize) / closingPositionSize * 100;
                         profitable = true;
                         closePositionQuote = nextQuote;
                         caughtGapUp = gapUp;
+                        closePositionPrice = takeProfit;
+                        closePositionCost = closePositionPrice;
                         break;
                     }
                     boolean slInsideBar = nextQuote.getLow() < stopLoss && nextQuote.getHigh() > stopLoss;
@@ -258,13 +257,11 @@ public class TaskTester {
                         loss = openPositionSize - closingPositionSize;
                         closePositionQuote = nextQuote;
                         caughtGapDown = gapDown;
+                        roi = (closingPositionSize - openPositionSize) / closingPositionSize * 100;
+                        closePositionPrice = stopLoss;
+                        closePositionCost = closingPositionSize;
                         break;
                     }
-                    // TODO собрать разную статистику:
-                    // колчество сигналов по символу, сколько закрылось по TP / SL в числах и процентах
-                    // среднее расстояние между входом и выходом из сделки
-                    // количество гэпов на профите и лоссе
-                    // напечатать все вместе
                 }
                 Result result = new Result();
                 if (closePositionQuote != null) {
@@ -276,6 +273,11 @@ public class TaskTester {
                     result.setLoss(loss);
                     result.setGapUp(caughtGapUp);
                     result.setGapDown(caughtGapDown);
+                    result.setRoi(Numbers.round(roi));
+                    result.setOpenPositionPrice(openingPrice);
+                    result.setOpenPositionCost(openPositionSize);
+                    result.setClosePositionPrice(closePositionPrice);
+                    result.setClosePositionCost(closePositionCost);
                 }
                 historicalTesting.addSignalResult(signal, result);
             }
