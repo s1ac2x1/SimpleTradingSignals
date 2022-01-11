@@ -4,9 +4,11 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
+import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
+import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -20,7 +22,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        Context.singleSymbol = "MCK";
+        //Context.singleSymbol = "MCK";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -36,11 +38,14 @@ public class Main {
         //buildCache(timeframes, tasks, false);
         //checkCache(timeframes, tasks);
 
-        //run(timeframes, tasks);
+        run(timeframes, tasks);
 
         //Context.screenOneDay = "2020-09";
         //Context.screenTwoDay = "2021-11-15";
-        test(timeframes, tasks);
+        //test(timeframes, tasks);
+
+        // зачем выгружать недельные котировки? если агрегировать дневные просто?
+        // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
 
         // сделать тест открытий позиций по стратегиям, собрать статистику по стратегиям
         // причесать код тестирования открытия позиций и сбора статистики
