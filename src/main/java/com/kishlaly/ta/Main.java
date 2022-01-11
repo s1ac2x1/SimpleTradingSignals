@@ -4,11 +4,8 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
-import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -22,7 +19,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        Context.singleSymbol = "MCK";
+        Context.singleSymbol = "TER";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -44,13 +41,11 @@ public class Main {
         //Context.screenTwoDay = "2021-11-15";
         test(timeframes, tasks);
 
-        // проверить, как работают индикаторы для недельных агрегированных котировок (изменил длину бара на 1440 минут)
-        // если все отлично - убрать загрузку недельных котировок (и их индикаторов) из API, оставив только дневные
+        // недельные котировки почему-то отстают на одну
+        // пример - сигнал [D] TER 12 JULY 2021 потому что нету недельной котировки 6 JUL 2021
+
 
         // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
-
-        // сделать тест открытий позиций по стратегиям, собрать статистику по стратегиям
-        // причесать код тестирования открытия позиций и сбора статистики
 
         // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
         // первый экран - подумать

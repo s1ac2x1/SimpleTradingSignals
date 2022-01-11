@@ -24,6 +24,7 @@ public class Quotes {
             try {
                 ZonedDateTime timeInExchangeZone = Dates.getTimeInExchangeZone(quote.getTimestamp(), Quote.exchangeTimezome);
                 DayOfWeek dayOfWeek = timeInExchangeZone.getDayOfWeek();
+                // TODO нужно проверять не дни недели, а принадлежность к weekday
                 if (dayOfWeek == DayOfWeek.MONDAY) {
                     foundMonday.set(true);
                     startWeekQuote.set(quote);

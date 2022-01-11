@@ -92,10 +92,10 @@ public class TaskTester {
                                 line += result.isProfitable() ? "PROFIT " : "LOSS ";
                                 line += result.getRoi() + "%";
                                 if (result.isGapUp()) {
-                                    line += " gap up";
+                                    line += " (gap up)";
                                 }
                                 if (result.isGapDown()) {
-                                    line += " gap down";
+                                    line += " (gap down)";
                                 }
                                 line += " " + result.getPositionDuration(screen2.timeframe);
                                 String endDate = getBarTimeInMyZone(result.getClosedTimestamp(), exchangeTimezome).toString();

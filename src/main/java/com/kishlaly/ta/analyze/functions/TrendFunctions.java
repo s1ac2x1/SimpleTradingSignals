@@ -15,6 +15,7 @@ public class TrendFunctions {
     // подразумевается, что размер коллекций равен Context.minimumBarsCount
     // Главные правила проверки:
     // 1. Как минимум пловина из N последних баров должна быть правильного цвета (зеленые на восходящем тренде или красные на нисходящем)
+    //    так же все N не должны пересекать EMA26
     // 2. ЕМА должна расти последовательно
     // 3. если гистограмма MACD не растет последовательно - нормально
     //    главное, чтобы она не спускалась последовательно при росте ЕМА
@@ -30,6 +31,7 @@ public class TrendFunctions {
                 symbolData,
                 barsToCheck,
                 quote -> quote.getOpen() < quote.getClose(),
+                (quote, ema) -> quote.getLow() > ema.getValue(),
                 (next, curr) -> next <= curr,
                 (curr, next) -> curr < next,
                 (curr, next) -> curr > next
@@ -43,6 +45,7 @@ public class TrendFunctions {
                 symbolData,
                 barsToCheck,
                 quote -> quote.getOpen() > quote.getClose(),
+                (quote, ema) -> quote.getHigh() < ema.getValue(),
                 (next, curr) -> next >= curr,
                 (curr, next) -> curr > next,
                 (curr, next) -> curr < next
@@ -73,6 +76,7 @@ public class TrendFunctions {
             SymbolData symbolData,
             int barsToCheck,
             Function<Quote, Boolean> barCorrectColor,
+            BiFunction<Quote, EMA, Boolean> quoteEmaIntersectionCheck,
             BiFunction<Double, Double, Boolean> emaMoveCheck,
             BiFunction<Double, Double, Boolean> histogramCheck1,
             BiFunction<Double, Double, Boolean> histogramCheck2
