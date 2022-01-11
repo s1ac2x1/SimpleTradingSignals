@@ -39,11 +39,11 @@ public class Main {
 
         //Context.screenOneDay = "2020-09";
         //Context.screenTwoDay = "2021-11-15";
-        test(timeframes, tasks);
-
-        // недельные котировки почему-то отстают на одну
-        // пример - сигнал [D] TER 12 JULY 2021 потому что нету недельной котировки 6 JUL 2021
-
+        try {
+            test(timeframes, tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
 

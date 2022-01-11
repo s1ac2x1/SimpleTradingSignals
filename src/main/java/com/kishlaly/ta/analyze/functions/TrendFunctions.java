@@ -88,6 +88,12 @@ public class TrendFunctions {
         List<MACD> macd = symbolData.indicators.get(Indicator.MACD);
         macd = macd.subList(macd.size() - 100, macd.size());
 
+        for (int i = quotes.size() - barsToCheck; i < quotes.size(); i++) {
+            if (!quoteEmaIntersectionCheck.apply(quotes.get(i), ema.get(i))) {
+                return false;
+            }
+        }
+
         int barsWithCorrectColors = 0;
         for (int i = quotes.size() - barsToCheck; i < quotes.size(); i++) {
             if (barCorrectColor.apply(quotes.get(i))) {
