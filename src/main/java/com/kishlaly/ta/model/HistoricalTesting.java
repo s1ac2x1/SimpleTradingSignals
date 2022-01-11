@@ -52,42 +52,42 @@ public class HistoricalTesting {
         return (long) signalsResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isClosed())
-                .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).average().getAsDouble();
+                .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).average().orElse(0);
     }
 
     public long getMinPositionDurationSeconds() {
         return signalsResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isClosed())
-                .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).min().getAsLong();
+                .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).min().orElse(0);
     }
 
     public long getMaxPositionDurationSeconds() {
         return signalsResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isClosed())
-                .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).max().getAsLong();
+                .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).max().orElse(0);
     }
 
     public double getMinProfit() {
         return Numbers.round(signalsResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getProfit()).min().getAsDouble());
+                .mapToDouble(entry -> entry.getValue().getProfit()).min().orElse(0));
     }
 
     public double getMaxProfit() {
         return Numbers.round(signalsResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getProfit()).max().getAsDouble());
+                .mapToDouble(entry -> entry.getValue().getProfit()).max().orElse(0));
     }
 
     public double getAvgProfit() {
         return Numbers.round(signalsResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getProfit()).average().getAsDouble());
+                .mapToDouble(entry -> entry.getValue().getProfit()).average().orElse(0));
     }
 
     // find the max of negative number
@@ -95,7 +95,7 @@ public class HistoricalTesting {
         return Numbers.round(signalsResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getLoss()).max().getAsDouble());
+                .mapToDouble(entry -> entry.getValue().getLoss()).max().orElse(0));
     }
 
     // find the min of negative number
@@ -103,14 +103,14 @@ public class HistoricalTesting {
         return Numbers.round(signalsResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getLoss()).min().getAsDouble());
+                .mapToDouble(entry -> entry.getValue().getLoss()).min().orElse(0));
     }
 
     public double getAvgLoss() {
         return Numbers.round(signalsResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getLoss()).average().getAsDouble());
+                .mapToDouble(entry -> entry.getValue().getLoss()).average().orElse(0));
     }
 
     public double getTotalProfit() {
