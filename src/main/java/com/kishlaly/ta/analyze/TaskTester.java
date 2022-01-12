@@ -28,7 +28,6 @@ public class TaskTester {
     public static void test(Timeframe[][] timeframes, TaskType[] tasks) {
         Set<String> symbols = getSymbols();
         StringBuilder log = new StringBuilder();
-        List<HistoricalTesting> historicalTestings = new ArrayList<>();
         Arrays.stream(timeframes).forEach(screens -> {
             Arrays.stream(tasks).forEach(task -> {
                 task.updateTimeframeForScreen(1, screens[0]);
@@ -59,7 +58,6 @@ public class TaskTester {
                     if (!taskResults.isEmpty()) {
                         HistoricalTesting testing = new HistoricalTesting(symbolDataForTesting, taskResults);
                         calculateStatistics(testing);
-                        historicalTestings.add(testing);
                         String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
                         Set<String> signalResults = readableOutput.get(key);
                         if (signalResults == null) {
