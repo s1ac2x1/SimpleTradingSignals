@@ -1,9 +1,6 @@
 package com.kishlaly.ta.analyze;
 
-import com.kishlaly.ta.model.HistoricalTesting;
-import com.kishlaly.ta.model.Quote;
-import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.Keltner;
 import com.kishlaly.ta.utils.Context;
@@ -21,7 +18,7 @@ import java.util.function.Function;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
-import static com.kishlaly.ta.model.HistoricalTesting.Result;
+import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Clean.clear;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
@@ -40,8 +37,8 @@ public class TaskTester {
                 symbols.forEach(symbol -> {
                     SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
                     SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
-                    SymbolData forTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);
-                    List<Quote> signals = new ArrayList<>();
+                    SymbolData symbolDataForTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);
+                    List<TaskResult> taskResults = new ArrayList<>();
                     if (!isDataFilled(screen1, screen2)) {
                         return;
                     }
@@ -49,10 +46,7 @@ public class TaskTester {
                         while (hasHistory(screen1, screen2)) {
                             Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
                             Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
-                            Quote result = task.getFunction().apply(screen1, screen2);
-                            if (result != null) {
-                                signals.add(result);
-                            }
+                            taskResults.add(task.getFunction().apply(screen1, screen2));
                             if (lastScreen2Quote.getTimestamp() <= lastScreen1Quote.getTimestamp()) {
                                 rewind(screen1, 1);
                             } else {
@@ -62,13 +56,9 @@ public class TaskTester {
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
-                    if (!signals.isEmpty()) {
-                        HistoricalTesting testing = new HistoricalTesting(forTesting, signals);
-                        try {
-                            calculateStatistics(testing);
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
+                    if (!taskResults.isEmpty()) {
+                        HistoricalTesting testing = new HistoricalTesting(symbolDataForTesting, taskResults);
+                        calculateStatistics(testing);
                         historicalTestings.add(testing);
                         String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
                         Set<String> signalResults = readableOutput.get(key);
@@ -77,36 +67,48 @@ public class TaskTester {
                         }
                         signalResults.add(formatTestingSummary(testing));
                         Set<String> finalSignalResults = signalResults;
-                        signals.forEach(signal -> {
-                            String signalDate = signal.getMyDate();
-                            ZonedDateTime parsedDate = ZonedDateTime.parse(signalDate);
-                            signalDate = parsedDate.getDayOfMonth() + " " + parsedDate.getMonth() + " " + parsedDate.getYear();
-                            if (screen2.timeframe == Timeframe.HOUR) {
-                                signalDate += " " + parsedDate.getHour() + ":" + parsedDate.getMinute();
-                            }
-                            Result result = testing.getResult(signal);
+                        // на данном этапе HistoricalTesting содержит тесты позиций по сигналам
+                        testing.getTaskResults().stream().forEach(taskResult -> {
                             String line = "";
-                            if (!result.isClosed()) {
-                                line += " NOT CLOSED";
-                            } else {
-                                line += result.isProfitable() ? "PROFIT " : "LOSS ";
-                                line += result.getRoi() + "%";
-                                if (result.isGapUp()) {
-                                    line += " (gap up)";
-                                }
-                                if (result.isGapDown()) {
-                                    line += " (gap down)";
-                                }
-                                line += " " + result.getPositionDuration(screen2.timeframe);
-                                String endDate = getBarTimeInMyZone(result.getClosedTimestamp(), exchangeTimezome).toString();
-                                ZonedDateTime parsed = ZonedDateTime.parse(endDate);
-                                String parsedEndDate = parsed.getDayOfMonth() + " " + parsed.getMonth() + " " + parsed.getYear();
-                                if (screen2.timeframe == Timeframe.HOUR) {
-                                    parsedEndDate += " " + parsed.getHour() + ":" + parsed.getMinute();
-                                }
-                                line += " [till " + parsedEndDate + "]";
+                            Quote quote = taskResult.getLastChartQuote();
+                            String quoteDate = quote.getMyDate();
+                            ZonedDateTime parsedDate = ZonedDateTime.parse(quoteDate);
+                            quoteDate = parsedDate.getDayOfMonth() + " " + parsedDate.getMonth() + " " + parsedDate.getYear();
+                            if (screen2.timeframe == Timeframe.HOUR) {
+                                quoteDate += " " + parsedDate.getHour() + ":" + parsedDate.getMinute();
                             }
-                            finalSignalResults.add(signalDate + " --- " + line);
+
+                            // сначала печатаем результаты тестирования сигналов
+                            if (taskResult.isSignal()) {
+                                PositionTestResult positionTestResult = testing.getResult(quote);
+                                if (!positionTestResult.isClosed()) {
+                                    line += " NOT CLOSED";
+                                } else {
+                                    line += positionTestResult.isProfitable() ? "PROFIT " : "LOSS ";
+                                    line += positionTestResult.getRoi() + "%";
+                                    if (positionTestResult.isGapUp()) {
+                                        line += " (gap up)";
+                                    }
+                                    if (positionTestResult.isGapDown()) {
+                                        line += " (gap down)";
+                                    }
+                                    line += " " + positionTestResult.getPositionDuration(screen2.timeframe);
+                                    String endDate = getBarTimeInMyZone(positionTestResult.getClosedTimestamp(), exchangeTimezome).toString();
+                                    ZonedDateTime parsed = ZonedDateTime.parse(endDate);
+                                    String parsedEndDate = parsed.getDayOfMonth() + " " + parsed.getMonth() + " " + parsed.getYear();
+                                    if (screen2.timeframe == Timeframe.HOUR) {
+                                        parsedEndDate += " " + parsed.getHour() + ":" + parsed.getMinute();
+                                    }
+                                    line += " [till " + parsedEndDate + "]";
+                                }
+                                finalSignalResults.add(quoteDate + " --- " + line);
+                            }
+
+                            // потом лог всех остальных котировок с указанием причины, почему стратегия дала отказ
+                            if (!taskResult.isSignal()) {
+                                finalSignalResults.add(quoteDate + " ### " + taskResult.getCode());
+                            }
+
                         });
                         readableOutput.put(key, signalResults);
                     }
@@ -182,11 +184,11 @@ public class TaskTester {
         return result;
     }
 
-    private static String formatRange(HistoricalTesting testing, Function<HistoricalTesting, Result> function) {
-        Result result = function.apply(testing);
+    private static String formatRange(HistoricalTesting testing, Function<HistoricalTesting, PositionTestResult> function) {
+        PositionTestResult positionTestResult = function.apply(testing);
         String output = "";
-        if (result != null) {
-            output = "[" + formatDate(testing.getData().timeframe, result.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, result.getClosedTimestamp()) + "]";
+        if (positionTestResult != null) {
+            output = "[" + formatDate(testing.getData().timeframe, positionTestResult.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, positionTestResult.getClosedTimestamp()) + "]";
         }
         return output;
     }
@@ -204,92 +206,98 @@ public class TaskTester {
         SymbolData data = historicalTesting.getData();
         List<Quote> quotes = data.quotes;
         data.indicators.put(Indicator.KELTNER, IndicatorUtils.buildKeltnerChannels(quotes));
-        List<Quote> signals = historicalTesting.getSignals();
-        signals.forEach(signal -> {
-            // найти индекс этой котировки в списке
-            int signalIndex = -1;
-            for (int i = 0; i < quotes.size(); i++) {
-                if (quotes.get(i).getTimestamp().compareTo(signal.getTimestamp()) == 0) {
-                    signalIndex = i;
+        historicalTesting
+                .getTaskResults()
+                .stream()
+                .filter(taskResult -> taskResult.isSignal())
+                .forEach(taskResult -> testPosition(data, taskResult, historicalTesting));
+    }
+
+    private static void testPosition(SymbolData data, TaskResult taskResult, HistoricalTesting historicalTesting) {
+        PositionTestResult positionTestResult = new PositionTestResult();
+        Quote signal = taskResult.getLastChartQuote();
+        int signalIndex = -1;
+        for (int i = 0; i < data.quotes.size(); i++) {
+            if (data.quotes.get(i).getTimestamp().compareTo(signal.getTimestamp()) == 0) {
+                signalIndex = i;
+                break;
+            }
+        }
+        if (signalIndex > 11) {
+            Keltner keltner = (Keltner) data.indicators.get(Indicator.KELTNER).get(signalIndex);
+            double openingPrice = signal.getClose() + 0.07;
+            double openPositionSize = Context.lots * openingPrice;
+            double takeProfit = keltner.getTop();
+            // SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой
+            Quote quoteWithMinimalLow = data.quotes.subList(signalIndex - 10, signalIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
+            double stopLoss = quoteWithMinimalLow.getLow() - 0.27;
+            int startPositionIndex = signalIndex;
+            double profit = 0;
+            double loss = 0;
+            boolean profitable = false;
+            boolean caughtGapUp = false;
+            boolean caughtGapDown = false;
+            double roi = 0;
+            double closePositionPrice = 0;
+            double closePositionCost = 0;
+            Quote closePositionQuote = null;
+            while (startPositionIndex < data.quotes.size()) {
+                startPositionIndex++;
+                Quote nextQuote = data.quotes.get(startPositionIndex);
+                boolean tpInsideBar = nextQuote.getLow() < takeProfit && nextQuote.getHigh() > takeProfit;
+                boolean tpAtHigh = nextQuote.getHigh() == takeProfit;
+                boolean gapUp = nextQuote.getOpen() > takeProfit;
+                // закрылся по TP
+                if (tpInsideBar || tpAtHigh || gapUp) {
+                    if (gapUp) {
+                        takeProfit = nextQuote.getOpen();
+                    }
+                    double closingPositionSize = Context.lots * takeProfit;
+                    profit = closingPositionSize - openPositionSize;
+                    roi = Numbers.roi(openPositionSize, closingPositionSize);
+                    profitable = true;
+                    closePositionQuote = nextQuote;
+                    caughtGapUp = gapUp;
+                    closePositionPrice = takeProfit;
+                    closePositionCost = closePositionPrice;
+                    break;
+                }
+                boolean slInsideBar = nextQuote.getLow() < stopLoss && nextQuote.getHigh() > stopLoss;
+                boolean slAtLow = nextQuote.getLow() == stopLoss;
+                boolean gapDown = nextQuote.getOpen() < stopLoss;
+                // закрылся по SL
+                if (slInsideBar || slAtLow || gapDown) {
+                    if (gapDown) {
+                        stopLoss = nextQuote.getOpen();
+                    }
+                    double closingPositionSize = Context.lots * stopLoss;
+                    loss = closingPositionSize - openPositionSize;
+                    closePositionQuote = nextQuote;
+                    caughtGapDown = gapDown;
+                    roi = Numbers.roi(openPositionSize, closingPositionSize);
+                    closePositionPrice = stopLoss;
+                    closePositionCost = closingPositionSize;
                     break;
                 }
             }
-            if (signalIndex > 11) {
-                Keltner keltner = (Keltner) data.indicators.get(Indicator.KELTNER).get(signalIndex);
-                double openingPrice = signal.getClose() + 0.07;
-                double openPositionSize = Context.lots * openingPrice;
-                double takeProfit = keltner.getTop();
-                // SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой
-                Quote quoteWithMinimalLow = quotes.subList(signalIndex - 10, signalIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
-                double stopLoss = quoteWithMinimalLow.getLow() - 0.27;
-                int startPositionIndex = signalIndex;
-                double profit = 0;
-                double loss = 0;
-                boolean profitable = false;
-                boolean caughtGapUp = false;
-                boolean caughtGapDown = false;
-                double roi = 0;
-                double closePositionPrice = 0;
-                double closePositionCost = 0;
-                Quote closePositionQuote = null;
-                while (startPositionIndex < quotes.size()) {
-                    startPositionIndex++;
-                    Quote nextQuote = quotes.get(startPositionIndex);
-                    boolean tpInsideBar = nextQuote.getLow() < takeProfit && nextQuote.getHigh() > takeProfit;
-                    boolean tpAtHigh = nextQuote.getHigh() == takeProfit;
-                    boolean gapUp = nextQuote.getOpen() > takeProfit;
-                    // закрылся по TP
-                    if (tpInsideBar || tpAtHigh || gapUp) {
-                        if (gapUp) {
-                            takeProfit = nextQuote.getOpen();
-                        }
-                        double closingPositionSize = Context.lots * takeProfit;
-                        profit = closingPositionSize - openPositionSize;
-                        roi = Numbers.roi(openPositionSize, closingPositionSize);
-                        profitable = true;
-                        closePositionQuote = nextQuote;
-                        caughtGapUp = gapUp;
-                        closePositionPrice = takeProfit;
-                        closePositionCost = closePositionPrice;
-                        break;
-                    }
-                    boolean slInsideBar = nextQuote.getLow() < stopLoss && nextQuote.getHigh() > stopLoss;
-                    boolean slAtLow = nextQuote.getLow() == stopLoss;
-                    boolean gapDown = nextQuote.getOpen() < stopLoss;
-                    // закрылся по SL
-                    if (slInsideBar || slAtLow || gapDown) {
-                        if (gapDown) {
-                            stopLoss = nextQuote.getOpen();
-                        }
-                        double closingPositionSize = Context.lots * stopLoss;
-                        loss = closingPositionSize - openPositionSize;
-                        closePositionQuote = nextQuote;
-                        caughtGapDown = gapDown;
-                        roi = Numbers.roi(openPositionSize, closingPositionSize);
-                        closePositionPrice = stopLoss;
-                        closePositionCost = closingPositionSize;
-                        break;
-                    }
-                }
-                Result result = new Result();
-                if (closePositionQuote != null) {
-                    result.setOpenedTimestamp(signal.getTimestamp());
-                    result.setClosedTimestamp(closePositionQuote.getTimestamp());
-                    result.setClosed(true);
-                    result.setProfitable(profitable);
-                    result.setProfit(profit);
-                    result.setLoss(loss);
-                    result.setGapUp(caughtGapUp);
-                    result.setGapDown(caughtGapDown);
-                    result.setRoi(Numbers.round(roi));
-                    result.setOpenPositionPrice(openingPrice);
-                    result.setOpenPositionCost(openPositionSize);
-                    result.setClosePositionPrice(closePositionPrice);
-                    result.setClosePositionCost(closePositionCost);
-                }
-                historicalTesting.addSignalResult(signal, result);
+            if (closePositionQuote != null) {
+                positionTestResult.setOpenedTimestamp(signal.getTimestamp());
+                positionTestResult.setClosedTimestamp(closePositionQuote.getTimestamp());
+                positionTestResult.setClosed(true);
+                positionTestResult.setProfitable(profitable);
+                positionTestResult.setProfit(profit);
+                positionTestResult.setLoss(loss);
+                positionTestResult.setGapUp(caughtGapUp);
+                positionTestResult.setGapDown(caughtGapDown);
+                positionTestResult.setRoi(Numbers.round(roi));
+                positionTestResult.setOpenPositionPrice(openingPrice);
+                positionTestResult.setOpenPositionCost(openPositionSize);
+                positionTestResult.setClosePositionPrice(closePositionPrice);
+                positionTestResult.setClosePositionCost(closePositionCost);
             }
-        });
+            historicalTesting.addTestResult(signal, positionTestResult);
+        }
+
     }
 
     private static void rewind(SymbolData screen, int i) {

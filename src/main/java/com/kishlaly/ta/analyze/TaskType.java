@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.TaskResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.TimeframeIndicators;
@@ -64,7 +64,7 @@ public enum TaskType {
 
     TaskType(final Map<Integer, Timeframe> timeframes,
              final Map<Integer, Indicator[]> indicators,
-             BiFunction<SymbolData, SymbolData, Quote> function) {
+             BiFunction<SymbolData, SymbolData, TaskResult> function) {
         this.timeframes = timeframes;
         this.indicators = indicators;
         this.function = function;
@@ -72,7 +72,7 @@ public enum TaskType {
 
     private Map<Integer, Timeframe> timeframes;
     private Map<Integer, Indicator[]> indicators;
-    private BiFunction<SymbolData, SymbolData, Quote> function;
+    private BiFunction<SymbolData, SymbolData, TaskResult> function;
     private TimeframeIndicators timeframeIndicators;
 
     public Timeframe getTimeframeForScreen(int screen) {
@@ -91,7 +91,7 @@ public enum TaskType {
         this.indicators.put(screen, indicators);
     }
 
-    public BiFunction<SymbolData, SymbolData, Quote> getFunction() {
+    public BiFunction<SymbolData, SymbolData, TaskResult> getFunction() {
         return this.function;
     }
 

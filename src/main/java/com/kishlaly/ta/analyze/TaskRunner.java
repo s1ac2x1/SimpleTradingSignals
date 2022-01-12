@@ -1,8 +1,8 @@
 package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.cache.CacheReader;
-import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.TaskResult;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.TimeframeIndicators;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -43,7 +43,7 @@ public class TaskRunner {
         }));
     }
 
-    private static void twoTimeframeFunction(BiFunction<SymbolData, SymbolData, Quote> function,
+    private static void twoTimeframeFunction(BiFunction<SymbolData, SymbolData, TaskResult> function,
                                              TimeframeIndicators longTerm,
                                              TimeframeIndicators middleTerm) {
         List<String> symbols = new ArrayList<>(getSymbols());
@@ -54,10 +54,10 @@ public class TaskRunner {
             Log.addDebugLine("");
             Log.addDebugLine(" === " + symbol + " === ");
             try {
-                Quote signal = function.apply(screen1, screen2);
-                Log.addDebugLine(signal != null ? "Вердикт: проверить" : "Вердикт: точно нет");
+                TaskResult taskResult = function.apply(screen1, screen2);
+                Log.addDebugLine(taskResult.isSignal() ? "Вердикт: проверить" : "Вердикт: точно нет");
                 Log.addDebugLine("");
-                if (signal != null) {
+                if (taskResult.isSignal()) {
                     Log.addLine(symbol);
                 }
             } catch (Exception e) {

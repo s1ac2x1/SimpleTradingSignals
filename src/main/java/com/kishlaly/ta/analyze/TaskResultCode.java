@@ -1,7 +1,11 @@
 package com.kishlaly.ta.analyze;
 
-public enum SignalResultCode {
+/**
+ * присваивается последней котировке (у правого конца графика) после прогона через стратегию
+ */
+public enum TaskResultCode {
 
+    SIGNAL,
     NO_DATA_QUOTES,
     NO_DATA_INDICATORS,
     NO_UPTREND,

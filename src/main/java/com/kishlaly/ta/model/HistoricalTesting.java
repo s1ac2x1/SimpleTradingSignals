@@ -3,17 +3,25 @@ package com.kishlaly.ta.model;
 import com.kishlaly.ta.utils.Dates;
 import com.kishlaly.ta.utils.Numbers;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class HistoricalTesting {
 
+    // график с индикаторами
     private SymbolData data;
-    private List<Quote> signals = new ArrayList<>();
-    private Map<Quote, Result> signalsResults = new HashMap<>();
 
-    public HistoricalTesting(final SymbolData data, final List<Quote> signals) {
+    // все результаты прогона по стратегии, прокручивая график на один столбик в прошлое
+    private List<TaskResult> taskResults;
+
+    // тестирование открытия позиций по полученным сигналам к входу
+    private Map<Quote, PositionTestResult> signalTestingResults = new HashMap<>();
+
+    public HistoricalTesting(final SymbolData data, final List<TaskResult> taskResults) {
         this.data = data;
-        this.signals = signals;
+        this.taskResults = taskResults;
     }
 
     public SymbolData getData() {
@@ -24,67 +32,67 @@ public class HistoricalTesting {
         this.data = data;
     }
 
-    public List<Quote> getSignals() {
-        return this.signals;
+    public List<TaskResult> getTaskResults() {
+        return this.taskResults;
     }
 
-    public void setSignals(final List<Quote> signals) {
-        this.signals = signals;
+    public void setSignals(final List<TaskResult> taskResults) {
+        this.taskResults = taskResults;
     }
 
-    public void addSignalResult(Quote signal, Result result) {
-        signalsResults.put(signal, result);
+    public void addTestResult(Quote signal, PositionTestResult positionTestResult) {
+        signalTestingResults.put(signal, positionTestResult);
     }
 
-    public Result getResult(Quote signal) {
-        return signalsResults.get(signal);
+    public PositionTestResult getResult(Quote signal) {
+        return signalTestingResults.get(signal);
     }
 
     public long getProfitablePositions() {
-        return signalsResults.entrySet().stream().filter(entry -> entry.getValue().isProfitable()).count();
+        return signalTestingResults.entrySet().stream().filter(entry -> entry.getValue().isProfitable()).count();
     }
 
     public long getLossPositions() {
-        return signalsResults.entrySet().stream().filter(entry -> !entry.getValue().isProfitable()).count();
+        return signalTestingResults.entrySet().stream().filter(entry -> !entry.getValue().isProfitable()).count();
     }
 
     public long getAveragePositionDurationSeconds() {
-        return (long) signalsResults.entrySet()
+        return (long) signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isClosed())
                 .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).average().orElse(0);
     }
 
     public long getMinPositionDurationSeconds() {
-        return signalsResults.entrySet()
+        return signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isClosed())
                 .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).min().orElse(0);
     }
 
     public long getMaxPositionDurationSeconds() {
-        return signalsResults.entrySet()
+        return signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isClosed())
                 .mapToLong(entry -> entry.getValue().getPositionDurationInSeconds(data.timeframe)).max().orElse(0);
     }
 
     public double getMinProfit() {
-        return Numbers.round(signalsResults.entrySet()
+        return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getProfit()).min().orElse(0));
     }
 
     public double getMaxProfit() {
-        return Numbers.round(signalsResults.entrySet()
+        return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getProfit()).max().orElse(0));
     }
 
     public double getAvgProfit() {
-        return Numbers.round(signalsResults.entrySet()
+        return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getProfit()).average().orElse(0));
@@ -92,7 +100,7 @@ public class HistoricalTesting {
 
     // find the max of negative number
     public double getMinLoss() {
-        return Numbers.round(signalsResults.entrySet()
+        return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getLoss()).max().orElse(0));
@@ -100,35 +108,35 @@ public class HistoricalTesting {
 
     // find the min of negative number
     public double getMaxLoss() {
-        return Numbers.round(signalsResults.entrySet()
+        return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getLoss()).min().orElse(0));
     }
 
     public double getAvgLoss() {
-        return Numbers.round(signalsResults.entrySet()
+        return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getLoss()).average().orElse(0));
     }
 
     public double getTotalProfit() {
-        return Numbers.round(signalsResults.entrySet()
+        return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getProfit()).sum());
     }
 
     public double getTotalLoss() {
-        return Numbers.round(signalsResults.entrySet()
+        return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getLoss()).sum());
     }
 
-    public Result searchSignalByLongestPosition() {
-        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getPositionDurationInSeconds(data.timeframe) == getMaxPositionDurationSeconds()).findFirst();
+    public PositionTestResult searchSignalByLongestPosition() {
+        Optional<Map.Entry<Quote, PositionTestResult>> first = signalTestingResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getPositionDurationInSeconds(data.timeframe) == getMaxPositionDurationSeconds()).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {
@@ -136,8 +144,8 @@ public class HistoricalTesting {
         }
     }
 
-    public Result searchSignalByProfit(double value) {
-        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet()
+    public PositionTestResult searchSignalByProfit(double value) {
+        Optional<Map.Entry<Quote, PositionTestResult>> first = signalTestingResults.entrySet()
                 .stream()
                 .filter(entrySet -> entrySet.getValue().isProfitable() && entrySet.getValue().getProfit() == value).findFirst();
         if (first.isPresent()) {
@@ -147,8 +155,8 @@ public class HistoricalTesting {
         }
     }
 
-    public Result searchSignalByLoss(double value) {
-        Optional<Map.Entry<Quote, Result>> first = signalsResults.entrySet()
+    public PositionTestResult searchSignalByLoss(double value) {
+        Optional<Map.Entry<Quote, PositionTestResult>> first = signalTestingResults.entrySet()
                 .stream()
                 .filter(entrySet -> !entrySet.getValue().isProfitable() && entrySet.getValue().getLoss() == value).findFirst();
         if (first.isPresent()) {
@@ -158,7 +166,7 @@ public class HistoricalTesting {
         }
     }
 
-    public static class Result {
+    public static class PositionTestResult {
 
         private long openedTimestamp;
         private long closedTimestamp;
@@ -292,6 +300,7 @@ public class HistoricalTesting {
         public void setClosePositionCost(final double closePositionCost) {
             this.closePositionCost = closePositionCost;
         }
+
     }
 
 }
