@@ -39,6 +39,17 @@ public enum TaskType {
             }},
             ThreeDisplays::buySignal
     ),
+    THREE_DISPLAYS_BUY_TYPE2(
+            new HashMap<Integer, Timeframe>() {{
+                put(1, WEEK);
+                put(2, DAY);
+            }},
+            new HashMap<Integer, Indicator[]>() {{
+                put(1, new Indicator[]{EMA26, MACD});
+                put(2, new Indicator[]{EMA13, MACD, STOCH});
+            }},
+            ThreeDisplays::buySignalType2
+    ),
     THREE_DISPLAYS_SELL(
             new HashMap<Integer, Timeframe>() {{
                 put(1, WEEK);

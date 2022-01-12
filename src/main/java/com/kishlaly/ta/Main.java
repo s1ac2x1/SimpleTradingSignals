@@ -7,6 +7,7 @@ import com.kishlaly.ta.utils.Context;
 import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
@@ -31,7 +32,7 @@ public class Main {
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                THREE_DISPLAYS_BUY,
+                THREE_DISPLAYS_BUY_TYPE2,
                 //THREE_DISPLAYS_SELL
         };
 
@@ -45,6 +46,8 @@ public class Main {
         test(timeframes, tasks);
 
         // сделать копию стратегии трех экранов, но проверять два значения бара/гистограммы/стохастика на втором экране
+
+        // при тестировании собирать лог с указанием даты проверяемой котировки и кодом ошибки
 
         // проверить, какое число NUMBER_OF_EMA26_VALUES_TO_CHECK лучше
 
