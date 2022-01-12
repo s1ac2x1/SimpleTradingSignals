@@ -16,4 +16,8 @@ public class Numbers {
         return round(result);
     }
 
+    public static double percent(double n, double N) {
+        return round(n * 100 / N);
+    }
+
 }

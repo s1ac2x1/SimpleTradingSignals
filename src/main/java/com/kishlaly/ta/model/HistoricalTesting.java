@@ -48,12 +48,28 @@ public class HistoricalTesting {
         return signalTestingResults.get(signal);
     }
 
-    public long getProfitablePositions() {
+    public double getSuccessfulRatio() {
+        long allPositions = getAllPositionsCount();
+        long profitablePositions = getProfitablePositionsCount();
+        return Numbers.percent(profitablePositions, allPositions);
+    }
+
+    public double getLossRatio() {
+        long allPositions = getAllPositionsCount();
+        long lossPossitions = getLossPositionsCount();
+        return Numbers.percent(lossPossitions, allPositions);
+    }
+
+    public long getProfitablePositionsCount() {
         return signalTestingResults.entrySet().stream().filter(entry -> entry.getValue().isProfitable()).count();
     }
 
-    public long getLossPositions() {
+    public long getLossPositionsCount() {
         return signalTestingResults.entrySet().stream().filter(entry -> !entry.getValue().isProfitable()).count();
+    }
+
+    public long getAllPositionsCount() {
+        return signalTestingResults.entrySet().stream().filter(entry -> entry.getValue().isClosed()).count();
     }
 
     public long getAveragePositionDurationSeconds() {

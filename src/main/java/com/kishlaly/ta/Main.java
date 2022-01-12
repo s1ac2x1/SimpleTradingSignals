@@ -4,8 +4,8 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
+import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
@@ -20,7 +20,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        Context.singleSymbol = "TER";
+        //Context.singleSymbol = "TER";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -36,11 +36,9 @@ public class Main {
         //buildCache(timeframes, tasks, false);
         //checkCache(timeframes, tasks);
 
-        //run(timeframes, tasks);
+        run(timeframes, tasks);
 
-        test(timeframes, tasks);
-
-        // сделать копию стратегии трех экранов, но проверять два значения бара/гистограммы/стохастика на втором экране
+        //test(timeframes, tasks);
 
         // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
 
