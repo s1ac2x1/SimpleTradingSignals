@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks;
 
-import com.kishlaly.ta.analyze.Codes;
+import com.kishlaly.ta.analyze.SignalResultCode;
 import com.kishlaly.ta.analyze.functions.TrendFunctions;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
@@ -39,12 +39,12 @@ public class ThreeDisplays {
 
         if (screen1.quotes.isEmpty() || screen1.quotes.size() < minimumBarsCount) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen1.timeframe.name());
-            Log.recordCode(Codes.NO_DATA_QUOTES, screen1);
+            Log.recordCode(SignalResultCode.NO_DATA_QUOTES, screen1);
             return null;
         }
         if (screen2.quotes.isEmpty() || screen2.quotes.size() < minimumBarsCount) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen2.timeframe.name());
-            Log.recordCode(Codes.NO_DATA_QUOTES, screen2);
+            Log.recordCode(SignalResultCode.NO_DATA_QUOTES, screen2);
             return null;
         }
 
@@ -60,8 +60,8 @@ public class ThreeDisplays {
             }
         });
         if (!missingData.isEmpty()) {
-            Log.recordCode(Codes.NO_DATA_INDICATORS, screen1);
-            Log.recordCode(Codes.NO_DATA_INDICATORS, screen2);
+            Log.recordCode(SignalResultCode.NO_DATA_INDICATORS, screen1);
+            Log.recordCode(SignalResultCode.NO_DATA_INDICATORS, screen2);
             Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
             return null;
         }
@@ -94,7 +94,7 @@ public class ThreeDisplays {
         boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, NUMBER_OF_EMA26_VALUES_TO_CHECK);
         //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen1); плохая проверка
         if (!uptrendCheckOnMultipleBars) {
-            Log.recordCode(Codes.NO_UPTREND, screen1);
+            Log.recordCode(SignalResultCode.NO_UPTREND, screen1);
             Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
             return null;
         }
@@ -108,7 +108,7 @@ public class ThreeDisplays {
         if (q4.getLow() >= q3.getLow() && q3.getLow() >= q2.getLow() && q2.getLow() >= q1.getLow()) {
             // допустимо только, если последний столбик зеленый
             if (q1.getClose() < q1.getOpen()) {
-                Log.recordCode(Codes.UPTREND_FAILING, screen1);
+                Log.recordCode(SignalResultCode.UPTREND_FAILING, screen1);
                 Log.addDebugLine("Последние 4 столбика на первом экране понижаются");
                 return null;
             } else {
@@ -126,14 +126,14 @@ public class ThreeDisplays {
 
         boolean histogramBelowZero = macd3 < 0 && macd2 < 0 && macd1 < 0;
         if (!histogramBelowZero) {
-            Log.recordCode(Codes.HISTOGRAM_NOT_BELOW_ZERO, screen2);
+            Log.recordCode(SignalResultCode.HISTOGRAM_NOT_BELOW_ZERO, screen2);
             Log.addDebugLine("Гистограмма на втором экране не ниже нуля");
             return null;
         }
 
         boolean ascendingHistogram = macd3 < macd2 && macd2 < macd1;
         if (!ascendingHistogram) {
-            Log.recordCode(Codes.HISTOGRAM_NOT_ASCENDING, screen2);
+            Log.recordCode(SignalResultCode.HISTOGRAM_NOT_ASCENDING, screen2);
             Log.addDebugLine("Гистограмма на втором экране не повышается");
             return null;
         }
@@ -147,7 +147,7 @@ public class ThreeDisplays {
         // %D повышается (достаточно, чтобы последний был больше прошлых двух)
         boolean ascendingStochastic = stoch1.getSlowD() > stoch2.getSlowD() && stoch1.getSlowD() > stoch3.getSlowD();
         if (!ascendingStochastic) {
-            Log.recordCode(Codes.STOCH_NOT_ASCENDING, screen1);
+            Log.recordCode(SignalResultCode.STOCH_NOT_ASCENDING, screen1);
             Log.addDebugLine("Стохастик %D не растет на втором экране");
             return null;
         }
@@ -163,7 +163,7 @@ public class ThreeDisplays {
                 && (stoch1.getSlowD() > stoch3.getSlowD());
 
         if (!isOversoldK || !isOversoldD) {
-            Log.recordCode(Codes.STOCH_NOT_ASCENDING_FROM_OVERSOLD, screen1);
+            Log.recordCode(SignalResultCode.STOCH_NOT_ASCENDING_FROM_OVERSOLD, screen1);
             Log.addDebugLine("Стохастик не поднимается из перепроданности " + STOCH_OVERSOLD + ". %D: " + isOversoldD + "; %K: " + isOversoldK);
             return null;
         }
@@ -181,10 +181,10 @@ public class ThreeDisplays {
 
         int screenTwoEMA13Count = screenTwoEMA13.size();
         if (!ascendingBarHigh) {
-            Log.recordCode(Codes.QUOTE_HIGH_NOT_GROWING, screen2);
+            Log.recordCode(SignalResultCode.QUOTE_HIGH_NOT_GROWING, screen2);
             Log.addDebugLine("Quote.high не растет последовательно");
             if (!ascendingBarClose) {
-                Log.recordCode(Codes.QUOTE_CLOSE_NOT_GROWING, screen2);
+                Log.recordCode(SignalResultCode.QUOTE_CLOSE_NOT_GROWING, screen2);
                 Log.addDebugLine("Quote.close не растет последовательно");
                 // третий с конца весь ниже ЕМА13, а второй и последний пересекли
                 boolean thirdBarBelowEMA13 = quote3.getLow() < screenTwoEMA13.get(screenTwoEMA13Count - 3).getValue()
@@ -198,18 +198,18 @@ public class ThreeDisplays {
                     Log.addDebugLine("Третий с конца" + (thirdBarBelowEMA13 ? " " : " не ") + "ниже ЕМА13");
                     Log.addDebugLine("Предпоследний" + (secondBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
                     Log.addDebugLine("Последний" + (lastBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
-                    Log.recordCode(Codes.CROSSING_RULE_VIOLATED, screen2);
+                    Log.recordCode(SignalResultCode.CROSSING_RULE_VIOLATED, screen2);
                     return null;
                 } else {
-                    Log.recordCode(Codes.CROSSING_RULE_PASSED, screen2);
+                    Log.recordCode(SignalResultCode.CROSSING_RULE_PASSED, screen2);
                     Log.addDebugLine("Правило пересечения выполняется");
                 }
             } else {
-                Log.recordCode(Codes.QUOTE_CLOSE_GROWING, screen2);
+                Log.recordCode(SignalResultCode.QUOTE_CLOSE_GROWING, screen2);
                 Log.addDebugLine("Есть рост Quote.close");
             }
         } else {
-            Log.recordCode(Codes.QUOTE_HIGH_GROWING, screen2);
+            Log.recordCode(SignalResultCode.QUOTE_HIGH_GROWING, screen2);
             Log.addDebugLine("Есть рост Quote.high");
         }
 
@@ -222,7 +222,7 @@ public class ThreeDisplays {
         boolean lastAboveEMA13 = quote1.getLow() > screenTwoEMA13.get(screenTwoEMA13Count - 1).getValue()
                 && quote1.getHigh() > screenTwoEMA13.get(screenTwoEMA13Count - 1).getValue();
         if (thirdCrossesEMA13 && secondCrossesEMA13 && lastAboveEMA13) {
-            Log.recordCode(Codes.LAST_BAR_ABOVE, screen2);
+            Log.recordCode(SignalResultCode.LAST_BAR_ABOVE, screen2);
             Log.addDebugLine("Третий и второй пересекли ЕМА13, а последний полностью выше");
             return null;
         }
@@ -254,12 +254,12 @@ public class ThreeDisplays {
 
         if (screen1.quotes.isEmpty() || screen1.quotes.size() < minimumBarsCount) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen1.timeframe.name());
-            Log.recordCode(Codes.NO_DATA_QUOTES, screen1);
+            Log.recordCode(SignalResultCode.NO_DATA_QUOTES, screen1);
             return null;
         }
         if (screen2.quotes.isEmpty() || screen2.quotes.size() < minimumBarsCount) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen2.timeframe.name());
-            Log.recordCode(Codes.NO_DATA_QUOTES, screen2);
+            Log.recordCode(SignalResultCode.NO_DATA_QUOTES, screen2);
             return null;
         }
 
@@ -275,8 +275,8 @@ public class ThreeDisplays {
             }
         });
         if (!missingData.isEmpty()) {
-            Log.recordCode(Codes.NO_DATA_INDICATORS, screen1);
-            Log.recordCode(Codes.NO_DATA_INDICATORS, screen2);
+            Log.recordCode(SignalResultCode.NO_DATA_INDICATORS, screen1);
+            Log.recordCode(SignalResultCode.NO_DATA_INDICATORS, screen2);
             Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
             return null;
         }
@@ -309,7 +309,7 @@ public class ThreeDisplays {
         boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, NUMBER_OF_EMA26_VALUES_TO_CHECK);
         //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen1); плохая проверка
         if (!uptrendCheckOnMultipleBars) {
-            Log.recordCode(Codes.NO_UPTREND, screen1);
+            Log.recordCode(SignalResultCode.NO_UPTREND, screen1);
             Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
             return null;
         }
@@ -323,7 +323,7 @@ public class ThreeDisplays {
         if (q4.getLow() >= q3.getLow() && q3.getLow() >= q2.getLow() && q2.getLow() >= q1.getLow()) {
             // допустимо только, если последний столбик зеленый
             if (q1.getClose() < q1.getOpen()) {
-                Log.recordCode(Codes.UPTREND_FAILING, screen1);
+                Log.recordCode(SignalResultCode.UPTREND_FAILING, screen1);
                 Log.addDebugLine("Последние 4 столбика на первом экране понижаются");
                 return null;
             } else {
@@ -340,14 +340,14 @@ public class ThreeDisplays {
 
         boolean histogramBelowZero = macd2 < 0 && macd1 < 0;
         if (!histogramBelowZero) {
-            Log.recordCode(Codes.HISTOGRAM_NOT_BELOW_ZERO, screen2);
+            Log.recordCode(SignalResultCode.HISTOGRAM_NOT_BELOW_ZERO, screen2);
             Log.addDebugLine("Гистограмма на втором экране не ниже нуля");
             return null;
         }
 
         boolean ascendingHistogram = macd2 < macd1;
         if (!ascendingHistogram) {
-            Log.recordCode(Codes.HISTOGRAM_NOT_ASCENDING, screen2);
+            Log.recordCode(SignalResultCode.HISTOGRAM_NOT_ASCENDING, screen2);
             Log.addDebugLine("Гистограмма на втором экране не повышается");
             return null;
         }
@@ -360,7 +360,7 @@ public class ThreeDisplays {
         // %D повышается (достаточно, чтобы последний был больше прошлого)
         boolean ascendingStochastic = stoch1.getSlowD() > stoch2.getSlowD();
         if (!ascendingStochastic) {
-            Log.recordCode(Codes.STOCH_NOT_ASCENDING, screen1);
+            Log.recordCode(SignalResultCode.STOCH_NOT_ASCENDING, screen1);
             Log.addDebugLine("Стохастик %D не растет на втором экране");
             return null;
         }
@@ -374,7 +374,7 @@ public class ThreeDisplays {
                 && stoch1.getSlowD() > stoch2.getSlowD();
 
         if (!isOversoldK || !isOversoldD) {
-            Log.recordCode(Codes.STOCH_NOT_ASCENDING_FROM_OVERSOLD, screen1);
+            Log.recordCode(SignalResultCode.STOCH_NOT_ASCENDING_FROM_OVERSOLD, screen1);
             Log.addDebugLine("Стохастик не поднимается из перепроданности " + STOCH_OVERSOLD + ". %D: " + isOversoldD + "; %K: " + isOversoldK);
             return null;
         }
@@ -387,7 +387,7 @@ public class ThreeDisplays {
         Quote lastQuote = screen2Quotes.get(minimumBarsCount - 1);
         boolean ascendingBarHigh = preLastQuote.getHigh() < lastQuote.getHigh();
         if (!ascendingBarHigh) {
-            Log.recordCode(Codes.QUOTE_HIGH_NOT_GROWING, screen2);
+            Log.recordCode(SignalResultCode.QUOTE_HIGH_NOT_GROWING, screen2);
             Log.addDebugLine("Quote.high не растет последовательно");
             return null;
         }
@@ -397,14 +397,14 @@ public class ThreeDisplays {
         // оба столбика ниже ЕМА - отказ
         if (isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteBelowEMA(lastQuote, lastEMA.getValue())) {
             Log.addDebugLine("Оба последних столбика ниже ЕМА");
-            Log.recordCode(Codes.QUOTES_BELOW_EMA, screen2);
+            Log.recordCode(SignalResultCode.QUOTES_BELOW_EMA, screen2);
             return null;
         }
 
         // оба столбика выше ЕМА - отказ
         if (isQuoteAboveEMA(preLastQuote, preLastEMA.getValue()) && isQuoteAboveEMA(lastQuote, lastEMA.getValue())) {
             Log.addDebugLine("Оба последних столбика выше ЕМА");
-            Log.recordCode(Codes.QUOTES_ABOVE_EMA, screen2);
+            Log.recordCode(SignalResultCode.QUOTES_ABOVE_EMA, screen2);
             return null;
         }
 
@@ -423,7 +423,7 @@ public class ThreeDisplays {
 
         if (!crossingRule1 || !crossingRule2 || !crossingRule3 || !crossingRule4) {
             Log.addDebugLine("Не выполняется правило пересечения ЕМА");
-            Log.recordCode(Codes.CROSSING_RULE_VIOLATED, screen2);
+            Log.recordCode(SignalResultCode.CROSSING_RULE_VIOLATED, screen2);
             return null;
         }
 
@@ -444,12 +444,12 @@ public class ThreeDisplays {
     public static Quote sellSignal(SymbolData screen1, SymbolData screen2) {
 
         if (screen1.quotes.isEmpty()) {
-            Log.recordCode(Codes.NO_DATA_QUOTES, screen1);
+            Log.recordCode(SignalResultCode.NO_DATA_QUOTES, screen1);
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen1.timeframe.name());
             return null;
         }
         if (screen2.quotes.isEmpty()) {
-            Log.recordCode(Codes.NO_DATA_QUOTES, screen2);
+            Log.recordCode(SignalResultCode.NO_DATA_QUOTES, screen2);
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen2.timeframe.name());
             return null;
         }
@@ -466,7 +466,7 @@ public class ThreeDisplays {
             }
         });
         if (!missingData.isEmpty()) {
-            Log.recordCode(Codes.NO_DATA_INDICATORS, screen1);
+            Log.recordCode(SignalResultCode.NO_DATA_INDICATORS, screen1);
             Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
             return null;
         }
@@ -495,7 +495,7 @@ public class ThreeDisplays {
         boolean downtrendCheckOnMultipleBars = TrendFunctions.downtrendCheckOnMultipleBars(screen1, NUMBER_OF_EMA26_VALUES_TO_CHECK);
         //boolean downtrendCheckOnLastBar = TrendFunctions.downtrendCheckOnLastBar(screen1); опасно
         if (!downtrendCheckOnMultipleBars) {
-            Log.recordCode(Codes.NO_DOWNTREND, screen1);
+            Log.recordCode(SignalResultCode.NO_DOWNTREND, screen1);
             Log.addDebugLine("Не обнаружен нисходящий тренд на долгосрочном экране");
             return null;
         }
@@ -509,7 +509,7 @@ public class ThreeDisplays {
         if (q4.getHigh() <= q3.getHigh() && q3.getHigh() <= q2.getHigh() && q2.getHigh() <= q1.getHigh()) {
             // допустимо только, если последний столбик красный
             if (q1.getClose() > q1.getOpen()) {
-                Log.recordCode(Codes.DOWNTREND_FAILING, screen1);
+                Log.recordCode(SignalResultCode.DOWNTREND_FAILING, screen1);
                 Log.addDebugLine("Последние 4 столбика на первом экране повышаются");
                 return null;
             } else {
@@ -527,14 +527,14 @@ public class ThreeDisplays {
 
         boolean histogramAboveZero = macd3 > 0 && macd2 > 0 && macd1 > 0;
         if (!histogramAboveZero) {
-            Log.recordCode(Codes.HISTOGRAM_NOT_ABOVE_ZERO, screen2);
+            Log.recordCode(SignalResultCode.HISTOGRAM_NOT_ABOVE_ZERO, screen2);
             Log.addDebugLine("Гистограмма на втором экране не выше нуля");
             return null;
         }
 
         boolean ascendingHistogram = macd3 > macd2 && macd2 > macd1;
         if (!ascendingHistogram) {
-            Log.recordCode(Codes.HISTOGRAM_NOT_DESCENDING, screen2);
+            Log.recordCode(SignalResultCode.HISTOGRAM_NOT_DESCENDING, screen2);
             Log.addDebugLine("Гистограмма на втором экране не снижается");
             return null;
         }
@@ -547,7 +547,7 @@ public class ThreeDisplays {
         // %D снижается (достаточно, чтобы последний был ниже прошлых двух)
         boolean ascendingStochastic = stoch1.getSlowD() < stoch2.getSlowD() && stoch1.getSlowD() < stoch3.getSlowD();
         if (!ascendingStochastic) {
-            Log.recordCode(Codes.STOCH_NOT_DESCENDING, screen2);
+            Log.recordCode(SignalResultCode.STOCH_NOT_DESCENDING, screen2);
             Log.addDebugLine("Стохастик %D не снижается на втором экране");
             return null;
         }
@@ -563,7 +563,7 @@ public class ThreeDisplays {
                 && (stoch1.getSlowD() < stoch3.getSlowD());
 
         if (!isOverboughtK || !isOverboughtD) {
-            Log.recordCode(Codes.STOCH_NOT_DESCENDING_FROM_OVERBOUGHT, screen2);
+            Log.recordCode(SignalResultCode.STOCH_NOT_DESCENDING_FROM_OVERBOUGHT, screen2);
             Log.addDebugLine("Стохастик не снижается из перекупленности " + STOCH_OVERBOUGHT + ". %D: " + isOverboughtD + "; %K: " + isOverboughtK);
             return null;
         }
@@ -579,10 +579,10 @@ public class ThreeDisplays {
         boolean descendingBarClose = quote3.getClose() > quote2.getClose() && quote2.getClose() > quote1.getClose();
 
         if (!descendingBarLow) {
-            Log.recordCode(Codes.QUOTE_LOW_NOT_LOWING, screen2);
+            Log.recordCode(SignalResultCode.QUOTE_LOW_NOT_LOWING, screen2);
             Log.addDebugLine("Quote.low не снижается последовательно");
             if (!descendingBarClose) {
-                Log.recordCode(Codes.QUOTE_CLOSE_NOT_LOWING, screen2);
+                Log.recordCode(SignalResultCode.QUOTE_CLOSE_NOT_LOWING, screen2);
                 Log.addDebugLine("Quote.close не снижается последовательно");
                 // третий с конца весь выше ЕМА13, а второй и последний пересекли ее
                 boolean thirdBarAboveEMA13 = quote3.getLow() > screenTwoEMA13.get(minimumBarsCount - 3).getValue()
@@ -596,18 +596,18 @@ public class ThreeDisplays {
                     Log.addDebugLine("Третий с конца" + (thirdBarAboveEMA13 ? " " : " не ") + "выше ЕМА13");
                     Log.addDebugLine("Предпоследний" + (secondBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
                     Log.addDebugLine("Последний" + (lastBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
-                    Log.recordCode(Codes.CROSSING_RULE_VIOLATED, screen2);
+                    Log.recordCode(SignalResultCode.CROSSING_RULE_VIOLATED, screen2);
                     return null;
                 } else {
-                    Log.recordCode(Codes.CROSSING_RULE_PASSED, screen2);
+                    Log.recordCode(SignalResultCode.CROSSING_RULE_PASSED, screen2);
                     Log.addDebugLine("Правило пересечения выполняется");
                 }
             } else {
-                Log.recordCode(Codes.QUOTE_CLOSE_LOWING, screen2);
+                Log.recordCode(SignalResultCode.QUOTE_CLOSE_LOWING, screen2);
                 Log.addDebugLine("Есть снижение Quote.close");
             }
         } else {
-            Log.recordCode(Codes.QUOTE_HIGH_LOWING, screen2);
+            Log.recordCode(SignalResultCode.QUOTE_HIGH_LOWING, screen2);
             Log.addDebugLine("Есть снижение Quote.high");
         }
 
@@ -620,7 +620,7 @@ public class ThreeDisplays {
         boolean lastBelowEMA13 = quote1.getLow() < screenTwoEMA13.get(minimumBarsCount - 1).getValue()
                 && quote1.getHigh() < screenTwoEMA13.get(minimumBarsCount - 1).getValue();
         if (thirdCrossesEMA13 && secondCrossesEMA13 && lastBelowEMA13) {
-            Log.recordCode(Codes.LAST_BAR_BELOW, screen2);
+            Log.recordCode(SignalResultCode.LAST_BAR_BELOW, screen2);
             Log.addDebugLine("Третий и второй пересекли ЕМА13, а последний полностью ниже");
             return null;
         }

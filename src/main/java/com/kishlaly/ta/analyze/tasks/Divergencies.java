@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks;
 
-import com.kishlaly.ta.analyze.Codes;
+import com.kishlaly.ta.analyze.SignalResultCode;
 import com.kishlaly.ta.analyze.functions.TrendFunctions;
 import com.kishlaly.ta.model.HistogramQuote;
 import com.kishlaly.ta.model.Quote;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.Codes.*;
+import static com.kishlaly.ta.analyze.SignalResultCode.*;
 import static com.kishlaly.ta.analyze.tasks.Divergencies.BullishConfig.ALLOW_ON_BEARISH_TREND;
 import static com.kishlaly.ta.analyze.tasks.Divergencies.BullishConfig.NUMBER_OF_EMA26_VALUES_TO_CHECK;
 import static com.kishlaly.ta.model.indicators.Indicator.EMA26;
@@ -62,12 +62,12 @@ public class Divergencies {
     public static Quote isBullish(SymbolData screen1, SymbolData screen2) {
         Quote result = null;
         if (screen1.indicators.get(Indicator.EMA26) == null || screen1.indicators.get(Indicator.EMA26).isEmpty()) {
-            Log.recordCode(Codes.NO_DATA_INDICATORS, screen1);
+            Log.recordCode(SignalResultCode.NO_DATA_INDICATORS, screen1);
             Log.addDebugLine("Недостаточно данных индикатора EMA26 для " + screen2.timeframe);
             return null;
         }
         if (screen2.quotes.isEmpty()) {
-            Log.recordCode(Codes.NO_DATA_QUOTES, screen1);
+            Log.recordCode(SignalResultCode.NO_DATA_QUOTES, screen1);
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen2.timeframe);
             return null;
         }
@@ -104,7 +104,7 @@ public class Divergencies {
         double latestHistogramValue = macdValues.get(minimumBarsCount - 1).getHistogram();
 
         if (latestHistogramValue > 0) {
-            Log.recordCode(Codes.LAST_HISTOGRAM_ABOVE_ZERO, screen1);
+            Log.recordCode(SignalResultCode.LAST_HISTOGRAM_ABOVE_ZERO, screen1);
             Log.addDebugLine("гистограмма у правого края выше нуля");
             return null;
         }
@@ -165,7 +165,7 @@ public class Divergencies {
                 .max(Comparator.comparingDouble(HistogramQuote::getHistogramValue)).get();
 
         if (quoteWithHighestHistogramAfterLowestLow.histogramValue <= 0) {
-            Log.recordCode(Codes.BEARISH_BACKBONE_NOT_CRACKED, screen1);
+            Log.recordCode(SignalResultCode.BEARISH_BACKBONE_NOT_CRACKED, screen1);
             Log.addDebugLine("не произошло перелома медвежьего хребта");
             return null;
         }
@@ -251,7 +251,7 @@ public class Divergencies {
                 }
             }
             if (foundSecondPositive) {
-                Log.recordCode(Codes.HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS, screen1);
+                Log.recordCode(SignalResultCode.HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS, screen1);
                 Log.addDebugLine("В точке " + beautifyQuoteDate(histogramQuotes.get(indexOfSecondPositive).quote) + " обнаружилась второая положительная область");
                 return null;
             }

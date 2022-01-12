@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze;
 
-public enum Codes {
+public enum SignalResultCode {
 
     NO_DATA_QUOTES,
     NO_DATA_INDICATORS,

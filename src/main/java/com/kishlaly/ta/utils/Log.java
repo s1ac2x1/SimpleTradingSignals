@@ -1,6 +1,6 @@
 package com.kishlaly.ta.utils;
 
-import com.kishlaly.ta.analyze.Codes;
+import com.kishlaly.ta.analyze.SignalResultCode;
 import com.kishlaly.ta.model.SymbolData;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class Log {
 
     private static StringBuilder log = new StringBuilder();
     private static StringBuilder debug = new StringBuilder();
-    private static Map<Codes, List<SymbolData>> codes = new HashMap<>();
+    private static Map<SignalResultCode, List<SymbolData>> codes = new HashMap<>();
 
     public static void addLine(String line) {
         log.append(line).append(System.lineSeparator());
@@ -26,7 +26,7 @@ public class Log {
         debug.append(line).append(System.lineSeparator());
     }
 
-    public static void recordCode(Codes code, SymbolData symbolData) {
+    public static void recordCode(SignalResultCode code, SymbolData symbolData) {
         List<SymbolData> existingRecord = codes.get(code);
         if (existingRecord == null) {
             existingRecord = new ArrayList<>();
