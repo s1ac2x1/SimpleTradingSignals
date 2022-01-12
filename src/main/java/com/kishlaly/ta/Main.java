@@ -4,12 +4,9 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
-import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -32,7 +29,7 @@ public class Main {
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                THREE_DISPLAYS_BUY_TYPE2,
+                THREE_DISPLAYS_BUY,
                 //THREE_DISPLAYS_SELL
         };
 
@@ -41,8 +38,6 @@ public class Main {
 
         //run(timeframes, tasks);
 
-        //Context.screenOneDay = "2020-09";
-        //Context.screenTwoDay = "2021-11-15";
         test(timeframes, tasks);
 
         // сделать копию стратегии трех экранов, но проверять два значения бара/гистограммы/стохастика на втором экране
