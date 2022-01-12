@@ -5,6 +5,7 @@ import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.utils.Context;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -15,7 +16,7 @@ public class TrendFunctions {
     // подразумевается, что размер коллекций равен Context.minimumBarsCount
     // Главные правила проверки:
     // 1. Как минимум пловина из N последних баров должна быть правильного цвета (зеленые на восходящем тренде или красные на нисходящем)
-    //    так же все N не должны пересекать EMA26
+    //    так же все N не должны открываться и закрываться выше EMA26 (тень может пересекать)
     // 2. ЕМА должна расти последовательно
     // 3. если гистограмма MACD не растет последовательно - нормально
     //    главное, чтобы она не спускалась последовательно при росте ЕМА
@@ -31,7 +32,7 @@ public class TrendFunctions {
                 symbolData,
                 barsToCheck,
                 quote -> quote.getOpen() < quote.getClose(),
-                (quote, ema) -> quote.getLow() > ema.getValue(),
+                (quote, ema) -> quote.getOpen() > ema.getValue() && quote.getClose() > ema.getValue(),
                 (next, curr) -> next <= curr,
                 (curr, next) -> curr < next,
                 (curr, next) -> curr > next
@@ -45,7 +46,7 @@ public class TrendFunctions {
                 symbolData,
                 barsToCheck,
                 quote -> quote.getOpen() > quote.getClose(),
-                (quote, ema) -> quote.getHigh() < ema.getValue(),
+                (quote, ema) -> quote.getOpen() < ema.getValue() && quote.getClose() < ema.getValue(),
                 (next, curr) -> next >= curr,
                 (curr, next) -> curr > next,
                 (curr, next) -> curr < next
@@ -82,11 +83,11 @@ public class TrendFunctions {
             BiFunction<Double, Double, Boolean> histogramCheck2
     ) {
         List<Quote> quotes = symbolData.quotes;
-        quotes = quotes.subList(quotes.size() - 100, quotes.size());
+        quotes = quotes.subList(quotes.size() - Context.minimumBarsCount, quotes.size());
         List<EMA> ema = symbolData.indicators.get(Indicator.EMA26);
-        ema = ema.subList(ema.size() - 100, ema.size());
+        ema = ema.subList(ema.size() - Context.minimumBarsCount, ema.size());
         List<MACD> macd = symbolData.indicators.get(Indicator.MACD);
-        macd = macd.subList(macd.size() - 100, macd.size());
+        macd = macd.subList(macd.size() - Context.minimumBarsCount, macd.size());
 
         for (int i = quotes.size() - barsToCheck; i < quotes.size(); i++) {
             if (!quoteEmaIntersectionCheck.apply(quotes.get(i), ema.get(i))) {

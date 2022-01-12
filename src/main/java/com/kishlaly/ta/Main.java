@@ -4,9 +4,11 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
+import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
+import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -42,9 +44,9 @@ public class Main {
         //Context.screenTwoDay = "2021-11-15";
         test(timeframes, tasks);
 
-        // наверно нужно все-таки изменить TrendFunctions, чтобы бары не целиком были выше, а только открывались и закрывались выше
+        // сделать копию стратегии трех экранов, но проверять два значения бара/гистограммы/стохастика на втором экране
+
         // проверить, какое число NUMBER_OF_EMA26_VALUES_TO_CHECK лучше
-        // [D] TER - 24 JUNE 2021 --- PROFIT 3.3% 5 days [till 29 JUNE 2021] почему не 23???
 
         // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
 
