@@ -38,7 +38,11 @@ public enum TakeProfitStrategy {
     private static double calculateFromKeltner(SymbolData data, int signalIndex) {
         Keltner keltner = (Keltner) data.indicators.get(Indicator.KELTNER).get(signalIndex);
         int keltnerTopRatio = (int) KELTNER.config;
-        return keltner.getTop() / 100 * keltnerTopRatio;
+        double middle = keltner.getMiddle();
+        double top = keltner.getTop();
+        double diff = top - middle;
+        double ratio = diff / 100 * keltnerTopRatio;
+        return middle + ratio;
     }
 
 }
