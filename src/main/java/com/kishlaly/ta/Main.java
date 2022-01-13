@@ -4,11 +4,8 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
-import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -46,8 +43,6 @@ public class Main {
             System.out.println(e);
         }
 
-
-        // проверить, сколко будет сигналов, если во второй версии стратегии трех экранов проверять на перепроданность только медленную линию D стохастика
 
         // сделать агрегацию часовых котировок
 
