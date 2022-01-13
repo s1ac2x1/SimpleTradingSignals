@@ -26,7 +26,7 @@ public class Context {
     // время работы NYSE и NASDAQ шесть с половиной часов или 390 минут
     // используется для дневных баров
     //public static int workingTime = 390;
-    public static int workingTime = 1440; // 1440 минут в сутках TODO верно?
+    public static int workingTime = 1440; // 1440 минут в сутках
 
     public static int minimumBarsCount = 100; // если меньше, то пропускать эту акцию
 
