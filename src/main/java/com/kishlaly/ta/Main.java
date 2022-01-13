@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import static com.kishlaly.ta.analyze.TaskTester.test;
+import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 

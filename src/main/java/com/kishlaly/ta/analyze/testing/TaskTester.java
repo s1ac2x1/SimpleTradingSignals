@@ -1,5 +1,6 @@
-package com.kishlaly.ta.analyze;
+package com.kishlaly.ta.analyze.testing;
 
+import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.Keltner;
@@ -216,10 +217,9 @@ public class TaskTester {
         SymbolData data = historicalTesting.getData();
         List<Quote> quotes = data.quotes;
         data.indicators.put(Indicator.KELTNER, IndicatorUtils.buildKeltnerChannels(quotes));
-        historicalTesting
-                .getTaskResults()
+        historicalTesting.getTaskResults()
                 .stream()
-                .filter(taskResult -> taskResult.isSignal())
+                .filter(taskResult -> taskResult.isSignal()) // берем только сигналы к входу
                 .forEach(taskResult -> testPosition(data, taskResult, historicalTesting));
     }
 
