@@ -251,7 +251,7 @@ public class TaskTester {
             double closePositionPrice = 0;
             double closePositionCost = 0;
             Quote closePositionQuote = null;
-            while (startPositionIndex < data.quotes.size()) {
+            while (startPositionIndex < data.quotes.size() - 1) {
                 startPositionIndex++;
                 Quote nextQuote = data.quotes.get(startPositionIndex);
                 boolean tpInsideBar = nextQuote.getLow() < takeProfit && nextQuote.getHigh() > takeProfit;

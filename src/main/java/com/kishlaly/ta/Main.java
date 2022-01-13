@@ -7,6 +7,8 @@ import com.kishlaly.ta.utils.Context;
 import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTester.test;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
+import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -20,7 +22,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        //Context.singleSymbol = "TER";
+        Context.singleSymbol = "CSCO";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -36,9 +38,18 @@ public class Main {
         //buildCache(timeframes, tasks, false);
         //checkCache(timeframes, tasks);
 
-        run(timeframes, tasks);
+        //run(timeframes, tasks);
 
-        //test(timeframes, tasks);
+        try {
+            test(timeframes, tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+
+        // проверить, сколко будет сигналов, если во второй версии стратегии трех экранов проверять на перепроданность только медленную линию D стохастика
+
+        // сделать агрегацию часовых котировок
 
         // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
 
@@ -60,7 +71,7 @@ public class Main {
         // попробовать разные значения индикаторов, например, ЕМА 14 на втором экране
         // а так же тестировать точки входа и выхода, например, 75% от верхней границы канала
         // и проверить скользящий стоплосс, например, по середней линии канала
-        // может быть, достаточно проверять последние два значения бара/гистограммы/стохастика на втором экране?
+        // проверить стоплосс на уровне нижней границы канала в точке сигнала
 
         // добавить в дивергенции расчет EFI, тогда, может быть, не придется фильтровать по SECOND_BOTTOM_RATIO ?
         // если EFI покажет правильную дивергенцию, которая подтверждает сигналы МАСD, то стоит обратить на это внимание
