@@ -149,7 +149,9 @@ public class TaskTester {
 
     private static String formatTestingSummary(HistoricalTesting testing) {
         String result = "";
-        result += "TP/SL = " + testing.getProfitablePositionsCount() + "/" + testing.getLossPositionsCount() + " = ";
+        result += "SL: " + testing.getStopLossStrategy().name() + ", " + testing.getStopLossStrategy().printConfig() + System.lineSeparator();
+        result += "\tTP: " + testing.getTakeProfitStrategy().name() + ", " + testing.getTakeProfitStrategy().printConfig() + System.lineSeparator();
+        result += "\tTP/SL = " + testing.getProfitablePositionsCount() + "/" + testing.getLossPositionsCount() + " = ";
         result += testing.getSuccessfulRatio() + "% / " + testing.getLossRatio() + "%" + System.lineSeparator();
         double balance = testing.getTotalProfit() + testing.getTotalLoss(); // loss is negative
         balance = balance - balance / 100 * 10;
