@@ -1,6 +1,9 @@
 package com.kishlaly.ta.utils;
 
+import com.kishlaly.ta.analyze.testing.StopLossStrategy;
 import com.kishlaly.ta.model.Timeframe;
+
+import static com.kishlaly.ta.analyze.testing.StopLossStrategy.FIXED;
 
 public class Context {
 
@@ -33,5 +36,6 @@ public class Context {
 
     // для тестирования на истоирческих данных
     public static double lots = 100;
+    public static StopLossStrategy stopLossStrategy = FIXED;
 
 }

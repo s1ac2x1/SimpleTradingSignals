@@ -5,7 +5,6 @@ import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.Keltner;
 import com.kishlaly.ta.utils.Context;
-import com.kishlaly.ta.utils.IndicatorUtils;
 import com.kishlaly.ta.utils.Numbers;
 
 import java.io.IOException;
@@ -57,7 +56,7 @@ public class TaskTester {
                         System.out.println(e.getMessage());
                     }
                     if (!taskResults.isEmpty()) {
-                        HistoricalTesting testing = new HistoricalTesting(symbolDataForTesting, taskResults);
+                        HistoricalTesting testing = new HistoricalTesting(symbolDataForTesting, taskResults, Context.stopLossStrategy);
                         calculateStatistics(testing);
                         String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
                         Set<String> signalResults = readableOutput.get(key);
@@ -207,26 +206,24 @@ public class TaskTester {
     /**
      * Простое тестирование длинных позиций
      * TP на верхней границе канала Кельтнера
-     * SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой
+     *
      * <p>
      * TODO адаптировать для коротких позиций тоже
      *
      * @param historicalTesting
      */
     private static void calculateStatistics(HistoricalTesting historicalTesting) {
-        SymbolData data = historicalTesting.getData();
-        List<Quote> quotes = data.quotes;
-        data.indicators.put(Indicator.KELTNER, IndicatorUtils.buildKeltnerChannels(quotes));
         historicalTesting.getTaskResults()
                 .stream()
                 .filter(taskResult -> taskResult.isSignal()) // берем только сигналы к входу
-                .forEach(taskResult -> testPosition(data, taskResult, historicalTesting));
+                .forEach(taskResult -> testPosition(taskResult, historicalTesting));
     }
 
-    private static void testPosition(SymbolData data, TaskResult taskResult, HistoricalTesting historicalTesting) {
+    private static void testPosition(TaskResult taskResult, HistoricalTesting historicalTesting) {
         PositionTestResult positionTestResult = new PositionTestResult();
         Quote signal = taskResult.getLastChartQuote();
         int signalIndex = -1;
+        SymbolData data = historicalTesting.getData();
         for (int i = 0; i < data.quotes.size(); i++) {
             if (data.quotes.get(i).getTimestamp().compareTo(signal.getTimestamp()) == 0) {
                 signalIndex = i;
@@ -239,8 +236,7 @@ public class TaskTester {
             double openPositionSize = Context.lots * openingPrice;
             double takeProfit = keltner.getTop();
             // SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой
-            Quote quoteWithMinimalLow = data.quotes.subList(signalIndex - 10, signalIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
-            double stopLoss = quoteWithMinimalLow.getLow() - 0.27;
+            double stopLoss = historicalTesting.getStopLossStrategy().calculate(data.quotes, signalIndex);
             int startPositionIndex = signalIndex;
             double profit = 0;
             double loss = 0;

@@ -2,8 +2,8 @@ package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
-import com.kishlaly.ta.model.TaskResult;
 import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.TaskResult;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.TimeframeIndicators;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -24,7 +24,7 @@ public enum TaskType {
             }},
             new HashMap<Integer, Indicator[]>() {{
                 put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{MACD});
+                put(2, new Indicator[]{MACD, KELTNER});
             }},
             Divergencies::isBullish
     ),
@@ -35,7 +35,7 @@ public enum TaskType {
             }},
             new HashMap<Integer, Indicator[]>() {{
                 put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH});
+                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
             ThreeDisplays::buySignal
     ),
@@ -46,7 +46,7 @@ public enum TaskType {
             }},
             new HashMap<Integer, Indicator[]>() {{
                 put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH});
+                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
             ThreeDisplays::buySignalType2
     ),
@@ -57,7 +57,7 @@ public enum TaskType {
             }},
             new HashMap<Integer, Indicator[]>() {{
                 put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH});
+                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
             ThreeDisplays::sellSignal
     );

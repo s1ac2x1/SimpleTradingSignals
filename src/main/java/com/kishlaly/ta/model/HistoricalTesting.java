@@ -1,5 +1,6 @@
 package com.kishlaly.ta.model;
 
+import com.kishlaly.ta.analyze.testing.StopLossStrategy;
 import com.kishlaly.ta.utils.Dates;
 import com.kishlaly.ta.utils.Numbers;
 
@@ -19,9 +20,16 @@ public class HistoricalTesting {
     // тестирование открытия позиций по полученным сигналам к входу
     private Map<Quote, PositionTestResult> signalTestingResults = new HashMap<>();
 
-    public HistoricalTesting(final SymbolData data, final List<TaskResult> taskResults) {
+    private StopLossStrategy stopLossStrategy;
+
+    public HistoricalTesting(final SymbolData data, final List<TaskResult> taskResults, StopLossStrategy stopLossStrategy) {
         this.data = data;
         this.taskResults = taskResults;
+        this.stopLossStrategy = stopLossStrategy;
+    }
+
+    public StopLossStrategy getStopLossStrategy() {
+        return this.stopLossStrategy;
     }
 
     public SymbolData getData() {

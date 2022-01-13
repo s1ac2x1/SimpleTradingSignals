@@ -126,9 +126,10 @@ public class CacheReader {
                             Files.readAllBytes(Paths.get(getFolder() + "/" + symbol + "_quotes.txt"))),
                     new TypeToken<ArrayList<Quote>>() {
                     }.getType());
-            if (Context.timeframe == Timeframe.WEEK) {
+            if (Context.aggregationTimeframe == Timeframe.DAY && Context.timeframe == Timeframe.WEEK) {
                 quotes = Quotes.dailyToWeekly(quotes);
             }
+            // TODO подумать про базовую агрегацию на основе часового фрейма
             Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
             return quotes;
         } catch (IOException e) {
@@ -177,6 +178,8 @@ public class CacheReader {
                     }
                 }
                 return stoch;
+            case KELTNER:
+                return IndicatorUtils.buildKeltnerChannels(quotes);
             default:
                 return Collections.emptyList();
         }

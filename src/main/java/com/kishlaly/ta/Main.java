@@ -16,6 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Context.api = ALPHAVANTAGE;
+        Context.aggregationTimeframe = Timeframe.DAY;
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";

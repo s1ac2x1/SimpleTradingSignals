@@ -51,7 +51,7 @@ public class IndicatorUtils {
         KeltnerChannelUpperIndicator top = new KeltnerChannelUpperIndicator(middle, 2, 10);
         List<Keltner> result = new ArrayList<>();
         for (int i = 0; i < quotes.size(); i++) {
-            result.add(new Keltner(low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
+            result.add(new Keltner(quotes.get(i).getTimestamp(), low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
         }
         return result;
     }
