@@ -1,11 +1,16 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.testing.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
+import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
+import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -39,6 +44,8 @@ public class Main {
         //run(timeframes, tasks);
 
         try {
+            Context.stopLossStrategy = StopLossStrategy.FIXED;
+            Context.takeProfitStrategy = TakeProfitStrategy.KELTNER;
             test(timeframes, tasks);
         } catch (Exception e) {
             System.out.println(e);

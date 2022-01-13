@@ -3,7 +3,6 @@ package com.kishlaly.ta.analyze.testing;
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
-import com.kishlaly.ta.model.indicators.Keltner;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.Numbers;
 
@@ -56,7 +55,7 @@ public class TaskTester {
                         System.out.println(e.getMessage());
                     }
                     if (!taskResults.isEmpty()) {
-                        HistoricalTesting testing = new HistoricalTesting(symbolDataForTesting, taskResults, Context.stopLossStrategy);
+                        HistoricalTesting testing = new HistoricalTesting(symbolDataForTesting, taskResults, Context.stopLossStrategy, Context.takeProfitStrategy);
                         calculateStatistics(testing);
                         String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
                         Set<String> signalResults = readableOutput.get(key);
@@ -205,8 +204,6 @@ public class TaskTester {
 
     /**
      * Простое тестирование длинных позиций
-     * TP на верхней границе канала Кельтнера
-     *
      * <p>
      * TODO адаптировать для коротких позиций тоже
      *
@@ -231,12 +228,10 @@ public class TaskTester {
             }
         }
         if (signalIndex > 11) {
-            Keltner keltner = (Keltner) data.indicators.get(Indicator.KELTNER).get(signalIndex);
+            double stopLoss = historicalTesting.getStopLossStrategy().calculate(data, signalIndex);
+            double takeProfit = historicalTesting.getTakeProfitStrategy().calcualte(data, signalIndex);
             double openingPrice = signal.getClose() + 0.07;
             double openPositionSize = Context.lots * openingPrice;
-            double takeProfit = keltner.getTop();
-            // SL выбирается на 27 центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой
-            double stopLoss = historicalTesting.getStopLossStrategy().calculate(data.quotes, signalIndex);
             int startPositionIndex = signalIndex;
             double profit = 0;
             double loss = 0;

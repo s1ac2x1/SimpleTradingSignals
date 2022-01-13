@@ -1,9 +1,11 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.analyze.testing.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 
 import static com.kishlaly.ta.analyze.testing.StopLossStrategy.FIXED;
+import static com.kishlaly.ta.analyze.testing.TakeProfitStrategy.KELTNER;
 
 public class Context {
 
@@ -37,5 +39,5 @@ public class Context {
     // для тестирования на истоирческих данных
     public static double lots = 100;
     public static StopLossStrategy stopLossStrategy = FIXED;
-
+    public static TakeProfitStrategy takeProfitStrategy = KELTNER;
 }

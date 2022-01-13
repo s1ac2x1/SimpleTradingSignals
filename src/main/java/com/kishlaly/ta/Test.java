@@ -1,15 +1,6 @@
 package com.kishlaly.ta;
 
-import com.kishlaly.ta.model.Quote;
-import com.kishlaly.ta.model.Timeframe;
-import com.kishlaly.ta.utils.*;
-import org.ta4j.core.BarSeries;
-import org.ta4j.core.indicators.EMAIndicator;
-
-import java.time.ZonedDateTime;
-import java.util.List;
-
-import static com.kishlaly.ta.cache.CacheReader.loadQuotesFromCache;
+import com.kishlaly.ta.utils.Numbers;
 
 public class Test {
 
