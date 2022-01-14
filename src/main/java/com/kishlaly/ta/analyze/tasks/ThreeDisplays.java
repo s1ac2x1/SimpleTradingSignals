@@ -5,10 +5,8 @@ import com.kishlaly.ta.analyze.functions.TrendFunctions;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.TaskResult;
-import com.kishlaly.ta.model.indicators.EMA;
-import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
-import com.kishlaly.ta.model.indicators.Stoch;
+import com.kishlaly.ta.model.indicators.*;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.ArrayList;
@@ -35,6 +33,7 @@ public class ThreeDisplays {
         public static int STOCH_OVERSOLD = 30;
         public static int STOCH_OVERBOUGHT = 70;
         public static int STOCH_VALUES_TO_CHECK = 5;
+        public static int FILTER_BY_KELTNER = 40; // в процентах от середины до вершины канала
     }
 
     public static TaskResult buySignal(SymbolData screen1, SymbolData screen2) {
@@ -298,6 +297,9 @@ public class ThreeDisplays {
         List<Stoch> screenTwoStochastic = screen2.indicators.get(Indicator.STOCH);
         screenTwoStochastic = screenTwoStochastic.subList(screenTwoStochastic.size() - minimumBarsCount, screenTwoStochastic.size());
 
+        List<Keltner> screenTwoKeltner = screen2.indicators.get(KELTNER);
+        screenTwoKeltner = screenTwoKeltner.subList(screenTwoKeltner.size() - minimumBarsCount, screenTwoKeltner.size());
+
         // первый экран
 
         // проверка тренда
@@ -447,6 +449,20 @@ public class ThreeDisplays {
             Log.addDebugLine("Не выполняется правило пересечения ЕМА");
             Log.recordCode(CROSSING_RULE_VIOLATED, screen2);
             return new TaskResult(lastChartQuote, CROSSING_RULE_VIOLATED);
+        }
+
+        // фильтрация поздних входов, когда столбик закрылся выше FILTER_BY_KELTNER
+        Keltner lastKeltnerData = screenTwoKeltner.get(minimumBarsCount - 1);
+        double lastQuoteClose = lastQuote.getClose();
+        double middle = lastKeltnerData.getMiddle();
+        double top = lastKeltnerData.getTop();
+        double diff = top - middle;
+        double ratio = diff / 100 * FILTER_BY_KELTNER;
+        double maxAllowedCloseValue = middle + ratio;
+        if (lastQuoteClose >= maxAllowedCloseValue) {
+            Log.addDebugLine("Последняя котировка закрылась выше " + FILTER_BY_KELTNER + "% расстояния от середины до вершины канала");
+            Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE, screen2);
+            return new TaskResult(lastChartQuote, QUOTE_CLOSED_ABOVE_KELTNER_RULE);
         }
 
         //попробовать посчитать среднюю длину баров и сравнить с ней последние три

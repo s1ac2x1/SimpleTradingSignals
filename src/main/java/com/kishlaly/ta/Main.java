@@ -25,7 +25,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        //Context.singleSymbol = "CSCO";
+        Context.singleSymbol = "AEE";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -39,9 +39,9 @@ public class Main {
         };
 
         //CacheBuilder.buildCache(timeframes, tasks, false);
-        CacheReader.checkCache(timeframes, tasks);
+        //CacheReader.checkCache(timeframes, tasks);
 
-        //TaskRunner.run(timeframes, tasks);
+        TaskRunner.run(timeframes, tasks);
 
 //        try {
 //            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
@@ -55,6 +55,8 @@ public class Main {
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
+
+        // check [D] AEE 12 Jan 2022
 
         // сделать агрегацию часовых котировок
 
