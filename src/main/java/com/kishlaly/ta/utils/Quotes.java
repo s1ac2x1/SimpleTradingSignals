@@ -2,16 +2,17 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.Quote;
 
+import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Quotes {
 
-    public static List<Quote> dailyToWeekly(List<Quote> dailyQuotes) {
+    public static List<Quote> dayToWeek(List<Quote> dailyQuotes) {
         List<Quote> weeklyQuotes = new ArrayList<>();
         Set<Quote> week = new HashSet<>();
-        List<Quote> weekSorted = new ArrayList<>();
+        List<Quote> weekSorted;
         for (int i = 0; i < dailyQuotes.size() - 1; i++) {
             try {
                 Quote currentQuote = dailyQuotes.get(i);
@@ -52,6 +53,39 @@ public class Quotes {
         }
         Collections.sort(weeklyQuotes, Comparator.comparing(Quote::getTimestamp));
         return weeklyQuotes;
+    }
+
+    public static List<Quote> hourToDay(List<Quote> hourQuotes) {
+        List<Quote> dayQuotes = new ArrayList<>();
+        List<Quote> duringDay = new ArrayList<>();
+        for (int i = 0; i < hourQuotes.size() - 1; i++) {
+            Quote currentHour = hourQuotes.get(i);
+            DayOfWeek currentHourDay = Dates.getTimeInExchangeZone(currentHour.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
+            Quote nextHour = hourQuotes.get(i + 1);
+            DayOfWeek nextHourDay = Dates.getTimeInExchangeZone(nextHour.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
+            if (currentHourDay == nextHourDay) {
+                duringDay.add(nextHour);
+            } else {
+                collectDayQuote(duringDay, dayQuotes);
+                duringDay.add(nextHour);
+            }
+        }
+        collectDayQuote(duringDay, dayQuotes);
+        return dayQuotes;
+    }
+
+    private static void collectDayQuote(List<Quote> hourQuotesInsideOneDay, List<Quote> dayQuotes) {
+        List<Quote> dayQuotesSorted = new ArrayList<>(hourQuotesInsideOneDay);
+        Collections.sort(dayQuotesSorted, Comparator.comparing(Quote::getTimestamp));
+        long timestamp = dayQuotesSorted.get(0).getTimestamp();
+        double high = dayQuotesSorted.stream().mapToDouble(q -> q.getHigh()).max().getAsDouble();
+        double open = dayQuotesSorted.get(0).getOpen();
+        double close = dayQuotesSorted.get(dayQuotesSorted.size() - 1).getClose();
+        double low = dayQuotesSorted.stream().mapToDouble(q -> q.getLow()).min().getAsDouble();
+        double volume = dayQuotesSorted.stream().mapToDouble(q -> q.getVolume()).sum();
+        Quote dayQuote = new Quote(timestamp, Numbers.round(high), open, close, Numbers.round(low), volume);
+        dayQuotes.add(dayQuote);
+        hourQuotesInsideOneDay.clear();
     }
 
 }

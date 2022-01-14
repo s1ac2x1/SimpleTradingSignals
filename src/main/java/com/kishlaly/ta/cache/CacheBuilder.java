@@ -18,8 +18,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.kishlaly.ta.cache.CacheReader.*;
-import static com.kishlaly.ta.utils.Context.limitPerMinute;
-import static com.kishlaly.ta.utils.Context.parallelRequests;
+import static com.kishlaly.ta.utils.Context.*;
 
 public class CacheBuilder {
 
@@ -41,15 +40,8 @@ public class CacheBuilder {
         AtomicReference<Set<String>> symbols = new AtomicReference<>(getSymbols());
         Arrays.stream(timeframes).forEach(screens -> {
             Arrays.stream(tasks).forEach(task -> {
-                // screen 1
-                Context.timeframe = screens[0];
-                if (reloadMissed) {
-                    symbols.set(getMissedSymbols());
-                }
-                cacheQuotes(symbols.get());
-
-                // screen 2
-                Context.timeframe = screens[1];
+                // загружаются только один таймфрейм Context.aggregationTimeframe
+                Context.timeframe = aggregationTimeframe;
                 if (reloadMissed) {
                     symbols.set(getMissedSymbols());
                 }
@@ -165,10 +157,7 @@ public class CacheBuilder {
                             && request.getTimeframe() == Context.timeframe
                             && request.getSymbols().containsAll(chunk)).findFirst();
                     if (!existingRequest.isPresent()) {
-                        // предполагается, что нужно загрузать только дневные котировки
-                        if (Context.timeframe == Timeframe.DAY) {
-                            requests.offer(new LoadRequest(CacheType.QUOTE, Context.timeframe, chunk));
-                        }
+                        requests.offer(new LoadRequest(CacheType.QUOTE, Context.timeframe, chunk));
                     } else {
                         System.out.println("Already in the queue: " + chunk.size() + " " + Context.timeframe.name() + " QUOTE");
                     }

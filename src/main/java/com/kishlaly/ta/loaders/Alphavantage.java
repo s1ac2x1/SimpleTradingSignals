@@ -27,6 +27,7 @@ import static java.lang.Double.parseDouble;
  * <p>
  * F4ZNUB0VYAAMTSLP
  *
+ * https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=60min&outputsize=full&apikey=F4ZNUB0VYAAMTSLP
  * https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=TER&&apikey=F4ZNUB0VYAAMTSLP
  * https://www.alphavantage.co/query?function=EMA&symbol=TER&apikey=F4ZNUB0VYAAMTSLP&series_type=close&time_period=26&interval=weekly
  *
@@ -227,7 +228,7 @@ public class Alphavantage {
                                 "?function=TIME_SERIES_INTRADAY" +
                                 "&interval=60min" +
                                 "&symbol=" + symbol +
-                                "&outputsize=compact" +
+                                "&outputsize=full" +
                                 "&apikey=" + KEY;
                 break;
             }

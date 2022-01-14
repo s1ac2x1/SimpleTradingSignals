@@ -117,10 +117,26 @@ public class CacheReader {
                             Files.readAllBytes(Paths.get(getFolder() + "/" + symbol + "_quotes.txt"))),
                     new TypeToken<ArrayList<Quote>>() {
                     }.getType());
-            if (Context.aggregationTimeframe == Timeframe.DAY && Context.timeframe == Timeframe.WEEK) {
-                quotes = Quotes.dailyToWeekly(quotes);
+            switch (Context.aggregationTimeframe) {
+                case DAY:
+                    if (Context.timeframe == Timeframe.WEEK) {
+                        quotes = Quotes.dayToWeek(quotes);
+                    }
+                    if (Context.timeframe == Timeframe.HOUR) {
+                        throw new RuntimeException("Requested HOUR quotes, but aggregationTimeframe = DAY");
+                    }
+                    break;
+                case HOUR:
+                    if (Context.timeframe == Timeframe.WEEK) {
+                        quotes = Quotes.hourToDay(quotes);
+                        quotes = Quotes.dayToWeek(quotes);
+                    }
+                    if (Context.timeframe == Timeframe.DAY) {
+                        quotes = Quotes.hourToDay(quotes);
+                    }
+                    break;
+                default:
             }
-            // TODO подумать про базовую агрегацию на основе часового фрейма
             Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
             return quotes;
         } catch (IOException e) {
