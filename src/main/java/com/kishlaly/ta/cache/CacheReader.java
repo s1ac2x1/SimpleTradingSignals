@@ -48,25 +48,16 @@ public class CacheReader {
         Map<Timeframe, Set<String>> missedData = new HashMap<>();
         Arrays.stream(timeframes).forEach(screens -> {
             // проверям только наличие котировок в кэше
+            // подразумевается, что загружаются только один Context.aggregationTimeframe
             screenNumber.getAndIncrement();
-
-            Context.timeframe = screens[0];
+            Context.timeframe = Context.aggregationTimeframe;
             List<String> missingQuotes = removeCachedQuotesSymbols(allSymbols);
             Set<String> missingQuotesCollectedByScreen1 = missedData.get(screens[0]);
             if (missingQuotesCollectedByScreen1 == null) {
                 missingQuotesCollectedByScreen1 = new HashSet<>();
             }
             missingQuotesCollectedByScreen1.addAll(missingQuotes);
-            missedData.put(screens[0], missingQuotesCollectedByScreen1);
-
-            Context.timeframe = screens[1];
-            missingQuotes = removeCachedQuotesSymbols(allSymbols);
-            Set<String> missingQuotesCollectedByScreen2 = missedData.get(screens[1]);
-            if (missingQuotesCollectedByScreen2 == null) {
-                missingQuotesCollectedByScreen2 = new HashSet<>();
-            }
-            missingQuotesCollectedByScreen2.addAll(missingQuotes);
-            missedData.put(screens[1], missingQuotesCollectedByScreen2);
+            missedData.put(Context.timeframe, missingQuotesCollectedByScreen1);
         });
         missedData.forEach((tf, quotes) -> {
             Context.timeframe = tf;

@@ -1,13 +1,16 @@
 package com.kishlaly.ta;
 
+import com.kishlaly.ta.analyze.TaskRunner;
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.testing.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.TaskTester;
+import com.kishlaly.ta.cache.CacheBuilder;
+import com.kishlaly.ta.cache.CacheReader;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
-import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -22,7 +25,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        Context.singleSymbol = "CSCO";
+        //Context.singleSymbol = "CSCO";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -35,23 +38,23 @@ public class Main {
                 //THREE_DISPLAYS_SELL
         };
 
-        //buildCache(timeframes, tasks, false);
-        //checkCache(timeframes, tasks);
+        //CacheBuilder.buildCache(timeframes, tasks, false);
+        CacheReader.checkCache(timeframes, tasks);
 
-        //run(timeframes, tasks);
+        //TaskRunner.run(timeframes, tasks);
 
-        try {
-            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-            Context.stopLossStrategy = stopLossStrategy;
-
-            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-            takeProfitStrategy.setConfig(80);
-            Context.takeProfitStrategy = takeProfitStrategy;
-
-            test(timeframes, tasks);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        try {
+//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+//            Context.stopLossStrategy = stopLossStrategy;
+//
+//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+//            takeProfitStrategy.setConfig(80);
+//            Context.takeProfitStrategy = takeProfitStrategy;
+//
+//            TaskTester.test(timeframes, tasks);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
         // сделать агрегацию часовых котировок
 
