@@ -40,6 +40,7 @@ public class Context {
     public static Timeframe logTimeframe2;
 
     // для тестирования на истоирческих данных
+    public static boolean testMode;
     public static double lots = 100;
     public static StopLossStrategy stopLossStrategy = FIXED;
     public static TakeProfitStrategy takeProfitStrategy = KELTNER;

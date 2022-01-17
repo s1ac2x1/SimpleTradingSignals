@@ -26,6 +26,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarCount;
 public class TaskTester {
 
     public static void test(Timeframe[][] timeframes, TaskType[] tasks) {
+        Context.testMode = true;
         Set<String> symbols = getSymbols();
         StringBuilder log = new StringBuilder();
         Arrays.stream(timeframes).forEach(screens -> {

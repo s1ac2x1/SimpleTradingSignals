@@ -21,15 +21,15 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Context.api = ALPHAVANTAGE;
         //Context.aggregationTimeframe = Timeframe.DAY; // последние 20 лет
-        Context.aggregationTimeframe = Timeframe.DAY;  // последние 3 месяца
+        Context.aggregationTimeframe = Timeframe.HOUR;  // последние 3 месяца
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
         Context.singleSymbol = "CSCO";
 
         Timeframe[][] timeframes = {
-                {Timeframe.WEEK, Timeframe.DAY},
-//                {Timeframe.DAY, Timeframe.HOUR},
+//                {Timeframe.WEEK, Timeframe.DAY},
+                {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
@@ -41,20 +41,22 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-        run(timeframes, tasks);
+//        run(timeframes, tasks);
 
-//        try {
-//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-//            Context.stopLossStrategy = stopLossStrategy;
-//
-//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-//            takeProfitStrategy.setConfig(80);
-//            Context.takeProfitStrategy = takeProfitStrategy;
-//
-//            test(timeframes, tasks);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
+        try {
+            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+            Context.stopLossStrategy = stopLossStrategy;
+
+            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+            takeProfitStrategy.setConfig(80);
+            Context.takeProfitStrategy = takeProfitStrategy;
+
+            test(timeframes, tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        // для тестов убирать проверку на мнимальное чисало данных
 
         // [D] AAPL 15 Nov 2021 - есть ли сигнал?
 

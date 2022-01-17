@@ -82,24 +82,40 @@ public class Quotes {
         switch (timeframe) {
             case WEEK:
                 if (Context.aggregationTimeframe == Timeframe.DAY) {
-                    return 30; // 30 недель минимум, чтобы отлавливать в том числе молодые акции
+                    if (Context.testMode) {
+                        return 4; // минимум для тестов
+                    } else {
+                        return 30; // 30 недель минимум, чтобы отлавливать в том числе молодые акции
+                    }
                 }
                 if (Context.aggregationTimeframe == Timeframe.HOUR) {
                     throw new RuntimeException("Attemp to aggregate WEEK from HOUR - no sense");
                 }
             case DAY:
                 if (Context.aggregationTimeframe == Timeframe.DAY) {
-                    return 240; // минимум год (рабочих дней)
+                    if (Context.testMode) {
+                        return 4; // минимум для тестов
+                    } else {
+                        return 240; // минимум год (рабочих дней)
+                    }
                 }
                 if (Context.aggregationTimeframe == Timeframe.HOUR) {
-                    return 30; // по часовым котировкам получается до 35 дней собрать
+                    if (Context.testMode) {
+                        return 4; // минимум для тестов
+                    } else {
+                        return 30; // по часовым котировкам получается до 35 дней собрать
+                    }
                 }
             case HOUR:
                 if (Context.aggregationTimeframe == Timeframe.DAY) {
                     throw new RuntimeException("Attemp to aggregate HOUR from DAY - impossible");
                 }
                 if (Context.aggregationTimeframe == Timeframe.HOUR) {
-                    return 80; // хотя бы 2 недели
+                    if (Context.testMode) {
+                        return 4; // минимум для тестов
+                    } else {
+                        return 80; // хотя бы 2 недели
+                    }
                 }
             default:
                 return notSet;
