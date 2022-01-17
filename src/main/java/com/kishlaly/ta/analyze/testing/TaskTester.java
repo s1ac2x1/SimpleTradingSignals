@@ -47,7 +47,7 @@ public class TaskTester {
                             Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
                             Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
                             taskResults.add(task.getFunction().apply(screen1, screen2));
-                            if (lastScreen2Quote.getTimestamp() <= lastScreen1Quote.getTimestamp()) {
+                            if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
                                 rewind(screen1, 1);
                             } else {
                                 rewind(screen2, 1);

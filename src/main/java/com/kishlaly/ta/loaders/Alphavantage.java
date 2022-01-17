@@ -10,6 +10,7 @@ import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.model.indicators.Stoch;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.Dates;
+import com.kishlaly.ta.utils.Quotes;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.ResponseBody;
@@ -84,7 +85,7 @@ public class Alphavantage {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
-        if (quotes.size() < 10) {
+        if (quotes.size() < Quotes.resolveMinBarCount(timeframe)) {
             return Collections.emptyList();
         }
         Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
