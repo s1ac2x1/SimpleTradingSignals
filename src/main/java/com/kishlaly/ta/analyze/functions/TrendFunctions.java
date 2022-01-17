@@ -5,7 +5,6 @@ import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
-import com.kishlaly.ta.utils.Context;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -13,7 +12,6 @@ import java.util.function.Function;
 
 public class TrendFunctions {
 
-    // подразумевается, что размер коллекций равен Context.minimumBarsCount
     // Главные правила проверки:
     // 1. Как минимум пловина из N последних баров должна быть правильного цвета (зеленые на восходящем тренде или красные на нисходящем)
     //    так же все N не должны открываться и закрываться выше EMA26 (тень может пересекать)
@@ -27,9 +25,11 @@ public class TrendFunctions {
     // (вероятно, этот случай уже покрывается первым пунктом: проверка цвета половины из N последних баров)
     public static boolean uptrendCheckOnMultipleBars(
             SymbolData symbolData,
+            int minBarsCount,
             int barsToCheck) {
         return abstractTrendCheckOnMultipleBars(
                 symbolData,
+                minBarsCount,
                 barsToCheck,
                 quote -> quote.getOpen() < quote.getClose(),
                 (quote, ema) -> quote.getOpen() > ema.getValue() && quote.getClose() > ema.getValue(),
@@ -39,11 +39,11 @@ public class TrendFunctions {
         );
     }
 
-    // подразумевается, что размер коллекций равен Context.minimumBarsCount
     // зеркальный аналог uptrendCheckOnMultipleBars
-    public static boolean downtrendCheckOnMultipleBars(SymbolData symbolData, int barsToCheck) {
+    public static boolean downtrendCheckOnMultipleBars(SymbolData symbolData, int minBarsCount, int barsToCheck) {
         return abstractTrendCheckOnMultipleBars(
                 symbolData,
+                minBarsCount,
                 barsToCheck,
                 quote -> quote.getOpen() > quote.getClose(),
                 (quote, ema) -> quote.getOpen() < ema.getValue() && quote.getClose() < ema.getValue(),
@@ -75,6 +75,7 @@ public class TrendFunctions {
 
     private static boolean abstractTrendCheckOnMultipleBars(
             SymbolData symbolData,
+            int minBarsCount,
             int barsToCheck,
             Function<Quote, Boolean> barCorrectColor,
             BiFunction<Quote, EMA, Boolean> quoteEmaIntersectionCheck,
@@ -83,11 +84,11 @@ public class TrendFunctions {
             BiFunction<Double, Double, Boolean> histogramCheck2
     ) {
         List<Quote> quotes = symbolData.quotes;
-        quotes = quotes.subList(quotes.size() - Context.minimumBarsCount, quotes.size());
+        quotes = quotes.subList(quotes.size() - minBarsCount, quotes.size());
         List<EMA> ema = symbolData.indicators.get(Indicator.EMA26);
-        ema = ema.subList(ema.size() - Context.minimumBarsCount, ema.size());
+        ema = ema.subList(ema.size() - minBarsCount, ema.size());
         List<MACD> macd = symbolData.indicators.get(Indicator.MACD);
-        macd = macd.subList(macd.size() - Context.minimumBarsCount, macd.size());
+        macd = macd.subList(macd.size() - minBarsCount, macd.size());
 
         for (int i = quotes.size() - barsToCheck; i < quotes.size(); i++) {
             if (!quoteEmaIntersectionCheck.apply(quotes.get(i), ema.get(i))) {

@@ -2,6 +2,8 @@ package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskRunner;
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.testing.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
 import com.kishlaly.ta.cache.CacheBuilder;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
@@ -42,22 +44,22 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-        run(timeframes, tasks);
+//        run(timeframes, tasks);
 
-//        try {
-//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-//            Context.stopLossStrategy = stopLossStrategy;
-//
-//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-//            takeProfitStrategy.setConfig(80);
-//            Context.takeProfitStrategy = takeProfitStrategy;
-//
-//            test(timeframes, tasks);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
+        try {
+            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+            Context.stopLossStrategy = stopLossStrategy;
 
-        // сделать агрегацию часовых котировок
+            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+            takeProfitStrategy.setConfig(80);
+            Context.takeProfitStrategy = takeProfitStrategy;
+
+            test(timeframes, tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        // [D] AAPL 15 Nov 2021 - есть ли сигнал?
 
         // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
 

@@ -26,7 +26,7 @@ import static java.lang.Double.parseDouble;
  * Таймзона всегда US/Eastern (проверить для форекса)
  * <p>
  * F4ZNUB0VYAAMTSLP
- *
+ * <p>
  * https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=60min&outputsize=full&apikey=F4ZNUB0VYAAMTSLP
  * https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=TER&&apikey=F4ZNUB0VYAAMTSLP
  * https://www.alphavantage.co/query?function=EMA&symbol=TER&apikey=F4ZNUB0VYAAMTSLP&series_type=close&time_period=26&interval=weekly
@@ -84,7 +84,7 @@ public class Alphavantage {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
-        if (quotes.size() < Context.minimumBarsCount) {
+        if (quotes.size() < 10) {
             return Collections.emptyList();
         }
         Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
@@ -117,7 +117,7 @@ public class Alphavantage {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
-        if (result.size() < Context.minimumBarsCount) {
+        if (result.size() < 10) {
             return Collections.emptyList();
         }
         Collections.sort(result, Comparator.comparing(MACD::getTimestamp));
@@ -147,7 +147,7 @@ public class Alphavantage {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
-        if (result.size() < Context.minimumBarsCount) {
+        if (result.size() < 10) {
             return Collections.emptyList();
         }
         Collections.sort(result, Comparator.comparing(EMA::getTimestamp));
@@ -178,7 +178,7 @@ public class Alphavantage {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
-        if (result.size() < Context.minimumBarsCount) {
+        if (result.size() < 10) {
             return Collections.emptyList();
         }
         Collections.sort(result, Comparator.comparing(Stoch::getTimestamp));

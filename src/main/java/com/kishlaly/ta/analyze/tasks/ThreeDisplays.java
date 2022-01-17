@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import static com.kishlaly.ta.analyze.TaskResultCode.*;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.*;
 import static com.kishlaly.ta.model.indicators.Indicator.*;
-import static com.kishlaly.ta.utils.Context.minimumBarsCount;
+import static com.kishlaly.ta.utils.Quotes.resolveMinBarCount;
 
 /**
  * Индикаторы:
@@ -38,12 +38,15 @@ public class ThreeDisplays {
 
     public static TaskResult buySignal(SymbolData screen1, SymbolData screen2) {
 
-        if (screen1.quotes.isEmpty() || screen1.quotes.size() < minimumBarsCount) {
+        int screenOneMinBarCount = resolveMinBarCount(screen1.timeframe);
+        int screenTwoMinBarCount = resolveMinBarCount(screen2.timeframe);
+
+        if (screen1.quotes.isEmpty() || screen1.quotes.size() < screenOneMinBarCount) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen1.timeframe.name());
             Log.recordCode(NO_DATA_QUOTES, screen1);
             return new TaskResult(null, NO_DATA_QUOTES);
         }
-        if (screen2.quotes.isEmpty() || screen2.quotes.size() < minimumBarsCount) {
+        if (screen2.quotes.isEmpty() || screen2.quotes.size() < screenTwoMinBarCount) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen2.timeframe.name());
             Log.recordCode(NO_DATA_QUOTES, screen2);
             return new TaskResult(null, NO_DATA_QUOTES);
@@ -51,12 +54,12 @@ public class ThreeDisplays {
 
         List<Indicator> missingData = new ArrayList<>();
         screen1.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty() || value.size() < minimumBarsCount) {
+            if (value.isEmpty() || value.size() < screenOneMinBarCount) {
                 missingData.add(indicator);
             }
         });
         screen2.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty() || value.size() < minimumBarsCount) {
+            if (value.isEmpty() || value.size() < screenTwoMinBarCount) {
                 missingData.add(indicator);
             }
         });
@@ -67,28 +70,28 @@ public class ThreeDisplays {
             return new TaskResult(null, NO_DATA_INDICATORS);
         }
 
-        List<Quote> screen1Quotes = screen1.quotes.subList(screen1.quotes.size() - minimumBarsCount, screen1.quotes.size());
-        List<Quote> screen2Quotes = screen2.quotes.subList(screen2.quotes.size() - minimumBarsCount, screen2.quotes.size());
+        List<Quote> screen1Quotes = screen1.quotes.subList(screen1.quotes.size() - screenOneMinBarCount, screen1.quotes.size());
+        List<Quote> screen2Quotes = screen2.quotes.subList(screen2.quotes.size() - screenTwoMinBarCount, screen2.quotes.size());
 
         List<EMA> screenOneEMA26 = screen1.indicators.get(EMA26);
-        screenOneEMA26 = screenOneEMA26.subList(screenOneEMA26.size() - minimumBarsCount, screenOneEMA26.size());
+        screenOneEMA26 = screenOneEMA26.subList(screenOneEMA26.size() - screenOneMinBarCount, screenOneEMA26.size());
 
         List<MACD> screenOneMACD = screen1.indicators.get(MACD);
-        screenOneMACD = screenOneMACD.subList(screenOneMACD.size() - minimumBarsCount, screenOneMACD.size());
+        screenOneMACD = screenOneMACD.subList(screenOneMACD.size() - screenOneMinBarCount, screenOneMACD.size());
 
         List<EMA> screenTwoEMA13 = screen2.indicators.get(Indicator.EMA13);
-        screenTwoEMA13 = screenTwoEMA13.subList(screenTwoEMA13.size() - minimumBarsCount, screenTwoEMA13.size());
+        screenTwoEMA13 = screenTwoEMA13.subList(screenTwoEMA13.size() - screenTwoMinBarCount, screenTwoEMA13.size());
 
         List<MACD> screenTwoMACD = screen2.indicators.get(Indicator.MACD);
-        screenTwoMACD = screenTwoMACD.subList(screenTwoMACD.size() - minimumBarsCount, screenTwoMACD.size());
+        screenTwoMACD = screenTwoMACD.subList(screenTwoMACD.size() - screenTwoMinBarCount, screenTwoMACD.size());
 
         List<Stoch> screenTwoStochastic = screen2.indicators.get(Indicator.STOCH);
-        screenTwoStochastic = screenTwoStochastic.subList(screenTwoStochastic.size() - minimumBarsCount, screenTwoStochastic.size());
+        screenTwoStochastic = screenTwoStochastic.subList(screenTwoStochastic.size() - screenTwoMinBarCount, screenTwoStochastic.size());
 
         // первый экран
 
         // проверка тренда
-        boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, NUMBER_OF_EMA26_VALUES_TO_CHECK);
+        boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, screenOneMinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
         //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen1); плохая проверка
         Quote lastChartQuote = screen2Quotes.get(screen2Quotes.size() - 1);
         if (!uptrendCheckOnMultipleBars) {
@@ -99,10 +102,10 @@ public class ThreeDisplays {
 
         // На первом экране последние 4 Quote.low не должны понижаться
         // (эта проверка уже есть в Functions.isUptrend, но пусть тут тоже будет)
-        Quote q4 = screen1Quotes.get(minimumBarsCount - 4);
-        Quote q3 = screen1Quotes.get(minimumBarsCount - 3);
-        Quote q2 = screen1Quotes.get(minimumBarsCount - 2);
-        Quote q1 = screen1Quotes.get(minimumBarsCount - 1);
+        Quote q4 = screen1Quotes.get(screenTwoMinBarCount - 4);
+        Quote q3 = screen1Quotes.get(screenTwoMinBarCount - 3);
+        Quote q2 = screen1Quotes.get(screenTwoMinBarCount - 2);
+        Quote q1 = screen1Quotes.get(screenTwoMinBarCount - 1);
         if (q4.getLow() >= q3.getLow() && q3.getLow() >= q2.getLow() && q2.getLow() >= q1.getLow()) {
             // допустимо только, если последний столбик зеленый
             if (q1.getClose() < q1.getOpen()) {
@@ -170,9 +173,9 @@ public class ThreeDisplays {
 
         // обязательное условие 1
         // убедиться сначала, что high у последних трех столбиков повышается
-        Quote quote3 = screen2Quotes.get(minimumBarsCount - 3);
-        Quote quote2 = screen2Quotes.get(minimumBarsCount - 2);
-        Quote quote1 = screen2Quotes.get(minimumBarsCount - 1);
+        Quote quote3 = screen2Quotes.get(screenTwoMinBarCount - 3);
+        Quote quote2 = screen2Quotes.get(screenTwoMinBarCount - 2);
+        Quote quote1 = screen2Quotes.get(screenTwoMinBarCount - 1);
         // наверно ascendingBarHigh=false + ascendingBarClose=false достаточно для отказа
         boolean ascendingBarHigh = quote3.getHigh() < quote2.getHigh() && quote2.getHigh() < quote1.getHigh();
         boolean ascendingBarClose = quote3.getClose() < quote2.getClose() && quote2.getClose() < quote1.getClose();
@@ -234,7 +237,7 @@ public class ThreeDisplays {
 
         //попробовать посчитать среднюю длину баров и сравнить с ней последние три
         Double sum = screen2Quotes.stream().map(quote -> quote.getHigh() - quote.getLow()).reduce(Double::sum).get();
-        double averageBarLength = sum / minimumBarsCount;
+        double averageBarLength = sum / screenTwoMinBarCount;
         double quote1Length = quote1.getHigh() - quote1.getLow();
         double quote2Length = quote2.getHigh() - quote2.getLow();
         double quote3Length = quote3.getHigh() - quote3.getLow();
@@ -250,12 +253,15 @@ public class ThreeDisplays {
 
     public static TaskResult buySignalType2(SymbolData screen1, SymbolData screen2) {
 
-        if (screen1.quotes.isEmpty() || screen1.quotes.size() < minimumBarsCount) {
+        int screenOneMinBarCount = resolveMinBarCount(screen1.timeframe);
+        int screenTwoMinBarCount = resolveMinBarCount(screen2.timeframe);
+
+        if (screen1.quotes.isEmpty() || screen1.quotes.size() < screenOneMinBarCount) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen1.timeframe.name());
             Log.recordCode(NO_DATA_QUOTES, screen1);
             return new TaskResult(null, NO_DATA_QUOTES);
         }
-        if (screen2.quotes.isEmpty() || screen2.quotes.size() < minimumBarsCount) {
+        if (screen2.quotes.isEmpty() || screen2.quotes.size() < screenTwoMinBarCount) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen2.timeframe.name());
             Log.recordCode(NO_DATA_QUOTES, screen2);
             return new TaskResult(null, NO_DATA_QUOTES);
@@ -263,12 +269,12 @@ public class ThreeDisplays {
 
         List<Indicator> missingData = new ArrayList<>();
         screen1.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty() || value.size() < minimumBarsCount) {
+            if (value.isEmpty() || value.size() < screenOneMinBarCount) {
                 missingData.add(indicator);
             }
         });
         screen2.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty() || value.size() < minimumBarsCount) {
+            if (value.isEmpty() || value.size() < screenTwoMinBarCount) {
                 missingData.add(indicator);
             }
         });
@@ -279,31 +285,31 @@ public class ThreeDisplays {
             return new TaskResult(null, NO_DATA_INDICATORS);
         }
 
-        List<Quote> screen1Quotes = screen1.quotes.subList(screen1.quotes.size() - minimumBarsCount, screen1.quotes.size());
-        List<Quote> screen2Quotes = screen2.quotes.subList(screen2.quotes.size() - minimumBarsCount, screen2.quotes.size());
+        List<Quote> screen1Quotes = screen1.quotes.subList(screen1.quotes.size() - screenOneMinBarCount, screen1.quotes.size());
+        List<Quote> screen2Quotes = screen2.quotes.subList(screen2.quotes.size() - screenTwoMinBarCount, screen2.quotes.size());
 
         List<EMA> screenOneEMA26 = screen1.indicators.get(EMA26);
-        screenOneEMA26 = screenOneEMA26.subList(screenOneEMA26.size() - minimumBarsCount, screenOneEMA26.size());
+        screenOneEMA26 = screenOneEMA26.subList(screenOneEMA26.size() - screenOneMinBarCount, screenOneEMA26.size());
 
         List<MACD> screenOneMACD = screen1.indicators.get(MACD);
-        screenOneMACD = screenOneMACD.subList(screenOneMACD.size() - minimumBarsCount, screenOneMACD.size());
+        screenOneMACD = screenOneMACD.subList(screenOneMACD.size() - screenOneMinBarCount, screenOneMACD.size());
 
         List<EMA> screenTwoEMA13 = screen2.indicators.get(Indicator.EMA13);
-        screenTwoEMA13 = screenTwoEMA13.subList(screenTwoEMA13.size() - minimumBarsCount, screenTwoEMA13.size());
+        screenTwoEMA13 = screenTwoEMA13.subList(screenTwoEMA13.size() - screenTwoMinBarCount, screenTwoEMA13.size());
 
         List<MACD> screenTwoMACD = screen2.indicators.get(Indicator.MACD);
-        screenTwoMACD = screenTwoMACD.subList(screenTwoMACD.size() - minimumBarsCount, screenTwoMACD.size());
+        screenTwoMACD = screenTwoMACD.subList(screenTwoMACD.size() - screenTwoMinBarCount, screenTwoMACD.size());
 
         List<Stoch> screenTwoStochastic = screen2.indicators.get(Indicator.STOCH);
-        screenTwoStochastic = screenTwoStochastic.subList(screenTwoStochastic.size() - minimumBarsCount, screenTwoStochastic.size());
+        screenTwoStochastic = screenTwoStochastic.subList(screenTwoStochastic.size() - screenTwoMinBarCount, screenTwoStochastic.size());
 
         List<Keltner> screenTwoKeltner = screen2.indicators.get(KELTNER);
-        screenTwoKeltner = screenTwoKeltner.subList(screenTwoKeltner.size() - minimumBarsCount, screenTwoKeltner.size());
+        screenTwoKeltner = screenTwoKeltner.subList(screenTwoKeltner.size() - screenTwoMinBarCount, screenTwoKeltner.size());
 
         // первый экран
 
         // проверка тренда
-        boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, NUMBER_OF_EMA26_VALUES_TO_CHECK);
+        boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, screenOneMinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
         //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen1); плохая проверка
         Quote lastChartQuote = screen2Quotes.get(screen2Quotes.size() - 1);
         if (!uptrendCheckOnMultipleBars) {
@@ -314,10 +320,10 @@ public class ThreeDisplays {
 
         // На первом экране последние 4 Quote.low не должны понижаться
         // (эта проверка уже есть в Functions.isUptrend, но пусть тут тоже будет)
-        Quote q4 = screen1Quotes.get(minimumBarsCount - 4);
-        Quote q3 = screen1Quotes.get(minimumBarsCount - 3);
-        Quote q2 = screen1Quotes.get(minimumBarsCount - 2);
-        Quote q1 = screen1Quotes.get(minimumBarsCount - 1);
+        Quote q4 = screen1Quotes.get(screenTwoMinBarCount - 4);
+        Quote q3 = screen1Quotes.get(screenTwoMinBarCount - 3);
+        Quote q2 = screen1Quotes.get(screenTwoMinBarCount - 2);
+        Quote q1 = screen1Quotes.get(screenTwoMinBarCount - 1);
         if (q4.getLow() >= q3.getLow() && q3.getLow() >= q2.getLow() && q2.getLow() >= q1.getLow()) {
             // допустимо только, если последний столбик зеленый
             if (q1.getClose() < q1.getOpen()) {
@@ -370,7 +376,7 @@ public class ThreeDisplays {
         // но при условии, что медленная линия у правого края была выше
         // тогда STOCH_OVERSOLD можно держать поменьше, эдак 30
         boolean wasOversoldRecently = false;
-        for (int i = minimumBarsCount - STOCH_VALUES_TO_CHECK; i < minimumBarsCount; i++) {
+        for (int i = screenTwoMinBarCount - STOCH_VALUES_TO_CHECK; i < screenTwoMinBarCount; i++) {
             Stoch stoch = screenTwoStochastic.get(i);
             if (stoch.getSlowD() <= STOCH_OVERSOLD || stoch.getSlowK() <= STOCH_OVERSOLD) {
                 wasOversoldRecently = true;
@@ -406,16 +412,16 @@ public class ThreeDisplays {
 
         // обязательное условие 1
         // убедиться сначала, что high у последних ДВУХ столбиков повышается
-        Quote preLastQuote = screen2Quotes.get(minimumBarsCount - 2);
-        Quote lastQuote = screen2Quotes.get(minimumBarsCount - 1);
+        Quote preLastQuote = screen2Quotes.get(screenTwoMinBarCount - 2);
+        Quote lastQuote = screen2Quotes.get(screenTwoMinBarCount - 1);
         boolean ascendingBarHigh = preLastQuote.getHigh() < lastQuote.getHigh();
         if (!ascendingBarHigh) {
             Log.recordCode(QUOTE_HIGH_NOT_GROWING, screen2);
             Log.addDebugLine("Quote.high не растет последовательно");
             return new TaskResult(lastChartQuote, QUOTE_HIGH_NOT_GROWING);
         }
-        EMA preLastEMA = screenTwoEMA13.get(minimumBarsCount - 2);
-        EMA lastEMA = screenTwoEMA13.get(minimumBarsCount - 1);
+        EMA preLastEMA = screenTwoEMA13.get(screenTwoMinBarCount - 2);
+        EMA lastEMA = screenTwoEMA13.get(screenTwoMinBarCount - 1);
 
         // оба столбика ниже ЕМА - отказ
         if (isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteBelowEMA(lastQuote, lastEMA.getValue())) {
@@ -452,7 +458,7 @@ public class ThreeDisplays {
         }
 
         // фильтрация поздних входов, когда столбик закрылся выше FILTER_BY_KELTNER
-        Keltner lastKeltnerData = screenTwoKeltner.get(minimumBarsCount - 1);
+        Keltner lastKeltnerData = screenTwoKeltner.get(screenTwoMinBarCount - 1);
         double lastQuoteClose = lastQuote.getClose();
         double middle = lastKeltnerData.getMiddle();
         double top = lastKeltnerData.getTop();
@@ -467,7 +473,7 @@ public class ThreeDisplays {
 
         //попробовать посчитать среднюю длину баров и сравнить с ней последние три
         Double sum = screen2Quotes.stream().map(quote -> quote.getHigh() - quote.getLow()).reduce(Double::sum).get();
-        double averageBarLength = sum / minimumBarsCount;
+        double averageBarLength = sum / screenTwoMinBarCount;
         double quote1Length = lastQuote.getHigh() - lastQuote.getLow();
         double quote2Length = preLastQuote.getHigh() - preLastQuote.getLow();
         boolean quote1StrangeLength = quote1Length >= averageBarLength * multiplier;
@@ -481,12 +487,15 @@ public class ThreeDisplays {
 
     public static TaskResult sellSignal(SymbolData screen1, SymbolData screen2) {
 
-        if (screen1.quotes.isEmpty()) {
+        int screenOneMinBarCount = resolveMinBarCount(screen1.timeframe);
+        int screenTwoMinBarCount = resolveMinBarCount(screen2.timeframe);
+
+        if (screen1.quotes.isEmpty() || screen1.quotes.size() < screenOneMinBarCount) {
             Log.recordCode(NO_DATA_QUOTES, screen1);
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen1.timeframe.name());
             return new TaskResult(null, NO_DATA_QUOTES);
         }
-        if (screen2.quotes.isEmpty()) {
+        if (screen2.quotes.isEmpty() || screen2.quotes.size() < screenTwoMinBarCount) {
             Log.recordCode(NO_DATA_QUOTES, screen2);
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen2.timeframe.name());
             return new TaskResult(null, NO_DATA_QUOTES);
@@ -509,28 +518,28 @@ public class ThreeDisplays {
             return new TaskResult(null, NO_DATA_INDICATORS);
         }
 
-        List<Quote> screen1Quotes = screen1.quotes.subList(screen1.quotes.size() - minimumBarsCount, screen1.quotes.size());
-        List<Quote> screen2Quotes = screen2.quotes.subList(screen2.quotes.size() - minimumBarsCount, screen2.quotes.size());
+        List<Quote> screen1Quotes = screen1.quotes.subList(screen1.quotes.size() - screenOneMinBarCount, screen1.quotes.size());
+        List<Quote> screen2Quotes = screen2.quotes.subList(screen2.quotes.size() - screenTwoMinBarCount, screen2.quotes.size());
 
         List<EMA> screenOneEMA26 = screen1.indicators.get(EMA26);
-        screenOneEMA26 = screenOneEMA26.subList(screenOneEMA26.size() - minimumBarsCount, screenOneEMA26.size());
+        screenOneEMA26 = screenOneEMA26.subList(screenOneEMA26.size() - screenOneMinBarCount, screenOneEMA26.size());
 
         List<MACD> screenOneMACD = screen1.indicators.get(MACD);
-        screenOneMACD = screenOneMACD.subList(screenOneMACD.size() - minimumBarsCount, screenOneMACD.size());
+        screenOneMACD = screenOneMACD.subList(screenOneMACD.size() - screenOneMinBarCount, screenOneMACD.size());
 
         List<EMA> screenTwoEMA13 = screen2.indicators.get(EMA13);
-        screenTwoEMA13 = screenTwoEMA13.subList(screenTwoEMA13.size() - minimumBarsCount, screenTwoEMA13.size());
+        screenTwoEMA13 = screenTwoEMA13.subList(screenTwoEMA13.size() - screenTwoMinBarCount, screenTwoEMA13.size());
 
         List<MACD> screenTwoMACD = screen2.indicators.get(MACD);
-        screenTwoMACD = screenTwoMACD.subList(screenTwoMACD.size() - minimumBarsCount, screenTwoMACD.size());
+        screenTwoMACD = screenTwoMACD.subList(screenTwoMACD.size() - screenTwoMinBarCount, screenTwoMACD.size());
 
         List<Stoch> screenTwoStochastic = screen2.indicators.get(STOCH);
-        screenTwoStochastic = screenTwoStochastic.subList(screenTwoStochastic.size() - minimumBarsCount, screenTwoStochastic.size());
+        screenTwoStochastic = screenTwoStochastic.subList(screenTwoStochastic.size() - screenTwoMinBarCount, screenTwoStochastic.size());
 
         // первый экран
 
         // проверка тренда
-        boolean downtrendCheckOnMultipleBars = TrendFunctions.downtrendCheckOnMultipleBars(screen1, NUMBER_OF_EMA26_VALUES_TO_CHECK);
+        boolean downtrendCheckOnMultipleBars = TrendFunctions.downtrendCheckOnMultipleBars(screen1, screenOneMinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
         //boolean downtrendCheckOnLastBar = TrendFunctions.downtrendCheckOnLastBar(screen1); опасно
         Quote lastChartQuote = screen2Quotes.get(screen2Quotes.size() - 1);
         if (!downtrendCheckOnMultipleBars) {
@@ -541,10 +550,10 @@ public class ThreeDisplays {
 
         // На первом экране последние 4 Quote.high не должны повышаться
         // (эта проверка уже есть в Functions.isDownrend, но пусть тут тоже будет)
-        Quote q4 = screen1Quotes.get(minimumBarsCount - 4);
-        Quote q3 = screen1Quotes.get(minimumBarsCount - 3);
-        Quote q2 = screen1Quotes.get(minimumBarsCount - 2);
-        Quote q1 = screen1Quotes.get(minimumBarsCount - 1);
+        Quote q4 = screen1Quotes.get(screenTwoMinBarCount - 4);
+        Quote q3 = screen1Quotes.get(screenTwoMinBarCount - 3);
+        Quote q2 = screen1Quotes.get(screenTwoMinBarCount - 2);
+        Quote q1 = screen1Quotes.get(screenTwoMinBarCount - 1);
         if (q4.getHigh() <= q3.getHigh() && q3.getHigh() <= q2.getHigh() && q2.getHigh() <= q1.getHigh()) {
             // допустимо только, если последний столбик красный
             if (q1.getClose() > q1.getOpen()) {
@@ -610,9 +619,9 @@ public class ThreeDisplays {
         // ценовые бары должны пересекать ЕМА13 и должны снижаться
 
         // убедиться сначала, что low у последних трех столбиков снижается
-        Quote quote3 = screen2Quotes.get(minimumBarsCount - 3);
-        Quote quote2 = screen2Quotes.get(minimumBarsCount - 2);
-        Quote quote1 = screen2Quotes.get(minimumBarsCount - 1);
+        Quote quote3 = screen2Quotes.get(screenTwoMinBarCount - 3);
+        Quote quote2 = screen2Quotes.get(screenTwoMinBarCount - 2);
+        Quote quote1 = screen2Quotes.get(screenTwoMinBarCount - 1);
         // наверно descendingBarLow=false + descendingBarClose=false достаточно для отказа
         boolean descendingBarLow = quote3.getLow() > quote2.getLow() && quote2.getLow() < quote1.getLow();
         boolean descendingBarClose = quote3.getClose() > quote2.getClose() && quote2.getClose() > quote1.getClose();
@@ -624,12 +633,12 @@ public class ThreeDisplays {
                 Log.recordCode(TaskResultCode.QUOTE_CLOSE_NOT_LOWING, screen2);
                 Log.addDebugLine("Quote.close не снижается последовательно");
                 // третий с конца весь выше ЕМА13, а второй и последний пересекли ее
-                boolean thirdBarAboveEMA13 = quote3.getLow() > screenTwoEMA13.get(minimumBarsCount - 3).getValue()
-                        && quote3.getHigh() > screenTwoEMA13.get(minimumBarsCount - 3).getValue();
-                boolean secondBarCrossesEMA13 = quote2.getLow() <= screenTwoEMA13.get(minimumBarsCount - 2).getValue()
-                        && quote2.getHigh() >= screenTwoEMA13.get(minimumBarsCount - 2).getValue();
-                boolean lastBarCrossesEMA13 = quote1.getLow() <= screenTwoEMA13.get(minimumBarsCount - 1).getValue()
-                        && quote1.getHigh() >= screenTwoEMA13.get(minimumBarsCount - 1).getValue();
+                boolean thirdBarAboveEMA13 = quote3.getLow() > screenTwoEMA13.get(screenTwoMinBarCount - 3).getValue()
+                        && quote3.getHigh() > screenTwoEMA13.get(screenTwoMinBarCount - 3).getValue();
+                boolean secondBarCrossesEMA13 = quote2.getLow() <= screenTwoEMA13.get(screenTwoMinBarCount - 2).getValue()
+                        && quote2.getHigh() >= screenTwoEMA13.get(screenTwoMinBarCount - 2).getValue();
+                boolean lastBarCrossesEMA13 = quote1.getLow() <= screenTwoEMA13.get(screenTwoMinBarCount - 1).getValue()
+                        && quote1.getHigh() >= screenTwoEMA13.get(screenTwoMinBarCount - 1).getValue();
                 boolean crossingRule = thirdBarAboveEMA13 && (secondBarCrossesEMA13 || lastBarCrossesEMA13);
                 if (!crossingRule) {
                     Log.addDebugLine("Третий с конца" + (thirdBarAboveEMA13 ? " " : " не ") + "выше ЕМА13");
@@ -652,12 +661,12 @@ public class ThreeDisplays {
 
         // нужно фильтровать ситуацию, когда третий и второй пересекают ЕМА13, а последний целиком ниже (то есть уже момент потерян)
         // третий может открыться и закрыться ниже, и это допустимо
-        boolean thirdCrossesEMA13 = quote3.getLow() < screenTwoEMA13.get(minimumBarsCount - 3).getValue()
-                && quote3.getHigh() > screenTwoEMA13.get(minimumBarsCount - 3).getValue();
-        boolean secondCrossesEMA13 = quote2.getLow() < screenTwoEMA13.get(minimumBarsCount - 2).getValue()
-                && quote2.getHigh() > screenTwoEMA13.get(minimumBarsCount - 2).getValue();
-        boolean lastBelowEMA13 = quote1.getLow() < screenTwoEMA13.get(minimumBarsCount - 1).getValue()
-                && quote1.getHigh() < screenTwoEMA13.get(minimumBarsCount - 1).getValue();
+        boolean thirdCrossesEMA13 = quote3.getLow() < screenTwoEMA13.get(screenTwoMinBarCount - 3).getValue()
+                && quote3.getHigh() > screenTwoEMA13.get(screenTwoMinBarCount - 3).getValue();
+        boolean secondCrossesEMA13 = quote2.getLow() < screenTwoEMA13.get(screenTwoMinBarCount - 2).getValue()
+                && quote2.getHigh() > screenTwoEMA13.get(screenTwoMinBarCount - 2).getValue();
+        boolean lastBelowEMA13 = quote1.getLow() < screenTwoEMA13.get(screenTwoMinBarCount - 1).getValue()
+                && quote1.getHigh() < screenTwoEMA13.get(screenTwoMinBarCount - 1).getValue();
         if (thirdCrossesEMA13 && secondCrossesEMA13 && lastBelowEMA13) {
             Log.recordCode(LAST_BAR_BELOW, screen2);
             Log.addDebugLine("Третий и второй пересекли ЕМА13, а последний полностью ниже");
@@ -673,7 +682,7 @@ public class ThreeDisplays {
 
         //попробовать посчитать среднюю длину баров и сравнить с ней последние три
         Double sum = screen2Quotes.stream().map(quote -> quote.getHigh() - quote.getLow()).reduce(Double::sum).get();
-        double averageBarLength = sum / minimumBarsCount;
+        double averageBarLength = sum / screenTwoMinBarCount;
         double quote1Length = quote1.getHigh() - quote1.getLow();
         double quote2Length = quote2.getHigh() - quote2.getLow();
         double quote3Length = quote3.getHigh() - quote3.getLow();

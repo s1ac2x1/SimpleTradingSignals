@@ -4,8 +4,8 @@ import com.kishlaly.ta.analyze.TaskResultCode;
 import com.kishlaly.ta.analyze.functions.TrendFunctions;
 import com.kishlaly.ta.model.HistogramQuote;
 import com.kishlaly.ta.model.Quote;
-import com.kishlaly.ta.model.TaskResult;
 import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.TaskResult;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
@@ -19,8 +19,8 @@ import static com.kishlaly.ta.analyze.TaskResultCode.*;
 import static com.kishlaly.ta.analyze.tasks.Divergencies.BullishConfig.ALLOW_ON_BEARISH_TREND;
 import static com.kishlaly.ta.analyze.tasks.Divergencies.BullishConfig.NUMBER_OF_EMA26_VALUES_TO_CHECK;
 import static com.kishlaly.ta.model.indicators.Indicator.EMA26;
-import static com.kishlaly.ta.utils.Context.minimumBarsCount;
 import static com.kishlaly.ta.utils.Dates.beautifyQuoteDate;
+import static com.kishlaly.ta.utils.Quotes.resolveMinBarCount;
 
 /**
  * Для бычьей дивергенции цена акций должна быть выше $3, для медвежьей - выше $10. Объем торгов по
@@ -62,29 +62,31 @@ public class Divergencies {
      */
     public static TaskResult isBullish(SymbolData screen1, SymbolData screen2) {
         Quote result = null;
-        if (screen1.indicators.get(Indicator.EMA26) == null || screen1.indicators.get(Indicator.EMA26).isEmpty()) {
+        int screenOneMinBarCount = resolveMinBarCount(screen1.timeframe);
+        int screenTwoMinBarCount = resolveMinBarCount(screen2.timeframe);
+        if (screen1.indicators.get(Indicator.EMA26) == null || screen1.indicators.get(Indicator.EMA26).isEmpty() || screen1.quotes.size() < screenOneMinBarCount) {
             Log.recordCode(TaskResultCode.NO_DATA_INDICATORS, screen1);
             Log.addDebugLine("Недостаточно данных индикатора EMA26 для " + screen2.timeframe);
             return null;
         }
-        if (screen2.quotes.isEmpty()) {
+        if (screen2.quotes.isEmpty() || screen2.quotes.size() < screenOneMinBarCount) {
             Log.recordCode(TaskResultCode.NO_DATA_QUOTES, screen1);
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen2.timeframe);
             return null;
         }
 
-        List<Quote> screen1Quotes = screen1.quotes.subList(screen1.quotes.size() - minimumBarsCount, screen1.quotes.size());
-        List<Quote> screen2Quotes = screen2.quotes.subList(screen2.quotes.size() - minimumBarsCount, screen2.quotes.size());
+        List<Quote> screen1Quotes = screen1.quotes.subList(screen1.quotes.size() - screenOneMinBarCount, screen1.quotes.size());
+        List<Quote> screen2Quotes = screen2.quotes.subList(screen2.quotes.size() - screenTwoMinBarCount, screen2.quotes.size());
 
         List<EMA> ema26All = screen1.indicators.get(EMA26);
-        List<EMA> ema26 = ema26All.subList(ema26All.size() - minimumBarsCount, ema26All.size());
+        List<EMA> ema26 = ema26All.subList(ema26All.size() - screenOneMinBarCount, ema26All.size());
 
         List<MACD> macdAll = screen1.indicators.get(Indicator.MACD);
-        List<MACD> macd = macdAll.subList(macdAll.size() - minimumBarsCount, macdAll.size());
+        List<MACD> macd = macdAll.subList(macdAll.size() - screenOneMinBarCount, macdAll.size());
 
         if (!ALLOW_ON_BEARISH_TREND) {
             // фильтрация нисходящих трендов
-            boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, NUMBER_OF_EMA26_VALUES_TO_CHECK);
+            boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, screenOneMinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
             //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen1); плохая проверка
             if (!uptrendCheckOnMultipleBars) {
                 Log.recordCode(NO_UPTREND, screen1);
@@ -93,16 +95,16 @@ public class Divergencies {
             }
         }
 
-        List<MACD> macdValuesAll = screen2.indicators.get(Indicator.MACD);
-        if (macdValuesAll.isEmpty()) {
+        List<MACD> screenTwomacdValuesAll = screen2.indicators.get(Indicator.MACD);
+        if (screenTwomacdValuesAll.isEmpty()) {
             Log.addDebugLine("Недостаточно данных по MACD");
             return null;
         }
-        List<MACD> macdValues = macdValuesAll.subList(macdValuesAll.size() - minimumBarsCount, macdValuesAll.size());
+        List<MACD> screenTwoMacdValues = screenTwomacdValuesAll.subList(screenTwomacdValuesAll.size() - screenTwoMinBarCount, screenTwomacdValuesAll.size());
 
         // последние значения гистограммы должны быть <= 0
 
-        double latestHistogramValue = macdValues.get(minimumBarsCount - 1).getHistogram();
+        double latestHistogramValue = screenTwoMacdValues.get(screenTwoMinBarCount - 1).getHistogram();
 
         if (latestHistogramValue > 0) {
             Log.recordCode(TaskResultCode.LAST_HISTOGRAM_ABOVE_ZERO, screen1);
@@ -113,8 +115,8 @@ public class Divergencies {
         // строим массив из котировок с их гистрограммами
 
         List<HistogramQuote> histogramQuotes = new ArrayList<>();
-        for (int i = 0; i < minimumBarsCount; i++) {
-            double histogram = macdValues.get(i).getHistogram();
+        for (int i = 0; i < screenTwoMinBarCount; i++) {
+            double histogram = screenTwoMacdValues.get(i).getHistogram();
             histogramQuotes.add(new HistogramQuote(histogram, screen2Quotes.get(i)));
         }
 
@@ -201,17 +203,6 @@ public class Divergencies {
 
             double priceInLowestHistogramBar = quoteWithLowestHistogram.quote.getClose();
             double priceWhenHitogramCrossedZeroFromTop = quoteWhenHistogramCrossedZeroFromTop.quote.getClose();
-
-            // в точке пересечения гистограммы нуля сверху вниз, цена должна иметь минимум за весь диапазон (100 баров)
-            // так ли это? см пример Элдера, где его сканер отмечает флаг, там посередине есть цена ниже
-            // убераю эту проверку, лучше отфильтрую вручную на графике
-
-//            double minPriceBetweenControlPoints = histogramQuotesAfterLowestLow.stream()
-//                .min(Comparator.comparingDouble(q -> q.quote.getClose()))
-//                .get().quote.getClose();
-//            if (priceWhenHitogramCrossedZeroFromTop > minPriceBetweenControlPoints) {
-//                return false;
-//            }
 
             // между точкой пересечения гистограммой нуля из вершины В и концом графика не должно быть положительных столбиков гистограммы
             // потому что это уже может быть старая дивергенция

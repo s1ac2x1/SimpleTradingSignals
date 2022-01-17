@@ -1,6 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.Timeframe;
 
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
@@ -72,6 +73,19 @@ public class Quotes {
         }
         collectDayQuote(duringDay, dayQuotes);
         return dayQuotes;
+    }
+
+    public static int resolveMinBarCount(Timeframe timeframe) {
+        switch (timeframe) {
+            case WEEK:
+                return 30;
+            case DAY:
+                return 250;
+            case HOUR:
+                return 300;
+            default:
+                return 100;
+        }
     }
 
     private static void collectDayQuote(List<Quote> hourQuotesInsideOneDay, List<Quote> dayQuotes) {

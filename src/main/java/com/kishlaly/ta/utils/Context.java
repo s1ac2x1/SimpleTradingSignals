@@ -30,7 +30,10 @@ public class Context {
     //public static int workingTime = 390;
     public static int workingTime = 1440; // 1440 минут в сутках
 
-    public static int minimumBarsCount = 100; // если меньше, то пропускать эту акцию
+    // если меньше, то пропускать эту акцию
+    public static int minimumWeekBarsCount = 50;
+    public static int minimumDayBarsCount = 100;
+    public static int minimumHourBarsCount = 300;
 
     // для логов
     public static Timeframe logTimeframe1;
