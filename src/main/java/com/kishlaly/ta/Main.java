@@ -1,18 +1,13 @@
 package com.kishlaly.ta;
 
-import com.kishlaly.ta.analyze.TaskRunner;
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.testing.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
-import com.kishlaly.ta.cache.CacheBuilder;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
-import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -31,8 +26,8 @@ public class Main {
         Context.singleSymbol = "CSCO";
 
         Timeframe[][] timeframes = {
-                //{Timeframe.WEEK, Timeframe.DAY},
-                {Timeframe.DAY, Timeframe.HOUR},
+                {Timeframe.WEEK, Timeframe.DAY},
+//                {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
