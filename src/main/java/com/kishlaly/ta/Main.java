@@ -7,9 +7,10 @@ import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
+import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
+import static com.kishlaly.ta.cache.CacheReader.checkCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -25,36 +26,38 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
-        Context.singleSymbol = "CSCO";
+        //Context.singleSymbol = "CSCO";
 
         Timeframe[][] timeframes = {
-//                {Timeframe.WEEK, Timeframe.DAY},
+                //{Timeframe.WEEK, Timeframe.DAY},
                 {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                THREE_DISPLAYS_BUY_TYPE2,
+                //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
+                //THREE_DISPLAYS_SELL,
+                THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
                 //THREE_DISPLAYS_SELL
         };
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-//        run(timeframes, tasks);
+        run(timeframes, tasks);
 
-        try {
-            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-            Context.stopLossStrategy = stopLossStrategy;
-
-            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-            takeProfitStrategy.setConfig(80);
-            Context.takeProfitStrategy = takeProfitStrategy;
-
-            test(timeframes, tasks);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        try {
+//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+//            Context.stopLossStrategy = stopLossStrategy;
+//
+//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+//            takeProfitStrategy.setConfig(80);
+//            Context.takeProfitStrategy = takeProfitStrategy;
+//
+//            test(timeframes, tasks);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
         // для тестов убирать проверку на мнимальное чисало данных
 
