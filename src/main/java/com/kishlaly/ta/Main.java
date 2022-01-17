@@ -6,6 +6,7 @@ import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
+import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
@@ -20,15 +21,15 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Context.api = ALPHAVANTAGE;
         //Context.aggregationTimeframe = Timeframe.DAY; // последние 20 лет
-        Context.aggregationTimeframe = Timeframe.HOUR;  // последние 3 месяца
+        Context.aggregationTimeframe = Timeframe.DAY;  // последние 3 месяца
 
         Context.source = "symbols/sp500.txt";
         //Context.source = "symbols/from_screener.txt";
         Context.singleSymbol = "CSCO";
 
         Timeframe[][] timeframes = {
-//                {Timeframe.WEEK, Timeframe.DAY},
-                {Timeframe.DAY, Timeframe.HOUR},
+                {Timeframe.WEEK, Timeframe.DAY},
+//                {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
@@ -40,24 +41,22 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-//        run(timeframes, tasks);
+        run(timeframes, tasks);
 
-        try {
-            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-            Context.stopLossStrategy = stopLossStrategy;
-
-            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-            takeProfitStrategy.setConfig(80);
-            Context.takeProfitStrategy = takeProfitStrategy;
-
-            test(timeframes, tasks);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        try {
+//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+//            Context.stopLossStrategy = stopLossStrategy;
+//
+//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+//            takeProfitStrategy.setConfig(80);
+//            Context.takeProfitStrategy = takeProfitStrategy;
+//
+//            test(timeframes, tasks);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
         // [D] AAPL 15 Nov 2021 - есть ли сигнал?
-
-        // точно ли нужно требовать наличия минимум 100 баров, даже если они недельные? если акции меньше двух лет?
 
         // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
         // первый экран - подумать
