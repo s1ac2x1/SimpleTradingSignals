@@ -21,6 +21,7 @@ import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Clean.clear;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
+import static com.kishlaly.ta.utils.Quotes.resolveMinBarCount;
 
 public class TaskTester {
 
@@ -314,17 +315,21 @@ public class TaskTester {
 
     private static boolean isDataFilled(SymbolData screen1, SymbolData screen2) {
         AtomicBoolean filledData = new AtomicBoolean(true);
-        if (screen1.quotes.size() < 100 || screen2.quotes.size() < 100) {
+
+        int screenOneMinBarCount = resolveMinBarCount(screen1.timeframe);
+        int screenTwoMinBarCount = resolveMinBarCount(screen2.timeframe);
+
+        if (screen1.quotes.size() < screenOneMinBarCount || screen2.quotes.size() < screenTwoMinBarCount) {
             filledData.set(false);
         }
         screen1.indicators.forEach(((indicator, data) -> {
-            if (data.size() < 100) {
+            if (data.size() < screenOneMinBarCount) {
                 filledData.set(false);
                 return;
             }
         }));
         screen2.indicators.forEach(((indicator, data) -> {
-            if (data.size() < 100) {
+            if (data.size() < screenTwoMinBarCount) {
                 filledData.set(false);
                 return;
             }

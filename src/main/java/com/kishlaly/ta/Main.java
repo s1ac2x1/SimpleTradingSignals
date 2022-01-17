@@ -8,6 +8,7 @@ import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
@@ -26,8 +27,8 @@ public class Main {
         Context.singleSymbol = "CSCO";
 
         Timeframe[][] timeframes = {
-                {Timeframe.WEEK, Timeframe.DAY},
-//                {Timeframe.DAY, Timeframe.HOUR},
+//                {Timeframe.WEEK, Timeframe.DAY},
+                {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
