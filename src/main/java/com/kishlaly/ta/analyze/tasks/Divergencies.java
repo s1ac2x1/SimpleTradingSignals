@@ -41,7 +41,7 @@ public class Divergencies {
         public static boolean ALLOW_MULTIPLE_ISLANDS = true;
         public static int MAX_TAIL_SIZE = 7;
         public static int SECOND_BOTTOM_RATIO = 80;
-        public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 3;
+        public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 4;
     }
 
     /**

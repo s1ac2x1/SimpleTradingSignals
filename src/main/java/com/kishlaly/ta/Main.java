@@ -45,20 +45,20 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-        run(timeframes, tasks);
+//        run(timeframes, tasks);
 
-//        try {
-//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-//            Context.stopLossStrategy = stopLossStrategy;
-//
-//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-//            takeProfitStrategy.setConfig(80);
-//            Context.takeProfitStrategy = takeProfitStrategy;
-//
-//            test(timeframes, tasks);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
+        try {
+            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+            Context.stopLossStrategy = stopLossStrategy;
+
+            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+            takeProfitStrategy.setConfig(80);
+            Context.takeProfitStrategy = takeProfitStrategy;
+
+            test(timeframes, tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         // для тестов убирать проверку на мнимальное чисало данных
 
