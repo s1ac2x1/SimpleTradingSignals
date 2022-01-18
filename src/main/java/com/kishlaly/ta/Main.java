@@ -11,7 +11,6 @@ import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.checkCache;
-import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 
 /**
  * @author Vladimir Kishlaly
@@ -20,13 +19,13 @@ import static com.kishlaly.ta.utils.Context.ApiSource.ALPHAVANTAGE;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Context.api = ALPHAVANTAGE;
-        Context.aggregationTimeframe = Timeframe.DAY; // последние 20 лет
-//        Context.aggregationTimeframe = Timeframe.HOUR;  // последние 3 месяца
+
+        Context.aggregationTimeframe = Timeframe.DAY;
+//        Context.aggregationTimeframe = Timeframe.HOUR;
 
         Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_many.txt";
-//        Context.singleSymbol = "TER";
+        Context.singleSymbol = "TER";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -37,30 +36,32 @@ public class Main {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_SELL,
-                //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
+                THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
                 //THREE_DISPLAYS_SELL,
-                FIRST_TRUST_MODEL
+                //FIRST_TRUST_MODEL
         };
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-        run(timeframes, tasks);
+//        run(timeframes, tasks);
 
-//        try {
-//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-//            Context.stopLossStrategy = stopLossStrategy;
-//
-//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-//            takeProfitStrategy.setConfig(80);
-//            Context.takeProfitStrategy = takeProfitStrategy;
-//
-//            test(timeframes, tasks);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
+        try {
+            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+            Context.stopLossStrategy = stopLossStrategy;
 
-        // для тестов убирать проверку на мнимальное чисало данных
+            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+            takeProfitStrategy.setConfig(80);
+            Context.takeProfitStrategy = takeProfitStrategy;
+
+            test(timeframes, tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        // сравнить тесты, когда обе %K и %D стохастика проверяются на перепродданность, а не толко одна
+
+        // что не так с MACD_BULLISH_DIVERGENCE ?
 
         // [D] AAPL 15 Nov 2021 - есть ли сигнал?
 

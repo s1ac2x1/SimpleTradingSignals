@@ -14,7 +14,7 @@ public class Context {
     }
 
     public static String outputFolder = "/Users/volodymyr/Investment/TA";
-    public static ApiSource api;
+    public static ApiSource api = ApiSource.ALPHAVANTAGE;
     public static double parallelRequests = 10;
     public static double limitPerMinute = 75;
     public static Timeframe timeframe = Timeframe.DAY; // по умолчению для тестов

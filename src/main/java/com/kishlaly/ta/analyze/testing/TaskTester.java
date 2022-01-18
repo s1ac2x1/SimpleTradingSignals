@@ -232,8 +232,12 @@ public class TaskTester {
             }
         }
         if (signalIndex > 11) {
-            double stopLoss = historicalTesting.getStopLossStrategy().calculate(data, signalIndex);
-            double takeProfit = historicalTesting.getTakeProfitStrategy().calcualte(data, signalIndex);
+            StopLossStrategy stopLossStrategy = historicalTesting.getStopLossStrategy();
+            double stopLoss = stopLossStrategy.calculate(data, signalIndex);
+
+            TakeProfitStrategy takeProfitStrategy = historicalTesting.getTakeProfitStrategy();
+            double takeProfit = takeProfitStrategy.calcualte(data, signalIndex);
+
             double openingPrice = signal.getClose() + 0.07;
             double openPositionSize = Context.lots * openingPrice;
             int startPositionIndex = signalIndex;
@@ -283,6 +287,9 @@ public class TaskTester {
                     closePositionPrice = stopLoss;
                     closePositionCost = closingPositionSize;
                     break;
+                }
+                if (stopLossStrategy.isVolatile()) {
+                    stopLoss = stopLossStrategy.calculate(data, startPositionIndex);
                 }
             }
             if (closePositionQuote != null) {

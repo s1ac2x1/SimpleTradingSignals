@@ -2,9 +2,11 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.HistogramQuote;
 import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.indicators.ATR;
 import com.kishlaly.ta.model.indicators.Keltner;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeries;
+import org.ta4j.core.indicators.ATRIndicator;
 import org.ta4j.core.indicators.EMAIndicator;
 import org.ta4j.core.indicators.MACDIndicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
@@ -52,6 +54,16 @@ public class IndicatorUtils {
         List<Keltner> result = new ArrayList<>();
         for (int i = 0; i < quotes.size(); i++) {
             result.add(new Keltner(quotes.get(i).getTimestamp(), low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
+        }
+        return result;
+    }
+
+    public static List<ATR> buildATR(List<Quote> quotes, int barCount) {
+        List<ATR> result = new ArrayList<>();
+        BarSeries barSeries = Bars.build(quotes);
+        ATRIndicator atrIndicator = new ATRIndicator(barSeries, barCount);
+        for (int i = 0; i < quotes.size(); i++) {
+            result.add(new ATR(quotes.get(i).getTimestamp(), atrIndicator.getValue(i).doubleValue()));
         }
         return result;
     }
