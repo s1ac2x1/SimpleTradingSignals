@@ -9,6 +9,7 @@ public enum TaskResultCode {
     NO_DATA_QUOTES,
     NO_DATA_INDICATORS,
     NO_DATA_MACD,
+    SIX_MONTHS_LOW_IS_FAR,
     NO_UPTREND,
     NO_DOWNTREND,
     UPTREND_FAILING,

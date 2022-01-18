@@ -26,7 +26,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_many.txt";
-        Context.singleSymbol = "TER";
+//        Context.singleSymbol = "TER";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -34,31 +34,31 @@ public class Main {
         };
 
         TaskType[] tasks = {
-                MACD_BULLISH_DIVERGENCE,
+                //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_SELL,
                 //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
                 //THREE_DISPLAYS_SELL,
-                //FIRST_TRUST_MODEL
+                FIRST_TRUST_MODEL
         };
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-//        run(timeframes, tasks);
+        run(timeframes, tasks);
 
-        try {
-            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-            Context.stopLossStrategy = stopLossStrategy;
-
-            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-            takeProfitStrategy.setConfig(80);
-            Context.takeProfitStrategy = takeProfitStrategy;
-
-            test(timeframes, tasks);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        try {
+//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+//            Context.stopLossStrategy = stopLossStrategy;
+//
+//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+//            takeProfitStrategy.setConfig(80);
+//            Context.takeProfitStrategy = takeProfitStrategy;
+//
+//            test(timeframes, tasks);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
         // для тестов убирать проверку на мнимальное чисало данных
 
