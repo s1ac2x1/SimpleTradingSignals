@@ -8,6 +8,7 @@ public enum TaskResultCode {
     SIGNAL,
     NO_DATA_QUOTES,
     NO_DATA_INDICATORS,
+    NO_DATA_MACD,
     NO_UPTREND,
     NO_DOWNTREND,
     UPTREND_FAILING,

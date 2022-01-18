@@ -20,7 +20,9 @@ public class FirstTrustModel {
         }
 
         // ищем минимум за последние 6 месяцев в одном из 10 последних столбиков
-
+//        screen_2.quotes.subList(screen_2.quotes.size() - 126, screen_2.quotes.size())
+//                .stream()
+//                .
 
         return new TaskResult(signal, SIGNAL);
     }

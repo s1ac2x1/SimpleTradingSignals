@@ -67,12 +67,12 @@ public class Divergencies {
         if (screen1.indicators.get(Indicator.EMA26) == null || screen1.indicators.get(Indicator.EMA26).isEmpty() || screen1.quotes.size() < screenOneMinBarCount) {
             Log.recordCode(TaskResultCode.NO_DATA_INDICATORS, screen1);
             Log.addDebugLine("Недостаточно данных индикатора EMA26 для " + screen2.timeframe);
-            return null;
+            return new TaskResult(null, NO_DATA_QUOTES);
         }
         if (screen2.quotes.isEmpty() || screen2.quotes.size() < screenOneMinBarCount) {
             Log.recordCode(TaskResultCode.NO_DATA_QUOTES, screen1);
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen2.timeframe);
-            return null;
+            return new TaskResult(null, NO_DATA_QUOTES);
         }
 
         List<Quote> screen1Quotes = screen1.quotes.subList(screen1.quotes.size() - screenOneMinBarCount, screen1.quotes.size());
@@ -84,6 +84,8 @@ public class Divergencies {
         List<MACD> macdAll = screen1.indicators.get(Indicator.MACD);
         List<MACD> macd = macdAll.subList(macdAll.size() - screenOneMinBarCount, macdAll.size());
 
+        Quote lastChartQuote = screen2Quotes.get(screen2Quotes.size() - 1);
+
         if (!ALLOW_ON_BEARISH_TREND) {
             // фильтрация нисходящих трендов
             boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, screenOneMinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
@@ -91,14 +93,14 @@ public class Divergencies {
             if (!uptrendCheckOnMultipleBars) {
                 Log.recordCode(NO_UPTREND, screen1);
                 Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
-                return null;
+                return new TaskResult(lastChartQuote, NO_UPTREND);
             }
         }
 
         List<MACD> screenTwomacdValuesAll = screen2.indicators.get(Indicator.MACD);
         if (screenTwomacdValuesAll.isEmpty()) {
             Log.addDebugLine("Недостаточно данных по MACD");
-            return null;
+            return new TaskResult(lastChartQuote, NO_DATA_MACD);
         }
         List<MACD> screenTwoMacdValues = screenTwomacdValuesAll.subList(screenTwomacdValuesAll.size() - screenTwoMinBarCount, screenTwomacdValuesAll.size());
 
@@ -109,7 +111,7 @@ public class Divergencies {
         if (latestHistogramValue > 0) {
             Log.recordCode(TaskResultCode.LAST_HISTOGRAM_ABOVE_ZERO, screen1);
             Log.addDebugLine("гистограмма у правого края выше нуля");
-            return null;
+            return new TaskResult(lastChartQuote, LAST_HISTOGRAM_ABOVE_ZERO);
         }
 
         // строим массив из котировок с их гистрограммами
@@ -170,7 +172,7 @@ public class Divergencies {
         if (quoteWithHighestHistogramAfterLowestLow.histogramValue <= 0) {
             Log.recordCode(TaskResultCode.BEARISH_BACKBONE_NOT_CRACKED, screen1);
             Log.addDebugLine("не произошло перелома медвежьего хребта");
-            return null;
+            return new TaskResult(lastChartQuote, BEARISH_BACKBONE_NOT_CRACKED);
         }
 
         // какой индекс у максимума
@@ -245,7 +247,7 @@ public class Divergencies {
             if (foundSecondPositive) {
                 Log.recordCode(TaskResultCode.HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS, screen1);
                 Log.addDebugLine("В точке " + beautifyQuoteDate(histogramQuotes.get(indexOfSecondPositive).quote) + " обнаружилась второая положительная область");
-                return null;
+                return new TaskResult(lastChartQuote, HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS);
             }
 
             // это может быть началом тройной дивергенции, если цена продолжает падать
@@ -270,7 +272,7 @@ public class Divergencies {
                     } else {
                         Log.recordCode(HISTOGRAM_ISLANDS_HIGHER_PRICE, screen1);
                         Log.addDebugLine("После дна гистограммы А встретилось несколько положительных областей гистограмм, но у края цена выше, чем в А");
-                        return null;
+                        return new TaskResult(lastChartQuote, HISTOGRAM_ISLANDS_HIGHER_PRICE);
                     }
                 } else {
                     Log.addDebugLine(
@@ -286,7 +288,7 @@ public class Divergencies {
             if (Math.abs(lowestHistogramAfterCrossedZeroFromTop) >= Math.abs(quoteWithLowestHistogram.histogramValue) / 100 * 60) {
                 Log.recordCode(HISTOGRAM_SECOND_BOTTOM_RATIO, screen1);
                 Log.addDebugLine("Второе дно гистограммы больше " + BullishConfig.SECOND_BOTTOM_RATIO + "% глубины первого дна");
-                return null;
+                return new TaskResult(lastChartQuote, HISTOGRAM_SECOND_BOTTOM_RATIO);
             }
 
             // последний столбик гистограммы должен быть меньше предыдущего
@@ -295,7 +297,7 @@ public class Divergencies {
             if (Math.abs(last.histogramValue) >= Math.abs(preLast.histogramValue)) {
                 Log.recordCode(HISTOGRAM_LAST_BAR_NOT_LOWER, screen1);
                 Log.addDebugLine("Последний столбик гистограммы не ниже предыдущего");
-                return null;
+                return new TaskResult(lastChartQuote, HISTOGRAM_LAST_BAR_NOT_LOWER);
             }
 
             // исплючаем длинные хвосты отрицательных гистограмм у правога края, которые часто бывают на нисходящем тренде на более крупном таймфрейме
@@ -303,7 +305,7 @@ public class Divergencies {
             if (tailCount >= BullishConfig.MAX_TAIL_SIZE) {
                 Log.recordCode(NEGATIVE_HISTOGRAMS_LIMIT, screen1);
                 Log.addDebugLine("У правого края скопилось " + tailCount + " отрицательных гистограмм (лимит: " + BullishConfig.MAX_TAIL_SIZE + ")");
-                return null;
+                return new TaskResult(lastChartQuote, NEGATIVE_HISTOGRAMS_LIMIT);
             }
 
             // цена должна образовать новую впадину
