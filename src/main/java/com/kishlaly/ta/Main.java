@@ -21,24 +21,25 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Context.api = ALPHAVANTAGE;
-        //Context.aggregationTimeframe = Timeframe.DAY; // последние 20 лет
-        Context.aggregationTimeframe = Timeframe.HOUR;  // последние 3 месяца
+        Context.aggregationTimeframe = Timeframe.DAY; // последние 20 лет
+//        Context.aggregationTimeframe = Timeframe.HOUR;  // последние 3 месяца
 
         Context.source = "symbols/sp500.txt";
-        //Context.source = "symbols/from_screener.txt";
-        //Context.singleSymbol = "CSCO";
+//        Context.source = "symbols/screener_many.txt";
+        Context.singleSymbol = "CSCO";
 
         Timeframe[][] timeframes = {
-                //{Timeframe.WEEK, Timeframe.DAY},
-                {Timeframe.DAY, Timeframe.HOUR},
+                {Timeframe.WEEK, Timeframe.DAY},
+//                {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_SELL,
-                THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
-                //THREE_DISPLAYS_SELL
+                //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
+                //THREE_DISPLAYS_SELL,
+                FIRST_TRUST_MODEL
         };
 
 //        buildCache(timeframes, tasks, false);
