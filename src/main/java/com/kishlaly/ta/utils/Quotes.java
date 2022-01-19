@@ -3,6 +3,7 @@ package com.kishlaly.ta.utils;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.Timeframe;
 
+import java.sql.SQLOutput;
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -127,6 +128,10 @@ public class Quotes {
     private static void collectDayQuote(List<Quote> hourQuotesInsideOneDay, List<Quote> dayQuotes) {
         List<Quote> dayQuotesSorted = new ArrayList<>(hourQuotesInsideOneDay);
         Collections.sort(dayQuotesSorted, Comparator.comparing(Quote::getTimestamp));
+        if (dayQuotesSorted.isEmpty()) {
+            System.out.println("Warning: hourQuotesInsideOneDay is empty");
+            return;
+        }
         long timestamp = dayQuotesSorted.get(0).getTimestamp();
         double high = dayQuotesSorted.stream().mapToDouble(q -> q.getHigh()).max().getAsDouble();
         double open = dayQuotesSorted.get(0).getOpen();
