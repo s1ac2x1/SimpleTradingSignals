@@ -12,7 +12,8 @@ import java.util.function.BiFunction;
 public enum StopLossStrategy {
 
     FIXED(StopLossStrategy::calculateWithFixedPrice, 0.27, false),
-    VOLATILE_ATR(StopLossStrategy::calculateVolativeATR, null, true); // двигается вниз !!!
+    VOLATILE_ATR(StopLossStrategy::calculateVolativeATR, null, true), // двигается вниз, поэтому проверять дополнительно при тестах
+    VOLATILE_LOCAL_MIN(StopLossStrategy::volatileLocalMin, 0.27, true);
 
     private BiFunction<SymbolData, Integer, Double> calculation;
     private Object config;
@@ -32,8 +33,8 @@ public enum StopLossStrategy {
         switch (this) {
             case FIXED:
                 return String.valueOf((double) config);
-            case VOLATILE_ATR:
-                return "";
+            case VOLATILE_LOCAL_MIN:
+                return String.valueOf((double) config);
             default:
                 return "";
         }
@@ -47,18 +48,26 @@ public enum StopLossStrategy {
         return this.isVolatile;
     }
 
-    // SL выбирается на N центов ниже самого низкого quote.low из десяти столбиков перед сигнальной котировкой
+    // SL выбирается на N центов ниже самого низкого quote.low из N столбиков перед сигнальной котировкой
     private static double calculateWithFixedPrice(SymbolData data, int signalIndex) {
-        Quote quoteWithMinimalLow = data.quotes.subList(signalIndex - 10, signalIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
+        Quote quoteWithMinimalLow = data.quotes.subList(signalIndex - 20, signalIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
         double distance = (double) FIXED.config;
         return quoteWithMinimalLow.getLow() - distance;
     }
 
     // SL = Current low – (2 × ATR)
-    private static double calculateVolativeATR(SymbolData data, int signalIndex) {
-        Quote signal = data.quotes.get(signalIndex);
+    private static double calculateVolativeATR(SymbolData data, int currentQuoteIndex) {
+        Quote signal = data.quotes.get(currentQuoteIndex);
         List<ATR> atrs = IndicatorUtils.buildATR(data.quotes, 22);
-        return signal.getLow() - (2 * atrs.get(signalIndex).getValue());
+        return signal.getLow() - (2 * atrs.get(currentQuoteIndex).getValue());
     }
+
+    // SL выбирается на N центов ниже самого низкого quote.low из N столбиков перед текущей котировкой
+    private static double volatileLocalMin(SymbolData data, int currentQuoteIndex) {
+        Quote quoteWithMinimalLow = data.quotes.subList(currentQuoteIndex - 5, currentQuoteIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
+        double distance = (double) VOLATILE_LOCAL_MIN.config;
+        return quoteWithMinimalLow.getLow() - distance;
+    }
+
 
 }

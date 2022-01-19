@@ -25,7 +25,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_many.txt";
-        Context.singleSymbol = "AAPL";
+        Context.singleSymbol = "TER";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -47,7 +47,7 @@ public class Main {
 //        run(timeframes, tasks);
 
         try {
-            StopLossStrategy stopLossStrategy = StopLossStrategy.VOLATILE_ATR;
+            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
             Context.stopLossStrategy = stopLossStrategy;
 
             TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
