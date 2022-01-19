@@ -19,7 +19,7 @@ public class EMA {
 
     public EMA(final Long timestamp, final Double value) {
         this.timestamp = timestamp;
-        this.value = Numbers.round(value);
+        this.value = value;
         this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
         this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
     }

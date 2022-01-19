@@ -24,7 +24,7 @@ public class MACD {
         this.timestamp = timestamp;
         this.macd = macd;
         this.signal = signal;
-        this.histogram = Numbers.round(histogram);
+        this.histogram = histogram;
         this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
         this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
     }

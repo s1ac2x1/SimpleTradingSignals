@@ -25,7 +25,7 @@ public class Main {
 
 //        Context.source = "symbols/sp500.txt";
         Context.source = "symbols/screener_2.txt";
-//        Context.singleSymbol = "LEE";
+//        Context.singleSymbol = "AAPL";
 
         Timeframe[][] timeframes = {
 //                {Timeframe.WEEK, Timeframe.DAY},
@@ -62,6 +62,8 @@ public class Main {
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
+
+        // re-check everything W-D and W-H
 
         // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
         // первый экран - подумать

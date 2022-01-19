@@ -37,7 +37,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarCount;
 public class Divergencies {
 
     public static class BullishConfig {
-        public static boolean ALLOW_ON_BEARISH_TREND;
+        public static boolean ALLOW_ON_BEARISH_TREND = true; // часто дивергенции бывают на горизонтальных долгосрочных трендах
         public static boolean ALLOW_MULTIPLE_ISLANDS = true;
         public static int MAX_TAIL_SIZE = 7;
         public static int SECOND_BOTTOM_RATIO = 80;
@@ -316,10 +316,12 @@ public class Divergencies {
             } else {
                 Log.recordCode(DIVERGENCE_FAIL_AT_ZERO, screen1);
                 Log.addDebugLine("Нету дивергенции: на спуске к нулю от В цена выше, чем в А");
+                return new TaskResult(lastChartQuote, DIVERGENCE_FAIL_AT_ZERO);
             }
         } else {
             Log.recordCode(DIVERGENCE_FAIL_AT_TOP, screen1);
             Log.addDebugLine("гистограмма не опустилась от вершины B");
+            return new TaskResult(lastChartQuote, DIVERGENCE_FAIL_AT_TOP);
         }
 
         return new TaskResult(result, SIGNAL);

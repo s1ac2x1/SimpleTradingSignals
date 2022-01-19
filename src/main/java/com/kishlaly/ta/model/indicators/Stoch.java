@@ -20,8 +20,8 @@ public class Stoch {
 
     public Stoch(final Long timestamp, final Double slowD, final Double slowK) {
         this.timestamp = timestamp;
-        this.slowD = Numbers.round(slowD);
-        this.slowK = Numbers.round(slowK);
+        this.slowD = slowD;
+        this.slowK = slowK;
         this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
         this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
     }
