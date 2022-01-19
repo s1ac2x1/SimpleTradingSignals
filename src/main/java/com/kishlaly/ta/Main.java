@@ -23,9 +23,9 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 //        Context.aggregationTimeframe = Timeframe.HOUR;
 
-        Context.source = "symbols/sp500.txt";
-//        Context.source = "symbols/screener_many.txt";
-        Context.singleSymbol = "TER";
+//        Context.source = "symbols/sp500.txt";
+        Context.source = "symbols/screener_2.txt";
+//        Context.singleSymbol = "LEE";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -36,32 +36,28 @@ public class Main {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_SELL,
-                THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
+                //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
                 //THREE_DISPLAYS_SELL,
                 //FIRST_TRUST_MODEL
         };
 
-//        buildCache(timeframes, tasks, false);
+        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
 //        run(timeframes, tasks);
 
-        try {
-            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-            Context.stopLossStrategy = stopLossStrategy;
-
-            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-            takeProfitStrategy.setConfig(80);
-            Context.takeProfitStrategy = takeProfitStrategy;
-
-            test(timeframes, tasks);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        // подправить TaskTester, чтобы волатильный стоп не двигался вниз
-
-        // что не так с MACD_BULLISH_DIVERGENCE ?
+//        try {
+//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+//            Context.stopLossStrategy = stopLossStrategy;
+//
+//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+//            takeProfitStrategy.setConfig(80);
+//            Context.takeProfitStrategy = takeProfitStrategy;
+//
+//            test(timeframes, tasks);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
         // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
         // первый экран - подумать
