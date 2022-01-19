@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
 public enum StopLossStrategy {
 
     FIXED(StopLossStrategy::calculateWithFixedPrice, 0.27, false),
-    VOLATILE_ATR(StopLossStrategy::calculateVolativeATR, null, true);
+    VOLATILE_ATR(StopLossStrategy::calculateVolativeATR, null, true); // двигается вниз !!!
 
     private BiFunction<SymbolData, Integer, Double> calculation;
     private Object config;

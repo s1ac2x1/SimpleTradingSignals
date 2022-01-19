@@ -288,7 +288,7 @@ public class TaskTester {
                     closePositionCost = closingPositionSize;
                     break;
                 }
-                if (stopLossStrategy.isVolatile()) {
+                if (stopLossStrategy.isVolatile() && stopLossStrategy.calculate(data, startPositionIndex) > stopLoss) {
                     stopLoss = stopLossStrategy.calculate(data, startPositionIndex);
                 }
             }

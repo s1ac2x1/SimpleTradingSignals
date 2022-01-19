@@ -25,7 +25,7 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_many.txt";
-        Context.singleSymbol = "TER";
+        Context.singleSymbol = "AAPL";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -47,7 +47,7 @@ public class Main {
 //        run(timeframes, tasks);
 
         try {
-            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+            StopLossStrategy stopLossStrategy = StopLossStrategy.VOLATILE_ATR;
             Context.stopLossStrategy = stopLossStrategy;
 
             TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
@@ -59,11 +59,9 @@ public class Main {
             System.out.println(e);
         }
 
-        // сравнить тесты, когда обе %K и %D стохастика проверяются на перепродданность, а не толко одна
+        // подправить TaskTester, чтобы волатильный стоп не двигался вниз
 
         // что не так с MACD_BULLISH_DIVERGENCE ?
-
-        // [D] AAPL 15 Nov 2021 - есть ли сигнал?
 
         // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
         // первый экран - подумать
