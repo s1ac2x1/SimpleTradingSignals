@@ -28,12 +28,23 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarCount;
 public class ThreeDisplays {
 
     public static class Config {
-        public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 4; // 3 дает меньше сигналов, но они надежнее
-        public static int multiplier = 2; // для поиска аномально длинных баров
+
+        // 3 дает меньше сигналов, но они надежнее
+        public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 4;
+
+        // для поиска аномально длинных баров
+        public static int multiplier = 2;
+
         public static int STOCH_OVERSOLD = 30;
         public static int STOCH_OVERBOUGHT = 70;
         public static int STOCH_VALUES_TO_CHECK = 5;
-        public static int FILTER_BY_KELTNER = 40; // в процентах от середины до вершины канала
+
+        // в процентах от середины до вершины канала
+        public static int FILTER_BY_KELTNER = 40;
+
+        // фильтрация сигналов, если котировка закрылась выше FILTER_BY_KELTNER
+        // тесты показывают результат лучше, когда эта проверка выключена
+        public static boolean FILTER_BY_KELTNER_ENABLED;
     }
 
     public static TaskResult buySignal(SymbolData screen_1, SymbolData screen_2) {
@@ -458,17 +469,19 @@ public class ThreeDisplays {
         }
 
         // фильтрация поздних входов, когда столбик закрылся выше FILTER_BY_KELTNER
-        Keltner lastKeltnerData = screen_2_Keltner.get(screen_2_MinBarCount - 1);
-        double lastQuoteClose = lastQuote.getClose();
-        double middle = lastKeltnerData.getMiddle();
-        double top = lastKeltnerData.getTop();
-        double diff = top - middle;
-        double ratio = diff / 100 * FILTER_BY_KELTNER;
-        double maxAllowedCloseValue = middle + ratio;
-        if (lastQuoteClose >= maxAllowedCloseValue) {
-            Log.addDebugLine("Последняя котировка закрылась выше " + FILTER_BY_KELTNER + "% расстояния от середины до вершины канала");
-            Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE, screen_2);
-            return new TaskResult(lastChartQuote, QUOTE_CLOSED_ABOVE_KELTNER_RULE);
+        if (FILTER_BY_KELTNER_ENABLED) {
+            Keltner lastKeltnerData = screen_2_Keltner.get(screen_2_MinBarCount - 1);
+            double lastQuoteClose = lastQuote.getClose();
+            double middle = lastKeltnerData.getMiddle();
+            double top = lastKeltnerData.getTop();
+            double diff = top - middle;
+            double ratio = diff / 100 * FILTER_BY_KELTNER;
+            double maxAllowedCloseValue = middle + ratio;
+            if (lastQuoteClose >= maxAllowedCloseValue) {
+                Log.addDebugLine("Последняя котировка закрылась выше " + FILTER_BY_KELTNER + "% расстояния от середины до вершины канала");
+                Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE, screen_2);
+                return new TaskResult(lastChartQuote, QUOTE_CLOSED_ABOVE_KELTNER_RULE);
+            }
         }
 
         //попробовать посчитать среднюю длину баров и сравнить с ней последние три

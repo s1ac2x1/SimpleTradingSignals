@@ -1,11 +1,15 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.testing.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.ABC_BUY;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
+import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 
 /**
@@ -19,9 +23,9 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 //        Context.aggregationTimeframe = Timeframe.HOUR;
 
-        Context.source = "symbols/sp500.txt";
-//        Context.source = "symbols/screener_2.txt";
-//        Context.singleSymbol = "AAPL";
+//        Context.source = "symbols/sp500.txt";
+        Context.source = "symbols/screener_2.txt";
+        Context.singleSymbol = "KBR";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -32,32 +36,32 @@ public class Main {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_SELL,
-                //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
+                THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
                 //FIRST_TRUST_MODEL,
-                ABC_BUY
+                //ABC_BUY
         };
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-        try {
-            run(timeframes, tasks);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
 //        try {
-//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-//            Context.stopLossStrategy = stopLossStrategy;
-//
-//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-//            takeProfitStrategy.setConfig(80);
-//            Context.takeProfitStrategy = takeProfitStrategy;
-//
-//            test(timeframes, tasks);
+//            run(timeframes, tasks);
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
+
+        try {
+            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+            Context.stopLossStrategy = stopLossStrategy;
+
+            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+            takeProfitStrategy.setConfig(80);
+            Context.takeProfitStrategy = takeProfitStrategy;
+
+            test(timeframes, tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         // проверить стратегию ABC от Элдера
 
