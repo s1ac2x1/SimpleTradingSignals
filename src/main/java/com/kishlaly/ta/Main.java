@@ -1,16 +1,12 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.analyze.testing.StopLossStrategy;
-import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.*;
-import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.analyze.TaskType.ABC_BUY;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
-import static com.kishlaly.ta.cache.CacheReader.checkCache;
 
 /**
  * @author Vladimir Kishlaly
@@ -20,25 +16,25 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-//        Context.aggregationTimeframe = Timeframe.DAY;
-        Context.aggregationTimeframe = Timeframe.HOUR;
+        Context.aggregationTimeframe = Timeframe.DAY;
+//        Context.aggregationTimeframe = Timeframe.HOUR;
 
-//        Context.source = "symbols/sp500.txt";
-        Context.source = "symbols/screener_2.txt";
+        Context.source = "symbols/sp500.txt";
+//        Context.source = "symbols/screener_2.txt";
 //        Context.singleSymbol = "AAPL";
 
         Timeframe[][] timeframes = {
-//                {Timeframe.WEEK, Timeframe.DAY},
-                {Timeframe.DAY, Timeframe.HOUR},
+                {Timeframe.WEEK, Timeframe.DAY},
+//                {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
+                //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_SELL,
                 //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
-                //THREE_DISPLAYS_SELL,
-                //FIRST_TRUST_MODEL
+                //FIRST_TRUST_MODEL,
+                ABC_BUY
         };
 
 //        buildCache(timeframes, tasks, false);
@@ -63,7 +59,9 @@ public class Main {
 //            System.out.println(e);
 //        }
 
-        // re-check everything W-D and W-H
+        // проверить стратегию ABC от Элдера
+
+        // стратегии поиска свечных моделей
 
         // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
         // первый экран - подумать
@@ -87,6 +85,10 @@ public class Main {
 
         // добавить в дивергенции расчет EFI, тогда, может быть, не придется фильтровать по SECOND_BOTTOM_RATIO ?
         // если EFI покажет правильную дивергенцию, которая подтверждает сигналы МАСD, то стоит обратить на это внимание
+
+        // реализовать тестирование шортов
+
+        // реализовать проверку медвежьей дивергенции
 
     }
 
