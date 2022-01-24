@@ -7,8 +7,7 @@ import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.ABC_BUY;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
+import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 
@@ -23,9 +22,9 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 //        Context.aggregationTimeframe = Timeframe.HOUR;
 
-//        Context.source = "symbols/sp500.txt";
-        Context.source = "symbols/screener_2.txt";
-        Context.singleSymbol = "KBR";
+        Context.source = "symbols/sp500.txt";
+//        Context.source = "symbols/screener_2.txt";
+        Context.singleSymbol = "MSFT";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -63,9 +62,9 @@ public class Main {
             System.out.println(e);
         }
 
-        // проверить стратегию ABC от Элдера
+        // что там все-таки за третий экран у Элдера? как его использовать? подозреваю, что пригодятся часовые графики
 
-        // стратегии поиска свечных моделей
+        // проверить стратегию ABC от Элдера
 
         // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
         // первый экран - подумать
@@ -77,6 +76,8 @@ public class Main {
         //    последние два бара полностью ниже ЕМА13
         // вход на 7 центов выше закрытия последнего бара
         // TP на середине верхней половины канала Кельтнера
+
+        // стратегии поиска свечных моделей
 
         // [D] INFO 4 Mar 2021
         // BK https://drive.google.com/file/d/14PlpZMZV7lwsIwP2V7bww0LKSVjdn70Q/view?usp=sharing и https://drive.google.com/file/d/1-a0ZtMuLQyuamez_402v6YkViNWzY6RS/view?usp=sharing

@@ -84,7 +84,7 @@ public enum TaskType {
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
             ABC::buySignal
-    );
+    ); // 6
 
 
     TaskType(final Map<Integer, Timeframe> timeframes,
