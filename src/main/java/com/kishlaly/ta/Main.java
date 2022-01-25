@@ -19,14 +19,12 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Context.trendCheckIncludeHistogram = false;
-
         Context.aggregationTimeframe = Timeframe.DAY;
 //        Context.aggregationTimeframe = Timeframe.HOUR;
 
         Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_2.txt";
-        Context.singleSymbol = "AAPL";
+//        Context.singleSymbol = "TER";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -45,24 +43,24 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-//        try {
-//            run(timeframes, tasks);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-
         try {
-            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-            Context.stopLossStrategy = stopLossStrategy;
-
-            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-            takeProfitStrategy.setConfig(80);
-            Context.takeProfitStrategy = takeProfitStrategy;
-
-            test(timeframes, tasks);
+            run(timeframes, tasks);
         } catch (Exception e) {
             System.out.println(e);
         }
+
+//        try {
+//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+//            Context.stopLossStrategy = stopLossStrategy;
+//
+//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+//            takeProfitStrategy.setConfig(80);
+//            Context.takeProfitStrategy = takeProfitStrategy;
+//
+//            test(timeframes, tasks);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
         // если не проверять гистограмму при проверке тренда на первом экране?
         // будет ли тогда сигнал у [D] MSFT 5 Oct 2021 у THREE_DISPLAYS_BUY_TYPE2 ?
