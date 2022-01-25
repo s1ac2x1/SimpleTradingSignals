@@ -44,4 +44,7 @@ public class Context {
     public static double lots = 100;
     public static StopLossStrategy stopLossStrategy = FIXED;
     public static TakeProfitStrategy takeProfitStrategy = KELTNER;
+
+    // разное
+    public static boolean trendCheckIncludeHistogram = true;
 }

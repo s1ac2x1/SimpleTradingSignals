@@ -19,12 +19,14 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        Context.trendCheckIncludeHistogram = false;
+
         Context.aggregationTimeframe = Timeframe.DAY;
 //        Context.aggregationTimeframe = Timeframe.HOUR;
 
         Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_2.txt";
-        Context.singleSymbol = "MSFT";
+        Context.singleSymbol = "AAPL";
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -61,6 +63,9 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        // если не проверять гистограмму при проверке тренда на первом экране?
+        // будет ли тогда сигнал у [D] MSFT 5 Oct 2021 у THREE_DISPLAYS_BUY_TYPE2 ?
 
         // что там все-таки за третий экран у Элдера? как его использовать? подозреваю, что пригодятся часовые графики
 

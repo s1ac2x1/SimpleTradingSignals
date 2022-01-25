@@ -151,7 +151,8 @@ public class TaskTester {
 
     private static String formatTestingSummary(HistoricalTesting testing) {
         String result = "";
-        result += "SL: " + testing.getStopLossStrategy().name() + ", " + testing.getStopLossStrategy().printConfig() + System.lineSeparator();
+        result += "trendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
+        result += "\tSL: " + testing.getStopLossStrategy().name() + ", " + testing.getStopLossStrategy().printConfig() + System.lineSeparator();
         result += "\tTP: " + testing.getTakeProfitStrategy().name() + ", " + testing.getTakeProfitStrategy().printConfig() + System.lineSeparator();
         result += "\tTP/SL = " + testing.getProfitablePositionsCount() + "/" + testing.getLossPositionsCount() + " = ";
         result += testing.getSuccessfulRatio() + "% / " + testing.getLossRatio() + "%" + System.lineSeparator();

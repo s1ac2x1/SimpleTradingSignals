@@ -5,6 +5,7 @@ import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.utils.Context;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -114,24 +115,26 @@ public class TrendFunctions {
             }
         }
 
-        int histogramMovement1 = 0;
-        int histogramMovement2 = 0;
-        boolean macdMovingConstantly = false;
-        for (int i = macd.size() - barsToCheck; i < macd.size() - 1; i++) {
-            Double curr = macd.get(i).getHistogram();
-            Double next = macd.get(i + 1).getHistogram();
-            if (histogramCheck1.apply(curr, next)) {
-                histogramMovement1++;
+        if (Context.trendCheckIncludeHistogram) {
+            int histogramMovement1 = 0;
+            int histogramMovement2 = 0;
+            boolean macdMovingConstantly = false;
+            for (int i = macd.size() - barsToCheck; i < macd.size() - 1; i++) {
+                Double curr = macd.get(i).getHistogram();
+                Double next = macd.get(i + 1).getHistogram();
+                if (histogramCheck1.apply(curr, next)) {
+                    histogramMovement1++;
+                }
+                if (histogramCheck2.apply(curr, next)) {
+                    histogramMovement2++;
+                }
             }
-            if (histogramCheck2.apply(curr, next)) {
-                histogramMovement2++;
-            }
-        }
 
-        macdMovingConstantly = histogramMovement1 == (barsToCheck - 1);
-        if (!macdMovingConstantly) {
-            if (histogramMovement2 == (barsToCheck - 1)) {
-                return false;
+            macdMovingConstantly = histogramMovement1 == (barsToCheck - 1);
+            if (!macdMovingConstantly) {
+                if (histogramMovement2 == (barsToCheck - 1)) {
+                    return false;
+                }
             }
         }
 
