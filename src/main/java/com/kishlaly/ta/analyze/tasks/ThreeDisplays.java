@@ -498,6 +498,164 @@ public class ThreeDisplays {
         return new TaskResult(lastQuote, SIGNAL);
     }
 
+    // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
+    // первый экран - подумать TODO
+    // второй экран -
+    //    перепроданность ниже 20 у трех значений медленной линии стохастика и она повышается
+    //    последние три столбика гистограммы повышаются
+    //    два из трех последних баров зеленые
+    //    последние два бара повышаются (quote.low & quote.high)
+    //    последние два бара полностью ниже ЕМА13
+    // вход на 7 центов выше закрытия последнего бара
+    // TP на середине верхней половины канала Кельтнера
+    public static TaskResult buySignalType3(SymbolData screen_1, SymbolData screen_2) {
+
+        int screen_1_MinBarCount = resolveMinBarCount(screen_1.timeframe);
+        int screen_2_MinBarCount = resolveMinBarCount(screen_2.timeframe);
+
+        if (screen_1.quotes.isEmpty() || screen_1.quotes.size() < screen_1_MinBarCount) {
+            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_1.timeframe.name());
+            Log.recordCode(NO_DATA_QUOTES, screen_1);
+            return new TaskResult(null, NO_DATA_QUOTES);
+        }
+        if (screen_2.quotes.isEmpty() || screen_2.quotes.size() < screen_2_MinBarCount) {
+            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_2.timeframe.name());
+            Log.recordCode(NO_DATA_QUOTES, screen_2);
+            return new TaskResult(null, NO_DATA_QUOTES);
+        }
+
+        List<Indicator> missingData = new ArrayList<>();
+        screen_1.indicators.forEach((indicator, value) -> {
+            if (value.isEmpty() || value.size() < screen_1_MinBarCount) {
+                missingData.add(indicator);
+            }
+        });
+        screen_2.indicators.forEach((indicator, value) -> {
+            if (value.isEmpty() || value.size() < screen_2_MinBarCount) {
+                missingData.add(indicator);
+            }
+        });
+        if (!missingData.isEmpty()) {
+            Log.recordCode(NO_DATA_INDICATORS, screen_1);
+            Log.recordCode(NO_DATA_INDICATORS, screen_2);
+            Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
+            return new TaskResult(null, NO_DATA_INDICATORS);
+        }
+
+        List<Quote> screen_1_Quotes = screen_1.quotes.subList(screen_1.quotes.size() - screen_1_MinBarCount, screen_1.quotes.size());
+        List<Quote> screen_2_Quotes = screen_2.quotes.subList(screen_2.quotes.size() - screen_2_MinBarCount, screen_2.quotes.size());
+
+        List<EMA> screen_1_EMA26 = screen_1.indicators.get(EMA26);
+        screen_1_EMA26 = screen_1_EMA26.subList(screen_1_EMA26.size() - screen_1_MinBarCount, screen_1_EMA26.size());
+
+        List<MACD> screen_1_MACD = screen_1.indicators.get(MACD);
+        screen_1_MACD = screen_1_MACD.subList(screen_1_MACD.size() - screen_1_MinBarCount, screen_1_MACD.size());
+
+        List<EMA> screen_2_EMA13 = screen_2.indicators.get(Indicator.EMA13);
+        screen_2_EMA13 = screen_2_EMA13.subList(screen_2_EMA13.size() - screen_2_MinBarCount, screen_2_EMA13.size());
+
+        List<MACD> screen_2_MACD = screen_2.indicators.get(Indicator.MACD);
+        screen_2_MACD = screen_2_MACD.subList(screen_2_MACD.size() - screen_2_MinBarCount, screen_2_MACD.size());
+
+        List<Stoch> screen_2_Stochastic = screen_2.indicators.get(Indicator.STOCH);
+        screen_2_Stochastic = screen_2_Stochastic.subList(screen_2_Stochastic.size() - screen_2_MinBarCount, screen_2_Stochastic.size());
+
+        List<Keltner> screen_2_Keltner = screen_2.indicators.get(KELTNER);
+        screen_2_Keltner = screen_2_Keltner.subList(screen_2_Keltner.size() - screen_2_MinBarCount, screen_2_Keltner.size());
+
+        // первый экран
+
+//        // проверка тренда
+//        boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen_1, screen_1_MinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
+//        //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen_1); плохая проверка
+//        Quote lastChartQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
+//        if (!uptrendCheckOnMultipleBars) {
+//            Log.recordCode(NO_UPTREND, screen_1);
+//            Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
+//            return new TaskResult(lastChartQuote, NO_UPTREND);
+//        }
+//
+//        // На первом экране последние 4 Quote.low не должны понижаться
+//        // (эта проверка уже есть в Functions.isUptrend, но пусть тут тоже будет)
+//        Quote q4 = screen_1_Quotes.get(screen_1_MinBarCount - 4);
+//        Quote q3 = screen_1_Quotes.get(screen_1_MinBarCount - 3);
+//        Quote q2 = screen_1_Quotes.get(screen_1_MinBarCount - 2);
+//        Quote q1 = screen_1_Quotes.get(screen_1_MinBarCount - 1);
+//        if (q4.getLow() >= q3.getLow() && q3.getLow() >= q2.getLow() && q2.getLow() >= q1.getLow()) {
+//            // допустимо только, если последний столбик зеленый
+//            if (q1.getClose() < q1.getOpen()) {
+//                Log.recordCode(UPTREND_FAILING, screen_1);
+//                Log.addDebugLine("Последние 4 столбика на первом экране понижаются");
+//                return new TaskResult(lastChartQuote, UPTREND_FAILING);
+//            } else {
+//                Log.addDebugLine("Последние 4 столбика на первом экране понижаются, но крайний правый закрылся выше открытия");
+//            }
+//        }
+
+        // второй экран
+
+        Quote lastChartQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
+
+        // перепроданность ниже 20 у трех значений медленной линии стохастика и она повышается
+        Stoch stoch3 = screen_2_Stochastic.get(screen_2_MinBarCount - 3);
+        Stoch stoch2 = screen_2_Stochastic.get(screen_2_MinBarCount - 2);
+        Stoch stoch1 = screen_2_Stochastic.get(screen_2_MinBarCount - 1);
+        boolean oversold = stoch3.getSlowD() < 20 && stoch2.getSlowD() < 20 && stoch1.getSlowD() < 20;
+        if (!oversold) {
+            Log.recordCode(STOCH_WAS_NOT_OVERSOLD_RECENTLY, screen_2);
+            Log.addDebugLine("Три последних значения %D стохастика не ниже 20");
+            return new TaskResult(lastChartQuote, STOCH_WAS_NOT_OVERSOLD_RECENTLY);
+        }
+        boolean stochAscending = stoch3.getSlowD() < stoch2.getSlowD() && stoch2.getSlowD() < stoch1.getSlowD();
+        if (!stochAscending) {
+            Log.recordCode(STOCH_NOT_ASCENDING, screen_2);
+            Log.addDebugLine("Три последних значения %D стохастика не повышаются");
+            return new TaskResult(lastChartQuote, STOCH_NOT_ASCENDING);
+        }
+
+        // последние три столбика гистограммы повышаются
+        MACD macd3 = screen_2_MACD.get(screen_2_MinBarCount - 3);
+        MACD macd2 = screen_2_MACD.get(screen_2_MinBarCount - 2);
+        MACD macd1 = screen_2_MACD.get(screen_2_MinBarCount - 1);
+        boolean histogramAscending = macd3.getHistogram() < macd2.getHistogram() && macd2.getHistogram() < macd1.getHistogram();
+        if (!histogramAscending) {
+            Log.recordCode(HISTOGRAM_NOT_ASCENDING, screen_2);
+            Log.addDebugLine("Три последних столбика гистограммы MACD не повышаются");
+            return new TaskResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING);
+        }
+
+        // два из трех последних баров зеленые
+        Quote quote2 = screen_2_Quotes.get(screen_2_MinBarCount - 2);
+        Quote quote1 = screen_2_Quotes.get(screen_2_MinBarCount - 1);
+        boolean quote2Green = quote2.getClose() > quote2.getOpen();
+        boolean quote1Green = quote1.getClose() > quote1.getOpen();
+        if (!quote2Green || !quote1Green) {
+            Log.recordCode(QUOTE_NOT_GREEN, screen_2);
+            Log.addDebugLine("Одна или две последних котировки не зеленые");
+            return new TaskResult(lastChartQuote, QUOTE_NOT_GREEN);
+        }
+
+        // последние два бара повышаются (quote.low & quote.high)
+        boolean lowAndHightAscending = quote2.getLow() < quote1.getLow() && quote2.getHigh() < quote1.getHigh();
+        if (!lowAndHightAscending) {
+            Log.recordCode(LAST_QUOTES_NOT_ASCENDING, screen_2);
+            Log.addDebugLine("Последние две котировки не растут последовательно");
+            return new TaskResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING);
+        }
+
+        // последние два бара полностью ниже ЕМА13
+        EMA ema13_2 = screen_2_EMA13.get(screen_2_MinBarCount - 2);
+        EMA ema13_1 = screen_2_EMA13.get(screen_2_MinBarCount - 1);
+        boolean lastQuotesBelowEMA = quote2.getHigh() < ema13_2.getValue() && quote1.getHigh() < ema13_1.getValue();
+        if (!lastQuotesBelowEMA) {
+            Log.recordCode(QUOTES_NOT_BELOW_EMA, screen_2);
+            Log.addDebugLine("Последние две котировки не ниже EMA13");
+            return new TaskResult(lastChartQuote, QUOTES_NOT_BELOW_EMA);
+        }
+
+        return new TaskResult(lastChartQuote, SIGNAL);
+    }
+
     public static TaskResult sellSignal(SymbolData screen_1, SymbolData screen_2) {
 
         int screen_1_MinBarCount = resolveMinBarCount(screen_1.timeframe);
