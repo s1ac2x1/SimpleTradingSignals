@@ -19,16 +19,16 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Context.aggregationTimeframe = Timeframe.DAY;
-//        Context.aggregationTimeframe = Timeframe.HOUR;
+//        Context.aggregationTimeframe = Timeframe.DAY;
+        Context.aggregationTimeframe = Timeframe.HOUR;
 
         Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_2.txt";
 //        Context.singleSymbol = "TER";
 
         Timeframe[][] timeframes = {
-                {Timeframe.WEEK, Timeframe.DAY},
-//                {Timeframe.DAY, Timeframe.HOUR},
+//                {Timeframe.WEEK, Timeframe.DAY},
+                {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
@@ -40,14 +40,14 @@ public class Main {
                 //ABC_BUY
         };
 
-//        buildCache(timeframes, tasks, false);
+        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-        try {
-            run(timeframes, tasks);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        try {
+//            run(timeframes, tasks);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
 //        try {
 //            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
@@ -62,10 +62,7 @@ public class Main {
 //            System.out.println(e);
 //        }
 
-        // если не проверять гистограмму при проверке тренда на первом экране?
-        // будет ли тогда сигнал у [D] MSFT 5 Oct 2021 у THREE_DISPLAYS_BUY_TYPE2 ?
-
-        // что там все-таки за третий экран у Элдера? как его использовать? подозреваю, что пригодятся часовые графики
+        // погонять тестирование на часовых графиках и особенно проверить THREE_DISPLAYS_BUY_TYPE2
 
         // проверить стратегию ABC от Элдера
 
