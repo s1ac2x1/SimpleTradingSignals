@@ -72,8 +72,8 @@ public class CacheReader {
 
     public static Set<String> getSymbols() {
         List<String> stocksRaw = new ArrayList<>();
-        if (Context.singleSymbol != null) {
-            stocksRaw.add(Context.singleSymbol);
+        if (!Context.testOnly.isEmpty()) {
+            stocksRaw.addAll(Context.testOnly);
         } else {
             try {
                 stocksRaw = Files.readAllLines(new File(Context.source).toPath(),

@@ -4,6 +4,9 @@ import com.kishlaly.ta.analyze.testing.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.kishlaly.ta.analyze.testing.StopLossStrategy.FIXED;
 import static com.kishlaly.ta.analyze.testing.TakeProfitStrategy.KELTNER;
 
@@ -20,7 +23,7 @@ public class Context {
     public static Timeframe timeframe = Timeframe.DAY; // по умолчению для тестов
     public static Timeframe aggregationTimeframe = Timeframe.DAY; // на основе этого таймфрема агрегируются другие котировки
     public static String source;
-    public static String singleSymbol;
+    public static List<String> testOnly = new ArrayList<>();
 
     // чтобы конвертировать в мою таймзону и сравнивать с графиками TradingView
     public static String myTimezone = "Europe/Berlin";

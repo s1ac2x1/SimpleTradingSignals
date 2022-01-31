@@ -6,10 +6,11 @@ import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
+import java.util.ArrayList;
+
 import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.*;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 
 /**
  * @author Vladimir Kishlaly
@@ -19,16 +20,19 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-//        Context.aggregationTimeframe = Timeframe.DAY;
-        Context.aggregationTimeframe = Timeframe.HOUR;
+        Context.aggregationTimeframe = Timeframe.DAY;
+//        Context.aggregationTimeframe = Timeframe.HOUR;
 
-        Context.source = "symbols/sp500.txt";
-//        Context.source = "symbols/screener_2.txt";
-//        Context.singleSymbol = "TER";
+//        Context.source = "symbols/sp500.txt";
+        Context.source = "symbols/screener_2.txt";
+        Context.testOnly = new ArrayList<String>() {{
+            add("TER");
+            add("AAPL");
+        }};
 
         Timeframe[][] timeframes = {
-//                {Timeframe.WEEK, Timeframe.DAY},
-                {Timeframe.DAY, Timeframe.HOUR},
+                {Timeframe.WEEK, Timeframe.DAY},
+//                {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
@@ -40,7 +44,7 @@ public class Main {
                 //ABC_BUY
         };
 
-        buildCache(timeframes, tasks, false);
+//        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
 //        try {
@@ -49,20 +53,22 @@ public class Main {
 //            System.out.println(e);
 //        }
 
-//        try {
-//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-//            Context.stopLossStrategy = stopLossStrategy;
-//
-//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-//            takeProfitStrategy.setConfig(80);
-//            Context.takeProfitStrategy = takeProfitStrategy;
-//
-//            test(timeframes, tasks);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
+        try {
+            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+            Context.stopLossStrategy = stopLossStrategy;
 
-        // погонять тестирование на часовых графиках и особенно проверить THREE_DISPLAYS_BUY_TYPE2
+            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+            takeProfitStrategy.setConfig(80);
+            Context.takeProfitStrategy = takeProfitStrategy;
+
+            test(timeframes, tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        // загрузить кэш дневных и часовы графиков для screener_many и проверить там THREE_DISPLAYS_BUY_TYPE2
+
+        // проверить THREE_DISPLAYS_BUY_TYPE2 при STOCH_OVERSOLD = 20
 
         // проверить стратегию ABC от Элдера
 

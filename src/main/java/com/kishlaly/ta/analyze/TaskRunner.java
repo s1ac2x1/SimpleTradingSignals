@@ -76,7 +76,7 @@ public class TaskRunner {
                     .forEach(file -> {
                         try {
                             String symbol = file.getFileName().toString().replace("_quotes.txt", "");
-                            if (Context.singleSymbol != null && !Context.singleSymbol.equalsIgnoreCase(symbol)) {
+                            if (!Context.testOnly.isEmpty() && !Context.testOnly.contains(symbol)) {
                                 return;
                             }
                             SymbolData symbolData = new SymbolData();

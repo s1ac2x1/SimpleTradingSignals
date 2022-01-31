@@ -35,7 +35,7 @@ public class ThreeDisplays {
         // для поиска аномально длинных баров
         public static int multiplier = 2;
 
-        public static int STOCH_OVERSOLD = 30;
+        public static int STOCH_OVERSOLD = 40;
         public static int STOCH_OVERBOUGHT = 70;
         public static int STOCH_VALUES_TO_CHECK = 5;
 
