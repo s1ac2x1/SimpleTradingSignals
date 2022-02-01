@@ -197,6 +197,26 @@ public class HistoricalTesting {
         }
     }
 
+    public String printSL() {
+        return getStopLossStrategy().name() + ", " + getStopLossStrategy().printConfig();
+    }
+
+    public String printTP() {
+        return getTakeProfitStrategy().getClass().getSimpleName() + ", " + getTakeProfitStrategy().printConfig();
+    }
+
+    public String printTPSLNumber() {
+        return getProfitablePositionsCount() + "/" + getLossPositionsCount();
+    }
+
+    public String printTPSLPercent() {
+        return getSuccessfulRatio() + "% / " + getLossRatio();
+    }
+
+    public double getBalance() {
+        return Numbers.round(getTotalProfit() + getTotalLoss()); // loss is negative
+    }
+
     public static class PositionTestResult {
 
         private long openedTimestamp;

@@ -29,6 +29,7 @@ public class TaskTester {
         Context.testMode = true;
         Set<String> symbols = getSymbols();
         StringBuilder log = new StringBuilder();
+        List<HistoricalTesting> allTests = new ArrayList<>();
         Arrays.stream(timeframes).forEach(screens -> {
             Arrays.stream(tasks).forEach(task -> {
                 task.updateTimeframeForScreen(1, screens[0]);
@@ -57,85 +58,114 @@ public class TaskTester {
                         System.out.println(e.getMessage());
                     }
                     if (!taskResults.isEmpty()) {
-                        HistoricalTesting testing = new HistoricalTesting(symbolDataForTesting, taskResults, Context.stopLossStrategy, Context.takeProfitStrategy);
-                        calculateStatistics(testing);
-                        String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
-                        Set<String> signalResults = readableOutput.get(key);
-                        if (signalResults == null) {
-                            signalResults = new LinkedHashSet<>();
-                        }
-                        signalResults.add(formatTestingSummary(testing));
-                        Set<String> finalSignalResults = signalResults;
+                        HistoricalTesting testing = null;
+                        if (Context.massTesting) {
+                            if (Context.takeProfitStrategies != null) {
+                                Context.takeProfitStrategies.forEach(takeProfitStrategy -> {
+                                    HistoricalTesting massTesting = new HistoricalTesting(symbolDataForTesting, taskResults, Context.stopLossStrategy, takeProfitStrategy);
+                                    calculateStatistics(massTesting);
+                                    allTests.add(massTesting);
+                                });
+                            }
+                        } else {
+                            testing = new HistoricalTesting(symbolDataForTesting, taskResults, Context.stopLossStrategy, Context.takeProfitStrategy);
+                            calculateStatistics(testing);
+                            allTests.add(testing);
+                            String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
+                            Set<String> signalResults = readableOutput.get(key);
+                            if (signalResults == null) {
+                                signalResults = new LinkedHashSet<>();
+                            }
+                            signalResults.add(formatTestingSummary(testing));
+                            Set<String> finalSignalResults = signalResults;
 
-                        // на данном этапе HistoricalTesting содержит тесты позиций по сигналам
-                        // а так же все результаты отказов
-                        // TaskResult.lastChartQuote может быть null, если стратегии не хватило котировок для теста
+                            // на данном этапе HistoricalTesting содержит тесты позиций по сигналам
+                            // а так же все результаты отказов
+                            // TaskResult.lastChartQuote может быть null, если стратегии не хватило котировок для теста
 
-                        // сначала печатаем отчет по позициям
-                        testing.getTaskResults()
-                                .stream()
-                                .filter(taskResult -> taskResult.getLastChartQuote() != null)
-                                .filter(taskResult -> taskResult.isSignal())
-                                .forEach(taskResult -> {
-                                    String line = "";
-                                    Quote quote = taskResult.getLastChartQuote();
-                                    String quoteDateFormatted = formatDate(screen2.timeframe, quote.getTimestamp());
+                            // сначала печатаем отчет по позициям
+                            HistoricalTesting finalTesting = testing;
+                            testing.getTaskResults()
+                                    .stream()
+                                    .filter(taskResult -> taskResult.getLastChartQuote() != null)
+                                    .filter(taskResult -> taskResult.isSignal())
+                                    .forEach(taskResult -> {
+                                        String line = "";
+                                        Quote quote = taskResult.getLastChartQuote();
+                                        String quoteDateFormatted = formatDate(screen2.timeframe, quote.getTimestamp());
 
-                                    // сначала печатаем результаты тестирования сигналов
-                                    if (taskResult.isSignal()) {
-                                        PositionTestResult positionTestResult = testing.getResult(quote);
-                                        if (!positionTestResult.isClosed()) {
-                                            line += " NOT CLOSED";
-                                        } else {
-                                            line += positionTestResult.isProfitable() ? "PROFIT " : "LOSS ";
-                                            line += positionTestResult.getRoi() + "%";
-                                            if (positionTestResult.isGapUp()) {
-                                                line += " (gap up)";
+                                        // сначала печатаем результаты тестирования сигналов
+                                        if (taskResult.isSignal()) {
+                                            PositionTestResult positionTestResult = finalTesting.getResult(quote);
+                                            if (!positionTestResult.isClosed()) {
+                                                line += " NOT CLOSED";
+                                            } else {
+                                                line += positionTestResult.isProfitable() ? "PROFIT " : "LOSS ";
+                                                line += positionTestResult.getRoi() + "%";
+                                                if (positionTestResult.isGapUp()) {
+                                                    line += " (gap up)";
+                                                }
+                                                if (positionTestResult.isGapDown()) {
+                                                    line += " (gap down)";
+                                                }
+                                                line += " " + positionTestResult.getPositionDuration(screen2.timeframe);
+                                                String endDate = getBarTimeInMyZone(positionTestResult.getClosedTimestamp(), exchangeTimezome).toString();
+                                                ZonedDateTime parsed = ZonedDateTime.parse(endDate);
+                                                String parsedEndDate = parsed.getDayOfMonth() + " " + parsed.getMonth() + " " + parsed.getYear();
+                                                if (screen2.timeframe == Timeframe.HOUR) {
+                                                    parsedEndDate += " " + parsed.getHour() + ":" + parsed.getMinute();
+                                                }
+                                                line += " [till " + parsedEndDate + "]";
                                             }
-                                            if (positionTestResult.isGapDown()) {
-                                                line += " (gap down)";
-                                            }
-                                            line += " " + positionTestResult.getPositionDuration(screen2.timeframe);
-                                            String endDate = getBarTimeInMyZone(positionTestResult.getClosedTimestamp(), exchangeTimezome).toString();
-                                            ZonedDateTime parsed = ZonedDateTime.parse(endDate);
-                                            String parsedEndDate = parsed.getDayOfMonth() + " " + parsed.getMonth() + " " + parsed.getYear();
-                                            if (screen2.timeframe == Timeframe.HOUR) {
-                                                parsedEndDate += " " + parsed.getHour() + ":" + parsed.getMinute();
-                                            }
-                                            line += " [till " + parsedEndDate + "]";
+                                            finalSignalResults.add(quoteDateFormatted + " --- " + line);
                                         }
-                                        finalSignalResults.add(quoteDateFormatted + " --- " + line);
-                                    }
-                                });
+                                    });
 
-                        // потом лог всех остальных котировок с указанием причины, почему стратегия дала отказ
-                        finalSignalResults.add(System.lineSeparator());
-                        finalSignalResults.add(System.lineSeparator());
-                        finalSignalResults.add(System.lineSeparator());
-                        testing.getTaskResults()
-                                .stream()
-                                .filter(taskResult -> taskResult.getLastChartQuote() != null)
-                                .filter(taskResult -> !taskResult.isSignal())
-                                .forEach(taskResult -> {
-                                    String quoteDateFormatted = formatDate(screen2.timeframe, taskResult.getLastChartQuote().getTimestamp());
-                                    finalSignalResults.add(quoteDateFormatted + " ### " + taskResult.getCode());
-                                });
-                        readableOutput.put(key, signalResults);
+                            // потом лог всех остальных котировок с указанием причины, почему стратегия дала отказ
+                            finalSignalResults.add(System.lineSeparator());
+                            finalSignalResults.add(System.lineSeparator());
+                            finalSignalResults.add(System.lineSeparator());
+                            testing.getTaskResults()
+                                    .stream()
+                                    .filter(taskResult -> taskResult.getLastChartQuote() != null)
+                                    .filter(taskResult -> !taskResult.isSignal())
+                                    .forEach(taskResult -> {
+                                        String quoteDateFormatted = formatDate(screen2.timeframe, taskResult.getLastChartQuote().getTimestamp());
+                                        finalSignalResults.add(quoteDateFormatted + " ### " + taskResult.getCode());
+                                    });
+                            readableOutput.put(key, signalResults);
+                        }
                     }
                     clear(screen1);
                     clear(screen2);
                 });
-                readableOutput.forEach((key, data) -> {
-                    log.append(key).append("\t").append(System.lineSeparator());
-                    data.forEach(line -> log.append("    " + line).append(System.lineSeparator()));
-                    log.append(System.lineSeparator());
-                });
+                if (!Context.massTesting) {
+                    readableOutput.forEach((key, data) -> {
+                        log.append(key).append("\t").append(System.lineSeparator());
+                        data.forEach(line -> log.append("    " + line).append(System.lineSeparator()));
+                        log.append(System.lineSeparator());
+                    });
+                }
             });
         });
-        try {
-            Files.write(Paths.get("tests.txt"), log.toString().getBytes());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        if (!Context.massTesting) {
+            try {
+                Files.write(Paths.get("tests.txt"), log.toString().getBytes());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            StringBuilder builder = new StringBuilder();
+            allTests.forEach(testing -> {
+                if (Context.takeProfitStrategies != null) {
+                    builder.append("TP: " + testing.printTP() + " => TP/SL = " + testing.printTPSLNumber() + " (" + testing.printTPSLPercent() + "); balance = " + testing.getBalance()).append(System.lineSeparator());
+                }
+            });
+            try {
+                Files.write(Paths.get("mass_tests.txt"), builder.toString().getBytes());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -152,11 +182,11 @@ public class TaskTester {
     private static String formatTestingSummary(HistoricalTesting testing) {
         String result = "";
         result += "trendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
-        result += "\tSL: " + testing.getStopLossStrategy().name() + ", " + testing.getStopLossStrategy().printConfig() + System.lineSeparator();
-        result += "\tTP: " + testing.getTakeProfitStrategy().name() + ", " + testing.getTakeProfitStrategy().printConfig() + System.lineSeparator();
-        result += "\tTP/SL = " + testing.getProfitablePositionsCount() + "/" + testing.getLossPositionsCount() + " = ";
-        result += testing.getSuccessfulRatio() + "% / " + testing.getLossRatio() + "%" + System.lineSeparator();
-        double balance = testing.getTotalProfit() + testing.getTotalLoss(); // loss is negative
+        result += "\tSL: " + testing.printSL() + System.lineSeparator();
+        result += "\tTP: " + testing.printTP() + System.lineSeparator();
+        result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
+        result += testing.printTPSLPercent() + "%" + System.lineSeparator();
+        double balance = testing.getBalance();
         balance = balance - balance / 100 * 10;
         result += "\tTotal balance (minus 10% commissions) = " + Numbers.round(balance) + System.lineSeparator();
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + System.lineSeparator();

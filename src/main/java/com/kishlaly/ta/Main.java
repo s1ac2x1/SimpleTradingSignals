@@ -2,6 +2,7 @@ package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.testing.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.TakeProfitKeltner;
 import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
@@ -9,6 +10,7 @@ import com.kishlaly.ta.utils.Context;
 import java.util.ArrayList;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
+import static com.kishlaly.ta.analyze.TaskType.MACD_BULLISH_DIVERGENCE;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 
@@ -23,11 +25,10 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 //        Context.aggregationTimeframe = Timeframe.HOUR;
 
-//        Context.source = "symbols/sp500.txt";
-        Context.source = "symbols/screener_2.txt";
+        Context.source = "symbols/sp500.txt";
+//        Context.source = "symbols/screener_2.txt";
         Context.testOnly = new ArrayList<String>() {{
             add("TER");
-            add("AAPL");
         }};
 
         Timeframe[][] timeframes = {
@@ -53,42 +54,33 @@ public class Main {
 //            System.out.println(e);
 //        }
 
+//        try {
+//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+//            Context.stopLossStrategy = stopLossStrategy;
+//
+//            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
+//            takeProfitStrategy.setConfig(80);
+//            Context.takeProfitStrategy = takeProfitStrategy;
+//
+//            test(timeframes, tasks);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+
         try {
             StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
             Context.stopLossStrategy = stopLossStrategy;
 
-            TakeProfitStrategy takeProfitStrategy = TakeProfitStrategy.KELTNER;
-            takeProfitStrategy.setConfig(80);
-            Context.takeProfitStrategy = takeProfitStrategy;
-
+            Context.massTesting = true;
+            Context.takeProfitStrategies = new ArrayList<>();
+            for (int i = 80; i <= 100; i++) {
+                TakeProfitStrategy tp = new TakeProfitKeltner(i);
+                Context.takeProfitStrategies.add(tp);
+            }
             test(timeframes, tasks);
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        // загрузить кэш дневных и часовы графиков для screener_many и проверить там THREE_DISPLAYS_BUY_TYPE2
-
-        // проверить THREE_DISPLAYS_BUY_TYPE2 при STOCH_OVERSOLD = 20
-
-        // проверить стратегию ABC от Элдера
-
-        // стратегии поиска свечных моделей
-
-        // [D] INFO 4 Mar 2021
-        // BK https://drive.google.com/file/d/14PlpZMZV7lwsIwP2V7bww0LKSVjdn70Q/view?usp=sharing и https://drive.google.com/file/d/1-a0ZtMuLQyuamez_402v6YkViNWzY6RS/view?usp=sharing
-
-        // когда будет готова система тестирования на исторических данных со статистикой
-        // попробовать разные значения индикаторов, например, ЕМА 14 на втором экране
-        // а так же тестировать точки входа и выхода, например, 75% от верхней границы канала
-        // и проверить скользящий стоплосс, например, по середней линии канала
-        // проверить стоплосс на уровне нижней границы канала в точке сигнала
-
-        // добавить в дивергенции расчет EFI, тогда, может быть, не придется фильтровать по SECOND_BOTTOM_RATIO ?
-        // если EFI покажет правильную дивергенцию, которая подтверждает сигналы МАСD, то стоит обратить на это внимание
-
-        // реализовать тестирование шортов
-
-        // реализовать проверку медвежьей дивергенции
 
     }
 
