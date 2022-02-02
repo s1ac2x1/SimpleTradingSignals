@@ -13,6 +13,7 @@ import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.MACD_BULLISH_DIVERGENCE;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 
 /**
  * @author Vladimir Kishlaly
@@ -22,18 +23,18 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Context.aggregationTimeframe = Timeframe.DAY;
-//        Context.aggregationTimeframe = Timeframe.HOUR;
+//        Context.aggregationTimeframe = Timeframe.DAY;
+        Context.aggregationTimeframe = Timeframe.HOUR;
 
-        Context.source = "symbols/sp500.txt";
-//        Context.source = "symbols/screener_2.txt";
-        Context.testOnly = new ArrayList<String>() {{
-            add("TER");
-        }};
+//        Context.source = "symbols/sp500.txt";
+        Context.source = "symbols/screener_2.txt";
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("AEP");
+//        }};
 
         Timeframe[][] timeframes = {
-                {Timeframe.WEEK, Timeframe.DAY},
-//                {Timeframe.DAY, Timeframe.HOUR},
+//                {Timeframe.WEEK, Timeframe.DAY},
+                {Timeframe.DAY, Timeframe.HOUR},
         };
 
         TaskType[] tasks = {
@@ -48,11 +49,11 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 
-//        try {
-//            run(timeframes, tasks);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
+        try {
+            run(timeframes, tasks);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
 //        try {
 //            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
@@ -67,20 +68,20 @@ public class Main {
 //            System.out.println(e);
 //        }
 
-        try {
-            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
-            Context.stopLossStrategy = stopLossStrategy;
-
-            Context.massTesting = true;
-            Context.takeProfitStrategies = new ArrayList<>();
-            for (int i = 80; i <= 100; i++) {
-                TakeProfitStrategy tp = new TakeProfitKeltner(i);
-                Context.takeProfitStrategies.add(tp);
-            }
-            test(timeframes, tasks);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+//        try {
+//            StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+//            Context.stopLossStrategy = stopLossStrategy;
+//
+//            Context.massTesting = true;
+//            Context.takeProfitStrategies = new ArrayList<>();
+//            for (int i = 80; i <= 100; i++) {
+//                TakeProfitStrategy tp = new TakeProfitKeltner(i);
+//                Context.takeProfitStrategies.add(tp);
+//            }
+//            test(timeframes, tasks);
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
 
     }
 
