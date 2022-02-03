@@ -12,6 +12,7 @@ import static com.kishlaly.ta.analyze.TaskResultCode.*;
 
 public class FirstTrustModel {
 
+    // TODO может, рассмотреть диапазон 3 месяца, а не 6?
     public static TaskResult buySignal(SymbolData screen_1, SymbolData screen_2) {
         Quote signal = null;
         if (screen_1.quotes.isEmpty() || screen_2.quotes.isEmpty()) {

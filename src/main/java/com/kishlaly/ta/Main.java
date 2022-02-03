@@ -83,6 +83,8 @@ public class Main {
 //            System.out.println(e);
 //        }
 
+        // добавить стратегию поиска акций с гэпом вниз
+
     }
 
 }

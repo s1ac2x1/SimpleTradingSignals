@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Подсчет калорий</title>
     <script>
         var count = 1;
+        var weight = 89;
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var tomorrowDay = tomorrow.getDay();
 
         class Food {
+            id = -1;
             name = '';
             belki = 0;
             giri = 0;
             uglevodi = 0;
 
-            constructor(name, belki, giri, uglevodi) {
+            constructor(id, name, belki, giri, uglevodi) {
+                this.id = id;
                 this.name = name;
                 this.belki = belki;
                 this.giri = giri;
@@ -21,10 +27,12 @@
         }
 
         let foodBasket = [
-            new Food('чечевица', 8, 0, 20),
-            new Food('пшенка', 3, 0.7, 17),
-            new Food('гречка', 3, 1, 21)
+            new Food(1, 'чечевица', 8, 0, 20),
+            new Food(2, 'пшенка', 3, 0.7, 17),
+            new Food(3, 'гречка', 3, 1, 21)
         ];
+
+        var selectedFood = [];
 
         function addProduct() {
             var table = document.getElementById("table");
@@ -34,30 +42,272 @@
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
             cell1.innerHTML = '<input type="button" value="X" onclick="removeProduct(' + count + ');">';
-            cell2.innerHTML = '<select id="sel-' + count + '" onchange="calculate(this)">\n' +
+            cell2.innerHTML = '<select class="selectedFood" id="sel-' + count + '">\n' +
                 '                    <option value="">---</option>\n' +
                 '                </select>';
-            cell3.innerHTML = '<input id="mass-' + count + '" type="text" size="5">';
+            cell3.innerHTML = '<input class="mass" id="mass-' + count + '" type="text" size="5" onkeypress="calculate();">';
             var ele = document.getElementById('sel-' + count);
             for (var i = 0; i < foodBasket.length; i++) {
                 ele.innerHTML = ele.innerHTML +
-                    '<option value="' + foodBasket[i].name + '">' + foodBasket[i].name + '</option>';
+                    '<option value="' + foodBasket[i].id + '">' + foodBasket[i].name + '</option>';
             }
             count++;
         }
 
         function calculate(element) {
-            var msg = document.getElementById('msg');
+            var selectedFoods = document.getElementsByClassName("selectedFood");
+            var foodIds = [];
+            var foodIdToMassId = new Map();
+            for (let i = 0; i < selectedFoods.length; i++) {
+                let id = parseInt(selectedFoods[i].value);
+                foodIds.push(id);
+                var j = i + 1;
+                foodIdToMassId.set(id, j);
+            }
+            var currentBelki = 0;
+            var currentGiri = 0;
+            var currentUglevodi = 0;
+            for (let i = 0; i < foodIds.length; i++) {
+                let foodId = foodIds[i];
+                var foundFood = findObjectByKey(foodBasket, 'id', parseInt(foodId));
+                let massId = foodIdToMassId.get(foodId);
+                var mass = document.getElementById("mass-" + massId).value;
+                currentBelki += mass * foundFood.belki / 100;
+            }
+            document.getElementById("planBelki").innerHTML = currentBelki;
+            document.getElementById("planGiri").innerHTML = currentGiri;
+            document.getElementById("planUglevodi").innerHTML = currentUglevodi;
+        }
+
+        function findObjectByKey(array, key, value) {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i][key] === value) {
+                    return array[i];
+                }
+            }
+            return null;
+        }
+
+        function getWeekdayBelki() {
+            return weight * 2;
+        }
+
+        function getWeekdayGiri() {
+            return weight / 2;
+        }
+
+        function getWeekdayUglevodi() {
+            return weight * 2;
+        }
+
+        function getSaturdayBelki() {
+            return weight / 2;
+        }
+
+        function getSaturdayGiri() {
+            return weight;
+        }
+
+        function getSaturdayUglevodi() {
+            return weight * 8;
+        }
+
+        function getSundayBelki() {
+            return weight * 2;
+        }
+
+        function getSundayGiri() {
+            return weight / 2;
+        }
+
+        function getSundayUglevodi() {
+            return weight * 4;
         }
 
         function removeProduct(number) {
-            var row = document.getElementById("row-" + number);
+            var row = document.getElementById('row-' + number);
             row.parentElement.removeChild(row);
             count--;
         }
+
+        function init() {
+            document.getElementById('weight').innerHTML = weight;
+            document.getElementById('weekdayBelki').innerHTML = getWeekdayBelki();
+            document.getElementById('weekdayGiri').innerHTML = getWeekdayGiri();
+            document.getElementById('weekdayUglevodi').innerHTML = getWeekdayUglevodi();
+            document.getElementById('saturdayBelki').innerHTML = getSaturdayBelki();
+            document.getElementById('saturdayGiri').innerHTML = getSaturdayGiri();
+            document.getElementById('saturdayUglevodi').innerHTML = getSaturdayUglevodi();
+            document.getElementById('sundayBelki').innerHTML = getSundayBelki();
+            document.getElementById('sundayGiri').innerHTML = getSundayGiri();
+            document.getElementById('sundayUglevodi').innerHTML = getSundayUglevodi();
+            document.getElementById('plan').innerHTML = "План [" + formatDay(tomorrowDay) + "]"
+        }
+
+        function formatDay(dayNumber) {
+            switch (dayNumber) {
+                case 1:
+                    return "Понедельник";
+                case 2:
+                    return "Вторник";
+                case 3:
+                    return "Среда";
+                case 4:
+                    return "Четвера";
+                case 5:
+                    return "Пятница";
+            }
+        }
     </script>
 </head>
-<body>
+<body onload="init();">
+Вес: <span id="weight"></span><br><br>
+<table>
+    <tr>
+        <td>
+            <table id="weekdayPlan">
+                <tr>
+                    <td>ПН - ПТ</td>
+                </tr>
+                <tr>
+                    <td>
+                        Белки
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="weekdayBelki"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Жиры
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="weekdayGiri"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Углеводы
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="weekdayUglevodi"></span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+            <table id="saturdayPlan">
+                <tr>
+                    <td>СБ</td>
+                </tr>
+                <tr>
+                    <td>
+                        Белки
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="saturdayBelki"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Жиры
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="saturdayGiri"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Углеводы
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="saturdayUglevodi"></span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+            <table id="sundayPlan">
+                <tr>
+                    <td>ВС</td>
+                </tr>
+                <tr>
+                    <td>
+                        Белки
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="sundayBelki"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Жиры
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="sundayGiri"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Углеводы
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="sundayUglevodi"></span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+            <table id="sundayPlan">
+                <tr>
+                    <td><span id="plan"></span></td>
+                </tr>
+                <tr>
+                    <td>
+                        Белки
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="planBelki"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Жиры
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="planGiri"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Углеводы
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td>
+                        <span id="planUglevodi"></span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<br>
+<input type="button" value="Пересчитать" onclick="calculate();">
+<br><br>
 <table id="table">
     <tr>
         <td><b>Завтрак</b></td>
