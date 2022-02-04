@@ -1,6 +1,5 @@
 package com.kishlaly.ta.analyze;
 
-import com.kishlaly.ta.analyze.tasks.ABC;
 import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
@@ -73,17 +72,6 @@ public enum TaskType {
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
             FirstTrustModel::buySignal
-    ),
-    ABC_BUY(
-            new HashMap<Integer, Timeframe>() {{
-                put(1, WEEK);
-                put(2, DAY);
-            }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
-            }},
-            ABC::buySignal
     ),
     THREE_DISPLAYS_BUY_TYPE3(
             new HashMap<Integer, Timeframe>() {{
