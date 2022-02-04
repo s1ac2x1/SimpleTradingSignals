@@ -10,9 +10,8 @@ import com.kishlaly.ta.utils.Context;
 import java.util.ArrayList;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.*;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 
 /**
  * @author Vladimir Kishlaly
@@ -32,30 +31,30 @@ public class Main {
 
         Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_2.txt";
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("PYPL");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("PYPL");
+        }};
 
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_SELL,
-                //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
-                FIRST_TRUST_MODEL
+                THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
+                //FIRST_TRUST_MODEL
         };
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
         run(timeframes, tasks);
 //        testPlain(timeframes, tasks);
-//        testDynamic(timeframes, tasks);
+//        testDynamicTP(timeframes, tasks);
 
         // добавить стратегию поиска акций с гэпом вниз
 
     }
 
-    private static void testDynamic(Timeframe[][] timeframes, TaskType[] tasks) {
+    private static void testDynamicTP(Timeframe[][] timeframes, TaskType[] tasks) {
         StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
         Context.stopLossStrategy = stopLossStrategy;
 
