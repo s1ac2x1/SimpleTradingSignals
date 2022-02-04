@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Подсчет калорий</title>
     <script>
-        var count = 1;
         var weight = 89;
         var tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -33,50 +32,59 @@
         ];
 
         var selectedFood = [];
+        var foodTableRowsCount = new Map();
+        foodTableRowsCount.set('zavtrak', 1);
+        foodTableRowsCount.set('perekus_1', 1);
+        foodTableRowsCount.set('perekus_2', 1);
+        foodTableRowsCount.set('obed', 1);
+        foodTableRowsCount.set('uzhin', 1);
 
-        function addProduct() {
-            var table = document.getElementById("table");
-            var row = table.insertRow(count);
-            row.id = 'row-' + count;
+        var mealTimeBelki = new Map();
+        var mealTimeGiri = new Map();
+        var mealTimeUglevodi = new Map();
+
+        function addProduct(tableId) {
+            var table = document.getElementById(tableId);
+            var rowCount = foodTableRowsCount.get(tableId);
+            var row = table.insertRow(rowCount);
+            row.id = tableId + '-row-' + rowCount;
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
-            cell1.innerHTML = '<input type="button" value="X" onclick="removeProduct(' + count + ');">';
-            cell2.innerHTML = '<select class="selectedFood" id="sel-' + count + '">\n' +
+            cell1.innerHTML = '<input type="button" value="X" onclick="removeProduct(' + rowCount + ', \'' + tableId + '\');">';
+            cell2.innerHTML = '<select class="selectedFood" id="' + tableId + '_sel-' + rowCount + '">\n' +
                 '                    <option value="">---</option>\n' +
                 '                </select>';
-            cell3.innerHTML = '<input class="mass" id="mass-' + count + '" type="text" size="5" onkeypress="calculate();">';
-            var ele = document.getElementById('sel-' + count);
+            cell3.innerHTML = '<input class="selectedMass" id="' + tableId + '_mass-' + rowCount + '" type="text" size="10" onkeyup="calculate();">';
+            var ele = document.getElementById(tableId + '_sel-' + rowCount);
             for (var i = 0; i < foodBasket.length; i++) {
                 ele.innerHTML = ele.innerHTML +
                     '<option value="' + foodBasket[i].id + '">' + foodBasket[i].name + '</option>';
             }
-            count++;
+            foodTableRowsCount.set(tableId, rowCount + 1)
         }
 
-        function calculate(element) {
-            var selectedFoods = document.getElementsByClassName("selectedFood");
-            var foodIds = [];
-            var foodIdToMassId = new Map();
-            for (let i = 0; i < selectedFoods.length; i++) {
-                let id = parseInt(selectedFoods[i].value);
-                foodIds.push(id);
-                var j = i + 1;
-                foodIdToMassId.set(id, j);
+        function calculate() {
+            let selects = document.getElementsByClassName("selectedFood");
+            let masses = document.getElementsByClassName("selectedMass");
+            var belki = 0;
+            var giri = 0;
+            var uglevodi = 0;
+            for (let i = 0; i < selects.length; i++) {
+                // zavtrak_sel-1
+                // zavtrak_mass-1
+                let select = selects[i];
+                let mealType = select.id.split("_sel")[0];
+                let inputNumber = select.id.split("-")[1];
+                let mass = document.getElementById(mealType + "_mass-" + inputNumber).value;
+                let food = findObjectByKey(foodBasket, 'id', parseInt(select.value));
+                belki += mass * food.belki / 100;
+                giri += mass * food.giri / 100;
+                uglevodi += mass * food.uglevodi / 100;
             }
-            var currentBelki = 0;
-            var currentGiri = 0;
-            var currentUglevodi = 0;
-            for (let i = 0; i < foodIds.length; i++) {
-                let foodId = foodIds[i];
-                var foundFood = findObjectByKey(foodBasket, 'id', parseInt(foodId));
-                let massId = foodIdToMassId.get(foodId);
-                var mass = document.getElementById("mass-" + massId).value;
-                currentBelki += mass * foundFood.belki / 100;
-            }
-            document.getElementById("planBelki").innerHTML = currentBelki;
-            document.getElementById("planGiri").innerHTML = currentGiri;
-            document.getElementById("planUglevodi").innerHTML = currentUglevodi;
+            document.getElementById("planBelki").innerHTML = belki;
+            document.getElementById("planGiri").innerHTML = giri;
+            document.getElementById("planUglevodi").innerHTML = uglevodi;
         }
 
         function findObjectByKey(array, key, value) {
@@ -124,10 +132,12 @@
             return weight * 4;
         }
 
-        function removeProduct(number) {
-            var row = document.getElementById('row-' + number);
+        function removeProduct(number, tableId) {
+            var row = document.getElementById(tableId + '-row-' + number);
             row.parentElement.removeChild(row);
-            count--;
+            let rowIndex = foodTableRowsCount.get(tableId);
+            foodTableRowsCount.set(tableId, rowIndex - 1);
+            calculate();
         }
 
         function init() {
@@ -156,6 +166,10 @@
                     return "Четвера";
                 case 5:
                     return "Пятница";
+                case 6:
+                    return "Суббота";
+                case 7:
+                    return "Воскресенье";
             }
         }
     </script>
@@ -306,16 +320,58 @@
     </tr>
 </table>
 <br>
-<input type="button" value="Пересчитать" onclick="calculate();">
-<br><br>
-<table id="table">
+<table id="zavtrak">
     <tr>
         <td><b>Завтрак</b></td>
     </tr>
 </table>
 <p>
     <input type="button"
-           onclick="addProduct()"
+           onclick="addProduct('zavtrak')"
+           value="Добавить продукт"/>
+</p>
+<br>
+<table id="perekus_1">
+    <tr>
+        <td><b>Перекус 1</b></td>
+    </tr>
+</table>
+<p>
+    <input type="button"
+           onclick="addProduct('perekus_1')"
+           value="Добавить продукт"/>
+</p>
+<br>
+<table id="obed">
+    <tr>
+        <td><b>Обед</b></td>
+    </tr>
+</table>
+<p>
+    <input type="button"
+           onclick="addProduct('obed')"
+           value="Добавить продукт"/>
+</p>
+<br>
+<table id="perekus_2">
+    <tr>
+        <td><b>Перекус 2</b></td>
+    </tr>
+</table>
+<p>
+    <input type="button"
+           onclick="addProduct('perekus_2')"
+           value="Добавить продукт"/>
+</p>
+<br>
+<table id="uzhin">
+    <tr>
+        <td><b>Ужин</b></td>
+    </tr>
+</table>
+<p>
+    <input type="button"
+           onclick="addProduct('uzhin')"
            value="Добавить продукт"/>
 </p>
 </body>
