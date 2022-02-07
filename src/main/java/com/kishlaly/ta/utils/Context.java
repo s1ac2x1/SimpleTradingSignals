@@ -1,14 +1,13 @@
 package com.kishlaly.ta.utils;
 
-import com.kishlaly.ta.analyze.testing.StopLossStrategy;
-import com.kishlaly.ta.analyze.testing.TakeProfitKeltner;
-import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitKeltner;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.kishlaly.ta.analyze.testing.StopLossStrategy.FIXED;
 
 public class Context {
 
@@ -45,7 +44,7 @@ public class Context {
     // для тестирования на истоирческих данных
     public static boolean testMode;
     public static double lots = 100;
-    public static StopLossStrategy stopLossStrategy = FIXED;
+    public static StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
     public static TakeProfitStrategy takeProfitStrategy = new TakeProfitKeltner(80);
     public static boolean massTesting;
     public static List<TakeProfitStrategy> takeProfitStrategies;

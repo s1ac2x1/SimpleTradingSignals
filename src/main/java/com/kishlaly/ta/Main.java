@@ -1,16 +1,17 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.analyze.testing.StopLossStrategy;
-import com.kishlaly.ta.analyze.testing.TakeProfitKeltner;
-import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitKeltner;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
 import java.util.ArrayList;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
+import static com.kishlaly.ta.analyze.TaskType.FIRST_TRUST_MODEL;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 
 /**
@@ -29,19 +30,19 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = "symbols/sp500.txt";
-//        Context.source = "symbols/screener_2.txt";
-        Context.testOnly = new ArrayList<String>() {{
-            add("PYPL");
-        }};
+//        Context.source = "symbols/sp500.txt";
+        Context.source = "symbols/screener_2.txt";
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("PYPL");
+//        }};
 
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_SELL,
-                THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
-                //FIRST_TRUST_MODEL
+                //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
+                FIRST_TRUST_MODEL
         };
 
 //        buildCache(timeframes, tasks, false);
@@ -55,7 +56,7 @@ public class Main {
     }
 
     private static void testDynamicTP(Timeframe[][] timeframes, TaskType[] tasks) {
-        StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+        StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
         Context.stopLossStrategy = stopLossStrategy;
 
         Context.massTesting = true;
@@ -68,7 +69,7 @@ public class Main {
     }
 
     private static void testPlain(Timeframe[][] timeframes, TaskType[] tasks) {
-        StopLossStrategy stopLossStrategy = StopLossStrategy.FIXED;
+        StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
         Context.stopLossStrategy = stopLossStrategy;
 
         TakeProfitStrategy takeProfitStrategy = new TakeProfitKeltner(100);

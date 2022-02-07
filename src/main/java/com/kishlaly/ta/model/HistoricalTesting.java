@@ -1,7 +1,7 @@
 package com.kishlaly.ta.model;
 
-import com.kishlaly.ta.analyze.testing.StopLossStrategy;
-import com.kishlaly.ta.analyze.testing.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.utils.Dates;
 import com.kishlaly.ta.utils.Numbers;
 
@@ -198,7 +198,7 @@ public class HistoricalTesting {
     }
 
     public String printSL() {
-        return getStopLossStrategy().name() + ", " + getStopLossStrategy().printConfig();
+        return getStopLossStrategy().getClass().getSimpleName() + ", " + getStopLossStrategy().printConfig();
     }
 
     public String printTP() {

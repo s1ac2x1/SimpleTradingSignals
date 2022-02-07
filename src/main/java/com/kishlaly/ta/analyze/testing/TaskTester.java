@@ -1,6 +1,8 @@
 package com.kishlaly.ta.analyze.testing;
 
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;

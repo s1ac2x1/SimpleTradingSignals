@@ -1,4 +1,4 @@
-package com.kishlaly.ta.analyze.testing;
+package com.kishlaly.ta.analyze.testing.tp;
 
 import com.kishlaly.ta.model.SymbolData;
 
