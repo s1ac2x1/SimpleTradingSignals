@@ -286,9 +286,15 @@ public class TaskTester {
             while (startPositionIndex < data.quotes.size() - 1) {
                 startPositionIndex++;
                 Quote nextQuote = data.quotes.get(startPositionIndex);
-                boolean tpInsideBar = nextQuote.getLow() < takeProfit && nextQuote.getHigh() > takeProfit;
-                boolean tpAtHigh = nextQuote.getHigh() == takeProfit;
-                boolean gapUp = nextQuote.getOpen() > takeProfit;
+                boolean tpInsideBar = takeProfitStrategy.isEnabled()
+                        ? nextQuote.getLow() < takeProfit && nextQuote.getHigh() > takeProfit
+                        : false;
+                boolean tpAtHigh = takeProfitStrategy.isEnabled()
+                        ? nextQuote.getHigh() == takeProfit
+                        : false;
+                boolean gapUp = takeProfitStrategy.isEnabled()
+                        ? nextQuote.getOpen() > takeProfit
+                        : false;
                 // закрылся по TP
                 if (tpInsideBar || tpAtHigh || gapUp) {
                     if (gapUp) {

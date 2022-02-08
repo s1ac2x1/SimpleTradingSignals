@@ -5,6 +5,7 @@ import com.kishlaly.ta.model.SymbolData;
 public abstract class TakeProfitStrategy {
 
     private Object config;
+    private boolean enabled;
 
     public TakeProfitStrategy(final Object config) {
         this.config = config;
@@ -16,6 +17,14 @@ public abstract class TakeProfitStrategy {
 
     public Object getConfig() {
         return this.config;
+    }
+
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public void setEnabled(final boolean enabled) {
+        this.enabled = enabled;
     }
 
     public abstract double calcualte(SymbolData data, int signalIndex);
