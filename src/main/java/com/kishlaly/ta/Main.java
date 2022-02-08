@@ -13,9 +13,9 @@ import com.kishlaly.ta.utils.Context;
 import java.util.ArrayList;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.FIRST_TRUST_MODEL;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
+import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 
 /**
  * @author Vladimir Kishlaly
@@ -33,10 +33,12 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = "symbols/sp500.txt";
+//        Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_2.txt";
+//        Context.source = "symbols/screener_many.txt";
+        Context.source = "symbols/naga.txt";
         Context.testOnly = new ArrayList<String>() {{
-            add("PYPL");
+            add("ADBE");
         }};
 
 
@@ -51,8 +53,8 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks);
-//        testFixed(timeframes, tasks);
-        testVolatile(timeframes, tasks);
+        testFixed(timeframes, tasks);
+//        testVolatile(timeframes, tasks);
 
         // добавить стратегию поиска акций с гэпом вниз
 
