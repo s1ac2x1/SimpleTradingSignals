@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.SymbolData;
 public abstract class TakeProfitStrategy {
 
     private Object config;
-    private boolean enabled;
+    private boolean enabled = true;
 
     public TakeProfitStrategy(final Object config) {
         this.config = config;
