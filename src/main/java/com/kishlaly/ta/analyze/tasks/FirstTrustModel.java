@@ -17,7 +17,6 @@ public class FirstTrustModel {
     }
 
     public static TaskResult buySignal(SymbolData screen_1, SymbolData screen_2) {
-        Quote signal = null;
         if (screen_1.quotes.isEmpty() || screen_2.quotes.isEmpty()) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_1.symbol);
             Log.recordCode(TaskResultCode.NO_DATA_QUOTES, screen_1);
@@ -25,6 +24,7 @@ public class FirstTrustModel {
         }
 
         Quote lastChartQuote = screen_2.quotes.get(screen_2.quotes.size() - 1);
+        Quote signal = lastChartQuote;
 
         // ищем минимум за последние MONTHS месяцев в одном из 10 последних столбиков
         int days = Config.MONTHS * 21;

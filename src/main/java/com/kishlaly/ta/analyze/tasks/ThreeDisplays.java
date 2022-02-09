@@ -455,7 +455,7 @@ public class ThreeDisplays {
         // предпоследний ниже ЕМА, последний пересекает - ОК
         boolean crossingRule2 = isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteCrossedEMA(lastQuote, lastEMA.getValue());
 
-        // препдоследний и последний пересекают ЕМА - ОК
+        // предпоследний и последний пересекают ЕМА - ОК
         boolean crossingRule3 = isQuoteCrossedEMA(preLastQuote, preLastEMA.getValue()) && isQuoteCrossedEMA(lastQuote, lastEMA.getValue());
 
         // предпоследний пересекает ЕМА, последний выше (может быть поздно входить в сделку, нужно смотреть на график) - ОК

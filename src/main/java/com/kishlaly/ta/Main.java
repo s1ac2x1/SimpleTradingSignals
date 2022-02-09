@@ -34,29 +34,26 @@ public class Main {
         };
 
 //        Context.source = "symbols/sp500.txt";
-//        Context.source = "symbols/screener_2.txt";
+        Context.source = "symbols/screener_2.txt";
 //        Context.source = "symbols/screener_many.txt";
-        Context.source = "symbols/naga.txt";
-        Context.testOnly = new ArrayList<String>() {{
-            add("ADBE");
-        }};
+//        Context.source = "symbols/naga.txt";
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("ADBE");
+//        }};
 
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
-                //THREE_DISPLAYS_SELL,
                 THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
                 //FIRST_TRUST_MODEL
         };
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
-//        run(timeframes, tasks);
-        testFixed(timeframes, tasks);
+        run(timeframes, tasks);
+//        testFixed(timeframes, tasks);
 //        testVolatile(timeframes, tasks);
-
-        // добавить стратегию поиска акций с гэпом вниз
 
     }
 
