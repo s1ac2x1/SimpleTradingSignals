@@ -4,6 +4,7 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileKeltnerBottom;
+import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileLocalMin;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitDisabled;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitKeltner;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
@@ -38,7 +39,7 @@ public class Main {
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
 //        Context.testOnly = new ArrayList<String>() {{
-//            add("ADBE");
+//            add("WDC");
 //        }};
 
 
@@ -46,12 +47,12 @@ public class Main {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
-                //FIRST_TRUST_MODEL
+                //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
-//        buildCache(timeframes, tasks, false);
+        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
-        run(timeframes, tasks);
+//        run(timeframes, tasks);
 //        testFixed(timeframes, tasks);
 //        testVolatile(timeframes, tasks);
 
@@ -82,7 +83,7 @@ public class Main {
     }
 
     private static void testFixed(Timeframe[][] timeframes, TaskType[] tasks) {
-        StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
+        StopLossStrategy stopLossStrategy = new StopLossVolatileLocalMin(0.27);
         Context.stopLossStrategy = stopLossStrategy;
 
         TakeProfitStrategy takeProfitStrategy = new TakeProfitKeltner(100);

@@ -37,8 +37,15 @@
             new Food(9, 'овощи Edeka Land Gemüse', 2, 0.1, 5.9),
             new Food(10, 'омега-3', 0, 100, 0),
             new Food(11, 'овощи Königs Gemüse', 2, 2.6, 5.3),
-            new Food(12, 'печень куриная', 19.1, 6.3, 0.6)
+            new Food(12, 'печень куриная', 19.1, 6.3, 0.6),
+            new Food(13, 'овощи Mediterrane Art', 1.4, 2.3, 3.5),
         ];
+
+        foodBasket.sort(function(a, b) {
+            var textA = a.name.toUpperCase();
+            var textB = b.name.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        });
 
         var selectedFood = [];
         var foodTableRowsCount = new Map();
