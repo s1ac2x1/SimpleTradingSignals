@@ -1,10 +1,7 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
-import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
-import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileKeltnerBottom;
-import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileLocalMin;
+import com.kishlaly.ta.analyze.testing.sl.*;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitDisabled;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitKeltner;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
@@ -34,13 +31,13 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-//        Context.source = "symbols/sp500.txt";
-        Context.source = "symbols/screener_2.txt";
+        Context.source = "symbols/sp500.txt";
+//        Context.source = "symbols/screener_2.txt";
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("WDC");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("SEE");
+        }};
 
 
         TaskType[] tasks = {
@@ -50,21 +47,23 @@ public class Main {
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
-        buildCache(timeframes, tasks, false);
+//        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks);
-//        testFixed(timeframes, tasks);
+        testFixed(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitKeltner(80));
 //        testVolatile(timeframes, tasks);
 
     }
 
-    private static void testVolatile(Timeframe[][] timeframes, TaskType[] tasks) {
-        StopLossStrategy stopLossStrategy = new StopLossVolatileKeltnerBottom();
+    private static void testFixed(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         Context.stopLossStrategy = stopLossStrategy;
-
-        TakeProfitStrategy takeProfitStrategy = new TakeProfitDisabled();
         Context.takeProfitStrategy = takeProfitStrategy;
+        test(timeframes, tasks);
+    }
 
+    private static void testVolatile(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+        Context.stopLossStrategy = stopLossStrategy;
+        Context.takeProfitStrategy = takeProfitStrategy;
         test(timeframes, tasks);
     }
 
@@ -79,16 +78,6 @@ public class Main {
             TakeProfitStrategy tp = new TakeProfitKeltner(i);
             Context.takeProfitStrategies.add(tp);
         }
-        test(timeframes, tasks);
-    }
-
-    private static void testFixed(Timeframe[][] timeframes, TaskType[] tasks) {
-        StopLossStrategy stopLossStrategy = new StopLossVolatileLocalMin(0.27);
-        Context.stopLossStrategy = stopLossStrategy;
-
-        TakeProfitStrategy takeProfitStrategy = new TakeProfitKeltner(100);
-        Context.takeProfitStrategy = takeProfitStrategy;
-
         test(timeframes, tasks);
     }
 
