@@ -31,13 +31,13 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = "symbols/sp500.txt";
+//        Context.source = "symbols/sp500.txt";
 //        Context.source = "symbols/screener_2.txt";
 //        Context.source = "symbols/screener_many.txt";
-//        Context.source = "symbols/naga.txt";
-        Context.testOnly = new ArrayList<String>() {{
-            add("SEE");
-        }};
+        Context.source = "symbols/naga.txt";
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("SEE");
+//        }};
 
 
         TaskType[] tasks = {
@@ -49,8 +49,8 @@ public class Main {
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
-//        run(timeframes, tasks);
-        testFixed(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitKeltner(80));
+        run(timeframes, tasks);
+//        testFixed(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitKeltner(100));
 //        testVolatile(timeframes, tasks);
 
     }
