@@ -327,12 +327,12 @@ public class TaskTester {
                     closePositionCost = closingPositionSize;
                     break;
                 }
-                // нельзя понижать
+                // нельзя двигать SL вниз
                 if (stopLossStrategy.isVolatile() && stopLossStrategy.calculate(data, startPositionIndex) > stopLoss) {
                     stopLoss = stopLossStrategy.calculate(data, startPositionIndex);
                 }
-                // можно двигать
-                if (takeProfitStrategy.isVolatile()) {
+                // нельзя двигать TP вниз
+                if (takeProfitStrategy.isVolatile() && takeProfitStrategy.calcualte(data, startPositionIndex) > takeProfit) {
                     takeProfit = takeProfitStrategy.calcualte(data, startPositionIndex);
                 }
             }
