@@ -4,6 +4,9 @@ import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.Keltner;
 
+/**
+ * TP на уровне % от вершины канала Кельтнера
+ */
 public class TakeProfitKeltner extends TakeProfitStrategy {
 
     public TakeProfitKeltner(Object config) {
