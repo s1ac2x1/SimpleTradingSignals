@@ -4,11 +4,13 @@ import com.kishlaly.ta.model.SymbolData;
 
 public abstract class TakeProfitStrategy {
 
-    private Object config;
-    private boolean enabled = true;
+    protected Object config;
+    protected boolean enabled = true;
+    protected boolean isVolatile;
 
-    public TakeProfitStrategy(final Object config) {
+    public TakeProfitStrategy(final Object config, final boolean isVolatile) {
         this.config = config;
+        this.isVolatile = isVolatile;
     }
 
     public void setConfig(Object config) {
@@ -30,5 +32,9 @@ public abstract class TakeProfitStrategy {
     public abstract double calcualte(SymbolData data, int signalIndex);
 
     public abstract String printConfig();
+
+    public boolean isVolatile() {
+        return this.isVolatile;
+    }
 
 }

@@ -7,10 +7,10 @@ import com.kishlaly.ta.model.indicators.Keltner;
 /**
  * TP на уровне % от вершины канала Кельтнера
  */
-public class TakeProfitKeltner extends TakeProfitStrategy {
+public class TakeProfitFixedKeltnerTop extends TakeProfitStrategy {
 
-    public TakeProfitKeltner(Object config) {
-        super(config);
+    public TakeProfitFixedKeltnerTop(Object config) {
+        super(config, false);
     }
 
     @Override

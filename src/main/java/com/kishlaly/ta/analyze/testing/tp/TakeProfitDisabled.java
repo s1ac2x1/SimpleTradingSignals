@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.SymbolData;
 public class TakeProfitDisabled extends TakeProfitStrategy {
 
     public TakeProfitDisabled() {
-        super(null);
+        super(null, false);
     }
 
     @Override

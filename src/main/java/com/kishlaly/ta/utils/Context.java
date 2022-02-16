@@ -2,7 +2,7 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitKeltner;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.model.Timeframe;
 
@@ -45,7 +45,7 @@ public class Context {
     public static boolean testMode;
     public static double lots = 100;
     public static StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
-    public static TakeProfitStrategy takeProfitStrategy = new TakeProfitKeltner(80);
+    public static TakeProfitStrategy takeProfitStrategy = new TakeProfitFixedKeltnerTop(80);
     public static boolean massTesting;
     public static List<TakeProfitStrategy> takeProfitStrategies;
 
