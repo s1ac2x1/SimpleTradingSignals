@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.SymbolData;
 import java.util.Comparator;
 
 /**
- * SL выбирается на N центов ниже самого низкого quote.low из N столбиков перед текущей котировкой
+ * SL выбирается на N ниже самого низкого quote.low из 20 столбиков перед текущей котировкой
  */
 public class StopLossVolatileLocalMin extends StopLossStrategy {
 
@@ -16,7 +16,7 @@ public class StopLossVolatileLocalMin extends StopLossStrategy {
 
     @Override
     public double calculate(SymbolData data, int currentQuoteIndex) {
-        Quote quoteWithMinimalLow = data.quotes.subList(currentQuoteIndex - 5, currentQuoteIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
+        Quote quoteWithMinimalLow = data.quotes.subList(currentQuoteIndex - 20, currentQuoteIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
         double distance = (double) config;
         return quoteWithMinimalLow.getLow() - distance;
     }

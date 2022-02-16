@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.SymbolData;
 import java.util.Comparator;
 
 /**
- * SL выбирается на N центов ниже самого низкого quote.low из LAST_QUOTES_TO_FIND_MIN столбиков перед сигнальной котировкой
+ * SL выбирается на N ниже самого низкого quote.low из LAST_QUOTES_TO_FIND_MIN столбиков перед сигнальной котировкой
  */
 public class StopLossFixedPrice extends StopLossStrategy {
 
