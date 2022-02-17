@@ -27,7 +27,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarCount;
 
 public class TaskTester {
 
-    public static void test(Timeframe[][] timeframes, TaskType[] tasks) {
+    public static List<HistoricalTesting> test(Timeframe[][] timeframes, TaskType[] tasks) {
         Context.testMode = true;
         Set<String> symbols = getSymbols();
         StringBuilder log = new StringBuilder();
@@ -152,7 +152,7 @@ public class TaskTester {
         });
         if (!Context.massTesting) {
             try {
-                Files.write(Paths.get("tests.txt"), log.toString().getBytes());
+                Files.write(Paths.get("tests/single.txt"), log.toString().getBytes());
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -164,11 +164,12 @@ public class TaskTester {
                 }
             });
             try {
-                Files.write(Paths.get("mass_tests.txt"), builder.toString().getBytes());
+                Files.write(Paths.get("tests/mass.txt"), builder.toString().getBytes());
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
         }
+        return allTests;
     }
 
     private static String formatDate(Timeframe timeframe, long timestamp) {
@@ -181,7 +182,7 @@ public class TaskTester {
         return date;
     }
 
-    private static String formatTestingSummary(HistoricalTesting testing) {
+    public static String formatTestingSummary(HistoricalTesting testing) {
         String result = "";
         result += "trendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
         result += "\tSL: " + testing.printSL() + System.lineSeparator();

@@ -37,4 +37,8 @@ public abstract class TakeProfitStrategy {
         return this.isVolatile;
     }
 
+    public String toString() {
+        return getClass().getSimpleName() + ", " + printConfig();
+    }
+
 }

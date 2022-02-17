@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class StopLossVolatileATR extends StopLossStrategy {
 
-    public StopLossVolatileATR(Object config) {
-        super(config, true);
+    public StopLossVolatileATR() {
+        super(null, true);
     }
 
     @Override

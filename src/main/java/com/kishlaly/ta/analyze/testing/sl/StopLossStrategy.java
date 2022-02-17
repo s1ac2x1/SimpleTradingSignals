@@ -28,4 +28,8 @@ public abstract class StopLossStrategy {
 
     public abstract String printConfig();
 
+    public String toString() {
+        return getClass().getSimpleName() + ", " + printConfig();
+    }
+
 }
