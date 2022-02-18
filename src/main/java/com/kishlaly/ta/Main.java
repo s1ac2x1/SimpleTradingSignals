@@ -17,10 +17,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 
 /**
  * @author Vladimir Kishlaly
@@ -31,7 +35,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         Context.aggregationTimeframe = Timeframe.DAY;
-//        Context.aggregationTimeframe = Timeframe.HOUR;
 
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
@@ -43,7 +46,7 @@ public class Main {
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
         Context.testOnly = new ArrayList<String>() {{
-            add("DDOG");
+            add("AAPL");
         }};
 
 
@@ -63,19 +66,25 @@ public class Main {
 
     private static void testSimple(Timeframe[][] timeframes, TaskType[] tasks) {
         List<HistoricalTesting> result = new ArrayList<>();
+        int total = getSLStrategies().size() * getTPStrategies().size();
+        AtomicInteger current = new AtomicInteger(1);
         getSLStrategies().forEach(stopLossStrategy -> {
             getTPStrategies().forEach(takeProfitStrategy -> {
                 Context.stopLossStrategy = stopLossStrategy;
                 Context.takeProfitStrategy = takeProfitStrategy;
-                System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
+                System.out.println(current.get() + "/" + total + " " + stopLossStrategy + " / " + takeProfitStrategy);
                 result.addAll(test(timeframes, tasks));
+                current.getAndIncrement();
             });
         });
         Collections.sort(result, Comparator.comparing(HistoricalTesting::getBalance));
-
+        HistoricalTesting worse = result.get(0);
+        writeToFile(worse.getData().symbol + "_worse", TaskTester.formatTestingSummary(worse));
+        HistoricalTesting best = result.get(result.size() - 1);
+        writeToFile(best.getData().symbol + "_best", TaskTester.formatTestingSummary(best));
     }
 
-    private static void writeToFile(String name, String content) {
+    public static void writeToFile(String name, String content) {
         try {
             Files.write(Paths.get("tests/" + name + ".txt"), content.toString().getBytes());
         } catch (IOException e) {
@@ -97,7 +106,7 @@ public class Main {
         test(timeframes, tasks);
     }
 
-    private static List<StopLossStrategy> getSLStrategies() {
+    public static List<StopLossStrategy> getSLStrategies() {
         return new ArrayList<StopLossStrategy>() {{
             add(new StopLossFixedPrice(0.27));
             add(new StopLossFixedKeltnerBottom());
@@ -107,7 +116,7 @@ public class Main {
         }};
     }
 
-    private static List<TakeProfitStrategy> getTPStrategies() {
+    public static List<TakeProfitStrategy> getTPStrategies() {
         return new ArrayList<TakeProfitStrategy>() {{
             add(new TakeProfitFixedKeltnerTop(70));
             add(new TakeProfitFixedKeltnerTop(80));

@@ -9,6 +9,9 @@ import org.ta4j.core.BarSeries;
 import org.ta4j.core.indicators.ATRIndicator;
 
 import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +21,12 @@ public class Test {
 
     public static void main(String[] args) {
         Context.aggregationTimeframe = Timeframe.DAY;
-        List<Quote> quotes = loadQuotesFromCache("MAS");
-        BarSeries barSeries = Bars.build(quotes);
-        ATRIndicator atrIndicator = new ATRIndicator(barSeries, 22);
-        System.out.println(atrIndicator);
+        List<Quote> quotes = loadQuotesFromCache("LMT");
+        Long timestamp = quotes.get(0).getTimestamp();
+        int lastQuoteYear = LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), ZoneId.of(Context.myTimezone)).getYear();
+        int currentYear = LocalDateTime.ofInstant(Instant.now(), ZoneId.of(Context.myTimezone)).getYear();
+        System.out.println(lastQuoteYear);
+        System.out.println(currentYear);
     }
 
 }

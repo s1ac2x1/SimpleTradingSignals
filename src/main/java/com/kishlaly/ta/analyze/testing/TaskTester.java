@@ -11,6 +11,9 @@ import com.kishlaly.ta.utils.Numbers;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +24,6 @@ import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
-import static com.kishlaly.ta.utils.Clean.clear;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarCount;
 
@@ -138,8 +140,6 @@ public class TaskTester {
                             readableOutput.put(key, signalResults);
                         }
                     }
-                    clear(screen1);
-                    clear(screen2);
                 });
                 if (!Context.massTesting) {
                     readableOutput.forEach((key, data) -> {
@@ -407,7 +407,11 @@ public class TaskTester {
                 return;
             }
         }));
-        return hasHistory.get();
+        Long timestampOfLastQuote = screen2.quotes.get(screen2.quotes.size() - 1).getTimestamp();
+        int lastQuoteYear = LocalDateTime.ofInstant(Instant.ofEpochSecond(timestampOfLastQuote), ZoneId.of(Context.myTimezone)).getYear();
+        int currentYear = LocalDateTime.ofInstant(Instant.now(), ZoneId.of(Context.myTimezone)).getYear();
+        boolean notMoreThatFiveYearsOld = currentYear - lastQuoteYear <= 10;
+        return hasHistory.get() && notMoreThatFiveYearsOld;
     }
 
 }
