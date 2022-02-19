@@ -1,5 +1,6 @@
 package com.kishlaly.ta.utils;
 
+import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.indicators.*;
@@ -17,20 +18,25 @@ import java.util.List;
 public class IndicatorUtils {
 
     public static List<EMA> buildEMA(String symbol, int period) {
-        IndicatorsInMemoryCache
-        List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
-        BarSeries barSeries = Bars.build(quotes);
-        ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
-        EMAIndicator ema = new EMAIndicator(closePriceIndicator, period);
-        List<EMA> result = new ArrayList<>();
-        for (int i = 0; i < ema.getBarSeries().getBarCount(); i++) {
-            result.add(new EMA(quotes.get(i).getTimestamp(), ema.getValue(i).doubleValue()));
+        List<EMA> fromCache = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period);
+        if (fromCache != null) {
+            return fromCache;
+        } else {
+            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
+            BarSeries barSeries = Bars.build(quotes);
+            ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
+            EMAIndicator ema = new EMAIndicator(closePriceIndicator, period);
+            List<EMA> result = new ArrayList<>();
+            for (int i = 0; i < ema.getBarSeries().getBarCount(); i++) {
+                result.add(new EMA(quotes.get(i).getTimestamp(), ema.getValue(i).doubleValue()));
+            }
+            IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe, period, result);
+            return result;
         }
-        return result;
     }
 
     public static List<MACD> buildMACDHistogram(String symbol) {
-        IndicatorsInMemoryCache
+        // TODO IndicatorsInMemoryCache
         List<MACD> result = new ArrayList<>();
         List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
         BarSeries barSeries = Bars.build(quotes);
@@ -55,7 +61,7 @@ public class IndicatorUtils {
     }
 
     public static List<Keltner> buildKeltnerChannels(String symbol) {
-        IndicatorsInMemoryCache
+        // TODO IndicatorsInMemoryCache
         List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
         BarSeries barSeries = Bars.build(quotes);
         KeltnerChannelMiddleIndicator middle = new KeltnerChannelMiddleIndicator(barSeries, 20);
@@ -69,7 +75,7 @@ public class IndicatorUtils {
     }
 
     public static List<ATR> buildATR(String symbol, int barCount) {
-        IndicatorsInMemoryCache
+        // TODO IndicatorsInMemoryCache
         List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
         List<ATR> result = new ArrayList<>();
         BarSeries barSeries = Bars.build(quotes);
@@ -81,7 +87,7 @@ public class IndicatorUtils {
     }
 
     public static List<Stoch> buildStochastic(String symbol) {
-        IndicatorsInMemoryCache
+        // TODO IndicatorsInMemoryCache
         List<Stoch> result = new ArrayList<>();
         List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
         BarSeries barSeries = Bars.build(quotes);
