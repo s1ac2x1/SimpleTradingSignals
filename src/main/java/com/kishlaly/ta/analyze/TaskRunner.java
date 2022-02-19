@@ -85,9 +85,8 @@ public class TaskRunner {
     }
 
     private static void twoTimeframeFunction(TaskType task) {
-        List<String> symbols = new ArrayList<>(getSymbols());
         Context.timeframe = task.getTimeframeIndicators(1).timeframe;
-        symbols.forEach(symbol -> {
+        Context.symbols.forEach(symbol -> {
             SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
             SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
             Log.addDebugLine("");

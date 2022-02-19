@@ -37,7 +37,7 @@ public class CacheBuilder {
         if (!directory.exists()) {
             directory.mkdir();
         }
-        AtomicReference<Set<String>> symbols = new AtomicReference<>(getSymbols());
+        AtomicReference<Set<String>> symbols = new AtomicReference<>(Context.symbols);
         Arrays.stream(timeframes).forEach(screens -> {
             Arrays.stream(tasks).forEach(task -> {
                 // загружаются только один таймфрейм Context.aggregationTimeframe

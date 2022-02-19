@@ -17,14 +17,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
+import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 
 /**
  * @author Vladimir Kishlaly
@@ -46,8 +43,10 @@ public class Main {
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
         Context.testOnly = new ArrayList<String>() {{
-            add("AAPL");
+            add("LMT");
         }};
+        Context.symbols = getSymbols();
+        // выгрузить в контекст все SymbolData?
 
 
         TaskType[] tasks = {
@@ -60,11 +59,19 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks);
-        testSimple(timeframes, tasks);
+//        testOneStrategy(timeframes, tasks, new StopLossVolatileKeltnerBottom(), new TakeProfitVolatileKeltnerTop(100));
+        testAllStrategies(timeframes, tasks);
 
     }
 
-    private static void testSimple(Timeframe[][] timeframes, TaskType[] tasks) {
+    private static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+        Context.stopLossStrategy = stopLossStrategy;
+        Context.takeProfitStrategy = takeProfitStrategy;
+        System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
+        test(timeframes, tasks);
+    }
+
+    private static void testAllStrategies(Timeframe[][] timeframes, TaskType[] tasks) {
         List<HistoricalTesting> result = new ArrayList<>();
         int total = getSLStrategies().size() * getTPStrategies().size();
         AtomicInteger current = new AtomicInteger(1);

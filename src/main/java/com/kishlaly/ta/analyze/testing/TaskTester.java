@@ -21,7 +21,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
-import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
@@ -31,7 +30,6 @@ public class TaskTester {
 
     public static List<HistoricalTesting> test(Timeframe[][] timeframes, TaskType[] tasks) {
         Context.testMode = true;
-        Set<String> symbols = getSymbols();
         StringBuilder log = new StringBuilder();
         List<HistoricalTesting> allTests = new ArrayList<>();
         Arrays.stream(timeframes).forEach(screens -> {
@@ -39,7 +37,7 @@ public class TaskTester {
                 task.updateTimeframeForScreen(1, screens[0]);
                 task.updateTimeframeForScreen(2, screens[1]);
                 Map<String, Set<String>> readableOutput = new HashMap<>();
-                symbols.forEach(symbol -> {
+                Context.symbols.forEach(symbol -> {
                     SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
                     SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
                     SymbolData symbolDataForTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);

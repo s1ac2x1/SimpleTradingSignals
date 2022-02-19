@@ -8,6 +8,7 @@ import com.kishlaly.ta.model.Timeframe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Context {
 
@@ -23,6 +24,7 @@ public class Context {
     public static Timeframe aggregationTimeframe = Timeframe.DAY; // на основе этого таймфрема агрегируются другие котировки
     public static String source;
     public static List<String> testOnly = new ArrayList<>();
+    public static Set<String> symbols;
 
     // чтобы конвертировать в мою таймзону и сравнивать с графиками TradingView
     public static String myTimezone = "Europe/Berlin";

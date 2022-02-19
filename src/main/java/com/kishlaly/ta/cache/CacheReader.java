@@ -43,7 +43,6 @@ public class CacheReader {
     public static CopyOnWriteArrayList<Future> callsInProgress = new CopyOnWriteArrayList<>();
 
     public static void checkCache(Timeframe[][] timeframes, TaskType[] tasks) {
-        Set<String> allSymbols = getSymbols();
         AtomicInteger screenNumber = new AtomicInteger(0);
         Map<Timeframe, Set<String>> missedData = new HashMap<>();
         Arrays.stream(timeframes).forEach(screens -> {
@@ -51,7 +50,7 @@ public class CacheReader {
             // подразумевается, что загружаются только один Context.aggregationTimeframe
             screenNumber.getAndIncrement();
             Context.timeframe = Context.aggregationTimeframe;
-            List<String> missingQuotes = removeCachedQuotesSymbols(allSymbols);
+            List<String> missingQuotes = removeCachedQuotesSymbols(Context.symbols);
             Set<String> missingQuotesCollectedByScreen1 = missedData.get(screens[0]);
             if (missingQuotesCollectedByScreen1 == null) {
                 missingQuotesCollectedByScreen1 = new HashSet<>();
