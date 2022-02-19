@@ -46,7 +46,6 @@ public class Main {
             add("LMT");
         }};
         Context.symbols = getSymbols();
-        // выгрузить в контекст все SymbolData?
 
 
         TaskType[] tasks = {

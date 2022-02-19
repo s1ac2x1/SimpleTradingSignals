@@ -408,7 +408,7 @@ public class TaskTester {
         Long timestampOfLastQuote = screen2.quotes.get(screen2.quotes.size() - 1).getTimestamp();
         int lastQuoteYear = LocalDateTime.ofInstant(Instant.ofEpochSecond(timestampOfLastQuote), ZoneId.of(Context.myTimezone)).getYear();
         int currentYear = LocalDateTime.ofInstant(Instant.now(), ZoneId.of(Context.myTimezone)).getYear();
-        boolean notMoreThatFiveYearsOld = currentYear - lastQuoteYear <= 10;
+        boolean notMoreThatFiveYearsOld = currentYear - lastQuoteYear <= 5;
         return hasHistory.get() && notMoreThatFiveYearsOld;
     }
 

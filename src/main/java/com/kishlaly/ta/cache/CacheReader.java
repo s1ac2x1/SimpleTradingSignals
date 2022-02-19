@@ -3,16 +3,17 @@ package com.kishlaly.ta.cache;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.model.*;
+import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeIndicators;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.model.indicators.Stoch;
-import com.kishlaly.ta.utils.Bars;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.IndicatorUtils;
 import com.kishlaly.ta.utils.Quotes;
-import org.ta4j.core.BarSeries;
 import org.ta4j.core.indicators.EMAIndicator;
 import org.ta4j.core.indicators.StochasticOscillatorDIndicator;
 import org.ta4j.core.indicators.StochasticOscillatorKIndicator;
@@ -109,89 +110,64 @@ public class CacheReader {
         }).collect(Collectors.toList());
     }
 
-    public static List<Quote> loadQuotesFromCache(String symbol) {
-        try {
-            List<Quote> quotes = gson.fromJson(
-                    new String(
-                            Files.readAllBytes(Paths.get(getFolder() + "/" + symbol + "_quotes.txt"))),
-                    new TypeToken<ArrayList<Quote>>() {
-                    }.getType());
-            switch (Context.aggregationTimeframe) {
-                case DAY:
-                    if (Context.timeframe == Timeframe.WEEK) {
-                        quotes = Quotes.dayToWeek(quotes);
-                    }
-                    if (Context.timeframe == Timeframe.HOUR) {
-                        throw new RuntimeException("Requested HOUR quotes, but aggregationTimeframe = DAY");
-                    }
-                    break;
-                case HOUR:
-                    if (Context.timeframe == Timeframe.WEEK) {
-                        quotes = Quotes.hourToDay(quotes);
-                        quotes = Quotes.dayToWeek(quotes);
-                    }
-                    if (Context.timeframe == Timeframe.DAY) {
-                        quotes = Quotes.hourToDay(quotes);
-                    }
-                    break;
-                default:
+    public static List<Quote> loadQuotesFromDiskCache(String symbol) {
+        List<Quote> cachedQuotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
+        if (cachedQuotes != null) {
+            return cachedQuotes;
+        } else {
+            try {
+                List<Quote> quotes = gson.fromJson(
+                        new String(
+                                Files.readAllBytes(Paths.get(getFolder() + "/" + symbol + "_quotes.txt"))),
+                        new TypeToken<ArrayList<Quote>>() {
+                        }.getType());
+                switch (Context.aggregationTimeframe) {
+                    case DAY:
+                        if (Context.timeframe == Timeframe.WEEK) {
+                            quotes = Quotes.dayToWeek(quotes);
+                        }
+                        if (Context.timeframe == Timeframe.HOUR) {
+                            throw new RuntimeException("Requested HOUR quotes, but aggregationTimeframe = DAY");
+                        }
+                        break;
+                    case HOUR:
+                        if (Context.timeframe == Timeframe.WEEK) {
+                            quotes = Quotes.hourToDay(quotes);
+                            quotes = Quotes.dayToWeek(quotes);
+                        }
+                        if (Context.timeframe == Timeframe.DAY) {
+                            quotes = Quotes.hourToDay(quotes);
+                        }
+                        break;
+                    default:
+                }
+                Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
+                QuotesInMemoryCache.put(symbol, Context.timeframe, quotes);
+                return quotes;
+            } catch (IOException e) {
+                return Collections.emptyList();
             }
-            Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
-            return quotes;
-        } catch (IOException e) {
-            return Collections.emptyList();
         }
     }
 
     public static List calculateIndicatorFromCachedQuotes(String symbol, Indicator indicator) {
-        List<Quote> quotes = loadQuotesFromCache(symbol);
-        if (quotes.isEmpty()) {
-            return Collections.emptyList();
-        }
-        Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
-        BarSeries bars = Bars.build(quotes);
         switch (indicator) {
             case MACD:
-                List<HistogramQuote> histogramQuotes = IndicatorUtils.buildMACDHistogram(bars, quotes);
-                List<MACD> macd = new ArrayList<>();
-                histogramQuotes.forEach(histogramQuote -> {
-                    macd.add(new MACD(histogramQuote.getQuote().getTimestamp(), 0d, 0d, histogramQuote.getHistogramValue()));
-                });
-                return macd;
+                return IndicatorUtils.buildMACDHistogram(symbol);
             case EMA13:
-                EMAIndicator ema13 = IndicatorUtils.buildEMA(bars, 13);
-                List<EMA> result = new ArrayList<>();
-                for (int i = 0; i < ema13.getBarSeries().getBarCount(); i++) {
-                    result.add(new EMA(quotes.get(i).getTimestamp(), ema13.getValue(i).doubleValue()));
-                }
-                return result;
+                return IndicatorUtils.buildEMA(symbol, 13);
             case EMA26:
-                EMAIndicator ema26 = IndicatorUtils.buildEMA(bars, 26);
-                List<EMA> res = new ArrayList<>();
-                for (int i = 0; i < ema26.getBarSeries().getBarCount(); i++) {
-                    res.add(new EMA(quotes.get(i).getTimestamp(), ema26.getValue(i).doubleValue()));
-                }
-                return res;
+                return IndicatorUtils.buildEMA(symbol, 26);
             case STOCH:
-                StochasticOscillatorKIndicator stochK = new StochasticOscillatorKIndicator(bars, 14);
-                StochasticOscillatorDIndicator stochD = new StochasticOscillatorDIndicator(stochK);
-                List<Stoch> stoch = new ArrayList<>();
-                for (int i = 0; i < quotes.size(); i++) {
-                    try {
-                        stoch.add(new Stoch(quotes.get(i).getTimestamp(), stochD.getValue(i).doubleValue(), stochK.getValue(i).doubleValue()));
-                    } catch (NumberFormatException e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-                return stoch;
+                return IndicatorUtils.buildStochastic(symbol);
             case KELTNER:
-                return IndicatorUtils.buildKeltnerChannels(quotes);
+                return IndicatorUtils.buildKeltnerChannels(symbol);
             default:
                 return Collections.emptyList();
         }
     }
 
-    public static List loadIndicatorFromCache(String symbol, Indicator indicator) {
+    public static List loadIndicatorFromDiskCache(String symbol, Indicator indicator) {
         try {
             Type type;
             switch (indicator) {
@@ -239,7 +215,7 @@ public class CacheReader {
         SymbolData screen = new SymbolData();
         screen.symbol = symbol;
         screen.timeframe = timeframeIndicators.timeframe;
-        screen.quotes = loadQuotesFromCache(symbol);
+        screen.quotes = loadQuotesFromDiskCache(symbol);
         Arrays.stream(timeframeIndicators.indicators).forEach(indicator -> {
             List data = calculateIndicatorFromCachedQuotes(symbol, indicator);
             screen.indicators.put(indicator, data);

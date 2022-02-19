@@ -3,6 +3,7 @@ package com.kishlaly.ta.analyze.testing.tp;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.Keltner;
+import com.kishlaly.ta.utils.IndicatorUtils;
 
 /**
  * TP на уровне % от вершины канала Кельтнера в каждой новой точке
@@ -15,7 +16,7 @@ public class TakeProfitVolatileKeltnerTop extends TakeProfitStrategy {
 
     @Override
     public double calcualte(SymbolData data, int signalIndex) {
-        Keltner keltner = (Keltner) data.indicators.get(Indicator.KELTNER).get(signalIndex);
+        Keltner keltner = IndicatorUtils.buildKeltnerChannels(data.symbol).get(signalIndex);
         int keltnerTopRatio = (int) getConfig();
         double middle = keltner.getMiddle();
         double top = keltner.getTop();
