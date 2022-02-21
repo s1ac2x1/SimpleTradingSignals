@@ -1,8 +1,7 @@
 package com.kishlaly.ta.cache;
 
 import com.kishlaly.ta.model.Timeframe;
-import com.kishlaly.ta.model.indicators.EMA;
-import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.model.indicators.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +11,9 @@ public class IndicatorsInMemoryCache {
 
     private static ConcurrentHashMap<EMAKey, List<EMA>> ema = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<MACDKey, List<MACD>> macd = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<KeltnerKEY, List<Keltner>> keltner = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<ATRKey, List<ATR>> atr = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
 
     public static void putEMA(String symbol, Timeframe timeframe, int period, List<EMA> data) {
         ema.put(new EMAKey(symbol, timeframe, period), data);
@@ -27,6 +29,101 @@ public class IndicatorsInMemoryCache {
 
     public static List<MACD> getMACD(String symbol, Timeframe timeframe) {
         return macd.get(new MACDKey(symbol, timeframe));
+    }
+
+    public static void putKeltner(String symbol, Timeframe timeframe, List<Keltner> data) {
+        keltner.put(new KeltnerKEY(symbol, timeframe), data);
+    }
+
+    public static List<Keltner> getKeltner(String symbol, Timeframe timeframe) {
+        return keltner.get(new KeltnerKEY(symbol, timeframe));
+    }
+
+    public static void putATR(String symbol, Timeframe timeframe, int period, List<ATR> data) {
+        atr.put(new ATRKey(symbol, timeframe, period), data);
+    }
+
+    public static List<ATR> getATR(String symbol, Timeframe timeframe, int period) {
+        return atr.get(new ATRKey(symbol, timeframe, period));
+    }
+
+    public static void putStoch(String symbol, Timeframe timeframe, List<Stoch> data) {
+        stoch.put(new StochKey(symbol, timeframe), data);
+    }
+
+    public static List<Stoch> getStoch(String symbol, Timeframe timeframe) {
+        return stoch.get(new StochKey(symbol, timeframe));
+    }
+
+    private static class StochKey {
+        String symbol;
+        Timeframe timeframe;
+
+        public StochKey(final String symbol, final Timeframe timeframe) {
+            this.symbol = symbol;
+            this.timeframe = timeframe;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (o == null || this.getClass() != o.getClass()) return false;
+            final StochKey stochKey = (StochKey) o;
+            return this.symbol.equals(stochKey.symbol) && this.timeframe == stochKey.timeframe;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.symbol, this.timeframe);
+        }
+    }
+
+    private static class ATRKey {
+        String symbol;
+        Timeframe timeframe;
+        int period;
+
+        public ATRKey(final String symbol, final Timeframe timeframe, final int period) {
+            this.symbol = symbol;
+            this.timeframe = timeframe;
+            this.period = period;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (o == null || this.getClass() != o.getClass()) return false;
+            final ATRKey atrKey = (ATRKey) o;
+            return this.period == atrKey.period && this.symbol.equals(atrKey.symbol) && this.timeframe == atrKey.timeframe;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.symbol, this.timeframe, this.period);
+        }
+    }
+
+    private static class KeltnerKEY {
+        String symbol;
+        Timeframe timeframe;
+
+        public KeltnerKEY(final String symbol, final Timeframe timeframe) {
+            this.symbol = symbol;
+            this.timeframe = timeframe;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (o == null || this.getClass() != o.getClass()) return false;
+            final KeltnerKEY that = (KeltnerKEY) o;
+            return this.symbol.equals(that.symbol) && this.timeframe == that.timeframe;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.symbol, this.timeframe);
+        }
     }
 
     private static class MACDKey {

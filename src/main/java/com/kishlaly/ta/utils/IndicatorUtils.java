@@ -18,9 +18,9 @@ import java.util.List;
 public class IndicatorUtils {
 
     public static List<EMA> buildEMA(String symbol, int period) {
-        List<EMA> fromCache = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period);
-        if (fromCache != null) {
-            return fromCache;
+        List<EMA> cached = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period);
+        if (cached != null) {
+            return cached;
         } else {
             List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
             BarSeries barSeries = Bars.build(quotes);
@@ -65,45 +65,60 @@ public class IndicatorUtils {
     }
 
     public static List<Keltner> buildKeltnerChannels(String symbol) {
-        // TODO IndicatorsInMemoryCache
-        List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
-        BarSeries barSeries = Bars.build(quotes);
-        KeltnerChannelMiddleIndicator middle = new KeltnerChannelMiddleIndicator(barSeries, 20);
-        KeltnerChannelLowerIndicator low = new KeltnerChannelLowerIndicator(middle, 2, 10);
-        KeltnerChannelUpperIndicator top = new KeltnerChannelUpperIndicator(middle, 2, 10);
-        List<Keltner> result = new ArrayList<>();
-        for (int i = 0; i < quotes.size(); i++) {
-            result.add(new Keltner(quotes.get(i).getTimestamp(), low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
+        List<Keltner> cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe);
+        if (cached != null) {
+            return cached;
+        } else {
+            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
+            BarSeries barSeries = Bars.build(quotes);
+            KeltnerChannelMiddleIndicator middle = new KeltnerChannelMiddleIndicator(barSeries, 20);
+            KeltnerChannelLowerIndicator low = new KeltnerChannelLowerIndicator(middle, 2, 10);
+            KeltnerChannelUpperIndicator top = new KeltnerChannelUpperIndicator(middle, 2, 10);
+            List<Keltner> result = new ArrayList<>();
+            for (int i = 0; i < quotes.size(); i++) {
+                result.add(new Keltner(quotes.get(i).getTimestamp(), low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
+            }
+            IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe, result);
+            return result;
         }
-        return result;
     }
 
     public static List<ATR> buildATR(String symbol, int barCount) {
-        // TODO IndicatorsInMemoryCache
-        List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
-        List<ATR> result = new ArrayList<>();
-        BarSeries barSeries = Bars.build(quotes);
-        ATRIndicator atrIndicator = new ATRIndicator(barSeries, barCount);
-        for (int i = 0; i < quotes.size(); i++) {
-            result.add(new ATR(quotes.get(i).getTimestamp(), atrIndicator.getValue(i).doubleValue()));
+        List<ATR> cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe, barCount);
+        if (cached != null) {
+            return cached;
+        } else {
+            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
+            List<ATR> result = new ArrayList<>();
+            BarSeries barSeries = Bars.build(quotes);
+            ATRIndicator atrIndicator = new ATRIndicator(barSeries, barCount);
+            for (int i = 0; i < quotes.size(); i++) {
+                result.add(new ATR(quotes.get(i).getTimestamp(), atrIndicator.getValue(i).doubleValue()));
+            }
+            IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result);
+            return result;
         }
-        return result;
     }
 
     public static List<Stoch> buildStochastic(String symbol) {
-        // TODO IndicatorsInMemoryCache
-        List<Stoch> result = new ArrayList<>();
-        List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
-        BarSeries barSeries = Bars.build(quotes);
-        StochasticOscillatorKIndicator stochK = new StochasticOscillatorKIndicator(barSeries, 14);
-        StochasticOscillatorDIndicator stochD = new StochasticOscillatorDIndicator(stochK);
-        for (int i = 0; i < quotes.size(); i++) {
-            try {
-                result.add(new Stoch(quotes.get(i).getTimestamp(), stochD.getValue(i).doubleValue(), stochK.getValue(i).doubleValue()));
-            } catch (NumberFormatException e) {
+        List<Stoch> cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe);
+        if (cached != null) {
+            return cached;
+        } else {
+            List<Stoch> result = new ArrayList<>();
+            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
+            BarSeries barSeries = Bars.build(quotes);
+            StochasticOscillatorKIndicator stochK = new StochasticOscillatorKIndicator(barSeries, 14);
+            StochasticOscillatorDIndicator stochD = new StochasticOscillatorDIndicator(stochK);
+            for (int i = 0; i < quotes.size(); i++) {
+                try {
+                    result.add(new Stoch(quotes.get(i).getTimestamp(), stochD.getValue(i).doubleValue(), stochK.getValue(i).doubleValue()));
+                } catch (NumberFormatException e) {
+                }
             }
+            IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result);
+            return result;
         }
-        return result;
     }
 
 }
