@@ -76,8 +76,6 @@ public class TaskRunner {
             double takeProfit = best.getTakeProfitStrategy().calcualte(complexTaskResult.screen2, complexTaskResult.screen2.quotes.size() - 1);
             suggestions.add(complexTaskResult.symbol + " SL: " + Numbers.round(stopLoss) + "; TP: " + Numbers.round(takeProfit) + " [" + best.getStopLossStrategy() + " ... " + best.getTakeProfitStrategy() + "]");
             symbolNumber.getAndIncrement();
-            QuotesInMemoryCache.clear();
-            IndicatorsInMemoryCache.clear();
         });
         if (!suggestions.isEmpty()) {
             try {
@@ -114,8 +112,6 @@ public class TaskRunner {
             } catch (Exception e) {
                 System.out.println("Function failed for symbol " + symbol + " with message: " + e.getMessage());
             }
-            QuotesInMemoryCache.clear();
-            IndicatorsInMemoryCache.clear();
         });
     }
 
