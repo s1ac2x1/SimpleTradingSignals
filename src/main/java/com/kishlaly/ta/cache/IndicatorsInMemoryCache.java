@@ -1,15 +1,18 @@
 package com.kishlaly.ta.cache;
 
+import com.google.gson.Gson;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class IndicatorsInMemoryCache {
+
+    private static Gson gson = new Gson();
 
     private static ConcurrentHashMap<EMAKey, List<EMA>> ema = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<MACDKey, List<MACD>> macd = new ConcurrentHashMap<>();
@@ -22,9 +25,15 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<EMA> getEMA(String symbol, Timeframe timeframe, int period) {
-        List<EMA> copy = new ArrayList<>();
-        Collections.copy(copy, ema.getOrDefault(new EMAKey(symbol, timeframe, period), Collections.emptyList()));
-        return copy;
+        List<EMA> cached = ema.getOrDefault(new EMAKey(symbol, timeframe, period), Collections.emptyList());
+        if (!cached.isEmpty()) {
+            String json = gson.toJson(cached);
+            List<EMA> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<EMA>>() {
+            }.getType());
+            Collections.sort(copy, Comparator.comparing(EMA::getTimestamp));
+            return copy;
+        }
+        return Collections.emptyList();
     }
 
     public static void putMACD(String symbol, Timeframe timeframe, List<MACD> data) {
@@ -32,9 +41,15 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<MACD> getMACD(String symbol, Timeframe timeframe) {
-        List<MACD> copy = new ArrayList<>();
-        Collections.copy(copy, macd.getOrDefault(new MACDKey(symbol, timeframe), Collections.emptyList()));
-        return copy;
+        List<MACD> cached = macd.get(new MACDKey(symbol, timeframe));
+        if (!cached.isEmpty()) {
+            String json = gson.toJson(cached);
+            List<MACD> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<MACD>>() {
+            }.getType());
+            Collections.sort(copy, Comparator.comparing(MACD::getTimestamp));
+            return copy;
+        }
+        return Collections.emptyList();
     }
 
     public static void putKeltner(String symbol, Timeframe timeframe, List<Keltner> data) {
@@ -42,9 +57,15 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<Keltner> getKeltner(String symbol, Timeframe timeframe) {
-        List<Keltner> copy = new ArrayList<>();
-        Collections.copy(copy, keltner.getOrDefault(new KeltnerKEY(symbol, timeframe), Collections.emptyList()));
-        return copy;
+        List<Keltner> cached = keltner.getOrDefault(new KeltnerKEY(symbol, timeframe), Collections.emptyList());
+        if (!cached.isEmpty()) {
+            String json = gson.toJson(cached);
+            List<Keltner> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<Keltner>>() {
+            }.getType());
+            Collections.sort(copy, Comparator.comparing(Keltner::getTimestamp));
+            return copy;
+        }
+        return Collections.emptyList();
     }
 
     public static void putATR(String symbol, Timeframe timeframe, int period, List<ATR> data) {
@@ -52,9 +73,15 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<ATR> getATR(String symbol, Timeframe timeframe, int period) {
-        List<ATR> copy = new ArrayList<>();
-        Collections.copy(copy, atr.getOrDefault(new ATRKey(symbol, timeframe, period), Collections.emptyList()));
-        return copy;
+        List<ATR> cached = atr.getOrDefault(new ATRKey(symbol, timeframe, period), Collections.emptyList());
+        if (!cached.isEmpty()) {
+            String json = gson.toJson(cached);
+            List<ATR> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<ATR>>() {
+            }.getType());
+            Collections.sort(copy, Comparator.comparing(ATR::getTimestamp));
+            return copy;
+        }
+        return Collections.emptyList();
     }
 
     public static void putStoch(String symbol, Timeframe timeframe, List<Stoch> data) {
@@ -62,9 +89,15 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<Stoch> getStoch(String symbol, Timeframe timeframe) {
-        List<Stoch> copy = new ArrayList<>();
-        Collections.copy(copy, stoch.getOrDefault(new StochKey(symbol, timeframe), Collections.emptyList()));
-        return copy;
+        List<Stoch> cached = stoch.getOrDefault(new StochKey(symbol, timeframe), Collections.emptyList());
+        if (!cached.isEmpty()) {
+            String json = gson.toJson(cached);
+            List<Stoch> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<Stoch>>() {
+            }.getType());
+            Collections.sort(copy, Comparator.comparing(Stoch::getTimestamp));
+            return copy;
+        }
+        return Collections.emptyList();
     }
 
     public static void clear() {

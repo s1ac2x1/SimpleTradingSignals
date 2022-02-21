@@ -141,7 +141,6 @@ public class CacheReader {
                         break;
                     default:
                 }
-                Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
                 QuotesInMemoryCache.put(symbol, Context.timeframe, quotes);
                 return quotes;
             } catch (IOException e) {
