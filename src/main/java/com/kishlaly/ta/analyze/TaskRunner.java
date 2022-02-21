@@ -90,13 +90,15 @@ public class TaskRunner {
 
     private static void twoTimeframeFunction(TaskType task) {
         Context.timeframe = task.getTimeframeIndicators(1).timeframe;
+        AtomicInteger processingSymbol = new AtomicInteger(1);
+        int totalSymbols = Context.symbols.size();
         Context.symbols.forEach(symbol -> {
             SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
             SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
             Log.addDebugLine("");
             Log.addDebugLine(" === " + symbol + " === ");
             try {
-                System.out.println("Applying " + task.name() + " on " + symbol + " ...");
+                System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " on " + symbol + " ...");
                 TaskResult taskResult = task.getFunction().apply(screen1, screen2);
                 Log.addDebugLine(taskResult.isSignal() ? "Вердикт: проверить" : "Вердикт: точно нет");
                 Log.addDebugLine("");
@@ -112,6 +114,9 @@ public class TaskRunner {
             } catch (Exception e) {
                 System.out.println("Function failed for symbol " + symbol + " with message: " + e.getMessage());
             }
+            processingSymbol.getAndIncrement();
+            QuotesInMemoryCache.clear();
+            IndicatorsInMemoryCache.clear();
         });
     }
 

@@ -31,7 +31,7 @@
             new Food(3, 'макароны безглютеновые', 6.4, 2.5, 38),
             new Food(4, 'творог Bio Körniger Frischkäse', 12.7, 4, 1),
             new Food(5, 'пшенка', 3, 0.7, 17),
-            new Food(6, 'гречка', 3, 1, 21),
+            new Food(6, 'гречка', 4, 1, 21),
             new Food(7, 'изолят', 87, 0.5, 2),
             new Food(8, 'овощи Iglo Pilz Pfanne', 1.8, 1.1, 7.2),
             new Food(9, 'овощи Edeka Land Gemüse', 2, 0.1, 5.9),
@@ -45,9 +45,10 @@
             new Food(17, 'курогрудь', 23.6, 2.5, 0.4),
             new Food(18, 'овощи Iglo Kürbis Qinoa', 3.2, 2.0, 9.3),
             new Food(18, 'рыба филе Edeka Bio', 20, 1, 3),
+            new Food(19, 'индюшиные сердечки', 16, 5.1, 0.4),
         ];
 
-        foodBasket.sort(function(a, b) {
+        foodBasket.sort(function (a, b) {
             var textA = a.name.toUpperCase();
             var textB = b.name.toUpperCase();
             return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -107,6 +108,8 @@
             document.getElementById("planBelki").innerHTML = belki;
             document.getElementById("planGiri").innerHTML = giri;
             document.getElementById("planUglevodi").innerHTML = uglevodi;
+            var total = belki * 4 + giri * 9 + uglevodi * 4;
+            document.getElementById("total").innerHTML = total;
         }
 
         function findObjectByKey(array, key, value) {
@@ -336,6 +339,15 @@
                     <td>
                         <span id="planUglevodi"></span>
                     </td>
+                </tr>
+            </table>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+            <table>
+                <tr>
+                    <td><span>Калории</span></td>
+                    <td><span id="total"></span></td>
                 </tr>
             </table>
         </td>
