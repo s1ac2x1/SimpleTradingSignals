@@ -3,6 +3,7 @@ package com.kishlaly.ta.cache;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.Timeframe;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -17,7 +18,13 @@ public class QuotesInMemoryCache {
     }
 
     public static List<Quote> get(String symbol, Timeframe timeframe) {
-        return cache.getOrDefault(new Key(symbol, timeframe), Collections.emptyList());
+        List<Quote> result = new ArrayList<>();
+        Collections.copy(result, cache.getOrDefault(new Key(symbol, timeframe), Collections.emptyList()));
+        return result;
+    }
+
+    public static void clear() {
+        cache.clear();
     }
 
     private static class Key {

@@ -1,6 +1,8 @@
 package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.cache.CacheReader;
+import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
+import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.HistoricalTesting;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.TaskResult;
@@ -44,7 +46,7 @@ public class TaskRunner {
             twoTimeframeFunction(task);
             System.out.println("\n");
             saveLog(task);
-            //findOptimalSLTP(task);
+            findOptimalSLTP(task);
         }));
     }
 
@@ -72,8 +74,10 @@ public class TaskRunner {
             HistoricalTesting best = result.get(result.size() - 1);
             double stopLoss = best.getStopLossStrategy().calculate(complexTaskResult.screen2, complexTaskResult.screen2.quotes.size() - 1);
             double takeProfit = best.getTakeProfitStrategy().calcualte(complexTaskResult.screen2, complexTaskResult.screen2.quotes.size() - 1);
-            suggestions.add(complexTaskResult.symbol + " SL: " + Numbers.round(stopLoss) + "; TP: " + Numbers.round(takeProfit) + " [" + best.getStopLossStrategy() + " ... " + best.getTakeProfitStrategy());
+            suggestions.add(complexTaskResult.symbol + " SL: " + Numbers.round(stopLoss) + "; TP: " + Numbers.round(takeProfit) + " [" + best.getStopLossStrategy() + " ... " + best.getTakeProfitStrategy() + "]");
             symbolNumber.getAndIncrement();
+            QuotesInMemoryCache.clear();
+            IndicatorsInMemoryCache.clear();
         });
         if (!suggestions.isEmpty()) {
             try {
@@ -110,6 +114,8 @@ public class TaskRunner {
             } catch (Exception e) {
                 System.out.println("Function failed for symbol " + symbol + " with message: " + e.getMessage());
             }
+            QuotesInMemoryCache.clear();
+            IndicatorsInMemoryCache.clear();
         });
     }
 

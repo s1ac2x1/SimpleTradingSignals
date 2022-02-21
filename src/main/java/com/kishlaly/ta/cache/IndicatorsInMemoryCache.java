@@ -3,6 +3,7 @@ package com.kishlaly.ta.cache;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +22,9 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<EMA> getEMA(String symbol, Timeframe timeframe, int period) {
-        return ema.getOrDefault(new EMAKey(symbol, timeframe, period), Collections.emptyList());
+        List<EMA> copy = new ArrayList<>();
+        Collections.copy(copy, ema.getOrDefault(new EMAKey(symbol, timeframe, period), Collections.emptyList()));
+        return copy;
     }
 
     public static void putMACD(String symbol, Timeframe timeframe, List<MACD> data) {
@@ -29,7 +32,9 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<MACD> getMACD(String symbol, Timeframe timeframe) {
-        return macd.getOrDefault(new MACDKey(symbol, timeframe), Collections.emptyList());
+        List<MACD> copy = new ArrayList<>();
+        Collections.copy(copy, macd.getOrDefault(new MACDKey(symbol, timeframe), Collections.emptyList()));
+        return copy;
     }
 
     public static void putKeltner(String symbol, Timeframe timeframe, List<Keltner> data) {
@@ -37,7 +42,9 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<Keltner> getKeltner(String symbol, Timeframe timeframe) {
-        return keltner.getOrDefault(new KeltnerKEY(symbol, timeframe), Collections.emptyList());
+        List<Keltner> copy = new ArrayList<>();
+        Collections.copy(copy, keltner.getOrDefault(new KeltnerKEY(symbol, timeframe), Collections.emptyList()));
+        return copy;
     }
 
     public static void putATR(String symbol, Timeframe timeframe, int period, List<ATR> data) {
@@ -45,7 +52,9 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<ATR> getATR(String symbol, Timeframe timeframe, int period) {
-        return atr.getOrDefault(new ATRKey(symbol, timeframe, period), Collections.emptyList());
+        List<ATR> copy = new ArrayList<>();
+        Collections.copy(copy, atr.getOrDefault(new ATRKey(symbol, timeframe, period), Collections.emptyList()));
+        return copy;
     }
 
     public static void putStoch(String symbol, Timeframe timeframe, List<Stoch> data) {
@@ -53,7 +62,17 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<Stoch> getStoch(String symbol, Timeframe timeframe) {
-        return stoch.getOrDefault(new StochKey(symbol, timeframe), Collections.emptyList());
+        List<Stoch> copy = new ArrayList<>();
+        Collections.copy(copy, stoch.getOrDefault(new StochKey(symbol, timeframe), Collections.emptyList()));
+        return copy;
+    }
+
+    public static void clear() {
+        ema.clear();
+        macd.clear();
+        keltner.clear();
+        atr.clear();
+        stoch.clear();
     }
 
     private static class StochKey {
