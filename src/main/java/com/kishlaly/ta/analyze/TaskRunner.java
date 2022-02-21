@@ -75,12 +75,14 @@ public class TaskRunner {
             suggestions.add(complexTaskResult.symbol + " SL: " + Numbers.round(stopLoss) + "; TP: " + Numbers.round(takeProfit) + " [" + best.getStopLossStrategy() + " ... " + best.getTakeProfitStrategy());
             symbolNumber.getAndIncrement();
         });
-        try {
-            String prefix = "[" + Context.logTimeframe1.name() + "][" + Context.logTimeframe2.name() + "]";
-            String fileName = Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + "_optimal.txt";
-            Files.write(Paths.get(fileName), suggestions.stream().collect(Collectors.joining(System.lineSeparator())).getBytes());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        if (!suggestions.isEmpty()) {
+            try {
+                String prefix = "[" + Context.logTimeframe1.name() + "][" + Context.logTimeframe2.name() + "]";
+                String fileName = Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + "_optimal.txt";
+                Files.write(Paths.get(fileName), suggestions.stream().collect(Collectors.joining(System.lineSeparator())).getBytes());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
