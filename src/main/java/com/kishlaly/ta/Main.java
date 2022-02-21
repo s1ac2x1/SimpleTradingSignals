@@ -43,7 +43,8 @@ public class Main {
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
         Context.testOnly = new ArrayList<String>() {{
-            add("LMT");
+            //add("LMT");
+            add("AAPL");
         }};
         Context.symbols = getSymbols();
 
@@ -58,8 +59,8 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks);
-//        testOneStrategy(timeframes, tasks, new StopLossVolatileKeltnerBottom(), new TakeProfitVolatileKeltnerTop(100));
-        testAllStrategies(timeframes, tasks);
+        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitVolatileKeltnerTop(100));
+//        testAllStrategies(timeframes, tasks);
 
     }
 

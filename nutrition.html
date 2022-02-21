@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Подсчет калорий</title>
     <script>
-        var weight = 89;
+        var weight = 88;
         var tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
         var tomorrowDay = tomorrow.getDay();
@@ -43,6 +43,8 @@
             new Food(15, 'хрустики рисовые', 8.9, 3.8, 77),
             new Food(16, 'овощи Brokkoli & Blumenkohl', 2.6, 1, 3.3),
             new Food(17, 'курогрудь', 23.6, 2.5, 0.4),
+            new Food(18, 'овощи Iglo Kürbis Qinoa', 3.2, 2.0, 9.3),
+            new Food(18, 'рыба филе Edeka Bio', 20, 1, 3),
         ];
 
         foodBasket.sort(function(a, b) {

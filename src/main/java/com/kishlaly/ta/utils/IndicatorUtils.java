@@ -36,28 +36,32 @@ public class IndicatorUtils {
     }
 
     public static List<MACD> buildMACDHistogram(String symbol) {
-        // TODO IndicatorsInMemoryCache
-        List<MACD> result = new ArrayList<>();
-        List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
-        BarSeries barSeries = Bars.build(quotes);
+        List<MACD> cached = IndicatorsInMemoryCache.getMACD(symbol, Context.timeframe);
+        if (cached != null) {
+            return cached;
+        } else {
+            List<MACD> result = new ArrayList<>();
+            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
+            BarSeries barSeries = Bars.build(quotes);
 
-        ClosePriceIndicator closePrice = new ClosePriceIndicator(barSeries);
-        MACDIndicator macd = new MACDIndicator(closePrice);
+            ClosePriceIndicator closePrice = new ClosePriceIndicator(barSeries);
+            MACDIndicator macd = new MACDIndicator(closePrice);
 
-        BarSeries macdSeries = new BaseBarSeries();
-        for (int i = 0; i < barSeries.getBarCount(); i++) {
-            macdSeries.addBar(barSeries.getBar(i).getEndTime(), 0d, 0d, 0d,
-                    macd.getValue(i).doubleValue(), 0d);
+            BarSeries macdSeries = new BaseBarSeries();
+            for (int i = 0; i < barSeries.getBarCount(); i++) {
+                macdSeries.addBar(barSeries.getBar(i).getEndTime(), 0d, 0d, 0d,
+                        macd.getValue(i).doubleValue(), 0d);
+            }
+            ClosePriceIndicator macdSignalIndicator = new ClosePriceIndicator(macdSeries);
+            EMAIndicator macdSignal = new EMAIndicator(macdSignalIndicator, 9);
+
+            for (int i = 0; i < barSeries.getBarCount(); i++) {
+                double histogram = macd.getValue(i).minus(macdSignal.getValue(i)).doubleValue();
+                result.add(new MACD(quotes.get(i).getTimestamp(), 0d, 0d, histogram));
+            }
+            IndicatorsInMemoryCache.putMACD(symbol, Context.timeframe, result);
+            return result;
         }
-        ClosePriceIndicator macdSignalIndicator = new ClosePriceIndicator(macdSeries);
-        EMAIndicator macdSignal = new EMAIndicator(macdSignalIndicator, 9);
-
-        for (int i = 0; i < barSeries.getBarCount(); i++) {
-            double histogram = macd.getValue(i).minus(macdSignal.getValue(i)).doubleValue();
-            result.add(new MACD(quotes.get(i).getTimestamp(), 0d, 0d, histogram));
-        }
-
-        return result;
     }
 
     public static List<Keltner> buildKeltnerChannels(String symbol) {
