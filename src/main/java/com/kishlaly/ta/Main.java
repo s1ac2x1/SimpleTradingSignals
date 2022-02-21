@@ -41,12 +41,12 @@ public class Main {
         };
 
 //        Context.source = "symbols/sp500.txt";
-        Context.source = "symbols/screener_2.txt";
+//        Context.source = "symbols/screener_2.txt";
 //        Context.source = "symbols/screener_many.txt";
-//        Context.source = "symbols/naga.txt";
-        Context.testOnly = new ArrayList<String>() {{
-            add("LMT");
-        }};
+        Context.source = "symbols/naga.txt";
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("LMT");
+//        }};
         Context.symbols = getSymbols();
 
 

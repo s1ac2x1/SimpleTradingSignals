@@ -19,7 +19,7 @@ public class IndicatorUtils {
 
     public static List<EMA> buildEMA(String symbol, int period) {
         List<EMA> cached = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period);
-        if (cached != null) {
+        if (!cached.isEmpty()) {
             return cached;
         } else {
             List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
@@ -37,7 +37,7 @@ public class IndicatorUtils {
 
     public static List<MACD> buildMACDHistogram(String symbol) {
         List<MACD> cached = IndicatorsInMemoryCache.getMACD(symbol, Context.timeframe);
-        if (cached != null) {
+        if (!cached.isEmpty()) {
             return cached;
         } else {
             List<MACD> result = new ArrayList<>();
@@ -66,7 +66,7 @@ public class IndicatorUtils {
 
     public static List<Keltner> buildKeltnerChannels(String symbol) {
         List<Keltner> cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe);
-        if (cached != null) {
+        if (!cached.isEmpty()) {
             return cached;
         } else {
             List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
@@ -85,7 +85,7 @@ public class IndicatorUtils {
 
     public static List<ATR> buildATR(String symbol, int barCount) {
         List<ATR> cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe, barCount);
-        if (cached != null) {
+        if (!cached.isEmpty()) {
             return cached;
         } else {
             List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
@@ -102,7 +102,7 @@ public class IndicatorUtils {
 
     public static List<Stoch> buildStochastic(String symbol) {
         List<Stoch> cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe);
-        if (cached != null) {
+        if (!cached.isEmpty()) {
             return cached;
         } else {
             List<Stoch> result = new ArrayList<>();

@@ -3,6 +3,7 @@ package com.kishlaly.ta.cache;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.Timeframe;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,7 +17,7 @@ public class QuotesInMemoryCache {
     }
 
     public static List<Quote> get(String symbol, Timeframe timeframe) {
-        return cache.get(new Key(symbol, timeframe));
+        return cache.getOrDefault(new Key(symbol, timeframe), Collections.emptyList());
     }
 
     private static class Key {

@@ -112,7 +112,7 @@ public class CacheReader {
 
     public static List<Quote> loadQuotesFromDiskCache(String symbol) {
         List<Quote> cachedQuotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
-        if (cachedQuotes != null) {
+        if (!cachedQuotes.isEmpty()) {
             return cachedQuotes;
         } else {
             try {

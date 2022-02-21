@@ -44,7 +44,7 @@ public class TaskRunner {
             twoTimeframeFunction(task);
             System.out.println("\n");
             saveLog(task);
-            findOptimalSLTP(task);
+            //findOptimalSLTP(task);
         }));
     }
 

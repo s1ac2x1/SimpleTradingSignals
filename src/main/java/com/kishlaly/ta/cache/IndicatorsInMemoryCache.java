@@ -3,6 +3,7 @@ package com.kishlaly.ta.cache;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,7 +21,7 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<EMA> getEMA(String symbol, Timeframe timeframe, int period) {
-        return ema.get(new EMAKey(symbol, timeframe, period));
+        return ema.getOrDefault(new EMAKey(symbol, timeframe, period), Collections.emptyList());
     }
 
     public static void putMACD(String symbol, Timeframe timeframe, List<MACD> data) {
@@ -28,7 +29,7 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<MACD> getMACD(String symbol, Timeframe timeframe) {
-        return macd.get(new MACDKey(symbol, timeframe));
+        return macd.getOrDefault(new MACDKey(symbol, timeframe), Collections.emptyList());
     }
 
     public static void putKeltner(String symbol, Timeframe timeframe, List<Keltner> data) {
@@ -36,7 +37,7 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<Keltner> getKeltner(String symbol, Timeframe timeframe) {
-        return keltner.get(new KeltnerKEY(symbol, timeframe));
+        return keltner.getOrDefault(new KeltnerKEY(symbol, timeframe), Collections.emptyList());
     }
 
     public static void putATR(String symbol, Timeframe timeframe, int period, List<ATR> data) {
@@ -44,7 +45,7 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<ATR> getATR(String symbol, Timeframe timeframe, int period) {
-        return atr.get(new ATRKey(symbol, timeframe, period));
+        return atr.getOrDefault(new ATRKey(symbol, timeframe, period), Collections.emptyList());
     }
 
     public static void putStoch(String symbol, Timeframe timeframe, List<Stoch> data) {
@@ -52,7 +53,7 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<Stoch> getStoch(String symbol, Timeframe timeframe) {
-        return stoch.get(new StochKey(symbol, timeframe));
+        return stoch.getOrDefault(new StochKey(symbol, timeframe), Collections.emptyList());
     }
 
     private static class StochKey {
