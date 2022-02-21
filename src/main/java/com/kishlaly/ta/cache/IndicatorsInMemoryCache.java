@@ -41,7 +41,7 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<MACD> getMACD(String symbol, Timeframe timeframe) {
-        List<MACD> cached = macd.get(new MACDKey(symbol, timeframe));
+        List<MACD> cached = macd.getOrDefault(new MACDKey(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
             List<MACD> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<MACD>>() {
