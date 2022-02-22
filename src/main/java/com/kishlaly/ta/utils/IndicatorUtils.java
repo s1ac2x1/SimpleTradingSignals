@@ -14,6 +14,7 @@ import org.ta4j.core.indicators.keltner.KeltnerChannelUpperIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IndicatorUtils {
 
@@ -30,6 +31,7 @@ public class IndicatorUtils {
             for (int i = 0; i < ema.getBarSeries().getBarCount(); i++) {
                 result.add(new EMA(quotes.get(i).getTimestamp(), ema.getValue(i).doubleValue()));
             }
+            result = result.stream().filter(EMA::valuesPresent).collect(Collectors.toList());
             IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe, period, result);
             return result;
         }
@@ -59,6 +61,7 @@ public class IndicatorUtils {
                 double histogram = macd.getValue(i).minus(macdSignal.getValue(i)).doubleValue();
                 result.add(new MACD(quotes.get(i).getTimestamp(), 0d, 0d, histogram));
             }
+            result = result.stream().filter(MACD::valuesPresent).collect(Collectors.toList());
             IndicatorsInMemoryCache.putMACD(symbol, Context.timeframe, result);
             return result;
         }
@@ -78,6 +81,7 @@ public class IndicatorUtils {
             for (int i = 0; i < quotes.size(); i++) {
                 result.add(new Keltner(quotes.get(i).getTimestamp(), low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
             }
+            result = result.stream().filter(Keltner::valuesPresent).collect(Collectors.toList());
             IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe, result);
             return result;
         }
@@ -95,6 +99,7 @@ public class IndicatorUtils {
             for (int i = 0; i < quotes.size(); i++) {
                 result.add(new ATR(quotes.get(i).getTimestamp(), atrIndicator.getValue(i).doubleValue()));
             }
+            result = result.stream().filter(ATR::valuesPresent).collect(Collectors.toList());
             IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result);
             return result;
         }
@@ -116,6 +121,7 @@ public class IndicatorUtils {
                 } catch (NumberFormatException e) {
                 }
             }
+            result = result.stream().filter(Stoch::valuesPresent).collect(Collectors.toList());
             IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result);
             return result;
         }

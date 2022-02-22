@@ -12,10 +12,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.utils.Context.*;
@@ -195,7 +199,13 @@ public class CacheBuilder {
             if (!directory.exists()) {
                 directory.mkdir();
             }
-            String json = gson.toJson(quotes);
+            ZoneId zone = ZoneId.of(myTimezone);
+            int currentYear = LocalDateTime.ofInstant(Instant.now(), zone).getYear();
+            List<Quote> filteredByHistory = quotes.stream().filter(quote -> {
+                int quoteYear = LocalDateTime.ofInstant(Instant.ofEpochSecond(quote.getTimestamp()), zone).getYear();
+                return currentYear - quoteYear <= yearsToAnalyze;
+            }).collect(Collectors.toList());
+            String json = gson.toJson(filteredByHistory);
             Files.write(Paths.get(folder + "/" + symbol + "_quotes.txt"), json.getBytes());
         } catch (IOException e) {
             e.printStackTrace();

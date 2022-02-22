@@ -113,6 +113,10 @@ public class Quote implements Serializable {
         this.volume = volume;
     }
 
+    public boolean valuesPesent() {
+        return !Double.isNaN(open) && !Double.isNaN(close) && !Double.isNaN(low) && !Double.isNaN(high) && !Double.isNaN(volume);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

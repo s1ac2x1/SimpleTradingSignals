@@ -30,4 +30,9 @@ public class Keltner {
     public Long getTimestamp() {
         return this.timestamp;
     }
+
+    public boolean valuesPresent() {
+        return !Double.isNaN(low) && !Double.isNaN(middle) && !Double.isNaN(top);
+    }
+
 }

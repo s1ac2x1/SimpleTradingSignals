@@ -79,7 +79,7 @@ public class Quotes {
     public static int resolveMinBarCount(Timeframe timeframe) {
         // если агрегация на основе часовых котировок (которых ~550), то дневных будет ~35, а недельных нет смысла рассматривать
         // если агрегация на основе дневных котировок (которых до 5500), то недельных будет до 1110
-        return 11; // меньше нельзя, иначе не сработает StopLossStrategy.FIXED
+        return 21; // меньше нельзя, иначе не сработает StopLossFixedPrice
 
 //        int notSet = -1;
 //        switch (timeframe) {

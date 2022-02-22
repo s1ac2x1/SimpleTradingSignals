@@ -76,4 +76,8 @@ public class MACD {
     public void setMyDate(final String myDate) {
         this.myDate = myDate;
     }
+
+    public boolean valuesPresent() {
+        return !Double.isNaN(macd) && !Double.isNaN(signal) && !Double.isNaN(histogram);
+    }
 }

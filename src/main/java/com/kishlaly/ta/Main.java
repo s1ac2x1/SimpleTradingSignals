@@ -40,12 +40,12 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-//        Context.source = "symbols/sp500.txt";
-        Context.source = "symbols/screener_2.txt";
+        Context.source = "symbols/sp500.txt";
+//        Context.source = "symbols/screener_2.txt";
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
 //        Context.testOnly = new ArrayList<String>() {{
-//            add("PYPL");
+//            add("ED");
 //            add("PEG");
 //            add("SRE");
 //        }};
@@ -64,8 +64,6 @@ public class Main {
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitVolatileKeltnerTop(100));
 //        testAllStrategies(timeframes, tasks);
     }
-
-    фильтровать все индикаторы с NaN
 
     private static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         Context.stopLossStrategy = stopLossStrategy;

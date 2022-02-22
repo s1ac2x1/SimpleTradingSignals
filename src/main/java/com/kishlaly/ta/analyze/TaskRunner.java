@@ -63,17 +63,19 @@ public class TaskRunner {
                     Context.stopLossStrategy = stopLossStrategy;
                     Context.takeProfitStrategy = takeProfitStrategy;
                     Timeframe[][] timeframes = {
-                            {complexTaskResult.screen1.timeframe, complexTaskResult.screen2.timeframe},
+                            {complexTaskResult.timeframe1, complexTaskResult.timeframe2},
                     };
                     System.out.println("Testing symbol " + symbolNumber.get() + "/" + totalSymbols + " with TP/SL " + currentSLTPStrategy.get() + "/" + totalSLTPStrategies);
                     result.addAll(test(timeframes, new TaskType[]{task}));
                     currentSLTPStrategy.getAndIncrement();
                 });
             });
+            SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), complexTaskResult.symbol);
+            SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), complexTaskResult.symbol);
             Collections.sort(result, Comparator.comparing(HistoricalTesting::getBalance));
             HistoricalTesting best = result.get(result.size() - 1);
-            double stopLoss = best.getStopLossStrategy().calculate(complexTaskResult.screen2, complexTaskResult.screen2.quotes.size() - 1);
-            double takeProfit = best.getTakeProfitStrategy().calcualte(complexTaskResult.screen2, complexTaskResult.screen2.quotes.size() - 1);
+            double stopLoss = best.getStopLossStrategy().calculate(screen2, screen2.quotes.size() - 1);
+            double takeProfit = best.getTakeProfitStrategy().calcualte(screen2, screen2.quotes.size() - 1);
             suggestions.add(complexTaskResult.symbol + " SL: " + Numbers.round(stopLoss) + "; TP: " + Numbers.round(takeProfit) + " [" + best.getStopLossStrategy() + " ... " + best.getTakeProfitStrategy() + "]");
             symbolNumber.getAndIncrement();
         });
@@ -105,8 +107,8 @@ public class TaskRunner {
                 if (taskResult.isSignal()) {
                     Log.addLine(symbol);
                     ComplexTaskResult complexTaskResult = new ComplexTaskResult();
-                    complexTaskResult.screen1 = screen1;
-                    complexTaskResult.screen2 = screen2;
+                    complexTaskResult.timeframe1 = screen1.timeframe;
+                    complexTaskResult.timeframe2 = screen2.timeframe;
                     complexTaskResult.taskResult = taskResult;
                     complexTaskResult.symbol = symbol;
                     complexTaskResults.add(complexTaskResult);
@@ -179,8 +181,8 @@ public class TaskRunner {
     }
 
     public static class ComplexTaskResult {
-        public SymbolData screen1;
-        public SymbolData screen2;
+        public Timeframe timeframe1;
+        public Timeframe timeframe2;
         public TaskResult taskResult;
         public String symbol;
     }

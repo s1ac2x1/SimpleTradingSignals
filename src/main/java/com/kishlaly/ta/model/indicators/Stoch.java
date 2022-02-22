@@ -65,4 +65,9 @@ public class Stoch {
     public void setMyDate(final String myDate) {
         this.myDate = myDate;
     }
+
+    public boolean valuesPresent() {
+        return !Double.isNaN(slowD) && !Double.isNaN(slowK);
+    }
+
 }

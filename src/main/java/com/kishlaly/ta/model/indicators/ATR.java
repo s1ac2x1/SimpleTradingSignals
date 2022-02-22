@@ -19,4 +19,9 @@ public class ATR {
     public double getValue() {
         return this.value;
     }
+
+    public boolean valuesPresent() {
+        return !Double.isNaN(value);
+    }
+
 }

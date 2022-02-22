@@ -141,6 +141,7 @@ public class CacheReader {
                         break;
                     default:
                 }
+                quotes = quotes.stream().filter(Quote::valuesPesent).collect(Collectors.toList());
                 QuotesInMemoryCache.put(symbol, Context.timeframe, quotes);
                 return quotes;
             } catch (IOException e) {

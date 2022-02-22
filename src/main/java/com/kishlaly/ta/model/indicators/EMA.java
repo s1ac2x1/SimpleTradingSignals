@@ -1,7 +1,5 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.utils.Numbers;
-
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
@@ -54,5 +52,9 @@ public class EMA {
 
     public void setValue(final Double value) {
         this.value = value;
+    }
+
+    public boolean valuesPresent() {
+        return !Double.isNaN(value);
     }
 }
