@@ -1,5 +1,7 @@
 package com.kishlaly.ta.analyze;
 
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.CacheReader;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.cache.QuotesInMemoryCache;
@@ -35,7 +37,7 @@ import static com.kishlaly.ta.model.indicators.Indicator.MACD;
  */
 public class TaskRunner {
 
-    public static List<ComplexTaskResult> complexTaskResults = new ArrayList<>();
+    public static List<Signal> signals = new ArrayList<>();
 
     public static void run(Timeframe[][] timeframes, TaskType[] tasks) {
         Arrays.stream(timeframes).forEach(screens -> Arrays.stream(tasks).forEach(task -> {
@@ -46,43 +48,50 @@ public class TaskRunner {
             twoTimeframeFunction(task);
             System.out.println("\n");
             saveLog(task);
-            findOptimalSLTP(task);
         }));
+        QuotesInMemoryCache.clear();
+        IndicatorsInMemoryCache.clear();
+        System.gc();
+        findOptimalSLTP();
     }
 
-    private static void findOptimalSLTP(TaskType task) {
+    private static void findOptimalSLTP() {
         List<String> suggestions = new ArrayList<>();
         AtomicInteger symbolNumber = new AtomicInteger(1);
-        int totalSymbols = complexTaskResults.size();
-        complexTaskResults.forEach(complexTaskResult -> {
-            AtomicInteger currentSLTPStrategy = new AtomicInteger(1);
-            int totalSLTPStrategies = getSLStrategies().size() * getTPStrategies().size();
+        int totalSymbols = signals.size();
+        List<StopLossStrategy> slStrategies = getSLStrategies();
+        List<TakeProfitStrategy> tpStrategies = getTPStrategies();
+        int totalSLTPStrategies = slStrategies.size() * tpStrategies.size();
+        signals.forEach(signal -> {
+            AtomicInteger testingStrategySet = new AtomicInteger(1);
             List<HistoricalTesting> result = new ArrayList<>();
-            getSLStrategies().forEach(stopLossStrategy -> {
-                getTPStrategies().forEach(takeProfitStrategy -> {
+            slStrategies.forEach(stopLossStrategy -> {
+                tpStrategies.forEach(takeProfitStrategy -> {
                     Context.stopLossStrategy = stopLossStrategy;
                     Context.takeProfitStrategy = takeProfitStrategy;
                     Timeframe[][] timeframes = {
-                            {complexTaskResult.timeframe1, complexTaskResult.timeframe2},
+                            {signal.timeframe1, signal.timeframe2},
                     };
-                    System.out.println("Testing symbol " + symbolNumber.get() + "/" + totalSymbols + " with TP/SL " + currentSLTPStrategy.get() + "/" + totalSLTPStrategies);
-                    result.addAll(test(timeframes, new TaskType[]{task}));
-                    currentSLTPStrategy.getAndIncrement();
+                    System.out.println("Testing symbol " + symbolNumber.get() + "/" + totalSymbols + " with TP/SL " + testingStrategySet.get() + "/" + totalSLTPStrategies);
+                    Context.symbols = new HashSet<String>() {{
+                        add(signal.symbol);
+                    }};
+                    result.addAll(test(timeframes, new TaskType[]{signal.task}));
+                    testingStrategySet.getAndIncrement();
                 });
             });
-            SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), complexTaskResult.symbol);
-            SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), complexTaskResult.symbol);
+            SymbolData screen2 = getSymbolData(signal.task.getTimeframeIndicators(2), signal.symbol);
             Collections.sort(result, Comparator.comparing(HistoricalTesting::getBalance));
             HistoricalTesting best = result.get(result.size() - 1);
             double stopLoss = best.getStopLossStrategy().calculate(screen2, screen2.quotes.size() - 1);
             double takeProfit = best.getTakeProfitStrategy().calcualte(screen2, screen2.quotes.size() - 1);
-            suggestions.add(complexTaskResult.symbol + " SL: " + Numbers.round(stopLoss) + "; TP: " + Numbers.round(takeProfit) + " [" + best.getStopLossStrategy() + " ... " + best.getTakeProfitStrategy() + "]");
+            suggestions.add(signal.symbol + " SL: " + Numbers.round(stopLoss) + "; TP: " + Numbers.round(takeProfit) + " [" + best.getStopLossStrategy() + " ... " + best.getTakeProfitStrategy() + "]");
             symbolNumber.getAndIncrement();
         });
         if (!suggestions.isEmpty()) {
             try {
                 String prefix = "[" + Context.logTimeframe1.name() + "][" + Context.logTimeframe2.name() + "]";
-                String fileName = Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + "_optimal.txt";
+                String fileName = Context.outputFolder + "/signal/optimal.txt";
                 Files.write(Paths.get(fileName), suggestions.stream().collect(Collectors.joining(System.lineSeparator())).getBytes());
             } catch (IOException e) {
                 System.out.println(e.getMessage());
@@ -106,12 +115,12 @@ public class TaskRunner {
                 Log.addDebugLine("");
                 if (taskResult.isSignal()) {
                     Log.addLine(symbol);
-                    ComplexTaskResult complexTaskResult = new ComplexTaskResult();
-                    complexTaskResult.timeframe1 = screen1.timeframe;
-                    complexTaskResult.timeframe2 = screen2.timeframe;
-                    complexTaskResult.taskResult = taskResult;
-                    complexTaskResult.symbol = symbol;
-                    complexTaskResults.add(complexTaskResult);
+                    Signal signal = new Signal();
+                    signal.timeframe1 = screen1.timeframe;
+                    signal.timeframe2 = screen2.timeframe;
+                    signal.symbol = symbol;
+                    signal.task = task;
+                    signals.add(signal);
                 }
             } catch (Exception e) {
                 System.out.println("Function failed for symbol " + symbol + " with message: " + e.getMessage());
@@ -180,11 +189,11 @@ public class TaskRunner {
         Log.clear();
     }
 
-    public static class ComplexTaskResult {
+    public static class Signal {
+        public String symbol;
         public Timeframe timeframe1;
         public Timeframe timeframe2;
-        public TaskResult taskResult;
-        public String symbol;
+        public TaskType task;
     }
 
 }

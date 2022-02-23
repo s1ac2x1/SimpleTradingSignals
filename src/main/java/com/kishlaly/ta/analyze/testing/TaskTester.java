@@ -11,9 +11,6 @@ import com.kishlaly.ta.utils.Numbers;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -59,6 +56,10 @@ public class TaskTester {
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
                     }
+                    screen1.quotes.clear();
+                    screen1.indicators.clear();
+                    screen2.quotes.clear();
+                    screen2.indicators.clear();
                     if (!taskResults.isEmpty()) {
                         HistoricalTesting testing = null;
                         if (Context.massTesting) {

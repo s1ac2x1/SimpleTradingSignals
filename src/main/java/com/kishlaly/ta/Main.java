@@ -40,14 +40,12 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = "symbols/sp500.txt";
-//        Context.source = "symbols/screener_2.txt";
+//        Context.source = "symbols/sp500.txt";
+        Context.source = "symbols/screener_2.txt";
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
         Context.testOnly = new ArrayList<String>() {{
-            add("ED");
-            add("PEG");
-            add("SRE");
+            add("XPRO");
         }};
         Context.symbols = getSymbols();
 
