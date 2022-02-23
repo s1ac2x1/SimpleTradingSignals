@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
@@ -45,9 +46,10 @@ public class Main {
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
         Context.testOnly = new ArrayList<String>() {{
-            add("XPRO");
+            add("WMT");
         }};
         Context.symbols = getSymbols();
+        Context.yearsToAnalyze = 5;
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
@@ -58,9 +60,9 @@ public class Main {
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
-        run(timeframes, tasks);
+//        run(timeframes, tasks);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitVolatileKeltnerTop(100));
-//        testAllStrategies(timeframes, tasks);
+        testAllStrategies(timeframes, tasks);
     }
 
     private static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
