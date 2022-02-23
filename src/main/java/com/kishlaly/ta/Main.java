@@ -3,6 +3,7 @@ package com.kishlaly.ta;
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.testing.TaskTester;
 import com.kishlaly.ta.analyze.testing.sl.*;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitDisabled;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
