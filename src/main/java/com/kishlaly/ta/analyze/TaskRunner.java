@@ -5,10 +5,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.CacheReader;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.cache.QuotesInMemoryCache;
-import com.kishlaly.ta.model.HistoricalTesting;
-import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.TaskResult;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.Log;
@@ -144,8 +141,9 @@ public class TaskRunner {
                             }
                             SymbolData symbolData = new SymbolData();
                             symbolData.timeframe = Context.timeframe;
-                            symbolData.quotes = loadQuotesFromDiskCache(symbol);
-                            Arrays.stream(indicators).forEach(indicator -> symbolData.indicators.put(MACD, calculateIndicatorFromCachedQuotes(symbol, MACD)));
+                            List<Quote> quotes = loadQuotesFromDiskCache(symbol);
+                            symbolData.quotes = quotes;
+                            Arrays.stream(indicators).forEach(indicator -> symbolData.indicators.put(MACD, calculateIndicatorFromCachedQuotes(symbol, quotes, MACD)));
                             Log.addDebugLine("");
                             Log.addDebugLine(" === " + symbol + " === ");
                             try {

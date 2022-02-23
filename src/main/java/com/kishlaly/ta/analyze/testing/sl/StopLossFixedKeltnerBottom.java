@@ -17,7 +17,7 @@ public class StopLossFixedKeltnerBottom extends StopLossStrategy {
 
     @Override
     public double calculate(SymbolData data, int signalIndex) {
-        List<Keltner> keltnerChannels = IndicatorUtils.buildKeltnerChannels(data.symbol);
+        List<Keltner> keltnerChannels = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes);
         return keltnerChannels.get(signalIndex).getLow();
     }
 

@@ -15,7 +15,7 @@ public class TakeProfitFixedKeltnerTop extends TakeProfitStrategy {
 
     @Override
     public double calcualte(SymbolData data, int signalIndex) {
-        Keltner keltner = IndicatorUtils.buildKeltnerChannels(data.symbol).get(signalIndex);
+        Keltner keltner = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes).get(signalIndex);
         int keltnerTopRatio = (int) getConfig();
         double middle = keltner.getMiddle();
         double top = keltner.getTop();

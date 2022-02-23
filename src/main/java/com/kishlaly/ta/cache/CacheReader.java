@@ -14,9 +14,6 @@ import com.kishlaly.ta.model.indicators.Stoch;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.IndicatorUtils;
 import com.kishlaly.ta.utils.Quotes;
-import org.ta4j.core.indicators.EMAIndicator;
-import org.ta4j.core.indicators.StochasticOscillatorDIndicator;
-import org.ta4j.core.indicators.StochasticOscillatorKIndicator;
 
 import java.io.File;
 import java.io.IOException;
@@ -150,18 +147,18 @@ public class CacheReader {
         }
     }
 
-    public static List calculateIndicatorFromCachedQuotes(String symbol, Indicator indicator) {
+    public static List calculateIndicatorFromCachedQuotes(String symbol, List<Quote> quotes, Indicator indicator) {
         switch (indicator) {
             case MACD:
-                return IndicatorUtils.buildMACDHistogram(symbol);
+                return IndicatorUtils.buildMACDHistogram(symbol, quotes);
             case EMA13:
-                return IndicatorUtils.buildEMA(symbol, 13);
+                return IndicatorUtils.buildEMA(symbol, quotes, 13);
             case EMA26:
-                return IndicatorUtils.buildEMA(symbol, 26);
+                return IndicatorUtils.buildEMA(symbol, quotes, 26);
             case STOCH:
-                return IndicatorUtils.buildStochastic(symbol);
+                return IndicatorUtils.buildStochastic(symbol, quotes);
             case KELTNER:
-                return IndicatorUtils.buildKeltnerChannels(symbol);
+                return IndicatorUtils.buildKeltnerChannels(symbol, quotes);
             default:
                 return Collections.emptyList();
         }
@@ -215,9 +212,10 @@ public class CacheReader {
         SymbolData screen = new SymbolData();
         screen.symbol = symbol;
         screen.timeframe = timeframeIndicators.timeframe;
-        screen.quotes = loadQuotesFromDiskCache(symbol);
+        List<Quote> quotes = loadQuotesFromDiskCache(symbol);
+        screen.quotes = quotes;
         Arrays.stream(timeframeIndicators.indicators).forEach(indicator -> {
-            List data = calculateIndicatorFromCachedQuotes(symbol, indicator);
+            List data = calculateIndicatorFromCachedQuotes(symbol, quotes, indicator);
             screen.indicators.put(indicator, data);
         });
         return screen;

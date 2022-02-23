@@ -1,7 +1,6 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
-import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.indicators.*;
 import org.ta4j.core.BarSeries;
@@ -18,12 +17,11 @@ import java.util.stream.Collectors;
 
 public class IndicatorUtils {
 
-    public static List<EMA> buildEMA(String symbol, int period) {
+    public static List<EMA> buildEMA(String symbol, List<Quote> quotes, int period) {
         List<EMA> cached = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period);
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
             BarSeries barSeries = Bars.build(quotes);
             ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
             EMAIndicator ema = new EMAIndicator(closePriceIndicator, period);
@@ -37,13 +35,12 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<MACD> buildMACDHistogram(String symbol) {
+    public static List<MACD> buildMACDHistogram(String symbol, List<Quote> quotes) {
         List<MACD> cached = IndicatorsInMemoryCache.getMACD(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
             List<MACD> result = new ArrayList<>();
-            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
             BarSeries barSeries = Bars.build(quotes);
 
             ClosePriceIndicator closePrice = new ClosePriceIndicator(barSeries);
@@ -67,12 +64,11 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<Keltner> buildKeltnerChannels(String symbol) {
+    public static List<Keltner> buildKeltnerChannels(String symbol, List<Quote> quotes) {
         List<Keltner> cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
             BarSeries barSeries = Bars.build(quotes);
             KeltnerChannelMiddleIndicator middle = new KeltnerChannelMiddleIndicator(barSeries, 20);
             KeltnerChannelLowerIndicator low = new KeltnerChannelLowerIndicator(middle, 2, 10);
@@ -87,12 +83,11 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<ATR> buildATR(String symbol, int barCount) {
+    public static List<ATR> buildATR(String symbol, List<Quote> quotes, int barCount) {
         List<ATR> cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe, barCount);
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
             List<ATR> result = new ArrayList<>();
             BarSeries barSeries = Bars.build(quotes);
             ATRIndicator atrIndicator = new ATRIndicator(barSeries, barCount);
@@ -105,13 +100,12 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<Stoch> buildStochastic(String symbol) {
+    public static List<Stoch> buildStochastic(String symbol, List<Quote> quotes) {
         List<Stoch> cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
             List<Stoch> result = new ArrayList<>();
-            List<Quote> quotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
             BarSeries barSeries = Bars.build(quotes);
             StochasticOscillatorKIndicator stochK = new StochasticOscillatorKIndicator(barSeries, 14);
             StochasticOscillatorDIndicator stochD = new StochasticOscillatorDIndicator(stochK);

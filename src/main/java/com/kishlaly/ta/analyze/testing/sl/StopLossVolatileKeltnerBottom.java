@@ -14,7 +14,7 @@ public class StopLossVolatileKeltnerBottom extends StopLossStrategy {
 
     @Override
     public double calculate(SymbolData data, int currentQuoteIndex) {
-        List<Keltner> keltnerChannels = IndicatorUtils.buildKeltnerChannels(data.symbol);
+        List<Keltner> keltnerChannels = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes);
         return keltnerChannels.get(currentQuoteIndex).getLow();
     }
 

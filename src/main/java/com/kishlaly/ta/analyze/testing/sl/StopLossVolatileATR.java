@@ -19,7 +19,7 @@ public class StopLossVolatileATR extends StopLossStrategy {
     @Override
     public double calculate(SymbolData data, int currentQuoteIndex) {
         Quote signal = data.quotes.get(currentQuoteIndex);
-        List<ATR> atrs = IndicatorUtils.buildATR(data.symbol, 22);
+        List<ATR> atrs = IndicatorUtils.buildATR(data.symbol, data.quotes, 22);
         return signal.getLow() - (2 * atrs.get(currentQuoteIndex).getValue());
     }
 
