@@ -119,7 +119,9 @@ public class Main {
         return new ArrayList<StopLossStrategy>() {{
             add(new StopLossFixedPrice(0.27));
             add(new StopLossFixedKeltnerBottom());
-            add(new StopLossVolatileKeltnerBottom());
+            add(new StopLossVolatileKeltnerBottom(70));
+            add(new StopLossVolatileKeltnerBottom(80));
+            add(new StopLossVolatileKeltnerBottom(100));
             add(new StopLossVolatileLocalMin(0.27));
             add(new StopLossVolatileATR());
         }};

@@ -4,22 +4,25 @@ import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.Keltner;
 import com.kishlaly.ta.utils.IndicatorUtils;
 
-import java.util.List;
-
 public class StopLossVolatileKeltnerBottom extends StopLossStrategy {
 
-    public StopLossVolatileKeltnerBottom() {
-        super(null, true);
+    public StopLossVolatileKeltnerBottom(Object config) {
+        super(config, true);
     }
 
     @Override
-    public double calculate(SymbolData data, int currentQuoteIndex) {
-        List<Keltner> keltnerChannels = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes);
-        return keltnerChannels.get(currentQuoteIndex).getLow();
+    public double calculate(SymbolData data, int signalIndex) {
+        Keltner keltner = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes).get(signalIndex);
+        int bottomRatio = (int) getConfig();
+        double middle = keltner.getMiddle();
+        double bottom = keltner.getLow();
+        double diff = middle - bottom;
+        double ratio = diff / 100 * bottomRatio;
+        return middle - ratio;
     }
 
     @Override
     public String printConfig() {
-        return "";
+        return (int) getConfig() + "% of top";
     }
 }
