@@ -658,6 +658,7 @@ public class ThreeDisplays {
 
     // модификация buySignalType2 с такими изменениями:
     // 1 экран: отслеживание начала движения выше ЕМА по двум столбикам
+    //   последний столбик зеленый
     //   последний столбик выше предпоследнего
     //   последний столбик пересекает ЕМА
     //   последняя гистограмма растет
@@ -725,14 +726,21 @@ public class ThreeDisplays {
         // первый экран
         Quote screen_1_lastQuote = screen_1_Quotes.get(screen_1_Quotes.size() - 1);
         Quote screen_1_preLastQuote = screen_1_Quotes.get(screen_1_Quotes.size() - 2);
-
-        // последний столбик выше предпоследнего
-        boolean check1 = screen_1_lastQuote.getLow() > screen_1_preLastQuote.getLow()
-                && screen_1_lastQuote.getHigh() > screen_1_preLastQuote.getHigh();
-
         Quote lastChartQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
 
-        if (!check1) {
+        // последний столбик зеленый
+        boolean lastBarIsGreen = screen_1_lastQuote.getOpen() < screen_1_lastQuote.getClose();
+        if (!lastBarIsGreen) {
+            Log.recordCode(LAST_QUOTE_NOT_GREEN_1_SCREEN, screen_1);
+            Log.addDebugLine("Последний столбик не зеленый на долгосрочном экране");
+            return new TaskResult(lastChartQuote, LAST_QUOTE_NOT_GREEN_1_SCREEN);
+        }
+
+        // последний столбик выше предпоследнего
+        boolean lastBarHigher = screen_1_lastQuote.getLow() > screen_1_preLastQuote.getLow()
+                && screen_1_lastQuote.getHigh() > screen_1_preLastQuote.getHigh();
+
+        if (!lastBarHigher) {
             Log.recordCode(LAST_QUOTES_NOT_ASCENDING, screen_1);
             Log.addDebugLine("Последний столбик не выше предпоследнего на долгосрочном экране");
             return new TaskResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING);
