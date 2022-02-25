@@ -83,7 +83,18 @@ public enum TaskType {
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
             ThreeDisplays::buySignalType3
-    ); // 7
+    ),
+    THREE_DISPLAYS_BUY_TYPE4(
+            new HashMap<Integer, Timeframe>() {{
+                put(1, WEEK);
+                put(2, DAY);
+            }},
+            new HashMap<Integer, Indicator[]>() {{
+                put(1, new Indicator[]{EMA26, MACD});
+                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
+            }},
+            ThreeDisplays::buySignalType4
+    ); // 8
 
 
     TaskType(final Map<Integer, Timeframe> timeframes,

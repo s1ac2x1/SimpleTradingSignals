@@ -21,8 +21,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE2;
+import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
@@ -42,12 +41,12 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-//        Context.source = "symbols/sp500.txt";
-        Context.source = "symbols/screener_2.txt";
+        Context.source = "symbols/sp500.txt";
+//        Context.source = "symbols/screener_2.txt";
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
         Context.testOnly = new ArrayList<String>() {{
-            add("WMT");
+            add("LMT");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -55,7 +54,8 @@ public class Main {
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
-                THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
+                //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
+                THREE_DISPLAYS_BUY_TYPE4,
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 

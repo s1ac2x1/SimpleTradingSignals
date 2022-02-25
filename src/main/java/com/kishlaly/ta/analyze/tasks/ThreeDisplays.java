@@ -656,6 +656,142 @@ public class ThreeDisplays {
         return new TaskResult(lastChartQuote, SIGNAL);
     }
 
+    // модификация buySignalType2 с такими изменениями:
+    // 1 экран: отслеживание начала движения выше ЕМА по двум столбикам
+    //   последний столбик выше предпоследнего
+    //   последний столбик пересекает ЕМА
+    //   последняя гистограмма растет
+    // 2 экран: смотреть на два последних столбика
+    //   high последнего столбика выше предпоследнего
+    //   последняя гистограмма растет
+    //   %D и %K последнего стохастика должны быть выше, чем у предпоследнего
+    // ВНИМАНИЕ:
+    // после сигнала проверить вручную, чтобы на втором экране послединй столбик не поднимался слишком высоко от ЕМА
+    public static TaskResult buySignalType4(SymbolData screen_1, SymbolData screen_2) {
+
+        int screen_1_MinBarCount = resolveMinBarCount(screen_1.timeframe);
+        int screen_2_MinBarCount = resolveMinBarCount(screen_2.timeframe);
+
+        if (screen_1.quotes.isEmpty() || screen_1.quotes.size() < screen_1_MinBarCount) {
+            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_1.timeframe.name());
+            Log.recordCode(NO_DATA_QUOTES, screen_1);
+            return new TaskResult(null, NO_DATA_QUOTES);
+        }
+        if (screen_2.quotes.isEmpty() || screen_2.quotes.size() < screen_2_MinBarCount) {
+            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_2.timeframe.name());
+            Log.recordCode(NO_DATA_QUOTES, screen_2);
+            return new TaskResult(null, NO_DATA_QUOTES);
+        }
+
+        List<Indicator> missingData = new ArrayList<>();
+        screen_1.indicators.forEach((indicator, value) -> {
+            if (value.isEmpty() || value.size() < screen_1_MinBarCount) {
+                missingData.add(indicator);
+            }
+        });
+        screen_2.indicators.forEach((indicator, value) -> {
+            if (value.isEmpty() || value.size() < screen_2_MinBarCount) {
+                missingData.add(indicator);
+            }
+        });
+        if (!missingData.isEmpty()) {
+            Log.recordCode(NO_DATA_INDICATORS, screen_1);
+            Log.recordCode(NO_DATA_INDICATORS, screen_2);
+            Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
+            return new TaskResult(null, NO_DATA_INDICATORS);
+        }
+
+        List<Quote> screen_1_Quotes = screen_1.quotes.subList(screen_1.quotes.size() - screen_1_MinBarCount, screen_1.quotes.size());
+        List<Quote> screen_2_Quotes = screen_2.quotes.subList(screen_2.quotes.size() - screen_2_MinBarCount, screen_2.quotes.size());
+
+        List<EMA> screen_1_EMA26 = screen_1.indicators.get(EMA26);
+        screen_1_EMA26 = screen_1_EMA26.subList(screen_1_EMA26.size() - screen_1_MinBarCount, screen_1_EMA26.size());
+
+        List<MACD> screen_1_MACD = screen_1.indicators.get(MACD);
+        screen_1_MACD = screen_1_MACD.subList(screen_1_MACD.size() - screen_1_MinBarCount, screen_1_MACD.size());
+
+        List<EMA> screen_2_EMA13 = screen_2.indicators.get(Indicator.EMA13);
+        screen_2_EMA13 = screen_2_EMA13.subList(screen_2_EMA13.size() - screen_2_MinBarCount, screen_2_EMA13.size());
+
+        List<MACD> screen_2_MACD = screen_2.indicators.get(Indicator.MACD);
+        screen_2_MACD = screen_2_MACD.subList(screen_2_MACD.size() - screen_2_MinBarCount, screen_2_MACD.size());
+
+        List<Stoch> screen_2_Stochastic = screen_2.indicators.get(Indicator.STOCH);
+        screen_2_Stochastic = screen_2_Stochastic.subList(screen_2_Stochastic.size() - screen_2_MinBarCount, screen_2_Stochastic.size());
+
+        List<Keltner> screen_2_Keltner = screen_2.indicators.get(KELTNER);
+        screen_2_Keltner = screen_2_Keltner.subList(screen_2_Keltner.size() - screen_2_MinBarCount, screen_2_Keltner.size());
+
+        // первый экран
+        Quote screen_1_lastQuote = screen_1_Quotes.get(screen_1_Quotes.size() - 1);
+        Quote screen_1_preLastQuote = screen_1_Quotes.get(screen_1_Quotes.size() - 2);
+
+        // последний столбик выше предпоследнего
+        boolean check1 = screen_1_lastQuote.getLow() > screen_1_preLastQuote.getLow()
+                && screen_1_lastQuote.getHigh() > screen_1_preLastQuote.getHigh();
+
+        Quote lastChartQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
+
+        if (!check1) {
+            Log.recordCode(LAST_QUOTES_NOT_ASCENDING, screen_1);
+            Log.addDebugLine("Последний столбик не выше предпоследнего на долгосрочном экране");
+            return new TaskResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING);
+        }
+
+        // последний столбик пересекает ЕМА
+        if (!isQuoteCrossedEMA(screen_1_lastQuote, screen_1_EMA26.get(screen_1_EMA26.size() - 1).getValue())) {
+            Log.recordCode(LAST_QUOTE_NOT_CROSSING_EMA, screen_1);
+            Log.addDebugLine("Последний столбик не пересекает ЕМА на долгосрочном экране");
+            return new TaskResult(lastChartQuote, LAST_QUOTE_NOT_CROSSING_EMA);
+        }
+
+        // последняя гистограмма растет
+        com.kishlaly.ta.model.indicators.MACD screen_1_lastMACD = screen_1_MACD.get(screen_1_MACD.size() - 1);
+        com.kishlaly.ta.model.indicators.MACD screen_1_preLastMACD = screen_1_MACD.get(screen_1_MACD.size() - 2);
+        boolean check2 = screen_1_lastMACD.getHistogram() > screen_1_preLastMACD.getHistogram();
+        if (!check2) {
+            Log.recordCode(HISTOGRAM_NOT_ASCENDING, screen_1);
+            Log.addDebugLine("Гистограмма не растет на долгосрочном экране");
+            return new TaskResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING);
+        }
+
+        // второй экран
+
+        Quote screen_2_lastQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
+        Quote screen_2_preLastQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 2);
+
+        // high последнего столбика выше предпоследнего
+        boolean screen_2_check1 = screen_2_lastQuote.getHigh() > screen_2_preLastQuote.getHigh();
+        if (!screen_2_check1) {
+            Log.recordCode(LAST_QUOTES_NOT_ASCENDING, screen_1);
+            Log.addDebugLine("High последнего столбика не выше предпоследнего на втором экране");
+            return new TaskResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING);
+        }
+
+        // последняя гистограмма растет
+        com.kishlaly.ta.model.indicators.MACD screen_2_lastMACD = screen_2_MACD.get(screen_2_MACD.size() - 1);
+        com.kishlaly.ta.model.indicators.MACD screen_2_preLastMACD = screen_2_MACD.get(screen_2_MACD.size() - 2);
+        boolean screen_2_check2 = screen_2_lastMACD.getHistogram() > screen_2_preLastMACD.getHistogram();
+        if (!screen_2_check2) {
+            Log.recordCode(HISTOGRAM_NOT_ASCENDING, screen_1);
+            Log.addDebugLine("Гистограмма не растет на втором экране");
+            return new TaskResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING);
+        }
+
+        // %D и %K последнего стохастика должны быть выше, чем у предпоследнего
+        Stoch screen_2_lastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
+        Stoch screen_2_preLastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
+        boolean screen_2_check3 = screen_2_lastStoch.getSlowK() > screen_2_preLastStoch.getSlowK()
+                && screen_2_lastStoch.getSlowD() > screen_2_preLastStoch.getSlowD();
+        if (!screen_2_check3) {
+            Log.recordCode(STOCH_NOT_ASCENDING, screen_1);
+            Log.addDebugLine("Стохастик не растет на втором экране");
+            return new TaskResult(lastChartQuote, STOCH_NOT_ASCENDING);
+        }
+
+        return new TaskResult(lastChartQuote, SIGNAL);
+    }
+
     public static TaskResult sellSignal(SymbolData screen_1, SymbolData screen_2) {
 
         int screen_1_MinBarCount = resolveMinBarCount(screen_1.timeframe);
