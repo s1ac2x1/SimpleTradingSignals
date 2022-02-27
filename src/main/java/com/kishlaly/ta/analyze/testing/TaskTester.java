@@ -87,55 +87,11 @@ public class TaskTester {
                             // TaskResult.lastChartQuote может быть null, если стратегии не хватило котировок для теста
 
                             // сначала печатаем отчет по позициям
-                            HistoricalTesting finalTesting = testing;
-                            testing.getTaskResults()
-                                    .stream()
-                                    .filter(taskResult -> taskResult.getLastChartQuote() != null)
-                                    .filter(taskResult -> taskResult.isSignal())
-                                    .forEach(taskResult -> {
-                                        String line = "";
-                                        Quote quote = taskResult.getLastChartQuote();
-                                        String quoteDateFormatted = formatDate(screen2.timeframe, quote.getTimestamp());
-
-                                        // сначала печатаем результаты тестирования сигналов
-                                        if (taskResult.isSignal()) {
-                                            PositionTestResult positionTestResult = finalTesting.getResult(quote);
-                                            if (!positionTestResult.isClosed()) {
-                                                line += " NOT CLOSED";
-                                            } else {
-                                                line += positionTestResult.isProfitable() ? "PROFIT " : "LOSS ";
-                                                line += positionTestResult.getRoi() + "%";
-                                                if (positionTestResult.isGapUp()) {
-                                                    line += " (gap up)";
-                                                }
-                                                if (positionTestResult.isGapDown()) {
-                                                    line += " (gap down)";
-                                                }
-                                                line += " " + positionTestResult.getPositionDuration(screen2.timeframe);
-                                                String endDate = getBarTimeInMyZone(positionTestResult.getClosedTimestamp(), exchangeTimezome).toString();
-                                                ZonedDateTime parsed = ZonedDateTime.parse(endDate);
-                                                String parsedEndDate = parsed.getDayOfMonth() + " " + parsed.getMonth() + " " + parsed.getYear();
-                                                if (screen2.timeframe == Timeframe.HOUR) {
-                                                    parsedEndDate += " " + parsed.getHour() + ":" + parsed.getMinute();
-                                                }
-                                                line += " [till " + parsedEndDate + "]";
-                                            }
-                                            finalSignalResults.add(quoteDateFormatted + " --- " + line);
-                                        }
-                                    });
+                            printPositionsReport(screen2.timeframe, testing, finalSignalResults);
 
                             // потом лог всех остальных котировок с указанием причины, почему стратегия дала отказ
-                            finalSignalResults.add(System.lineSeparator());
-                            finalSignalResults.add(System.lineSeparator());
-                            finalSignalResults.add(System.lineSeparator());
-                            testing.getTaskResults()
-                                    .stream()
-                                    .filter(taskResult -> taskResult.getLastChartQuote() != null)
-                                    .filter(taskResult -> !taskResult.isSignal())
-                                    .forEach(taskResult -> {
-                                        String quoteDateFormatted = formatDate(screen2.timeframe, taskResult.getLastChartQuote().getTimestamp());
-                                        finalSignalResults.add(quoteDateFormatted + " ### " + taskResult.getCode());
-                                    });
+                            printNoSignalsReport(screen2.timeframe, testing, finalSignalResults);
+
                             readableOutput.put(key, signalResults);
                         }
                     }
@@ -169,6 +125,58 @@ public class TaskTester {
             }
         }
         return allTests;
+    }
+
+    public static void printNoSignalsReport(Timeframe timeframe, HistoricalTesting testing, Set<String> finalSignalResults) {
+        finalSignalResults.add(System.lineSeparator());
+        finalSignalResults.add(System.lineSeparator());
+        finalSignalResults.add(System.lineSeparator());
+        testing.getTaskResults()
+                .stream()
+                .filter(taskResult -> taskResult.getLastChartQuote() != null)
+                .filter(taskResult -> !taskResult.isSignal())
+                .forEach(taskResult -> {
+                    String quoteDateFormatted = formatDate(timeframe, taskResult.getLastChartQuote().getTimestamp());
+                    finalSignalResults.add(quoteDateFormatted + " ### " + taskResult.getCode());
+                });
+    }
+
+    public static void printPositionsReport(Timeframe timeframe, final HistoricalTesting testing, final Set<String> report) {
+        testing.getTaskResults()
+                .stream()
+                .filter(taskResult -> taskResult.getLastChartQuote() != null)
+                .filter(taskResult -> taskResult.isSignal())
+                .forEach(taskResult -> {
+                    String line = "";
+                    Quote quote = taskResult.getLastChartQuote();
+                    String quoteDateFormatted = formatDate(timeframe, quote.getTimestamp());
+
+                    // результаты тестирования сигналов
+                    if (taskResult.isSignal()) {
+                        PositionTestResult positionTestResult = testing.getResult(quote);
+                        if (!positionTestResult.isClosed()) {
+                            line += " NOT CLOSED";
+                        } else {
+                            line += positionTestResult.isProfitable() ? "PROFIT " : "LOSS ";
+                            line += positionTestResult.getRoi() + "%";
+                            if (positionTestResult.isGapUp()) {
+                                line += " (gap up)";
+                            }
+                            if (positionTestResult.isGapDown()) {
+                                line += " (gap down)";
+                            }
+                            line += " " + positionTestResult.getPositionDuration(timeframe);
+                            String endDate = getBarTimeInMyZone(positionTestResult.getClosedTimestamp(), exchangeTimezome).toString();
+                            ZonedDateTime parsed = ZonedDateTime.parse(endDate);
+                            String parsedEndDate = parsed.getDayOfMonth() + " " + parsed.getMonth() + " " + parsed.getYear();
+                            if (timeframe == Timeframe.HOUR) {
+                                parsedEndDate += " " + parsed.getHour() + ":" + parsed.getMinute();
+                            }
+                            line += " [till " + parsedEndDate + "]";
+                        }
+                        report.add(quoteDateFormatted + " --- " + line);
+                    }
+                });
     }
 
     private static String formatDate(Timeframe timeframe, long timestamp) {

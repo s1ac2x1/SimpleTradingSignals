@@ -36,7 +36,7 @@ public class TaskRunner {
 
     public static List<Signal> signals = new ArrayList<>();
 
-    public static void run(Timeframe[][] timeframes, TaskType[] tasks) {
+    public static void run(Timeframe[][] timeframes, TaskType[] tasks, boolean findOptimal) {
         Arrays.stream(timeframes).forEach(screens -> Arrays.stream(tasks).forEach(task -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
@@ -46,10 +46,12 @@ public class TaskRunner {
             System.out.println("\n");
             saveLog(task);
         }));
-        QuotesInMemoryCache.clear();
-        IndicatorsInMemoryCache.clear();
-        System.gc();
-        findOptimalSLTP();
+        if (findOptimal) {
+            QuotesInMemoryCache.clear();
+            IndicatorsInMemoryCache.clear();
+            System.gc();
+            findOptimalSLTP();
+        }
     }
 
     private static void findOptimalSLTP() {

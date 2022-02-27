@@ -61,7 +61,7 @@ public class Main {
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
-//        run(timeframes, tasks);
+//        run(timeframes, tasks, false);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitVolatileKeltnerTop(100));
         testAllStrategies(timeframes, tasks);
     }
