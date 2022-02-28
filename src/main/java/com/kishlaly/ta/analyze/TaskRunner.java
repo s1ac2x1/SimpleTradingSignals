@@ -84,7 +84,7 @@ public class TaskRunner {
             HistoricalTesting best = result.get(result.size() - 1);
             double stopLoss = best.getStopLossStrategy().calculate(screen2, screen2.quotes.size() - 1);
             double takeProfit = best.getTakeProfitStrategy().calcualte(screen2, screen2.quotes.size() - 1);
-            suggestions.add(signal.symbol + System.lineSeparator() + "SL: " + Numbers.round(stopLoss) + "; TP: " + Numbers.round(takeProfit) + " [" + best.getStopLossStrategy() + " ... " + best.getTakeProfitStrategy() + "]");
+            suggestions.add(signal.symbol + System.lineSeparator() + "SL: " + Numbers.round(stopLoss) + "; TP: " + Numbers.round(takeProfit) + System.lineSeparator() + best.getStopLossStrategy() + " --- " + best.getTakeProfitStrategy());
             symbolNumber.getAndIncrement();
         });
         if (!suggestions.isEmpty()) {
