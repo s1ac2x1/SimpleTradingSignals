@@ -8,6 +8,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
 import com.kishlaly.ta.model.HistoricalTesting;
+import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
@@ -41,12 +42,9 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-//        Context.source = "symbols/sp500.txt";
-        Context.source = "symbols/screener_2.txt";
-//        Context.source = "symbols/screener_many.txt";
-//        Context.source = "symbols/naga.txt";
+        Context.source = SymbolsSource.NAGA;
 //        Context.testOnly = new ArrayList<String>() {{
-//            add("LMT");
+//            add("AMZN");
 //        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -62,7 +60,7 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
         run(timeframes, tasks, true);
-//        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitVolatileKeltnerTop(100));
+//        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        testAllStrategies(timeframes, tasks);
     }
 

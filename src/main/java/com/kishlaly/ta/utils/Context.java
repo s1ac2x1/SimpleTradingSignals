@@ -4,6 +4,7 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
+import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class Context {
     public static double limitPerMinute = 75;
     public static Timeframe timeframe = Timeframe.DAY; // по умолчению для тестов
     public static Timeframe aggregationTimeframe = Timeframe.DAY; // на основе этого таймфрема агрегируются другие котировки
-    public static String source;
+    public static SymbolsSource source = SymbolsSource.SP500;
     public static List<String> testOnly = new ArrayList<>();
     public static Set<String> symbols;
     public static int yearsToAnalyze = 5;

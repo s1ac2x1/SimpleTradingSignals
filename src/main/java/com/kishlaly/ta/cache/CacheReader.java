@@ -73,7 +73,7 @@ public class CacheReader {
             stocksRaw.addAll(Context.testOnly);
         } else {
             try {
-                stocksRaw = Files.readAllLines(new File(Context.source).toPath(),
+                stocksRaw = Files.readAllLines(new File(Context.source.getFilename()).toPath(),
                         Charset.defaultCharset());
             } catch (IOException e) {
                 System.out.println(e.getMessage());
