@@ -91,7 +91,7 @@ public class TaskRunner {
             try {
                 String prefix = "[" + Context.logTimeframe1.name() + "][" + Context.logTimeframe2.name() + "]";
                 String fileName = Context.outputFolder + "/signal/optimal.txt";
-                Files.write(Paths.get(fileName), suggestions.stream().collect(Collectors.joining(System.lineSeparator())).getBytes());
+                Files.write(Paths.get(fileName), suggestions.stream().collect(Collectors.joining(System.lineSeparator() + System.lineSeparator())).getBytes());
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }

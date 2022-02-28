@@ -41,13 +41,13 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = "symbols/sp500.txt";
-//        Context.source = "symbols/screener_2.txt";
+//        Context.source = "symbols/sp500.txt";
+        Context.source = "symbols/screener_2.txt";
 //        Context.source = "symbols/screener_many.txt";
 //        Context.source = "symbols/naga.txt";
-        Context.testOnly = new ArrayList<String>() {{
-            add("LMT");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("LMT");
+//        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
@@ -61,9 +61,9 @@ public class Main {
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
-//        run(timeframes, tasks, false);
+        run(timeframes, tasks, true);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitVolatileKeltnerTop(100));
-        testAllStrategies(timeframes, tasks);
+//        testAllStrategies(timeframes, tasks);
     }
 
     private static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
