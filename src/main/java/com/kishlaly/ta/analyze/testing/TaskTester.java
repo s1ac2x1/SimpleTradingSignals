@@ -189,7 +189,7 @@ public class TaskTester {
     }
 
     public static String formatTestingSummary(HistoricalTesting testing) {
-        String result = testing.getTaskType().name() + System.lineSeparator();
+        String result = testing.getTaskType().name() + " - " + testing.getData().symbol + System.lineSeparator();
         result += "\ttrendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
         result += "\t" + testing.printSL() + System.lineSeparator();
         result += "\t" + testing.printTP() + System.lineSeparator();
