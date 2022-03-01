@@ -1,5 +1,6 @@
 package com.kishlaly.ta.model;
 
+import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.utils.Dates;
@@ -11,6 +12,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class HistoricalTesting {
+
+    private TaskType taskType;
 
     // график с индикаторами
     private SymbolData data;
@@ -24,11 +27,16 @@ public class HistoricalTesting {
     private StopLossStrategy stopLossStrategy;
     private TakeProfitStrategy takeProfitStrategy;
 
-    public HistoricalTesting(final SymbolData data, final List<TaskResult> taskResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public HistoricalTesting(TaskType taskType, final SymbolData data, final List<TaskResult> taskResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+        this.taskType = taskType;
         this.data = data;
         this.taskResults = taskResults;
         this.stopLossStrategy = stopLossStrategy;
         this.takeProfitStrategy = takeProfitStrategy;
+    }
+
+    public TaskType getTaskType() {
+        return this.taskType;
     }
 
     public StopLossStrategy getStopLossStrategy() {

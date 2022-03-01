@@ -65,13 +65,13 @@ public class TaskTester {
                         if (Context.massTesting) {
                             if (Context.takeProfitStrategies != null) {
                                 Context.takeProfitStrategies.forEach(takeProfitStrategy -> {
-                                    HistoricalTesting massTesting = new HistoricalTesting(symbolDataForTesting, taskResults, Context.stopLossStrategy, takeProfitStrategy);
+                                    HistoricalTesting massTesting = new HistoricalTesting(task, symbolDataForTesting, taskResults, Context.stopLossStrategy, takeProfitStrategy);
                                     calculateStatistics(massTesting);
                                     allTests.add(massTesting);
                                 });
                             }
                         } else {
-                            testing = new HistoricalTesting(symbolDataForTesting, taskResults, Context.stopLossStrategy, Context.takeProfitStrategy);
+                            testing = new HistoricalTesting(task, symbolDataForTesting, taskResults, Context.stopLossStrategy, Context.takeProfitStrategy);
                             calculateStatistics(testing);
                             allTests.add(testing);
                             String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
@@ -98,7 +98,6 @@ public class TaskTester {
                 });
                 if (!Context.massTesting) {
                     readableOutput.forEach((key, data) -> {
-                        log.append(key).append("\t").append(System.lineSeparator());
                         data.forEach(line -> log.append("    " + line).append(System.lineSeparator()));
                         log.append(System.lineSeparator());
                     });
@@ -190,8 +189,8 @@ public class TaskTester {
     }
 
     public static String formatTestingSummary(HistoricalTesting testing) {
-        String result = "";
-        result += "trendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
+        String result = testing.getTaskType().name() + System.lineSeparator();
+        result += "\ttrendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
         result += "\t" + testing.printSL() + System.lineSeparator();
         result += "\t" + testing.printTP() + System.lineSeparator();
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
