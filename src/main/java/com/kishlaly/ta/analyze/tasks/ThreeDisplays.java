@@ -664,6 +664,7 @@ public class ThreeDisplays {
     //   последняя гистограмма растет
     // 2 экран: смотреть на два последних столбика
     //   high последнего столбика выше предпоследнего
+    //   последний столбик не выше ЕМА13
     //   последняя гистограмма растет
     //   %D и %K последнего стохастика должны быть выше, чем у предпоследнего
     // ВНИМАНИЕ:
@@ -731,9 +732,9 @@ public class ThreeDisplays {
         // последний столбик зеленый
         boolean lastBarIsGreen = screen_1_lastQuote.getOpen() < screen_1_lastQuote.getClose();
         if (!lastBarIsGreen) {
-            Log.recordCode(LAST_QUOTE_NOT_GREEN_1_SCREEN, screen_1);
+            Log.recordCode(LAST_QUOTE_NOT_GREEN_SCREEN_1, screen_1);
             Log.addDebugLine("Последний столбик не зеленый на долгосрочном экране");
-            return new TaskResult(lastChartQuote, LAST_QUOTE_NOT_GREEN_1_SCREEN);
+            return new TaskResult(lastChartQuote, LAST_QUOTE_NOT_GREEN_SCREEN_1);
         }
 
         // последний столбик выше предпоследнего
@@ -776,6 +777,13 @@ public class ThreeDisplays {
             return new TaskResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING);
         }
 
+        // последний столбик не выше ЕМА13
+        if (isQuoteAboveEMA(screen_2_lastQuote, screen_2_EMA13.get(screen_2_EMA13.size() - 1).getValue())) {
+            Log.recordCode(LAST_QUOTE_ABOVE_EMA_SCREEN_2, screen_1);
+            Log.addDebugLine("Последний столбик выше EMA на втором экране");
+            return new TaskResult(lastChartQuote, LAST_QUOTE_ABOVE_EMA_SCREEN_2);
+        }
+
         // последняя гистограмма растет
         com.kishlaly.ta.model.indicators.MACD screen_2_lastMACD = screen_2_MACD.get(screen_2_MACD.size() - 1);
         com.kishlaly.ta.model.indicators.MACD screen_2_preLastMACD = screen_2_MACD.get(screen_2_MACD.size() - 2);
@@ -795,6 +803,21 @@ public class ThreeDisplays {
             Log.recordCode(STOCH_NOT_ASCENDING, screen_1);
             Log.addDebugLine("Стохастик не растет на втором экране");
             return new TaskResult(lastChartQuote, STOCH_NOT_ASCENDING);
+        }
+
+        if (FILTER_BY_KELTNER_ENABLED) {
+            Keltner lastKeltnerData = screen_2_Keltner.get(screen_2_MinBarCount - 1);
+            double lastQuoteClose = lastChartQuote.getClose();
+            double middle = lastKeltnerData.getMiddle();
+            double top = lastKeltnerData.getTop();
+            double diff = top - middle;
+            double ratio = diff / 100 * FILTER_BY_KELTNER;
+            double maxAllowedCloseValue = middle + ratio;
+            if (lastQuoteClose >= maxAllowedCloseValue) {
+                Log.addDebugLine("Последняя котировка закрылась выше " + FILTER_BY_KELTNER + "% расстояния от середины до вершины канала");
+                Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE, screen_2);
+                return new TaskResult(lastChartQuote, QUOTE_CLOSED_ABOVE_KELTNER_RULE);
+            }
         }
 
         return new TaskResult(lastChartQuote, SIGNAL);
