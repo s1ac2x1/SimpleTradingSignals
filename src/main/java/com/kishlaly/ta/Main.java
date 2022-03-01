@@ -51,9 +51,9 @@ public class Main {
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
+                THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
-                THREE_DISPLAYS_BUY_TYPE4,
+                //THREE_DISPLAYS_BUY_TYPE4,
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 

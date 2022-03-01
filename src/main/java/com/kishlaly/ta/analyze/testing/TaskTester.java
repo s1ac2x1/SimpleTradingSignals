@@ -189,7 +189,8 @@ public class TaskTester {
     }
 
     public static String formatTestingSummary(HistoricalTesting testing) {
-        String result = testing.getTaskType().name() + " - " + testing.getData().symbol + System.lineSeparator();
+        String timeframesInfo = "[" + testing.getTaskType().getTimeframeForScreen(1) + "][" + testing.getTaskType().getTimeframeForScreen(2) + "]";
+        String result = timeframesInfo + " " + testing.getTaskType().name() + " - " + testing.getData().symbol + System.lineSeparator();
         result += "\ttrendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
         result += "\t" + testing.printSL() + System.lineSeparator();
         result += "\t" + testing.printTP() + System.lineSeparator();
