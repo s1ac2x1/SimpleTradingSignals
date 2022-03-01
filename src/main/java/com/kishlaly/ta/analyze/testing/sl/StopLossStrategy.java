@@ -26,10 +26,6 @@ public abstract class StopLossStrategy {
 
     public abstract double calculate(SymbolData data, int signalIndex);
 
-    public abstract String printConfig();
-
-    public String toString() {
-        return getClass().getSimpleName() + ", " + printConfig();
-    }
+    public abstract String toString();
 
 }

@@ -25,7 +25,7 @@ public class TakeProfitVolatileKeltnerTop extends TakeProfitStrategy {
     }
 
     @Override
-    public String printConfig() {
-        return (int) getConfig() + "% of top";
+    public String toString() {
+        return "TP volatile " + getConfig() + "% Keltner top";
     }
 }

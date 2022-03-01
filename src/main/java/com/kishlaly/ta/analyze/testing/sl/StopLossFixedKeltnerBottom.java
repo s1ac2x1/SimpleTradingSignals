@@ -22,7 +22,7 @@ public class StopLossFixedKeltnerBottom extends StopLossStrategy {
     }
 
     @Override
-    public String printConfig() {
-        return "";
+    public String toString() {
+        return "SL [Fixed] Keltner 100% bottom";
     }
 }

@@ -14,12 +14,12 @@ public class TakeProfitDisabled extends TakeProfitStrategy {
     }
 
     @Override
-    public String printConfig() {
-        return "";
+    public boolean isEnabled() {
+        return false;
     }
 
     @Override
-    public boolean isEnabled() {
-        return false;
+    public String toString() {
+        return "TP disabled";
     }
 }

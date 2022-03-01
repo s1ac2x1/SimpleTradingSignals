@@ -22,7 +22,7 @@ public class StopLossVolatileKeltnerBottom extends StopLossStrategy {
     }
 
     @Override
-    public String printConfig() {
-        return (int) getConfig() + "% of top";
+    public String toString() {
+        return "SL volatile Keltner " + getConfig() + "% bottom";
     }
 }

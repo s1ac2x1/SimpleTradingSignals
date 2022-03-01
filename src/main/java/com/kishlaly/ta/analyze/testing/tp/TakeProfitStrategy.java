@@ -31,14 +31,10 @@ public abstract class TakeProfitStrategy {
 
     public abstract double calcualte(SymbolData data, int signalIndex);
 
-    public abstract String printConfig();
-
     public boolean isVolatile() {
         return this.isVolatile;
     }
 
-    public String toString() {
-        return getClass().getSimpleName() + ", " + printConfig();
-    }
+    public abstract String toString();
 
 }

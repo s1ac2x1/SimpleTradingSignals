@@ -192,8 +192,8 @@ public class TaskTester {
     public static String formatTestingSummary(HistoricalTesting testing) {
         String result = "";
         result += "trendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
-        result += "\tSL: " + testing.printSL() + System.lineSeparator();
-        result += "\tTP: " + testing.printTP() + System.lineSeparator();
+        result += "\t" + testing.printSL() + System.lineSeparator();
+        result += "\t" + testing.printTP() + System.lineSeparator();
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
         result += testing.printTPSLPercent() + "%" + System.lineSeparator();
         double balance = testing.getBalance();

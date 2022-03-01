@@ -24,7 +24,7 @@ public class StopLossVolatileATR extends StopLossStrategy {
     }
 
     @Override
-    public String printConfig() {
-        return "";
+    public String toString() {
+        return "SL volatile ATR";
     }
 }

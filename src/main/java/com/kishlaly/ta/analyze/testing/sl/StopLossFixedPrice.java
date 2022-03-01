@@ -24,7 +24,7 @@ public class StopLossFixedPrice extends StopLossStrategy {
     }
 
     @Override
-    public String printConfig() {
-        return String.valueOf((double) config);
+    public String toString() {
+        return "SL [Fixed] price " + (double) config;
     }
 }

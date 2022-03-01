@@ -25,7 +25,7 @@ public class TakeProfitFixedKeltnerTop extends TakeProfitStrategy {
     }
 
     @Override
-    public String printConfig() {
-        return (int) getConfig() + "% of top";
+    public String toString() {
+        return "TP [Fixed] Keltner " + getConfig() + "% top ";
     }
 }

@@ -10,19 +10,21 @@ import java.util.Comparator;
  */
 public class StopLossVolatileLocalMin extends StopLossStrategy {
 
+    public static final int QUOTES_TO_FIND_MIN = 20;
+
     public StopLossVolatileLocalMin(Object config) {
         super(config, true);
     }
 
     @Override
     public double calculate(SymbolData data, int currentQuoteIndex) {
-        Quote quoteWithMinimalLow = data.quotes.subList(currentQuoteIndex - 20, currentQuoteIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
+        Quote quoteWithMinimalLow = data.quotes.subList(currentQuoteIndex - QUOTES_TO_FIND_MIN, currentQuoteIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
         double distance = (double) config;
         return quoteWithMinimalLow.getLow() - distance;
     }
 
     @Override
-    public String printConfig() {
-        return String.valueOf((double) config);
+    public String toString() {
+        return "SL volatile local min";
     }
 }

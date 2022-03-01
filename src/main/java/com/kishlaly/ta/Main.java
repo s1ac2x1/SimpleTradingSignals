@@ -42,10 +42,10 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = SymbolsSource.SP500;
-        Context.testOnly = new ArrayList<String>() {{
-            add("LMT");
-        }};
+        Context.source = SymbolsSource.NAGA;
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("LMT");
+//        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
@@ -57,11 +57,11 @@ public class Main {
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
-//        buildCache(timeframes, tasks, false);
+        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, true);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
-        testAllStrategies(timeframes, tasks);
+//        testAllStrategies(timeframes, tasks);
     }
 
     private static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {

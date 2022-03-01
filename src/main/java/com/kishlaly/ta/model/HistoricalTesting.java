@@ -198,11 +198,11 @@ public class HistoricalTesting {
     }
 
     public String printSL() {
-        return getStopLossStrategy().getClass().getSimpleName() + ", " + getStopLossStrategy().printConfig();
+        return getStopLossStrategy().toString();
     }
 
     public String printTP() {
-        return getTakeProfitStrategy().getClass().getSimpleName() + ", " + getTakeProfitStrategy().printConfig();
+        return getTakeProfitStrategy().toString();
     }
 
     public String printTPSLNumber() {
