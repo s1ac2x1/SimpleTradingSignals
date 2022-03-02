@@ -13,10 +13,7 @@ import com.kishlaly.ta.utils.Context;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -42,24 +39,25 @@ public class Main {
         };
 
         Context.source = SymbolsSource.TEST;
-        Context.testOnly = new ArrayList<String>() {{
-            add("HAL");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("PYPL");
+//        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
-                THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
-                //THREE_DISPLAYS_BUY_TYPE_4,
+                //THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
+                THREE_DISPLAYS_BUY_TYPE_4,
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
 //        buildCache(timeframes, tasks, false);
+        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, false);
-        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
     }
@@ -94,11 +92,35 @@ public class Main {
             result.addAll(test(timeframes, tasks));
         }
         saveTable(result);
-        findBestStrategyForSymbols();
     }
 
     private static void findBestStrategyForSymbols() {
-
+        Timeframe[][] timeframes = {
+                {Timeframe.WEEK, Timeframe.DAY},
+        };
+        TaskType[] tasks = {
+                THREE_DISPLAYS_BUY_TYPE_2,
+                THREE_DISPLAYS_BUY_TYPE_4
+        };
+        List<HistoricalTesting> result = new ArrayList<>();
+        Context.stopLossStrategy = new StopLossFixedPrice(0.27);
+        Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
+        result.addAll(test(timeframes, tasks));
+        Map<String, TaskType> winners = new HashMap<>();
+        result.stream().collect(Collectors.groupingBy(HistoricalTesting::getSymbol))
+                .entrySet().stream().forEach(bySymbol -> {
+                    String symbol = bySymbol.getKey();
+                    List<HistoricalTesting> testings = bySymbol.getValue();
+                    Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
+                    HistoricalTesting best = testings.get(testings.size() - 1);
+                    winners.put(symbol, best.getTaskType());
+                    System.out.println(symbol + " " + best.getTaskType().name() + " " + best.getBalance());
+                });
+        StringBuilder builder = new StringBuilder();
+        winners.entrySet().stream().forEach(entry -> {
+            builder.append(entry.getKey()).append("=").append(entry.getValue().name()).append(System.lineSeparator());
+        });
+        writeToFile("best.txt", builder.toString());
     }
 
     private static void saveTable(List<HistoricalTesting> result) {
