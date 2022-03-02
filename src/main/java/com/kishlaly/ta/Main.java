@@ -38,7 +38,7 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = SymbolsSource.SP500;
+        Context.source = SymbolsSource.NAGA;
 //        Context.testOnly = new ArrayList<String>() {{
 //            add("PYPL");
 //        }};
@@ -53,8 +53,8 @@ public class Main {
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
-//        buildCache(timeframes, tasks, false);
-        findBestStrategyForSymbols();
+        buildCache(timeframes, tasks, false);
+//        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, false);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
@@ -120,7 +120,7 @@ public class Main {
         winners.entrySet().stream().forEach(entry -> {
             builder.append(entry.getKey()).append("=").append(entry.getValue().name()).append(System.lineSeparator());
         });
-        writeToFile("best" + Context.source.name().toLowerCase() + ".txt", builder.toString());
+        writeToFile("best_" + Context.source.name().toLowerCase() + "_" + timeframes[0][0].name().toLowerCase() + "_" + timeframes[0][1].name().toLowerCase() + ".txt", builder.toString());
     }
 
     private static void saveTable(List<HistoricalTesting> result) {
