@@ -38,12 +38,6 @@ public class TaskRunner {
     public static List<Signal> signals = new ArrayList<>();
 
     public static void run(Timeframe[][] timeframes, TaskType[] tasks, boolean findOptimal) {
-        try {
-            FileUtils.deleteDirectory(new File(Context.outputFolder + "/debug"));
-            FileUtils.deleteDirectory(new File(Context.outputFolder + "/signal"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         Arrays.stream(timeframes).forEach(screens -> Arrays.stream(tasks).forEach(task -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
@@ -62,6 +56,12 @@ public class TaskRunner {
     }
 
     public static void runBest(Timeframe[][] timeframes) {
+        try {
+            FileUtils.deleteDirectory(new File(Context.outputFolder + "/debug"));
+            FileUtils.deleteDirectory(new File(Context.outputFolder + "/signal"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String tf1 = timeframes[0][0].name().toLowerCase();
         String tf2 = timeframes[0][1].name().toLowerCase();
         try {
@@ -71,6 +71,9 @@ public class TaskRunner {
                 String[] split = line.split("=");
                 String symbol = split[0];
                 TaskType task = TaskType.valueOf(split[1].toUpperCase());
+                Context.symbols = new HashSet<String>() {{
+                    add(symbol);
+                }};
                 run(timeframes, new TaskType[]{task}, false);
             });
         } catch (IOException e) {

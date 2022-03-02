@@ -35,7 +35,7 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = SymbolsSource.NAGA;
+        Context.source = SymbolsSource.SP500;
 //        Context.testOnly = new ArrayList<String>() {{
 //            add("PYPL");
 //        }};
@@ -46,7 +46,7 @@ public class Main {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
-                THREE_DISPLAYS_BUY_TYPE_4,
+                //THREE_DISPLAYS_BUY_TYPE_4,
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
