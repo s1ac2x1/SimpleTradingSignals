@@ -3,11 +3,13 @@ package com.kishlaly.ta.analyze.testing;
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
+import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.Numbers;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,6 +17,7 @@ import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
@@ -34,7 +37,11 @@ public class TaskTester {
                 task.updateTimeframeForScreen(1, screens[0]);
                 task.updateTimeframeForScreen(2, screens[1]);
                 Map<String, Set<String>> readableOutput = new HashMap<>();
+                AtomicInteger currSymbol = new AtomicInteger(1);
+                int totalSymbols = Context.symbols.size();
                 Context.symbols.forEach(symbol -> {
+                    System.out.println("[" + currSymbol + "/" + totalSymbols  +"] Testing " + symbol);
+                    currSymbol.getAndIncrement();
                     SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
                     SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
                     SymbolData symbolDataForTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);
@@ -96,6 +103,7 @@ public class TaskTester {
                         }
                     }
                 });
+                IndicatorsInMemoryCache.clear();
                 if (!Context.massTesting) {
                     readableOutput.forEach((key, data) -> {
                         data.forEach(line -> log.append("    " + line).append(System.lineSeparator()));
@@ -104,6 +112,10 @@ public class TaskTester {
                 }
             });
         });
+        File directory = new File("tests");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
         if (!Context.massTesting) {
             try {
                 Files.write(Paths.get("tests/single.txt"), log.toString().getBytes());

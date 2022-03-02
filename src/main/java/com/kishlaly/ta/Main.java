@@ -41,26 +41,26 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = SymbolsSource.SP500;
+        Context.source = SymbolsSource.TEST;
         Context.testOnly = new ArrayList<String>() {{
-            add("PYPL");
+            add("HAL");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
+                //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
-                THREE_DISPLAYS_BUY_TYPE_4,
+                //THREE_DISPLAYS_BUY_TYPE_4,
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
 //        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, false);
-//        testOneStrategy(timeframes, tasks, new StopLossVolatileLocalMin(0.27), new TakeProfitFixedKeltnerTop(100));
-        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
     }
 
@@ -93,6 +93,15 @@ public class Main {
             Context.takeProfitStrategy = takeProfitStrategy;
             result.addAll(test(timeframes, tasks));
         }
+        saveTable(result);
+        findBestStrategyForSymbols();
+    }
+
+    private static void findBestStrategyForSymbols() {
+
+    }
+
+    private static void saveTable(List<HistoricalTesting> result) {
         StringBuilder table = new StringBuilder("<table>");
         result
                 .stream()
@@ -140,11 +149,6 @@ public class Main {
                 });
         table.append("</table>");
         writeToFile("table.html", table.toString());
-//        Collections.sort(result, Comparator.comparing(HistoricalTesting::getBalance));
-//        HistoricalTesting worse = result.get(0);
-//        writeToFile(worse.getData().symbol + "_worse", TaskTester.formatTestingSummary(worse));
-//        HistoricalTesting best = result.get(result.size() - 1);
-//        writeToFile(best.getData().symbol + "_best", TaskTester.formatTestingSummary(best));
     }
 
     public static void writeToFile(String name, String content) {
