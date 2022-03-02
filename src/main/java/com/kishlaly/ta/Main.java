@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
@@ -41,25 +42,26 @@ public class Main {
         };
 
         Context.source = SymbolsSource.SP500;
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("LMT");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("PYPL");
+        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
+                THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
-                //THREE_DISPLAYS_BUY_TYPE_4,
+                THREE_DISPLAYS_BUY_TYPE_4,
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
-        buildCache(timeframes, tasks, false);
+//        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
-//        run(timeframes, tasks, true);
+//        run(timeframes, tasks, false);
 //        testOneStrategy(timeframes, tasks, new StopLossVolatileLocalMin(0.27), new TakeProfitFixedKeltnerTop(100));
-//        buildTasksAndStrategiesSummary(timeframes, tasks);
+        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
     }
 
     private static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
@@ -69,19 +71,28 @@ public class Main {
         test(timeframes, tasks);
     }
 
-    private static void buildTasksAndStrategiesSummary(Timeframe[][] timeframes, TaskType[] tasks) {
+    private static void buildTasksAndStrategiesSummary(Timeframe[][] timeframes,
+                                                       TaskType[] tasks,
+                                                       StopLossStrategy stopLossStrategy,
+                                                       TakeProfitStrategy takeProfitStrategy) {
         List<HistoricalTesting> result = new ArrayList<>();
         int total = getSLStrategies().size() * getTPStrategies().size();
         AtomicInteger current = new AtomicInteger(1);
-        getSLStrategies().forEach(stopLossStrategy -> {
-            getTPStrategies().forEach(takeProfitStrategy -> {
-                Context.stopLossStrategy = stopLossStrategy;
-                Context.takeProfitStrategy = takeProfitStrategy;
-                System.out.println(current.get() + "/" + total + " " + stopLossStrategy + " / " + takeProfitStrategy);
-                result.addAll(test(timeframes, tasks));
-                current.getAndIncrement();
+        if (stopLossStrategy == null || takeProfitStrategy == null) {
+            getSLStrategies().forEach(sl -> {
+                getTPStrategies().forEach(tp -> {
+                    Context.stopLossStrategy = sl;
+                    Context.takeProfitStrategy = tp;
+                    System.out.println(current.get() + "/" + total + " " + sl + " / " + tp);
+                    result.addAll(test(timeframes, tasks));
+                    current.getAndIncrement();
+                });
             });
-        });
+        } else {
+            Context.stopLossStrategy = stopLossStrategy;
+            Context.takeProfitStrategy = takeProfitStrategy;
+            result.addAll(test(timeframes, tasks));
+        }
         StringBuilder table = new StringBuilder("<table>");
         result
                 .stream()
