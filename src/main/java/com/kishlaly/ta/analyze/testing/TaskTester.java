@@ -1,7 +1,9 @@
 package com.kishlaly.ta.analyze.testing;
 
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.model.*;
@@ -40,7 +42,7 @@ public class TaskTester {
                 AtomicInteger currSymbol = new AtomicInteger(1);
                 int totalSymbols = Context.symbols.size();
                 Context.symbols.forEach(symbol -> {
-                    System.out.println("[" + currSymbol + "/" + totalSymbols  +"] Testing " + symbol);
+                    System.out.println("[" + currSymbol + "/" + totalSymbols + "] Testing " + symbol);
                     currSymbol.getAndIncrement();
                     SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
                     SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
@@ -257,6 +259,27 @@ public class TaskTester {
             output = "[" + formatDate(testing.getData().timeframe, positionTestResult.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, positionTestResult.getClosedTimestamp()) + "]";
         }
         return output;
+    }
+
+    public static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+        Context.stopLossStrategy = stopLossStrategy;
+        Context.takeProfitStrategy = takeProfitStrategy;
+        System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
+        test(timeframes, tasks);
+    }
+
+    public static void testMass(Timeframe[][] timeframes, TaskType[] tasks) {
+        Context.massTesting = true;
+
+        StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
+        Context.stopLossStrategy = stopLossStrategy;
+
+        Context.takeProfitStrategies = new ArrayList<>();
+        for (int i = 80; i <= 100; i++) {
+            TakeProfitStrategy tp = new TakeProfitFixedKeltnerTop(i);
+            Context.takeProfitStrategies.add(tp);
+        }
+        test(timeframes, tasks);
     }
 
     /**

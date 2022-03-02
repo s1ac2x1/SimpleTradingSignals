@@ -2,7 +2,12 @@ package com.kishlaly.ta.cache;
 
 import com.google.common.collect.Lists;
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.testing.sl.*;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
 import com.kishlaly.ta.loaders.Alphavantage;
+import com.kishlaly.ta.model.HistoricalTesting;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -18,11 +23,16 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE_2;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE_4;
+import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.utils.Context.*;
+import static com.kishlaly.ta.utils.FilesUtil.writeToFile;
 
 public class CacheBuilder {
 
@@ -118,6 +128,134 @@ public class CacheBuilder {
                 });
             }
         }
+    }
+
+    // для каждого набора символов (SP500, NAGA, ...) создает файл best_{set}_{scree1}_{scree2}.txt
+    // в этом файле строки вида symbol=TaskType
+    // подразумевается, что каждому символу соответствует TaskType, который показал лучший результат на исторических данных
+    // при тестировании сигналов использовалась базовая пара StopLossFixedPrice(0.27) и TakeProfitFixedKeltnerTop(100)
+    public static void findBestStrategyForSymbols() {
+        Timeframe[][] timeframes = {
+                {Timeframe.WEEK, Timeframe.DAY},
+        };
+        TaskType[] tasks = {
+                THREE_DISPLAYS_BUY_TYPE_2,
+                THREE_DISPLAYS_BUY_TYPE_4
+        };
+        List<HistoricalTesting> result = new ArrayList<>();
+        Context.stopLossStrategy = new StopLossFixedPrice(0.27);
+        Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
+        result.addAll(test(timeframes, tasks));
+        Map<String, TaskType> winners = new HashMap<>();
+        result.stream().collect(Collectors.groupingBy(HistoricalTesting::getSymbol))
+                .entrySet().stream().forEach(bySymbol -> {
+                    String symbol = bySymbol.getKey();
+                    List<HistoricalTesting> testings = bySymbol.getValue();
+                    Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
+                    HistoricalTesting best = testings.get(testings.size() - 1);
+                    winners.put(symbol, best.getTaskType());
+                    System.out.println(symbol + " " + best.getTaskType().name() + " " + best.getBalance());
+                });
+        StringBuilder builder = new StringBuilder();
+        winners.entrySet().stream().forEach(entry -> {
+            builder.append(entry.getKey()).append("=").append(entry.getValue().name()).append(System.lineSeparator());
+        });
+        writeToFile("best_" + Context.source.name().toLowerCase() + "_" + timeframes[0][0].name().toLowerCase() + "_" + timeframes[0][1].name().toLowerCase() + ".txt", builder.toString());
+    }
+
+    public static void saveTable(List<HistoricalTesting> result) {
+        StringBuilder table = new StringBuilder("<table>");
+        result
+                .stream()
+                .collect(Collectors.groupingBy(HistoricalTesting::getSymbol))
+                .entrySet().stream()
+                .forEach(bySymbol -> {
+                    String symbol = bySymbol.getKey();
+                    table.append("<tr>");
+                    table.append("<td style=\"vertical-align: left;\">" + symbol + "</td>");
+                    table.append("<td>");
+                    StringBuilder innerTable = new StringBuilder("<table>");
+                    List<HistoricalTesting> testings = bySymbol.getValue();
+                    Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
+                    testings.stream()
+                            .collect(Collectors.groupingBy(HistoricalTesting::getTaskType))
+                            .entrySet().stream().forEach(byTask -> {
+                                TaskType taskType = byTask.getKey();
+                                List<HistoricalTesting> historicalTestings = byTask.getValue();
+                                HistoricalTesting best = historicalTestings.get(historicalTestings.size() - 1);
+                                innerTable.append("<tr>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: left;\">" + taskType.name() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">" + best.printTPSLNumber() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">" + best.printTPSLPercent() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left;\">" + best.getBalance() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">" + best.getStopLossStrategy() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">" + best.getTakeProfitStrategy() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("</tr>");
+                            });
+                    innerTable.append("</table>");
+                    table.append(innerTable);
+                    table.append("</td>");
+                    table.append("</tr>");
+                });
+        table.append("</table>");
+        writeToFile("tests/table.html", table.toString());
+    }
+
+    public static void buildTasksAndStrategiesSummary(Timeframe[][] timeframes,
+                                                       TaskType[] tasks,
+                                                       StopLossStrategy stopLossStrategy,
+                                                       TakeProfitStrategy takeProfitStrategy) {
+        List<HistoricalTesting> result = new ArrayList<>();
+        int total = getSLStrategies().size() * getTPStrategies().size();
+        AtomicInteger current = new AtomicInteger(1);
+        if (stopLossStrategy == null || takeProfitStrategy == null) {
+            getSLStrategies().forEach(sl -> {
+                getTPStrategies().forEach(tp -> {
+                    Context.stopLossStrategy = sl;
+                    Context.takeProfitStrategy = tp;
+                    System.out.println(current.get() + "/" + total + " " + sl + " / " + tp);
+                    result.addAll(test(timeframes, tasks));
+                    current.getAndIncrement();
+                });
+            });
+        } else {
+            Context.stopLossStrategy = stopLossStrategy;
+            Context.takeProfitStrategy = takeProfitStrategy;
+            result.addAll(test(timeframes, tasks));
+        }
+        saveTable(result);
+    }
+
+    public static List<StopLossStrategy> getSLStrategies() {
+        return new ArrayList<StopLossStrategy>() {{
+            add(new StopLossFixedPrice(0.27));
+            add(new StopLossFixedKeltnerBottom());
+            add(new StopLossVolatileKeltnerBottom(80));
+            add(new StopLossVolatileKeltnerBottom(100));
+            add(new StopLossVolatileLocalMin(0.27));
+            add(new StopLossVolatileATR());
+        }};
+    }
+
+    public static List<TakeProfitStrategy> getTPStrategies() {
+        return new ArrayList<TakeProfitStrategy>() {{
+            add(new TakeProfitFixedKeltnerTop(80));
+            add(new TakeProfitFixedKeltnerTop(100));
+            add(new TakeProfitVolatileKeltnerTop(80));
+            add(new TakeProfitVolatileKeltnerTop(100));
+        }};
     }
 
     private static void saveIndicator(String symbol, Indicator indicator, List values) {

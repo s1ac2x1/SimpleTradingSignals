@@ -23,9 +23,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.kishlaly.ta.Main.getSLStrategies;
-import static com.kishlaly.ta.Main.getTPStrategies;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.cache.CacheBuilder.getSLStrategies;
+import static com.kishlaly.ta.cache.CacheBuilder.getTPStrategies;
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.model.indicators.Indicator.MACD;
 

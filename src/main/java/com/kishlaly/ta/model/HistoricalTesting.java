@@ -218,7 +218,7 @@ public class HistoricalTesting {
     }
 
     public String printTPSLPercent() {
-        return getSuccessfulRatio() + "% / " + getLossRatio();
+        return getSuccessfulRatio() + "% / " + getLossRatio() + "%";
     }
 
     public double getBalance() {
