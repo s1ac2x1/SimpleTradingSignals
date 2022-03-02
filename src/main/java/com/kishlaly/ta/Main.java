@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskRunner.runBest;
 import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
@@ -35,9 +36,9 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = SymbolsSource.SP500;
+        Context.source = SymbolsSource.SCREENER_FILTERED;
 //        Context.testOnly = new ArrayList<String>() {{
-//            add("PYPL");
+//            add("ABC");
 //        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -51,10 +52,10 @@ public class Main {
         };
 
 //        buildCache(timeframes, tasks, false);
-//        findBestStrategyForSymbols();
+        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, false);
-        runBest(timeframes);
+//        runBest(timeframes);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
