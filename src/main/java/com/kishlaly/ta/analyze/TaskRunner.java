@@ -10,6 +10,7 @@ import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.Log;
 import com.kishlaly.ta.utils.Numbers;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +38,12 @@ public class TaskRunner {
     public static List<Signal> signals = new ArrayList<>();
 
     public static void run(Timeframe[][] timeframes, TaskType[] tasks, boolean findOptimal) {
+        try {
+            FileUtils.deleteDirectory(new File(Context.outputFolder + "/debug"));
+            FileUtils.deleteDirectory(new File(Context.outputFolder + "/signal"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Arrays.stream(timeframes).forEach(screens -> Arrays.stream(tasks).forEach(task -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
@@ -51,6 +58,23 @@ public class TaskRunner {
             IndicatorsInMemoryCache.clear();
             System.gc();
             findOptimalSLTP();
+        }
+    }
+
+    public static void runBest(Timeframe[][] timeframes) {
+        String tf1 = timeframes[0][0].name().toLowerCase();
+        String tf2 = timeframes[0][1].name().toLowerCase();
+        try {
+            String best = new String(Files.readAllBytes(Paths.get("best_" + Context.source.name().toLowerCase() + "_" + tf1 + "_" + tf2 + ".txt")));
+            String[] lines = best.split(System.lineSeparator());
+            Arrays.stream(lines).forEach(line -> {
+                String[] split = line.split("=");
+                String symbol = split[0];
+                TaskType task = TaskType.valueOf(split[1].toUpperCase());
+                run(timeframes, new TaskType[]{task}, false);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

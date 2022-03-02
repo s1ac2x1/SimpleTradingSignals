@@ -3,9 +3,6 @@ package com.kishlaly.ta.utils;
 import com.kishlaly.ta.analyze.TaskResultCode;
 import com.kishlaly.ta.model.SymbolData;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,32 +33,20 @@ public class Log {
     }
 
     public static void saveDebug(String filename) {
-        try {
-            Files.write(Paths.get(filename), debug.toString().getBytes());
-        } catch (IOException e) {
-            System.out.println("Failed to save debug log: " + e.getMessage());
-        }
+        FilesUtil.appendToFile(filename, debug.toString());
     }
 
     public static void saveSignal(String filename) {
-        try {
-            String output = log.toString();
-            if (!output.isEmpty()) {
-                Files.write(Paths.get(filename), output.getBytes());
-            }
-        } catch (IOException e) {
-            System.out.println("Failed to save signal log: " + e.getMessage());
+        String output = log.toString();
+        if (!output.isEmpty()) {
+            FilesUtil.appendToFile(filename, output);
         }
     }
 
     public static void saveCodes(String folder) {
         codes.forEach((code, symbols) -> {
-            try {
-                String s = symbols.stream().map(symbolData -> symbolData.symbol).collect(Collectors.joining(System.lineSeparator()));
-                Files.write(Paths.get(folder + "/" + code.name().toLowerCase() + ".txt"), s.getBytes());
-            } catch (Exception e) {
-                System.out.println("Failed to save codes log: " + e.getMessage());
-            }
+            String s = symbols.stream().map(symbolData -> symbolData.symbol).collect(Collectors.joining(System.lineSeparator()));
+            FilesUtil.appendToFile(folder + "/" + code.name().toLowerCase() + ".txt", s);
         });
     }
 

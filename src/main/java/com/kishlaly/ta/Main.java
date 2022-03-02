@@ -10,18 +10,15 @@ import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.analyze.TaskRunner.run;
+import static com.kishlaly.ta.analyze.TaskRunner.runBest;
 import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
+import static com.kishlaly.ta.utils.FilesUtil.writeToFile;
 
 /**
  * @author Vladimir Kishlaly
@@ -176,14 +173,6 @@ public class Main {
                 });
         table.append("</table>");
         writeToFile("tests/table.html", table.toString());
-    }
-
-    public static void writeToFile(String name, String content) {
-        try {
-            Files.write(Paths.get(name), content.toString().getBytes());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     private static void testMass(Timeframe[][] timeframes, TaskType[] tasks) {
