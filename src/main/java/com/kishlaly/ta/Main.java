@@ -38,7 +38,7 @@ public class Main {
 //                {Timeframe.DAY, Timeframe.HOUR},
         };
 
-        Context.source = SymbolsSource.TEST;
+        Context.source = SymbolsSource.SP500;
 //        Context.testOnly = new ArrayList<String>() {{
 //            add("PYPL");
 //        }};
@@ -120,7 +120,7 @@ public class Main {
         winners.entrySet().stream().forEach(entry -> {
             builder.append(entry.getKey()).append("=").append(entry.getValue().name()).append(System.lineSeparator());
         });
-        writeToFile("best.txt", builder.toString());
+        writeToFile("best" + Context.source.name().toLowerCase() + ".txt", builder.toString());
     }
 
     private static void saveTable(List<HistoricalTesting> result) {
@@ -170,12 +170,12 @@ public class Main {
                     table.append("</tr>");
                 });
         table.append("</table>");
-        writeToFile("table.html", table.toString());
+        writeToFile("tests/table.html", table.toString());
     }
 
     public static void writeToFile(String name, String content) {
         try {
-            Files.write(Paths.get("tests/" + name), content.toString().getBytes());
+            Files.write(Paths.get(name), content.toString().getBytes());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
