@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE_2;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE_4;
+import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 
 /**
@@ -41,9 +41,9 @@ public class Main {
         };
 
         Context.source = SymbolsSource.SP500;
-        Context.testOnly = new ArrayList<String>() {{
-            add("LMT");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("LMT");
+//        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
@@ -51,15 +51,15 @@ public class Main {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
-                THREE_DISPLAYS_BUY_TYPE_4,
+                //THREE_DISPLAYS_BUY_TYPE_4,
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
-//        buildCache(timeframes, tasks, false);
+        buildCache(timeframes, tasks, false);
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, true);
 //        testOneStrategy(timeframes, tasks, new StopLossVolatileLocalMin(0.27), new TakeProfitFixedKeltnerTop(100));
-        buildTasksAndStrategiesSummary(timeframes, tasks);
+//        buildTasksAndStrategiesSummary(timeframes, tasks);
     }
 
     private static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
@@ -90,26 +90,36 @@ public class Main {
                 .forEach(bySymbol -> {
                     String symbol = bySymbol.getKey();
                     table.append("<tr>");
-                    table.append("<td style=\"vertical-align: top;\">" + symbol + "</td>");
+                    table.append("<td style=\"vertical-align: left;\">" + symbol + "</td>");
                     table.append("<td>");
                     StringBuilder innerTable = new StringBuilder("<table>");
                     List<HistoricalTesting> testings = bySymbol.getValue();
+                    Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
                     testings.stream()
                             .collect(Collectors.groupingBy(HistoricalTesting::getTaskType))
                             .entrySet().stream().forEach(byTask -> {
                                 TaskType taskType = byTask.getKey();
                                 List<HistoricalTesting> historicalTestings = byTask.getValue();
-                                Collections.sort(historicalTestings, Comparator.comparing(HistoricalTesting::getBalance));
                                 HistoricalTesting best = historicalTestings.get(historicalTestings.size() - 1);
                                 innerTable.append("<tr>");
-                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">" + taskType.name() + "</td>");
-                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">&nbsp;&nbsp;<&nbsp;</td>");
-                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">" + best.printTPSLNumber() + "</td>");
-                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">&nbsp;&nbsp;<&nbsp;</td>");
-                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">" + best.printTPSLPercent() + "</td>");
-                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">&nbsp;&nbsp;<&nbsp;</td>");
-                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">" + best.getBalance() + "</td>");
-                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">&nbsp;&nbsp;<&nbsp;</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: left;\">" + taskType.name() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">" + best.printTPSLNumber() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">" + best.printTPSLPercent() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left;\">" + best.getBalance() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">" + best.getStopLossStrategy() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
+                                innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">" + best.getTakeProfitStrategy() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
+
                                 innerTable.append("</tr>");
                             });
                     innerTable.append("</table>");
