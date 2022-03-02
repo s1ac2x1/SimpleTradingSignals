@@ -54,9 +54,10 @@ public class Main {
         };
 
 //        buildCache(timeframes, tasks, false);
-        findBestStrategyForSymbols();
+//        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, false);
+        runBest(timeframes);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
@@ -94,6 +95,10 @@ public class Main {
         saveTable(result);
     }
 
+    // для каждого набора символов (SP500, NAGA, ...) создает файл best_{set}_{scree1}_{scree2}.txt
+    // в этом файле строки вида symbol=TaskType
+    // подразумевается, что каждому символу соответствует TaskType, который показал лучший результат на исторических данных
+    // при тестировании сигналов использовалась базовая пара StopLossFixedPrice(0.27) и TakeProfitFixedKeltnerTop(100)
     private static void findBestStrategyForSymbols() {
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
