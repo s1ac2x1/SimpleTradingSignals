@@ -1,9 +1,7 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.analyze.testing.TaskTester;
 import com.kishlaly.ta.analyze.testing.sl.*;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitDisabled;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
@@ -20,11 +18,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.*;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE_2;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE_4;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 
 /**
@@ -44,16 +42,16 @@ public class Main {
 
         Context.source = SymbolsSource.SP500;
         Context.testOnly = new ArrayList<String>() {{
-            add("ABC");
+            add("LMT");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
-                //THREE_DISPLAYS_BUY_TYPE2, // лучше работает для WEEK-DAY
-                //THREE_DISPLAYS_BUY_TYPE4,
+                //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
+                THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
+                THREE_DISPLAYS_BUY_TYPE_4,
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
@@ -61,7 +59,7 @@ public class Main {
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, true);
 //        testOneStrategy(timeframes, tasks, new StopLossVolatileLocalMin(0.27), new TakeProfitFixedKeltnerTop(100));
-        testAllStrategies(timeframes, tasks);
+        buildTasksAndStrategiesSummary(timeframes, tasks);
     }
 
     private static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
@@ -71,7 +69,7 @@ public class Main {
         test(timeframes, tasks);
     }
 
-    private static void testAllStrategies(Timeframe[][] timeframes, TaskType[] tasks) {
+    private static void buildTasksAndStrategiesSummary(Timeframe[][] timeframes, TaskType[] tasks) {
         List<HistoricalTesting> result = new ArrayList<>();
         int total = getSLStrategies().size() * getTPStrategies().size();
         AtomicInteger current = new AtomicInteger(1);
@@ -84,16 +82,53 @@ public class Main {
                 current.getAndIncrement();
             });
         });
-        Collections.sort(result, Comparator.comparing(HistoricalTesting::getBalance));
-        HistoricalTesting worse = result.get(0);
-        writeToFile(worse.getData().symbol + "_worse", TaskTester.formatTestingSummary(worse));
-        HistoricalTesting best = result.get(result.size() - 1);
-        writeToFile(best.getData().symbol + "_best", TaskTester.formatTestingSummary(best));
+        StringBuilder table = new StringBuilder("<table>");
+        result
+                .stream()
+                .collect(Collectors.groupingBy(HistoricalTesting::getSymbol))
+                .entrySet().stream()
+                .forEach(bySymbol -> {
+                    String symbol = bySymbol.getKey();
+                    table.append("<tr>");
+                    table.append("<td style=\"vertical-align: top;\">" + symbol + "</td>");
+                    table.append("<td>");
+                    StringBuilder innerTable = new StringBuilder("<table>");
+                    List<HistoricalTesting> testings = bySymbol.getValue();
+                    testings.stream()
+                            .collect(Collectors.groupingBy(HistoricalTesting::getTaskType))
+                            .entrySet().stream().forEach(byTask -> {
+                                TaskType taskType = byTask.getKey();
+                                List<HistoricalTesting> historicalTestings = byTask.getValue();
+                                Collections.sort(historicalTestings, Comparator.comparing(HistoricalTesting::getBalance));
+                                HistoricalTesting best = historicalTestings.get(historicalTestings.size() - 1);
+                                innerTable.append("<tr>");
+                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">" + taskType.name() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">&nbsp;&nbsp;<&nbsp;</td>");
+                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">" + best.printTPSLNumber() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">&nbsp;&nbsp;<&nbsp;</td>");
+                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">" + best.printTPSLPercent() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">&nbsp;&nbsp;<&nbsp;</td>");
+                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">" + best.getBalance() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top; width: 100%; text-align: center;\">&nbsp;&nbsp;<&nbsp;</td>");
+                                innerTable.append("</tr>");
+                            });
+                    innerTable.append("</table>");
+                    table.append(innerTable);
+                    table.append("</td>");
+                    table.append("</tr>");
+                });
+        table.append("</table>");
+        writeToFile("table.html", table.toString());
+//        Collections.sort(result, Comparator.comparing(HistoricalTesting::getBalance));
+//        HistoricalTesting worse = result.get(0);
+//        writeToFile(worse.getData().symbol + "_worse", TaskTester.formatTestingSummary(worse));
+//        HistoricalTesting best = result.get(result.size() - 1);
+//        writeToFile(best.getData().symbol + "_best", TaskTester.formatTestingSummary(best));
     }
 
     public static void writeToFile(String name, String content) {
         try {
-            Files.write(Paths.get("tests/" + name + ".txt"), content.toString().getBytes());
+            Files.write(Paths.get("tests/" + name), content.toString().getBytes());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -117,7 +152,6 @@ public class Main {
         return new ArrayList<StopLossStrategy>() {{
             add(new StopLossFixedPrice(0.27));
             add(new StopLossFixedKeltnerBottom());
-            add(new StopLossVolatileKeltnerBottom(70));
             add(new StopLossVolatileKeltnerBottom(80));
             add(new StopLossVolatileKeltnerBottom(100));
             add(new StopLossVolatileLocalMin(0.27));
@@ -127,13 +161,9 @@ public class Main {
 
     public static List<TakeProfitStrategy> getTPStrategies() {
         return new ArrayList<TakeProfitStrategy>() {{
-            add(new TakeProfitFixedKeltnerTop(70));
             add(new TakeProfitFixedKeltnerTop(80));
-            add(new TakeProfitFixedKeltnerTop(90));
             add(new TakeProfitFixedKeltnerTop(100));
-            add(new TakeProfitVolatileKeltnerTop(70));
             add(new TakeProfitVolatileKeltnerTop(80));
-            add(new TakeProfitVolatileKeltnerTop(90));
             add(new TakeProfitVolatileKeltnerTop(100));
         }};
     }

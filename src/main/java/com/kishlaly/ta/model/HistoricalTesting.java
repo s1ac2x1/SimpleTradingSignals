@@ -225,6 +225,10 @@ public class HistoricalTesting {
         return Numbers.round(getTotalProfit() + getTotalLoss()); // loss is negative
     }
 
+    public String getSymbol() {
+        return data.symbol;
+    }
+
     public static class PositionTestResult {
 
         private long openedTimestamp;

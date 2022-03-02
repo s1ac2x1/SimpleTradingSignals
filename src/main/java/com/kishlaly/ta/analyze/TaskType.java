@@ -40,7 +40,7 @@ public enum TaskType {
             }},
             ThreeDisplays::buySignal
     ),
-    THREE_DISPLAYS_BUY_TYPE2(
+    THREE_DISPLAYS_BUY_TYPE_2(
             new HashMap<Integer, Timeframe>() {{
                 put(1, WEEK);
                 put(2, DAY);
@@ -84,7 +84,7 @@ public enum TaskType {
             }},
             ThreeDisplays::buySignalType3
     ),
-    THREE_DISPLAYS_BUY_TYPE4(
+    THREE_DISPLAYS_BUY_TYPE_4(
             new HashMap<Integer, Timeframe>() {{
                 put(1, WEEK);
                 put(2, DAY);
