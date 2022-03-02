@@ -53,8 +53,8 @@ public class Main {
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
-        buildCache(timeframes, tasks, false);
-//        findBestStrategyForSymbols();
+//        buildCache(timeframes, tasks, false);
+        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, false);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
