@@ -72,12 +72,15 @@ public class CacheReader {
         if (!Context.testOnly.isEmpty()) {
             stocksRaw.addAll(Context.testOnly);
         } else {
-            try {
-                stocksRaw = Files.readAllLines(new File(Context.source.getFilename()).toPath(),
-                        Charset.defaultCharset());
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+            Arrays.stream(Context.source).forEach(source -> {
+                try {
+                    List<String> lines = Files.readAllLines(new File(source.getFilename()).toPath(),
+                            Charset.defaultCharset());
+                    stocksRaw.addAll(lines);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
         return new HashSet<>(stocksRaw);
     }

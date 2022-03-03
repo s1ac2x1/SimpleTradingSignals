@@ -135,6 +135,9 @@ public class CacheBuilder {
     // подразумевается, что каждому символу соответствует TaskType, который показал лучший результат на исторических данных
     // при тестировании сигналов использовалась базовая пара StopLossFixedPrice(0.27) и TakeProfitFixedKeltnerTop(100)
     public static void findBestStrategyForSymbols() {
+        if (source.length > 1) {
+            throw new RuntimeException("Only one symbols source please");
+        }
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
         };
@@ -160,7 +163,7 @@ public class CacheBuilder {
         winners.entrySet().stream().forEach(entry -> {
             builder.append(entry.getKey()).append("=").append(entry.getValue().name()).append(System.lineSeparator());
         });
-        writeToFile("best_" + Context.source.name().toLowerCase() + "_" + timeframes[0][0].name().toLowerCase() + "_" + timeframes[0][1].name().toLowerCase() + ".txt", builder.toString());
+        writeToFile("best_" + Context.source[0].name().toLowerCase() + "_" + timeframes[0][0].name().toLowerCase() + "_" + timeframes[0][1].name().toLowerCase() + ".txt", builder.toString());
     }
 
     public static void saveTable(List<HistoricalTesting> result) {
@@ -214,9 +217,9 @@ public class CacheBuilder {
     }
 
     public static void buildTasksAndStrategiesSummary(Timeframe[][] timeframes,
-                                                       TaskType[] tasks,
-                                                       StopLossStrategy stopLossStrategy,
-                                                       TakeProfitStrategy takeProfitStrategy) {
+                                                      TaskType[] tasks,
+                                                      StopLossStrategy stopLossStrategy,
+                                                      TakeProfitStrategy takeProfitStrategy) {
         List<HistoricalTesting> result = new ArrayList<>();
         int total = getSLStrategies().size() * getTPStrategies().size();
         AtomicInteger current = new AtomicInteger(1);

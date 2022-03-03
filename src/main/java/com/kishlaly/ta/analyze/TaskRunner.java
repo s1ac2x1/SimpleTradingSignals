@@ -64,21 +64,25 @@ public class TaskRunner {
         }
         String tf1 = timeframes[0][0].name().toLowerCase();
         String tf2 = timeframes[0][1].name().toLowerCase();
-        try {
-            String best = new String(Files.readAllBytes(Paths.get("best_" + Context.source.name().toLowerCase() + "_" + tf1 + "_" + tf2 + ".txt")));
-            String[] lines = best.split(System.lineSeparator());
-            Arrays.stream(lines).forEach(line -> {
-                String[] split = line.split("=");
-                String symbol = split[0];
-                TaskType task = TaskType.valueOf(split[1].toUpperCase());
-                Context.symbols = new HashSet<String>() {{
-                    add(symbol);
-                }};
-                run(timeframes, new TaskType[]{task}, false);
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        StringBuilder content = new StringBuilder();
+        Arrays.stream(Context.source).forEach(source -> {
+            try {
+                String best = new String(Files.readAllBytes(Paths.get("best_" + source.name().toLowerCase() + "_" + tf1 + "_" + tf2 + ".txt")));
+                content.append(best).append(System.lineSeparator());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        String[] lines = content.toString().split(System.lineSeparator());
+        Arrays.stream(lines).forEach(line -> {
+            String[] split = line.split("=");
+            String symbol = split[0];
+            TaskType task = TaskType.valueOf(split[1].toUpperCase());
+            Context.symbols = new HashSet<String>() {{
+                add(symbol);
+            }};
+            run(timeframes, new TaskType[]{task}, false);
+        });
     }
 
     private static void findOptimalSLTP() {

@@ -23,7 +23,7 @@ public class Context {
     public static double limitPerMinute = 75;
     public static Timeframe timeframe = Timeframe.DAY; // по умолчению для тестов
     public static Timeframe aggregationTimeframe = Timeframe.DAY; // на основе этого таймфрема агрегируются другие котировки
-    public static SymbolsSource source = SymbolsSource.SP500;
+    public static SymbolsSource[] source = {SymbolsSource.SP500, SymbolsSource.NAGA, SymbolsSource.SCREENER_FILTERED};
     public static List<String> testOnly = new ArrayList<>();
     public static Set<String> symbols;
     public static int yearsToAnalyze = 5;
