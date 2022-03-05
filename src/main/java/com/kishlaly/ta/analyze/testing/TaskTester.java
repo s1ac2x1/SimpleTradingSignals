@@ -26,7 +26,7 @@ import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarCount;
+import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class TaskTester {
 
@@ -47,7 +47,7 @@ public class TaskTester {
                     SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
                     SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
                     SymbolData symbolDataForTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);
-                    List<TaskResult> taskResults = new ArrayList<>();
+                    List<BlockResult> blockResults = new ArrayList<>();
                     if (!isDataFilled(screen1, screen2)) {
                         return;
                     }
@@ -55,7 +55,7 @@ public class TaskTester {
                         while (hasHistory(screen1, screen2)) {
                             Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
                             Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
-                            taskResults.add(task.getFunction().apply(screen1, screen2));
+                            blockResults.add(task.getFunction().apply(screen1, screen2));
                             if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
                                 rewind(screen1, 1);
                             } else {
@@ -69,18 +69,18 @@ public class TaskTester {
                     screen1.indicators.clear();
                     screen2.quotes.clear();
                     screen2.indicators.clear();
-                    if (!taskResults.isEmpty()) {
+                    if (!blockResults.isEmpty()) {
                         HistoricalTesting testing = null;
                         if (Context.massTesting) {
                             if (Context.takeProfitStrategies != null) {
                                 Context.takeProfitStrategies.forEach(takeProfitStrategy -> {
-                                    HistoricalTesting massTesting = new HistoricalTesting(task, symbolDataForTesting, taskResults, Context.stopLossStrategy, takeProfitStrategy);
+                                    HistoricalTesting massTesting = new HistoricalTesting(task, symbolDataForTesting, blockResults, Context.stopLossStrategy, takeProfitStrategy);
                                     calculateStatistics(massTesting);
                                     allTests.add(massTesting);
                                 });
                             }
                         } else {
-                            testing = new HistoricalTesting(task, symbolDataForTesting, taskResults, Context.stopLossStrategy, Context.takeProfitStrategy);
+                            testing = new HistoricalTesting(task, symbolDataForTesting, blockResults, Context.stopLossStrategy, Context.takeProfitStrategy);
                             calculateStatistics(testing);
                             allTests.add(testing);
                             String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
@@ -147,7 +147,7 @@ public class TaskTester {
         testing.getTaskResults()
                 .stream()
                 .filter(taskResult -> taskResult.getLastChartQuote() != null)
-                .filter(taskResult -> !taskResult.isSignal())
+                .filter(taskResult -> !taskResult.isOk())
                 .forEach(taskResult -> {
                     String quoteDateFormatted = formatDate(timeframe, taskResult.getLastChartQuote().getTimestamp());
                     finalSignalResults.add(quoteDateFormatted + " ### " + taskResult.getCode());
@@ -158,14 +158,14 @@ public class TaskTester {
         testing.getTaskResults()
                 .stream()
                 .filter(taskResult -> taskResult.getLastChartQuote() != null)
-                .filter(taskResult -> taskResult.isSignal())
+                .filter(taskResult -> taskResult.isOk())
                 .forEach(taskResult -> {
                     String line = "";
                     Quote quote = taskResult.getLastChartQuote();
                     String quoteDateFormatted = formatDate(timeframe, quote.getTimestamp());
 
                     // результаты тестирования сигналов
-                    if (taskResult.isSignal()) {
+                    if (taskResult.isOk()) {
                         PositionTestResult positionTestResult = testing.getResult(quote);
                         if (!positionTestResult.isClosed()) {
                             line += " NOT CLOSED";
@@ -292,13 +292,13 @@ public class TaskTester {
     private static void calculateStatistics(HistoricalTesting historicalTesting) {
         historicalTesting.getTaskResults()
                 .stream()
-                .filter(taskResult -> taskResult.isSignal()) // берем только сигналы к входу
+                .filter(taskResult -> taskResult.isOk()) // берем только сигналы к входу
                 .forEach(taskResult -> testPosition(taskResult, historicalTesting));
     }
 
-    private static void testPosition(TaskResult taskResult, HistoricalTesting historicalTesting) {
+    private static void testPosition(BlockResult blockResult, HistoricalTesting historicalTesting) {
         PositionTestResult positionTestResult = new PositionTestResult();
-        Quote signal = taskResult.getLastChartQuote();
+        Quote signal = blockResult.getLastChartQuote();
         int signalIndex = -1;
         SymbolData data = historicalTesting.getData();
         for (int i = 0; i < data.quotes.size(); i++) {
@@ -411,8 +411,8 @@ public class TaskTester {
     private static boolean isDataFilled(SymbolData screen1, SymbolData screen2) {
         AtomicBoolean filledData = new AtomicBoolean(true);
 
-        int screenOneMinBarCount = resolveMinBarCount(screen1.timeframe);
-        int screenTwoMinBarCount = resolveMinBarCount(screen2.timeframe);
+        int screenOneMinBarCount = resolveMinBarsCount(screen1.timeframe);
+        int screenTwoMinBarCount = resolveMinBarsCount(screen2.timeframe);
 
         if (screen1.quotes.size() < screenOneMinBarCount || screen2.quotes.size() < screenTwoMinBarCount) {
             filledData.set(false);

@@ -1,11 +1,8 @@
 package com.kishlaly.ta.analyze;
 
-/**
- * присваивается последней котировке (у правого конца графика) после прогона через стратегию
- */
-public enum TaskResultCode {
+public enum BlockResultCode {
 
-    SIGNAL,
+    OK,
     NO_DATA_QUOTES,
     NO_DATA_INDICATORS,
     NO_DATA_MACD,

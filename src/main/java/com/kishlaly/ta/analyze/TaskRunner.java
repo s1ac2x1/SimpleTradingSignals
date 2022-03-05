@@ -140,10 +140,10 @@ public class TaskRunner {
             Log.addDebugLine(" === " + symbol + " === ");
             try {
                 System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " on " + symbol + " ...");
-                TaskResult taskResult = task.getFunction().apply(screen1, screen2);
-                Log.addDebugLine(taskResult.isSignal() ? "Вердикт: проверить" : "Вердикт: точно нет");
+                BlockResult blockResult = task.getFunction().apply(screen1, screen2);
+                Log.addDebugLine(blockResult.isOk() ? "Вердикт: проверить" : "Вердикт: точно нет");
                 Log.addDebugLine("");
-                if (taskResult.isSignal()) {
+                if (blockResult.isOk()) {
                     Log.addLine(symbol);
                     Signal signal = new Signal();
                     signal.timeframe1 = screen1.timeframe;

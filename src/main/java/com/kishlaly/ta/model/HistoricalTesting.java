@@ -19,7 +19,7 @@ public class HistoricalTesting {
     private SymbolData data;
 
     // все результаты прогона по стратегии, прокручивая график на один столбик в прошлое
-    private List<TaskResult> taskResults;
+    private List<BlockResult> blockResults;
 
     // тестирование открытия позиций по полученным сигналам к входу
     private Map<Quote, PositionTestResult> signalTestingResults = new HashMap<>();
@@ -27,10 +27,10 @@ public class HistoricalTesting {
     private StopLossStrategy stopLossStrategy;
     private TakeProfitStrategy takeProfitStrategy;
 
-    public HistoricalTesting(TaskType taskType, final SymbolData data, final List<TaskResult> taskResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public HistoricalTesting(TaskType taskType, final SymbolData data, final List<BlockResult> blockResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         this.taskType = taskType;
         this.data = data;
-        this.taskResults = taskResults;
+        this.blockResults = blockResults;
         this.stopLossStrategy = stopLossStrategy;
         this.takeProfitStrategy = takeProfitStrategy;
     }
@@ -55,12 +55,12 @@ public class HistoricalTesting {
         this.data = data;
     }
 
-    public List<TaskResult> getTaskResults() {
-        return this.taskResults;
+    public List<BlockResult> getTaskResults() {
+        return this.blockResults;
     }
 
-    public void setSignals(final List<TaskResult> taskResults) {
-        this.taskResults = taskResults;
+    public void setSignals(final List<BlockResult> blockResults) {
+        this.blockResults = blockResults;
     }
 
     public void addTestResult(Quote signal, PositionTestResult positionTestResult) {

@@ -44,9 +44,7 @@ public class Main {
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
-                THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
-                //THREE_DISPLAYS_BUY_TYPE_4,
+                THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
@@ -54,7 +52,7 @@ public class Main {
 //        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, false);
-//        runBest(timeframes);
+        runBest(timeframes);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);

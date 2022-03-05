@@ -1,14 +1,14 @@
 package com.kishlaly.ta.analyze.tasks;
 
-import com.kishlaly.ta.analyze.TaskResultCode;
+import com.kishlaly.ta.analyze.BlockResultCode;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.TaskResult;
+import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.Comparator;
 
-import static com.kishlaly.ta.analyze.TaskResultCode.*;
+import static com.kishlaly.ta.analyze.BlockResultCode.*;
 
 public class FirstTrustModel {
 
@@ -16,11 +16,11 @@ public class FirstTrustModel {
         public static int MONTHS = 3;
     }
 
-    public static TaskResult buySignal(SymbolData screen_1, SymbolData screen_2) {
+    public static BlockResult buySignal(SymbolData screen_1, SymbolData screen_2) {
         if (screen_1.quotes.isEmpty() || screen_2.quotes.isEmpty()) {
             Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_1.symbol);
-            Log.recordCode(TaskResultCode.NO_DATA_QUOTES, screen_1);
-            return new TaskResult(null, NO_DATA_QUOTES);
+            Log.recordCode(BlockResultCode.NO_DATA_QUOTES, screen_1);
+            return new BlockResult(null, NO_DATA_QUOTES);
         }
 
         Quote lastChartQuote = screen_2.quotes.get(screen_2.quotes.size() - 1);
@@ -40,20 +40,20 @@ public class FirstTrustModel {
         }
         if (nMonthsLowIndex < 0) {
             Log.addDebugLine("Недостаточно ценовых столбиков для поиска шестмесячного минимума у " + screen_1.symbol);
-            Log.recordCode(TaskResultCode.NO_DATA_QUOTES, screen_1);
-            return new TaskResult(lastChartQuote, NO_DATA_QUOTES);
+            Log.recordCode(BlockResultCode.NO_DATA_QUOTES, screen_1);
+            return new BlockResult(lastChartQuote, NO_DATA_QUOTES);
         }
 
         if (screen_2.quotes.size() - nMonthsLowIndex > 5) {
             Log.addDebugLine("Минимум обнаружен далеко от последних трех столбиков");
             Log.recordCode(N_MONTHS_LOW_IS_TOO_FAR, screen_1);
-            return new TaskResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_FAR);
+            return new BlockResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_FAR);
         }
 
         if (nMonthsLowIndex + 2 >= screen_2.quotes.size()) {
             Log.addDebugLine("Минимум обнаружен слишком близко к правому краю");
             Log.recordCode(N_MONTHS_LOW_IS_TOO_CLOSE, screen_1);
-            return new TaskResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_CLOSE);
+            return new BlockResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_CLOSE);
         }
 
         // ищем хотя бы два зеленый столбика после минимума
@@ -63,10 +63,10 @@ public class FirstTrustModel {
         if (!ascendingLastBars) {
             Log.addDebugLine("После минимума не было роста двух столбиков");
             Log.recordCode(QUOTES_NOT_ASCENDING_AFTER_MIN, screen_1);
-            return new TaskResult(lastChartQuote, QUOTES_NOT_ASCENDING_AFTER_MIN);
+            return new BlockResult(lastChartQuote, QUOTES_NOT_ASCENDING_AFTER_MIN);
         }
 
-        return new TaskResult(signal, SIGNAL);
+        return new BlockResult(signal, OK);
     }
 
 }

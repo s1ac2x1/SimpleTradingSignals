@@ -3,7 +3,6 @@ package com.kishlaly.ta.utils;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.Timeframe;
 
-import java.sql.SQLOutput;
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -76,10 +75,11 @@ public class Quotes {
         return dayQuotes;
     }
 
-    public static int resolveMinBarCount(Timeframe timeframe) {
+    public static int resolveMinBarsCount(Timeframe timeframe) {
+        int min = 21; // меньше нельзя, иначе не сработает StopLossFixedPrice
         // если агрегация на основе часовых котировок (которых ~550), то дневных будет ~35, а недельных нет смысла рассматривать
         // если агрегация на основе дневных котировок (которых до 5500), то недельных будет до 1110
-        return 21; // меньше нельзя, иначе не сработает StopLossFixedPrice
+        return min;
 
 //        int notSet = -1;
 //        switch (timeframe) {
@@ -123,6 +123,10 @@ public class Quotes {
 //            default:
 //                return notSet;
 //        }
+    }
+
+    public static List<Quote> trim(List<Quote> src, int count) {
+        return src.subList(src.size() - count, src.size());
     }
 
     private static void collectDayQuote(List<Quote> hourQuotesInsideOneDay, List<Quote> dayQuotes) {

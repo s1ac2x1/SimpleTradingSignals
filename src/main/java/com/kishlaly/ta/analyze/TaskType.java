@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.TaskResult;
+import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.TimeframeIndicators;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -40,17 +40,6 @@ public enum TaskType {
             }},
             ThreeDisplays::buySignal
     ),
-    THREE_DISPLAYS_BUY_TYPE_2(
-            new HashMap<Integer, Timeframe>() {{
-                put(1, WEEK);
-                put(2, DAY);
-            }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
-            }},
-            ThreeDisplays::buySignalType2
-    ),
     THREE_DISPLAYS_SELL(
             new HashMap<Integer, Timeframe>() {{
                 put(1, WEEK);
@@ -72,34 +61,11 @@ public enum TaskType {
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
             FirstTrustModel::buySignal
-    ),
-    THREE_DISPLAYS_BUY_TYPE3(
-            new HashMap<Integer, Timeframe>() {{
-                put(1, WEEK);
-                put(2, DAY);
-            }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
-            }},
-            ThreeDisplays::buySignalType3
-    ),
-    THREE_DISPLAYS_BUY_TYPE_4(
-            new HashMap<Integer, Timeframe>() {{
-                put(1, WEEK);
-                put(2, DAY);
-            }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
-            }},
-            ThreeDisplays::buySignalType4
-    ); // 8
-
+    );
 
     TaskType(final Map<Integer, Timeframe> timeframes,
              final Map<Integer, Indicator[]> indicators,
-             BiFunction<SymbolData, SymbolData, TaskResult> function) {
+             BiFunction<SymbolData, SymbolData, BlockResult> function) {
         this.timeframes = timeframes;
         this.indicators = indicators;
         this.function = function;
@@ -107,7 +73,7 @@ public enum TaskType {
 
     private Map<Integer, Timeframe> timeframes;
     private Map<Integer, Indicator[]> indicators;
-    private BiFunction<SymbolData, SymbolData, TaskResult> function;
+    private BiFunction<SymbolData, SymbolData, BlockResult> function;
     private TimeframeIndicators timeframeIndicators;
 
     public Timeframe getTimeframeForScreen(int screen) {
@@ -126,7 +92,7 @@ public enum TaskType {
         this.indicators.put(screen, indicators);
     }
 
-    public BiFunction<SymbolData, SymbolData, TaskResult> getFunction() {
+    public BiFunction<SymbolData, SymbolData, BlockResult> getFunction() {
         return this.function;
     }
 
