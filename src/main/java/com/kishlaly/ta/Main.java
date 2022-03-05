@@ -54,7 +54,7 @@ public class Main {
 //        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
 //        run(timeframes, tasks, false);
-        runBest(timeframes);
+//        runBest(timeframes);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
