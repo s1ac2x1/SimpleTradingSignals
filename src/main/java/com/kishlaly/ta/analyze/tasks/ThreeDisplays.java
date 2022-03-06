@@ -86,15 +86,13 @@ public class ThreeDisplays {
         BlockResult screenTwoResult = null;
         for (int i = 0; i < screenTwoBlocks.size(); i++) {
             TaskBlock block = screenTwoBlocks.get(i);
-            screenOneResult = block.check(screens.screen2);
-            if (!screenOneResult.isOk()) {
+            screenTwoResult = block.check(screens.screen2);
+            if (!screenTwoResult.isOk()) {
                 break;
             }
         }
-        return screenOneResult;
+        return screenTwoResult;
 
-
-        List<Quote> screen_2_Quotes = screen_2.quotes.subList(screen_2.quotes.size() - screen_2_MinBarCount, screen_2.quotes.size());
 
         List<EMA> screen_1_EMA26 = screen_1.indicators.get(EMA26);
         screen_1_EMA26 = screen_1_EMA26.subList(screen_1_EMA26.size() - screen_1_MinBarCount, screen_1_EMA26.size());
