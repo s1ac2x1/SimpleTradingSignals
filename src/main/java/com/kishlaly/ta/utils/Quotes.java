@@ -1,6 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
 
 import java.time.DayOfWeek;
@@ -125,8 +126,12 @@ public class Quotes {
 //        }
     }
 
-    public static List<Quote> trim(List<Quote> src, int count) {
-        return src.subList(src.size() - count, src.size());
+    public static void trim(SymbolData screen) {
+        if (screen.quotes != null && !screen.quotes.isEmpty()) {
+            screen.quotes = screen.quotes.subList(screen.quotes.size() - resolveMinBarsCount(screen.timeframe), screen.quotes.size());
+        } else {
+            screen.quotes = new ArrayList<>();
+        }
     }
 
     private static void collectDayQuote(List<Quote> hourQuotesInsideOneDay, List<Quote> dayQuotes) {

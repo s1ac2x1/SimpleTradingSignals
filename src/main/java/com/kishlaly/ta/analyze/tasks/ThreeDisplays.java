@@ -10,6 +10,7 @@ import com.kishlaly.ta.model.Screens;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.model.indicators.*;
+import com.kishlaly.ta.utils.IndicatorUtils;
 import com.kishlaly.ta.utils.Log;
 import com.kishlaly.ta.utils.Quotes;
 
@@ -56,8 +57,10 @@ public class ThreeDisplays {
         SymbolData screen1 = screens.screen1;
         SymbolData screen2 = screens.screen2;
 
-        screen1.quotes = Quotes.trim(screen1.quotes, resolveMinBarsCount(screen1.timeframe));
-        screen2.quotes = Quotes.trim(screen2.quotes, resolveMinBarsCount(screen2.timeframe));
+        Quotes.trim(screen1);
+        Quotes.trim(screen2);
+        IndicatorUtils.trim(screen1);
+        IndicatorUtils.trim(screen2);
 
         List<TaskBlock> screenOneBlocks = blocks
                 .stream()
@@ -92,7 +95,6 @@ public class ThreeDisplays {
             }
         }
         return screenTwoResult;
-
 
         List<EMA> screen_1_EMA26 = screen_1.indicators.get(EMA26);
         screen_1_EMA26 = screen_1_EMA26.subList(screen_1_EMA26.size() - screen_1_MinBarCount, screen_1_EMA26.size());

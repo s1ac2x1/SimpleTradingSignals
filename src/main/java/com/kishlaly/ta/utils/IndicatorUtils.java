@@ -2,6 +2,7 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.*;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeries;
@@ -14,6 +15,8 @@ import org.ta4j.core.indicators.keltner.KeltnerChannelUpperIndicator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class IndicatorUtils {
 
@@ -119,6 +122,12 @@ public class IndicatorUtils {
             IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result);
             return result;
         }
+    }
+
+    public static void trim(SymbolData screen) {
+        взять все индикаторы, проверить у каждого
+                если нал или пустой - инициализировать
+                иначе обрезать
     }
 
 }
