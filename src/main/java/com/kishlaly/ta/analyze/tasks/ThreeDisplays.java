@@ -96,198 +96,9 @@ public class ThreeDisplays {
             }
         }
         return screenTwoResult;
-
-        // первый экран
-
-        // ScreenOneStrictTrendCheck
-
-        // второй экран
-
-        // ScreenTwoMACDCheck3Bars
-
-        // ScreenTwoStochAscending
-
-        // проверка перепроданности
-
-        // третья или вторая с конца %K ниже STOCH_OVERSOLD, и самая последняя выше первой
-        boolean isOversoldK = (stoch3.getSlowK() <= STOCH_OVERSOLD || stoch2.getSlowK() <= STOCH_OVERSOLD)
-                && (stoch1.getSlowK() > stoch3.getSlowK());
-        // третья или вторая с конца %D ниже STOCH_OVERSOLD, и самая последняя выше обеих
-        boolean isOversoldD = (stoch3.getSlowD() <= STOCH_OVERSOLD || stoch2.getSlowD() <= STOCH_OVERSOLD)
-                && (stoch1.getSlowD() > stoch2.getSlowD())
-                && (stoch1.getSlowD() > stoch3.getSlowD());
-
-        if (!isOversoldK || !isOversoldD) {
-            Log.recordCode(STOCH_NOT_ASCENDING_FROM_OVERSOLD, screen_1);
-            Log.addDebugLine("Стохастик не поднимается из перепроданности " + STOCH_OVERSOLD + ". %D: " + isOversoldD + "; %K: " + isOversoldK);
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_FROM_OVERSOLD);
-        }
-
-        // ценовые бары должны пересекать ЕМА13 и должны подниматься
-
-        // обязательное условие 1
-        // убедиться сначала, что high у последних трех столбиков повышается
-        Quote quote3 = screen_2_Quotes.get(screen_2_MinBarCount - 3);
-        Quote quote2 = screen_2_Quotes.get(screen_2_MinBarCount - 2);
-        Quote quote1 = screen_2_Quotes.get(screen_2_MinBarCount - 1);
-        // наверно ascendingBarHigh=false + ascendingBarClose=false достаточно для отказа
-        boolean ascendingBarHigh = quote3.getHigh() < quote2.getHigh() && quote2.getHigh() < quote1.getHigh();
-        boolean ascendingBarClose = quote3.getClose() < quote2.getClose() && quote2.getClose() < quote1.getClose();
-
-        int screen_2_EMA13Count = screen_2_EMA13.size();
-        if (!ascendingBarHigh) {
-            Log.recordCode(QUOTE_HIGH_NOT_GROWING, screen_2);
-            Log.addDebugLine("Quote.high не растет последовательно");
-            if (!ascendingBarClose) {
-                Log.recordCode(BlockResultCode.QUOTE_CLOSE_NOT_GROWING, screen_2);
-                Log.addDebugLine("Quote.close не растет последовательно");
-                // третий с конца весь ниже ЕМА13, а второй и последний пересекли
-                boolean thirdBarBelowEMA13 = quote3.getLow() < screen_2_EMA13.get(screen_2_EMA13Count - 3).getValue()
-                        && quote3.getHigh() < screen_2_EMA13.get(screen_2_EMA13Count - 3).getValue();
-                boolean secondBarCrossesEMA13 = quote2.getLow() <= screen_2_EMA13.get(screen_2_EMA13Count - 2).getValue()
-                        && quote2.getHigh() >= screen_2_EMA13.get(screen_2_EMA13Count - 2).getValue();
-                boolean lastBarCrossesEMA13 = quote1.getLow() <= screen_2_EMA13.get(screen_2_EMA13Count - 1).getValue()
-                        && quote1.getHigh() >= screen_2_EMA13.get(screen_2_EMA13Count - 1).getValue();
-                boolean crossingRule = thirdBarBelowEMA13 && (secondBarCrossesEMA13 || lastBarCrossesEMA13);
-                if (!crossingRule) {
-                    Log.addDebugLine("Третий с конца" + (thirdBarBelowEMA13 ? " " : " не ") + "ниже ЕМА13");
-                    Log.addDebugLine("Предпоследний" + (secondBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
-                    Log.addDebugLine("Последний" + (lastBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
-                    Log.recordCode(CROSSING_RULE_VIOLATED, screen_2);
-                    return new BlockResult(lastChartQuote, CROSSING_RULE_VIOLATED);
-                } else {
-                    Log.recordCode(BlockResultCode.CROSSING_RULE_PASSED, screen_2);
-                    Log.addDebugLine("Правило пересечения выполняется");
-                }
-            } else {
-                Log.recordCode(BlockResultCode.QUOTE_CLOSE_GROWING, screen_2);
-                Log.addDebugLine("Есть рост Quote.close");
-            }
-        } else {
-            Log.recordCode(BlockResultCode.QUOTE_HIGH_GROWING, screen_2);
-            Log.addDebugLine("Есть рост Quote.high");
-        }
-
-        // нужно фильтровать ситуацию, когда третий и второй пересекают ЕМА13, а послдений целиком выше (момент входа в сделку упущен)
-        // третий может открыться и закрыться выше, и это допустимо: https://drive.google.com/file/d/15XkXFKBQbTjeNjBn03NrF9JawCBFaO5t/view?usp=sharing
-        boolean thirdCrossesEMA13 = quote3.getLow() < screen_2_EMA13.get(screen_2_EMA13Count - 3).getValue()
-                && quote3.getHigh() > screen_2_EMA13.get(screen_2_EMA13Count - 3).getValue();
-        boolean secondCrossesEMA13 = quote2.getLow() < screen_2_EMA13.get(screen_2_EMA13Count - 2).getValue()
-                && quote2.getHigh() > screen_2_EMA13.get(screen_2_EMA13Count - 2).getValue();
-        boolean lastAboveEMA13 = quote1.getLow() > screen_2_EMA13.get(screen_2_EMA13Count - 1).getValue()
-                && quote1.getHigh() > screen_2_EMA13.get(screen_2_EMA13Count - 1).getValue();
-        if (thirdCrossesEMA13 && secondCrossesEMA13 && lastAboveEMA13) {
-            Log.recordCode(LAST_BAR_ABOVE, screen_2);
-            Log.addDebugLine("Третий и второй пересекли ЕМА13, а последний полностью выше");
-            return new BlockResult(lastChartQuote, LAST_BAR_ABOVE);
-        }
-
-        // фильтровать ситуации, когда последний столбик имеет тень ниже, чем третий с конца, например: https://drive.google.com/file/d/1-bxHShDKdKEBSk_ADBape7t9ZD4IaMA3/view?usp=sharing
-        // это не обязательно
-//        if (quote1.getLow() < quote2.getLow() && quote1.getLow() < quote3.getLow()) {
-//            Log.addDebugLine("Последний столбик имеет тень ниже предыдуших двух");
-//            return false;
-//        }
-
-        //попробовать посчитать среднюю длину баров и сравнить с ней последние три
-        Double sum = screen_2_Quotes.stream().map(quote -> quote.getHigh() - quote.getLow()).reduce(Double::sum).get();
-        double averageBarLength = sum / screen_2_MinBarCount;
-        double quote1Length = quote1.getHigh() - quote1.getLow();
-        double quote2Length = quote2.getHigh() - quote2.getLow();
-        double quote3Length = quote3.getHigh() - quote3.getLow();
-        boolean quote1StrangeLength = quote1Length >= averageBarLength * multiplier;
-        boolean quote2StrangeLength = quote2Length >= averageBarLength * multiplier;
-        boolean quote3StrangeLength = quote3Length >= averageBarLength * multiplier;
-        if (quote1StrangeLength || quote2StrangeLength || quote3StrangeLength) {
-            Log.addDebugLine("Внимание: один из последних трех столбиков в " + multiplier + " раза выше среднего");
-        }
-
-        return new BlockResult(quote1, OK);
     }
 
     public static BlockResult buySignalType2(SymbolData screen_1, SymbolData screen_2) {
-
-        int screen_1_MinBarCount = resolveMinBarsCount(screen_1.timeframe);
-        int screen_2_MinBarCount = resolveMinBarsCount(screen_2.timeframe);
-
-        if (screen_1.quotes.isEmpty() || screen_1.quotes.size() < screen_1_MinBarCount) {
-            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_1.timeframe.name());
-            Log.recordCode(NO_DATA_QUOTES, screen_1);
-            return new BlockResult(null, NO_DATA_QUOTES);
-        }
-        if (screen_2.quotes.isEmpty() || screen_2.quotes.size() < screen_2_MinBarCount) {
-            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_2.timeframe.name());
-            Log.recordCode(NO_DATA_QUOTES, screen_2);
-            return new BlockResult(null, NO_DATA_QUOTES);
-        }
-
-        List<Indicator> missingData = new ArrayList<>();
-        screen_1.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty() || value.size() < screen_1_MinBarCount) {
-                missingData.add(indicator);
-            }
-        });
-        screen_2.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty() || value.size() < screen_2_MinBarCount) {
-                missingData.add(indicator);
-            }
-        });
-        if (!missingData.isEmpty()) {
-            Log.recordCode(NO_DATA_INDICATORS, screen_1);
-            Log.recordCode(NO_DATA_INDICATORS, screen_2);
-            Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
-            return new BlockResult(null, NO_DATA_INDICATORS);
-        }
-
-        List<Quote> screen_1_Quotes = screen_1.quotes.subList(screen_1.quotes.size() - screen_1_MinBarCount, screen_1.quotes.size());
-        List<Quote> screen_2_Quotes = screen_2.quotes.subList(screen_2.quotes.size() - screen_2_MinBarCount, screen_2.quotes.size());
-
-        List<EMA> screen_1_EMA26 = screen_1.indicators.get(EMA26);
-        screen_1_EMA26 = screen_1_EMA26.subList(screen_1_EMA26.size() - screen_1_MinBarCount, screen_1_EMA26.size());
-
-        List<MACD> screen_1_MACD = screen_1.indicators.get(MACD);
-        screen_1_MACD = screen_1_MACD.subList(screen_1_MACD.size() - screen_1_MinBarCount, screen_1_MACD.size());
-
-        List<EMA> screen_2_EMA13 = screen_2.indicators.get(Indicator.EMA13);
-        screen_2_EMA13 = screen_2_EMA13.subList(screen_2_EMA13.size() - screen_2_MinBarCount, screen_2_EMA13.size());
-
-        List<MACD> screen_2_MACD = screen_2.indicators.get(Indicator.MACD);
-        screen_2_MACD = screen_2_MACD.subList(screen_2_MACD.size() - screen_2_MinBarCount, screen_2_MACD.size());
-
-        List<Stoch> screen_2_Stochastic = screen_2.indicators.get(Indicator.STOCH);
-        screen_2_Stochastic = screen_2_Stochastic.subList(screen_2_Stochastic.size() - screen_2_MinBarCount, screen_2_Stochastic.size());
-
-        List<Keltner> screen_2_Keltner = screen_2.indicators.get(KELTNER);
-        screen_2_Keltner = screen_2_Keltner.subList(screen_2_Keltner.size() - screen_2_MinBarCount, screen_2_Keltner.size());
-
-        // первый экран
-
-        // проверка тренда
-        boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen_1, screen_1_MinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
-        //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen_1); плохая проверка
-        Quote lastChartQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
-        if (!uptrendCheckOnMultipleBars) {
-            Log.recordCode(NO_UPTREND_SCREEN_1, screen_1);
-            Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
-            return new BlockResult(lastChartQuote, NO_UPTREND_SCREEN_1);
-        }
-
-        // На первом экране последние 4 Quote.low не должны понижаться
-        // (эта проверка уже есть в Functions.isUptrend, но пусть тут тоже будет)
-        Quote q4 = screen_1_Quotes.get(screen_1_MinBarCount - 4);
-        Quote q3 = screen_1_Quotes.get(screen_1_MinBarCount - 3);
-        Quote q2 = screen_1_Quotes.get(screen_1_MinBarCount - 2);
-        Quote q1 = screen_1_Quotes.get(screen_1_MinBarCount - 1);
-        if (q4.getLow() >= q3.getLow() && q3.getLow() >= q2.getLow() && q2.getLow() >= q1.getLow()) {
-            // допустимо только, если последний столбик зеленый
-            if (q1.getClose() < q1.getOpen()) {
-                Log.recordCode(UPTREND_FAILING, screen_1);
-                Log.addDebugLine("Последние 4 столбика на первом экране понижаются");
-                return new BlockResult(lastChartQuote, UPTREND_FAILING);
-            } else {
-                Log.addDebugLine("Последние 4 столбика на первом экране понижаются, но крайний правый закрылся выше открытия");
-            }
-        }
 
         // второй экран
 
@@ -318,9 +129,9 @@ public class ThreeDisplays {
         // %D повышается (достаточно, чтобы последний был больше прошлого)
         boolean ascendingStochastic = stoch1.getSlowD() > stoch2.getSlowD();
         if (!ascendingStochastic) {
-            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_1, screen_1);
+            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_2, screen_1);
             Log.addDebugLine("Стохастик %D не растет на втором экране");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_1);
+            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_2);
         }
 
         // проверка перепроданности
@@ -344,9 +155,9 @@ public class ThreeDisplays {
 
         boolean lastStochIsBigger = stoch1.getSlowD() > stoch2.getSlowD();
         if (!lastStochIsBigger) {
-            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_1, screen_2);
+            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_2, screen_2);
             Log.addDebugLine("Последние два значения стохастика не повышаются");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_1);
+            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_2);
         }
 
 // старый вариант
@@ -370,9 +181,9 @@ public class ThreeDisplays {
         Quote lastQuote = screen_2_Quotes.get(screen_2_MinBarCount - 1);
         boolean ascendingBarHigh = preLastQuote.getHigh() < lastQuote.getHigh();
         if (!ascendingBarHigh) {
-            Log.recordCode(QUOTE_HIGH_NOT_GROWING, screen_2);
+            Log.recordCode(QUOTE_HIGH_NOT_GROWING_SCREEN_2, screen_2);
             Log.addDebugLine("Quote.high не растет последовательно");
-            return new BlockResult(lastChartQuote, QUOTE_HIGH_NOT_GROWING);
+            return new BlockResult(lastChartQuote, QUOTE_HIGH_NOT_GROWING_SCREEN_2);
         }
         EMA preLastEMA = screen_2_EMA13.get(screen_2_MinBarCount - 2);
         EMA lastEMA = screen_2_EMA13.get(screen_2_MinBarCount - 1);
@@ -407,8 +218,8 @@ public class ThreeDisplays {
         boolean crossingOk = crossingRule1 || crossingRule2 || crossingRule3 || crossingRule4;
         if (!crossingOk) {
             Log.addDebugLine("Не выполняется правило пересечения ЕМА");
-            Log.recordCode(CROSSING_RULE_VIOLATED, screen_2);
-            return new BlockResult(lastChartQuote, CROSSING_RULE_VIOLATED);
+            Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen_2);
+            return new BlockResult(lastChartQuote, CROSSING_RULE_VIOLATED_SCREEN_2);
         }
 
         // фильтрация поздних входов, когда столбик закрылся выше FILTER_BY_KELTNER
@@ -551,9 +362,9 @@ public class ThreeDisplays {
         }
         boolean stochAscending = stoch3.getSlowD() < stoch2.getSlowD() && stoch2.getSlowD() < stoch1.getSlowD();
         if (!stochAscending) {
-            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_1, screen_2);
+            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_2, screen_2);
             Log.addDebugLine("Три последних значения %D стохастика не повышаются");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_1);
+            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_2);
         }
 
         // последние три столбика гистограммы повышаются
@@ -743,9 +554,9 @@ public class ThreeDisplays {
         boolean screen_2_check3 = screen_2_lastStoch.getSlowK() > screen_2_preLastStoch.getSlowK()
                 && screen_2_lastStoch.getSlowD() > screen_2_preLastStoch.getSlowD();
         if (!screen_2_check3) {
-            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_1, screen_1);
+            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_2, screen_1);
             Log.addDebugLine("Стохастик не растет на втором экране");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_1);
+            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_2);
         }
 
         if (FILTER_BY_KELTNER_ENABLED) {
@@ -925,10 +736,10 @@ public class ThreeDisplays {
                     Log.addDebugLine("Третий с конца" + (thirdBarAboveEMA13 ? " " : " не ") + "выше ЕМА13");
                     Log.addDebugLine("Предпоследний" + (secondBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
                     Log.addDebugLine("Последний" + (lastBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
-                    Log.recordCode(CROSSING_RULE_VIOLATED, screen_2);
-                    return new BlockResult(lastChartQuote, CROSSING_RULE_VIOLATED);
+                    Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen_2);
+                    return new BlockResult(lastChartQuote, CROSSING_RULE_VIOLATED_SCREEN_2);
                 } else {
-                    Log.recordCode(BlockResultCode.CROSSING_RULE_PASSED, screen_2);
+                    Log.recordCode(BlockResultCode.CROSSING_RULE_PASSED_SCREEN_2, screen_2);
                     Log.addDebugLine("Правило пересечения выполняется");
                 }
             } else {

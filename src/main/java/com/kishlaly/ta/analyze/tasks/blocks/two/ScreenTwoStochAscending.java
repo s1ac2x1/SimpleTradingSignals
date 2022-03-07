@@ -9,7 +9,7 @@ import com.kishlaly.ta.utils.Log;
 import java.util.List;
 
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
-import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_NOT_ASCENDING_SCREEN_1;
+import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_NOT_ASCENDING_SCREEN_2;
 
 /**
  * стохастик должен подниматься из зоны перепроданности: проверить на трех последних значениях
@@ -25,9 +25,9 @@ public class ScreenTwoStochAscending implements ScreenTwoBlock {
         // %D повышается (достаточно, чтобы последний был больше прошлых двух)
         boolean ascendingStochastic = stoch1.getSlowD() > stoch2.getSlowD() && stoch1.getSlowD() > stoch3.getSlowD();
         if (!ascendingStochastic) {
-            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_1, screen);
+            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_2, screen);
             Log.addDebugLine("Стохастик %D не растет на втором экране");
-            return new BlockResult(screen.getLastQuote(), STOCH_NOT_ASCENDING_SCREEN_1);
+            return new BlockResult(screen.getLastQuote(), STOCH_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);
     }
