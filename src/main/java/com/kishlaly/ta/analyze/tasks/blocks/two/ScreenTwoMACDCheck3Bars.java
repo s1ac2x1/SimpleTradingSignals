@@ -24,16 +24,16 @@ public class ScreenTwoMACDCheck3Bars implements ScreenTwoBlock {
 
         boolean histogramBelowZero = macd3 < 0 && macd2 < 0 && macd1 < 0;
         if (!histogramBelowZero) {
-            Log.recordCode(HISTOGRAM_NOT_BELOW_ZERO, screen);
+            Log.recordCode(HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen);
             Log.addDebugLine("Гистограмма на втором экране не ниже нуля");
-            return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_BELOW_ZERO);
+            return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2);
         }
 
         boolean ascendingHistogram = macd3 < macd2 && macd2 < macd1;
         if (!ascendingHistogram) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING, screen);
+            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
             Log.addDebugLine("Гистограмма на втором экране не повышается");
-            return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING);
+            return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);
     }

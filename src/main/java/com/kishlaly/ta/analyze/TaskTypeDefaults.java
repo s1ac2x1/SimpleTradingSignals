@@ -25,7 +25,7 @@ public class TaskTypeDefaults {
                     add(new ScreenOneStrictTrendCheck());
 
                     add(new ScreenTwoMACDCheck3Bars());
-                    add(new ScreenTwoStochAscending());
+                    add(new ScreenTwoStochAscending3Values());
                     add(new ScreenTwoStochOversoldCheck());
                     add(new ScreenTwoLast3BarsEMACheck());
                     add(new ScreenTwoLastBarTooHighCheck());

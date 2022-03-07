@@ -102,37 +102,9 @@ public class ThreeDisplays {
 
         // второй экран
 
-        // гистограмма должна быть ниже нуля и начать повышаться: проверить на ДВУХ последних значениях
+        // ScreenTwoLast2BarsEMACheck
 
-        Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram(); // 2 от правого края
-        Double macd1 = screen_2_MACD.get(screen_2_MACD.size() - 1).getHistogram(); // последняя
-
-        boolean histogramBelowZero = macd2 < 0 && macd1 < 0;
-        if (!histogramBelowZero) {
-            Log.recordCode(HISTOGRAM_NOT_BELOW_ZERO, screen_2);
-            Log.addDebugLine("Гистограмма на втором экране не ниже нуля");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_BELOW_ZERO);
-        }
-
-        boolean ascendingHistogram = macd2 < macd1;
-        if (!ascendingHistogram) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING, screen_2);
-            Log.addDebugLine("Гистограмма на втором экране не повышается");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING);
-        }
-
-        // стохастик должен подниматься из зоны перепроданности: проверить на ДВУХ последних значениях
-
-        Stoch stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
-        Stoch stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
-
-        // %D повышается (достаточно, чтобы последний был больше прошлого)
-        boolean ascendingStochastic = stoch1.getSlowD() > stoch2.getSlowD();
-        if (!ascendingStochastic) {
-            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_2, screen_1);
-            Log.addDebugLine("Стохастик %D не растет на втором экране");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_2);
-        }
+        // ScreenTwoStochAscending2Values
 
         // проверка перепроданности
 
@@ -373,9 +345,9 @@ public class ThreeDisplays {
         MACD macd1 = screen_2_MACD.get(screen_2_MinBarCount - 1);
         boolean histogramAscending = macd3.getHistogram() < macd2.getHistogram() && macd2.getHistogram() < macd1.getHistogram();
         if (!histogramAscending) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING, screen_2);
+            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen_2);
             Log.addDebugLine("Три последних столбика гистограммы MACD не повышаются");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING);
+            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
 
         // два из трех последних баров зеленые
@@ -513,9 +485,9 @@ public class ThreeDisplays {
         com.kishlaly.ta.model.indicators.MACD screen_1_preLastMACD = screen_1_MACD.get(screen_1_MACD.size() - 2);
         boolean check2 = screen_1_lastMACD.getHistogram() > screen_1_preLastMACD.getHistogram();
         if (!check2) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING, screen_1);
+            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen_1);
             Log.addDebugLine("Гистограмма не растет на долгосрочном экране");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING);
+            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
 
         // второй экран
@@ -543,9 +515,9 @@ public class ThreeDisplays {
         com.kishlaly.ta.model.indicators.MACD screen_2_preLastMACD = screen_2_MACD.get(screen_2_MACD.size() - 2);
         boolean screen_2_check2 = screen_2_lastMACD.getHistogram() > screen_2_preLastMACD.getHistogram();
         if (!screen_2_check2) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING, screen_1);
+            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen_1);
             Log.addDebugLine("Гистограмма не растет на втором экране");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING);
+            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
 
         // %D и %K последнего стохастика должны быть выше, чем у предпоследнего
