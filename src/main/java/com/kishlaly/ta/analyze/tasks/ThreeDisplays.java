@@ -2,8 +2,9 @@ package com.kishlaly.ta.analyze.tasks;
 
 import com.kishlaly.ta.analyze.BlockResultCode;
 import com.kishlaly.ta.analyze.functions.TrendFunctions;
-import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.Screens;
@@ -52,10 +53,10 @@ public class ThreeDisplays {
         public static boolean FILTER_BY_KELTNER_ENABLED;
     }
 
-    public static BlockResult buySignal(Screens screens, List<TaskBlock> blocks) {
+    public static BlockResult buy(Screens screens, List<TaskBlock> blocks) {
 
-        SymbolData screen1 = screens.screen1;
-        SymbolData screen2 = screens.screen2;
+        SymbolData screen1 = screens.getScreen1();
+        SymbolData screen2 = screens.getScreen2();
 
         Quotes.trim(screen1);
         Quotes.trim(screen2);
@@ -84,7 +85,7 @@ public class ThreeDisplays {
 
         List<TaskBlock> screenTwoBlocks = blocks
                 .stream()
-                .filter(block -> block instanceof ScreenOneBlock)
+                .filter(block -> block instanceof ScreenTwoBlock)
                 .collect(Collectors.toList());
         BlockResult screenTwoResult = null;
         for (int i = 0; i < screenTwoBlocks.size(); i++) {
@@ -104,19 +105,7 @@ public class ThreeDisplays {
 
         // ScreenTwoMACDCheck3Bars
 
-        // стохастик должен подниматься из зоны перепроданности: проверить на трех последних значениях
-
-        Stoch stoch3 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 3);
-        Stoch stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
-        Stoch stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
-
-        // %D повышается (достаточно, чтобы последний был больше прошлых двух)
-        boolean ascendingStochastic = stoch1.getSlowD() > stoch2.getSlowD() && stoch1.getSlowD() > stoch3.getSlowD();
-        if (!ascendingStochastic) {
-            Log.recordCode(STOCH_NOT_ASCENDING, screen_1);
-            Log.addDebugLine("Стохастик %D не растет на втором экране");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING);
-        }
+        // ScreenTwoStochAscending
 
         // проверка перепроданности
 
@@ -329,9 +318,9 @@ public class ThreeDisplays {
         // %D повышается (достаточно, чтобы последний был больше прошлого)
         boolean ascendingStochastic = stoch1.getSlowD() > stoch2.getSlowD();
         if (!ascendingStochastic) {
-            Log.recordCode(STOCH_NOT_ASCENDING, screen_1);
+            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_1, screen_1);
             Log.addDebugLine("Стохастик %D не растет на втором экране");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING);
+            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_1);
         }
 
         // проверка перепроданности
@@ -355,9 +344,9 @@ public class ThreeDisplays {
 
         boolean lastStochIsBigger = stoch1.getSlowD() > stoch2.getSlowD();
         if (!lastStochIsBigger) {
-            Log.recordCode(STOCH_NOT_ASCENDING, screen_2);
+            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_1, screen_2);
             Log.addDebugLine("Последние два значения стохастика не повышаются");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING);
+            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_1);
         }
 
 // старый вариант
@@ -562,9 +551,9 @@ public class ThreeDisplays {
         }
         boolean stochAscending = stoch3.getSlowD() < stoch2.getSlowD() && stoch2.getSlowD() < stoch1.getSlowD();
         if (!stochAscending) {
-            Log.recordCode(STOCH_NOT_ASCENDING, screen_2);
+            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_1, screen_2);
             Log.addDebugLine("Три последних значения %D стохастика не повышаются");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING);
+            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_1);
         }
 
         // последние три столбика гистограммы повышаются
@@ -754,9 +743,9 @@ public class ThreeDisplays {
         boolean screen_2_check3 = screen_2_lastStoch.getSlowK() > screen_2_preLastStoch.getSlowK()
                 && screen_2_lastStoch.getSlowD() > screen_2_preLastStoch.getSlowD();
         if (!screen_2_check3) {
-            Log.recordCode(STOCH_NOT_ASCENDING, screen_1);
+            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_1, screen_1);
             Log.addDebugLine("Стохастик не растет на втором экране");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING);
+            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_1);
         }
 
         if (FILTER_BY_KELTNER_ENABLED) {

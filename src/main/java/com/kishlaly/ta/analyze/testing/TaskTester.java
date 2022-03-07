@@ -1,6 +1,7 @@
 package com.kishlaly.ta.analyze.testing;
 
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.TaskTypeDefaults;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
@@ -55,7 +56,7 @@ public class TaskTester {
                         while (hasHistory(screen1, screen2)) {
                             Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
                             Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
-                            blockResults.add(task.getFunction().apply(screen1, screen2));
+                            blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), TaskTypeDefaults.get(task)));
                             if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
                                 rewind(screen1, 1);
                             } else {

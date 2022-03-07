@@ -27,8 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE_2;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY_TYPE_4;
+import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.utils.Context.*;
@@ -134,21 +133,21 @@ public class CacheBuilder {
     // в этом файле строки вида symbol=TaskType
     // подразумевается, что каждому символу соответствует TaskType, который показал лучший результат на исторических данных
     // при тестировании сигналов использовалась базовая пара StopLossFixedPrice(0.27) и TakeProfitFixedKeltnerTop(100)
-    public static void findBestStrategyForSymbols() {
+    public static void findBestStrategyForSymbols(TaskType task) {
         if (source.length > 1) {
             throw new RuntimeException("Only one symbols source please");
         }
         Timeframe[][] timeframes = {
                 {Timeframe.WEEK, Timeframe.DAY},
         };
-        TaskType[] tasks = {
-                THREE_DISPLAYS_BUY_TYPE_2,
-                THREE_DISPLAYS_BUY_TYPE_4
-        };
         List<HistoricalTesting> result = new ArrayList<>();
         Context.stopLossStrategy = new StopLossFixedPrice(0.27);
         Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
-        result.addAll(test(timeframes, tasks));
+
+        // TODO тут нужно протестировать декартово множество блоков
+        task.setBlocks(new ArrayList<>());
+        result.addAll(test(timeframes, new TaskType[]{task}));
+
         Map<String, TaskType> winners = new HashMap<>();
         result.stream().collect(Collectors.groupingBy(HistoricalTesting::getSymbol))
                 .entrySet().stream().forEach(bySymbol -> {
@@ -156,6 +155,7 @@ public class CacheBuilder {
                     List<HistoricalTesting> testings = bySymbol.getValue();
                     Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
                     HistoricalTesting best = testings.get(testings.size() - 1);
+                    // TODO нужно сохранить маппинг symbol--taskType--blocks
                     winners.put(symbol, best.getTaskType());
                     System.out.println(symbol + " " + best.getTaskType().name() + " " + best.getBalance());
                 });
