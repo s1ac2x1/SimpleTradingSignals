@@ -13,7 +13,9 @@ import org.ta4j.core.indicators.keltner.KeltnerChannelMiddleIndicator;
 import org.ta4j.core.indicators.keltner.KeltnerChannelUpperIndicator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
@@ -125,9 +127,15 @@ public class IndicatorUtils {
     }
 
     public static void trim(SymbolData screen) {
-        взять все индикаторы, проверить у каждого
-                если нал или пустой - инициализировать
-                иначе обрезать
+        Map<Indicator, List> trimmedIndicators = new HashMap();
+        screen.indicators.forEach((indicator, values) -> {
+            if (values == null || values.isEmpty()) {
+                trimmedIndicators.put(indicator, new ArrayList());
+            } else {
+                trimmedIndicators.put(indicator, values.subList(values.size() - resolveMinBarsCount(screen.timeframe), values.size()));
+            }
+        });
+        screen.indicators = trimmedIndicators;
     }
 
 }

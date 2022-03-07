@@ -1,5 +1,6 @@
-package com.kishlaly.ta.analyze.tasks.blocks;
+package com.kishlaly.ta.analyze.tasks.blocks.commons;
 
+import com.kishlaly.ta.analyze.tasks.blocks.commons.CommonBlock;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
-public class ScreenOneValidation implements ScreenOneBlock {
+public class ScreenValidation implements CommonBlock {
 
     @Override
     public BlockResult check(SymbolData screenOne) {

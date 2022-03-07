@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks;
 
 import com.kishlaly.ta.analyze.BlockResultCode;
 import com.kishlaly.ta.analyze.functions.TrendFunctions;
-import com.kishlaly.ta.analyze.tasks.blocks.ScreenOneBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.Quote;
@@ -67,18 +67,18 @@ public class ThreeDisplays {
                 .filter(block -> block instanceof ScreenOneBlock)
                 .collect(Collectors.toList());
 
-        boolean screenOneAllBlockaValid = true;
+        boolean screenOneAllBlocksValid = true;
         BlockResult screenOneResult = null;
 
         for (int i = 0; i < screenOneBlocks.size(); i++) {
-            TaskBlock block = screenOneBlocks.get(i);
-            screenOneResult = block.check(screen1);
+            TaskBlock screenOneBlock = screenOneBlocks.get(i);
+            screenOneResult = screenOneBlock.check(screen1);
             if (!screenOneResult.isOk()) {
-                screenOneAllBlockaValid = false;
+                screenOneAllBlocksValid = false;
                 break;
             }
         }
-        if (!screenOneAllBlockaValid) {
+        if (!screenOneAllBlocksValid) {
             return screenOneResult;
         }
 
@@ -88,79 +88,21 @@ public class ThreeDisplays {
                 .collect(Collectors.toList());
         BlockResult screenTwoResult = null;
         for (int i = 0; i < screenTwoBlocks.size(); i++) {
-            TaskBlock block = screenTwoBlocks.get(i);
-            screenTwoResult = block.check(screens.screen2);
+            TaskBlock screenTwoBlock = screenTwoBlocks.get(i);
+            screenTwoResult = screenTwoBlock.check(screen2);
             if (!screenTwoResult.isOk()) {
                 break;
             }
         }
         return screenTwoResult;
 
-        List<EMA> screen_1_EMA26 = screen_1.indicators.get(EMA26);
-        screen_1_EMA26 = screen_1_EMA26.subList(screen_1_EMA26.size() - screen_1_MinBarCount, screen_1_EMA26.size());
-
-        List<MACD> screen_1_MACD = screen_1.indicators.get(MACD);
-        screen_1_MACD = screen_1_MACD.subList(screen_1_MACD.size() - screen_1_MinBarCount, screen_1_MACD.size());
-
-        List<EMA> screen_2_EMA13 = screen_2.indicators.get(Indicator.EMA13);
-        screen_2_EMA13 = screen_2_EMA13.subList(screen_2_EMA13.size() - screen_2_MinBarCount, screen_2_EMA13.size());
-
-        List<MACD> screen_2_MACD = screen_2.indicators.get(Indicator.MACD);
-        screen_2_MACD = screen_2_MACD.subList(screen_2_MACD.size() - screen_2_MinBarCount, screen_2_MACD.size());
-
-        List<Stoch> screen_2_Stochastic = screen_2.indicators.get(Indicator.STOCH);
-        screen_2_Stochastic = screen_2_Stochastic.subList(screen_2_Stochastic.size() - screen_2_MinBarCount, screen_2_Stochastic.size());
-
         // первый экран
 
-        // проверка тренда
-        boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen_1, screen_1_MinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
-        //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen_1); плохая проверка
-        Quote lastChartQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
-        if (!uptrendCheckOnMultipleBars) {
-            Log.recordCode(NO_UPTREND, screen_1);
-            Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
-            return new BlockResult(lastChartQuote, NO_UPTREND);
-        }
-
-        // На первом экране последние 4 Quote.low не должны понижаться
-        // (эта проверка уже есть в Functions.isUptrend, но пусть тут тоже будет)
-        Quote q4 = screen_1_Quotes.get(screen_1_MinBarCount - 4);
-        Quote q3 = screen_1_Quotes.get(screen_1_MinBarCount - 3);
-        Quote q2 = screen_1_Quotes.get(screen_1_MinBarCount - 2);
-        Quote q1 = screen_1_Quotes.get(screen_1_MinBarCount - 1);
-        if (q4.getLow() >= q3.getLow() && q3.getLow() >= q2.getLow() && q2.getLow() >= q1.getLow()) {
-            // допустимо только, если последний столбик зеленый
-            if (q1.getClose() < q1.getOpen()) {
-                Log.recordCode(UPTREND_FAILING, screen_1);
-                Log.addDebugLine("Последние 4 столбика на первом экране понижаются");
-                return new BlockResult(lastChartQuote, UPTREND_FAILING);
-            } else {
-                Log.addDebugLine("Последние 4 столбика на первом экране понижаются, но крайний правый закрылся выше открытия");
-            }
-        }
+        // ScreenOneStrictTrendCheck
 
         // второй экран
 
-        // гистограмма должна быть ниже нуля и начать повышаться: проверить на трех последних значениях
-
-        Double macd3 = screen_2_MACD.get(screen_2_MACD.size() - 3).getHistogram(); // 3 от правого края
-        Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram(); // 2 от правого края
-        Double macd1 = screen_2_MACD.get(screen_2_MACD.size() - 1).getHistogram(); // последняя
-
-        boolean histogramBelowZero = macd3 < 0 && macd2 < 0 && macd1 < 0;
-        if (!histogramBelowZero) {
-            Log.recordCode(HISTOGRAM_NOT_BELOW_ZERO, screen_2);
-            Log.addDebugLine("Гистограмма на втором экране не ниже нуля");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_BELOW_ZERO);
-        }
-
-        boolean ascendingHistogram = macd3 < macd2 && macd2 < macd1;
-        if (!ascendingHistogram) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING, screen_2);
-            Log.addDebugLine("Гистограмма на втором экране не повышается");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING);
-        }
+        // ScreenTwoMACDCheck3Bars
 
         // стохастик должен подниматься из зоны перепроданности: проверить на трех последних значениях
 
@@ -336,9 +278,9 @@ public class ThreeDisplays {
         //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen_1); плохая проверка
         Quote lastChartQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
         if (!uptrendCheckOnMultipleBars) {
-            Log.recordCode(NO_UPTREND, screen_1);
+            Log.recordCode(NO_UPTREND_SCREEN_1, screen_1);
             Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
-            return new BlockResult(lastChartQuote, NO_UPTREND);
+            return new BlockResult(lastChartQuote, NO_UPTREND_SCREEN_1);
         }
 
         // На первом экране последние 4 Quote.low не должны понижаться

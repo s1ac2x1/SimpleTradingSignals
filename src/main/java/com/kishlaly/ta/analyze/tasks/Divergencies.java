@@ -91,9 +91,9 @@ public class Divergencies {
             boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, screenOneMinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
             //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen1); плохая проверка
             if (!uptrendCheckOnMultipleBars) {
-                Log.recordCode(NO_UPTREND, screen1);
+                Log.recordCode(NO_UPTREND_SCREEN_1, screen1);
                 Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
-                return new BlockResult(lastChartQuote, NO_UPTREND);
+                return new BlockResult(lastChartQuote, NO_UPTREND_SCREEN_1);
             }
         }
 

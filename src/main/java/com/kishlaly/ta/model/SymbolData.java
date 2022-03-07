@@ -13,4 +13,8 @@ public class SymbolData {
     public List<Quote> quotes;
     public Map<Indicator, List> indicators = new HashMap<>();
 
+    public Quote getLastQuote() {
+        return quotes.get(quotes.size() - 1);
+    }
+
 }
