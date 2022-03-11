@@ -12,7 +12,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_NOT_ASCENDING_FROM_OVERSOLD_SCREEN_2;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_OVERSOLD;
 
-public class ScreenTwoStochOversold3Check implements ScreenTwoBlock {
+public class ScreenTwo_Stoch_ThreeValuesAscendingFromOversold implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);

@@ -15,7 +15,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 /**
  * ценовые бары должны пересекать ЕМА13 и должны подниматься
  */
-public class ScreenTwoBarsAscendingAndCrossingEMACheck implements ScreenTwoBlock {
+public class ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Quote> screen_2_Quotes = screen.quotes;

@@ -24,11 +24,11 @@ public class TaskTypeDefaults {
                     add(new ScreenValidation());
                     add(new ScreenOneStrictTrendCheck());
 
-                    add(new ScreenTwoMACDCheck3Bars());
-                    add(new ScreenTwoStochAscending3Values());
-                    add(new ScreenTwoStochOversold3Check());
-                    add(new ScreenTwoLast3BarsEMACheck());
-                    add(new ScreenTwoLastBarTooHighCheck());
+                    add(new ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending());
+                    add(new ScreenTwo_Stoch_ThreeValuesAscending());
+                    add(new ScreenTwo_Stoch_ThreeValuesAscendingFromOversold());
+                    add(new ScreenTwo_EMA_ThreeBarsAscendingAndCrossing());
+                    add(new ScreenTwo_EMA_LastBarTooHigh());
                 }};
             default:
                 return Collections.emptyList();
