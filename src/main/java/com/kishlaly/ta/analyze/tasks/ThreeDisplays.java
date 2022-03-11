@@ -106,31 +106,8 @@ public class ThreeDisplays {
 
         // ScreenTwoStochAscending2Values
 
-        // проверка перепроданности
+        // ScreenTwoStochOversoldMultipleCheck
 
-        // нужно проверять несколько стохастиков влево от последнего значения
-        // например, 5 последних: если ли среди них значения ниже STOCH_OVERSOLD
-        // но при условии, что медленная линия у правого края была выше
-        // тогда STOCH_OVERSOLD можно держать поменьше, эдак 30
-        boolean wasOversoldRecently = false;
-        for (int i = screen_2_MinBarCount - STOCH_VALUES_TO_CHECK; i < screen_2_MinBarCount; i++) {
-            Stoch stoch = screen_2_Stochastic.get(i);
-            if (stoch.getSlowD() <= STOCH_OVERSOLD || stoch.getSlowK() <= STOCH_OVERSOLD) {
-                wasOversoldRecently = true;
-            }
-        }
-        if (!wasOversoldRecently) {
-            Log.recordCode(STOCH_WAS_NOT_OVERSOLD_RECENTLY, screen_2);
-            Log.addDebugLine("Стохастик не был в перепроданности на последних " + STOCH_VALUES_TO_CHECK + " значениях");
-            return new BlockResult(lastChartQuote, STOCH_WAS_NOT_OVERSOLD_RECENTLY);
-        }
-
-        boolean lastStochIsBigger = stoch1.getSlowD() > stoch2.getSlowD();
-        if (!lastStochIsBigger) {
-            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_2, screen_2);
-            Log.addDebugLine("Последние два значения стохастика не повышаются");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_2);
-        }
 
 // старый вариант
 //        // вторая с конца %K ниже STOCH_OVERSOLD, и последняя выше
