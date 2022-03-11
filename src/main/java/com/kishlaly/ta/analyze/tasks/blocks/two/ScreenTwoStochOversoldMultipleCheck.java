@@ -34,9 +34,9 @@ public class ScreenTwoStochOversoldMultipleCheck implements ScreenTwoBlock {
             }
         }
         if (!wasOversoldRecently) {
-            Log.recordCode(STOCH_WAS_NOT_OVERSOLD_RECENTLY, screen);
+            Log.recordCode(STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2, screen);
             Log.addDebugLine("Стохастик не был в перепроданности на последних " + STOCH_VALUES_TO_CHECK + " значениях");
-            return new BlockResult(screen.getLastQuote(), STOCH_WAS_NOT_OVERSOLD_RECENTLY);
+            return new BlockResult(screen.getLastQuote(), STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2);
         }
 
         boolean lastStochIsBigger = stoch1.getSlowD() > stoch2.getSlowD();

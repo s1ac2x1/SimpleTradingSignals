@@ -9,7 +9,7 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.LAST_BAR_ABOVE;
+import static com.kishlaly.ta.analyze.BlockResultCode.LAST_BAR_ABOVE_SCREEN_2;
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
@@ -33,9 +33,9 @@ public class ScreenTwoLastBarTooHighCheck implements ScreenTwoBlock {
         boolean lastAboveEMA13 = quote1.getLow() > screen_2_EMA13.get(screen_2_EMA13Count - 1).getValue()
                 && quote1.getHigh() > screen_2_EMA13.get(screen_2_EMA13Count - 1).getValue();
         if (thirdCrossesEMA13 && secondCrossesEMA13 && lastAboveEMA13) {
-            Log.recordCode(LAST_BAR_ABOVE, screen);
+            Log.recordCode(LAST_BAR_ABOVE_SCREEN_2, screen);
             Log.addDebugLine("Третий и второй пересекли ЕМА13, а последний полностью выше");
-            return new BlockResult(screen.getLastQuote(), LAST_BAR_ABOVE);
+            return new BlockResult(screen.getLastQuote(), LAST_BAR_ABOVE_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);
     }

@@ -108,68 +108,7 @@ public class ThreeDisplays {
 
         // ScreenTwoStochOversoldMultipleCheck
 
-
-// старый вариант
-//        // вторая с конца %K ниже STOCH_OVERSOLD, и последняя выше
-//        boolean isOversoldK = stoch2.getSlowK() <= STOCH_OVERSOLD && stoch1.getSlowK() > stoch2.getSlowK();
-//        // вторая с конца %D ниже STOCH_OVERSOLD, и последняя выше
-//        boolean isOversoldD = stoch2.getSlowD() <= STOCH_OVERSOLD
-//                && stoch1.getSlowD() > stoch2.getSlowD();
-//
-//        if (!isOversoldK || !isOversoldD) {
-//            Log.recordCode(STOCH_NOT_ASCENDING_FROM_OVERSOLD, screen_1);
-//            Log.addDebugLine("Стохастик не поднимается из перепроданности " + STOCH_OVERSOLD + ". %D: " + isOversoldD + "; %K: " + isOversoldK);
-//            return new TaskResult(screen_2_Quotes.get(screen_2_Quotes.size() - 1), STOCH_NOT_ASCENDING_FROM_OVERSOLD);
-//        }
-
-        // ценовые бары должны пересекать ЕМА13 и должны подниматься
-
-        // обязательное условие 1
-        // убедиться сначала, что high у последних ДВУХ столбиков повышается
-        Quote preLastQuote = screen_2_Quotes.get(screen_2_MinBarCount - 2);
-        Quote lastQuote = screen_2_Quotes.get(screen_2_MinBarCount - 1);
-        boolean ascendingBarHigh = preLastQuote.getHigh() < lastQuote.getHigh();
-        if (!ascendingBarHigh) {
-            Log.recordCode(QUOTE_HIGH_NOT_GROWING_SCREEN_2, screen_2);
-            Log.addDebugLine("Quote.high не растет последовательно");
-            return new BlockResult(lastChartQuote, QUOTE_HIGH_NOT_GROWING_SCREEN_2);
-        }
-        EMA preLastEMA = screen_2_EMA13.get(screen_2_MinBarCount - 2);
-        EMA lastEMA = screen_2_EMA13.get(screen_2_MinBarCount - 1);
-
-        // оба столбика ниже ЕМА - отказ
-        if (isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteBelowEMA(lastQuote, lastEMA.getValue())) {
-            Log.addDebugLine("Оба последних столбика ниже ЕМА");
-            Log.recordCode(QUOTES_BELOW_EMA, screen_2);
-            return new BlockResult(lastChartQuote, QUOTES_BELOW_EMA);
-        }
-
-        // оба столбика выше ЕМА - отказ
-        if (isQuoteAboveEMA(preLastQuote, preLastEMA.getValue()) && isQuoteAboveEMA(lastQuote, lastEMA.getValue())) {
-            Log.addDebugLine("Оба последних столбика выше ЕМА");
-            Log.recordCode(QUOTES_ABOVE_EMA, screen_2);
-            return new BlockResult(lastChartQuote, QUOTES_ABOVE_EMA);
-        }
-
-        // предпоследний ниже ЕМА, последний пересекает или выше - ОК
-        boolean crossingRule1 = isQuoteBelowEMA(preLastQuote, preLastEMA.getValue())
-                && (isQuoteCrossedEMA(lastQuote, lastEMA.getValue()) || isQuoteAboveEMA(lastQuote, lastEMA.getValue()));
-
-        // предпоследний ниже ЕМА, последний пересекает - ОК
-        boolean crossingRule2 = isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteCrossedEMA(lastQuote, lastEMA.getValue());
-
-        // предпоследний и последний пересекают ЕМА - ОК
-        boolean crossingRule3 = isQuoteCrossedEMA(preLastQuote, preLastEMA.getValue()) && isQuoteCrossedEMA(lastQuote, lastEMA.getValue());
-
-        // предпоследний пересекает ЕМА, последний выше (может быть поздно входить в сделку, нужно смотреть на график) - ОК
-        boolean crossingRule4 = isQuoteCrossedEMA(preLastQuote, preLastEMA.getValue()) && isQuoteAboveEMA(lastQuote, lastEMA.getValue());
-
-        boolean crossingOk = crossingRule1 || crossingRule2 || crossingRule3 || crossingRule4;
-        if (!crossingOk) {
-            Log.addDebugLine("Не выполняется правило пересечения ЕМА");
-            Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen_2);
-            return new BlockResult(lastChartQuote, CROSSING_RULE_VIOLATED_SCREEN_2);
-        }
+        // ScreenTwoBarsAscendingAndCrossingEMACheck
 
         // фильтрация поздних входов, когда столбик закрылся выше FILTER_BY_KELTNER
         if (FILTER_BY_KELTNER_ENABLED) {
@@ -305,9 +244,9 @@ public class ThreeDisplays {
         Stoch stoch1 = screen_2_Stochastic.get(screen_2_MinBarCount - 1);
         boolean oversold = stoch3.getSlowD() < 20 && stoch2.getSlowD() < 20 && stoch1.getSlowD() < 20;
         if (!oversold) {
-            Log.recordCode(STOCH_WAS_NOT_OVERSOLD_RECENTLY, screen_2);
+            Log.recordCode(STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2, screen_2);
             Log.addDebugLine("Три последних значения %D стохастика не ниже 20");
-            return new BlockResult(lastChartQuote, STOCH_WAS_NOT_OVERSOLD_RECENTLY);
+            return new BlockResult(lastChartQuote, STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2);
         }
         boolean stochAscending = stoch3.getSlowD() < stoch2.getSlowD() && stoch2.getSlowD() < stoch1.getSlowD();
         if (!stochAscending) {

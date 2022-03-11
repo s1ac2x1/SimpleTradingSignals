@@ -48,7 +48,6 @@ public class TaskTypeDefaults {
             add(new ScreenValidation());
             add(new ScreenOneStrictTrendCheck());
 
-
         }};
 
     }
