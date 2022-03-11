@@ -48,6 +48,10 @@ public class TaskTypeDefaults {
             add(new ScreenValidation());
             add(new ScreenOneStrictTrendCheck());
 
+            add(new ScreenTwo_MACD_TwoBarsBelowZeroAndAscending());
+            add(new ScreenTwo_Stoch_TwoValuesAscending());
+            add(new ScreenTwo_Stoch_SomeValuesWereUnderOversold());
+            add(new ScreenTwo_EMA_TwoBarsAscendingAndCrossing());
         }};
 
     }

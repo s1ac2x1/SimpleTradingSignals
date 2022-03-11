@@ -102,14 +102,6 @@ public class ThreeDisplays {
 
         // второй экран
 
-        // ScreenTwoLast2BarsEMACheck
-
-        // ScreenTwoStochAscending2Values
-
-        // ScreenTwoStochOversoldMultipleCheck
-
-        // ScreenTwoBarsAscendingAndCrossingEMACheck
-
         // фильтрация поздних входов, когда столбик закрылся выше FILTER_BY_KELTNER
         if (FILTER_BY_KELTNER_ENABLED) {
             Keltner lastKeltnerData = screen_2_Keltner.get(screen_2_MinBarCount - 1);
