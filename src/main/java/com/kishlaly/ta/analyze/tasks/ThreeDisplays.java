@@ -102,16 +102,6 @@ public class ThreeDisplays {
 
         // первый экран
 
-        // последний столбик выше предпоследнего
-        boolean lastBarHigher = screen_1_lastQuote.getLow() > screen_1_preLastQuote.getLow()
-                && screen_1_lastQuote.getHigh() > screen_1_preLastQuote.getHigh();
-
-        if (!lastBarHigher) {
-            Log.recordCode(LAST_QUOTES_NOT_ASCENDING_SCREEN_2, screen_1);
-            Log.addDebugLine("Последний столбик не выше предпоследнего на долгосрочном экране");
-            return new BlockResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING_SCREEN_2);
-        }
-
         // последний столбик пересекает ЕМА
         if (!isQuoteCrossedEMA(screen_1_lastQuote, screen_1_EMA26.get(screen_1_EMA26.size() - 1).getValue())) {
             Log.recordCode(LAST_QUOTE_NOT_CROSSING_EMA, screen_1);

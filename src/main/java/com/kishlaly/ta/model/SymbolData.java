@@ -17,4 +17,8 @@ public class SymbolData {
         return quotes.get(quotes.size() - 1);
     }
 
+    public Quote getPreLastQuote() {
+        return quotes.get(quotes.size() - 2);
+    }
+
 }

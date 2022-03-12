@@ -3,6 +3,7 @@ package com.kishlaly.ta.analyze;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarHigher;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
@@ -97,7 +98,7 @@ public class TaskTypeDefaults {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenValidation());
             add(new Long_ScreenOne_LastBarGreen());
-
+            add(new Long_ScreenOne_LastBarHigher());
         }};
     }
 
