@@ -98,28 +98,6 @@ public class ThreeDisplays {
         return screenTwoResult;
     }
 
-    public static BlockResult buySignalType4(SymbolData screen_1, SymbolData screen_2) {
-
-        // второй экран
-
-        if (FILTER_BY_KELTNER_ENABLED) {
-            Keltner lastKeltnerData = screen_2_Keltner.get(screen_2_MinBarCount - 1);
-            double lastQuoteClose = lastChartQuote.getClose();
-            double middle = lastKeltnerData.getMiddle();
-            double top = lastKeltnerData.getTop();
-            double diff = top - middle;
-            double ratio = diff / 100 * FILTER_BY_KELTNER;
-            double maxAllowedCloseValue = middle + ratio;
-            if (lastQuoteClose >= maxAllowedCloseValue) {
-                Log.addDebugLine("Последняя котировка закрылась выше " + FILTER_BY_KELTNER + "% расстояния от середины до вершины канала");
-                Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2, screen_2);
-                return new BlockResult(lastChartQuote, QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2);
-            }
-        }
-
-        return new BlockResult(lastChartQuote, OK);
-    }
-
     public static BlockResult sellSignal(SymbolData screen_1, SymbolData screen_2) {
 
         int screen_1_MinBarCount = resolveMinBarsCount(screen_1.timeframe);
