@@ -98,30 +98,9 @@ public class ThreeDisplays {
         return screenTwoResult;
     }
 
-    // модификация buySignalType2 с попыткой остлеживания начала долгосрочного тренда
-    // 1 экран: отслеживание начала движения выше ЕМА по двум столбикам
-    //   последний столбик зеленый
-    //   последний столбик выше предпоследнего
-    //   последний столбик пересекает ЕМА26
-    //   последняя гистограмма растет
-    // 2 экран: смотреть на два последних столбика
-    //   high последнего столбика выше предпоследнего
-    //   последний столбик не выше ЕМА13
-    //   последняя гистограмма растет
-    //   %D и %K последнего стохастика должны быть выше, чем у предпоследнего
-    // ВНИМАНИЕ:
-    // после сигнала проверить вручную, чтобы на втором экране послединй столбик не поднимался слишком высоко от ЕМА13
     public static BlockResult buySignalType4(SymbolData screen_1, SymbolData screen_2) {
 
         // первый экран
-
-        // последний столбик зеленый
-        boolean lastBarIsGreen = screen_1_lastQuote.getOpen() < screen_1_lastQuote.getClose();
-        if (!lastBarIsGreen) {
-            Log.recordCode(LAST_QUOTE_NOT_GREEN_SCREEN_1, screen_1);
-            Log.addDebugLine("Последний столбик не зеленый на долгосрочном экране");
-            return new BlockResult(lastChartQuote, LAST_QUOTE_NOT_GREEN_SCREEN_1);
-        }
 
         // последний столбик выше предпоследнего
         boolean lastBarHigher = screen_1_lastQuote.getLow() > screen_1_preLastQuote.getLow()
