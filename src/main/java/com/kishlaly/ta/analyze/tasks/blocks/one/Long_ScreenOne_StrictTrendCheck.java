@@ -7,12 +7,13 @@ import com.kishlaly.ta.utils.Log;
 
 import static com.kishlaly.ta.analyze.BlockResultCode.NO_UPTREND_SCREEN_1;
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.NUMBER_OF_EMA26_VALUES_TO_CHECK;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 /**
  * Строгая проверка тренда с использованием котировок, EMA26 и MACD
  */
-public class ScreenOneStrictTrendCheck implements ScreenOneBlock {
+public class Long_ScreenOne_StrictTrendCheck implements ScreenOneBlock {
 
     @Override
     public BlockResult check(SymbolData screen) {

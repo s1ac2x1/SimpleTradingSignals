@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneStrictTrendCheck;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class TaskTypeDefaults {
             case THREE_DISPLAYS_BUY:
                 return new ArrayList<TaskBlock>() {{
                     add(new ScreenValidation());
-                    add(new ScreenOneStrictTrendCheck());
+                    add(new Long_ScreenOne_StrictTrendCheck());
 
                     add(new Long_ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending());
                     add(new Long_ScreenTwo_Stoch_ThreeValuesAscending());
@@ -46,7 +46,7 @@ public class TaskTypeDefaults {
     public List<TaskBlock> threeDisplaysType2() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenValidation());
-            add(new ScreenOneStrictTrendCheck());
+            add(new Long_ScreenOne_StrictTrendCheck());
 
             add(new Long_ScreenTwo_MACD_TwoBarsBelowZeroAndAscending());
             add(new Long_ScreenTwo_Stoch_TwoValuesAscending());
@@ -69,13 +69,33 @@ public class TaskTypeDefaults {
     public List<TaskBlock> threeDisplaysType3() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenValidation());
-            add(new ScreenOneStrictTrendCheck());
+            add(new Long_ScreenOne_StrictTrendCheck());
 
             add(new Long_ScreenTwo_Stoch_ThreeValuesAscendingFromStrongOversold());
             add(new Long_ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending());
             add(new Long_ScreenTwo_TwoGreenQuotes());
             add(new Long_ScreenTwo_TwoQuotesAscending());
             add(new Long_ScreenTwo_EMA_TwoBarsBelow());
+        }};
+    }
+
+    // модификация buySignalType2 с попыткой остлеживания начала долгосрочного тренда
+    // 1 экран: отслеживание начала движения выше ЕМА по двум столбикам
+    //   последний столбик зеленый
+    //   последний столбик выше предпоследнего
+    //   последний столбик пересекает ЕМА26
+    //   последняя гистограмма растет
+    // 2 экран: смотреть на два последних столбика
+    //   high последнего столбика выше предпоследнего
+    //   последний столбик не выше ЕМА13
+    //   последняя гистограмма растет
+    //   %D и %K последнего стохастика должны быть выше, чем у предпоследнего
+    // ВНИМАНИЕ:
+    // после сигнала проверить вручную, чтобы на втором экране послединй столбик не поднимался слишком высоко от ЕМА13
+    public List<TaskBlock> threeDisplaysType4() {
+        return new ArrayList<TaskBlock>() {{
+            add(new ScreenValidation());
+
         }};
     }
 

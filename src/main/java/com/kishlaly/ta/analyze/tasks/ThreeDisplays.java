@@ -113,63 +113,7 @@ public class ThreeDisplays {
     // после сигнала проверить вручную, чтобы на втором экране послединй столбик не поднимался слишком высоко от ЕМА13
     public static BlockResult buySignalType4(SymbolData screen_1, SymbolData screen_2) {
 
-        int screen_1_MinBarCount = resolveMinBarsCount(screen_1.timeframe);
-        int screen_2_MinBarCount = resolveMinBarsCount(screen_2.timeframe);
-
-        if (screen_1.quotes.isEmpty() || screen_1.quotes.size() < screen_1_MinBarCount) {
-            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_1.timeframe.name());
-            Log.recordCode(NO_DATA_QUOTES, screen_1);
-            return new BlockResult(null, NO_DATA_QUOTES);
-        }
-        if (screen_2.quotes.isEmpty() || screen_2.quotes.size() < screen_2_MinBarCount) {
-            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_2.timeframe.name());
-            Log.recordCode(NO_DATA_QUOTES, screen_2);
-            return new BlockResult(null, NO_DATA_QUOTES);
-        }
-
-        List<Indicator> missingData = new ArrayList<>();
-        screen_1.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty() || value.size() < screen_1_MinBarCount) {
-                missingData.add(indicator);
-            }
-        });
-        screen_2.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty() || value.size() < screen_2_MinBarCount) {
-                missingData.add(indicator);
-            }
-        });
-        if (!missingData.isEmpty()) {
-            Log.recordCode(NO_DATA_INDICATORS, screen_1);
-            Log.recordCode(NO_DATA_INDICATORS, screen_2);
-            Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
-            return new BlockResult(null, NO_DATA_INDICATORS);
-        }
-
-        List<Quote> screen_1_Quotes = screen_1.quotes.subList(screen_1.quotes.size() - screen_1_MinBarCount, screen_1.quotes.size());
-        List<Quote> screen_2_Quotes = screen_2.quotes.subList(screen_2.quotes.size() - screen_2_MinBarCount, screen_2.quotes.size());
-
-        List<EMA> screen_1_EMA26 = screen_1.indicators.get(EMA26);
-        screen_1_EMA26 = screen_1_EMA26.subList(screen_1_EMA26.size() - screen_1_MinBarCount, screen_1_EMA26.size());
-
-        List<MACD> screen_1_MACD = screen_1.indicators.get(MACD);
-        screen_1_MACD = screen_1_MACD.subList(screen_1_MACD.size() - screen_1_MinBarCount, screen_1_MACD.size());
-
-        List<EMA> screen_2_EMA13 = screen_2.indicators.get(Indicator.EMA13);
-        screen_2_EMA13 = screen_2_EMA13.subList(screen_2_EMA13.size() - screen_2_MinBarCount, screen_2_EMA13.size());
-
-        List<MACD> screen_2_MACD = screen_2.indicators.get(Indicator.MACD);
-        screen_2_MACD = screen_2_MACD.subList(screen_2_MACD.size() - screen_2_MinBarCount, screen_2_MACD.size());
-
-        List<Stoch> screen_2_Stochastic = screen_2.indicators.get(Indicator.STOCH);
-        screen_2_Stochastic = screen_2_Stochastic.subList(screen_2_Stochastic.size() - screen_2_MinBarCount, screen_2_Stochastic.size());
-
-        List<Keltner> screen_2_Keltner = screen_2.indicators.get(KELTNER);
-        screen_2_Keltner = screen_2_Keltner.subList(screen_2_Keltner.size() - screen_2_MinBarCount, screen_2_Keltner.size());
-
         // первый экран
-        Quote screen_1_lastQuote = screen_1_Quotes.get(screen_1_Quotes.size() - 1);
-        Quote screen_1_preLastQuote = screen_1_Quotes.get(screen_1_Quotes.size() - 2);
-        Quote lastChartQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
 
         // последний столбик зеленый
         boolean lastBarIsGreen = screen_1_lastQuote.getOpen() < screen_1_lastQuote.getClose();
