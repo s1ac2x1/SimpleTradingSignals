@@ -102,17 +102,6 @@ public class ThreeDisplays {
 
         // второй экран
 
-        // %D и %K последнего стохастика должны быть выше, чем у предпоследнего
-        Stoch screen_2_lastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
-        Stoch screen_2_preLastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
-        boolean screen_2_check3 = screen_2_lastStoch.getSlowK() > screen_2_preLastStoch.getSlowK()
-                && screen_2_lastStoch.getSlowD() > screen_2_preLastStoch.getSlowD();
-        if (!screen_2_check3) {
-            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_2, screen_1);
-            Log.addDebugLine("Стохастик не растет на втором экране");
-            return new BlockResult(lastChartQuote, STOCH_NOT_ASCENDING_SCREEN_2);
-        }
-
         if (FILTER_BY_KELTNER_ENABLED) {
             Keltner lastKeltnerData = screen_2_Keltner.get(screen_2_MinBarCount - 1);
             double lastQuoteClose = lastChartQuote.getClose();
