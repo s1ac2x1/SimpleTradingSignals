@@ -13,7 +13,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.*;
 /**
  * перепроданность ниже 20 у трех значений медленной линии стохастика и она повышается
  */
-public class Long_ScreenTwo_Stoch_ThreeValuesAscendingFromStrongOversold implements ScreenTwoBlock {
+public class Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromStrongOversold implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);

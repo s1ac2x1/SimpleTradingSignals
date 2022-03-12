@@ -22,8 +22,6 @@ public class Long_ScreenTwo_Stoch_D_K_SomeWereOversold implements ScreenTwoBlock
     @Override
     public BlockResult check(SymbolData screen) {
         List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);
-        Stoch stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
-        Stoch stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
 
         boolean wasOversoldRecently = false;
         for (int i = resolveMinBarsCount(screen.timeframe) - STOCH_VALUES_TO_CHECK; i < resolveMinBarsCount(screen.timeframe); i++) {

@@ -50,7 +50,6 @@ public class TaskTypeDefaults {
             add(new Long_ScreenOne_StrictTrendCheck());
 
             add(new Long_ScreenTwo_MACD_TwoBarsBelowZeroAndAscending());
-            add(new Long_ScreenTwo_Stoch_TwoValuesAscending());
             add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversold());
             add(new Long_ScreenTwo_Stoch_D_LastAscending());
             add(new Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing());
@@ -74,7 +73,7 @@ public class TaskTypeDefaults {
 
             add(new Long_ScreenOne_StrictTrendCheck());
 
-            add(new Long_ScreenTwo_Stoch_ThreeValuesAscendingFromStrongOversold());
+            add(new Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromStrongOversold());
             add(new Long_ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending());
             add(new Long_ScreenTwo_TwoBarsGreen());
             add(new Long_ScreenTwo_TwoBarsAscending());
