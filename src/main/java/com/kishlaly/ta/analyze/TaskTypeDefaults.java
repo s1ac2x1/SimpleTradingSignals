@@ -2,6 +2,7 @@ package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosses;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarHigher;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
@@ -48,6 +49,7 @@ public class TaskTypeDefaults {
     public List<TaskBlock> threeDisplaysType2() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenValidation());
+
             add(new Long_ScreenOne_StrictTrendCheck());
 
             add(new Long_ScreenTwo_MACD_TwoBarsBelowZeroAndAscending());
@@ -71,6 +73,7 @@ public class TaskTypeDefaults {
     public List<TaskBlock> threeDisplaysType3() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenValidation());
+
             add(new Long_ScreenOne_StrictTrendCheck());
 
             add(new Long_ScreenTwo_Stoch_ThreeValuesAscendingFromStrongOversold());
@@ -97,8 +100,10 @@ public class TaskTypeDefaults {
     public List<TaskBlock> threeDisplaysType4() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenValidation());
+
             add(new Long_ScreenOne_LastBarGreen());
             add(new Long_ScreenOne_LastBarHigher());
+            add(new Long_ScreenOne_EMA_LastBarCrosses());
         }};
     }
 

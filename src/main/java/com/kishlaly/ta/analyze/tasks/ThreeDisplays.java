@@ -102,13 +102,6 @@ public class ThreeDisplays {
 
         // первый экран
 
-        // последний столбик пересекает ЕМА
-        if (!isQuoteCrossedEMA(screen_1_lastQuote, screen_1_EMA26.get(screen_1_EMA26.size() - 1).getValue())) {
-            Log.recordCode(LAST_QUOTE_NOT_CROSSING_EMA, screen_1);
-            Log.addDebugLine("Последний столбик не пересекает ЕМА на долгосрочном экране");
-            return new BlockResult(lastChartQuote, LAST_QUOTE_NOT_CROSSING_EMA);
-        }
-
         // последняя гистограмма растет
         com.kishlaly.ta.model.indicators.MACD screen_1_lastMACD = screen_1_MACD.get(screen_1_MACD.size() - 1);
         com.kishlaly.ta.model.indicators.MACD screen_1_preLastMACD = screen_1_MACD.get(screen_1_MACD.size() - 2);

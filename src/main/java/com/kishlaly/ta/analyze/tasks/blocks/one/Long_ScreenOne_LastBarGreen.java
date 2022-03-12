@@ -7,6 +7,9 @@ import com.kishlaly.ta.utils.Log;
 import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTE_NOT_GREEN_SCREEN_1;
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
+/**
+ * последний столбик - зеленый
+ */
 public class Long_ScreenOne_LastBarGreen implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
