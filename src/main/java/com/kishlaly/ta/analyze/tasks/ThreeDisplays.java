@@ -98,31 +98,6 @@ public class ThreeDisplays {
         return screenTwoResult;
     }
 
-    public static BlockResult buySignalType3(SymbolData screen_1, SymbolData screen_2) {
-
-        // второй экран
-
-        // последние два бара повышаются (quote.low & quote.high)
-        boolean lowAndHightAscending = quote2.getLow() < quote1.getLow() && quote2.getHigh() < quote1.getHigh();
-        if (!lowAndHightAscending) {
-            Log.recordCode(LAST_QUOTES_NOT_ASCENDING, screen_2);
-            Log.addDebugLine("Последние две котировки не растут последовательно");
-            return new BlockResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING);
-        }
-
-        // последние два бара полностью ниже ЕМА13
-        EMA ema13_2 = screen_2_EMA13.get(screen_2_MinBarCount - 2);
-        EMA ema13_1 = screen_2_EMA13.get(screen_2_MinBarCount - 1);
-        boolean lastQuotesBelowEMA = quote2.getHigh() < ema13_2.getValue() && quote1.getHigh() < ema13_1.getValue();
-        if (!lastQuotesBelowEMA) {
-            Log.recordCode(QUOTES_NOT_BELOW_EMA, screen_2);
-            Log.addDebugLine("Последние две котировки не ниже EMA13");
-            return new BlockResult(lastChartQuote, QUOTES_NOT_BELOW_EMA);
-        }
-
-        return new BlockResult(lastChartQuote, OK);
-    }
-
     // модификация buySignalType2 с попыткой остлеживания начала долгосрочного тренда
     // 1 экран: отслеживание начала движения выше ЕМА по двум столбикам
     //   последний столбик зеленый
@@ -209,9 +184,9 @@ public class ThreeDisplays {
                 && screen_1_lastQuote.getHigh() > screen_1_preLastQuote.getHigh();
 
         if (!lastBarHigher) {
-            Log.recordCode(LAST_QUOTES_NOT_ASCENDING, screen_1);
+            Log.recordCode(LAST_QUOTES_NOT_ASCENDING_SCREEN_2, screen_1);
             Log.addDebugLine("Последний столбик не выше предпоследнего на долгосрочном экране");
-            return new BlockResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING);
+            return new BlockResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING_SCREEN_2);
         }
 
         // последний столбик пересекает ЕМА
@@ -239,9 +214,9 @@ public class ThreeDisplays {
         // high последнего столбика выше предпоследнего
         boolean screen_2_check1 = screen_2_lastQuote.getHigh() > screen_2_preLastQuote.getHigh();
         if (!screen_2_check1) {
-            Log.recordCode(LAST_QUOTES_NOT_ASCENDING, screen_1);
+            Log.recordCode(LAST_QUOTES_NOT_ASCENDING_SCREEN_2, screen_1);
             Log.addDebugLine("High последнего столбика не выше предпоследнего на втором экране");
-            return new BlockResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING);
+            return new BlockResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING_SCREEN_2);
         }
 
         // последний столбик не выше ЕМА13

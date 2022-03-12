@@ -74,6 +74,8 @@ public class TaskTypeDefaults {
             add(new Long_ScreenTwo_Stoch_ThreeValuesAscendingFromStrongOversold());
             add(new Long_ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending());
             add(new Long_ScreenTwo_TwoGreenQuotes());
+            add(new Long_ScreenTwo_TwoQuotesAscending());
+            add(new Long_ScreenTwo_EMA_TwoBarsBelow());
         }};
     }
 
