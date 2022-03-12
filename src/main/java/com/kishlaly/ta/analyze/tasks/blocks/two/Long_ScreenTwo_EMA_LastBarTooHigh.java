@@ -17,7 +17,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
  * нужно фильтровать ситуацию, когда третий и второй пересекают ЕМА13, а послдений целиком выше (момент входа в сделку упущен)
  * третий может открыться и закрыться выше, и это допустимо: https://drive.google.com/file/d/15XkXFKBQbTjeNjBn03NrF9JawCBFaO5t/view?usp=sharing
  */
-public class ScreenTwo_EMA_LastBarTooHigh implements ScreenTwoBlock {
+public class Long_ScreenTwo_EMA_LastBarTooHigh implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         Quote quote3 = screen.quotes.get(resolveMinBarsCount(screen.timeframe) - 3);

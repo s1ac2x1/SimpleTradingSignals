@@ -24,11 +24,11 @@ public class TaskTypeDefaults {
                     add(new ScreenValidation());
                     add(new ScreenOneStrictTrendCheck());
 
-                    add(new ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending());
-                    add(new ScreenTwo_Stoch_ThreeValuesAscending());
-                    add(new ScreenTwo_Stoch_ThreeValuesAscendingFromOversold());
-                    add(new ScreenTwo_EMA_ThreeBarsAscendingAndCrossing());
-                    add(new ScreenTwo_EMA_LastBarTooHigh());
+                    add(new Long_ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending());
+                    add(new Long_ScreenTwo_Stoch_ThreeValuesAscending());
+                    add(new Long_ScreenTwo_Stoch_ThreeValuesAscendingFromOversold());
+                    add(new Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing());
+                    add(new Long_ScreenTwo_EMA_LastBarTooHigh());
                 }};
             default:
                 return Collections.emptyList();
@@ -48,10 +48,11 @@ public class TaskTypeDefaults {
             add(new ScreenValidation());
             add(new ScreenOneStrictTrendCheck());
 
-            add(new ScreenTwo_MACD_TwoBarsBelowZeroAndAscending());
-            add(new ScreenTwo_Stoch_TwoValuesAscending());
-            add(new ScreenTwo_Stoch_SomeValuesWereUnderOversold());
-            add(new ScreenTwo_EMA_TwoBarsAscendingAndCrossing());
+            add(new Long_ScreenTwo_MACD_TwoBarsBelowZeroAndAscending());
+            add(new Long_ScreenTwo_Stoch_TwoValuesAscending());
+            add(new Long_ScreenTwo_Stoch_SomeValuesWereUnderOversold());
+            add(new Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing());
+            add(new Long_ScreenTwo_FilterLateEntry());
         }};
 
     }

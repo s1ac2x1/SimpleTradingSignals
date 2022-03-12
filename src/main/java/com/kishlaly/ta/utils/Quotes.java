@@ -152,4 +152,16 @@ public class Quotes {
         hourQuotesInsideOneDay.clear();
     }
 
+    public static boolean isQuoteCrossedEMA(Quote quote, double emaValue) {
+        return quote.getLow() <= emaValue && quote.getHigh() >= emaValue;
+    }
+
+    public static boolean isQuoteBelowEMA(Quote quote, double emaValue) {
+        return quote.getLow() < emaValue && quote.getHigh() < emaValue;
+    }
+
+    public static boolean isQuoteAboveEMA(Quote quote, double emaValue) {
+        return quote.getLow() > emaValue && quote.getHigh() > emaValue;
+    }
+
 }

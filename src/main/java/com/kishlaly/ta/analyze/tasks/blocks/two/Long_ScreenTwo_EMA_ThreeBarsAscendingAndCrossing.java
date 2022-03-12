@@ -16,7 +16,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 /**
  * ценовые бары должны пересекать ЕМА13 и должны подниматься
  */
-public class ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenTwoBlock {
+public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         Quote quote3 = screen.quotes.get(resolveMinBarsCount(screen.timeframe) - 3);

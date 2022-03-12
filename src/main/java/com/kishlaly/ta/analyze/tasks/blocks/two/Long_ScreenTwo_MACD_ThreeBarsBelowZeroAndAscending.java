@@ -13,7 +13,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.*;
 /**
  * гистограмма должна быть ниже нуля и начать повышаться на трех последних значениях
  */
-public class ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending implements ScreenTwoBlock {
+public class Long_ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending implements ScreenTwoBlock {
 
     @Override
     public BlockResult check(SymbolData screen) {

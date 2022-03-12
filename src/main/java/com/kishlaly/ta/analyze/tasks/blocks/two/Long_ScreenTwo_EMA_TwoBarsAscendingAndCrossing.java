@@ -4,21 +4,22 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
-import static com.kishlaly.ta.analyze.BlockResultCode.CROSSING_RULE_VIOLATED_SCREEN_2;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
+import static com.kishlaly.ta.utils.Quotes.*;
 
 /**
  * ценовые бары должны пересекать ЕМА13 и должны подниматься
  */
-public class ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwoBlock {
+public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Quote> screen_2_Quotes = screen.quotes;
+        List<EMA> screen_2_EMA13 = screen.indicators.get(Indicator.EMA13);
         // обязательное условие 1
         // убедиться сначала, что high у последних ДВУХ столбиков повышается
         Quote preLastQuote = screen_2_Quotes.get(resolveMinBarsCount(screen.timeframe) - 2);
@@ -35,15 +36,15 @@ public class ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwoBlock
         // оба столбика ниже ЕМА - отказ
         if (isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteBelowEMA(lastQuote, lastEMA.getValue())) {
             Log.addDebugLine("Оба последних столбика ниже ЕМА");
-            Log.recordCode(QUOTES_BELOW_EMA, screen_2);
-            return new BlockResult(lastChartQuote, QUOTES_BELOW_EMA);
+            Log.recordCode(QUOTES_BELOW_EMA_SCREEN_2, screen);
+            return new BlockResult(screen.getLastQuote(), QUOTES_BELOW_EMA_SCREEN_2);
         }
 
         // оба столбика выше ЕМА - отказ
         if (isQuoteAboveEMA(preLastQuote, preLastEMA.getValue()) && isQuoteAboveEMA(lastQuote, lastEMA.getValue())) {
             Log.addDebugLine("Оба последних столбика выше ЕМА");
-            Log.recordCode(QUOTES_ABOVE_EMA, screen_2);
-            return new BlockResult(lastChartQuote, QUOTES_ABOVE_EMA);
+            Log.recordCode(QUOTES_ABOVE_EMA_SCREEN_2, screen);
+            return new BlockResult(screen.getLastQuote(), QUOTES_ABOVE_EMA_SCREEN_2);
         }
 
         // предпоследний ниже ЕМА, последний пересекает или выше - ОК
@@ -62,9 +63,9 @@ public class ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwoBlock
         boolean crossingOk = crossingRule1 || crossingRule2 || crossingRule3 || crossingRule4;
         if (!crossingOk) {
             Log.addDebugLine("Не выполняется правило пересечения ЕМА");
-            Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen_2);
-            return new BlockResult(lastChartQuote, CROSSING_RULE_VIOLATED_SCREEN_2);
+            Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen);
+            return new BlockResult(screen.getLastQuote(), CROSSING_RULE_VIOLATED_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), CROSSING_RULE_VIOLATED_SCREEN_2);
+        return new BlockResult(screen.getLastQuote(), OK);
     }
 }

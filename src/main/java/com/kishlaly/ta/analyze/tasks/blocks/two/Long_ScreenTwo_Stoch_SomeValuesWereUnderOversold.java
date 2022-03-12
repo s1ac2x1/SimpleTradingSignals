@@ -19,7 +19,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
  * но при условии, что медленная линия у правого края была выше
  * тогда STOCH_OVERSOLD можно держать поменьше, эдак 30
  */
-public class ScreenTwo_Stoch_SomeValuesWereUnderOversold implements ScreenTwoBlock {
+public class Long_ScreenTwo_Stoch_SomeValuesWereUnderOversold implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);

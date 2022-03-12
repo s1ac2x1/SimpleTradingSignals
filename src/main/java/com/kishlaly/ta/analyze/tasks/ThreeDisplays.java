@@ -98,40 +98,6 @@ public class ThreeDisplays {
         return screenTwoResult;
     }
 
-    public static BlockResult buySignalType2(SymbolData screen_1, SymbolData screen_2) {
-
-        // второй экран
-
-        // фильтрация поздних входов, когда столбик закрылся выше FILTER_BY_KELTNER
-        if (FILTER_BY_KELTNER_ENABLED) {
-            Keltner lastKeltnerData = screen_2_Keltner.get(screen_2_MinBarCount - 1);
-            double lastQuoteClose = lastQuote.getClose();
-            double middle = lastKeltnerData.getMiddle();
-            double top = lastKeltnerData.getTop();
-            double diff = top - middle;
-            double ratio = diff / 100 * FILTER_BY_KELTNER;
-            double maxAllowedCloseValue = middle + ratio;
-            if (lastQuoteClose >= maxAllowedCloseValue) {
-                Log.addDebugLine("Последняя котировка закрылась выше " + FILTER_BY_KELTNER + "% расстояния от середины до вершины канала");
-                Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE, screen_2);
-                return new BlockResult(lastChartQuote, QUOTE_CLOSED_ABOVE_KELTNER_RULE);
-            }
-        }
-
-        //попробовать посчитать среднюю длину баров и сравнить с ней последние три
-        Double sum = screen_2_Quotes.stream().map(quote -> quote.getHigh() - quote.getLow()).reduce(Double::sum).get();
-        double averageBarLength = sum / screen_2_MinBarCount;
-        double quote1Length = lastQuote.getHigh() - lastQuote.getLow();
-        double quote2Length = preLastQuote.getHigh() - preLastQuote.getLow();
-        boolean quote1StrangeLength = quote1Length >= averageBarLength * multiplier;
-        boolean quote2StrangeLength = quote2Length >= averageBarLength * multiplier;
-        if (quote1StrangeLength || quote2StrangeLength) {
-            Log.addDebugLine("Внимание: один из последних трех столбиков в " + multiplier + " раза выше среднего");
-        }
-
-        return new BlockResult(lastQuote, OK);
-    }
-
     // проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
     // первый экран - подумать TODO
     // второй экран -
@@ -449,8 +415,8 @@ public class ThreeDisplays {
             double maxAllowedCloseValue = middle + ratio;
             if (lastQuoteClose >= maxAllowedCloseValue) {
                 Log.addDebugLine("Последняя котировка закрылась выше " + FILTER_BY_KELTNER + "% расстояния от середины до вершины канала");
-                Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE, screen_2);
-                return new BlockResult(lastChartQuote, QUOTE_CLOSED_ABOVE_KELTNER_RULE);
+                Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2, screen_2);
+                return new BlockResult(lastChartQuote, QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2);
             }
         }
 
@@ -666,18 +632,6 @@ public class ThreeDisplays {
         }
 
         return new BlockResult(quote1, OK);
-    }
-
-    private static boolean isQuoteCrossedEMA(Quote quote, double emaValue) {
-        return quote.getLow() <= emaValue && quote.getHigh() >= emaValue;
-    }
-
-    private static boolean isQuoteBelowEMA(Quote quote, double emaValue) {
-        return quote.getLow() < emaValue && quote.getHigh() < emaValue;
-    }
-
-    private static boolean isQuoteAboveEMA(Quote quote, double emaValue) {
-        return quote.getLow() > emaValue && quote.getHigh() > emaValue;
     }
 
 }
