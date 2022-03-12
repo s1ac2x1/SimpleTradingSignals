@@ -105,6 +105,7 @@ public class TaskTypeDefaults {
 
             add(new Long_ScreenTwo_TwoBarsHighAscending());
             add(new Long_ScreenTwo_EMA_LastBarNotAbove());
+            add(new Long_ScreenTwo_MACD_LastAscending());
         }};
     }
 

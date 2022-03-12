@@ -102,16 +102,6 @@ public class ThreeDisplays {
 
         // второй экран
 
-        // последняя гистограмма растет
-        com.kishlaly.ta.model.indicators.MACD screen_2_lastMACD = screen_2_MACD.get(screen_2_MACD.size() - 1);
-        com.kishlaly.ta.model.indicators.MACD screen_2_preLastMACD = screen_2_MACD.get(screen_2_MACD.size() - 2);
-        boolean screen_2_check2 = screen_2_lastMACD.getHistogram() > screen_2_preLastMACD.getHistogram();
-        if (!screen_2_check2) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen_1);
-            Log.addDebugLine("Гистограмма не растет на втором экране");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING_SCREEN_2);
-        }
-
         // %D и %K последнего стохастика должны быть выше, чем у предпоследнего
         Stoch screen_2_lastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
         Stoch screen_2_preLastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
