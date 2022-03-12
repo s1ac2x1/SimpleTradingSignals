@@ -28,8 +28,8 @@ public class Short_ScreenTwo_MACD_ThreeAboveZeroAndDescending implements ScreenT
             return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ABOVE_ZERO_SCREEN_2);
         }
 
-        boolean ascendingHistogram = macd3 > macd2 && macd2 > macd1;
-        if (!ascendingHistogram) {
+        boolean descending = macd3 > macd2 && macd2 > macd1;
+        if (!descending) {
             Log.recordCode(HISTOGRAM_NOT_DESCENDING_SCREEN_2, screen);
             Log.addDebugLine("Гистограмма на втором экране не снижается");
             return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_DESCENDING_SCREEN_2);
