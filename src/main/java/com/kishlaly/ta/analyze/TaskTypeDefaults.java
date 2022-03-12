@@ -2,10 +2,7 @@ package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosses;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarHigher;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
+import com.kishlaly.ta.analyze.tasks.blocks.one.*;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
@@ -104,6 +101,7 @@ public class TaskTypeDefaults {
             add(new Long_ScreenOne_LastBarGreen());
             add(new Long_ScreenOne_LastBarHigher());
             add(new Long_ScreenOne_EMA_LastBarCrosses());
+            add(new Long_ScreenOne_MACD_LastAscending());
         }};
     }
 

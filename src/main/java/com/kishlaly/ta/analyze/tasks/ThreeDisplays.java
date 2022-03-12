@@ -100,18 +100,6 @@ public class ThreeDisplays {
 
     public static BlockResult buySignalType4(SymbolData screen_1, SymbolData screen_2) {
 
-        // первый экран
-
-        // последняя гистограмма растет
-        com.kishlaly.ta.model.indicators.MACD screen_1_lastMACD = screen_1_MACD.get(screen_1_MACD.size() - 1);
-        com.kishlaly.ta.model.indicators.MACD screen_1_preLastMACD = screen_1_MACD.get(screen_1_MACD.size() - 2);
-        boolean check2 = screen_1_lastMACD.getHistogram() > screen_1_preLastMACD.getHistogram();
-        if (!check2) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen_1);
-            Log.addDebugLine("Гистограмма не растет на долгосрочном экране");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ASCENDING_SCREEN_2);
-        }
-
         // второй экран
 
         Quote screen_2_lastQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);

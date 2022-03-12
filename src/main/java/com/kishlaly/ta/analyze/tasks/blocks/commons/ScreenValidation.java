@@ -1,6 +1,5 @@
 package com.kishlaly.ta.analyze.tasks.blocks.commons;
 
-import com.kishlaly.ta.analyze.tasks.blocks.commons.CommonBlock;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.Indicator;
