@@ -107,26 +107,6 @@ public class ThreeDisplays {
 
         // второй экран
 
-        // гистограмма должна быть выше нуля и начать снижаться: проверить на трех последних значениях
-
-        Double macd3 = screen_2_MACD.get(screen_2_MACD.size() - 3).getHistogram(); // 3 от правого края
-        Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram(); // 2 от правого края
-        Double macd1 = screen_2_MACD.get(screen_2_MACD.size() - 1).getHistogram(); // последняя
-
-        boolean histogramAboveZero = macd3 > 0 && macd2 > 0 && macd1 > 0;
-        if (!histogramAboveZero) {
-            Log.recordCode(HISTOGRAM_NOT_ABOVE_ZERO, screen_2);
-            Log.addDebugLine("Гистограмма на втором экране не выше нуля");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_ABOVE_ZERO);
-        }
-
-        boolean ascendingHistogram = macd3 > macd2 && macd2 > macd1;
-        if (!ascendingHistogram) {
-            Log.recordCode(HISTOGRAM_NOT_DESCENDING, screen_2);
-            Log.addDebugLine("Гистограмма на втором экране не снижается");
-            return new BlockResult(lastChartQuote, HISTOGRAM_NOT_DESCENDING);
-        }
-
         // стохастик должен снижаться из зоны перекупленности: проверить на трех последних значениях
 
         Stoch stoch3 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 3);

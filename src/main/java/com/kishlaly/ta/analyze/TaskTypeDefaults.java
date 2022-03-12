@@ -35,6 +35,7 @@ public class TaskTypeDefaults {
                     add(new ScreenValidation());
                     add(new Short_ScreenOne_StrictTrendCheck());
 
+                    add(new Short_ScreenTwo_MACD_ThreeAboveZeroAndDescending());
                 }};
             default:
                 return Collections.emptyList();
