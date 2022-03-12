@@ -102,24 +102,6 @@ public class ThreeDisplays {
 
         // второй экран
 
-        Quote screen_2_lastQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
-        Quote screen_2_preLastQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 2);
-
-        // high последнего столбика выше предпоследнего
-        boolean screen_2_check1 = screen_2_lastQuote.getHigh() > screen_2_preLastQuote.getHigh();
-        if (!screen_2_check1) {
-            Log.recordCode(LAST_QUOTES_NOT_ASCENDING_SCREEN_2, screen_1);
-            Log.addDebugLine("High последнего столбика не выше предпоследнего на втором экране");
-            return new BlockResult(lastChartQuote, LAST_QUOTES_NOT_ASCENDING_SCREEN_2);
-        }
-
-        // последний столбик не выше ЕМА13
-        if (isQuoteAboveEMA(screen_2_lastQuote, screen_2_EMA13.get(screen_2_EMA13.size() - 1).getValue())) {
-            Log.recordCode(LAST_QUOTE_ABOVE_EMA_SCREEN_2, screen_1);
-            Log.addDebugLine("Последний столбик выше EMA на втором экране");
-            return new BlockResult(lastChartQuote, LAST_QUOTE_ABOVE_EMA_SCREEN_2);
-        }
-
         // последняя гистограмма растет
         com.kishlaly.ta.model.indicators.MACD screen_2_lastMACD = screen_2_MACD.get(screen_2_MACD.size() - 1);
         com.kishlaly.ta.model.indicators.MACD screen_2_preLastMACD = screen_2_MACD.get(screen_2_MACD.size() - 2);
