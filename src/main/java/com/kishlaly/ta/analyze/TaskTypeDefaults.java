@@ -24,11 +24,17 @@ public class TaskTypeDefaults {
                     add(new ScreenValidation());
                     add(new Long_ScreenOne_StrictTrendCheck());
 
-                    add(new Long_ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending());
+                    add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending());
                     add(new Long_ScreenTwo_Stoch_D_ThreeAscending());
                     add(new Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromOversold());
                     add(new Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing());
                     add(new Long_ScreenTwo_EMA_LastBarTooHigh());
+                }};
+            case THREE_DISPLAYS_SELL:
+                return new ArrayList<TaskBlock>() {{
+                    add(new ScreenValidation());
+                    add(new Short_ScreenOne_StrictTrendCheck());
+
                 }};
             default:
                 return Collections.emptyList();
@@ -43,13 +49,13 @@ public class TaskTypeDefaults {
         this.customBlocks = customBlocks;
     }
 
-    public List<TaskBlock> threeDisplaysType2() {
+    public List<TaskBlock> threeDisplaysBuyType2() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenValidation());
 
             add(new Long_ScreenOne_StrictTrendCheck());
 
-            add(new Long_ScreenTwo_MACD_TwoBarsBelowZeroAndAscending());
+            add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
             add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversold());
             add(new Long_ScreenTwo_Stoch_D_LastAscending());
             add(new Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing());
@@ -67,14 +73,14 @@ public class TaskTypeDefaults {
     //    последние два бара полностью ниже ЕМА13
     // вход на 7 центов выше закрытия последнего бара
     // TP на середине верхней половины канала Кельтнера
-    public List<TaskBlock> threeDisplaysType3() {
+    public List<TaskBlock> threeDisplaysBuyType3() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenValidation());
 
             add(new Long_ScreenOne_StrictTrendCheck());
 
             add(new Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromStrongOversold());
-            add(new Long_ScreenTwo_MACD_ThreeBarsBelowZeroAndAscending());
+            add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending());
             add(new Long_ScreenTwo_TwoBarsGreen());
             add(new Long_ScreenTwo_TwoBarsAscending());
             add(new Long_ScreenTwo_EMA_TwoBarsBelow());
@@ -94,7 +100,7 @@ public class TaskTypeDefaults {
     //   %D и %K последнего стохастика должны быть выше, чем у предпоследнего
     // ВНИМАНИЕ:
     // после сигнала проверить вручную, чтобы на втором экране послединй столбик не поднимался слишком высоко от ЕМА13
-    public List<TaskBlock> threeDisplaysType4() {
+    public List<TaskBlock> threeDisplaysBuyType4() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenValidation());
 

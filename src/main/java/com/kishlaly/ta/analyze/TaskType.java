@@ -52,7 +52,7 @@ public enum TaskType {
                 put(1, new Indicator[]{EMA26, MACD});
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
-            ThreeDisplays::sellSignal
+            ThreeDisplays::sell
     ),
     FIRST_TRUST_MODEL(
             new HashMap<Integer, Timeframe>() {{

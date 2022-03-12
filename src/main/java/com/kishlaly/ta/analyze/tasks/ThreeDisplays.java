@@ -53,7 +53,7 @@ public class ThreeDisplays {
         public static boolean FILTER_BY_KELTNER_ENABLED;
     }
 
-    public static BlockResult buy(Screens screens, List<TaskBlock> blocks) {
+    private static BlockResult check(Screens screens, List<TaskBlock> blocks) {
 
         SymbolData screen1 = screens.getScreen1();
         SymbolData screen2 = screens.getScreen2();
@@ -98,85 +98,12 @@ public class ThreeDisplays {
         return screenTwoResult;
     }
 
-    public static BlockResult sellSignal(SymbolData screen_1, SymbolData screen_2) {
+    public static BlockResult buy(Screens screens, List<TaskBlock> blocks) {
+        return check(screens, blocks);
+    }
 
-        int screen_1_MinBarCount = resolveMinBarsCount(screen_1.timeframe);
-        int screen_2_MinBarCount = resolveMinBarsCount(screen_2.timeframe);
-
-        if (screen_1.quotes.isEmpty() || screen_1.quotes.size() < screen_1_MinBarCount) {
-            Log.recordCode(NO_DATA_QUOTES, screen_1);
-            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_1.timeframe.name());
-            return new BlockResult(null, NO_DATA_QUOTES);
-        }
-        if (screen_2.quotes.isEmpty() || screen_2.quotes.size() < screen_2_MinBarCount) {
-            Log.recordCode(NO_DATA_QUOTES, screen_2);
-            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen_2.timeframe.name());
-            return new BlockResult(null, NO_DATA_QUOTES);
-        }
-
-        List<Indicator> missingData = new ArrayList<>();
-        screen_1.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty()) {
-                missingData.add(indicator);
-            }
-        });
-        screen_2.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty()) {
-                missingData.add(indicator);
-            }
-        });
-        if (!missingData.isEmpty()) {
-            Log.recordCode(NO_DATA_INDICATORS, screen_1);
-            Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
-            return new BlockResult(null, NO_DATA_INDICATORS);
-        }
-
-        List<Quote> screen_1_Quotes = screen_1.quotes.subList(screen_1.quotes.size() - screen_1_MinBarCount, screen_1.quotes.size());
-        List<Quote> screen_2_Quotes = screen_2.quotes.subList(screen_2.quotes.size() - screen_2_MinBarCount, screen_2.quotes.size());
-
-        List<EMA> screen_1_EMA26 = screen_1.indicators.get(EMA26);
-        screen_1_EMA26 = screen_1_EMA26.subList(screen_1_EMA26.size() - screen_1_MinBarCount, screen_1_EMA26.size());
-
-        List<MACD> screen_1_MACD = screen_1.indicators.get(MACD);
-        screen_1_MACD = screen_1_MACD.subList(screen_1_MACD.size() - screen_1_MinBarCount, screen_1_MACD.size());
-
-        List<EMA> screen_2_EMA13 = screen_2.indicators.get(EMA13);
-        screen_2_EMA13 = screen_2_EMA13.subList(screen_2_EMA13.size() - screen_2_MinBarCount, screen_2_EMA13.size());
-
-        List<MACD> screen_2_MACD = screen_2.indicators.get(MACD);
-        screen_2_MACD = screen_2_MACD.subList(screen_2_MACD.size() - screen_2_MinBarCount, screen_2_MACD.size());
-
-        List<Stoch> screen_2_Stochastic = screen_2.indicators.get(STOCH);
-        screen_2_Stochastic = screen_2_Stochastic.subList(screen_2_Stochastic.size() - screen_2_MinBarCount, screen_2_Stochastic.size());
-
-        // первый экран
-
-        // проверка тренда
-        boolean downtrendCheckOnMultipleBars = TrendFunctions.downtrendCheckOnMultipleBars(screen_1, screen_1_MinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
-        //boolean downtrendCheckOnLastBar = TrendFunctions.downtrendCheckOnLastBar(screen_1); опасно
-        Quote lastChartQuote = screen_2_Quotes.get(screen_2_Quotes.size() - 1);
-        if (!downtrendCheckOnMultipleBars) {
-            Log.recordCode(NO_DOWNTREND, screen_1);
-            Log.addDebugLine("Не обнаружен нисходящий тренд на долгосрочном экране");
-            return new BlockResult(lastChartQuote, NO_DOWNTREND);
-        }
-
-        // На первом экране последние 4 Quote.high не должны повышаться
-        // (эта проверка уже есть в Functions.isDownrend, но пусть тут тоже будет)
-        Quote q4 = screen_1_Quotes.get(screen_1_MinBarCount - 4);
-        Quote q3 = screen_1_Quotes.get(screen_1_MinBarCount - 3);
-        Quote q2 = screen_1_Quotes.get(screen_1_MinBarCount - 2);
-        Quote q1 = screen_1_Quotes.get(screen_1_MinBarCount - 1);
-        if (q4.getHigh() <= q3.getHigh() && q3.getHigh() <= q2.getHigh() && q2.getHigh() <= q1.getHigh()) {
-            // допустимо только, если последний столбик красный
-            if (q1.getClose() > q1.getOpen()) {
-                Log.recordCode(DOWNTREND_FAILING, screen_1);
-                Log.addDebugLine("Последние 4 столбика на первом экране повышаются");
-                return new BlockResult(lastChartQuote, DOWNTREND_FAILING);
-            } else {
-                Log.addDebugLine("Последние 4 столбика на первом экране повышаются, но крайний правый закрылся ниже открытия");
-            }
-        }
+    public static BlockResult sell(Screens screens, List<TaskBlock> blocks) {
+        return check(screens, blocks);
 
         // второй экран
 
