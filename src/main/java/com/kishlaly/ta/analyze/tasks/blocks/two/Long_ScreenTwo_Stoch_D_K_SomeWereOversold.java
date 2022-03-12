@@ -8,7 +8,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
+import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_OVERSOLD;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_VALUES_TO_CHECK;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
@@ -16,10 +17,8 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 /**
  * нужно проверять несколько стохастиков влево от последнего значения
  * например, 5 последних: если ли среди них значения ниже STOCH_OVERSOLD
- * но при условии, что медленная линия у правого края была выше
- * тогда STOCH_OVERSOLD можно держать поменьше, эдак 30
  */
-public class Long_ScreenTwo_Stoch_SomeValuesWereUnderOversold implements ScreenTwoBlock {
+public class Long_ScreenTwo_Stoch_D_K_SomeWereOversold implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);
@@ -37,13 +36,6 @@ public class Long_ScreenTwo_Stoch_SomeValuesWereUnderOversold implements ScreenT
             Log.recordCode(STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2, screen);
             Log.addDebugLine("Стохастик не был в перепроданности на последних " + STOCH_VALUES_TO_CHECK + " значениях");
             return new BlockResult(screen.getLastQuote(), STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2);
-        }
-
-        boolean lastStochIsBigger = stoch1.getSlowD() > stoch2.getSlowD();
-        if (!lastStochIsBigger) {
-            Log.recordCode(STOCH_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("Последние два значения стохастика не повышаются");
-            return new BlockResult(screen.getLastQuote(), STOCH_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);
     }

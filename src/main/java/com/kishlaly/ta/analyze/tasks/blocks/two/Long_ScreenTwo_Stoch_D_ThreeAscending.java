@@ -14,7 +14,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_NOT_ASCENDING_SCREEN
 /**
  * стохастик должен подниматься: проверить на ТРЕХ последних значениях
  */
-public class Long_ScreenTwo_Stoch_ThreeValuesAscending implements ScreenTwoBlock {
+public class Long_ScreenTwo_Stoch_D_ThreeAscending implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);
