@@ -1,28 +1,16 @@
 package com.kishlaly.ta.analyze.tasks;
 
-import com.kishlaly.ta.analyze.BlockResultCode;
-import com.kishlaly.ta.analyze.functions.TrendFunctions;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock;
 import com.kishlaly.ta.model.BlockResult;
-import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.Screens;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.MACD;
-import com.kishlaly.ta.model.indicators.*;
 import com.kishlaly.ta.utils.IndicatorUtils;
-import com.kishlaly.ta.utils.Log;
 import com.kishlaly.ta.utils.Quotes;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
-import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.*;
-import static com.kishlaly.ta.model.indicators.Indicator.*;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 /**
  * Индикаторы:
@@ -37,9 +25,6 @@ public class ThreeDisplays {
 
         // 3 дает меньше сигналов, но они надежнее
         public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 4;
-
-        // для поиска аномально длинных баров
-        public static int multiplier = 2;
 
         public static int STOCH_OVERSOLD = 40;
         public static int STOCH_OVERBOUGHT = 70;
@@ -104,23 +89,6 @@ public class ThreeDisplays {
 
     public static BlockResult sell(Screens screens, List<TaskBlock> blocks) {
         return check(screens, blocks);
-
-        // второй экран
-
-        //попробовать посчитать среднюю длину баров и сравнить с ней последние три
-        Double sum = screen_2_Quotes.stream().map(quote -> quote.getHigh() - quote.getLow()).reduce(Double::sum).get();
-        double averageBarLength = sum / screen_2_MinBarCount;
-        double quote1Length = quote1.getHigh() - quote1.getLow();
-        double quote2Length = quote2.getHigh() - quote2.getLow();
-        double quote3Length = quote3.getHigh() - quote3.getLow();
-        boolean quote1StrangeLength = quote1Length >= averageBarLength * multiplier;
-        boolean quote2StrangeLength = quote2Length >= averageBarLength * multiplier;
-        boolean quote3StrangeLength = quote3Length >= averageBarLength * multiplier;
-        if (quote1StrangeLength || quote2StrangeLength || quote3StrangeLength) {
-            Log.addDebugLine("Внимание: один из последних трех столбиков в " + multiplier + " раза больше среднего");
-        }
-
-        return new BlockResult(quote1, OK);
     }
 
 }
