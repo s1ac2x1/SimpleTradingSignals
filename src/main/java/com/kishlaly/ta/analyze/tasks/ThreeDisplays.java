@@ -107,27 +107,6 @@ public class ThreeDisplays {
 
         // второй экран
 
-        // нужно фильтровать ситуацию, когда третий и второй пересекают ЕМА13, а последний целиком ниже (то есть уже момент потерян)
-        // третий может открыться и закрыться ниже, и это допустимо
-        boolean thirdCrossesEMA13 = quote3.getLow() < screen_2_EMA13.get(screen_2_MinBarCount - 3).getValue()
-                && quote3.getHigh() > screen_2_EMA13.get(screen_2_MinBarCount - 3).getValue();
-        boolean secondCrossesEMA13 = quote2.getLow() < screen_2_EMA13.get(screen_2_MinBarCount - 2).getValue()
-                && quote2.getHigh() > screen_2_EMA13.get(screen_2_MinBarCount - 2).getValue();
-        boolean lastBelowEMA13 = quote1.getLow() < screen_2_EMA13.get(screen_2_MinBarCount - 1).getValue()
-                && quote1.getHigh() < screen_2_EMA13.get(screen_2_MinBarCount - 1).getValue();
-        if (thirdCrossesEMA13 && secondCrossesEMA13 && lastBelowEMA13) {
-            Log.recordCode(LAST_BAR_BELOW, screen_2);
-            Log.addDebugLine("Третий и второй пересекли ЕМА13, а последний полностью ниже");
-            return new BlockResult(lastChartQuote, LAST_BAR_BELOW);
-        }
-
-        // фильтровать ситуации, когда последний столбик имеет тень ниже, чем третий с конца
-        // это не обязательно
-//        if (quote1.getLow() < quote2.getLow() && quote1.getLow() < quote3.getLow()) {
-//            Log.addDebugLine("Последний столбик имеет тень ниже предыдуших двух");
-//            return false;
-//        }
-
         //попробовать посчитать среднюю длину баров и сравнить с ней последние три
         Double sum = screen_2_Quotes.stream().map(quote -> quote.getHigh() - quote.getLow()).reduce(Double::sum).get();
         double averageBarLength = sum / screen_2_MinBarCount;
