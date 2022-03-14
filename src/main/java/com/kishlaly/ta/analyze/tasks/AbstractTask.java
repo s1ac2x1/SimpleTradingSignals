@@ -1,6 +1,7 @@
 package com.kishlaly.ta.analyze.tasks;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.commons.CommonBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock;
 import com.kishlaly.ta.model.BlockResult;
@@ -23,6 +24,31 @@ public class AbstractTask {
         Quotes.trim(screen2);
         IndicatorUtils.trim(screen1);
         IndicatorUtils.trim(screen2);
+
+        List<TaskBlock> commonBlocks = blocks
+                .stream()
+                .filter(block -> block instanceof CommonBlock)
+                .collect(Collectors.toList());
+
+        boolean commonBlocksSucceded = true;
+        BlockResult commonBlockLastResult = null;
+
+        for (int i = 0; i < commonBlocks.size(); i++) {
+            TaskBlock commonBlock = commonBlocks.get(i);
+            BlockResult check1 = commonBlock.check(screen1);
+            BlockResult check2 = commonBlock.check(screen2);
+            if (!check1.isOk()) {
+                commonBlockLastResult = check1;
+                commonBlocksSucceded = false;
+            }
+            if (!check2.isOk()) {
+                commonBlockLastResult = check2;
+                commonBlocksSucceded = false;
+            }
+        }
+        if (!commonBlocksSucceded) {
+            return commonBlockLastResult;
+        }
 
         List<TaskBlock> screenOneBlocks = blocks
                 .stream()

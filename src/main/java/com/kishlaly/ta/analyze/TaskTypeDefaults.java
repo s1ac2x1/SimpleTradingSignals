@@ -1,7 +1,8 @@
 package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
-import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenSoftValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.*;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
@@ -23,7 +24,7 @@ public class TaskTypeDefaults {
         switch (taskType) {
             case THREE_DISPLAYS_BUY:
                 return new ArrayList<TaskBlock>() {{
-                    add(new ScreenValidation());
+                    add(new ScreenBasicValidation());
                     add(new Long_ScreenOne_StrictTrendCheck());
 
                     add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending());
@@ -34,7 +35,7 @@ public class TaskTypeDefaults {
                 }};
             case THREE_DISPLAYS_SELL:
                 return new ArrayList<TaskBlock>() {{
-                    add(new ScreenValidation());
+                    add(new ScreenBasicValidation());
                     add(new Short_ScreenOne_StrictTrendCheck());
 
                     add(new Short_ScreenTwo_MACD_ThreeAboveZeroAndDescending());
@@ -45,12 +46,17 @@ public class TaskTypeDefaults {
                 }};
             case MACD_BULLISH_DIVERGENCE:
                 return new ArrayList<TaskBlock>() {{
-                    add(new ScreenValidation());
+                    add(new ScreenBasicValidation());
                     if (!ALLOW_ON_BEARISH_TREND) {
                         add(new Short_ScreenOne_StrictTrendCheck());
                     }
 
                     add(new Long_ScreenTwo_MACD_LastShouldBeNegative());
+                }};
+            case FIRST_TRUST_MODEL:
+                return new ArrayList<TaskBlock>() {{
+                    add(new ScreenSoftValidation());
+
                 }};
             default:
                 return Collections.emptyList();
@@ -67,7 +73,7 @@ public class TaskTypeDefaults {
 
     public List<TaskBlock> threeDisplaysBuyType2() {
         return new ArrayList<TaskBlock>() {{
-            add(new ScreenValidation());
+            add(new ScreenBasicValidation());
 
             add(new Long_ScreenOne_StrictTrendCheck());
 
@@ -91,7 +97,7 @@ public class TaskTypeDefaults {
     // TP на середине верхней половины канала Кельтнера
     public List<TaskBlock> threeDisplaysBuyType3() {
         return new ArrayList<TaskBlock>() {{
-            add(new ScreenValidation());
+            add(new ScreenBasicValidation());
 
             add(new Long_ScreenOne_StrictTrendCheck());
 
@@ -118,7 +124,7 @@ public class TaskTypeDefaults {
     // после сигнала проверить вручную, чтобы на втором экране послединй столбик не поднимался слишком высоко от ЕМА13
     public List<TaskBlock> threeDisplaysBuyType4() {
         return new ArrayList<TaskBlock>() {{
-            add(new ScreenValidation());
+            add(new ScreenBasicValidation());
 
             add(new Long_ScreenOne_LastBarGreen());
             add(new Long_ScreenOne_LastBarHigher());

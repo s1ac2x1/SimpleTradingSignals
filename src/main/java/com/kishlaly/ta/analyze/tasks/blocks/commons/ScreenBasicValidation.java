@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
-public class ScreenValidation implements CommonBlock {
+public class ScreenBasicValidation implements CommonBlock {
 
     @Override
     public BlockResult check(SymbolData screenOne) {
