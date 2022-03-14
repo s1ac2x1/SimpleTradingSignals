@@ -36,26 +36,26 @@ public class Main {
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
         };
-        Context.testOnly = new ArrayList<String>() {{
-            add("AIG");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("AIG");
+//        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
                 //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
-                THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
-                //THREE_DISPLAYS_BUY_TYPE_4,
+                //THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
+                THREE_DISPLAYS_BUY_TYPE_4,
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
 
 //        buildCache(timeframes, tasks, false);
 //        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
-//        run(timeframes, tasks, false);
+        run(timeframes, tasks, false);
 //        runBest(timeframes);
-        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
     }
