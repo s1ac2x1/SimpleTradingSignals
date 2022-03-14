@@ -32,7 +32,7 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                //SymbolsSource.SP500,
+                SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
         };
@@ -53,8 +53,8 @@ public class Main {
 //        buildCache(timeframes, tasks, false);
 //        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
-//        run(timeframes, tasks, false);
-        runBest(timeframes);
+        run(timeframes, tasks, false);
+//        runBest(timeframes);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
