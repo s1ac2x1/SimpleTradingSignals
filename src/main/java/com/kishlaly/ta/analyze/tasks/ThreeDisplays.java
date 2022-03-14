@@ -107,49 +107,6 @@ public class ThreeDisplays {
 
         // второй экран
 
-        // ценовые бары должны пересекать ЕМА13 и должны снижаться
-
-        // убедиться сначала, что low у последних трех столбиков снижается
-        Quote quote3 = screen_2_Quotes.get(screen_2_MinBarCount - 3);
-        Quote quote2 = screen_2_Quotes.get(screen_2_MinBarCount - 2);
-        Quote quote1 = screen_2_Quotes.get(screen_2_MinBarCount - 1);
-        // наверно descendingBarLow=false + descendingBarClose=false достаточно для отказа
-        boolean descendingBarLow = quote3.getLow() > quote2.getLow() && quote2.getLow() < quote1.getLow();
-        boolean descendingBarClose = quote3.getClose() > quote2.getClose() && quote2.getClose() > quote1.getClose();
-
-        if (!descendingBarLow) {
-            Log.recordCode(BlockResultCode.QUOTE_LOW_NOT_LOWING, screen_2);
-            Log.addDebugLine("Quote.low не снижается последовательно");
-            if (!descendingBarClose) {
-                Log.recordCode(BlockResultCode.QUOTE_CLOSE_NOT_LOWING, screen_2);
-                Log.addDebugLine("Quote.close не снижается последовательно");
-                // третий с конца весь выше ЕМА13, а второй и последний пересекли ее
-                boolean thirdBarAboveEMA13 = quote3.getLow() > screen_2_EMA13.get(screen_2_MinBarCount - 3).getValue()
-                        && quote3.getHigh() > screen_2_EMA13.get(screen_2_MinBarCount - 3).getValue();
-                boolean secondBarCrossesEMA13 = quote2.getLow() <= screen_2_EMA13.get(screen_2_MinBarCount - 2).getValue()
-                        && quote2.getHigh() >= screen_2_EMA13.get(screen_2_MinBarCount - 2).getValue();
-                boolean lastBarCrossesEMA13 = quote1.getLow() <= screen_2_EMA13.get(screen_2_MinBarCount - 1).getValue()
-                        && quote1.getHigh() >= screen_2_EMA13.get(screen_2_MinBarCount - 1).getValue();
-                boolean crossingRule = thirdBarAboveEMA13 && (secondBarCrossesEMA13 || lastBarCrossesEMA13);
-                if (!crossingRule) {
-                    Log.addDebugLine("Третий с конца" + (thirdBarAboveEMA13 ? " " : " не ") + "выше ЕМА13");
-                    Log.addDebugLine("Предпоследний" + (secondBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
-                    Log.addDebugLine("Последний" + (lastBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
-                    Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen_2);
-                    return new BlockResult(lastChartQuote, CROSSING_RULE_VIOLATED_SCREEN_2);
-                } else {
-                    Log.recordCode(BlockResultCode.CROSSING_RULE_PASSED_SCREEN_2, screen_2);
-                    Log.addDebugLine("Правило пересечения выполняется");
-                }
-            } else {
-                Log.recordCode(BlockResultCode.QUOTE_CLOSE_LOWING, screen_2);
-                Log.addDebugLine("Есть снижение Quote.close");
-            }
-        } else {
-            Log.recordCode(BlockResultCode.QUOTE_HIGH_LOWING, screen_2);
-            Log.addDebugLine("Есть снижение Quote.high");
-        }
-
         // нужно фильтровать ситуацию, когда третий и второй пересекают ЕМА13, а последний целиком ниже (то есть уже момент потерян)
         // третий может открыться и закрыться ниже, и это допустимо
         boolean thirdCrossesEMA13 = quote3.getLow() < screen_2_EMA13.get(screen_2_MinBarCount - 3).getValue()

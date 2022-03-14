@@ -38,6 +38,7 @@ public class TaskTypeDefaults {
                     add(new Short_ScreenTwo_MACD_ThreeAboveZeroAndDescending());
                     add(new Short_ScreenTwo_Stoch_D_ThreeDescending());
                     add(new Short_ScreenTwo_Stoch_D_K_ThreeDescendingFromOverbought());
+                    add(new Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing());
                 }};
             default:
                 return Collections.emptyList();
