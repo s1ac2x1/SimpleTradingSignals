@@ -107,35 +107,6 @@ public class ThreeDisplays {
 
         // второй экран
 
-        // стохастик должен снижаться из зоны перекупленности: проверить на трех последних значениях
-
-        Stoch stoch3 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 3);
-        Stoch stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
-        Stoch stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
-        // %D снижается (достаточно, чтобы последний был ниже прошлых двух)
-        boolean ascendingStochastic = stoch1.getSlowD() < stoch2.getSlowD() && stoch1.getSlowD() < stoch3.getSlowD();
-        if (!ascendingStochastic) {
-            Log.recordCode(STOCH_NOT_DESCENDING, screen_2);
-            Log.addDebugLine("Стохастик %D не снижается на втором экране");
-            return new BlockResult(lastChartQuote, STOCH_NOT_DESCENDING);
-        }
-
-        // проверка перекупленности
-
-        // третья или вторая с конца %K выше STOCH_OVERSOLD, и самая последняя ниже первой
-        boolean isOverboughtK = (stoch3.getSlowK() >= STOCH_OVERBOUGHT || stoch2.getSlowK() >= STOCH_OVERBOUGHT)
-                && (stoch1.getSlowK() < stoch3.getSlowK());
-        // третья или вторая с конца %D выше STOCH_OVERSOLD, и самая последняя ниже обеих
-        boolean isOverboughtD = (stoch3.getSlowD() >= STOCH_OVERBOUGHT || stoch2.getSlowD() >= STOCH_OVERBOUGHT)
-                && (stoch1.getSlowD() < stoch2.getSlowD())
-                && (stoch1.getSlowD() < stoch3.getSlowD());
-
-        if (!isOverboughtK || !isOverboughtD) {
-            Log.recordCode(STOCH_NOT_DESCENDING_FROM_OVERBOUGHT, screen_2);
-            Log.addDebugLine("Стохастик не снижается из перекупленности " + STOCH_OVERBOUGHT + ". %D: " + isOverboughtD + "; %K: " + isOverboughtK);
-            return new BlockResult(lastChartQuote, STOCH_NOT_DESCENDING_FROM_OVERBOUGHT);
-        }
-
         // ценовые бары должны пересекать ЕМА13 и должны снижаться
 
         // убедиться сначала, что low у последних трех столбиков снижается
