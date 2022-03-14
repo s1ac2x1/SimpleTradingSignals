@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.kishlaly.ta.analyze.tasks.Divergencies.BullishConfig.ALLOW_ON_BEARISH_TREND;
+
 public class TaskTypeDefaults {
 
     // все декартово произведение или один из его вариантов?
@@ -40,6 +42,15 @@ public class TaskTypeDefaults {
                     add(new Short_ScreenTwo_Stoch_D_K_ThreeDescendingFromOverbought());
                     add(new Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing());
                     add(new Short_ScreenTwo_EMA_LastBarTooLow());
+                }};
+            case MACD_BULLISH_DIVERGENCE:
+                return new ArrayList<TaskBlock>() {{
+                    add(new ScreenValidation());
+                    if (!ALLOW_ON_BEARISH_TREND) {
+                        add(new Short_ScreenOne_StrictTrendCheck());
+                    }
+
+                    add(new Long_ScreenTwo_MACD_LastShouldBeNegative());
                 }};
             default:
                 return Collections.emptyList();

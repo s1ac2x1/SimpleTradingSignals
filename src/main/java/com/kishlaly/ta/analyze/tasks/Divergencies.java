@@ -86,33 +86,34 @@ public class Divergencies {
 
         Quote lastChartQuote = screen2Quotes.get(screen2Quotes.size() - 1);
 
-        if (!ALLOW_ON_BEARISH_TREND) {
-            // фильтрация нисходящих трендов
-            boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, screenOneMinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
-            //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen1); плохая проверка
-            if (!uptrendCheckOnMultipleBars) {
-                Log.recordCode(NO_UPTREND_SCREEN_1, screen1);
-                Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
-                return new BlockResult(lastChartQuote, NO_UPTREND_SCREEN_1);
-            }
-        }
+//        if (!ALLOW_ON_BEARISH_TREND) {
+//            // фильтрация нисходящих трендов
+//            boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen1, screenOneMinBarCount, NUMBER_OF_EMA26_VALUES_TO_CHECK);
+//            //boolean uptrendCheckOnLastBar = TrendFunctions.uptrendCheckOnLastBar(screen1); плохая проверка
+//            if (!uptrendCheckOnMultipleBars) {
+//                Log.recordCode(NO_UPTREND_SCREEN_1, screen1);
+//                Log.addDebugLine("Не обнаружен восходящий тренд на долгосрочном экране");
+//                return new BlockResult(lastChartQuote, NO_UPTREND_SCREEN_1);
+//            }
+//        }
 
         List<MACD> screenTwomacdValuesAll = screen2.indicators.get(Indicator.MACD);
-        if (screenTwomacdValuesAll.isEmpty()) {
-            Log.addDebugLine("Недостаточно данных по MACD");
-            return new BlockResult(lastChartQuote, NO_DATA_MACD);
-        }
+
+//        if (screenTwomacdValuesAll.isEmpty()) {
+//            Log.addDebugLine("Недостаточно данных по MACD");
+//            return new BlockResult(lastChartQuote, NO_DATA_MACD);
+//        }
         List<MACD> screenTwoMacdValues = screenTwomacdValuesAll.subList(screenTwomacdValuesAll.size() - screenTwoMinBarCount, screenTwomacdValuesAll.size());
 
         // последние значения гистограммы должны быть <= 0
 
-        double latestHistogramValue = screenTwoMacdValues.get(screenTwoMinBarCount - 1).getHistogram();
-
-        if (latestHistogramValue > 0) {
-            Log.recordCode(BlockResultCode.LAST_HISTOGRAM_ABOVE_ZERO, screen1);
-            Log.addDebugLine("гистограмма у правого края выше нуля");
-            return new BlockResult(lastChartQuote, LAST_HISTOGRAM_ABOVE_ZERO);
-        }
+//        double latestHistogramValue = screenTwoMacdValues.get(screenTwoMinBarCount - 1).getHistogram();
+//
+//        if (latestHistogramValue > 0) {
+//            Log.recordCode(BlockResultCode.LAST_HISTOGRAM_ABOVE_ZERO, screen1);
+//            Log.addDebugLine("гистограмма у правого края выше нуля");
+//            return new BlockResult(lastChartQuote, LAST_HISTOGRAM_ABOVE_ZERO);
+//        }
 
         // строим массив из котировок с их гистрограммами
 
