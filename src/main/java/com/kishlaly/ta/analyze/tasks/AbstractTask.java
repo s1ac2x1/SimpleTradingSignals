@@ -17,8 +17,8 @@ public class AbstractTask {
 
     public static BlockResult check(Screens screens, List<TaskBlock> blocks) {
 
-        SymbolData screen1 = screens.getScreen1();
-        SymbolData screen2 = screens.getScreen2();
+        SymbolData screen1 = screens.getScreen1().copy();
+        SymbolData screen2 = screens.getScreen2().copy();
 
         Quotes.trim(screen1);
         Quotes.trim(screen2);
