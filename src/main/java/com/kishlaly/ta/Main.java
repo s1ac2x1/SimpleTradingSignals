@@ -37,9 +37,9 @@ public class Main {
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
         };
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("AIG");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("AIG");
+        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
