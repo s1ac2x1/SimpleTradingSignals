@@ -63,7 +63,7 @@ public enum TaskType {
                 put(1, new Indicator[]{EMA26, MACD});
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
-            FirstTrustModel::buySignal
+            FirstTrustModel::buy
     );
 
     TaskType(final Map<Integer, Timeframe> timeframes,

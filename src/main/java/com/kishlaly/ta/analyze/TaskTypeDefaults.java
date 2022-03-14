@@ -71,7 +71,7 @@ public class TaskTypeDefaults {
         this.customBlocks = customBlocks;
     }
 
-    public List<TaskBlock> threeDisplaysBuyType2() {
+    public static List<TaskBlock> threeDisplaysBuyType2() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
@@ -95,7 +95,7 @@ public class TaskTypeDefaults {
     //    последние два бара полностью ниже ЕМА13
     // вход на 7 центов выше закрытия последнего бара
     // TP на середине верхней половины канала Кельтнера
-    public List<TaskBlock> threeDisplaysBuyType3() {
+    public static List<TaskBlock> threeDisplaysBuyType3() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
@@ -122,7 +122,7 @@ public class TaskTypeDefaults {
     //   %D и %K последнего стохастика должны быть выше, чем у предпоследнего
     // ВНИМАНИЕ:
     // после сигнала проверить вручную, чтобы на втором экране послединй столбик не поднимался слишком высоко от ЕМА13
-    public List<TaskBlock> threeDisplaysBuyType4() {
+    public static List<TaskBlock> threeDisplaysBuyType4() {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 

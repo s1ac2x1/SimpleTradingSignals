@@ -12,7 +12,7 @@ public class FirstTrustModel extends AbstractTask {
         public static int MONTHS = 3;
     }
 
-    public static BlockResult buySignal(Screens screens, List<TaskBlock> blocks) {
+    public static BlockResult buy(Screens screens, List<TaskBlock> blocks) {
         return check(screens, blocks);
     }
 
