@@ -85,7 +85,7 @@ public class Alphavantage {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
-        if (quotes.size() < Quotes.resolveMinBarCount(timeframe)) {
+        if (quotes.size() < Quotes.resolveMinBarsCount(timeframe)) {
             return Collections.emptyList();
         }
         Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));

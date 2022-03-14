@@ -3,13 +3,16 @@ package com.kishlaly.ta.analyze;
 import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
-import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.TaskResult;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.Screens;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.TimeframeIndicators;
 import com.kishlaly.ta.model.indicators.Indicator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
@@ -38,18 +41,7 @@ public enum TaskType {
                 put(1, new Indicator[]{EMA26, MACD});
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
-            ThreeDisplays::buySignal
-    ),
-    THREE_DISPLAYS_BUY_TYPE_2(
-            new HashMap<Integer, Timeframe>() {{
-                put(1, WEEK);
-                put(2, DAY);
-            }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
-            }},
-            ThreeDisplays::buySignalType2
+            ThreeDisplays::buy
     ),
     THREE_DISPLAYS_SELL(
             new HashMap<Integer, Timeframe>() {{
@@ -60,7 +52,7 @@ public enum TaskType {
                 put(1, new Indicator[]{EMA26, MACD});
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
-            ThreeDisplays::sellSignal
+            ThreeDisplays::sell
     ),
     FIRST_TRUST_MODEL(
             new HashMap<Integer, Timeframe>() {{
@@ -71,35 +63,12 @@ public enum TaskType {
                 put(1, new Indicator[]{EMA26, MACD});
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
-            FirstTrustModel::buySignal
-    ),
-    THREE_DISPLAYS_BUY_TYPE3(
-            new HashMap<Integer, Timeframe>() {{
-                put(1, WEEK);
-                put(2, DAY);
-            }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
-            }},
-            ThreeDisplays::buySignalType3
-    ),
-    THREE_DISPLAYS_BUY_TYPE_4(
-            new HashMap<Integer, Timeframe>() {{
-                put(1, WEEK);
-                put(2, DAY);
-            }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
-            }},
-            ThreeDisplays::buySignalType4
-    ); // 8
-
+            FirstTrustModel::buy
+    );
 
     TaskType(final Map<Integer, Timeframe> timeframes,
              final Map<Integer, Indicator[]> indicators,
-             BiFunction<SymbolData, SymbolData, TaskResult> function) {
+             BiFunction<Screens, List<TaskBlock>, BlockResult> function) {
         this.timeframes = timeframes;
         this.indicators = indicators;
         this.function = function;
@@ -107,8 +76,17 @@ public enum TaskType {
 
     private Map<Integer, Timeframe> timeframes;
     private Map<Integer, Indicator[]> indicators;
-    private BiFunction<SymbolData, SymbolData, TaskResult> function;
+    private BiFunction<Screens, List<TaskBlock>, BlockResult> function;
     private TimeframeIndicators timeframeIndicators;
+    private List<TaskBlock> blocks = new ArrayList<>();
+
+    public List<TaskBlock> getBlocks() {
+        return this.blocks;
+    }
+
+    public void setBlocks(final List<TaskBlock> blocks) {
+        this.blocks = blocks;
+    }
 
     public Timeframe getTimeframeForScreen(int screen) {
         return timeframes.get(screen);
@@ -126,7 +104,7 @@ public enum TaskType {
         this.indicators.put(screen, indicators);
     }
 
-    public BiFunction<SymbolData, SymbolData, TaskResult> getFunction() {
+    public BiFunction<Screens, List<TaskBlock>, BlockResult> getFunction() {
         return this.function;
     }
 

@@ -1,9 +1,9 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
 
-import java.sql.SQLOutput;
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -76,10 +76,11 @@ public class Quotes {
         return dayQuotes;
     }
 
-    public static int resolveMinBarCount(Timeframe timeframe) {
+    public static int resolveMinBarsCount(Timeframe timeframe) {
+        int min = 21; // меньше нельзя, иначе не сработает StopLossFixedPrice
         // если агрегация на основе часовых котировок (которых ~550), то дневных будет ~35, а недельных нет смысла рассматривать
         // если агрегация на основе дневных котировок (которых до 5500), то недельных будет до 1110
-        return 21; // меньше нельзя, иначе не сработает StopLossFixedPrice
+        return min;
 
 //        int notSet = -1;
 //        switch (timeframe) {
@@ -125,6 +126,14 @@ public class Quotes {
 //        }
     }
 
+    public static void trim(SymbolData screen) {
+        if (screen.quotes != null && !screen.quotes.isEmpty()) {
+            screen.quotes = screen.quotes.subList(screen.quotes.size() - resolveMinBarsCount(screen.timeframe), screen.quotes.size());
+        } else {
+            screen.quotes = new ArrayList<>();
+        }
+    }
+
     private static void collectDayQuote(List<Quote> hourQuotesInsideOneDay, List<Quote> dayQuotes) {
         List<Quote> dayQuotesSorted = new ArrayList<>(hourQuotesInsideOneDay);
         Collections.sort(dayQuotesSorted, Comparator.comparing(Quote::getTimestamp));
@@ -141,6 +150,18 @@ public class Quotes {
         Quote dayQuote = new Quote(timestamp, Numbers.round(high), open, close, Numbers.round(low), volume);
         dayQuotes.add(dayQuote);
         hourQuotesInsideOneDay.clear();
+    }
+
+    public static boolean isQuoteCrossedEMA(Quote quote, double emaValue) {
+        return quote.getLow() <= emaValue && quote.getHigh() >= emaValue;
+    }
+
+    public static boolean isQuoteBelowEMA(Quote quote, double emaValue) {
+        return quote.getLow() < emaValue && quote.getHigh() < emaValue;
+    }
+
+    public static boolean isQuoteAboveEMA(Quote quote, double emaValue) {
+        return quote.getLow() > emaValue && quote.getHigh() > emaValue;
     }
 
 }

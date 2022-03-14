@@ -1,6 +1,7 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.TaskTypeDefaults;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.SymbolsSource;
@@ -44,11 +45,10 @@ public class Main {
 
         TaskType[] tasks = {
                 //MACD_BULLISH_DIVERGENCE,
-                //THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
-                //THREE_DISPLAYS_BUY_TYPE_2, // лучше работает для WEEK-DAY
-                THREE_DISPLAYS_BUY_TYPE_4,
+                THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
+        THREE_DISPLAYS_BUY.setBlocks(TaskTypeDefaults.threeDisplaysBuyType4());
 
 //        buildCache(timeframes, tasks, false);
 //        findBestStrategyForSymbols();

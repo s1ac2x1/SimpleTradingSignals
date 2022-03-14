@@ -1,5 +1,6 @@
 package com.kishlaly.ta.analyze;
 
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.CacheReader;
@@ -140,10 +141,14 @@ public class TaskRunner {
             Log.addDebugLine(" === " + symbol + " === ");
             try {
                 System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " on " + symbol + " ...");
-                TaskResult taskResult = task.getFunction().apply(screen1, screen2);
-                Log.addDebugLine(taskResult.isSignal() ? "Вердикт: проверить" : "Вердикт: точно нет");
+                List<TaskBlock> blocks = task.getBlocks();
+                if (blocks.isEmpty()) {
+                    blocks = TaskTypeDefaults.get(task);
+                }
+                BlockResult blockResult = task.getFunction().apply(new Screens(screen1, screen2), blocks);
+                Log.addDebugLine(blockResult.isOk() ? "Вердикт: проверить" : "Вердикт: точно нет");
                 Log.addDebugLine("");
-                if (taskResult.isSignal()) {
+                if (blockResult.isOk()) {
                     Log.addLine(symbol);
                     Signal signal = new Signal();
                     signal.timeframe1 = screen1.timeframe;
