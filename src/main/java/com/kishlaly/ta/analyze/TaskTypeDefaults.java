@@ -56,7 +56,7 @@ public class TaskTypeDefaults {
             case FIRST_TRUST_MODEL:
                 return new ArrayList<TaskBlock>() {{
                     add(new ScreenSoftValidation());
-
+                    add(new Long_ScreenTwo_FirstTrustModelMainLogic());
                 }};
             default:
                 return Collections.emptyList();
