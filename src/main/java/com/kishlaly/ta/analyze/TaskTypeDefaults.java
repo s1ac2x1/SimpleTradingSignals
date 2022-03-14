@@ -51,7 +51,7 @@ public class TaskTypeDefaults {
                         add(new Short_ScreenOne_StrictTrendCheck());
                     }
 
-                    add(new Long_ScreenTwo_MACD_LastShouldBeNegative());
+                    add(new Long_ScreenTwo_BullishDivergenceMainLogic());
                 }};
             case FIRST_TRUST_MODEL:
                 return new ArrayList<TaskBlock>() {{
