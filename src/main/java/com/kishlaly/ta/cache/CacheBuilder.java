@@ -228,14 +228,14 @@ public class CacheBuilder {
                     Context.stopLossStrategy = sl;
                     Context.takeProfitStrategy = tp;
                     System.out.println(current.get() + "/" + total + " " + sl + " / " + tp);
-                    result.addAll(test(timeframes, task, blocksGroup));
+                    blocksGroups.forEach(group -> result.addAll(test(timeframes, task, group)));
                     current.getAndIncrement();
                 });
             });
         } else {
             Context.stopLossStrategy = stopLossStrategy;
             Context.takeProfitStrategy = takeProfitStrategy;
-            result.addAll(test(timeframes, task, blocksGroup));
+            blocksGroups.forEach(group -> result.addAll(test(timeframes, task, group)));
         }
         saveTable(result);
     }
