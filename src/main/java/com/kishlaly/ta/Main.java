@@ -38,7 +38,7 @@ public class Main {
                 //SymbolsSource.SCREENER_FILTERED
         };
         Context.testOnly = new ArrayList<String>() {{
-            add("TSN");
+            add("XOM");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -56,7 +56,6 @@ public class Main {
                 new ArrayList<BlocksGroup>(){{
                     add(new ThreeDisplays_Buy_1());
                     add(new ThreeDisplays_Buy_2());
-                    add(new ThreeDisplays_Buy_3());
                     add(new ThreeDisplays_Buy_4());
                 }},
                 new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));

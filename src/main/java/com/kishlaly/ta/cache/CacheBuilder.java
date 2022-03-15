@@ -179,13 +179,13 @@ public class CacheBuilder {
                     List<HistoricalTesting> testings = bySymbol.getValue();
                     Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
                     testings.stream()
-                            .collect(Collectors.groupingBy(HistoricalTesting::getTaskType))
+                            .collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup))
                             .entrySet().stream().forEach(byTask -> {
-                                TaskType taskType = byTask.getKey();
+                                BlocksGroup blocksGroup = byTask.getKey();
                                 List<HistoricalTesting> historicalTestings = byTask.getValue();
                                 HistoricalTesting best = historicalTestings.get(historicalTestings.size() - 1);
                                 innerTable.append("<tr>");
-                                innerTable.append("<td style=\"vertical-align: top text-align: left;\">" + taskType.name() + "</td>");
+                                innerTable.append("<td style=\"vertical-align: top text-align: left;\">" + blocksGroup.getClass().getSimpleName() + "</td>");
                                 innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
 
                                 innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">" + best.printTPSLNumber() + "</td>");
