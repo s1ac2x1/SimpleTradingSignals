@@ -1,11 +1,5 @@
 package com.kishlaly.ta.analyze.tasks;
 
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
-import com.kishlaly.ta.model.BlockResult;
-import com.kishlaly.ta.model.Screens;
-
-import java.util.List;
-
 /**
  * Индикаторы:
  * EMA26 (close) на первом экране
@@ -30,14 +24,6 @@ public class ThreeDisplays extends AbstractTask {
         // фильтрация сигналов, если котировка закрылась выше FILTER_BY_KELTNER
         // тесты показывают результат лучше, когда эта проверка выключена
         public static boolean FILTER_BY_KELTNER_ENABLED;
-    }
-
-    public static BlockResult buy(Screens screens, List<TaskBlock> blocks) {
-        return check(screens, blocks);
-    }
-
-    public static BlockResult sell(Screens screens, List<TaskBlock> blocks) {
-        return check(screens, blocks);
     }
 
 }

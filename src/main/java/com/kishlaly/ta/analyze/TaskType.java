@@ -1,8 +1,6 @@
 package com.kishlaly.ta.analyze;
 
-import com.kishlaly.ta.analyze.tasks.Divergencies;
-import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
-import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
+import com.kishlaly.ta.analyze.tasks.AbstractTask;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.Screens;
@@ -30,7 +28,7 @@ public enum TaskType {
                 put(1, new Indicator[]{EMA26, MACD});
                 put(2, new Indicator[]{MACD, KELTNER});
             }},
-            Divergencies::isBullish
+            AbstractTask::check
     ),
     THREE_DISPLAYS_BUY(
             new HashMap<Integer, Timeframe>() {{
@@ -41,7 +39,7 @@ public enum TaskType {
                 put(1, new Indicator[]{EMA26, MACD});
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
-            ThreeDisplays::buy
+            AbstractTask::check
     ),
     THREE_DISPLAYS_SELL(
             new HashMap<Integer, Timeframe>() {{
@@ -52,7 +50,7 @@ public enum TaskType {
                 put(1, new Indicator[]{EMA26, MACD});
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
-            ThreeDisplays::sell
+            AbstractTask::check
     ),
     FIRST_TRUST_MODEL(
             new HashMap<Integer, Timeframe>() {{
@@ -63,7 +61,7 @@ public enum TaskType {
                 put(1, new Indicator[]{EMA26, MACD});
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
             }},
-            FirstTrustModel::buy
+            AbstractTask::check
     );
 
     TaskType(final Map<Integer, Timeframe> timeframes,
