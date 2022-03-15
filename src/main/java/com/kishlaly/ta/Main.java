@@ -2,6 +2,7 @@ package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.TaskTypeDefaults;
+import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.SymbolsSource;
@@ -48,15 +49,15 @@ public class Main {
                 THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
                 //FIRST_TRUST_MODEL, // искать на S&P500
         };
-        THREE_DISPLAYS_BUY.setBlocks(TaskTypeDefaults.threeDisplaysBuyType2());
+        THREE_DISPLAYS_BUY.setBlocks(ThreeDisplays.Default.buy());
 
 //        buildCache(timeframes, tasks, false);
 //        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
-//        run(timeframes, tasks, false);
+        run(timeframes, tasks, false);
 //        runBest(timeframes);
 //        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
-        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
     }
 

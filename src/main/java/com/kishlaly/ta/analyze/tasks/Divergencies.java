@@ -1,5 +1,15 @@
 package com.kishlaly.ta.analyze.tasks;
 
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Short_ScreenOne_StrictTrendCheck;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_BullishDivergenceMainLogic;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.kishlaly.ta.analyze.tasks.Divergencies.BullishConfig.ALLOW_ON_BEARISH_TREND;
+
 /**
  * Для бычьей дивергенции цена акций должна быть выше $3, для медвежьей - выше $10. Объем торгов по
  * акции должен быть выше 500к в сутки (низкий объем торгов означает слабый интерес и частые
@@ -29,6 +39,21 @@ public class Divergencies extends AbstractTask {
         public static boolean ALLOW_MULTIPLE_ISLANDS = true;
         public static int MAX_TAIL_SIZE = 7;
         public static int SECOND_BOTTOM_RATIO = 80;
+    }
+
+    public static class Default {
+
+        public static List<TaskBlock> buy() {
+            return new ArrayList<TaskBlock>() {{
+                add(new ScreenBasicValidation());
+                if (!ALLOW_ON_BEARISH_TREND) {
+                    add(new Short_ScreenOne_StrictTrendCheck());
+                }
+
+                add(new Long_ScreenTwo_BullishDivergenceMainLogic());
+            }};
+        }
+
     }
 
 }
