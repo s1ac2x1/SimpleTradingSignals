@@ -74,13 +74,13 @@ public class TaskTester {
                     if (Context.massTesting) {
                         if (Context.takeProfitStrategies != null) {
                             Context.takeProfitStrategies.forEach(takeProfitStrategy -> {
-                                HistoricalTesting massTesting = new HistoricalTesting(task, symbolDataForTesting, blockResults, Context.stopLossStrategy, takeProfitStrategy);
+                                HistoricalTesting massTesting = new HistoricalTesting(task, blocksGroup, symbolDataForTesting, blockResults, Context.stopLossStrategy, takeProfitStrategy);
                                 calculateStatistics(massTesting);
                                 allTests.add(massTesting);
                             });
                         }
                     } else {
-                        testing = new HistoricalTesting(task, symbolDataForTesting, blockResults, Context.stopLossStrategy, Context.takeProfitStrategy);
+                        testing = new HistoricalTesting(task, blocksGroup, symbolDataForTesting, blockResults, Context.stopLossStrategy, Context.takeProfitStrategy);
                         calculateStatistics(testing);
                         allTests.add(testing);
                         String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
@@ -203,7 +203,7 @@ public class TaskTester {
 
     public static String formatTestingSummary(HistoricalTesting testing) {
         String timeframesInfo = "[" + testing.getTaskType().getTimeframeForScreen(1) + "][" + testing.getTaskType().getTimeframeForScreen(2) + "]";
-        String result = timeframesInfo + " " + testing.getTaskType().name() + " - " + testing.getData().symbol + System.lineSeparator();
+        String result = timeframesInfo + " " + testing.getData().symbol + " - " + testing.getTaskType().name() + " - " + testing.getBlocksGroup().getClass().getSimpleName() + System.lineSeparator();
         result += "\ttrendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
         result += "\t" + testing.printSL() + System.lineSeparator();
         result += "\t" + testing.printTP() + System.lineSeparator();
