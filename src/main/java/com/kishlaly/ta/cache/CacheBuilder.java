@@ -216,7 +216,7 @@ public class CacheBuilder {
 
     public static void buildTasksAndStrategiesSummary(Timeframe[][] timeframes,
                                                       TaskType task,
-                                                      BlocksGroup blocksGroup,
+                                                      List<BlocksGroup> blocksGroups,
                                                       StopLossStrategy stopLossStrategy,
                                                       TakeProfitStrategy takeProfitStrategy) {
         List<HistoricalTesting> result = new ArrayList<>();
