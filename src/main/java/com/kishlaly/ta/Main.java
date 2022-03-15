@@ -1,8 +1,10 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.analyze.TaskTypeDefaults;
-import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_2;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_3;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.SymbolsSource;
@@ -12,10 +14,9 @@ import com.kishlaly.ta.utils.Context;
 import java.util.ArrayList;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskRunner.runBest;
-import static com.kishlaly.ta.analyze.TaskType.*;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.analyze.testing.TaskTester.testOneStrategy;
-import static com.kishlaly.ta.cache.CacheBuilder.*;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 
 /**
@@ -44,18 +45,12 @@ public class Main {
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
-        TaskType[] tasks = {
-                //MACD_BULLISH_DIVERGENCE,
-                THREE_DISPLAYS_BUY, // лучше работает для DAY-HOUR
-                //FIRST_TRUST_MODEL, // искать на S&P500
-        };
-
-//        buildCache(timeframes, tasks, false);
+//        buildCache(timeframes, false);
 //        findBestStrategyForSymbols();
 //        checkCache(timeframes, tasks);
-//        run(timeframes, tasks, false, ThreeDisplays.Type4.buy());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        runBest(timeframes);
-//        testOneStrategy(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_1(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 //        buildTasksAndStrategiesSummary(timeframes, tasks, null, null);
     }

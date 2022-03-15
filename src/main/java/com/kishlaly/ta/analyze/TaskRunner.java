@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze;
 
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.CacheReader;
@@ -38,21 +38,21 @@ public class TaskRunner {
 
     public static List<Signal> signals = new ArrayList<>();
 
-    public static void run(Timeframe[][] timeframes, TaskType[] tasks, boolean findOptimal, List<TaskBlock> blocks) {
-        Arrays.stream(timeframes).forEach(screens -> Arrays.stream(tasks).forEach(task -> {
+    public static void run(Timeframe[][] timeframes, TaskType task, boolean findOptimal, BlocksGroup blocksGroup) {
+        Arrays.stream(timeframes).forEach(screens -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
             Context.logTimeframe1 = screens[0];
             Context.logTimeframe2 = screens[1];
-            twoTimeframeFunction(task, blocks);
+            twoTimeframeFunction(task, blocksGroup);
             System.out.println("\n");
             saveLog(task);
-        }));
+        });
         if (findOptimal) {
             QuotesInMemoryCache.clear();
             IndicatorsInMemoryCache.clear();
             System.gc();
-            findOptimalSLTP(blocks);
+            findOptimalSLTP(blocksGroup);
         }
     }
 
@@ -86,7 +86,7 @@ public class TaskRunner {
         });
     }
 
-    private static void findOptimalSLTP(List<TaskBlock> blocks) {
+    private static void findOptimalSLTP(BlocksGroup blocksGroup) {
         List<String> suggestions = new ArrayList<>();
         AtomicInteger symbolNumber = new AtomicInteger(1);
         int totalSymbols = signals.size();
@@ -107,7 +107,7 @@ public class TaskRunner {
                     Context.symbols = new HashSet<String>() {{
                         add(signal.symbol);
                     }};
-                    result.addAll(test(timeframes, new TaskType[]{signal.task}, blocks));
+                    result.addAll(test(timeframes, signal.task, blocksGroup));
                     testingStrategySet.getAndIncrement();
                 });
             });
@@ -130,7 +130,7 @@ public class TaskRunner {
         }
     }
 
-    private static void twoTimeframeFunction(TaskType task, List<TaskBlock> blocks) {
+    private static void twoTimeframeFunction(TaskType task, BlocksGroup blocksGroup) {
         Context.timeframe = task.getTimeframeIndicators(1).timeframe;
         AtomicInteger processingSymbol = new AtomicInteger(1);
         int totalSymbols = Context.symbols.size();
@@ -141,7 +141,7 @@ public class TaskRunner {
             Log.addDebugLine(" === " + symbol + " === ");
             try {
                 System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " on " + symbol + " ...");
-                BlockResult blockResult = task.getFunction().apply(new Screens(screen1, screen2), blocks);
+                BlockResult blockResult = task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks());
                 Log.addDebugLine(blockResult.isOk() ? "Вердикт: проверить" : "Вердикт: точно нет");
                 Log.addDebugLine("");
                 if (blockResult.isOk()) {

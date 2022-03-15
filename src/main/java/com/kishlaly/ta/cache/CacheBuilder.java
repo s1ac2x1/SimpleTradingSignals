@@ -2,7 +2,7 @@ package com.kishlaly.ta.cache;
 
 import com.google.common.collect.Lists;
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
 import com.kishlaly.ta.analyze.testing.sl.*;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
@@ -44,7 +44,7 @@ public class CacheBuilder {
      * -----------------{symbol}_macd.txt
      * -----------------{symbol}_stoch.txt
      */
-    public static void buildCache(Timeframe[][] timeframes, TaskType[] tasks, boolean reloadMissed) {
+    public static void buildCache(Timeframe[][] timeframes, boolean reloadMissed) {
         String folder = Context.outputFolder + "/cache";
         File directory = new File(folder);
         if (!directory.exists()) {
@@ -52,14 +52,12 @@ public class CacheBuilder {
         }
         AtomicReference<Set<String>> symbols = new AtomicReference<>(Context.symbols);
         Arrays.stream(timeframes).forEach(screens -> {
-            Arrays.stream(tasks).forEach(task -> {
-                // загружаются только один таймфрейм Context.aggregationTimeframe
-                Context.timeframe = aggregationTimeframe;
-                if (reloadMissed) {
-                    symbols.set(getMissedSymbols());
-                }
-                cacheQuotes(symbols.get());
-            });
+            // загружаются только один таймфрейм Context.aggregationTimeframe
+            Context.timeframe = aggregationTimeframe;
+            if (reloadMissed) {
+                symbols.set(getMissedSymbols());
+            }
+            cacheQuotes(symbols.get());
         });
         double p = limitPerMinute / parallelRequests;
         requestPeriod = (int) (p * 1000) + 1000; // +1 секунда для запаса
@@ -217,8 +215,8 @@ public class CacheBuilder {
     }
 
     public static void buildTasksAndStrategiesSummary(Timeframe[][] timeframes,
-                                                      TaskType[] tasks,
-                                                      List<TaskBlock> blocks,
+                                                      TaskType task,
+                                                      BlocksGroup blocksGroup,
                                                       StopLossStrategy stopLossStrategy,
                                                       TakeProfitStrategy takeProfitStrategy) {
         List<HistoricalTesting> result = new ArrayList<>();
@@ -230,14 +228,14 @@ public class CacheBuilder {
                     Context.stopLossStrategy = sl;
                     Context.takeProfitStrategy = tp;
                     System.out.println(current.get() + "/" + total + " " + sl + " / " + tp);
-                    result.addAll(test(timeframes, tasks, blocks));
+                    result.addAll(test(timeframes, task, blocksGroup));
                     current.getAndIncrement();
                 });
             });
         } else {
             Context.stopLossStrategy = stopLossStrategy;
             Context.takeProfitStrategy = takeProfitStrategy;
-            result.addAll(test(timeframes, tasks, blocks));
+            result.addAll(test(timeframes, task, blocksGroup));
         }
         saveTable(result);
     }

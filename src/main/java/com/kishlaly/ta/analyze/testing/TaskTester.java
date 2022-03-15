@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.testing;
 
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
@@ -31,89 +31,87 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class TaskTester {
 
-    public static List<HistoricalTesting> test(Timeframe[][] timeframes, TaskType[] tasks, List<TaskBlock> blocks) {
+    public static List<HistoricalTesting> test(Timeframe[][] timeframes, TaskType task, BlocksGroup blocksGroup) {
         Context.testMode = true;
         StringBuilder log = new StringBuilder();
         List<HistoricalTesting> allTests = new ArrayList<>();
         Arrays.stream(timeframes).forEach(screens -> {
-            Arrays.stream(tasks).forEach(task -> {
-                task.updateTimeframeForScreen(1, screens[0]);
-                task.updateTimeframeForScreen(2, screens[1]);
-                Map<String, Set<String>> readableOutput = new HashMap<>();
-                AtomicInteger currSymbol = new AtomicInteger(1);
-                int totalSymbols = Context.symbols.size();
-                Context.symbols.forEach(symbol -> {
-                    System.out.println("[" + currSymbol + "/" + totalSymbols + "] Testing " + symbol);
-                    currSymbol.getAndIncrement();
-                    SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
-                    SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
-                    SymbolData symbolDataForTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);
-                    List<BlockResult> blockResults = new ArrayList<>();
-                    if (!isDataFilled(screen1, screen2)) {
-                        return;
-                    }
-                    try {
-                        while (hasHistory(screen1, screen2)) {
-                            Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
-                            Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
-                            blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), blocks));
-                            if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
-                                rewind(screen1, 1);
-                            } else {
-                                rewind(screen2, 1);
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                    screen1.quotes.clear();
-                    screen1.indicators.clear();
-                    screen2.quotes.clear();
-                    screen2.indicators.clear();
-                    if (!blockResults.isEmpty()) {
-                        HistoricalTesting testing = null;
-                        if (Context.massTesting) {
-                            if (Context.takeProfitStrategies != null) {
-                                Context.takeProfitStrategies.forEach(takeProfitStrategy -> {
-                                    HistoricalTesting massTesting = new HistoricalTesting(task, symbolDataForTesting, blockResults, Context.stopLossStrategy, takeProfitStrategy);
-                                    calculateStatistics(massTesting);
-                                    allTests.add(massTesting);
-                                });
-                            }
+            task.updateTimeframeForScreen(1, screens[0]);
+            task.updateTimeframeForScreen(2, screens[1]);
+            Map<String, Set<String>> readableOutput = new HashMap<>();
+            AtomicInteger currSymbol = new AtomicInteger(1);
+            int totalSymbols = Context.symbols.size();
+            Context.symbols.forEach(symbol -> {
+                System.out.println("[" + currSymbol + "/" + totalSymbols + "] Testing " + symbol);
+                currSymbol.getAndIncrement();
+                SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
+                SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
+                SymbolData symbolDataForTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);
+                List<BlockResult> blockResults = new ArrayList<>();
+                if (!isDataFilled(screen1, screen2)) {
+                    return;
+                }
+                try {
+                    while (hasHistory(screen1, screen2)) {
+                        Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
+                        Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
+                        blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks()));
+                        if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
+                            rewind(screen1, 1);
                         } else {
-                            testing = new HistoricalTesting(task, symbolDataForTesting, blockResults, Context.stopLossStrategy, Context.takeProfitStrategy);
-                            calculateStatistics(testing);
-                            allTests.add(testing);
-                            String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
-                            Set<String> signalResults = readableOutput.get(key);
-                            if (signalResults == null) {
-                                signalResults = new LinkedHashSet<>();
-                            }
-                            signalResults.add(formatTestingSummary(testing));
-                            Set<String> finalSignalResults = signalResults;
-
-                            // на данном этапе HistoricalTesting содержит тесты позиций по сигналам
-                            // а так же все результаты отказов
-                            // TaskResult.lastChartQuote может быть null, если стратегии не хватило котировок для теста
-
-                            // сначала печатаем отчет по позициям
-                            printPositionsReport(screen2.timeframe, testing, finalSignalResults);
-
-                            // потом лог всех остальных котировок с указанием причины, почему стратегия дала отказ
-                            printNoSignalsReport(screen2.timeframe, testing, finalSignalResults);
-
-                            readableOutput.put(key, signalResults);
+                            rewind(screen2, 1);
                         }
                     }
-                });
-                IndicatorsInMemoryCache.clear();
-                if (!Context.massTesting) {
-                    readableOutput.forEach((key, data) -> {
-                        data.forEach(line -> log.append("    " + line).append(System.lineSeparator()));
-                        log.append(System.lineSeparator());
-                    });
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                screen1.quotes.clear();
+                screen1.indicators.clear();
+                screen2.quotes.clear();
+                screen2.indicators.clear();
+                if (!blockResults.isEmpty()) {
+                    HistoricalTesting testing = null;
+                    if (Context.massTesting) {
+                        if (Context.takeProfitStrategies != null) {
+                            Context.takeProfitStrategies.forEach(takeProfitStrategy -> {
+                                HistoricalTesting massTesting = new HistoricalTesting(task, symbolDataForTesting, blockResults, Context.stopLossStrategy, takeProfitStrategy);
+                                calculateStatistics(massTesting);
+                                allTests.add(massTesting);
+                            });
+                        }
+                    } else {
+                        testing = new HistoricalTesting(task, symbolDataForTesting, blockResults, Context.stopLossStrategy, Context.takeProfitStrategy);
+                        calculateStatistics(testing);
+                        allTests.add(testing);
+                        String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
+                        Set<String> signalResults = readableOutput.get(key);
+                        if (signalResults == null) {
+                            signalResults = new LinkedHashSet<>();
+                        }
+                        signalResults.add(formatTestingSummary(testing));
+                        Set<String> finalSignalResults = signalResults;
+
+                        // на данном этапе HistoricalTesting содержит тесты позиций по сигналам
+                        // а так же все результаты отказов
+                        // TaskResult.lastChartQuote может быть null, если стратегии не хватило котировок для теста
+
+                        // сначала печатаем отчет по позициям
+                        printPositionsReport(screen2.timeframe, testing, finalSignalResults);
+
+                        // потом лог всех остальных котировок с указанием причины, почему стратегия дала отказ
+                        printNoSignalsReport(screen2.timeframe, testing, finalSignalResults);
+
+                        readableOutput.put(key, signalResults);
+                    }
                 }
             });
+            IndicatorsInMemoryCache.clear();
+            if (!Context.massTesting) {
+                readableOutput.forEach((key, data) -> {
+                    data.forEach(line -> log.append("    " + line).append(System.lineSeparator()));
+                    log.append(System.lineSeparator());
+                });
+            }
         });
         File directory = new File("tests");
         if (!directory.exists()) {
@@ -262,14 +260,14 @@ public class TaskTester {
         return output;
     }
 
-    public static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, List<TaskBlock> blocks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public static void testOneStrategy(Timeframe[][] timeframes, TaskType task, BlocksGroup blocksGroup, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         Context.stopLossStrategy = stopLossStrategy;
         Context.takeProfitStrategy = takeProfitStrategy;
         System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
-        test(timeframes, tasks, blocks);
+        test(timeframes, task, blocksGroup);
     }
 
-    public static void testMass(Timeframe[][] timeframes, TaskType[] tasks, List<TaskBlock> blocks) {
+    public static void testMass(Timeframe[][] timeframes, TaskType task, BlocksGroup blocksGroup) {
         Context.massTesting = true;
 
         StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
@@ -280,7 +278,7 @@ public class TaskTester {
             TakeProfitStrategy tp = new TakeProfitFixedKeltnerTop(i);
             Context.takeProfitStrategies.add(tp);
         }
-        test(timeframes, tasks, blocks);
+        test(timeframes, task, blocksGroup);
     }
 
     /**
