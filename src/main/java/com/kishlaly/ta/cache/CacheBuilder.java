@@ -143,8 +143,7 @@ public class CacheBuilder {
         Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
 
         // TODO тут нужно протестировать декартово множество блоков
-        task.setBlocks(new ArrayList<>());
-        //result.addAll(test(timeframes, new TaskType[]{task}, blocks));
+        //result.addAll(test(timeframes, task, BlocksGroup));
 
         Map<String, TaskType> winners = new HashMap<>();
         result.stream().collect(Collectors.groupingBy(HistoricalTesting::getSymbol))

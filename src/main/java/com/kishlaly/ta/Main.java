@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.analyze.testing.TaskTester.testOneStrategy;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
-import static com.kishlaly.ta.cache.CacheBuilder.buildTasksAndStrategiesSummary;
+import static com.kishlaly.ta.cache.CacheBuilder.*;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 
 /**
@@ -44,21 +43,21 @@ public class Main {
         Context.yearsToAnalyze = 5;
 
 //        buildCache(timeframes, false);
-//        findBestStrategyForSymbols();
+        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
 //        checkCache(timeframes, tasks);
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        runBest(timeframes);
 //        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 
-        buildTasksAndStrategiesSummary(
-                timeframes,
-                THREE_DISPLAYS_BUY,
-                new ArrayList<BlocksGroup>(){{
-                    add(new ThreeDisplays_Buy_1());
-                    add(new ThreeDisplays_Buy_2());
-                    add(new ThreeDisplays_Buy_4());
-                }},
-                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//        buildTasksAndStrategiesSummary(
+//                timeframes,
+//                THREE_DISPLAYS_BUY,
+//                new ArrayList<BlocksGroup>(){{
+//                    add(new ThreeDisplays_Buy_1());
+//                    add(new ThreeDisplays_Buy_2());
+//                    add(new ThreeDisplays_Buy_4());
+//                }},
+//                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
     }
 
 }
