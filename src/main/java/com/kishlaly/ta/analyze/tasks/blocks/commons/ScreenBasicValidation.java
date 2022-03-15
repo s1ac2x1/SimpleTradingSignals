@@ -15,21 +15,21 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 public class ScreenBasicValidation implements CommonBlock {
 
     @Override
-    public BlockResult check(SymbolData screenOne) {
-        if (screenOne.quotes.isEmpty() || screenOne.quotes.size() < resolveMinBarsCount(screenOne.timeframe)) {
-            Log.addDebugLine("Недостаточно ценовых столбиков для " + screenOne.timeframe.name());
-            Log.recordCode(NO_DATA_QUOTES, screenOne);
+    public BlockResult check(SymbolData screen) {
+        if (screen.quotes.isEmpty() || screen.quotes.size() < resolveMinBarsCount(screen.timeframe)) {
+            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen.timeframe.name());
+            Log.recordCode(NO_DATA_QUOTES, screen);
             return new BlockResult(null, NO_DATA_QUOTES);
         }
 
         List<Indicator> missingData = new ArrayList<>();
-        screenOne.indicators.forEach((indicator, value) -> {
-            if (value.isEmpty() || value.size() < resolveMinBarsCount(screenOne.timeframe)) {
+        screen.indicators.forEach((indicator, value) -> {
+            if (value.isEmpty() || value.size() < resolveMinBarsCount(screen.timeframe)) {
                 missingData.add(indicator);
             }
         });
         if (!missingData.isEmpty()) {
-            Log.recordCode(NO_DATA_INDICATORS, screenOne);
+            Log.recordCode(NO_DATA_INDICATORS, screen);
             Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
             return new BlockResult(null, NO_DATA_INDICATORS);
         }
