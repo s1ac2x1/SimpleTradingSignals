@@ -1,9 +1,10 @@
 package com.kishlaly.ta.analyze;
 
-import com.kishlaly.ta.analyze.tasks.Divergencies;
-import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
-import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BullishDivergence_Buy_1;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.FirstTrustModel_Buy_1;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Sell_1;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,13 +21,13 @@ public class TaskTypeDefaults {
     public static List<TaskBlock> get(TaskType taskType) {
         switch (taskType) {
             case THREE_DISPLAYS_BUY:
-                return ThreeDisplays.Default.buy();
+                return new ThreeDisplays_Buy_1().blocks();
             case THREE_DISPLAYS_SELL:
-                return ThreeDisplays.Default.sell();
+                return new ThreeDisplays_Sell_1().blocks();
             case MACD_BULLISH_DIVERGENCE:
-                return Divergencies.Default.buy();
+                return new BullishDivergence_Buy_1().blocks();
             case FIRST_TRUST_MODEL:
-                return FirstTrustModel.Default.blocks();
+                return new FirstTrustModel_Buy_1().blocks();
             default:
                 return Collections.emptyList();
         }

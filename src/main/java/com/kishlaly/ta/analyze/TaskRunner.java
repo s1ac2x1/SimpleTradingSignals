@@ -38,13 +38,13 @@ public class TaskRunner {
 
     public static List<Signal> signals = new ArrayList<>();
 
-    public static void run(Timeframe[][] timeframes, TaskType[] tasks, boolean findOptimal) {
+    public static void run(Timeframe[][] timeframes, TaskType[] tasks, boolean findOptimal, List<TaskBlock> blocks) {
         Arrays.stream(timeframes).forEach(screens -> Arrays.stream(tasks).forEach(task -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
             Context.logTimeframe1 = screens[0];
             Context.logTimeframe2 = screens[1];
-            twoTimeframeFunction(task);
+            twoTimeframeFunction(task, blocks);
             System.out.println("\n");
             saveLog(task);
         }));
@@ -52,7 +52,7 @@ public class TaskRunner {
             QuotesInMemoryCache.clear();
             IndicatorsInMemoryCache.clear();
             System.gc();
-            findOptimalSLTP();
+            findOptimalSLTP(blocks);
         }
     }
 
@@ -82,11 +82,11 @@ public class TaskRunner {
             Context.symbols = new HashSet<String>() {{
                 add(symbol);
             }};
-            run(timeframes, new TaskType[]{task}, false);
+            //run(timeframes, new TaskType[]{task}, false); TODO
         });
     }
 
-    private static void findOptimalSLTP() {
+    private static void findOptimalSLTP(List<TaskBlock> blocks) {
         List<String> suggestions = new ArrayList<>();
         AtomicInteger symbolNumber = new AtomicInteger(1);
         int totalSymbols = signals.size();
@@ -107,7 +107,7 @@ public class TaskRunner {
                     Context.symbols = new HashSet<String>() {{
                         add(signal.symbol);
                     }};
-                    result.addAll(test(timeframes, new TaskType[]{signal.task}));
+                    result.addAll(test(timeframes, new TaskType[]{signal.task}, blocks));
                     testingStrategySet.getAndIncrement();
                 });
             });
@@ -130,7 +130,7 @@ public class TaskRunner {
         }
     }
 
-    private static void twoTimeframeFunction(TaskType task) {
+    private static void twoTimeframeFunction(TaskType task, List<TaskBlock> blocks) {
         Context.timeframe = task.getTimeframeIndicators(1).timeframe;
         AtomicInteger processingSymbol = new AtomicInteger(1);
         int totalSymbols = Context.symbols.size();
@@ -141,10 +141,6 @@ public class TaskRunner {
             Log.addDebugLine(" === " + symbol + " === ");
             try {
                 System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " on " + symbol + " ...");
-                List<TaskBlock> blocks = task.getBlocks();
-                if (blocks.isEmpty()) {
-                    blocks = TaskTypeDefaults.get(task);
-                }
                 BlockResult blockResult = task.getFunction().apply(new Screens(screen1, screen2), blocks);
                 Log.addDebugLine(blockResult.isOk() ? "Вердикт: проверить" : "Вердикт: точно нет");
                 Log.addDebugLine("");

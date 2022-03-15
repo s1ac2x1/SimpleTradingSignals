@@ -1,7 +1,6 @@
 package com.kishlaly.ta.analyze.testing;
 
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.analyze.TaskTypeDefaults;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
@@ -32,7 +31,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class TaskTester {
 
-    public static List<HistoricalTesting> test(Timeframe[][] timeframes, TaskType[] tasks) {
+    public static List<HistoricalTesting> test(Timeframe[][] timeframes, TaskType[] tasks, List<TaskBlock> blocks) {
         Context.testMode = true;
         StringBuilder log = new StringBuilder();
         List<HistoricalTesting> allTests = new ArrayList<>();
@@ -57,10 +56,6 @@ public class TaskTester {
                         while (hasHistory(screen1, screen2)) {
                             Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
                             Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
-                            List<TaskBlock> blocks = task.getBlocks();
-                            if (blocks.isEmpty()) {
-                                blocks = TaskTypeDefaults.get(task);
-                            }
                             blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), blocks));
                             if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
                                 rewind(screen1, 1);
@@ -267,14 +262,14 @@ public class TaskTester {
         return output;
     }
 
-    public static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public static void testOneStrategy(Timeframe[][] timeframes, TaskType[] tasks, List<TaskBlock> blocks, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         Context.stopLossStrategy = stopLossStrategy;
         Context.takeProfitStrategy = takeProfitStrategy;
         System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
-        test(timeframes, tasks);
+        test(timeframes, tasks, blocks);
     }
 
-    public static void testMass(Timeframe[][] timeframes, TaskType[] tasks) {
+    public static void testMass(Timeframe[][] timeframes, TaskType[] tasks, List<TaskBlock> blocks) {
         Context.massTesting = true;
 
         StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
@@ -285,7 +280,7 @@ public class TaskTester {
             TakeProfitStrategy tp = new TakeProfitFixedKeltnerTop(i);
             Context.takeProfitStrategies.add(tp);
         }
-        test(timeframes, tasks);
+        test(timeframes, tasks, blocks);
     }
 
     /**

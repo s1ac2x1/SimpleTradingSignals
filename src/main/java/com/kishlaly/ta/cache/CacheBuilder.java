@@ -2,6 +2,7 @@ package com.kishlaly.ta.cache;
 
 import com.google.common.collect.Lists;
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.testing.sl.*;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
@@ -27,7 +28,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.analyze.TaskType.*;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.utils.Context.*;
@@ -146,7 +146,7 @@ public class CacheBuilder {
 
         // TODO тут нужно протестировать декартово множество блоков
         task.setBlocks(new ArrayList<>());
-        result.addAll(test(timeframes, new TaskType[]{task}));
+        //result.addAll(test(timeframes, new TaskType[]{task}, blocks));
 
         Map<String, TaskType> winners = new HashMap<>();
         result.stream().collect(Collectors.groupingBy(HistoricalTesting::getSymbol))
@@ -218,6 +218,7 @@ public class CacheBuilder {
 
     public static void buildTasksAndStrategiesSummary(Timeframe[][] timeframes,
                                                       TaskType[] tasks,
+                                                      List<TaskBlock> blocks,
                                                       StopLossStrategy stopLossStrategy,
                                                       TakeProfitStrategy takeProfitStrategy) {
         List<HistoricalTesting> result = new ArrayList<>();
@@ -229,14 +230,14 @@ public class CacheBuilder {
                     Context.stopLossStrategy = sl;
                     Context.takeProfitStrategy = tp;
                     System.out.println(current.get() + "/" + total + " " + sl + " / " + tp);
-                    result.addAll(test(timeframes, tasks));
+                    result.addAll(test(timeframes, tasks, blocks));
                     current.getAndIncrement();
                 });
             });
         } else {
             Context.stopLossStrategy = stopLossStrategy;
             Context.takeProfitStrategy = takeProfitStrategy;
-            result.addAll(test(timeframes, tasks));
+            result.addAll(test(timeframes, tasks, blocks));
         }
         saveTable(result);
     }
