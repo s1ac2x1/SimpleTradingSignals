@@ -47,6 +47,7 @@ public class AbstractTask {
             }
         }
         if (!commonBlocksSucceded) {
+            commonBlockLastResult.setLastChartQuote(screen2.getLastQuote());
             return commonBlockLastResult;
         }
 
@@ -67,6 +68,7 @@ public class AbstractTask {
             }
         }
         if (!screenOneAllBlocksValid) {
+            screenOneResult.setLastChartQuote(screen2.getLastQuote());
             return screenOneResult;
         }
 
@@ -82,6 +84,7 @@ public class AbstractTask {
                 break;
             }
         }
+        screenTwoResult.setLastChartQuote(screen2.getLastQuote());
         return screenTwoResult;
     }
 

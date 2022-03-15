@@ -16,6 +16,10 @@ public class BlockResult {
         return this.lastChartQuote;
     }
 
+    public void setLastChartQuote(final Quote lastChartQuote) {
+        this.lastChartQuote = lastChartQuote;
+    }
+
     public BlockResultCode getCode() {
         return this.code;
     }
