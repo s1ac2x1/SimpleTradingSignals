@@ -10,6 +10,7 @@ import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.FilesUtil;
 import com.kishlaly.ta.utils.Numbers;
 
 import java.io.File;
@@ -28,8 +29,11 @@ import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
+import static java.lang.System.lineSeparator;
 
 public class TaskTester {
+
+    private static StringBuilder testLog = new StringBuilder();
 
     public static List<HistoricalTesting> test(Timeframe[][] timeframes, TaskType task, BlocksGroup blocksGroup) {
         Context.testMode = true;
@@ -108,8 +112,8 @@ public class TaskTester {
             IndicatorsInMemoryCache.clear();
             if (!Context.massTesting) {
                 readableOutput.forEach((key, data) -> {
-                    data.forEach(line -> log.append("    " + line).append(System.lineSeparator()));
-                    log.append(System.lineSeparator());
+                    data.forEach(line -> log.append("    " + line).append(lineSeparator()));
+                    log.append(lineSeparator());
                 });
             }
         });
@@ -127,7 +131,7 @@ public class TaskTester {
             StringBuilder builder = new StringBuilder();
             allTests.forEach(testing -> {
                 if (Context.takeProfitStrategies != null) {
-                    builder.append("TP: " + testing.printTP() + " => TP/SL = " + testing.printTPSLNumber() + " (" + testing.printTPSLPercent() + "); balance = " + testing.getBalance()).append(System.lineSeparator());
+                    builder.append("TP: " + testing.printTP() + " => TP/SL = " + testing.printTPSLNumber() + " (" + testing.printTPSLPercent() + "); balance = " + testing.getBalance()).append(lineSeparator());
                 }
             });
             try {
@@ -140,9 +144,9 @@ public class TaskTester {
     }
 
     public static void printNoSignalsReport(Timeframe timeframe, HistoricalTesting testing, Set<String> finalSignalResults) {
-        finalSignalResults.add(System.lineSeparator());
-        finalSignalResults.add(System.lineSeparator());
-        finalSignalResults.add(System.lineSeparator());
+        finalSignalResults.add(lineSeparator());
+        finalSignalResults.add(lineSeparator());
+        finalSignalResults.add(lineSeparator());
         testing.getTaskResults()
                 .stream()
                 .filter(taskResult -> taskResult.getLastChartQuote() != null)
@@ -203,16 +207,16 @@ public class TaskTester {
 
     public static String formatTestingSummary(HistoricalTesting testing) {
         String timeframesInfo = "[" + testing.getTaskType().getTimeframeForScreen(1) + "][" + testing.getTaskType().getTimeframeForScreen(2) + "]";
-        String result = timeframesInfo + " " + testing.getData().symbol + " - " + testing.getTaskType().name() + " - " + testing.getBlocksGroup().getClass().getSimpleName() + System.lineSeparator();
-        result += "\ttrendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + System.lineSeparator();
-        result += "\t" + testing.printSL() + System.lineSeparator();
-        result += "\t" + testing.printTP() + System.lineSeparator();
+        String result = timeframesInfo + " " + testing.getData().symbol + " - " + testing.getTaskType().name() + " - " + testing.getBlocksGroup().getClass().getSimpleName() + lineSeparator();
+        result += "\ttrendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + lineSeparator();
+        result += "\t" + testing.printSL() + lineSeparator();
+        result += "\t" + testing.printTP() + lineSeparator();
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
-        result += testing.printTPSLPercent() + "%" + System.lineSeparator();
+        result += testing.printTPSLPercent() + "%" + lineSeparator();
         double balance = testing.getBalance();
         balance = balance - balance / 100 * 10;
-        result += "\tTotal balance (minus 10% commissions) = " + Numbers.round(balance) + System.lineSeparator();
-        result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + System.lineSeparator();
+        result += "\tTotal balance (minus 10% commissions) = " + Numbers.round(balance) + lineSeparator();
+        result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
         String longestPositionRange = formatRange(testing, t -> t.searchSignalByLongestPosition());
@@ -222,32 +226,32 @@ public class TaskTester {
                 int minPositionDurationDays = (int) TimeUnit.SECONDS.toDays(minPositionDurationSeconds);
                 int maxPositionDurationDays = (int) TimeUnit.SECONDS.toDays(maxPositionDurationSeconds);
                 int avgPositionDurationDays = (int) TimeUnit.SECONDS.toDays(averagePositionDurationSeconds);
-                result += "\tmin duration = " + minPositionDurationDays + " days" + System.lineSeparator();
-                result += "\tmax duration = " + maxPositionDurationDays + " days " + longestPositionRange + System.lineSeparator();
-                result += "\tavg duration = " + avgPositionDurationDays + " days" + System.lineSeparator();
+                result += "\tmin duration = " + minPositionDurationDays + " days" + lineSeparator();
+                result += "\tmax duration = " + maxPositionDurationDays + " days " + longestPositionRange + lineSeparator();
+                result += "\tavg duration = " + avgPositionDurationDays + " days" + lineSeparator();
                 break;
             case HOUR:
                 int minPositionDurationHours = (int) TimeUnit.SECONDS.toHours(minPositionDurationSeconds);
                 int maxPositionDurationHours = (int) TimeUnit.SECONDS.toHours(maxPositionDurationSeconds);
                 int avgPositionDurationHours = (int) TimeUnit.SECONDS.toHours(averagePositionDurationSeconds);
-                result += "\tmin duration = " + minPositionDurationHours + " hours" + System.lineSeparator();
-                result += "\tmax duration = " + maxPositionDurationHours + " hours" + System.lineSeparator(); // TODO сюда диапазон
-                result += "\tavg duration = " + avgPositionDurationHours + " hours" + System.lineSeparator();
+                result += "\tmin duration = " + minPositionDurationHours + " hours" + lineSeparator();
+                result += "\tmax duration = " + maxPositionDurationHours + " hours" + lineSeparator(); // TODO сюда диапазон
+                result += "\tavg duration = " + avgPositionDurationHours + " hours" + lineSeparator();
                 break;
         }
         if (testing.searchSignalByProfit(testing.getMinProfit()) != null) {
-            result += "\tmin profit = " + testing.searchSignalByProfit(testing.getMinProfit()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByProfit(t.getMinProfit())) + System.lineSeparator();
+            result += "\tmin profit = " + testing.searchSignalByProfit(testing.getMinProfit()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByProfit(t.getMinProfit())) + lineSeparator();
         }
         if (testing.searchSignalByProfit(testing.getMaxProfit()) != null) {
-            result += "\tmax profit = " + testing.searchSignalByProfit(testing.getMaxProfit()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByProfit(t.getMaxProfit())) + System.lineSeparator();
+            result += "\tmax profit = " + testing.searchSignalByProfit(testing.getMaxProfit()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByProfit(t.getMaxProfit())) + lineSeparator();
         }
         if (testing.searchSignalByLoss(testing.getMinLoss()) != null) {
-            result += "\tmin loss = " + testing.searchSignalByLoss(testing.getMinLoss()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByLoss(t.getMinLoss())) + System.lineSeparator();
+            result += "\tmin loss = " + testing.searchSignalByLoss(testing.getMinLoss()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByLoss(t.getMinLoss())) + lineSeparator();
         }
         if (testing.searchSignalByLoss(testing.getMaxLoss()) != null) {
-            result += "\tmax loss = " + testing.searchSignalByLoss(testing.getMaxLoss()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByLoss(t.getMaxLoss())) + System.lineSeparator();
+            result += "\tmax loss = " + testing.searchSignalByLoss(testing.getMaxLoss()).getRoi() + "% " + formatRange(testing, t -> t.searchSignalByLoss(t.getMaxLoss())) + lineSeparator();
         }
-        result += "\tavg profit / loss = " + testing.getAvgProfit() + " / " + testing.getAvgLoss() + System.lineSeparator();
+        result += "\tavg profit / loss = " + testing.getAvgProfit() + " / " + testing.getAvgLoss() + lineSeparator();
         return result;
     }
 
@@ -293,6 +297,8 @@ public class TaskTester {
                 .stream()
                 .filter(taskResult -> taskResult.isOk()) // берем только сигналы к входу
                 .forEach(taskResult -> testPosition(taskResult, historicalTesting));
+        testLog.append(historicalTesting.getSymbol() + lineSeparator());
+        FilesUtil.writeToFile(historicalTesting.getSymbol() + "_test_log.txt", testLog.toString());
     }
 
     private static void testPosition(BlockResult blockResult, HistoricalTesting historicalTesting) {
@@ -307,6 +313,7 @@ public class TaskTester {
             }
         }
         if (signalIndex > 11) {
+
             StopLossStrategy stopLossStrategy = historicalTesting.getStopLossStrategy();
             double stopLoss = stopLossStrategy.calculate(data, signalIndex);
 
@@ -315,6 +322,18 @@ public class TaskTester {
 
             double openingPrice = signal.getClose() + 0.07;
             double openPositionSize = Context.lots * openingPrice;
+
+            boolean skip = openingPrice > takeProfit;
+
+            if (!skip) {
+                testLog.append("signal " + signal.getNativeDate() + lineSeparator());
+                testLog.append("\tSL: " + Numbers.round(stopLoss) + lineSeparator());
+                testLog.append("\tTP: " + Numbers.round(takeProfit) + lineSeparator());
+                testLog.append("\topen price: " + Numbers.round(openingPrice) + lineSeparator());
+            } else {
+                testLog.append("signal " + signal.getNativeDate() + " SKIPPED");
+            }
+
             int startPositionIndex = signalIndex;
             double profit = 0;
             double loss = 0;
@@ -325,7 +344,8 @@ public class TaskTester {
             double closePositionPrice = 0;
             double closePositionCost = 0;
             Quote closePositionQuote = null;
-            while (startPositionIndex < data.quotes.size() - 1) {
+
+            while (!skip && startPositionIndex < data.quotes.size() - 1) {
                 startPositionIndex++;
                 Quote nextQuote = data.quotes.get(startPositionIndex);
                 boolean tpInsideBar = takeProfitStrategy.isEnabled()
@@ -392,8 +412,11 @@ public class TaskTester {
                 positionTestResult.setOpenPositionCost(openPositionSize);
                 positionTestResult.setClosePositionPrice(closePositionPrice);
                 positionTestResult.setClosePositionCost(closePositionCost);
+                testLog.append("\tcloce price: " + Numbers.round(closePositionPrice) + lineSeparator());
+                testLog.append("\tprofitable: " + profitable + lineSeparator());
             }
             historicalTesting.addTestResult(signal, positionTestResult);
+            testLog.append(lineSeparator() + lineSeparator());
         }
 
     }

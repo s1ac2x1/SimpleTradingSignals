@@ -238,6 +238,11 @@ public class CacheBuilder {
             blocksGroups.forEach(group -> result.addAll(test(timeframes, task, group)));
         }
         saveTable(result);
+        saveSummaryPerGroup(result);
+    }
+
+    private static void saveSummaryPerGroup(List<HistoricalTesting> result) {
+
     }
 
     public static List<StopLossStrategy> getSLStrategies() {
