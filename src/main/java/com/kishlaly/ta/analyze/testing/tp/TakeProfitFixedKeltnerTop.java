@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.indicators.Keltner;
 import com.kishlaly.ta.utils.IndicatorUtils;
 
 /**
- * TP на уровне % от вершины канала Кельтнера
+ * TP на уровне % от середины до вершины канала Кельтнера
  */
 public class TakeProfitFixedKeltnerTop extends TakeProfitStrategy {
 
