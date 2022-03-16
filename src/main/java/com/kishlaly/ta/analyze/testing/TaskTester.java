@@ -7,6 +7,7 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
+import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
@@ -69,10 +70,6 @@ public class TaskTester {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-                screen1.quotes.clear();
-                screen1.indicators.clear();
-                screen2.quotes.clear();
-                screen2.indicators.clear();
                 if (!blockResults.isEmpty()) {
                     HistoricalTesting testing = null;
                     if (Context.massTesting) {
@@ -108,6 +105,14 @@ public class TaskTester {
                         readableOutput.put(key, signalResults);
                     }
                 }
+                QuotesInMemoryCache.clear();
+                IndicatorsInMemoryCache.clear();
+                screen1.quotes.clear();
+                screen1.indicators.clear();
+                screen2.quotes.clear();
+                screen2.indicators.clear();
+                screen1 = null;
+                screen2 = null;
             });
             IndicatorsInMemoryCache.clear();
             if (!Context.massTesting) {

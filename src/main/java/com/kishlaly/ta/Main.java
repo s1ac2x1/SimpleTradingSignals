@@ -32,16 +32,13 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                //SymbolsSource.SP500,
+                SymbolsSource.SP500_RANDOM,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                SymbolsSource.TEST
+                //SymbolsSource.TEST
         };
 //        Context.testOnly = new ArrayList<String>() {{
 //            add("TER");
-//            add("XOM");
-//            add("AAPL");
-//            add("NLOK");
 //        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
