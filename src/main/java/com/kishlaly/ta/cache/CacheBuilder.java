@@ -13,6 +13,7 @@ import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.FilesUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -242,7 +243,19 @@ public class CacheBuilder {
     }
 
     private static void saveSummaryPerGroup(List<HistoricalTesting> result) {
-
+        TreeMap<Double, String> balances = new TreeMap<>(Collections.reverseOrder());
+        Map<BlocksGroup, List<HistoricalTesting>> byGroup = result.stream().collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup));
+        byGroup.entrySet().stream().forEach(entry -> {
+            BlocksGroup group = entry.getKey();
+            List<HistoricalTesting> testings = entry.getValue();
+            double totalBalance = testings.stream().map(HistoricalTesting::getBalance).mapToDouble(Double::doubleValue).sum();
+            balances.put(totalBalance, group.getClass().getSimpleName());
+        });
+        StringBuilder output = new StringBuilder();
+        balances.forEach((k, v) -> {
+            output.append(v + ": " + k + System.lineSeparator());
+        });
+        FilesUtil.writeToFile("tests/summary.txt", output.toString());
     }
 
     public static List<StopLossStrategy> getSLStrategies() {

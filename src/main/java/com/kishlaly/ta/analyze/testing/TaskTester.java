@@ -298,7 +298,7 @@ public class TaskTester {
                 .filter(taskResult -> taskResult.isOk()) // берем только сигналы к входу
                 .forEach(taskResult -> testPosition(taskResult, historicalTesting));
         testLog.append(historicalTesting.getSymbol() + lineSeparator());
-        FilesUtil.writeToFile(historicalTesting.getSymbol() + "_test_log.txt", testLog.toString());
+        //FilesUtil.writeToFile(historicalTesting.getSymbol() + "_test_log.txt", testLog.toString());
     }
 
     private static void testPosition(BlockResult blockResult, HistoricalTesting historicalTesting) {
@@ -413,7 +413,10 @@ public class TaskTester {
                 positionTestResult.setClosePositionPrice(closePositionPrice);
                 positionTestResult.setClosePositionCost(closePositionCost);
                 testLog.append("\tcloce price: " + Numbers.round(closePositionPrice) + lineSeparator());
+                testLog.append("\tclosed: " + closePositionQuote.getNativeDate() + lineSeparator());
                 testLog.append("\tprofitable: " + profitable + lineSeparator());
+                testLog.append("\tgap up: " + caughtGapUp + lineSeparator());
+                testLog.append("\tgap down: " + caughtGapDown + lineSeparator());
             }
             historicalTesting.addTestResult(signal, positionTestResult);
             testLog.append(lineSeparator() + lineSeparator());
