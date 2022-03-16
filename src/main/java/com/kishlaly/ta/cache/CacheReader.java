@@ -77,6 +77,7 @@ public class CacheReader {
                     List<String> lines = Files.readAllLines(new File(source.getFilename()).toPath(),
                             Charset.defaultCharset());
                     if (source.isRandom()) {
+                        Collections.shuffle(lines);
                         lines = lines.stream().limit(30).collect(Collectors.toList());
                     }
                     stocksRaw.addAll(lines);
