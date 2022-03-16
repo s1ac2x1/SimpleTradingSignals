@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * копия ThreeDisplays_Buy_2
  * добавлена Long_ScreenTwo_Stoch_D_ThreeFigureU
+ * Long_ScreenTwo_MACD_TwoBelowZeroAndAscending заменена на Long_ScreenTwo_MACD_ThreeBelowZeroAndFigureU
  */
 public class ThreeDisplays_Buy_5 implements BlocksGroup {
 
@@ -20,7 +21,7 @@ public class ThreeDisplays_Buy_5 implements BlocksGroup {
 
             add(new Long_ScreenOne_StrictTrendCheck());
 
-            add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
+            add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndFigureU());
             add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversold());
             add(new Long_ScreenTwo_Stoch_D_ThreeFigureU());
             add(new Long_ScreenTwo_Stoch_D_LastAscending());
