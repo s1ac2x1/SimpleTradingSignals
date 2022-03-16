@@ -2,14 +2,13 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// проверить buy стратегию (вдохновитель [D] CFLT 20 Dec 2021)
-// первый экран - подумать TODO
+// вдохновитель [D] CFLT 20 Dec 2021
+// первый экран - нету
 // второй экран -
 //    перепроданность ниже 20 у трех значений медленной линии стохастика и она повышается
 //    последние три столбика гистограммы повышаются
@@ -24,7 +23,7 @@ public class ThreeDisplays_Buy_3 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            add(new Long_ScreenOne_StrictTrendCheck());
+            //add(new Long_ScreenOne_StrictTrendCheck());
 
             add(new Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromStrongOversold());
             add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending());

@@ -179,7 +179,8 @@ public class CacheBuilder {
                     Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
                     testings.stream()
                             .collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup))
-                            .entrySet().stream().forEach(byTask -> {
+                            .entrySet().stream()
+                            .forEach(byTask -> {
                                 BlocksGroup blocksGroup = byTask.getKey();
                                 List<HistoricalTesting> historicalTestings = byTask.getValue();
                                 HistoricalTesting best = historicalTestings.get(historicalTestings.size() - 1);

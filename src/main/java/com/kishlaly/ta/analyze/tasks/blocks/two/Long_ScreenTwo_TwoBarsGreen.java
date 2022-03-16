@@ -22,9 +22,10 @@ public class Long_ScreenTwo_TwoBarsGreen implements ScreenTwoBlock {
         Quote quote1 = screen_2_Quotes.get(resolveMinBarsCount(screen.timeframe) - 1);
         boolean quote2Green = quote2.getClose() > quote2.getOpen();
         boolean quote1Green = quote1.getClose() > quote1.getOpen();
-        if (!quote2Green || !quote1Green) {
+        boolean bothAreGreen = quote1Green && quote2Green;
+        if (!bothAreGreen) {
             Log.recordCode(LAST_QUOTES_NOT_GREEN_SCREEN_2, screen);
-            Log.addDebugLine("Одна или две последних котировки не зеленые");
+            Log.addDebugLine("Две последних котировки не зеленые");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTES_NOT_GREEN_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

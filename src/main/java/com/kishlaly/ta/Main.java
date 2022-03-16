@@ -38,6 +38,9 @@ public class Main {
         };
         Context.testOnly = new ArrayList<String>() {{
             add("TER");
+            add("NLOK");
+            add("XOM");
+            add("AAPL");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -46,7 +49,7 @@ public class Main {
 //        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        runBest(timeframes);
-//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_5(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_3(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
 
         buildTasksAndStrategiesSummary(
                 timeframes,
@@ -54,10 +57,11 @@ public class Main {
                 new ArrayList<BlocksGroup>(){{
                     add(new ThreeDisplays_Buy_1());
                     add(new ThreeDisplays_Buy_2());
+                    add(new ThreeDisplays_Buy_3());
                     add(new ThreeDisplays_Buy_4());
                     add(new ThreeDisplays_Buy_5());
                 }},
-                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
 
     }
 
