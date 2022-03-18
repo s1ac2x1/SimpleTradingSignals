@@ -244,18 +244,48 @@ public class CacheBuilder {
 
     private static void saveSummaryPerGroup(List<HistoricalTesting> result) {
         TreeMap<Double, String> balances = new TreeMap<>(Collections.reverseOrder());
+        List<TPSL> tpSL = new ArrayList<>();
         Map<BlocksGroup, List<HistoricalTesting>> byGroup = result.stream().collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup));
         byGroup.entrySet().stream().forEach(entry -> {
             BlocksGroup group = entry.getKey();
             List<HistoricalTesting> testings = entry.getValue();
             double totalBalance = testings.stream().map(HistoricalTesting::getBalance).mapToDouble(Double::doubleValue).sum();
-            balances.put(totalBalance, group.getClass().getSimpleName());
+            String groupName = group.getClass().getSimpleName();
+            balances.put(totalBalance, groupName);
+            long tp = testings.stream().mapToLong(t -> t.getProfitablePositionsCount()).sum();
+            long sl = testings.stream().mapToLong(t -> t.getLossPositionsCount()).sum();
+            tpSL.add(new TPSL(groupName, tp, sl));
         });
         StringBuilder output = new StringBuilder();
-        balances.forEach((k, v) -> {
-            output.append(v + ": " + k + System.lineSeparator());
-        });
+        balances.forEach((k, v) -> output.append(v + ": " + k + System.lineSeparator()));
+        output.append(System.lineSeparator());
+        tpSL.sort(Comparator.comparing(TPSL::getTp).reversed());
+        tpSL.forEach(tpsl -> output.append(tpsl.groupName + ": TP/SL = " + tpsl.getTp() + "/" + tpsl.getSl() + System.lineSeparator()));
         FilesUtil.writeToFile("tests/summary.txt", output.toString());
+    }
+
+    static class TPSL {
+        String groupName;
+        long tp;
+        long sl;
+
+        public TPSL(final String groupName, final long tp, final long sl) {
+            this.groupName = groupName;
+            this.tp = tp;
+            this.sl = sl;
+        }
+
+        public String getGroupName() {
+            return this.groupName;
+        }
+
+        public long getTp() {
+            return this.tp;
+        }
+
+        public long getSl() {
+            return this.sl;
+        }
     }
 
     public static List<StopLossStrategy> getSLStrategies() {
