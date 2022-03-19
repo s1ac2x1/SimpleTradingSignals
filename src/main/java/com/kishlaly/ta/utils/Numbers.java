@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Numbers {
 
     public static double round(double value) {
-        if (Double.isNaN(value)) {
+        if (Double.isNaN(value) || value == 0) {
             return 0d;
         }
         return BigDecimal.valueOf(value).setScale(2, BigDecimal.ROUND_UP).doubleValue();

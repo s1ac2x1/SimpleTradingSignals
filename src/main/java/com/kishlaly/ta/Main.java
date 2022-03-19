@@ -38,16 +38,16 @@ public class Main {
                 //SymbolsSource.TEST
         };
 //        Context.testOnly = new ArrayList<String>() {{
-//            add("PYPL");
+//            add("DOW");
 //        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
 //        buildCache(timeframes, false);
 //        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
-//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_2());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        runBest(timeframes);
-//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_2(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 
         buildTasksAndStrategiesSummary(
                 timeframes,
