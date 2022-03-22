@@ -10,7 +10,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 /**
  * high последнего столбика выше предпоследнего
  */
-public class Long_ScreenTwo_TwoBarsHighAscending implements ScreenTwoBlock {
+public class Long_ScreenTwo_Bars_TwoHighAscending implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         boolean screen_2_check1 = screen.getLastQuote().getHigh() > screen.getPreLastQuote().getHigh();
