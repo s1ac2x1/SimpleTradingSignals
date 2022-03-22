@@ -14,6 +14,7 @@ import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.FilesUtil;
+import com.kishlaly.ta.utils.Numbers;
 
 import java.io.File;
 import java.io.IOException;
@@ -250,6 +251,7 @@ public class CacheBuilder {
             BlocksGroup group = entry.getKey();
             List<HistoricalTesting> testings = entry.getValue();
             double totalBalance = testings.stream().map(HistoricalTesting::getBalance).mapToDouble(Double::doubleValue).sum();
+            totalBalance = Numbers.round(totalBalance);
             String groupName = group.getClass().getSimpleName();
             balances.put(totalBalance, groupName);
             long tp = testings.stream().mapToLong(t -> t.getProfitablePositionsCount()).sum();
