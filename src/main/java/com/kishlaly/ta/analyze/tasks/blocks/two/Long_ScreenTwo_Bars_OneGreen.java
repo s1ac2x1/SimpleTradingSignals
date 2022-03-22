@@ -11,7 +11,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.*;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 /**
- * Две последние котировки - зеленые
+ * Последния котировка - зеленая
  */
 public class Long_ScreenTwo_Bars_OneGreen implements ScreenTwoBlock {
     @Override
