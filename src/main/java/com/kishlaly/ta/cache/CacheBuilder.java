@@ -246,6 +246,7 @@ public class CacheBuilder {
     private static void saveSummaryPerGroup(List<HistoricalTesting> result) {
         TreeMap<Double, String> balances = new TreeMap<>(Collections.reverseOrder());
         List<TPSL> tpSL = new ArrayList<>();
+        List<ROI> roi = new ArrayList<>();
         Map<BlocksGroup, List<HistoricalTesting>> byGroup = result.stream().collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup));
         byGroup.entrySet().stream().forEach(entry -> {
             BlocksGroup group = entry.getKey();
@@ -257,13 +258,35 @@ public class CacheBuilder {
             long tp = testings.stream().mapToLong(t -> t.getProfitablePositionsCount()).sum();
             long sl = testings.stream().mapToLong(t -> t.getLossPositionsCount()).sum();
             tpSL.add(new TPSL(groupName, tp, sl));
+            double roi_ = testings.stream().mapToDouble(t -> t.getAverageRoi()).average().orElse(0);
+            roi.add(new ROI(groupName, roi_));
         });
         StringBuilder output = new StringBuilder();
         balances.forEach((k, v) -> output.append(v + ": " + k + System.lineSeparator()));
         output.append(System.lineSeparator());
         tpSL.sort(Comparator.comparing(TPSL::getTp).reversed());
         tpSL.forEach(tpsl -> output.append(tpsl.groupName + ": TP/SL = " + tpsl.getTp() + "/" + tpsl.getSl() + System.lineSeparator()));
+        output.append(System.lineSeparator());
+        roi.forEach(r -> output.append(r.groupName + ": " + r.getRoi() + "%" + System.lineSeparator()));
         FilesUtil.writeToFile("tests/summary.txt", output.toString());
+    }
+
+    static class ROI {
+        String groupName;
+        double roi;
+
+        public ROI(final String groupName, final double roi) {
+            this.groupName = groupName;
+            this.roi = roi;
+        }
+
+        public String getGroupName() {
+            return this.groupName;
+        }
+
+        public double getRoi() {
+            return this.roi;
+        }
     }
 
     static class TPSL {

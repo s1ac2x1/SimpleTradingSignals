@@ -174,6 +174,13 @@ public class HistoricalTesting {
                 .mapToDouble(entry -> entry.getValue().getProfit()).sum());
     }
 
+    public double getAverageRoi() {
+        return Numbers.round(signalTestingResults.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().isProfitable())
+                .mapToDouble(entry -> entry.getValue().getRoi()).average().orElse(0));
+    }
+
     public double getTotalLoss() {
         return Numbers.round(signalTestingResults.entrySet()
                 .stream()
