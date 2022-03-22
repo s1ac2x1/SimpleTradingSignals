@@ -32,7 +32,7 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500_RANDOM,
+                SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
                 //SymbolsSource.TEST
@@ -45,21 +45,21 @@ public class Main {
 
 //        buildCache(timeframes, false);
 //        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
-//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
+        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        runBest(timeframes);
 //        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 
-        buildTasksAndStrategiesSummary(
-                timeframes,
-                THREE_DISPLAYS_BUY,
-                new ArrayList<BlocksGroup>(){{
-                    add(new ThreeDisplays_Buy_1());
-                    add(new ThreeDisplays_Buy_2());
-                    add(new ThreeDisplays_Buy_3());
-                    add(new ThreeDisplays_Buy_4());
-                    add(new ThreeDisplays_Buy_5());
-                }},
-                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//        buildTasksAndStrategiesSummary(
+//                timeframes,
+//                THREE_DISPLAYS_BUY,
+//                new ArrayList<BlocksGroup>(){{
+//                    add(new ThreeDisplays_Buy_1());
+//                    add(new ThreeDisplays_Buy_2());
+//                    add(new ThreeDisplays_Buy_3());
+//                    add(new ThreeDisplays_Buy_4());
+//                    add(new ThreeDisplays_Buy_5());
+//                }},
+//                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
 
     }
 
