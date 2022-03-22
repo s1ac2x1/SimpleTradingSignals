@@ -2,6 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bars_OneGreen;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EMA_TwoBarsBelow;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_LastAscending;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_TwoOrOneBelowExtraLow;
@@ -26,7 +27,7 @@ public class ThreeDisplays_Buy_6 implements BlocksGroup {
             add(new Long_ScreenTwo_MACD_LastAscending());
             add(new Long_ScreenTwo_Stoch_D_TwoOrOneBelowExtraLow());
             add(new Long_ScreenTwo_EMA_TwoBarsBelow());
-
+            add(new Long_ScreenTwo_Bars_OneGreen());
         }};
 
     }
