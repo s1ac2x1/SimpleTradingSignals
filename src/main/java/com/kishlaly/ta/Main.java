@@ -37,17 +37,17 @@ public class Main {
                 //SymbolsSource.SCREENER_FILTERED
                 //SymbolsSource.TEST
         };
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("DOW");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("HBAN");
+        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
 //        buildCache(timeframes, false);
 //        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
-        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        runBest(timeframes);
-//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_6(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
 
 //        buildTasksAndStrategiesSummary(
 //                timeframes,
@@ -58,8 +58,9 @@ public class Main {
 //                    add(new ThreeDisplays_Buy_3());
 //                    add(new ThreeDisplays_Buy_4());
 //                    add(new ThreeDisplays_Buy_5());
+//                    add(new ThreeDisplays_Buy_6());
 //                }},
-//                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+//                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
 
     }
 
