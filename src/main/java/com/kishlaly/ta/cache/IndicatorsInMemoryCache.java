@@ -19,6 +19,7 @@ public class IndicatorsInMemoryCache {
     private static ConcurrentHashMap<KeltnerKEY, List<Keltner>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKey, List<ATR>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<BollingerKey, List<Bollinger>> bollinger = new ConcurrentHashMap<>();
 
     public static void putEMA(String symbol, Timeframe timeframe, int period, List<EMA> data) {
         ema.put(new EMAKey(symbol, timeframe, period), data);
@@ -108,11 +109,47 @@ public class IndicatorsInMemoryCache {
         stoch.clear();
     }
 
+    public static List<Bollinger> getBollinger(String symbol, Timeframe timeframe) {
+        List<Bollinger> cached = bollinger.getOrDefault(new BollingerKey(symbol, timeframe), Collections.emptyList());
+        if (!cached.isEmpty()) {
+            String json = gson.toJson(cached);
+            List<Bollinger> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<Bollinger>>() {
+            }.getType());
+            Collections.sort(copy, Comparator.comparing(Bollinger::getTimestamp));
+            return copy;
+        }
+        return Collections.emptyList();
+
+    }
+
     private static class StochKey {
         String symbol;
         Timeframe timeframe;
 
         public StochKey(final String symbol, final Timeframe timeframe) {
+            this.symbol = symbol;
+            this.timeframe = timeframe;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (o == null || this.getClass() != o.getClass()) return false;
+            final StochKey stochKey = (StochKey) o;
+            return this.symbol.equals(stochKey.symbol) && this.timeframe == stochKey.timeframe;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.symbol, this.timeframe);
+        }
+    }
+
+    private static class BollingerKey {
+        String symbol;
+        Timeframe timeframe;
+
+        public BollingerKey(final String symbol, final Timeframe timeframe) {
             this.symbol = symbol;
             this.timeframe = timeframe;
         }

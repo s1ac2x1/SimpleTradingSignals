@@ -34,8 +34,8 @@ public class Main {
 
         Context.source = new SymbolsSource[]{
                 //SymbolsSource.SP500,
-                //SymbolsSource.NAGA,
-                SymbolsSource.SCREENER_FILTERED
+                SymbolsSource.NAGA,
+                //SymbolsSource.SCREENER_FILTERED
                 //SymbolsSource.TEST
         };
 //        Context.testOnly = new ArrayList<String>() {{
@@ -48,7 +48,10 @@ public class Main {
 //        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
-        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_1());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_1());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_2());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8());
 //        runBest(timeframes);
 //        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
 

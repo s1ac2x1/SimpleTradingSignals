@@ -146,6 +146,7 @@ public class CacheReader {
                     default:
                 }
                 quotes = quotes.stream().filter(Quote::valuesPesent).collect(Collectors.toList());
+                Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
                 QuotesInMemoryCache.put(symbol, Context.timeframe, quotes);
                 return quotes;
             } catch (IOException e) {
@@ -166,6 +167,8 @@ public class CacheReader {
                 return IndicatorUtils.buildStochastic(symbol, quotes);
             case KELTNER:
                 return IndicatorUtils.buildKeltnerChannels(symbol, quotes);
+            case BOLLINGER:
+                return IndicatorUtils.buildBollingerBands(symbol, quotes);
             default:
                 return Collections.emptyList();
         }
