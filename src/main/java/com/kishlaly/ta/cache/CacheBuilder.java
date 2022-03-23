@@ -265,8 +265,8 @@ public class CacheBuilder {
         balances.forEach((k, v) -> output.append(v + ": " + k + System.lineSeparator()));
         output.append(System.lineSeparator());
         Comparator<TPSL> c = (o1, o2) -> {
-            long l1 = o1.getSl() > 0 ? o1.getTp() / o1.getSl() : 1;
-            long l2 = o2.getSl() > 0 ? o2.getTp() / o2.getSl() : 1;
+            long l1 = o1.getSl() > 0 ? o1.getTp() / o1.getSl() : o1.getTp();
+            long l2 = o2.getSl() > 0 ? o2.getTp() / o2.getSl() : o2.getTp();
             return (int) (l1 - l2);
         };
         tpSL.sort(c.reversed());
