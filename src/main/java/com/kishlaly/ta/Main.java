@@ -33,14 +33,14 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                //SymbolsSource.SP500,
-                SymbolsSource.NAGA,
+                SymbolsSource.SP500,
+                //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
                 //SymbolsSource.TEST
         };
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("TER");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("AAPL");
+        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
@@ -50,10 +50,10 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_1());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_2());
-        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8());
 //        runBest(timeframes);
-//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
 
 //        buildTasksAndStrategiesSummary(
 //                timeframes,

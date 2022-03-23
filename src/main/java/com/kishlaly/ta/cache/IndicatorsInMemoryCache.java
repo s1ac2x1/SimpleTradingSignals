@@ -161,8 +161,8 @@ public class IndicatorsInMemoryCache {
         public boolean equals(final Object o) {
             if (this == o) return true;
             if (o == null || this.getClass() != o.getClass()) return false;
-            final StochKey stochKey = (StochKey) o;
-            return this.symbol.equals(stochKey.symbol) && this.timeframe == stochKey.timeframe;
+            final BollingerKey that = (BollingerKey) o;
+            return this.symbol.equals(that.symbol) && this.timeframe == that.timeframe;
         }
 
         @Override
