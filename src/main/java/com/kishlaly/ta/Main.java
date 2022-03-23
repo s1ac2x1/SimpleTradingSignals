@@ -1,6 +1,7 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
@@ -34,35 +35,37 @@ public class Main {
         Context.source = new SymbolsSource[]{
                 //SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
-                SymbolsSource.SCREENER_FILTERED_RANDOM
+                SymbolsSource.SCREENER_FILTERED
                 //SymbolsSource.TEST
         };
 //        Context.testOnly = new ArrayList<String>() {{
-//            add("EGY");
+//            add("TER");
 //        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
 //        buildCache(timeframes, false);
 //        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
-//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_2());
+        ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
+        ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
+        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_1());
 //        runBest(timeframes);
-//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_8(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
+//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
 
-        buildTasksAndStrategiesSummary(
-                timeframes,
-                THREE_DISPLAYS_BUY,
-                new ArrayList<BlocksGroup>(){{
-                    add(new ThreeDisplays_Buy_1());
-                    add(new ThreeDisplays_Buy_2());
-                    add(new ThreeDisplays_Buy_3());
-                    add(new ThreeDisplays_Buy_4());
-                    add(new ThreeDisplays_Buy_5());
-                    add(new ThreeDisplays_Buy_6());
-                    add(new ThreeDisplays_Buy_7());
-                    add(new ThreeDisplays_Buy_8());
-                }},
-                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
+//        buildTasksAndStrategiesSummary(
+//                timeframes,
+//                THREE_DISPLAYS_BUY,
+//                new ArrayList<BlocksGroup>(){{
+//                    add(new ThreeDisplays_Buy_1());
+//                    add(new ThreeDisplays_Buy_2());
+//                    add(new ThreeDisplays_Buy_3());
+//                    add(new ThreeDisplays_Buy_4());
+//                    add(new ThreeDisplays_Buy_5());
+//                    add(new ThreeDisplays_Buy_6());
+//                    add(new ThreeDisplays_Buy_7());
+//                    add(new ThreeDisplays_Buy_8());
+//                }},
+//                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
 
     }
 
