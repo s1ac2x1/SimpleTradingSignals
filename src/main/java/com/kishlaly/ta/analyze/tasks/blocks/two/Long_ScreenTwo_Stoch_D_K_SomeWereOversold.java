@@ -9,7 +9,7 @@ import com.kishlaly.ta.utils.Log;
 import java.util.List;
 
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
-import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2;
+import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_D_K_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_OVERSOLD;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_VALUES_TO_CHECK;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
@@ -31,9 +31,9 @@ public class Long_ScreenTwo_Stoch_D_K_SomeWereOversold implements ScreenTwoBlock
             }
         }
         if (!wasOversoldRecently) {
-            Log.recordCode(STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2, screen);
+            Log.recordCode(STOCH_D_K_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2, screen);
             Log.addDebugLine("Стохастик не был в перепроданности на последних " + STOCH_VALUES_TO_CHECK + " значениях");
-            return new BlockResult(screen.getLastQuote(), STOCH_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2);
+            return new BlockResult(screen.getLastQuote(), STOCH_D_K_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);
     }

@@ -12,9 +12,13 @@ import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// модификация ThreeDisplays_Buy_4
+// модификация ThreeDisplays_Buy_4 для поиска ультра коротких позиций
 // 1 экран: нет
 // 2 экран: добавлена проверка, чтобы последняя котировка не поднималась выше 10% от середины канала
+//
+// TP 50-70% от канала
+//
+// на исторических тестах показывает хороший баланс, но количество SL позиций сильно больше TP
 public class ThreeDisplays_Buy_7 implements BlocksGroup {
 
     public List<TaskBlock> blocks() {

@@ -9,23 +9,23 @@ import com.kishlaly.ta.utils.Log;
 import java.util.List;
 
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
-import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_K_NOT_ASCENDING_SCREEN_2;
+import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_D_NOT_ASCENDING_SCREEN_2;
 
 /**
- * медленная линия у правого края выше
+ * последняя %D стохастика выше
  */
-public class Long_ScreenTwo_Stoch_D_LastAscending implements ScreenTwoBlock {
+public class Long_ScreenTwo_Stoch_D_TwoAscending implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);
         Stoch stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
         Stoch stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
 
-        boolean lastStochIsBigger = stoch1.getSlowD() > stoch2.getSlowD();
-        if (!lastStochIsBigger) {
-            Log.recordCode(STOCH_K_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("Последние два %D стохастика не повышаются");
-            return new BlockResult(screen.getLastQuote(), STOCH_K_NOT_ASCENDING_SCREEN_2);
+        boolean ascendingStochastic = stoch2.getSlowD() < stoch1.getSlowD();
+        if (!ascendingStochastic) {
+            Log.recordCode(STOCH_D_NOT_ASCENDING_SCREEN_2, screen);
+            Log.addDebugLine("Стохастик %D не растет на втором экране");
+            return new BlockResult(screen.getLastQuote(), STOCH_D_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);
     }
