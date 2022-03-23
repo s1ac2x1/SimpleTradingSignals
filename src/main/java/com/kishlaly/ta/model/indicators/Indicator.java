@@ -6,5 +6,5 @@ public enum Indicator {
     MACD, // 12 26 9 close
     STOCH, // 14 1 3 close
     KELTNER, // 20 2 ATR 10
-    BOLLINGER
+    BOLLINGER // 20 2 0
 }

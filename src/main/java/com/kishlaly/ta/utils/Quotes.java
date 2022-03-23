@@ -3,6 +3,7 @@ package com.kishlaly.ta.utils;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.indicators.Bollinger;
 
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
@@ -162,6 +163,10 @@ public class Quotes {
 
     public static boolean isQuoteAboveEMA(Quote quote, double emaValue) {
         return quote.getLow() > emaValue && quote.getHigh() > emaValue;
+    }
+
+    public static boolean isQuoteCrossedBollingerBottom(Quote quote, Bollinger bollinger) {
+        return quote.getLow() < bollinger.getBottom();
     }
 
 }
