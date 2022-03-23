@@ -264,9 +264,15 @@ public class CacheBuilder {
         StringBuilder output = new StringBuilder();
         balances.forEach((k, v) -> output.append(v + ": " + k + System.lineSeparator()));
         output.append(System.lineSeparator());
-        tpSL.sort(Comparator.comparing(TPSL::getSl));
+        Comparator<TPSL> c = (o1, o2) -> {
+            long l1 = o1.getTp() / o1.getSl();
+            long l2 = o2.getTp() / o2.getSl();
+            return (int) (l1 - l2);
+        };
+        tpSL.sort(c.reversed());
         tpSL.forEach(tpsl -> output.append(tpsl.groupName + ": TP/SL = " + tpsl.getTp() + "/" + tpsl.getSl() + System.lineSeparator()));
         output.append(System.lineSeparator());
+        roi.sort(Comparator.comparing(ROI::getRoi).reversed());
         roi.forEach(r -> output.append(r.groupName + ": " + Numbers.round(r.getRoi()) + " %" + System.lineSeparator()));
         FilesUtil.writeToFile("tests/summary.txt", output.toString());
     }
