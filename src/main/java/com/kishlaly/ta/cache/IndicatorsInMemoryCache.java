@@ -119,7 +119,10 @@ public class IndicatorsInMemoryCache {
             return copy;
         }
         return Collections.emptyList();
+    }
 
+    public static void putBollinger(String symbol, Timeframe timeframe, List<Bollinger> data) {
+        bollinger.put(new BollingerKey(symbol, timeframe), data);
     }
 
     private static class StochKey {

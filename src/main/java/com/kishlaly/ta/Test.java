@@ -33,7 +33,7 @@ public class Test {
         BarSeries barSeries = Bars.build(quotes);
         ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
         SMAIndicator sma20 = new SMAIndicator(closePriceIndicator, 20);
-        StandardDeviationIndicator standartDeviation = new StandardDeviationIndicator(closePriceIndicator, 2);
+        StandardDeviationIndicator standartDeviation = new StandardDeviationIndicator(closePriceIndicator, 20);
 
         BollingerBandsMiddleIndicator middle = new BollingerBandsMiddleIndicator(sma20);
         BollingerBandsLowerIndicator bottom = new BollingerBandsLowerIndicator(middle, standartDeviation);

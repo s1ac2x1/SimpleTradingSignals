@@ -7,10 +7,14 @@ import com.kishlaly.ta.model.indicators.*;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeries;
 import org.ta4j.core.indicators.*;
+import org.ta4j.core.indicators.bollinger.BollingerBandsLowerIndicator;
+import org.ta4j.core.indicators.bollinger.BollingerBandsMiddleIndicator;
+import org.ta4j.core.indicators.bollinger.BollingerBandsUpperIndicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
 import org.ta4j.core.indicators.keltner.KeltnerChannelLowerIndicator;
 import org.ta4j.core.indicators.keltner.KeltnerChannelMiddleIndicator;
 import org.ta4j.core.indicators.keltner.KeltnerChannelUpperIndicator;
+import org.ta4j.core.indicators.statistics.StandardDeviationIndicator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -144,6 +148,22 @@ public class IndicatorUtils {
             return cached;
         } else {
             List<Bollinger> result = new ArrayList<>();
+            BarSeries barSeries = Bars.build(quotes);
+            ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
+            SMAIndicator sma20 = new SMAIndicator(closePriceIndicator, 20);
+            StandardDeviationIndicator standartDeviation = new StandardDeviationIndicator(closePriceIndicator, 20);
+
+            BollingerBandsMiddleIndicator middle = new BollingerBandsMiddleIndicator(sma20);
+            BollingerBandsLowerIndicator bottom = new BollingerBandsLowerIndicator(middle, standartDeviation);
+            BollingerBandsUpperIndicator top = new BollingerBandsUpperIndicator(middle, standartDeviation);
+
+            for (int i = 0; i < quotes.size(); i++) {
+                try {
+                    result.add(new Bollinger(quotes.get(i).getTimestamp(), bottom.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
+                } catch (NumberFormatException e) {
+                }
+            }
+            IndicatorsInMemoryCache.putBollinger(symbol, Context.timeframe, result);
             return result;
         }
     }
