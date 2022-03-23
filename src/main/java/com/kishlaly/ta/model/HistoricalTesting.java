@@ -81,12 +81,18 @@ public class HistoricalTesting {
     public double getSuccessfulRatio() {
         long allPositions = getAllPositionsCount();
         long profitablePositions = getProfitablePositionsCount();
+        if (allPositions == 0) {
+            return 0;
+        }
         return Numbers.percent(profitablePositions, allPositions);
     }
 
     public double getLossRatio() {
         long allPositions = getAllPositionsCount();
         long lossPossitions = getLossPositionsCount();
+        if (allPositions == 0) {
+            return 0;
+        }
         return Numbers.percent(lossPossitions, allPositions);
     }
 
