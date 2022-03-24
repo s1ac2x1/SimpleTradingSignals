@@ -37,6 +37,7 @@ public class ThreeDisplays_Buy_8 implements BlocksGroup {
             add(new Long_ScreenTwo_Stoch_D_TwoAscending());
             add(new Long_ScreenTwo_Stoch_K_TwoOrOneBelow_20());
             add(new Long_ScreenTwo_Stoch_K_TwoAscending());
+            add(new Long_ScreenTwo_FilterLateEntry());
         }};
 
     }
