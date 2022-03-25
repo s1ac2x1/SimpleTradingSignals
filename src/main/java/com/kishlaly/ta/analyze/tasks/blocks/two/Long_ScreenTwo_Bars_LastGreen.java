@@ -13,7 +13,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 /**
  * Последния котировка - зеленая
  */
-public class Long_ScreenTwo_Bars_OneGreen implements ScreenTwoBlock {
+public class Long_ScreenTwo_Bars_LastGreen implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Quote> screen_2_Quotes = screen.quotes;

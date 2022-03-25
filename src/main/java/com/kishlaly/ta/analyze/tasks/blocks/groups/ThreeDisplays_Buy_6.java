@@ -29,7 +29,7 @@ public class ThreeDisplays_Buy_6 implements BlocksGroup {
             add(new Long_ScreenTwo_MACD_LastAscending());
             add(new Long_ScreenTwo_Stoch_D_TwoOrOneBelow_X());
             add(new Long_ScreenTwo_EMA_TwoBarsBelow());
-            add(new Long_ScreenTwo_Bars_OneGreen());
+            add(new Long_ScreenTwo_Bars_LastGreen());
             add(new Long_ScreenTwo_FilterLateEntry());
         }};
 
