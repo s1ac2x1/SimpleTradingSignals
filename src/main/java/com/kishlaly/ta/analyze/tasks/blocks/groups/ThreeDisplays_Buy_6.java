@@ -1,5 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
+import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
@@ -20,11 +21,13 @@ import java.util.List;
 public class ThreeDisplays_Buy_6 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {
+        ThreeDisplays.Config.STOCH_CUSTOM = 20;
+
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
             add(new Long_ScreenTwo_MACD_LastAscending());
-            add(new Long_ScreenTwo_Stoch_D_TwoOrOneBelow_20());
+            add(new Long_ScreenTwo_Stoch_D_TwoOrOneBelow_X());
             add(new Long_ScreenTwo_EMA_TwoBarsBelow());
             add(new Long_ScreenTwo_Bars_OneGreen());
             add(new Long_ScreenTwo_FilterLateEntry());

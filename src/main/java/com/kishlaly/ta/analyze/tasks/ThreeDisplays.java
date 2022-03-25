@@ -24,6 +24,8 @@ public class ThreeDisplays extends AbstractTask {
         // фильтрация сигналов, если котировка закрылась выше FILTER_BY_KELTNER
         // тесты показывают результат лучше, когда эта проверка выключена
         public static boolean FILTER_BY_KELTNER_ENABLED;
+
+        public static int STOCH_CUSTOM;
     }
 
 }

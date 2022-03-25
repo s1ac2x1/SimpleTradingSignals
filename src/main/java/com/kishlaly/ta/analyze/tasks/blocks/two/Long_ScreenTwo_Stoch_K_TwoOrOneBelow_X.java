@@ -1,5 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
+import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -14,14 +15,14 @@ import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_K_NOT_EXTRA_OVERSOLD
 /**
  * одно из двух значений %K стохастика меньше 20
  */
-public class Long_ScreenTwo_Stoch_K_TwoOrOneBelow_20 implements ScreenTwoBlock {
+public class Long_ScreenTwo_Stoch_K_TwoOrOneBelow_X implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);
         Stoch stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
         Stoch stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
 
-        boolean oneBelowExtraLow = stoch2.getSlowK() < 20 || stoch1.getSlowK() < 20;
+        boolean oneBelowExtraLow = stoch2.getSlowK() < ThreeDisplays.Config.STOCH_CUSTOM || stoch1.getSlowK() < ThreeDisplays.Config.STOCH_CUSTOM;
 
         if (!oneBelowExtraLow) {
             Log.recordCode(STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2, screen);
