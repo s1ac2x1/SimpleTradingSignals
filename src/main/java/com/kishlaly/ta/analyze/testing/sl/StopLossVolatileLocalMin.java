@@ -10,7 +10,7 @@ import java.util.Comparator;
  */
 public class StopLossVolatileLocalMin extends StopLossStrategy {
 
-    public static final int QUOTES_TO_FIND_MIN = 20;
+    public static int QUOTES_TO_FIND_MIN = 20;
 
     public StopLossVolatileLocalMin(Object config) {
         super(config, true);

@@ -5,6 +5,7 @@ import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedKeltnerBottom;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
+import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileLocalMin;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
@@ -40,7 +41,7 @@ public class Main {
                 //SymbolsSource.TEST
         };
         Context.testOnly = new ArrayList<String>() {{
-            add("AAPL");
+            add("ADBE");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -53,9 +54,9 @@ public class Main {
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8());
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(90));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossVolatileLocalMin(0.27), new TakeProfitFixedKeltnerTop(90));
 
-// сделать StopLossFixedPrice с использованием поиска на недельных графиках
+// в какой стратегии фильтруется большое отклонение недельных от ЕМА26 ?
 
 //        buildTasksAndStrategiesSummary(
 //                timeframes,

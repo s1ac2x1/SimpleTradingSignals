@@ -26,6 +26,9 @@ public class ThreeDisplays extends AbstractTask {
         public static boolean FILTER_BY_KELTNER_ENABLED;
 
         public static int STOCH_CUSTOM;
+
+        public static int EMA26_TOTAL_BARS_CHECK;
+        public static int EMA26_ABOVE_BARS;
     }
 
 }
