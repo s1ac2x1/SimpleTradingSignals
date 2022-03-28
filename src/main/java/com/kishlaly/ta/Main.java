@@ -3,6 +3,7 @@ package com.kishlaly.ta;
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
+import com.kishlaly.ta.analyze.testing.sl.StopLossFixedKeltnerBottom;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.SymbolsSource;
@@ -39,7 +40,7 @@ public class Main {
                 //SymbolsSource.TEST
         };
         Context.testOnly = new ArrayList<String>() {{
-            add("TWNK");
+            add("AAPL");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -50,11 +51,10 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_2());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
-//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8()); ?
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8());
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Experiments(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(90));
 
-//сделать StopLossFixedPrice с использованием чисел фибоначчи
 // сделать StopLossFixedPrice с использованием поиска на недельных графиках
 
 //        buildTasksAndStrategiesSummary(
