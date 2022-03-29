@@ -6,6 +6,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosses;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_X_OutOf_Y_Above;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscending;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,8 @@ public class ThreeDisplays_Buy_9 implements BlocksGroup {
             add(new Long_ScreenOne_LastBarGreen());
             add(new Long_ScreenOne_EMA_LastBarCrosses());
             add(new Long_ScreenOne_EMA_X_OutOf_Y_Above());
+
+            add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
         }};
 
     }
