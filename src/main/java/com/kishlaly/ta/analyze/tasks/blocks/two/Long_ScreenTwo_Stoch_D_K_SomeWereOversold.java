@@ -12,7 +12,6 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_D_K_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_OVERSOLD;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_VALUES_TO_CHECK;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 /**
  * нужно проверять несколько стохастиков влево от последнего значения
@@ -24,7 +23,7 @@ public class Long_ScreenTwo_Stoch_D_K_SomeWereOversold implements ScreenTwoBlock
         List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);
 
         boolean wasOversoldRecently = false;
-        for (int i = resolveMinBarsCount(screen.timeframe) - STOCH_VALUES_TO_CHECK; i < resolveMinBarsCount(screen.timeframe); i++) {
+        for (int i = screen_2_Stochastic.size() - STOCH_VALUES_TO_CHECK; i < screen_2_Stochastic.size(); i++) {
             Stoch stoch = screen_2_Stochastic.get(i);
             if (stoch.getSlowD() <= STOCH_OVERSOLD || stoch.getSlowK() <= STOCH_OVERSOLD) {
                 wasOversoldRecently = true;

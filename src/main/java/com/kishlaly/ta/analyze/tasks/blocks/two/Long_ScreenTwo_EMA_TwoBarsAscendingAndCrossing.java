@@ -5,6 +5,7 @@ import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -22,16 +23,16 @@ public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwo
         List<EMA> screen_2_EMA13 = screen.indicators.get(Indicator.EMA13);
         // обязательное условие 1
         // убедиться сначала, что high у последних ДВУХ столбиков повышается
-        Quote preLastQuote = screen_2_Quotes.get(resolveMinBarsCount(screen.timeframe) - 2);
-        Quote lastQuote = screen_2_Quotes.get(resolveMinBarsCount(screen.timeframe) - 1);
+        Quote preLastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
+        Quote lastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 1);
         boolean ascendingBarHigh = preLastQuote.getHigh() < lastQuote.getHigh();
         if (!ascendingBarHigh) {
             Log.recordCode(QUOTE_HIGH_NOT_GROWING_SCREEN_2, screen);
             Log.addDebugLine("Quote.high не растет последовательно");
             return new BlockResult(screen.getLastQuote(), QUOTE_HIGH_NOT_GROWING_SCREEN_2);
         }
-        EMA preLastEMA = screen_2_EMA13.get(resolveMinBarsCount(screen.timeframe) - 2);
-        EMA lastEMA = screen_2_EMA13.get(resolveMinBarsCount(screen.timeframe) - 1);
+        EMA preLastEMA = CollectionsTools.getFromEnd(screen_2_EMA13, 2);
+        EMA lastEMA = CollectionsTools.getFromEnd(screen_2_EMA13, 1);
 
         // оба столбика ниже ЕМА - отказ
         if (isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteBelowEMA(lastQuote, lastEMA.getValue())) {

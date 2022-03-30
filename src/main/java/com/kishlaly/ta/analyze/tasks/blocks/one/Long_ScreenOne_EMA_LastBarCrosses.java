@@ -4,6 +4,7 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class Long_ScreenOne_EMA_LastBarCrosses implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<EMA> screen_1_EMA26 = screen.indicators.get(Indicator.EMA26);
-        if (!isQuoteCrossedEMA(screen.getLastQuote(), screen_1_EMA26.get(screen_1_EMA26.size() - 1).getValue())) {
+        if (!isQuoteCrossedEMA(screen.getLastQuote(), CollectionsTools.getLast(screen_1_EMA26).getValue())) {
             Log.recordCode(LAST_QUOTE_NOT_CROSSING_EMA, screen);
             Log.addDebugLine("Последний столбик не пересекает ЕМА на долгосрочном экране");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTE_NOT_CROSSING_EMA);

@@ -4,6 +4,7 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -18,9 +19,9 @@ public class Long_ScreenOne_EMA_ThreeAscending implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<EMA> screen_1_EMA26 = screen.indicators.get(Indicator.EMA26);
-        EMA ema3 = screen_1_EMA26.get(screen_1_EMA26.size() - 3);
-        EMA ema2 = screen_1_EMA26.get(screen_1_EMA26.size() - 2);
-        EMA ema1 = screen_1_EMA26.get(screen_1_EMA26.size() - 1);
+        EMA ema3 = CollectionsTools.getFromEnd(screen_1_EMA26, 3);
+        EMA ema2 = CollectionsTools.getFromEnd(screen_1_EMA26, 2);
+        EMA ema1 = CollectionsTools.getFromEnd(screen_1_EMA26, 1);
 
         boolean ascending = ema3.getValue() < ema2.getValue() && ema2.getValue() < ema1.getValue();
 

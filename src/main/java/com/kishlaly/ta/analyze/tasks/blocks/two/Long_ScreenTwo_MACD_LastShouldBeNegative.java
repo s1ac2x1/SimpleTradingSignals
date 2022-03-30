@@ -5,19 +5,19 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
 import static com.kishlaly.ta.analyze.BlockResultCode.LAST_HISTOGRAM_ABOVE_ZERO_SCREEN_2;
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class Long_ScreenTwo_MACD_LastShouldBeNegative implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<MACD> screenTwoMacdValues = screen.indicators.get(Indicator.MACD);
-        double latestHistogramValue = screenTwoMacdValues.get(resolveMinBarsCount(screen.timeframe) - 1).getHistogram();
+        double latestHistogramValue = CollectionsTools.getFromEnd(screenTwoMacdValues, 1).getHistogram();
 
         if (latestHistogramValue > 0) {
             Log.recordCode(BlockResultCode.LAST_HISTOGRAM_ABOVE_ZERO_SCREEN_2, screen);

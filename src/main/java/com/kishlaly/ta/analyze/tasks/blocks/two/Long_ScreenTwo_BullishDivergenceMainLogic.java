@@ -15,12 +15,11 @@ import java.util.List;
 
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
 import static com.kishlaly.ta.utils.Dates.beautifyQuoteDate;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        int screenTwoMinBarCount = resolveMinBarsCount(screen.timeframe);
+        int screenTwoMinBarCount = screen.quotes.size();
         List<MACD> screenTwoMacdValues = screen.indicators.get(Indicator.MACD);
 
         // строим массив из котировок с их гистрограммами
