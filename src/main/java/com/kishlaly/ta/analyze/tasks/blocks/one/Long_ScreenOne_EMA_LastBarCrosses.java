@@ -20,7 +20,7 @@ public class Long_ScreenOne_EMA_LastBarCrosses implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<EMA> screen_1_EMA26 = screen.indicators.get(Indicator.EMA26);
-        if (!isQuoteCrossedEMA(screen.getLastQuote(), CollectionsTools.getLast(screen_1_EMA26).getValue())) {
+        if (!isQuoteCrossedEMA(screen.getLastQuote(), CollectionsTools.getFromEnd(screen_1_EMA26, 1).getValue())) {
             Log.recordCode(LAST_QUOTE_NOT_CROSSING_EMA, screen);
             Log.addDebugLine("Последний столбик не пересекает ЕМА на долгосрочном экране");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTE_NOT_CROSSING_EMA);

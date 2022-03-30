@@ -46,9 +46,9 @@ public class Main {
 
         //INTC есть сигнал 16 марта?
 
-        Context.testOnly = new ArrayList<String>() {{
-            add("INTC");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("INTC");
+//        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
