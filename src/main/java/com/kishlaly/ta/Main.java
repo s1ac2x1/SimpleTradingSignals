@@ -42,9 +42,9 @@ public class Main {
                 SymbolsSource.SCREENER_MANY
                 //SymbolsSource.TEST
         };
-        Context.testOnly = new ArrayList<String>() {{
-            add("SEIC");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("SEIC");
+//        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
@@ -54,24 +54,26 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_2());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8()); // сильная перегпроданность
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_9()); // отслеживать недельные
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Experiments(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(80));
+//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Experiments(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(80));
 
-//        buildTasksAndStrategiesSummary(
-//                timeframes,
-//                THREE_DISPLAYS_BUY,
-//                new ArrayList<BlocksGroup>(){{
-//                    add(new ThreeDisplays_Buy_1());
-//                    add(new ThreeDisplays_Buy_2());
-//                    add(new ThreeDisplays_Buy_3());
-//                    add(new ThreeDisplays_Buy_4());
-//                    add(new ThreeDisplays_Buy_5());
-//                    add(new ThreeDisplays_Buy_6());
-//                    add(new ThreeDisplays_Buy_7());
-//                    add(new ThreeDisplays_Buy_8());
-//                }},
-//                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
+        buildTasksAndStrategiesSummary(
+                timeframes,
+                THREE_DISPLAYS_BUY,
+                new ArrayList<BlocksGroup>(){{
+                    add(new ThreeDisplays_Buy_1());
+                    add(new ThreeDisplays_Buy_2());
+                    add(new ThreeDisplays_Buy_3());
+                    add(new ThreeDisplays_Buy_4());
+                    add(new ThreeDisplays_Buy_5());
+                    add(new ThreeDisplays_Buy_6());
+                    add(new ThreeDisplays_Buy_7());
+                    add(new ThreeDisplays_Buy_8());
+                    add(new ThreeDisplays_Buy_Experiments());
+                }},
+                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(80));
 
     }
 
