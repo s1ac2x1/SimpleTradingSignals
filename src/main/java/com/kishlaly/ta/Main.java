@@ -37,10 +37,10 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                //SymbolsSource.SP500,
+                SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                SymbolsSource.SCREENER_MANY
+                //SymbolsSource.SCREENER_MANY
                 //SymbolsSource.TEST
         };
 
@@ -56,12 +56,11 @@ public class Main {
 //        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
-        // убрать trim и чистить кэш после каждого символа
-//        run(timeframes, FIRST_TRUST_MODEL, false, new FirstTrustModel_Buy_1());
+//        run(timeframes, FIRST_TRUST_MODEL, false, new FirstTrustModel_Buy_1()); // только для SP500
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_2());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8()); // сильная перегпроданность
-        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_9()); // отслеживать недельные
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_9()); // отслеживать недельные
 //        runBest(timeframes);
 //        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_8(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(80));
 
