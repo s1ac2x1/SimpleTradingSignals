@@ -19,6 +19,13 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 public class Long_ScreenOne_EMA_X_OutOf_Y_Above implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
+        if (ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK < 0) {
+            throw new RuntimeException("ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK not set");
+        }
+        if (ThreeDisplays.Config.EMA26_ABOVE_BARS < 0) {
+            throw new RuntimeException("ThreeDisplays.Config.EMA26_ABOVE_BARS not set");
+        }
+
         List<EMA> screen_1_EMA26 = screen.indicators.get(Indicator.EMA26);
         int aboveEMA26 = 0;
         for (int i = screen_1_EMA26.size() - ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK; i < screen_1_EMA26.size(); i++) {

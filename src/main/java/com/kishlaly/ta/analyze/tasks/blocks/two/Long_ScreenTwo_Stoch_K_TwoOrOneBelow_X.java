@@ -22,6 +22,10 @@ public class Long_ScreenTwo_Stoch_K_TwoOrOneBelow_X implements ScreenTwoBlock {
         Stoch stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
         Stoch stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
 
+        if (ThreeDisplays.Config.STOCH_CUSTOM < 0) {
+            throw new RuntimeException("ThreeDisplays.Config.STOCH_CUSTOM not set");
+        }
+
         boolean oneBelowExtraLow = stoch2.getSlowK() < ThreeDisplays.Config.STOCH_CUSTOM || stoch1.getSlowK() < ThreeDisplays.Config.STOCH_CUSTOM;
 
         if (!oneBelowExtraLow) {

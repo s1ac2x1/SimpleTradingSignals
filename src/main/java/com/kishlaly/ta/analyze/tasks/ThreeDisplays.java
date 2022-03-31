@@ -25,10 +25,10 @@ public class ThreeDisplays extends AbstractTask {
         // тесты показывают результат лучше, когда эта проверка выключена
         public static boolean FILTER_BY_KELTNER_ENABLED;
 
-        public static int STOCH_CUSTOM;
-
-        public static int EMA26_TOTAL_BARS_CHECK;
-        public static int EMA26_ABOVE_BARS;
+        // плавающие значения индикаторов
+        public static int STOCH_CUSTOM = -1;
+        public static int EMA26_TOTAL_BARS_CHECK = -1;
+        public static int EMA26_ABOVE_BARS = -1;
     }
 
 }
