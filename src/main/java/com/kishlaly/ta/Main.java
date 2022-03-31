@@ -37,14 +37,12 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500,
+                //SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                //SymbolsSource.SCREENER_MANY
+                SymbolsSource.SCREENER_MANY
                 //SymbolsSource.TEST
         };
-
-        //INTC есть сигнал 16 марта?
 
 //        Context.testOnly = new ArrayList<String>() {{
 //            add("INTC");
@@ -62,7 +60,11 @@ public class Main {
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8()); // сильная перегпроданность
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_9()); // отслеживать недельные
 //        runBest(timeframes);
-//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_8(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(80));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_2(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(80));
+
+//        приоритет:
+//        1) стратегии с полосами Боллинжера (INTC есть сигнал 16 марта?)
+//        2) дивергенции EFI
 
 //        buildTasksAndStrategiesSummary(
 //                timeframes,
