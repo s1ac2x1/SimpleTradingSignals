@@ -24,7 +24,8 @@ import java.util.List;
 public class ThreeDisplays_Buy_9 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {
-        ThreeDisplays.Config.STOCH_CUSTOM = 20;
+        ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK = 7;
+        ThreeDisplays.Config.EMA26_ABOVE_BARS = 4;
 
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
