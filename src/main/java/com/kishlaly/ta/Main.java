@@ -45,7 +45,7 @@ public class Main {
         };
 
 //        Context.testOnly = new ArrayList<String>() {{
-//            add("INTC");
+//            add("TER");
 //        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -59,10 +59,10 @@ public class Main {
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8()); // сильная перегпроданность
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_9()); // отслеживать недельные
-        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_10()); // Боллинжер
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_10()); // Боллинжер, лучше SP500
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Experiments());
 //        runBest(timeframes);
-//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_10(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(30));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_10(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(30));
 
 //        приоритет:
 //        1) стратегии с полосами Боллинжера (INTC есть сигнал 16 марта?)

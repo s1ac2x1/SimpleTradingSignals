@@ -27,7 +27,7 @@ public class Test {
     private static void indicators() {
         Context.aggregationTimeframe = Timeframe.DAY;
         Context.timeframe = Timeframe.DAY;
-        String symbol = "AAPL";
+        String symbol = "TER";
         List<Quote> quotes = loadQuotesFromDiskCache(symbol);
 
         BarSeries barSeries = Bars.build(quotes);
