@@ -37,15 +37,15 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                //SymbolsSource.SP500,
+                SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                SymbolsSource.SCREENER_MANY
+                //SymbolsSource.SCREENER_MANY_RANDOM
                 //SymbolsSource.TEST
         };
 
 //        Context.testOnly = new ArrayList<String>() {{
-//            add("TER");
+//            add("INTC");
 //        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -62,13 +62,14 @@ public class Main {
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_10()); // Боллинжер, лучше SP500
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Experiments());
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_10(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(30));
+//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_10(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
 
 //        приоритет:
-//        1) стратегии с полосами Боллинжера (INTC есть сигнал 16 марта?)
+//        1) стратегии с полосами Боллинжера
 //           частный случай: когда 2 из последних 3 баров целиком ниже нинжей ленты, последний бар касается ее, три гистограммы отрицательные и растут, три %D ниже 20 и растут (INTC 24.05.19)
 //        2) что там Элдер писал про анализ графиков и отклонения цен?
 //        3) дивергенции EFI
+//        4) тестировать на определенных участках между датами
 
 //        buildTasksAndStrategiesSummary(
 //                timeframes,
