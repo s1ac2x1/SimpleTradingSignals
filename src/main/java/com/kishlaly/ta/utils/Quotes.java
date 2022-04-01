@@ -166,7 +166,11 @@ public class Quotes {
     }
 
     public static boolean isQuoteCrossedBollingerBottom(Quote quote, Bollinger bollinger) {
-        return quote.getLow() < bollinger.getBottom();
+        return quote.getLow() <= bollinger.getBottom() && quote.getHigh() >= bollinger.getBottom();
+    }
+
+    public static boolean isQuoteBelowBollingerBottom(Quote quote, Bollinger bollinger) {
+        return quote.getLow() < bollinger.getBottom() && quote.getHigh() < bollinger.getBottom();
     }
 
 }
