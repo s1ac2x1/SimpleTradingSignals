@@ -56,7 +56,7 @@ public class Main {
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Bollinger_1());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Experiments());
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_2(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
+//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_2(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
 
 //        приоритет:
 //        1) что там еще было по Боллинжеру в блокноте и в заметках?
