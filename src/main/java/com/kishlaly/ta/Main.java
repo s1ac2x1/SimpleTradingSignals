@@ -39,7 +39,7 @@ public class Main {
         };
 
         Context.testOnly = new ArrayList<String>() {{
-            add("AAPL");
+            add("INTC");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
