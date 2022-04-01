@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Low_LastBarCrossed;
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Low_ThreeTwoBelow;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Low_PreLastBelow;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscending;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_LastAscending;
 
@@ -25,8 +25,7 @@ public class ThreeDisplays_Buy_Bollinger_2 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            //add(new Long_ScreenTwo_Bollinger_Low_PreLastBelow());
-            add(new Long_ScreenTwo_Bollinger_Low_ThreeTwoBelow());
+            add(new Long_ScreenTwo_Bollinger_Low_PreLastBelow());
             add(new Long_ScreenTwo_Bollinger_Low_LastBarCrossed());
             add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
             add(new Long_ScreenTwo_Stoch_D_LastAscending());
