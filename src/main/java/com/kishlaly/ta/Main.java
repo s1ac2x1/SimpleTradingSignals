@@ -38,9 +38,9 @@ public class Main {
                 //SymbolsSource.TEST
         };
 
-        Context.testOnly = new ArrayList<String>() {{
-            add("LMT");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("XOM");
+//        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
@@ -53,7 +53,7 @@ public class Main {
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8()); // сильная перегпроданность
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_9()); // отслеживать недельные
-//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Bollinger_1()); // базовая проверка
+        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Bollinger_1()); // базовая проверка
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Bollinger_2()); // бывает редко, но 100% profit
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Experiments());
 //        runBest(timeframes);

@@ -159,6 +159,11 @@ public class TaskRunner {
             processingSymbol.getAndIncrement();
             QuotesInMemoryCache.clear();
             IndicatorsInMemoryCache.clear();
+            screen1.clear();
+            screen1 = null;
+            screen2.clear();
+            screen2 = null;
+            System.gc();
         });
     }
 

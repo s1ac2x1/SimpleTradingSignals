@@ -31,4 +31,9 @@ public class SymbolData {
         return copy;
     }
 
+    public void clear() {
+        quotes.clear();
+        indicators.clear();
+    }
+
 }
