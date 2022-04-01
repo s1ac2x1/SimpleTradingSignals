@@ -37,16 +37,16 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500,
+                SymbolsSource.SP500_RANDOM,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                //SymbolsSource.SCREENER_MANY_RANDOM
+                //SymbolsSource.SCREENER_MANY
                 //SymbolsSource.TEST
         };
 
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("INTC");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("INTC");
+        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
@@ -83,6 +83,7 @@ public class Main {
 //                    add(new ThreeDisplays_Buy_6());
 //                    add(new ThreeDisplays_Buy_7());
 //                    add(new ThreeDisplays_Buy_8());
+//                    add(new ThreeDisplays_Buy_10());
 //                    add(new ThreeDisplays_Buy_Experiments());
 //                }},
 //                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(80));

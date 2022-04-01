@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * Возвращение цены к ЕМА на восходящем тренде
  * <p>
- * Первый экран - не учитывается?
  * Второй экран:
  * + было пересечение нижней лены Боллинжера одним из последних трех баров
  * + две гистограммы MACD ниже нуля и последняя выше
@@ -28,9 +27,6 @@ public class ThreeDisplays_Buy_10 implements BlocksGroup {
 
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
-
-            // Long_ScreenOne_StrictTrendCheck ?
-            // или проверять, чтобы на первом экране последняя котировка пересекала ЕМА26 или была выше
 
             add(new Long_ScreenTwo_Bollinger_Low_X_Of_Y_LastBarsCrossed());
             add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
