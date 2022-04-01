@@ -39,7 +39,7 @@ public class Main {
         };
 
         Context.testOnly = new ArrayList<String>() {{
-            add("INTC");
+            add("AAPL");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -56,9 +56,10 @@ public class Main {
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Bollinger_1());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Experiments());
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_1(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_2(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
 
 //        приоритет:
+//        1) что там еще было по Боллинжеру в блокноте и в заметках?
 //        2) что там Элдер писал про анализ графиков и отклонения цен?
 //        3) дивергенции EFI
 
