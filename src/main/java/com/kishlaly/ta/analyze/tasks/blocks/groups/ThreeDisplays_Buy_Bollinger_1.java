@@ -18,7 +18,7 @@ import java.util.List;
  * + последний столбик зеленый и выше предыдущего
  * + фильтровать late entry
  */
-public class ThreeDisplays_Buy_10 implements BlocksGroup {
+public class ThreeDisplays_Buy_Bollinger_1 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {
         ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3;
