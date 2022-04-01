@@ -8,9 +8,7 @@ import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
-import com.kishlaly.ta.utils.Context;
-import com.kishlaly.ta.utils.Log;
-import com.kishlaly.ta.utils.Numbers;
+import com.kishlaly.ta.utils.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -29,6 +27,7 @@ import static com.kishlaly.ta.cache.CacheBuilder.getSLStrategies;
 import static com.kishlaly.ta.cache.CacheBuilder.getTPStrategies;
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.model.indicators.Indicator.MACD;
+import static com.kishlaly.ta.utils.Context.TRIM_DATA;
 
 /**
  * @author Vladimir Kishlaly
@@ -137,6 +136,14 @@ public class TaskRunner {
         Context.symbols.forEach(symbol -> {
             SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
             SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
+
+            if (TRIM_DATA) {
+                Quotes.trim(screen1);
+                Quotes.trim(screen2);
+                IndicatorUtils.trim(screen1);
+                IndicatorUtils.trim(screen2);
+            }
+
             Log.addDebugLine("");
             Log.addDebugLine(" === " + symbol + " === ");
             try {
