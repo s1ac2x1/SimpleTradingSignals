@@ -22,6 +22,7 @@ public class AbstractTask {
         SymbolData screen1 = screens.getScreen1().copy();
         SymbolData screen2 = screens.getScreen2().copy();
 
+        тут трим один раз для таски или для каждого блока? если для блока, то плохо
         if (TRIM_DATA) {
             Quotes.trim(screen1);
             Quotes.trim(screen2);

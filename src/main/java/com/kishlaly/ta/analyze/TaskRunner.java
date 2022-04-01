@@ -38,13 +38,13 @@ public class TaskRunner {
 
     public static List<Signal> signals = new ArrayList<>();
 
-    public static void run(Timeframe[][] timeframes, TaskType task, boolean findOptimal, BlocksGroup... blocksGroup) {
+    public static void run(Timeframe[][] timeframes, TaskType task, boolean findOptimal, BlocksGroup... blocksGroups) {
         Arrays.stream(timeframes).forEach(screens -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
             Context.logTimeframe1 = screens[0];
             Context.logTimeframe2 = screens[1];
-            twoTimeframeFunction(task, blocksGroup);
+            twoTimeframeFunction(task, blocksGroups);
             System.out.println("\n");
             saveLog(task);
         });
@@ -52,7 +52,7 @@ public class TaskRunner {
             QuotesInMemoryCache.clear();
             IndicatorsInMemoryCache.clear();
             System.gc();
-            findOptimalSLTP(blocksGroup);
+            //findOptimalSLTP(blocksGroups);
         }
     }
 
@@ -130,7 +130,7 @@ public class TaskRunner {
         }
     }
 
-    private static void twoTimeframeFunction(TaskType task, BlocksGroup blocksGroup) {
+    private static void twoTimeframeFunction(TaskType task, BlocksGroup... blocksGroups) {
         Context.timeframe = task.getTimeframeIndicators(1).timeframe;
         AtomicInteger processingSymbol = new AtomicInteger(1);
         int totalSymbols = Context.symbols.size();
@@ -140,19 +140,21 @@ public class TaskRunner {
             Log.addDebugLine("");
             Log.addDebugLine(" === " + symbol + " === ");
             try {
-                System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " on " + symbol + " ...");
-                BlockResult blockResult = task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks());
-                Log.addDebugLine(blockResult.isOk() ? "Вердикт: проверить" : "Вердикт: точно нет");
-                Log.addDebugLine("");
-                if (blockResult.isOk()) {
-                    Log.addLine(symbol);
-                    Signal signal = new Signal();
-                    signal.timeframe1 = screen1.timeframe;
-                    signal.timeframe2 = screen2.timeframe;
-                    signal.symbol = symbol;
-                    signal.task = task;
-                    signals.add(signal);
-                }
+                Arrays.stream(blocksGroups).forEach(blocksGroup -> {
+                    System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " " + blocksGroup.getClass().getSimpleName() + " on " + symbol + " ...");
+                    BlockResult blockResult = task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks());
+                    Log.addDebugLine(blockResult.isOk() ? "Вердикт: проверить" : "Вердикт: точно нет");
+                    Log.addDebugLine("");
+                    if (blockResult.isOk()) {
+                        Log.addLine(symbol);
+                        Signal signal = new Signal();
+                        signal.timeframe1 = screen1.timeframe;
+                        signal.timeframe2 = screen2.timeframe;
+                        signal.symbol = symbol;
+                        signal.task = task;
+                        signals.add(signal);
+                    }
+                });
             } catch (Exception e) {
                 System.out.println("Function failed for symbol " + symbol + " with message: " + e.getMessage());
             }

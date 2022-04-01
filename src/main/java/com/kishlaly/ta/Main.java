@@ -39,9 +39,9 @@ public class Main {
                 //SymbolsSource.TEST
         };
 
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("XOM");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("TER");
+        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 

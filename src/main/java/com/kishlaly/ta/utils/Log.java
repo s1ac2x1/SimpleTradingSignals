@@ -3,10 +3,7 @@ package com.kishlaly.ta.utils;
 import com.kishlaly.ta.analyze.BlockResultCode;
 import com.kishlaly.ta.model.SymbolData;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Log {
@@ -14,6 +11,7 @@ public class Log {
     private static StringBuilder log = new StringBuilder();
     private static StringBuilder debug = new StringBuilder();
     private static Map<BlockResultCode, List<SymbolData>> codes = new HashMap<>();
+    private static Map<Key, String> summary = new HashMap<>();
 
     public static void addLine(String line) {
         log.append(line).append(System.lineSeparator());
@@ -54,6 +52,41 @@ public class Log {
         log = new StringBuilder();
         debug = new StringBuilder();
         codes = new HashMap<>();
+    }
+
+    public static void add(Key key, String symbol) {
+        summary.put(key, symbol);
+    }
+
+    public static class Key {
+        private String taskName;
+        private String blockName;
+
+        public Key(final String taskName, final String blockName) {
+            this.taskName = taskName;
+            this.blockName = blockName;
+        }
+
+        public String getTaskName() {
+            return this.taskName;
+        }
+
+        public String getBlockName() {
+            return this.blockName;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (o == null || this.getClass() != o.getClass()) return false;
+            final Key key = (Key) o;
+            return this.taskName.equals(key.taskName) && this.blockName.equals(key.blockName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.taskName, this.blockName);
+        }
     }
 
 }
