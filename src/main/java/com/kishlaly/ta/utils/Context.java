@@ -56,4 +56,5 @@ public class Context {
     // разное
     public static boolean trendCheckIncludeHistogram = true;
     public static boolean TRIM_DATA = true;
+
 }

@@ -61,16 +61,8 @@ public class Quote implements Serializable {
         return this.nativeDate;
     }
 
-    public void setNativeDate(final String nativeDate) {
-        this.nativeDate = nativeDate;
-    }
-
     public String getMyDate() {
         return this.myDate;
-    }
-
-    public void setMyDate(final String myDate) {
-        this.myDate = myDate;
     }
 
     public double getHigh() {
