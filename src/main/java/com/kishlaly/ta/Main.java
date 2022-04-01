@@ -53,7 +53,8 @@ public class Main {
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_4());
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_8()); // сильная перегпроданность
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_9()); // отслеживать недельные
-//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Bollinger_1());
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Bollinger_1()); // базовая проверка
+//        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Bollinger_2()); // бывает редко, но 100% profit
 //        run(timeframes, THREE_DISPLAYS_BUY, false, new ThreeDisplays_Buy_Experiments());
 //        runBest(timeframes);
 //        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_2(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
