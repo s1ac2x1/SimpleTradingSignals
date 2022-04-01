@@ -45,4 +45,9 @@ public class ThreeDisplays_Buy_4 implements BlocksGroup {
         }};
     }
 
+    @Override
+    public String comments() {
+        return "Лучший показатель TP/SL и цены";
+    }
+
 }

@@ -38,4 +38,9 @@ public class ThreeDisplays_Buy_Bollinger_1 implements BlocksGroup {
         }};
 
     }
+
+    @Override
+    public String comments() {
+        return "Цена недавно касалась нижней ленты, проверки долгосрочного тренда нету";
+    }
 }

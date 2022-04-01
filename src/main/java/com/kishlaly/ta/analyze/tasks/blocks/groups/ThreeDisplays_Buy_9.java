@@ -38,4 +38,9 @@ public class ThreeDisplays_Buy_9 implements BlocksGroup {
         }};
 
     }
+
+    @Override
+    public String comments() {
+        return "Ищет возвращение цены к ЕМА26 на восходящем тренде первого экрана";
+    }
 }

@@ -36,4 +36,9 @@ public class ThreeDisplays_Buy_7 implements BlocksGroup {
         }};
     }
 
+    @Override
+    public String comments() {
+        return "Лучшая доходность, но дикое количество позиций (TP больше)";
+    }
+
 }

@@ -44,4 +44,9 @@ public class ThreeDisplays_Buy_8 implements BlocksGroup {
         }};
 
     }
+
+    @Override
+    public String comments() {
+        return "Поиск сильной перепроданности, но чаще всего это продолжение медвежьего тренда";
+    }
 }

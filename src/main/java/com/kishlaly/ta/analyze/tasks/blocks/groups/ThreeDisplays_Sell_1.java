@@ -22,4 +22,9 @@ public class ThreeDisplays_Sell_1 implements BlocksGroup {
             add(new Short_ScreenTwo_EMA_LastBarTooLow());
         }};
     }
+
+    @Override
+    public String comments() {
+        return "Первый шорт, наверно нестабилен";
+    }
 }

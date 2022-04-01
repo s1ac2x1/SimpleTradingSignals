@@ -24,4 +24,9 @@ public class ThreeDisplays_Buy_2 implements BlocksGroup {
         }};
     }
 
+    @Override
+    public String comments() {
+        return "На втором месте по эффективности";
+    }
+
 }

@@ -38,7 +38,7 @@ public class TaskRunner {
 
     public static List<Signal> signals = new ArrayList<>();
 
-    public static void run(Timeframe[][] timeframes, TaskType task, boolean findOptimal, BlocksGroup blocksGroup) {
+    public static void run(Timeframe[][] timeframes, TaskType task, boolean findOptimal, BlocksGroup... blocksGroup) {
         Arrays.stream(timeframes).forEach(screens -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);

@@ -8,4 +8,6 @@ public interface BlocksGroup {
 
     List<TaskBlock> blocks();
 
+    String comments();
+
 }

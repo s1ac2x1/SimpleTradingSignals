@@ -30,6 +30,11 @@ public class ThreeDisplays_Buy_Experiments implements BlocksGroup {
         }};
 
     }
+
+    @Override
+    public String comments() {
+        return "Эксперименты";
+    }
 }
 // =================
 //

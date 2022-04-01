@@ -23,4 +23,9 @@ public class ThreeDisplays_Buy_1 implements BlocksGroup {
             add(new Long_ScreenTwo_FilterLateEntry());
         }};
     }
+
+    @Override
+    public String comments() {
+        return "Иногда хорошие результаты";
+    }
 }

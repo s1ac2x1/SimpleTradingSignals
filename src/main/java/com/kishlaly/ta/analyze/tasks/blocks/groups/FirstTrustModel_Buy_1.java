@@ -18,4 +18,9 @@ public class FirstTrustModel_Buy_1 implements BlocksGroup {
             add(new Long_ScreenTwo_FirstTrustModelMainLogic());
         }};
     }
+
+    @Override
+    public String comments() {
+        return "Первая трастовая модель";
+    }
 }

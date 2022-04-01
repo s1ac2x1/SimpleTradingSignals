@@ -34,4 +34,9 @@ public class ThreeDisplays_Buy_3 implements BlocksGroup {
         }};
     }
 
+    @Override
+    public String comments() {
+        return "Дает много SL";
+    }
+
 }

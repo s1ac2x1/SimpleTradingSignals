@@ -34,4 +34,9 @@ public class ThreeDisplays_Buy_6 implements BlocksGroup {
         }};
 
     }
+
+    @Override
+    public String comments() {
+        return "Хорошая доходность, но число SL сильно перевешивает";
+    }
 }

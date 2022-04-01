@@ -23,4 +23,9 @@ public class BullishDivergence_Buy_1 implements BlocksGroup {
         }};
     }
 
+    @Override
+    public String comments() {
+        return "Нестабильна";
+    }
+
 }
