@@ -160,6 +160,7 @@ public class TaskRunner {
                         signal.symbol = symbol;
                         signal.task = task;
                         signals.add(signal);
+                        Log.addSummary(task.name(), blocksGroup, symbol);
                     }
                 });
             } catch (Exception e) {

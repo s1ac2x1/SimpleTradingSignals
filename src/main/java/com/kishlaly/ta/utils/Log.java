@@ -1,6 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.analyze.BlockResultCode;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
 import com.kishlaly.ta.model.SymbolData;
 
 import java.util.*;
@@ -37,7 +38,10 @@ public class Log {
     public static void saveSummary(String filename) {
         StringBuilder builder = new StringBuilder();
         summary.forEach((key, symbols) -> {
-            builder.append(key.getTaskName() + " - " + key.getBlockName());
+            builder.append(key.getTaskName() + " - " + key.getBlocksGroup().getClass().getSimpleName() + System.lineSeparator());
+            builder.append(key.getBlocksGroup().comments() + System.lineSeparator());
+            symbols.forEach(symbol -> builder.append(symbol + System.lineSeparator()));
+            builder.append(System.lineSeparator());
         });
     }
 
@@ -61,7 +65,8 @@ public class Log {
         codes = new HashMap<>();
     }
 
-    public static void add(Key key, String symbol) {
+    public static void addSummary(String name, BlocksGroup blocksGroup, String symbol) {
+        Key key = new Key(name, blocksGroup);
         if (summary.get(key) == null) {
             summary.put(key, new HashSet<>());
         }
@@ -70,19 +75,19 @@ public class Log {
 
     public static class Key {
         private String taskName;
-        private String blockName;
+        private BlocksGroup blocksGroup;
 
-        public Key(final String taskName, final String blockName) {
+        public Key(final String taskName, final BlocksGroup blocksGroup) {
             this.taskName = taskName;
-            this.blockName = blockName;
+            this.blocksGroup = blocksGroup;
         }
 
         public String getTaskName() {
             return this.taskName;
         }
 
-        public String getBlockName() {
-            return this.blockName;
+        public BlocksGroup getBlocksGroup() {
+            return this.blocksGroup;
         }
 
         @Override
@@ -90,12 +95,12 @@ public class Log {
             if (this == o) return true;
             if (o == null || this.getClass() != o.getClass()) return false;
             final Key key = (Key) o;
-            return this.taskName.equals(key.taskName) && this.blockName.equals(key.blockName);
+            return this.taskName.equals(key.taskName) && this.blocksGroup.equals(key.blocksGroup);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(this.taskName, this.blockName);
+            return Objects.hash(this.taskName, this.blocksGroup);
         }
     }
 
