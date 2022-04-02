@@ -224,9 +224,10 @@ public class TaskRunner {
         if (!d2.exists()) {
             d2.mkdir();
         }
-        Log.saveSignal(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".txt");
-        Log.saveDebug(customDebugFolder + "/all.txt");
-        Log.saveCodes(customDebugFolder);
+        //Log.saveSignal(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".txt");
+        //Log.saveDebug(customDebugFolder + "/all.txt");
+        //Log.saveCodes(customDebugFolder);
+        Log.saveSummary(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".txt");
         Log.clear();
     }
 

@@ -11,7 +11,7 @@ public class Log {
     private static StringBuilder log = new StringBuilder();
     private static StringBuilder debug = new StringBuilder();
     private static Map<BlockResultCode, List<SymbolData>> codes = new HashMap<>();
-    private static Map<Key, String> summary = new HashMap<>();
+    private static Map<Key, Set<String>> summary = new HashMap<>();
 
     public static void addLine(String line) {
         log.append(line).append(System.lineSeparator());
@@ -32,6 +32,13 @@ public class Log {
 
     public static void saveDebug(String filename) {
         FilesUtil.appendToFile(filename, debug.toString());
+    }
+
+    public static void saveSummary(String filename) {
+        StringBuilder builder = new StringBuilder();
+        summary.forEach((key, symbols) -> {
+            builder.append(key.getTaskName() + " - " + key.getBlockName());
+        });
     }
 
     public static void saveSignal(String filename) {
@@ -55,7 +62,10 @@ public class Log {
     }
 
     public static void add(Key key, String symbol) {
-        summary.put(key, symbol);
+        if (summary.get(key) == null) {
+            summary.put(key, new HashSet<>());
+        }
+        summary.get(key).add(symbol);
     }
 
     public static class Key {
