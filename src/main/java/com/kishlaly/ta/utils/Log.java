@@ -43,6 +43,7 @@ public class Log {
             symbols.forEach(symbol -> builder.append(symbol + System.lineSeparator()));
             builder.append(System.lineSeparator());
         });
+        FilesUtil.appendToFile(filename, builder.toString());
     }
 
     public static void saveSignal(String filename) {
