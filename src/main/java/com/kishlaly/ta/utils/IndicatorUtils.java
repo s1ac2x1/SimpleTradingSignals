@@ -168,4 +168,30 @@ public class IndicatorUtils {
         }
     }
 
+    public static List<ElderForceIndex> buildEFI(String symbol, List<Quote> quotes) {
+        List<ElderForceIndex> cached = IndicatorsInMemoryCache.getEFI(symbol, Context.timeframe);
+        if (!cached.isEmpty()) {
+            return cached;
+        } else {
+            List<ElderForceIndex> result = new ArrayList<>();
+            BarSeries series = Bars.build(quotes);
+            BarSeries efiSeries = new BaseBarSeries();
+            for (int i = 0; i < series.getBarCount(); i++) {
+                Quote todayQuote = quotes.get(i);
+                Quote yesterdayQuote = quotes.get(i - 1);
+                double efiValue = (todayQuote.getClose() - yesterdayQuote.getClose()) * todayQuote.getVolume();
+                efiSeries.addBar(series.getBar(i).getEndTime(), 0d, 0d, 0d, efiValue, 0d);
+            }
+            ClosePriceIndicator efiClosePriceIndicator = new ClosePriceIndicator(efiSeries);
+            EMAIndicator efiEMA = new EMAIndicator(efiClosePriceIndicator, 13);
+            for (int i = 0; i < series.getBarCount(); i++) {
+                double efiSmoothed = efiEMA.getValue(i).doubleValue();
+                Long timestamp = quotes.get(i).getTimestamp();
+                result.add(new ElderForceIndex(timestamp, efiSmoothed));
+            }
+            IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result);
+            return result;
+        }
+    }
+
 }

@@ -169,6 +169,8 @@ public class CacheReader {
                 return IndicatorUtils.buildKeltnerChannels(symbol, quotes);
             case BOLLINGER:
                 return IndicatorUtils.buildBollingerBands(symbol, quotes);
+            case EFI:
+                return IndicatorUtils.buildEFI(symbol, quotes);
             default:
                 return Collections.emptyList();
         }

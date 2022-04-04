@@ -20,6 +20,7 @@ public class IndicatorsInMemoryCache {
     private static ConcurrentHashMap<ATRKey, List<ATR>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<BollingerKey, List<Bollinger>> bollinger = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<EFIKey, List<ElderForceIndex>> efi = new ConcurrentHashMap<>();
 
     public static void putEMA(String symbol, Timeframe timeframe, int period, List<EMA> data) {
         ema.put(new EMAKey(symbol, timeframe, period), data);
@@ -125,6 +126,22 @@ public class IndicatorsInMemoryCache {
         bollinger.put(new BollingerKey(symbol, timeframe), data);
     }
 
+    public static List<ElderForceIndex> getEFI(String symbol, Timeframe timeframe) {
+        List<ElderForceIndex> cached = efi.getOrDefault(new EFIKey(symbol, timeframe), Collections.emptyList());
+        if (!cached.isEmpty()) {
+            String json = gson.toJson(cached);
+            List<ElderForceIndex> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<ElderForceIndex>>() {
+            }.getType());
+            Collections.sort(copy, Comparator.comparing(ElderForceIndex::getTimestamp));
+            return copy;
+        }
+        return Collections.emptyList();
+    }
+
+    public static void putEFI(String symbol, Timeframe timeframe, List<ElderForceIndex> data) {
+        efi.put(new EFIKey(symbol, timeframe), data);
+    }
+
     private static class StochKey {
         String symbol;
         Timeframe timeframe;
@@ -140,6 +157,29 @@ public class IndicatorsInMemoryCache {
             if (o == null || this.getClass() != o.getClass()) return false;
             final StochKey stochKey = (StochKey) o;
             return this.symbol.equals(stochKey.symbol) && this.timeframe == stochKey.timeframe;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(this.symbol, this.timeframe);
+        }
+    }
+
+    private static class EFIKey {
+        String symbol;
+        Timeframe timeframe;
+
+        public EFIKey(final String symbol, final Timeframe timeframe) {
+            this.symbol = symbol;
+            this.timeframe = timeframe;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (o == null || this.getClass() != o.getClass()) return false;
+            final EFIKey efiKey = (EFIKey) o;
+            return this.symbol.equals(efiKey.symbol) && this.timeframe == efiKey.timeframe;
         }
 
         @Override

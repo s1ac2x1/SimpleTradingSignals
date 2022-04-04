@@ -67,7 +67,8 @@ public class Main {
         testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_1(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
 
 //        приоритет:
-//        1) что там еще было по Боллинжеру в блокноте и в заметках?
+//        1) простая стратегия по EFI
+//           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля" и проверить
 //        2) что там Элдер писал про анализ графиков и отклонения цен?
 //        3) дивергенции EFI
 
