@@ -2,8 +2,10 @@ package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
-import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
+import com.kishlaly.ta.analyze.testing.sl.*;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitDisabled;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
 import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
@@ -41,7 +43,7 @@ public class Main {
         };
 
         Context.testOnly = new ArrayList<String>() {{
-            add("AAPL");
+            add("TER");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -62,7 +64,7 @@ public class Main {
 //        );
 
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_4(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(100));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_1(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
 
 //        приоритет:
 //        1) что там еще было по Боллинжеру в блокноте и в заметках?

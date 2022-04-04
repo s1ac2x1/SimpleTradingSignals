@@ -17,6 +17,8 @@ import java.util.List;
  * + две %D стохастика ниже 30 и последняя выше
  * + последний столбик зеленый и выше предыдущего
  * + фильтровать late entry
+ *
+ * SL можно скользящий по средней ленте Боллинжера
  */
 public class ThreeDisplays_Buy_Bollinger_1 implements BlocksGroup {
     @Override
