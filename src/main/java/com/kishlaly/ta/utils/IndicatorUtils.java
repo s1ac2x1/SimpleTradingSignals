@@ -142,7 +142,7 @@ public class IndicatorUtils {
         screen.indicators = trimmedIndicators;
     }
 
-    public static List buildBollingerBands(String symbol, List<Quote> quotes) {
+    public static List<Bollinger> buildBollingerBands(String symbol, List<Quote> quotes) {
         List<Bollinger> cached = IndicatorsInMemoryCache.getBollinger(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
