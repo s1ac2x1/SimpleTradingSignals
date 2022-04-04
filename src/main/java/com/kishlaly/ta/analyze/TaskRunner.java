@@ -28,6 +28,7 @@ import static com.kishlaly.ta.cache.CacheBuilder.getTPStrategies;
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.model.indicators.Indicator.MACD;
 import static com.kishlaly.ta.utils.Context.TRIM_DATA;
+import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 /**
  * @author Vladimir Kishlaly
@@ -136,6 +137,12 @@ public class TaskRunner {
         Context.symbols.forEach(symbol -> {
             SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
             SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
+
+            //пропускать символы, если у них на недельном фрейме меньше resolveMinBarsCount котировок
+            if (screen1.quotes.size() < resolveMinBarsCount(screen1.timeframe)
+                    || screen2.quotes.size() < resolveMinBarsCount(screen2.timeframe)) {
+                return;
+            }
 
             if (TRIM_DATA) {
                 Quotes.trim(screen1);
