@@ -17,6 +17,7 @@ import java.util.List;
  * <p>
  * !!! Нельзя перевернуть для шортов !!!
  */
+//TODO закончить
 public class ThreeDisplays_Buy_EFI_1 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {

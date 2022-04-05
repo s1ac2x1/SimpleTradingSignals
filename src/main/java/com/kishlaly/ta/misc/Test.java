@@ -20,7 +20,7 @@ public class Test {
     private static void indicators() {
         Context.aggregationTimeframe = Timeframe.DAY;
         Context.timeframe = Timeframe.DAY;
-        String symbol = "SLB";
+        String symbol = "AAPL";
         SymbolData screen2 = getSymbolData(THREE_DISPLAYS_BUY.getTimeframeIndicators(2), symbol);
         List<ElderForceIndex> list = screen2.indicators.get(EFI);
         System.out.println(list);
