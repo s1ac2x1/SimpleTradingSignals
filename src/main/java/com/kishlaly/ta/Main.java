@@ -53,18 +53,19 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-//        run(timeframes, THREE_DISPLAYS_BUY, false,
+        run(timeframes, THREE_DISPLAYS_BUY, false,
 //                new ThreeDisplays_Buy_1(),
 //                new ThreeDisplays_Buy_2(),
 //                new ThreeDisplays_Buy_4(),
 //                new ThreeDisplays_Buy_8(),
 //                new ThreeDisplays_Buy_9(),
-//                new ThreeDisplays_Buy_Bollinger_1(),
-//                new ThreeDisplays_Buy_Bollinger_2()
-//        );
+                new ThreeDisplays_Buy_Bollinger_1(),
+                new ThreeDisplays_Buy_Bollinger_1_2(),
+                new ThreeDisplays_Buy_Bollinger_2()
+        );
 
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_1(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
+//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_1(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
 
 //        приоритет:
 //        1) простая стратегия по EFI
