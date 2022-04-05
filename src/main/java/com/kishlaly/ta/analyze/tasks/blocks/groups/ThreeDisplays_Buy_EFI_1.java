@@ -11,13 +11,13 @@ import java.util.List;
  * Первый экран не используется
  * На втором проверяются три значения EFI:
  * + третье с конца отрицательное
- * + предпоследнее и последнии положительные
+ * + предпоследнее и последнее положительные
  * <p>
  * SL скользящий по средней ленте Боллинжера или TP у вершины канала, если последняя котировка не очень высокая
  * <p>
  * !!! Нельзя перевернуть для шортов !!!
  */
-public class ThreeDisplays_Buy_EFI implements BlocksGroup {
+public class ThreeDisplays_Buy_EFI_1 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {
         ThreeDisplays.Config.STOCH_CUSTOM = 30;

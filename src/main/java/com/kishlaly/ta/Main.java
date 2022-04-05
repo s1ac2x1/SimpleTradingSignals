@@ -36,15 +36,15 @@ public class Main {
 
         Context.source = new SymbolsSource[]{
                 //SymbolsSource.SP500,
-                SymbolsSource.NAGA,
+                //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                //SymbolsSource.SCREENER_MANY
+                SymbolsSource.SCREENER_MANY
                 //SymbolsSource.TEST
         };
 
-        Context.testOnly = new ArrayList<String>() {{
-            add("TER");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("TER");
+//        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 

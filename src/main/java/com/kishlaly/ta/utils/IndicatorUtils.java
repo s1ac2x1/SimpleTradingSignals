@@ -174,19 +174,19 @@ public class IndicatorUtils {
             return cached;
         } else {
             List<ElderForceIndex> result = new ArrayList<>();
-            BarSeries series = Bars.build(quotes);
+            BarSeries quoteSeries = Bars.build(quotes);
             BarSeries efiSeries = new BaseBarSeries();
-            for (int i = 0; i < series.getBarCount(); i++) {
+            for (int i = 1; i < quoteSeries.getBarCount() - 1; i++) {
                 Quote todayQuote = quotes.get(i);
                 Quote yesterdayQuote = quotes.get(i - 1);
                 double efiValue = (todayQuote.getClose() - yesterdayQuote.getClose()) * todayQuote.getVolume();
-                efiSeries.addBar(series.getBar(i).getEndTime(), 0d, 0d, 0d, efiValue, 0d);
+                efiSeries.addBar(quoteSeries.getBar(i).getEndTime(), 0d, 0d, 0d, efiValue, 0d);
             }
             ClosePriceIndicator efiClosePriceIndicator = new ClosePriceIndicator(efiSeries);
-            EMAIndicator efiEMA = new EMAIndicator(efiClosePriceIndicator, 13);
-            for (int i = 0; i < series.getBarCount(); i++) {
-                double efiSmoothed = efiEMA.getValue(i).doubleValue();
-                Long timestamp = quotes.get(i).getTimestamp();
+            EMAIndicator efiEMA13 = new EMAIndicator(efiClosePriceIndicator, 13);
+            for (int i = 0; i < efiSeries.getBarCount(); i++) {
+                double efiSmoothed = efiEMA13.getValue(i).doubleValue();
+                Long timestamp = efiSeries.getBar(i).getEndTime().toEpochSecond();
                 result.add(new ElderForceIndex(timestamp, efiSmoothed));
             }
             IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result);
