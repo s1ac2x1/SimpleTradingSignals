@@ -16,10 +16,7 @@ import org.ta4j.core.indicators.keltner.KeltnerChannelMiddleIndicator;
 import org.ta4j.core.indicators.keltner.KeltnerChannelUpperIndicator;
 import org.ta4j.core.indicators.statistics.StandardDeviationIndicator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
@@ -39,6 +36,7 @@ public class IndicatorUtils {
                 result.add(new EMA(quotes.get(i).getTimestamp(), ema.getValue(i).doubleValue()));
             }
             result = result.stream().filter(EMA::valuesPresent).collect(Collectors.toList());
+            Collections.sort(result, Comparator.comparing(EMA::getTimestamp));
             IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe, period, result);
             return result;
         }
@@ -68,6 +66,7 @@ public class IndicatorUtils {
                 result.add(new MACD(quotes.get(i).getTimestamp(), 0d, 0d, histogram));
             }
             result = result.stream().filter(MACD::valuesPresent).collect(Collectors.toList());
+            Collections.sort(result, Comparator.comparing(MACD::getTimestamp));
             IndicatorsInMemoryCache.putMACD(symbol, Context.timeframe, result);
             return result;
         }
@@ -87,6 +86,7 @@ public class IndicatorUtils {
                 result.add(new Keltner(quotes.get(i).getTimestamp(), low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
             }
             result = result.stream().filter(Keltner::valuesPresent).collect(Collectors.toList());
+            Collections.sort(result, Comparator.comparing(Keltner::getTimestamp));
             IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe, result);
             return result;
         }
@@ -104,6 +104,7 @@ public class IndicatorUtils {
                 result.add(new ATR(quotes.get(i).getTimestamp(), atrIndicator.getValue(i).doubleValue()));
             }
             result = result.stream().filter(ATR::valuesPresent).collect(Collectors.toList());
+            Collections.sort(result, Comparator.comparing(ATR::getTimestamp));
             IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result);
             return result;
         }
@@ -125,6 +126,7 @@ public class IndicatorUtils {
                 }
             }
             result = result.stream().filter(Stoch::valuesPresent).collect(Collectors.toList());
+            Collections.sort(result, Comparator.comparing(Stoch::getTimestamp));
             IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result);
             return result;
         }
@@ -189,6 +191,7 @@ public class IndicatorUtils {
                 Long timestamp = efiSeries.getBar(i).getEndTime().toEpochSecond();
                 result.add(new ElderForceIndex(timestamp, efiSmoothed));
             }
+            Collections.sort(result, Comparator.comparing(ElderForceIndex::getTimestamp));
             IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result);
             return result;
         }
