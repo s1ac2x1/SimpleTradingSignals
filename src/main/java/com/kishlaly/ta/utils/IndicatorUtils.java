@@ -170,6 +170,7 @@ public class IndicatorUtils {
         }
     }
 
+    //TODO что тут не так?
     public static List<ElderForceIndex> buildEFI(String symbol, List<Quote> quotes) {
         List<ElderForceIndex> cached = IndicatorsInMemoryCache.getEFI(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
