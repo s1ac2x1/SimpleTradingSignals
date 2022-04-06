@@ -35,8 +35,8 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                //SymbolsSource.SP500,
-                SymbolsSource.NAGA,
+                SymbolsSource.SP500,
+                //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
                 //SymbolsSource.SCREENER_MANY
                 //SymbolsSource.TEST
@@ -48,7 +48,7 @@ public class Main {
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
-//        buildCache(timeframes, false);
+        buildCache(timeframes, false);
 //        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;

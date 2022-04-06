@@ -2,7 +2,7 @@ package com.kishlaly.ta.misc.trendlines;
 
 import java.util.Random;
 
-public class Test {
+public class TestTrendlines {
 
     public static void main(String[] args) {
         TrendLine t = new PolyTrendLine(2);
