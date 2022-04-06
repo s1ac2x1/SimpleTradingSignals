@@ -35,20 +35,20 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500,
+                //SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                //SymbolsSource.SCREENER_MANY
+                SymbolsSource.SCREENER_MANY
                 //SymbolsSource.TEST
         };
 
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("TER");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("TER");
+        }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
-        buildCache(timeframes, false);
+//        buildCache(timeframes, false);
 //        findBestStrategyForSymbols(THREE_DISPLAYS_BUY);
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
@@ -65,7 +65,7 @@ public class Main {
 //        );
 
 //        runBest(timeframes);
-//        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_1(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_6(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(30));
 
 //        закончить стратегии по EFI
 //           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля" и проверить

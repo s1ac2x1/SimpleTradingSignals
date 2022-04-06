@@ -10,7 +10,7 @@ import java.util.Comparator;
  */
 public class StopLossFixedPrice extends StopLossStrategy {
 
-    private static int LAST_QUOTES_TO_FIND_MIN = 20;
+    public static int LAST_QUOTES_TO_FIND_MIN = 20;
 
     public StopLossFixedPrice(Object config) {
         super(config, false);
