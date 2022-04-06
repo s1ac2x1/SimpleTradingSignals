@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
@@ -284,8 +285,14 @@ public class TaskTester {
         Context.stopLossStrategy = new StopLossFixedPrice(0.27);
         Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
         BlocksGroup[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
-        Arrays.stream(blocksGroups).forEach(blocksGroup -> {
-            test(timeframes, task, blocksGroup);
+        List<HistoricalTesting> testings = Arrays.stream(blocksGroups).flatMap(blocksGroup -> test(timeframes, task, blocksGroup).stream()).collect(Collectors.toList());
+        String[] split = datePart.split("\\.");
+        String date = split[2] + "-" + split[1] + "-" + split[0] + "T09:30-04:00[US/Eastern]";
+        ZonedDateTime parsed = ZonedDateTime.parse(date);
+        testings.forEach(testing -> {
+            String groupName = testing.getBlocksGroup().getClass().getSimpleName();
+            BlockResult blockResult = testing.getTaskResults().stream().filter(taskResult -> taskResult.getLastChartQuote().getTimestamp() == parsed.toEpochSecond()).findFirst().get();
+            System.out.println(datePart + " " + groupName + " = " + blockResult.getCode());
         });
     }
 

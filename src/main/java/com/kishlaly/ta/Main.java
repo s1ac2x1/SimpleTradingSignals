@@ -67,15 +67,11 @@ public class Main {
 
 //        runBest(timeframes);
 //        testOneStrategy(timeframes,
-//                THREE_DISPLAYS_BUY,
-//                new ThreeDisplays_Buy_1(),
+//                THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_1(),
 //                new StopLossFixedPrice(0.27),
 //                new TakeProfitFixedKeltnerTop(30));
 
-        testStrategiesOnSpecificDate(
-                "15.03.2022",
-                THREE_DISPLAYS_BUY,
-                timeframes);
+        testStrategiesOnSpecificDate("15.03.2022", THREE_DISPLAYS_BUY, timeframes);
 
 //        закончить стратегии по EFI
 //           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля" и проверить
