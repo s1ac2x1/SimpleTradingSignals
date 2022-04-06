@@ -1,6 +1,7 @@
 package com.kishlaly.ta.analyze.testing;
 
 import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtils;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
@@ -11,7 +12,6 @@ import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
-import com.kishlaly.ta.utils.FilesUtil;
 import com.kishlaly.ta.utils.Numbers;
 
 import java.io.File;
@@ -274,6 +274,19 @@ public class TaskTester {
         Context.takeProfitStrategy = takeProfitStrategy;
         System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
         test(timeframes, task, blocksGroup);
+    }
+
+    public static void testStrategiesOnSpecificDate(String datePart, TaskType task, Timeframe[][] timeframes) {
+        if (Context.symbols.size() > 1) {
+            throw new RuntimeException("Only ony symbol allowed here");
+        }
+        // тут не важны стратегии тестирования позиций, важен отчет в какой дате был сигнал или почему нет
+        Context.stopLossStrategy = new StopLossFixedPrice(0.27);
+        Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
+        BlocksGroup[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
+        Arrays.stream(blocksGroups).forEach(blocksGroup -> {
+            test(timeframes, task, blocksGroup);
+        });
     }
 
     public static void testMass(Timeframe[][] timeframes, TaskType task, BlocksGroup blocksGroup) {

@@ -16,6 +16,7 @@ import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.FIRST_TRUST_MODEL;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.analyze.testing.TaskTester.testOneStrategy;
+import static com.kishlaly.ta.analyze.testing.TaskTester.testStrategiesOnSpecificDate;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 
@@ -65,7 +66,16 @@ public class Main {
 //        );
 
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_1(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(30));
+//        testOneStrategy(timeframes,
+//                THREE_DISPLAYS_BUY,
+//                new ThreeDisplays_Buy_1(),
+//                new StopLossFixedPrice(0.27),
+//                new TakeProfitFixedKeltnerTop(30));
+
+        testStrategiesOnSpecificDate(
+                "15.03.2022",
+                THREE_DISPLAYS_BUY,
+                timeframes);
 
 //        закончить стратегии по EFI
 //           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля" и проверить
