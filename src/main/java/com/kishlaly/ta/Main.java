@@ -43,7 +43,7 @@ public class Main {
         };
 
         Context.testOnly = new ArrayList<String>() {{
-            add("TER");
+            add("AAPL");
         }};
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -65,7 +65,7 @@ public class Main {
 //        );
 
 //        runBest(timeframes);
-        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_6(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(30));
+        testOneStrategy(timeframes, THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_1(), new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(30));
 
 //        закончить стратегии по EFI
 //           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля" и проверить

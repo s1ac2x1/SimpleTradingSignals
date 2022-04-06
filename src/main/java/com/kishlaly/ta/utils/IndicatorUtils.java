@@ -177,27 +177,27 @@ public class IndicatorUtils {
             return cached;
         } else {
             List<ElderForceIndex> result = new ArrayList<>();
-//            BarSeries quoteSeries = Bars.build(quotes);
-//            BarSeries efiSeries = new BaseBarSeries();
-//            for (int i = 1; i < quoteSeries.getBarCount() - 1; i++) {
-//                Quote todayQuote = quotes.get(i);
-//                Quote yesterdayQuote = quotes.get(i - 1);
-//                double efiValue = (todayQuote.getClose() - yesterdayQuote.getClose()) * todayQuote.getVolume();
-//                efiSeries.addBar(quoteSeries.getBar(i).getEndTime(), 0d, 0d, 0d, efiValue, 0d);
-//            }
-//            ClosePriceIndicator efiClosePriceIndicator = new ClosePriceIndicator(efiSeries);
-//            EMAIndicator efiEMA13 = new EMAIndicator(efiClosePriceIndicator, 13);
-//            for (int i = 0; i < efiSeries.getBarCount(); i++) {
-//                double efiSmoothed = efiEMA13.getValue(i).doubleValue();
-//                Long timestamp = efiSeries.getBar(i).getEndTime().toEpochSecond();
-//                result.add(new ElderForceIndex(timestamp, efiSmoothed));
-//            }
-            for (int i = 1; i < quotes.size() - 1; i++) {
-                Quote todayQuote = quotes.get(i);
-                Quote yesterdayQuote = quotes.get(i - 1);
+            BarSeries quoteSeries = Bars.build(quotes);
+            BarSeries efiSeries = new BaseBarSeries();
+            for (int i = 0; i < quoteSeries.getBarCount() - 1; i++) {
+                Quote todayQuote = quotes.get(i + 1);
+                Quote yesterdayQuote = quotes.get(i);
                 double efiValue = (todayQuote.getClose() - yesterdayQuote.getClose()) * todayQuote.getVolume();
-                result.add(new ElderForceIndex(todayQuote.getTimestamp(), efiValue));
+                efiSeries.addBar(quoteSeries.getBar(i + 1).getEndTime(), 0d, 0d, 0d, efiValue, 0d);
             }
+            ClosePriceIndicator efiClosePriceIndicator = new ClosePriceIndicator(efiSeries);
+            EMAIndicator efiEMA13 = new EMAIndicator(efiClosePriceIndicator, 13);
+            for (int i = 0; i < efiSeries.getBarCount(); i++) {
+                double efiSmoothed = efiEMA13.getValue(i).doubleValue();
+                Long timestamp = efiSeries.getBar(i).getEndTime().toEpochSecond();
+                result.add(new ElderForceIndex(timestamp, efiSmoothed));
+            }
+//            for (int i = 0; i < quotes.size() - 1; i++) {
+//                Quote todayQuote = quotes.get(i + 1);
+//                Quote yesterdayQuote = quotes.get(i);
+//                double efiValue = (todayQuote.getClose() - yesterdayQuote.getClose()) * todayQuote.getVolume();
+//                result.add(new ElderForceIndex(todayQuote.getTimestamp(), efiValue));
+//            }
             Collections.sort(result, Comparator.comparing(ElderForceIndex::getTimestamp));
             IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result);
             return result;
