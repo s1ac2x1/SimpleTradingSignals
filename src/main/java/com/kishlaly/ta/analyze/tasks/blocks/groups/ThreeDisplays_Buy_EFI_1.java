@@ -32,6 +32,6 @@ public class ThreeDisplays_Buy_EFI_1 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Простая стратегия по значениям EFI";
+        return "EFI поднялся выше нуля и два значения положительные";
     }
 }
