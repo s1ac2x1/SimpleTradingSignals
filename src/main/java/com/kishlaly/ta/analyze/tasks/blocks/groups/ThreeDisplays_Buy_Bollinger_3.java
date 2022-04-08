@@ -21,9 +21,6 @@ import java.util.List;
  * + предпоследняя %D стохастика ниже 40
  *
  * Пример: [D] AAPL 15.11.2021, 7.06.2021
- *
- * скользящий SL по средней полосе Боллинжера
- * или TP у верхней границы канала Кельтнера
  */
 //TODO закончить
 public class ThreeDisplays_Buy_Bollinger_3 implements BlocksGroup {

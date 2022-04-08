@@ -43,33 +43,35 @@ public class Main {
                 //SymbolsSource.TEST
         };
 
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("AAPL");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("AAPL");
+        }};
+
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
 //        buildCache(timeframes, false);
+
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        run(timeframes, THREE_DISPLAYS_BUY, false,
-                new ThreeDisplays_Buy_1(),
-                new ThreeDisplays_Buy_2(),
-                new ThreeDisplays_Buy_4(),
-                new ThreeDisplays_Buy_8(),
-                new ThreeDisplays_Buy_9(),
-                new ThreeDisplays_Buy_Bollinger_1(),
-                new ThreeDisplays_Buy_Bollinger_1_2(),
-                new ThreeDisplays_Buy_Bollinger_2()
-        );
+//        run(timeframes, THREE_DISPLAYS_BUY, false,
+//                new ThreeDisplays_Buy_1(),
+//                new ThreeDisplays_Buy_2(),
+//                new ThreeDisplays_Buy_4(),
+//                new ThreeDisplays_Buy_8(),
+//                new ThreeDisplays_Buy_9(),
+//                new ThreeDisplays_Buy_Bollinger_1(),
+//                new ThreeDisplays_Buy_Bollinger_1_2(),
+//                new ThreeDisplays_Buy_Bollinger_2()
+//        );
 
 //        testOneStrategy(timeframes,
 //                THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_6(),
 //                new StopLossFixedPrice(0.27),
 //                new TakeProfitFixedKeltnerTop(30));
 
-//        testStrategiesOnSpecificDate("15.03.2022", THREE_DISPLAYS_BUY, timeframes);
+        testStrategiesOnSpecificDate("15.03.2022", THREE_DISPLAYS_BUY, timeframes);
 
 //        закончить стратегии по EFI
 //           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля" и проверить
