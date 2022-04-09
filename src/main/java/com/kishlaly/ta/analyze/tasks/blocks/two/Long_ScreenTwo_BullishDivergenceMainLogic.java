@@ -78,9 +78,9 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                 .max(Comparator.comparingDouble(HistogramQuote::getHistogramValue)).get();
 
         if (quoteWithHighestHistogramAfterLowestLow.histogramValue <= 0) {
-            Log.recordCode(BlockResultCode.BEARISH_BACKBONE_NOT_CRACKED, screen);
+            Log.recordCode(BlockResultCode.BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2, screen);
             Log.addDebugLine("не произошло перелома медвежьего хребта");
-            return new BlockResult(screen.getLastQuote(), BEARISH_BACKBONE_NOT_CRACKED);
+            return new BlockResult(screen.getLastQuote(), BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2);
         }
 
         // какой индекс у максимума

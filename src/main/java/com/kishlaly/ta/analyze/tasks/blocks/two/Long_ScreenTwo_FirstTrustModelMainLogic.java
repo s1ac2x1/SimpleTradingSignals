@@ -37,14 +37,14 @@ public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
 
         if (screen.quotes.size() - nMonthsLowIndex > 5) {
             Log.addDebugLine("Минимум обнаружен далеко от последних трех столбиков");
-            Log.recordCode(N_MONTHS_LOW_IS_TOO_FAR, screen);
-            return new BlockResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_FAR);
+            Log.recordCode(N_MONTHS_LOW_IS_TOO_FAR_SCREEN_2, screen);
+            return new BlockResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_FAR_SCREEN_2);
         }
 
         if (nMonthsLowIndex + 2 >= screen.quotes.size()) {
             Log.addDebugLine("Минимум обнаружен слишком близко к правому краю");
-            Log.recordCode(N_MONTHS_LOW_IS_TOO_CLOSE, screen);
-            return new BlockResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_CLOSE);
+            Log.recordCode(N_MONTHS_LOW_IS_TOO_CLOSE_SCREEN_2, screen);
+            return new BlockResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_CLOSE_SCREEN_2);
         }
 
         // ищем хотя бы два зеленый столбика после минимума
