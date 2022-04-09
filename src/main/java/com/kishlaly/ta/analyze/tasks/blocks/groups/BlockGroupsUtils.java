@@ -16,7 +16,7 @@ public class BlockGroupsUtils {
                         new ThreeDisplays_Buy_6(),
                         new ThreeDisplays_Buy_7(),
                         new ThreeDisplays_Buy_8(),
-                        new ThreeDisplays_Buy_9(),
+                        new FirstScreen_Buy_1(),
                         new ThreeDisplays_Buy_Bollinger_1(),
                         new ThreeDisplays_Buy_Bollinger_1_2(),
                         new ThreeDisplays_Buy_Bollinger_3(),
