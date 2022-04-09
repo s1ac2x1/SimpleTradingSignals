@@ -9,8 +9,7 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.HISTOGRAM_NOT_ASCENDING_SCREEN_2;
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.analyze.BlockResultCode.*;
 
 /**
  * последние X гистограмм растут последовательно
@@ -32,9 +31,9 @@ public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlock {
         }
 
         if (count < ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("Гистограмма не растет на долгосрочном экране");
-            return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
+            Log.recordCode(X_HISTOGRAMS_NOT_ASCENDING_SCREEN_1, screen);
+            Log.addDebugLine(ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK + " гистограмм не растет на долгосрочном экране");
+            return new BlockResult(screen.getLastQuote(), X_HISTOGRAMS_NOT_ASCENDING_SCREEN_1);
         }
         return new BlockResult(screen.getLastQuote(), OK);
     }
