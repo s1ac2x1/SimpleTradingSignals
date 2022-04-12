@@ -43,12 +43,13 @@ public class SpreadsheetUtils {
     }
 
     private static void addRowCell(Row row, String value, int cellIndex) {
-        CellStyle symbolStyle = positions.createCellStyle();
-        symbolStyle.setFont(createSymbolCellFont((XSSFWorkbook) positions));
-        symbolStyle.setWrapText(true);
-        Cell symbolCell = row.createCell(cellIndex);
-        symbolCell.setCellValue(value);
-        symbolCell.setCellStyle(symbolStyle);
+        CellStyle cellStyle = positions.createCellStyle();
+        cellStyle.setFont(createSymbolCellFont((XSSFWorkbook) positions));
+        cellStyle.setWrapText(true);
+        cellStyle.setVerticalAlignment(VerticalAlignment.TOP);
+        Cell cell = row.createCell(cellIndex);
+        cell.setCellValue(value);
+        cell.setCellStyle(cellStyle);
     }
 
     private static void createSheetIfNotExists() throws Exception {
@@ -93,7 +94,6 @@ public class SpreadsheetUtils {
         String fileLocation = path.substring(0, path.length() - 1) + POSITIONS_XLSX;
         FileOutputStream outputStream = new FileOutputStream(fileLocation);
         positions.write(outputStream);
-        positions.close();
     }
 
     @NotNull
