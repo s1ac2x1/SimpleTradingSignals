@@ -27,10 +27,10 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                //SymbolsSource.SP500,
+                SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                SymbolsSource.SCREENER_MANY
+                //SymbolsSource.SCREENER_MANY
                 //SymbolsSource.TEST
         };
 
@@ -41,20 +41,20 @@ public class Main {
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
-        buildCache(timeframes, false);
+//        buildCache(timeframes, false);
 
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-//        run(timeframes, THREE_DISPLAYS_BUY, false,
-//                new ThreeDisplays_Buy_1(),
-//                new ThreeDisplays_Buy_2(),
-//                new ThreeDisplays_Buy_4(),
-//                new ThreeDisplays_Buy_8(),
-//                new FirstScreen_Buy_1(),
-//                new ThreeDisplays_Buy_Bollinger_1_2(),
-//                new ThreeDisplays_Buy_Bollinger_2()
-//        );
+        run(timeframes, THREE_DISPLAYS_BUY, false,
+                new ThreeDisplays_Buy_1(),
+                new ThreeDisplays_Buy_2(),
+                new ThreeDisplays_Buy_4(),
+                new ThreeDisplays_Buy_8(),
+                new FirstScreen_Buy_1(),
+                new ThreeDisplays_Buy_Bollinger_1_2(),
+                new ThreeDisplays_Buy_Bollinger_2()
+        );
 
 //        testOneStrategy(timeframes,
 //                THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_6(),
