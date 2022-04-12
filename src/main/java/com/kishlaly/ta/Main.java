@@ -8,6 +8,7 @@ import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 
 /**
@@ -40,20 +41,20 @@ public class Main {
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
-//        buildCache(timeframes, false);
+        buildCache(timeframes, false);
 
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        run(timeframes, THREE_DISPLAYS_BUY, false,
-                new ThreeDisplays_Buy_1(),
-                new ThreeDisplays_Buy_2(),
-                new ThreeDisplays_Buy_4(),
-                new ThreeDisplays_Buy_8(),
-                new FirstScreen_Buy_1(),
-                new ThreeDisplays_Buy_Bollinger_1_2(),
-                new ThreeDisplays_Buy_Bollinger_2()
-        );
+//        run(timeframes, THREE_DISPLAYS_BUY, false,
+//                new ThreeDisplays_Buy_1(),
+//                new ThreeDisplays_Buy_2(),
+//                new ThreeDisplays_Buy_4(),
+//                new ThreeDisplays_Buy_8(),
+//                new FirstScreen_Buy_1(),
+//                new ThreeDisplays_Buy_Bollinger_1_2(),
+//                new ThreeDisplays_Buy_Bollinger_2()
+//        );
 
 //        testOneStrategy(timeframes,
 //                THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_6(),

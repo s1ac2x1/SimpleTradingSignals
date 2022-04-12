@@ -37,12 +37,38 @@ public class Log {
 
     public static void saveSummary(String filename) {
         StringBuilder builder = new StringBuilder();
+        Map<String, Set<BlocksGroup>> symbolToGroups = new HashMap<>();
         summary.forEach((key, symbols) -> {
-            builder.append(key.getTaskName() + " - " + key.getBlocksGroup().getClass().getSimpleName() + System.lineSeparator());
-            builder.append(key.getBlocksGroup().comments() + System.lineSeparator());
-            symbols.forEach(symbol -> builder.append(symbol + System.lineSeparator()));
-            builder.append(System.lineSeparator());
+            symbols.forEach(symbol -> {
+                Set<BlocksGroup> symbolGroups = symbolToGroups.get(symbol);
+                if (symbolGroups == null) {
+                    symbolGroups = new HashSet<>();
+                    symbolToGroups.put(symbol, symbolGroups);
+                }
+                symbolGroups.add(key.getBlocksGroup());
+            });
         });
+// придумать как вести лог каждого символа с комментариями как закрылась сделка
+
+        builder.append("<table style=\"border: 1px solid;\">");
+
+        Comparator<Map.Entry<String, Set<BlocksGroup>>> comparator = Comparator.comparingInt(entry -> entry.getValue().size());
+        symbolToGroups
+                .entrySet()
+                .stream()
+                .sorted(comparator.reversed())
+                .forEach(entry -> {
+                    builder.append("<tr style=\"border: 1px solid;\">");
+                    builder.append("<td style=\"border: 1px solid; vertical-align: top text-align: left;\">" + entry.getKey() + "</td>");
+                    builder.append("<td style=\"border: 1px solid; vertical-align: top; text-align: left;\">");
+                    entry.getValue().forEach(group -> {
+                        builder.append(group.getClass().getSimpleName() + "<br>");
+                        builder.append(group.comments() + "<br><br>");
+                    });
+                    builder.append("</td>");
+                    builder.append("</tr>");
+                });
+        builder.append("</table>");
         FilesUtil.appendToFile(filename, builder.toString());
     }
 

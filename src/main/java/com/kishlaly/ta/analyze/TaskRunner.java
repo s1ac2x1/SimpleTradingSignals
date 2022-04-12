@@ -235,7 +235,7 @@ public class TaskRunner {
         //Log.saveSignal(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".txt");
         //Log.saveDebug(customDebugFolder + "/all.txt");
         //Log.saveCodes(customDebugFolder);
-        Log.saveSummary(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".txt");
+        Log.saveSummary(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".html");
         Log.clear();
     }
 
