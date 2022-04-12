@@ -11,8 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpreadsheetUtils {
 
@@ -26,17 +28,33 @@ public class SpreadsheetUtils {
         groups.add(new ThreeDisplays_Buy_2());
         groups.add(new ThreeDisplays_Buy_4());
         appendToSheet(symbol, groups);
+        saveSheet();
     }
 
-    private static void appendToSheet(String symbol, List<BlocksGroup> groups) throws Exception {
-        FileInputStream file = new FileInputStream(POSITIONS_XLSX);
+    public static void appendToSheet(String symbol, List<BlocksGroup> groups) throws Exception {
+        if (positions == null) {
+            createSheetIfNotExists();
+        }
+        Sheet sheet = positions.getSheetAt(0);
+        Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
+        String groupsOutput = groups.stream().map(group -> group.getClass().getSimpleName() + System.lineSeparator() + group.comments()).collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
+        addRowCell(newRow, symbol, 0);
+        addRowCell(newRow, groupsOutput, 1);
+    }
+
+    private static void addRowCell(Row row, String value, int cellIndex) {
+        CellStyle symbolStyle = positions.createCellStyle();
+        symbolStyle.setFont(createSymbolCellFont((XSSFWorkbook) positions));
+        symbolStyle.setWrapText(true);
+        Cell symbolCell = row.createCell(cellIndex);
+        symbolCell.setCellValue(value);
+        symbolCell.setCellStyle(symbolStyle);
     }
 
     private static void createSheetIfNotExists() throws Exception {
         File file = new File(POSITIONS_XLSX);
         if (!file.exists()) {
             positions = new XSSFWorkbook();
-
             Sheet sheet = positions.createSheet("Positions");
             sheet.setColumnWidth(0, 6000);
             sheet.setColumnWidth(1, 4000);
@@ -62,20 +80,20 @@ public class SpreadsheetUtils {
             comments.setCellValue("Comments");
             comments.setCellStyle(headerStyle);
 
-//            CellStyle style = createSymbolCellStyle(workbook);
-//            Row row = sheet.createRow(2);
-
-//            Cell cell = row.createCell(0);
-//            cell.setCellValue("John Smith");
-//            cell.setCellStyle(style);
-
-            File currDir = new File(".");
-            String path = currDir.getAbsolutePath();
-            String fileLocation = path.substring(0, path.length() - 1) + POSITIONS_XLSX;
-            FileOutputStream outputStream = new FileOutputStream(fileLocation);
-            positions.write(outputStream);
-            positions.close();
+            saveSheet();
+        } else {
+            FileInputStream sheetFile = new FileInputStream(POSITIONS_XLSX);
+            positions = new XSSFWorkbook(sheetFile);
         }
+    }
+
+    private static void saveSheet() throws IOException {
+        File currDir = new File(".");
+        String path = currDir.getAbsolutePath();
+        String fileLocation = path.substring(0, path.length() - 1) + POSITIONS_XLSX;
+        FileOutputStream outputStream = new FileOutputStream(fileLocation);
+        positions.write(outputStream);
+        positions.close();
     }
 
     @NotNull
