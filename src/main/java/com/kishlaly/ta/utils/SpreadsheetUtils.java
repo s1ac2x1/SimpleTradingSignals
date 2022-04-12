@@ -1,31 +1,49 @@
 package com.kishlaly.ta.utils;
 
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_2;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpreadsheetUtils {
 
+    public static final String POSITIONS_XLSX = "positions.xlsx";
+    private static Workbook positions;
+
     public static void main(String[] args) throws Exception {
-        createSheetIfNotExists("positions.xlsx");
+        createSheetIfNotExists();
+        String symbol = "AAPL";
+        List<BlocksGroup> groups = new ArrayList<>();
+        groups.add(new ThreeDisplays_Buy_2());
+        groups.add(new ThreeDisplays_Buy_4());
+        appendToSheet(symbol, groups);
     }
 
-    private static void createSheetIfNotExists(String name) throws Exception {
-        File file = new File(name);
-        if (!file.exists()) {
-            Workbook workbook = new XSSFWorkbook();
+    private static void appendToSheet(String symbol, List<BlocksGroup> groups) throws Exception {
+        FileInputStream file = new FileInputStream(POSITIONS_XLSX);
+    }
 
-            Sheet sheet = workbook.createSheet("Positions");
+    private static void createSheetIfNotExists() throws Exception {
+        File file = new File(POSITIONS_XLSX);
+        if (!file.exists()) {
+            positions = new XSSFWorkbook();
+
+            Sheet sheet = positions.createSheet("Positions");
             sheet.setColumnWidth(0, 6000);
             sheet.setColumnWidth(1, 4000);
 
             Row header = sheet.createRow(0);
-            CellStyle headerStyle = workbook.createCellStyle();
-            headerStyle.setFont(createHeaderCellFont((XSSFWorkbook) workbook));
+            CellStyle headerStyle = positions.createCellStyle();
+            headerStyle.setFont(createHeaderCellFont((XSSFWorkbook) positions));
             headerStyle.setWrapText(true);
 
             Cell symbol = header.createCell(0);
@@ -53,10 +71,10 @@ public class SpreadsheetUtils {
 
             File currDir = new File(".");
             String path = currDir.getAbsolutePath();
-            String fileLocation = path.substring(0, path.length() - 1) + name;
+            String fileLocation = path.substring(0, path.length() - 1) + POSITIONS_XLSX;
             FileOutputStream outputStream = new FileOutputStream(fileLocation);
-            workbook.write(outputStream);
-            workbook.close();
+            positions.write(outputStream);
+            positions.close();
         }
     }
 
