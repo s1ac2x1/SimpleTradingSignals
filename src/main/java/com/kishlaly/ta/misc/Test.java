@@ -8,7 +8,7 @@ import java.util.List;
 
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
-import static com.kishlaly.ta.model.indicators.Indicator.KELTNER;
+import static com.kishlaly.ta.model.indicators.Indicator.BOLLINGER;
 
 public class Test {
 
@@ -21,8 +21,8 @@ public class Test {
         Context.timeframe = Timeframe.DAY;
         String symbol = "SEAS";
         SymbolData screen2 = getSymbolData(THREE_DISPLAYS_BUY.getTimeframeIndicators(2), symbol);
-        List keltner = screen2.indicators.get(KELTNER);
-        System.out.println(keltner.size());
+        List list = screen2.indicators.get(BOLLINGER);
+        System.out.println(list.size());
     }
 
 }

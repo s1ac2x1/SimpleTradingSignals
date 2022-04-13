@@ -58,11 +58,11 @@ public class RapidAPI {
 
             ArrayList<Double> timestamps = (ArrayList) m2.get("timestamp");
             timestamps.forEach(entry -> {
-                Quote quote = new Quote();
-                long timestamp = entry.longValue();
-                quote.exchangeTimezome = exchangeTimezoneName;
-                quote.setTimestamp(timestamp);
-                quotes.add(quote);
+//                Quote quote = new Quote();
+//                long timestamp = entry.longValue();
+//                quote.exchangeTimezome = exchangeTimezoneName;
+//                quote.setTimestamp(timestamp);
+//                quotes.add(quote);
             });
 
             LinkedTreeMap indicators = (LinkedTreeMap) m2.get("indicators");

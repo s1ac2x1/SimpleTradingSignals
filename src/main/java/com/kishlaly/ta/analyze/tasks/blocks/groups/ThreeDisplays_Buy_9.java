@@ -13,7 +13,7 @@ import java.util.List;
  * Первый экран
  * + повышение трех последних EMA26 (нету проверок гистограммы и столбиков)
  * Второй экран
- * + третья с конца котировка пересекла нижнию границу канала Кельтнера
+ * + было пересечение нижней лены Боллинжера одним из последних трех баров
  * + вторая и первая с конца котировки зеленые
  * + вторая и первая с конца котировки ниже ЕМА13
  * + одно из трех последних %D стохастика ниже 20
@@ -25,7 +25,8 @@ import java.util.List;
 public class ThreeDisplays_Buy_9 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {
-        ThreeDisplays.Config.QUOTE_FROM_END_TO_USE = 3;
+        ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3;
+        ThreeDisplays.Config.BOLLINGER_CROSSED_BOTTOM_BARS = 1;
         ThreeDisplays.Config.STOCH_VALUES_TO_CHECK = 3;
         ThreeDisplays.Config.STOCH_OVERSOLD = 20;
 
@@ -34,7 +35,7 @@ public class ThreeDisplays_Buy_9 implements BlocksGroup {
 
             add(new Long_ScreenOne_EMA_ThreeAscending());
 
-            add(new Long_ScreenTwo_Keltner_Bottom_X_FromEndCrossed());
+            add(new Long_ScreenTwo_Bollinger_Low_X_Of_Y_LastBarsCrossed());
             add(new Long_ScreenTwo_Bars_TwoGreen());
             add(new Long_ScreenTwo_EMA_TwoBarsBelow());
             add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversold());
