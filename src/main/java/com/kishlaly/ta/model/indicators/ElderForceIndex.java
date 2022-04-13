@@ -1,14 +1,13 @@
 package com.kishlaly.ta.model.indicators;
 
-public class ElderForceIndex {
+import com.kishlaly.ta.model.EntityWithDate;
 
-    // in epoch seconds
-    private Long timestamp;
+public class ElderForceIndex extends EntityWithDate {
 
     private double value;
 
     public ElderForceIndex(final Long timestamp, final double value) {
-        this.timestamp = timestamp;
+        super(timestamp);
         this.value = value;
     }
 

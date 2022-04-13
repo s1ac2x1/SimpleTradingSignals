@@ -1,22 +1,18 @@
 package com.kishlaly.ta.model.indicators;
 
-import static com.kishlaly.ta.model.Quote.exchangeTimezome;
+import com.kishlaly.ta.model.EntityWithDate;
+
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
 
-public class EMA {
-    // in epoch seconds
-    private Long timestamp;
+public class EMA extends EntityWithDate {
     private String nativeDate;
     private String myDate;
 
     private Double value;
 
-    public EMA() {
-    }
-
     public EMA(final Long timestamp, final Double value) {
-        this.timestamp = timestamp;
+        super(timestamp);
         this.value = value;
         this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
         this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();

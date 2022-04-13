@@ -1,32 +1,18 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.utils.Numbers;
+import com.kishlaly.ta.model.EntityWithDate;
 
-import static com.kishlaly.ta.model.Quote.exchangeTimezome;
-import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
-import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
-import static com.kishlaly.ta.utils.Numbers.round;
-
-public class MACD {
-    // in epoch seconds
-    private Long timestamp;
-    private String nativeDate;
-    private String myDate;
+public class MACD extends EntityWithDate {
 
     private Double macd;
     private Double signal;
     private Double histogram;
 
-    public MACD() {
-    }
-
     public MACD(final Long timestamp, final Double macd, final Double signal, final Double histogram) {
-        this.timestamp = timestamp;
+        super(timestamp);
         this.macd = macd;
         this.signal = signal;
         this.histogram = histogram;
-        this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
-        this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
     }
 
     public Long getTimestamp() {

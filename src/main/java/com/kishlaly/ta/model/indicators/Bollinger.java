@@ -1,18 +1,15 @@
 package com.kishlaly.ta.model.indicators;
 
-public class Bollinger {
+import com.kishlaly.ta.model.EntityWithDate;
 
-    private Long timestamp;
+public class Bollinger extends EntityWithDate {
 
     private double bottom;
     private double middle;
     private double top;
 
-    public Bollinger() {
-    }
-
     public Bollinger(final Long timestamp, final double bottom, final double middle, final double top) {
-        this.timestamp = timestamp;
+        super(timestamp);
         this.bottom = bottom;
         this.middle = middle;
         this.top = top;

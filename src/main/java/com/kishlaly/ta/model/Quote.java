@@ -10,14 +10,7 @@ import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
  * @author Vladimir Kishlaly
  * @since 16.11.2021
  */
-public class Quote implements Serializable {
-
-    // in epoch seconds
-    private Long timestamp;
-
-    public static String exchangeTimezome = "US/Eastern";
-    private String nativeDate;
-    private String myDate;
+public class Quote extends EntityWithDate implements Serializable {
 
     private double high;
     private double open;
@@ -25,18 +18,13 @@ public class Quote implements Serializable {
     private double low;
     private double volume;
 
-    public Quote() {
-    }
-
     public Quote(final Long timestamp, final double high, final double open, final double close, final double low, final double volume) {
-        this.timestamp = timestamp;
+        super(timestamp);
         this.high = high;
         this.open = open;
         this.close = close;
         this.low = low;
         this.volume = volume;
-        this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
-        this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
     }
 
     public Long getTimestamp() {

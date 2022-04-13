@@ -1,14 +1,13 @@
 package com.kishlaly.ta.model.indicators;
 
-public class ATR {
+import com.kishlaly.ta.model.EntityWithDate;
 
-    // in epoch seconds
-    private Long timestamp;
+public class ATR extends EntityWithDate {
 
     private double value;
 
     public ATR(final Long timestamp, final double value) {
-        this.timestamp = timestamp;
+        super(timestamp);
         this.value = value;
     }
 
