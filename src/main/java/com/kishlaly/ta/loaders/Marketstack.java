@@ -2,12 +2,12 @@ package com.kishlaly.ta.loaders;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.ResponseBody;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.marketstack.MarketstackResponse;
 import com.kishlaly.ta.utils.Context;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.ResponseBody;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -36,13 +36,12 @@ public class Marketstack {
                     new TypeToken<MarketstackResponse>() {
                     }.getType());
             response.data.stream().filter(data -> data.close != null).forEach(data -> {
-                Quote quote = new Quote();
-                quote.setTimestamp(Instant.ofEpochMilli(data.date.getTime()).getEpochSecond());
-                quote.setOpen(data.open);
-                quote.setClose(data.close);
-                quote.setHigh(data.high);
-                quote.setLow(data.low);
-                quote.setVolume(data.volume);
+                Quote quote = new Quote(Instant.ofEpochMilli(data.date.getTime()).getEpochSecond(),
+                        data.high,
+                        data.open,
+                        data.close,
+                        data.low,
+                        data.volume);
             });
         } catch (Exception e) {
             System.out.println("Couldn't get quotes");

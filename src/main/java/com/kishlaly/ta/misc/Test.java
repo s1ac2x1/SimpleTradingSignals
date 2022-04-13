@@ -2,14 +2,12 @@ package com.kishlaly.ta.misc;
 
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
-import com.kishlaly.ta.model.indicators.ElderForceIndex;
 import com.kishlaly.ta.utils.Context;
 
 import java.util.List;
 
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
-import static com.kishlaly.ta.model.indicators.Indicator.EFI;
 import static com.kishlaly.ta.model.indicators.Indicator.KELTNER;
 
 public class Test {
