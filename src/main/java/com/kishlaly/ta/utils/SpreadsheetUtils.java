@@ -12,9 +12,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class SpreadsheetUtils {
@@ -25,14 +25,14 @@ public class SpreadsheetUtils {
     public static void main(String[] args) throws Exception {
         createSheetIfNotExists();
         String symbol = "AAPL";
-        List<BlocksGroup> groups = new ArrayList<>();
+        Set<BlocksGroup> groups = new HashSet<>();
         groups.add(new ThreeDisplays_Buy_2());
         groups.add(new ThreeDisplays_Buy_4());
         appendToSheet(symbol, groups);
         saveSheet();
     }
 
-    public static void createOrUpdateSheet(Map<String, List<BlocksGroup>> map) {
+    public static void createOrUpdateSheet(Map<String, Set<BlocksGroup>> map) {
         try {
             map.forEach((symbol, groups) -> {
                 try {
@@ -47,7 +47,7 @@ public class SpreadsheetUtils {
         }
     }
 
-    public static void appendToSheet(String symbol, List<BlocksGroup> groups) throws Exception {
+    private static void appendToSheet(String symbol, Set<BlocksGroup> groups) throws Exception {
         if (positions == null) {
             createSheetIfNotExists();
         }

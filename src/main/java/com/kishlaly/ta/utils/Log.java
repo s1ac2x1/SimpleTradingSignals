@@ -70,6 +70,8 @@ public class Log {
                 });
         builder.append("</table>");
         FilesUtil.appendToFile(filename, builder.toString());
+
+        SpreadsheetUtils.createOrUpdateSheet(symbolToGroups);
     }
 
     public static void saveSignal(String filename) {
