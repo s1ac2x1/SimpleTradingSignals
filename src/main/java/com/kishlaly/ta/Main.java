@@ -72,7 +72,7 @@ public class Main {
 
 //        закончить стратегии по EFI
 //           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля" и проверить
-//        закончить ThreeDisplays_Buy_Bollinger_3
+//        закончить другие стратегии, помеченные todo
 //        что там Элдер писал про анализ графиков и отклонения цен?
 //        дивергенции EFI
 
@@ -84,24 +84,24 @@ public class Main {
 
 // было бы здорово протестировать декартово произведение всех групп
 
-        buildTasksAndStrategiesSummary(
-                timeframes,
-                THREE_DISPLAYS_BUY,
-                new ArrayList<BlocksGroup>(){{
-                    add(new ThreeDisplays_Buy_1());
-                    add(new ThreeDisplays_Buy_2());
-                    add(new ThreeDisplays_Buy_3());
-                    add(new ThreeDisplays_Buy_4());
-                    add(new ThreeDisplays_Buy_5());
-                    add(new ThreeDisplays_Buy_6());
-                    add(new ThreeDisplays_Buy_7());
-                    add(new ThreeDisplays_Buy_8());
-                    add(new ThreeDisplays_Buy_9());
-                    add(new ThreeDisplays_Buy_Bollinger_1_2());
-                    add(new ThreeDisplays_Buy_Bollinger_2());
-                    add(new ThreeDisplays_Buy_Experiments());
-                }},
-                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
+//        buildTasksAndStrategiesSummary(
+//                timeframes,
+//                THREE_DISPLAYS_BUY,
+//                new ArrayList<BlocksGroup>(){{
+//                    add(new ThreeDisplays_Buy_1());
+//                    add(new ThreeDisplays_Buy_2());
+//                    add(new ThreeDisplays_Buy_3());
+//                    add(new ThreeDisplays_Buy_4());
+//                    add(new ThreeDisplays_Buy_5());
+//                    add(new ThreeDisplays_Buy_6());
+//                    add(new ThreeDisplays_Buy_7());
+//                    add(new ThreeDisplays_Buy_8());
+//                    add(new ThreeDisplays_Buy_9());
+//                    add(new ThreeDisplays_Buy_Bollinger_1_2());
+//                    add(new ThreeDisplays_Buy_Bollinger_2());
+//                    add(new ThreeDisplays_Buy_Experiments());
+//                }},
+//                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
 
     }
 
