@@ -4,6 +4,7 @@ import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.Bollinger;
+import com.kishlaly.ta.model.indicators.Keltner;
 
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
@@ -172,5 +173,10 @@ public class Quotes {
     public static boolean isQuoteBelowBollingerBottom(Quote quote, Bollinger bollinger) {
         return quote.getLow() < bollinger.getBottom() && quote.getHigh() < bollinger.getBottom();
     }
+
+    public static boolean isQuoteCrossedKeltnerBottom(Quote quote, Keltner keltner) {
+        return quote.getLow() <= keltner.getLow() && quote.getHigh() >= keltner.getLow();
+    }
+
 
 }

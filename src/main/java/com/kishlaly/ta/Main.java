@@ -27,10 +27,10 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500,
+                //SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                //SymbolsSource.SCREENER_MANY
+                SymbolsSource.SCREENER_MANY
                 //SymbolsSource.TEST
         };
 

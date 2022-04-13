@@ -31,6 +31,7 @@ public class ThreeDisplays extends AbstractTask {
         public static int EMA26_ABOVE_BARS = -1;
         public static int BOLLINGER_TOTAL_BARS_CHECK = -1;
         public static int BOLLINGER_CROSSED_BOTTOM_BARS = -1;
+        public static int QUOTE_FROM_END_TO_USE = -1;
     }
 
 }
