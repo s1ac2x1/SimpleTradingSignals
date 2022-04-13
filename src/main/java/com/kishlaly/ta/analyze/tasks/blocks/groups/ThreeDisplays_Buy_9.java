@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_ThreeAscending;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Первый экран
- * + повышение трех последних EMA26 (нету проверок гистограммы и столбиков)
+ * + строгая проверка тренда
  * Второй экран
  * + было пересечение нижней лены Боллинжера одним из последних трех баров
  * + вторая и первая с конца котировки зеленые
@@ -21,7 +21,6 @@ import java.util.List;
  * <p>
  * TP не выше 50% канала
  */
-// TODO проверить на [D] SEAS 11.04.2022 & 09.03.2022
 public class ThreeDisplays_Buy_9 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {
@@ -33,7 +32,7 @@ public class ThreeDisplays_Buy_9 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            add(new Long_ScreenOne_EMA_ThreeAscending());
+            add(new Long_ScreenOne_StrictTrendCheck());
 
             add(new Long_ScreenTwo_Bollinger_Low_X_Of_Y_LastBarsCrossed());
             add(new Long_ScreenTwo_Bars_TwoGreen());
@@ -46,6 +45,6 @@ public class ThreeDisplays_Buy_9 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Поиск плавного волнообразного подъема из перепроданности";
+        return "Поиск плавного волнообразного подъема из перепроданности. Очень редкий сигнал, но крайне мало SL";
     }
 }
