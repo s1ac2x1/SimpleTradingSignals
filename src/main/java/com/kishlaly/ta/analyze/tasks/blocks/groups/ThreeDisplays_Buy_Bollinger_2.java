@@ -35,6 +35,6 @@ public class ThreeDisplays_Buy_Bollinger_2 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Поиск выпадания за нижнюю ленту. Очень редко бывает, но SL почти нету";
+        return "Поиск выпадания за нижнюю ленту (проверки первого экране нету). Очень редко бывает, но SL почти нету";
     }
 }
