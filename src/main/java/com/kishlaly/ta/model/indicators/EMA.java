@@ -6,8 +6,6 @@ import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
 
 public class EMA extends EntityWithDate {
-    private String nativeDate;
-    private String myDate;
 
     private Double value;
 
