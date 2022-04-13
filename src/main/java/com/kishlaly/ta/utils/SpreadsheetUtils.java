@@ -42,6 +42,7 @@ public class SpreadsheetUtils {
                 }
             });
             saveSheet();
+            System.out.println("\nSheet updated");
         } catch (Exception e) {
             System.out.println("!!!! Failed to save updated sheet");
         }

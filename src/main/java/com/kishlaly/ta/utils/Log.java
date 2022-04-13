@@ -48,7 +48,6 @@ public class Log {
                 symbolGroups.add(key.getBlocksGroup());
             });
         });
-// придумать как вести лог каждого символа с комментариями как закрылась сделка
 
         builder.append("<table style=\"border: 1px solid;\">");
 
