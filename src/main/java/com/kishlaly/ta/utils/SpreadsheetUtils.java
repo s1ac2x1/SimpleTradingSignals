@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SpreadsheetUtils {
@@ -29,6 +30,21 @@ public class SpreadsheetUtils {
         groups.add(new ThreeDisplays_Buy_4());
         appendToSheet(symbol, groups);
         saveSheet();
+    }
+
+    public static void createOrUpdateSheet(Map<String, List<BlocksGroup>> map) {
+        try {
+            map.forEach((symbol, groups) -> {
+                try {
+                    appendToSheet(symbol, groups);
+                } catch (Exception e) {
+                    System.out.println("!!! Failed to append sheet row");
+                }
+            });
+            saveSheet();
+        } catch (Exception e) {
+            System.out.println("!!!! Failed to save updated sheet");
+        }
     }
 
     public static void appendToSheet(String symbol, List<BlocksGroup> groups) throws Exception {
