@@ -14,7 +14,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SpreadsheetUtils {
 
@@ -35,11 +34,31 @@ public class SpreadsheetUtils {
         if (positions == null) {
             createSheetIfNotExists();
         }
+        if (hasOpenedPositionsForSymbol(symbol)) {
+            return;
+        }
         Sheet sheet = positions.getSheetAt(0);
         Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
         String groupsOutput = groups.stream().map(group -> group.getClass().getSimpleName() + System.lineSeparator() + group.comments()).collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
         addRowCell(newRow, symbol, 0);
         addRowCell(newRow, groupsOutput, 1);
+        addRowCell(newRow, "", 2);
+    }
+
+    private static boolean hasOpenedPositionsForSymbol(String symbol) {
+        Sheet sheet = positions.getSheetAt(0);
+        for (Row row : sheet) {
+            Cell symbolCell = row.getCell(0);
+            String symbolCellValue = symbolCell.getRichStringCellValue().getString();
+            if (symbolCellValue.trim().toLowerCase().contains(symbol.trim().toLowerCase())) {
+                Cell resultCell = row.getCell(2);
+                String resultCellValue = resultCell.getRichStringCellValue().getString().trim();
+                if (resultCellValue.isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static void addRowCell(Row row, String value, int cellIndex) {
