@@ -174,8 +174,10 @@ public class TaskRunner {
                 System.out.println("Function failed for symbol " + symbol + " with message: " + e.getMessage());
             }
             processingSymbol.getAndIncrement();
-            QuotesInMemoryCache.clear(); // TODO зачем тут все чистить?
-            IndicatorsInMemoryCache.clear(); // // TODO зачем тут все чистить?
+            QuotesInMemoryCache.clear();
+            IndicatorsInMemoryCache.clear();
+            screen1.clear();
+            screen2.clear();
         });
     }
 
