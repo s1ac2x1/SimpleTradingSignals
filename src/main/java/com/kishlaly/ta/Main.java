@@ -37,7 +37,9 @@ public class Main {
                 //SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                SymbolsSource.SCREENER_MANY
+                SymbolsSource.SCREENER_MANY_P_1,
+                //SymbolsSource.SCREENER_MANY_P_2,
+                //SymbolsSource.SCREENER_MANY_P_3,
                 //SymbolsSource.SCREENER_MANY_RANDOM
                 //SymbolsSource.TEST
         };
