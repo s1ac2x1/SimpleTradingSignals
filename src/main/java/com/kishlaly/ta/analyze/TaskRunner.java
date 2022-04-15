@@ -228,7 +228,7 @@ public class TaskRunner {
         if (!s.exists()) {
             s.mkdir();
         }
-        String prefix = "[" + Context.logTimeframe1.name() + "][" + Context.logTimeframe2.name() + "]";
+        String prefix = "[" + Context.logTimeframe1.name() + "][" + Context.logTimeframe2.name() + "][" + Context.source[0].name() + "]";
         String customDebugFolder = Context.outputFolder + "/debug/" + prefix + task.name().toLowerCase();
         File d2 = new File(customDebugFolder);
         if (!d2.exists()) {
