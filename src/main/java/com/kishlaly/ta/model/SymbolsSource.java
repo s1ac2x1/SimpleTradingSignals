@@ -8,6 +8,8 @@ public enum SymbolsSource {
     SCREENER_FILTERED_RANDOM("symbols/screener_filtered.txt", true),
 
     SCREENER_MANY_P_1("symbols/screener_many_p_1.txt", false),
+    SCREENER_MANY_P_2("symbols/screener_many_p_2.txt", false),
+    SCREENER_MANY_P_3("symbols/screener_many_p_3.txt", false),
     SCREENER_MANY_RANDOM("symbols/screener_many.txt", true),
 
     TEST("symbols/test.txt", false),
