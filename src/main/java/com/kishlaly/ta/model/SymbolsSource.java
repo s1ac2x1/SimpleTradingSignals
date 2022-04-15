@@ -7,7 +7,7 @@ public enum SymbolsSource {
     SCREENER_FILTERED("symbols/screener_filtered.txt", false),
     SCREENER_FILTERED_RANDOM("symbols/screener_filtered.txt", true),
 
-    SCREENER_MANY("symbols/screener_many.txt", false),
+    SCREENER_MANY_P_1("symbols/screener_many_p_1.txt", false),
     SCREENER_MANY_RANDOM("symbols/screener_many.txt", true),
 
     TEST("symbols/test.txt", false),

@@ -22,6 +22,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.getSLStrategies;
 import static com.kishlaly.ta.cache.CacheBuilder.getTPStrategies;
@@ -42,6 +43,7 @@ public class TaskRunner {
         Arrays.stream(timeframes).forEach(screens -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
+            loadQuotesToMemory(THREE_DISPLAYS_BUY);
             Context.logTimeframe1 = screens[0];
             Context.logTimeframe2 = screens[1];
             twoTimeframeFunction(task, blocksGroups);
@@ -174,8 +176,6 @@ public class TaskRunner {
                 System.out.println("Function failed for symbol " + symbol + " with message: " + e.getMessage());
             }
             processingSymbol.getAndIncrement();
-            QuotesInMemoryCache.clear();
-            IndicatorsInMemoryCache.clear();
             screen1.clear();
             screen2.clear();
         });

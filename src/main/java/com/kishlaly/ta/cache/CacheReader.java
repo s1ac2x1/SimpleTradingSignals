@@ -40,6 +40,17 @@ public class CacheReader {
     public static ConcurrentLinkedDeque<LoadRequest> requests = new ConcurrentLinkedDeque<>();
     public static CopyOnWriteArrayList<Future> callsInProgress = new CopyOnWriteArrayList<>();
 
+    public static void loadQuotesToMemory(TaskType task) {
+        AtomicInteger count = new AtomicInteger(1);
+        int total = Context.symbols.size();
+        Context.symbols.forEach(symbol -> {
+            System.out.print("[" + count.getAndIncrement() + "/" + total + "] Warming up " + symbol + " ... ");
+            getSymbolData(task.getTimeframeIndicators(1), symbol);
+            getSymbolData(task.getTimeframeIndicators(2), symbol);
+            System.out.println("done");
+        });
+    }
+
     public static void checkCache(Timeframe[][] timeframes, TaskType[] tasks) {
         AtomicInteger screenNumber = new AtomicInteger(0);
         Map<Timeframe, Set<String>> missedData = new HashMap<>();
