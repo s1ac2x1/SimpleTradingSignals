@@ -37,7 +37,7 @@ public class Main {
                 //SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                //SymbolsSource.SCREENER_MANY_P_1,
+                SymbolsSource.SCREENER_MANY_P_1,
                 //SymbolsSource.SCREENER_MANY_P_2,
                 //SymbolsSource.SCREENER_MANY_P_3,
                 //SymbolsSource.SCREENER_MANY_RANDOM
@@ -74,6 +74,7 @@ public class Main {
 
 //        testStrategiesOnSpecificDate("15.03.2022", THREE_DISPLAYS_BUY, timeframes);
 
+        отделить run() недельных графиков от дневных, и так же отчет в разных листах sheet
 //        закончить стратегии по EFI
 //           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля и проверить
 //        закончить другие стратегии, помеченные todo
