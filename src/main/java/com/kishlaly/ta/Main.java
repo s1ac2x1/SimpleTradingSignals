@@ -56,8 +56,8 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        //buyWeekly(timeframes);
-        buyDaily(timeframes);
+        buyWeekly(timeframes);
+        //buyDaily(timeframes);
 
 //        testOneStrategy(timeframes,
 //                THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_3(),
@@ -109,7 +109,6 @@ public class Main {
                 new ThreeDisplays_Buy_4(),
                 new ThreeDisplays_Buy_8(),
                 new ThreeDisplays_Buy_9(),
-                new FirstScreen_Buy_1(),
                 new ThreeDisplays_Buy_Bollinger_1_2(),
                 new ThreeDisplays_Buy_Bollinger_2()
         );
@@ -118,8 +117,8 @@ public class Main {
     private static void buyWeekly(Timeframe[][] timeframes) {
         Context.runGroups = Timeframe.WEEK;
         run(timeframes, THREE_DISPLAYS_BUY, false,
-                new FirstScreen_Buy_1(),
-                new FirstScreen_Buy_2()
+                new FirstScreen_Buy_1()
+                //new FirstScreen_Buy_2()
         );
     }
 
