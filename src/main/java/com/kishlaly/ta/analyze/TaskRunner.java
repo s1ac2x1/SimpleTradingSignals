@@ -160,6 +160,7 @@ public class TaskRunner {
                     Log.addDebugLine(blockResult.isOk() ? "Вердикт: проверить" : "Вердикт: точно нет");
                     Log.addDebugLine("");
                     if (blockResult.isOk()) {
+                        //TODO сюда можно добавить прогон по свечным моделям
                         Log.addLine(symbol);
                         Signal signal = new Signal();
                         signal.timeframe1 = screen1.timeframe;
@@ -167,7 +168,7 @@ public class TaskRunner {
                         signal.symbol = symbol;
                         signal.task = task;
                         signals.add(signal);
-                        Log.addSummary(task.name(), blocksGroup, symbol);
+                        Log.addSummary(task.name(), blocksGroup, symbol); // TODO добавить список найденных свечных моделей
                     }
                 });
             } catch (Exception e) {
