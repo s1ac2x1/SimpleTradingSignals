@@ -3,6 +3,8 @@ package com.kishlaly.ta.analyze.candles.patterns;
 import com.kishlaly.ta.analyze.candles.CandlePattern;
 import com.kishlaly.ta.analyze.candles.CandleResult;
 import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.utils.IndicatorUtils;
 
 /**
  * Ситуация: бычий тренд становится восприимчивым к новым продавцам
@@ -20,6 +22,10 @@ public class HangingMan implements CandlePattern {
 
     @Override
     public CandleResult check(SymbolData screen) {
+        if (IndicatorUtils.emaAscending(screen.indicators.get(Indicator.EMA13), 3, 4)) {
+
+        }
+
         return CandleResult.NO_RESULT;
     }
 
