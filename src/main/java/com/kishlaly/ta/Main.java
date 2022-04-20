@@ -56,7 +56,7 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        buyWeekly(timeframes);
+        //buyWeekly(timeframes);
         //buyDaily(timeframes);
 
 //        testOneStrategy(timeframes,
