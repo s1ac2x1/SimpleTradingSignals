@@ -34,10 +34,10 @@ public class Main {
         };
 
         Context.source = new SymbolsSource[]{
-                //SymbolsSource.SP500,
+                SymbolsSource.SP500,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                SymbolsSource.SCREENER_MANY_P_1,
+                //SymbolsSource.SCREENER_MANY_P_1,
                 //SymbolsSource.SCREENER_MANY_P_2,
                 //SymbolsSource.SCREENER_MANY_P_3,
                 //SymbolsSource.SCREENER_MANY_RANDOM
@@ -51,12 +51,12 @@ public class Main {
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
-//        buildCache(timeframes, false);
+        buildCache(timeframes, false);
 
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        buyWeekly(timeframes);
+        //buyWeekly(timeframes);
         //buyDaily(timeframes);
 
 //        testOneStrategy(timeframes,
@@ -66,7 +66,6 @@ public class Main {
 
 //        testStrategiesOnSpecificDate("15.03.2022", THREE_DISPLAYS_BUY, timeframes);
 
-        отделить run() недельных графиков от дневных, и так же отчет в разных листах sheet
 //        закончить стратегии по EFI
 //           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля и проверить
 //        закончить другие стратегии, помеченные todo
