@@ -55,7 +55,18 @@ public class SpreadsheetUtils {
         if (hasOpenedPositionsForSymbol(symbol)) {
             return;
         }
-        Sheet sheet = positions.getSheetAt(0);
+        int sheetNumber;
+        switch (Context.runGroups) {
+            case DAY:
+                sheetNumber = 0;
+                break;
+            case WEEK:
+                sheetNumber = 1;
+                break;
+            default:
+                sheetNumber = 0;
+        }
+        Sheet sheet = positions.getSheetAt(sheetNumber);
         Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
         String groupsOutput = groups.stream().map(group -> group.getClass().getSimpleName() + System.lineSeparator() + group.comments()).collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
         addRowCell(newRow, symbol, 0);

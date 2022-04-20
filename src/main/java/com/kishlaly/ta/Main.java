@@ -56,16 +56,8 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        run(timeframes, THREE_DISPLAYS_BUY, false,
-                new ThreeDisplays_Buy_1(),
-                new ThreeDisplays_Buy_2(),
-                new ThreeDisplays_Buy_4(),
-                new ThreeDisplays_Buy_8(),
-                new ThreeDisplays_Buy_9(),
-                new FirstScreen_Buy_1(),
-                new ThreeDisplays_Buy_Bollinger_1_2(),
-                new ThreeDisplays_Buy_Bollinger_2()
-        );
+        buyWeekly(timeframes);
+        //buyDaily(timeframes);
 
 //        testOneStrategy(timeframes,
 //                THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_3(),
@@ -108,6 +100,28 @@ public class Main {
 //                }},
 //                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
 
+    }
+
+    private static void buyDaily(Timeframe[][] timeframes) {
+        Context.runGroups = Timeframe.DAY;
+        run(timeframes, THREE_DISPLAYS_BUY, false,
+                new ThreeDisplays_Buy_1(),
+                new ThreeDisplays_Buy_2(),
+                new ThreeDisplays_Buy_4(),
+                new ThreeDisplays_Buy_8(),
+                new ThreeDisplays_Buy_9(),
+                new FirstScreen_Buy_1(),
+                new ThreeDisplays_Buy_Bollinger_1_2(),
+                new ThreeDisplays_Buy_Bollinger_2()
+        );
+    }
+
+    private static void buyWeekly(Timeframe[][] timeframes) {
+        Context.runGroups = Timeframe.WEEK;
+        run(timeframes, THREE_DISPLAYS_BUY, false,
+                new FirstScreen_Buy_1(),
+                new FirstScreen_Buy_2()
+        );
     }
 
 }

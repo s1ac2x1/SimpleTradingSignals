@@ -44,6 +44,7 @@ public class Context {
     // для логов
     public static Timeframe logTimeframe1;
     public static Timeframe logTimeframe2;
+    public static Timeframe runGroups;
 
     // для тестирования на истоирческих данных
     public static boolean testMode;
