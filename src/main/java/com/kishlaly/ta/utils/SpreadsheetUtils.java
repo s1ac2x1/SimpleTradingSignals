@@ -55,6 +55,15 @@ public class SpreadsheetUtils {
         if (hasOpenedPositionsForSymbol(symbol)) {
             return;
         }
+        Sheet sheet = positions.getSheetAt(getSheetNumber());
+        Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
+        String groupsOutput = groups.stream().map(group -> group.getClass().getSimpleName() + System.lineSeparator() + group.comments()).collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
+        addRowCell(newRow, symbol, 0);
+        addRowCell(newRow, groupsOutput, 1);
+        addRowCell(newRow, "", 2);
+    }
+
+    private static int getSheetNumber() {
         int sheetNumber;
         switch (Context.runGroups) {
             case DAY:
@@ -66,16 +75,11 @@ public class SpreadsheetUtils {
             default:
                 sheetNumber = 0;
         }
-        Sheet sheet = positions.getSheetAt(sheetNumber);
-        Row newRow = sheet.createRow(sheet.getLastRowNum() + 1);
-        String groupsOutput = groups.stream().map(group -> group.getClass().getSimpleName() + System.lineSeparator() + group.comments()).collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
-        addRowCell(newRow, symbol, 0);
-        addRowCell(newRow, groupsOutput, 1);
-        addRowCell(newRow, "", 2);
+        return sheetNumber;
     }
 
     private static boolean hasOpenedPositionsForSymbol(String symbol) {
-        Sheet sheet = positions.getSheetAt(0);
+        Sheet sheet = positions.getSheetAt(getSheetNumber());
         for (Row row : sheet) {
             Cell symbolCell = row.getCell(0);
             String symbolCellValue = symbolCell.getRichStringCellValue().getString();
