@@ -204,4 +204,19 @@ public class IndicatorUtils {
         }
     }
 
+    public static boolean emaAscending(List<EMA> ema, int atLeast, int fromLast) {
+        if (fromLast < 2) {
+            throw new RuntimeException("EMA ascending check: required at least 2 values");
+        }
+        int ascendingCount = 0;
+        for (int i = ema.size() - fromLast; i < ema.size() - 1; i++) {
+            EMA curr = ema.get(i);
+            EMA next = ema.get(i + 1);
+            if (next.getValue() > curr.getValue()) {
+                ascendingCount++;
+            }
+        }
+        return ascendingCount >= atLeast;
+    }
+
 }
