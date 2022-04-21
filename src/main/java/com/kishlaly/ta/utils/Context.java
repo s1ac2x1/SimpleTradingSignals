@@ -27,6 +27,8 @@ public class Context {
     public static List<String> testOnly = new ArrayList<>();
     public static Set<String> symbols;
     public static int yearsToAnalyze = 5;
+    public static boolean lowPricesOnly;
+    public static int lowPriceLimit = 20;
 
     // чтобы конвертировать в мою таймзону и сравнивать с графиками TradingView
     public static String myTimezone = "Europe/Berlin";

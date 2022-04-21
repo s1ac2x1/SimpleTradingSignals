@@ -141,6 +141,8 @@ public class TaskRunner {
             //пропускать символы, если у них на недельном фрейме меньше resolveMinBarsCount котировок
             if (screen1.quotes.size() < resolveMinBarsCount(screen1.timeframe)
                     || screen2.quotes.size() < resolveMinBarsCount(screen2.timeframe)) {
+                screen1.clear();
+                screen2.clear();
                 return;
             }
 
@@ -149,6 +151,13 @@ public class TaskRunner {
                 Quotes.trim(screen2);
                 IndicatorUtils.trim(screen1);
                 IndicatorUtils.trim(screen2);
+            }
+
+            if (Context.lowPricesOnly && screen2.quotes.get(screen2.quotes.size() - 1).getClose() > Context.lowPriceLimit) {
+                screen1.clear();
+                screen2.clear();
+                System.out.println("Skipped high price stock");
+                return;
             }
 
             Log.addDebugLine("");
