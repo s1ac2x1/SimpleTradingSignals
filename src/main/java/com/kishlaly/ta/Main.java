@@ -38,7 +38,6 @@ public class Main {
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
-        Context.trimToDate = "16.03.2022";
 
 //        buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
 
@@ -47,7 +46,8 @@ public class Main {
 
         //buyDaily();
         //testStrategiesOnSpecificDate_("16.03.2022");
-        testOneStrategy_();
+        //testOneStrategy_();
+        testOneStrategyTrimTo("16.03.2022");
         //buildTasksAndStrategiesSummary_();
 
 //        важное замечание: прошлый столбик на недельном графике должен быть зеленым.

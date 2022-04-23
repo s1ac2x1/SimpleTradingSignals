@@ -1,8 +1,10 @@
 package com.kishlaly.ta.model;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.Objects;
+
+import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
+import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
 
 /**
  * @author Vladimir Kishlaly
@@ -31,6 +33,14 @@ public class Quote extends EntityWithDate implements Serializable {
 
     public void setTimestamp(final Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public static String getExchangeTimezome() {
+        return Quote.exchangeTimezome;
+    }
+
+    public static void setExchangeTimezome(final String exchangeTimezome) {
+        Quote.exchangeTimezome = exchangeTimezome;
     }
 
     public double getHigh() {
@@ -75,30 +85,6 @@ public class Quote extends EntityWithDate implements Serializable {
 
     public boolean valuesPesent() {
         return !Double.isNaN(open) && !Double.isNaN(close) && !Double.isNaN(low) && !Double.isNaN(high) && !Double.isNaN(volume);
-    }
-
-    public static String getExchangeTimezome() {
-        return EntityWithDate.exchangeTimezome;
-    }
-
-    public static void setExchangeTimezome(final String exchangeTimezome) {
-        EntityWithDate.exchangeTimezome = exchangeTimezome;
-    }
-
-    public ZonedDateTime getNativeDate() {
-        return this.nativeDate;
-    }
-
-    public void setNativeDate(final ZonedDateTime nativeDate) {
-        this.nativeDate = nativeDate;
-    }
-
-    public ZonedDateTime getMyDate() {
-        return this.myDate;
-    }
-
-    public void setMyDate(final ZonedDateTime myDate) {
-        this.myDate = myDate;
     }
 
     @Override

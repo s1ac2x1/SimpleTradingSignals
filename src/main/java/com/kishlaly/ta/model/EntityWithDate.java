@@ -1,19 +1,18 @@
 package com.kishlaly.ta.model;
 
-import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
 
-public abstract class EntityWithDate implements Serializable {
+public abstract class EntityWithDate {
 
     // in epoch seconds
     protected Long timestamp;
 
     public static String exchangeTimezome = "US/Eastern";
-    public ZonedDateTime nativeDate;
-    public ZonedDateTime myDate;
+    protected ZonedDateTime nativeDate;
+    protected ZonedDateTime myDate;
 
     public EntityWithDate(final Long timestamp) {
         this.timestamp = timestamp;
@@ -21,4 +20,27 @@ public abstract class EntityWithDate implements Serializable {
         this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome);
     }
 
+    public static String getExchangeTimezome() {
+        return EntityWithDate.exchangeTimezome;
+    }
+
+    public static void setExchangeTimezome(final String exchangeTimezome) {
+        EntityWithDate.exchangeTimezome = exchangeTimezome;
+    }
+
+    public ZonedDateTime getNativeDate() {
+        return this.nativeDate;
+    }
+
+    public void setNativeDate(final ZonedDateTime nativeDate) {
+        this.nativeDate = nativeDate;
+    }
+
+    public ZonedDateTime getMyDate() {
+        return this.myDate;
+    }
+
+    public void setMyDate(final ZonedDateTime myDate) {
+        this.myDate = myDate;
+    }
 }
