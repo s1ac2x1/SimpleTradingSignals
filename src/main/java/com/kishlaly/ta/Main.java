@@ -7,6 +7,7 @@ import com.kishlaly.ta.utils.Context;
 
 import java.util.ArrayList;
 
+import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 import static com.kishlaly.ta.utils.RunUtils.*;
 
@@ -33,13 +34,14 @@ public class Main {
         };
 
         Context.testOnly = new ArrayList<String>() {{
-            add("AAPL");
+            add("KMI");
         }};
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
+        //Context.trimToDate = "16.03.2022";
 
-//        buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
+        //buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
 
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
