@@ -39,7 +39,7 @@ public class Main {
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
-        //Context.trimToDate = "16.03.2022";
+        Context.trimToDate = "16.03.2022";
 
         //buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
 

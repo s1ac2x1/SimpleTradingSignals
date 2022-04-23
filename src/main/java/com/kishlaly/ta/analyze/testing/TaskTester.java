@@ -30,6 +30,7 @@ import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
+import static com.kishlaly.ta.utils.Dates.shortDateToZoned;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 import static java.lang.System.lineSeparator;
 
@@ -284,9 +285,7 @@ public class TaskTester {
         Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
         BlocksGroup[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
         List<HistoricalTesting> testings = Arrays.stream(blocksGroups).flatMap(blocksGroup -> test(timeframes, task, blocksGroup).stream()).collect(Collectors.toList());
-        String[] split = datePart.split("\\.");
-        String date = split[2] + "-" + split[1] + "-" + split[0] + "T09:30-04:00[US/Eastern]";
-        ZonedDateTime parsed = ZonedDateTime.parse(date);
+        ZonedDateTime parsed = shortDateToZoned(datePart);
         testings.forEach(testing -> {
             String groupName = testing.getBlocksGroup().getClass().getSimpleName();
             BlockResult blockResult = testing.getTaskResults().stream().filter(taskResult -> taskResult.getLastChartQuote().getTimestamp() == parsed.toEpochSecond()).findFirst().get();
