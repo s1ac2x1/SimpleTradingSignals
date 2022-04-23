@@ -53,15 +53,6 @@ public class RunUtils {
                 new TakeProfitFixedKeltnerTop(50));
     }
 
-    // сначала убирает исторические данные после этой даты
-    public static void testOneStrategyTrimTo(String date) {
-        Context.trimToDate = date;
-        testOneStrategy(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY,
-                new ThreeDisplays_Buy_3(),
-                new StopLossFixedPrice(0.27),
-                new TakeProfitFixedKeltnerTop(50));
-    }
-
     public static void buyDaily() {
         Context.runGroups = Timeframe.DAY;
         run(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY, false,

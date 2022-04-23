@@ -2,6 +2,8 @@ package com.kishlaly.ta.model.indicators;
 
 import com.kishlaly.ta.model.EntityWithDate;
 
+import java.time.ZonedDateTime;
+
 public class Bollinger extends EntityWithDate {
 
     private double bottom;
@@ -45,5 +47,29 @@ public class Bollinger extends EntityWithDate {
 
     public void setTop(final double top) {
         this.top = top;
+    }
+
+    public static String getExchangeTimezome() {
+        return EntityWithDate.exchangeTimezome;
+    }
+
+    public static void setExchangeTimezome(final String exchangeTimezome) {
+        EntityWithDate.exchangeTimezome = exchangeTimezome;
+    }
+
+    public ZonedDateTime getNativeDate() {
+        return this.nativeDate;
+    }
+
+    public void setNativeDate(final ZonedDateTime nativeDate) {
+        this.nativeDate = nativeDate;
+    }
+
+    public ZonedDateTime getMyDate() {
+        return this.myDate;
+    }
+
+    public void setMyDate(final ZonedDateTime myDate) {
+        this.myDate = myDate;
     }
 }
