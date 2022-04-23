@@ -2,9 +2,6 @@ package com.kishlaly.ta.model.indicators;
 
 import com.kishlaly.ta.model.EntityWithDate;
 
-import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
-import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
-
 public class Stoch extends EntityWithDate {
     private Double slowD;
     private Double slowK;
@@ -13,8 +10,6 @@ public class Stoch extends EntityWithDate {
         super(timestamp);
         this.slowD = slowD;
         this.slowK = slowK;
-        this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
-        this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
     }
 
     public Long getTimestamp() {
@@ -39,22 +34,6 @@ public class Stoch extends EntityWithDate {
 
     public void setSlowK(final Double slowK) {
         this.slowK = slowK;
-    }
-
-    public String getNativeDate() {
-        return this.nativeDate;
-    }
-
-    public void setNativeDate(final String nativeDate) {
-        this.nativeDate = nativeDate;
-    }
-
-    public String getMyDate() {
-        return this.myDate;
-    }
-
-    public void setMyDate(final String myDate) {
-        this.myDate = myDate;
     }
 
     public boolean valuesPresent() {

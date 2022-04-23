@@ -24,20 +24,20 @@ public class RunUtils {
                     add(new ThreeDisplays_Buy_2());
                     add(new ThreeDisplays_Buy_3());
                     add(new ThreeDisplays_Buy_4());
-//                    add(new ThreeDisplays_Buy_5());
-//                    add(new ThreeDisplays_Buy_6());
-//                    add(new ThreeDisplays_Buy_7());
-//                    add(new ThreeDisplays_Buy_8());
-//                    add(new ThreeDisplays_Buy_9());
-//                    add(new ThreeDisplays_Buy_Bollinger_1());
-//                    add(new ThreeDisplays_Buy_Bollinger_1_2());
-//                    add(new ThreeDisplays_Buy_Bollinger_2());
-//                    add(new ThreeDisplays_Buy_Bollinger_3());
-//                    add(new ThreeDisplays_Buy_Bollinger_4());
-//                    add(new ThreeDisplays_Buy_EFI_1());
-//                    add(new ThreeDisplays_Buy_EFI_2());
-//                    add(new ThreeDisplays_Buy_EFI_3());
-//                    add(new ThreeDisplays_Buy_Experiments());
+                    add(new ThreeDisplays_Buy_5());
+                    add(new ThreeDisplays_Buy_6());
+                    add(new ThreeDisplays_Buy_7());
+                    add(new ThreeDisplays_Buy_8());
+                    add(new ThreeDisplays_Buy_9());
+                    add(new ThreeDisplays_Buy_Bollinger_1());
+                    add(new ThreeDisplays_Buy_Bollinger_1_2());
+                    add(new ThreeDisplays_Buy_Bollinger_2());
+                    add(new ThreeDisplays_Buy_Bollinger_3());
+                    add(new ThreeDisplays_Buy_Bollinger_4());
+                    add(new ThreeDisplays_Buy_EFI_1());
+                    add(new ThreeDisplays_Buy_EFI_2());
+                    add(new ThreeDisplays_Buy_EFI_3());
+                    add(new ThreeDisplays_Buy_Experiments());
                 }},
                 new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
     }
@@ -48,10 +48,18 @@ public class RunUtils {
 
     public static void testOneStrategy_() {
         testOneStrategy(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY,
-                new ThreeDisplays_Buy_4(),
+                new ThreeDisplays_Buy_3(),
                 new StopLossFixedPrice(0.27),
-                new TakeProfitFixedKeltnerTop(80));
+                new TakeProfitFixedKeltnerTop(50));
+    }
 
+    // сначала убирает исторические данные после этой даты
+    public static void testOneStrategyTrimTo(String date) {
+        Context.trimToDate = date;
+        testOneStrategy(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY,
+                new ThreeDisplays_Buy_3(),
+                new StopLossFixedPrice(0.27),
+                new TakeProfitFixedKeltnerTop(50));
     }
 
     public static void buyDaily() {

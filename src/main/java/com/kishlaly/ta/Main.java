@@ -21,8 +21,8 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500,
-                //SymbolsSource.SP500_RANDOM,
+                //SymbolsSource.SP500,
+                SymbolsSource.SP500_RANDOM,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
                 //SymbolsSource.SCREENER_MANY_P_1,
@@ -33,7 +33,7 @@ public class Main {
         };
 
         Context.testOnly = new ArrayList<String>() {{
-            add("AAPL");
+            add("KMI");
         }};
 
         Context.symbols = getSymbols();
@@ -45,8 +45,9 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
         //buyDaily();
-        //testStrategiesOnSpecificDate_("15.03.2022");
-        testOneStrategy_();
+        //testStrategiesOnSpecificDate_("16.03.2022");
+        //testOneStrategy_();
+        testOneStrategyTrimTo("16.03.2022");
         //buildTasksAndStrategiesSummary_();
 
 //        важное замечание: прошлый столбик на недельном графике должен быть зеленым.

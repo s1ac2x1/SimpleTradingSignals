@@ -12,8 +12,6 @@ public class EMA extends EntityWithDate {
     public EMA(final Long timestamp, final Double value) {
         super(timestamp);
         this.value = value;
-        this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
-        this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
     }
 
     public Long getTimestamp() {
@@ -26,22 +24,6 @@ public class EMA extends EntityWithDate {
 
     public void setTimestamp(final Long timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public String getNativeDate() {
-        return this.nativeDate;
-    }
-
-    public void setNativeDate(final String nativeDate) {
-        this.nativeDate = nativeDate;
-    }
-
-    public String getMyDate() {
-        return this.myDate;
-    }
-
-    public void setMyDate(final String myDate) {
-        this.myDate = myDate;
     }
 
     public void setValue(final Double value) {

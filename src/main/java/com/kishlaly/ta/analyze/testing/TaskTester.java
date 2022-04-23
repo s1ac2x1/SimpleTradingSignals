@@ -30,6 +30,7 @@ import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
+import static com.kishlaly.ta.utils.Dates.shortDateToZoned;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 import static java.lang.System.lineSeparator;
 
@@ -56,6 +57,10 @@ public class TaskTester {
                 List<BlockResult> blockResults = new ArrayList<>();
                 if (!isDataFilled(screen1, screen2)) {
                     return;
+                }
+                if (Context.trimToDate != null) {
+                    ZonedDateTime filterAfterHere = shortDateToZoned(Context.trimToDate);
+                    screen1.quotes.stream().filter(quote -> quote.ge)
                 }
                 try {
                     while (hasHistory(screen1, screen2)) {
@@ -218,8 +223,8 @@ public class TaskTester {
         result += "\t" + testing.printTP() + lineSeparator();
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
         result += testing.printTPSLPercent() + "%" + lineSeparator();
-        double balance = testing.getBalance(); //TODO
-        result += "\tTotal balance = " + Numbers.round(balance) + lineSeparator();
+        double balance = testing.getBalance();
+        result += "\tTotal profit after " + Context.tradeCommission + "% commissions per trade = " + Numbers.round(balance) + lineSeparator();
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
@@ -269,6 +274,9 @@ public class TaskTester {
     }
 
     public static void testOneStrategy(Timeframe[][] timeframes, TaskType task, BlocksGroup blocksGroup, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+        if (Context.symbols.size() > 1) {
+            throw new RuntimeException("Only one symbol allowed here");
+        }
         Context.stopLossStrategy = stopLossStrategy;
         Context.takeProfitStrategy = takeProfitStrategy;
         System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
@@ -284,9 +292,7 @@ public class TaskTester {
         Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
         BlocksGroup[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
         List<HistoricalTesting> testings = Arrays.stream(blocksGroups).flatMap(blocksGroup -> test(timeframes, task, blocksGroup).stream()).collect(Collectors.toList());
-        String[] split = datePart.split("\\.");
-        String date = split[2] + "-" + split[1] + "-" + split[0] + "T09:30-04:00[US/Eastern]";
-        ZonedDateTime parsed = ZonedDateTime.parse(date);
+        ZonedDateTime parsed = shortDateToZoned(datePart);
         testings.forEach(testing -> {
             String groupName = testing.getBlocksGroup().getClass().getSimpleName();
             BlockResult blockResult = testing.getTaskResults().stream().filter(taskResult -> taskResult.getLastChartQuote().getTimestamp() == parsed.toEpochSecond()).findFirst().get();

@@ -33,8 +33,6 @@ public class Quote extends EntityWithDate implements Serializable {
 
     public void setTimestamp(final Long timestamp) {
         this.timestamp = timestamp;
-        this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
-        this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
     }
 
     public static String getExchangeTimezome() {
@@ -43,14 +41,6 @@ public class Quote extends EntityWithDate implements Serializable {
 
     public static void setExchangeTimezome(final String exchangeTimezome) {
         Quote.exchangeTimezome = exchangeTimezome;
-    }
-
-    public String getNativeDate() {
-        return this.nativeDate;
-    }
-
-    public String getMyDate() {
-        return this.myDate;
     }
 
     public double getHigh() {
