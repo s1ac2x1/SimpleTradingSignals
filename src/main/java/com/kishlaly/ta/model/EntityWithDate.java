@@ -19,4 +19,28 @@ public abstract class EntityWithDate {
         this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome);
         this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome);
     }
+
+    public static String getExchangeTimezome() {
+        return EntityWithDate.exchangeTimezome;
+    }
+
+    public static void setExchangeTimezome(final String exchangeTimezome) {
+        EntityWithDate.exchangeTimezome = exchangeTimezome;
+    }
+
+    public ZonedDateTime getNativeDate() {
+        return this.nativeDate;
+    }
+
+    public void setNativeDate(final ZonedDateTime nativeDate) {
+        this.nativeDate = nativeDate;
+    }
+
+    public ZonedDateTime getMyDate() {
+        return this.myDate;
+    }
+
+    public void setMyDate(final ZonedDateTime myDate) {
+        this.myDate = myDate;
+    }
 }

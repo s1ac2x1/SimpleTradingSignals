@@ -60,7 +60,12 @@ public class TaskTester {
                 }
                 if (Context.trimToDate != null) {
                     ZonedDateTime filterAfterHere = shortDateToZoned(Context.trimToDate);
-                    screen1.quotes.stream().filter(quote -> quote.ge)
+
+                    screen1.quotes = screen1.quotes.stream().filter(quote -> quote.getNativeDate().isBefore(filterAfterHere) || quote.getNativeDate().isEqual(filterAfterHere)).collect(Collectors.toList());
+                    Collections.sort(screen1.quotes, Comparator.comparing(Quote::getTimestamp));
+
+                    screen2.quotes = screen2.quotes.stream().filter(quote -> quote.getNativeDate().isBefore(filterAfterHere) || quote.getNativeDate().isEqual(filterAfterHere)).collect(Collectors.toList());
+                    Collections.sort(screen2.quotes, Comparator.comparing(Quote::getTimestamp));
                 }
                 try {
                     while (hasHistory(screen1, screen2)) {
