@@ -47,6 +47,22 @@ public class MACD extends EntityWithDate {
         this.histogram = histogram;
     }
 
+    public String getNativeDate() {
+        return this.nativeDate;
+    }
+
+    public void setNativeDate(final String nativeDate) {
+        this.nativeDate = nativeDate;
+    }
+
+    public String getMyDate() {
+        return this.myDate;
+    }
+
+    public void setMyDate(final String myDate) {
+        this.myDate = myDate;
+    }
+
     public boolean valuesPresent() {
         return !Double.isNaN(macd) && !Double.isNaN(signal) && !Double.isNaN(histogram);
     }

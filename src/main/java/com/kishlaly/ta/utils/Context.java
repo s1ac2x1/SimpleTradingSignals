@@ -30,7 +30,6 @@ public class Context {
     public static List<String> testOnly = new ArrayList<>();
     public static Set<String> symbols;
     public static int yearsToAnalyze = 5;
-
     public static boolean lowPricesOnly;
     public static int lowPriceLimit = 20;
 
@@ -62,6 +61,5 @@ public class Context {
     // разное
     public static boolean trendCheckIncludeHistogram = true;
     public static boolean TRIM_DATA = true;
-    public static String trimToDate;
 
 }

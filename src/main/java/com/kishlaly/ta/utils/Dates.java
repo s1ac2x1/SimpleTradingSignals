@@ -102,13 +102,6 @@ public class Dates {
         }
     }
 
-    public static ZonedDateTime shortDateToZoned(String datePart) {
-        String[] split = datePart.split("\\.");
-        String date = split[2] + "-" + split[1] + "-" + split[0] + "T09:30-04:00[US/Eastern]";
-        ZonedDateTime parsed = ZonedDateTime.parse(date);
-        return parsed;
-    }
-
     public static void main(String[] args) {
         System.out.println(getDuration(Timeframe.DAY, 1632749400, 1633008600));
     }
