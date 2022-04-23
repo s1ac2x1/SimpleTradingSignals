@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class Context {
 
-    public static double accountBalance = 10.000; // максимальный размер позиции
+    public static double accountBalance = 10_000; // максимальный размер позиции
     public static double tradeCommission = 1; // процент с каждой сделки
 
     public enum ApiSource {

@@ -15,7 +15,7 @@ public class Numbers {
         if (Double.isNaN(value) || value == 0) {
             return 0;
         }
-        return BigDecimal.valueOf(value).setScale(0, BigDecimal.ROUND_DOWN).intValue();
+        return BigDecimal.valueOf(value).setScale(2, BigDecimal.ROUND_DOWN).intValue();
     }
 
     public static double roi(double initialCost, double currentCost) {

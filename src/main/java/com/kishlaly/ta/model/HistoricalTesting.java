@@ -177,7 +177,7 @@ public class HistoricalTesting {
         return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getProfit()).sum());
+                .mapToDouble(entry -> entry.getValue().getProfit() - entry.getValue().getCommissions()).sum());
     }
 
     public double getAverageRoi() {
@@ -191,7 +191,7 @@ public class HistoricalTesting {
         return Numbers.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
-                .mapToDouble(entry -> entry.getValue().getLoss()).sum());
+                .mapToDouble(entry -> entry.getValue().getLoss() - entry.getValue().getCommissions()).sum());
     }
 
     public PositionTestResult searchSignalByLongestPosition() {
@@ -258,6 +258,7 @@ public class HistoricalTesting {
         private double openPositionCost;
         private double closePositionPrice;
         private double closePositionCost;
+        private double commissions;
 
         private boolean closed;
 
@@ -302,6 +303,14 @@ public class HistoricalTesting {
 
         public void setProfit(final double profit) {
             this.profit = profit;
+        }
+
+        public double getCommissions() {
+            return this.commissions;
+        }
+
+        public void setCommissions(final double commissions) {
+            this.commissions = commissions;
         }
 
         public double getLoss() {

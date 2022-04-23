@@ -20,10 +20,12 @@ public class Test {
         String symbol = "KMI";
         SymbolData screen2 = getSymbolData(THREE_DISPLAYS_BUY.getTimeframeIndicators(2), symbol);
 
-        int accountBalance = 100;
-        double price = 15.05;
-        int lots = Numbers.roundDown(accountBalance / price);
-        System.out.println(lots);
+        double openingPrice = 100;
+        int lots = Numbers.roundDown(Context.accountBalance / openingPrice);
+        double openPositionSize = lots * openingPrice;
+        double commissions = openPositionSize / 100 * Context.tradeCommission;
+        System.out.println(openPositionSize);
+        System.out.println(commissions);
     }
 
 }

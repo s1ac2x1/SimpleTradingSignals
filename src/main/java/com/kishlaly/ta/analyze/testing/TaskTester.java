@@ -219,8 +219,7 @@ public class TaskTester {
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
         result += testing.printTPSLPercent() + "%" + lineSeparator();
         double balance = testing.getBalance(); //TODO
-        balance = balance - balance / 100 * 15;
-        result += "\tTotal balance (minus 15% commissions) = " + Numbers.round(balance) + lineSeparator();
+        result += "\tTotal balance = " + Numbers.round(balance) + lineSeparator();
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
@@ -347,6 +346,7 @@ public class TaskTester {
             double openingPrice = signal.getClose() + 0.07;
             int lots = Numbers.roundDown(Context.accountBalance / openingPrice);
             double openPositionSize = lots * openingPrice;
+            double commissions = openPositionSize / 100 * Context.tradeCommission;
 
             boolean skip = openingPrice > takeProfit;
 
@@ -387,7 +387,7 @@ public class TaskTester {
                     if (gapUp) {
                         takeProfit = nextQuote.getOpen();
                     }
-                    double closingPositionSize = Context.lots * takeProfit;
+                    double closingPositionSize = lots * takeProfit;
                     profit = closingPositionSize - openPositionSize;
                     roi = Numbers.roi(openPositionSize, closingPositionSize);
                     profitable = true;
@@ -405,7 +405,7 @@ public class TaskTester {
                     if (gapDown) {
                         stopLoss = nextQuote.getOpen();
                     }
-                    double closingPositionSize = Context.lots * stopLoss;
+                    double closingPositionSize = lots * stopLoss;
                     loss = closingPositionSize - openPositionSize;
                     closePositionQuote = nextQuote;
                     caughtGapDown = gapDown;
@@ -429,6 +429,7 @@ public class TaskTester {
                 positionTestResult.setClosed(true);
                 positionTestResult.setProfitable(profitable);
                 positionTestResult.setProfit(profit);
+                positionTestResult.setCommissions(commissions);
                 positionTestResult.setLoss(loss);
                 positionTestResult.setGapUp(caughtGapUp);
                 positionTestResult.setGapDown(caughtGapDown);
