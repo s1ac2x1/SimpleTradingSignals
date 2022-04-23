@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.analyze.testing.TaskTester.testOneStrategy;
-import static com.kishlaly.ta.analyze.testing.TaskTester.testStrategiesOnSpecificDate;
+import static com.kishlaly.ta.analyze.testing.TaskTester.testAllStrategiesOnSpecificDate;
 import static com.kishlaly.ta.cache.CacheBuilder.buildTasksAndStrategiesSummary;
 
 public class RunUtils {
@@ -37,7 +37,7 @@ public class RunUtils {
     }
 
     public static void testStrategiesOnSpecificDate_(String date) {
-        testStrategiesOnSpecificDate(date, THREE_DISPLAYS_BUY, new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}});
+        testAllStrategiesOnSpecificDate(date, THREE_DISPLAYS_BUY, new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}});
     }
 
     public static void testOneStrategy_() {

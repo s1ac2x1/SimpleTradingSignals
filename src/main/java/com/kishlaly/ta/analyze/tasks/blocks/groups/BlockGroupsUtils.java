@@ -16,13 +16,17 @@ public class BlockGroupsUtils {
                         new ThreeDisplays_Buy_6(),
                         new ThreeDisplays_Buy_7(),
                         new ThreeDisplays_Buy_8(),
+                        new ThreeDisplays_Buy_9(),
                         new FirstScreen_Buy_1(),
                         new ThreeDisplays_Buy_Bollinger_1(),
                         new ThreeDisplays_Buy_Bollinger_1_2(),
+                        new ThreeDisplays_Buy_Bollinger_2(),
                         new ThreeDisplays_Buy_Bollinger_3(),
+                        new ThreeDisplays_Buy_Bollinger_4(),
                         new ThreeDisplays_Buy_Experiments(),
                         new ThreeDisplays_Buy_EFI_1(),
                         new ThreeDisplays_Buy_EFI_2(),
+                        new ThreeDisplays_Buy_EFI_3(),
                 };
             default:
                 return new BlocksGroup[]{};

@@ -277,11 +277,11 @@ public class TaskTester {
         test(timeframes, task, blocksGroup);
     }
 
-    public static void testStrategiesOnSpecificDate(String datePart, TaskType task, Timeframe[][] timeframes) {
+    public static void testAllStrategiesOnSpecificDate(String datePart, TaskType task, Timeframe[][] timeframes) {
         if (Context.symbols.size() > 1) {
-            throw new RuntimeException("Only ony symbol allowed here");
+            throw new RuntimeException("Only one symbol allowed here");
         }
-        // тут не важны стратегии тестирования позиций, важен отчет в какой дате был сигнал или почему нет
+        // тут не важны SL/TP, а важно какой сигнал или код ошибки в конкретной дате
         Context.stopLossStrategy = new StopLossFixedPrice(0.27);
         Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
         BlocksGroup[] blocksGroups = BlockGroupsUtils.getAllGroups(task);

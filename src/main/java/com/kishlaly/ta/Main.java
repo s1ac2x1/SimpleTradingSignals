@@ -7,6 +7,7 @@ import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 import static com.kishlaly.ta.utils.RunUtils.buyDaily;
+import static com.kishlaly.ta.utils.RunUtils.testStrategiesOnSpecificDate_;
 
 /**
  * @author Vladimir Kishlaly
@@ -41,8 +42,8 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        buyDaily();
-        //buyWeekly();
+        //buyDaily();
+        testStrategiesOnSpecificDate_("15.03.2022");
 
 //        важное замечание: прошлый столбик на недельном графике должен быть зеленым.
 //        Проверить у всех стратегий, включающих первый экран
