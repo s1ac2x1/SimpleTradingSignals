@@ -41,7 +41,7 @@ public class Long_ScreenTwo_Bollinger_Low_X_Of_Y_LastBarsCrossed implements Scre
 
         if (crossed < BOLLINGER_CROSSED_BOTTOM_BARS) {
             Log.recordCode(LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2, screen);
-            Log.addDebugLine("Последний столбик выше EMA на втором экране");
+            Log.addDebugLine("X из последних Y столбиков не коснулись нижней ленты Боллинжера");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

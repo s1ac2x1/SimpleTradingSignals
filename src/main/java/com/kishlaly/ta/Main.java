@@ -5,9 +5,10 @@ import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
+import java.util.ArrayList;
+
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
-import static com.kishlaly.ta.utils.RunUtils.buyDaily;
-import static com.kishlaly.ta.utils.RunUtils.testStrategiesOnSpecificDate_;
+import static com.kishlaly.ta.utils.RunUtils.*;
 
 /**
  * @author Vladimir Kishlaly
@@ -30,9 +31,9 @@ public class Main {
                 //SymbolsSource.TEST
         };
 
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("AAPL");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("AAPL");
+        }};
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -43,7 +44,9 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
         //buyDaily();
-        testStrategiesOnSpecificDate_("15.03.2022");
+        //testStrategiesOnSpecificDate_("15.03.2022");
+        //testOneStrategy_();
+        buildTasksAndStrategiesSummary_();
 
 //        важное замечание: прошлый столбик на недельном графике должен быть зеленым.
 //        Проверить у всех стратегий, включающих первый экран
