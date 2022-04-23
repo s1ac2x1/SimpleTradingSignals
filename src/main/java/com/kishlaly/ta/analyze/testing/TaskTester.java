@@ -115,7 +115,6 @@ public class TaskTester {
                 screen1 = null;
                 screen2 = null;
             });
-            IndicatorsInMemoryCache.clear();
             if (!Context.massTesting) {
                 readableOutput.forEach((key, data) -> {
                     data.forEach(line -> log.append("    " + line).append(lineSeparator()));

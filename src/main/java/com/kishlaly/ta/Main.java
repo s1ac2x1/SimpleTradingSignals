@@ -22,6 +22,7 @@ public class Main {
 
         Context.source = new SymbolsSource[]{
                 SymbolsSource.SP500,
+                //SymbolsSource.SP500_RANDOM,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
                 //SymbolsSource.SCREENER_MANY_P_1,
@@ -45,8 +46,8 @@ public class Main {
 
         //buyDaily();
         //testStrategiesOnSpecificDate_("15.03.2022");
-        //testOneStrategy_();
-        buildTasksAndStrategiesSummary_();
+        testOneStrategy_();
+        //buildTasksAndStrategiesSummary_();
 
 //        важное замечание: прошлый столбик на недельном графике должен быть зеленым.
 //        Проверить у всех стратегий, включающих первый экран
