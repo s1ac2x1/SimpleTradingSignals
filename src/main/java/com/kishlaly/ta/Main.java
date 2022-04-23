@@ -6,6 +6,7 @@ import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
+import static com.kishlaly.ta.utils.RunUtils.buyDaily;
 
 /**
  * @author Vladimir Kishlaly
@@ -40,8 +41,8 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        //buyDaily(timeframes);
-        //buyWeekly(timeframes);
+        buyDaily();
+        //buyWeekly();
 
 //        важное замечание: прошлый столбик на недельном графике должен быть зеленым.
 //        Проверить у всех стратегий, включающих первый экран
