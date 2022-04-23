@@ -1,21 +1,10 @@
 package com.kishlaly.ta;
 
-import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
-import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
-import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import java.util.ArrayList;
-
-import static com.kishlaly.ta.analyze.TaskRunner.run;
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
-import static com.kishlaly.ta.analyze.testing.TaskTester.testOneStrategy;
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
-import static com.kishlaly.ta.cache.CacheBuilder.buildTasksAndStrategiesSummary;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 
 /**
@@ -27,11 +16,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         Context.aggregationTimeframe = Timeframe.DAY;
-
-        Timeframe[][] timeframes = {
-                {Timeframe.WEEK, Timeframe.DAY},
-//                {Timeframe.DAY, Timeframe.HOUR},
-        };
 
         Context.source = new SymbolsSource[]{
                 SymbolsSource.SP500,
@@ -51,20 +35,17 @@ public class Main {
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
 
-//        buildCache(timeframes, false);
+//        buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
 
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        buyDaily(timeframes);
+        //buyDaily(timeframes);
         //buyWeekly(timeframes);
 
-//        testOneStrategy(timeframes,
-//                THREE_DISPLAYS_BUY, new ThreeDisplays_Buy_Bollinger_3(),
-//                new StopLossFixedPrice(0.27),
-//                new TakeProfitFixedKeltnerTop(50));
+//        важное замечание: прошлый столбик на недельном графике должен быть зеленым.
+//        Проверить у всех стратегий, включающих первый экран
 
-//        testStrategiesOnSpecificDate("15.03.2022", THREE_DISPLAYS_BUY, timeframes);
 
 //        закончить стратегии по EFI
 //           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля и проверить
@@ -80,46 +61,6 @@ public class Main {
 
 // было бы здорово протестировать декартово произведение всех групп
 
-//        buildTasksAndStrategiesSummary(
-//                timeframes,
-//                THREE_DISPLAYS_BUY,
-//                new ArrayList<BlocksGroup>(){{
-//                    add(new ThreeDisplays_Buy_1());
-//                    add(new ThreeDisplays_Buy_2());
-//                    add(new ThreeDisplays_Buy_3());
-//                    add(new ThreeDisplays_Buy_4());
-//                    add(new ThreeDisplays_Buy_5());
-//                    add(new ThreeDisplays_Buy_6());
-//                    add(new ThreeDisplays_Buy_7());
-//                    add(new ThreeDisplays_Buy_8());
-//                    add(new ThreeDisplays_Buy_9());
-//                    add(new ThreeDisplays_Buy_Bollinger_1_2());
-//                    add(new ThreeDisplays_Buy_Bollinger_2());
-//                    add(new ThreeDisplays_Buy_Experiments());
-//                }},
-//                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
 
     }
-
-    private static void buyDaily(Timeframe[][] timeframes) {
-        Context.runGroups = Timeframe.DAY;
-        run(timeframes, THREE_DISPLAYS_BUY, false,
-                new ThreeDisplays_Buy_1(),
-                new ThreeDisplays_Buy_2(),
-                new ThreeDisplays_Buy_4(),
-                new ThreeDisplays_Buy_8(),
-                new ThreeDisplays_Buy_9(),
-                new ThreeDisplays_Buy_Bollinger_1_2(),
-                new ThreeDisplays_Buy_Bollinger_2()
-        );
-    }
-
-    private static void buyWeekly(Timeframe[][] timeframes) {
-        Context.runGroups = Timeframe.WEEK;
-        run(timeframes, THREE_DISPLAYS_BUY, false,
-                new FirstScreen_Buy_1()
-                //new FirstScreen_Buy_2()
-        );
-    }
-
 }
