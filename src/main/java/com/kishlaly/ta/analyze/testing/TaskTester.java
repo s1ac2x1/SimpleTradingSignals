@@ -219,7 +219,7 @@ public class TaskTester {
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
         result += testing.printTPSLPercent() + "%" + lineSeparator();
         double balance = testing.getBalance();
-        result += "\tTotal profit after " + Context.tradeCommission + "% commissions = " + Numbers.round(balance) + lineSeparator();
+        result += "\tTotal profit after " + Context.tradeCommission + "% commissions per trade = " + Numbers.round(balance) + lineSeparator();
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
