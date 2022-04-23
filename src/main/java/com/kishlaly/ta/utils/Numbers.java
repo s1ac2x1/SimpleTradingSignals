@@ -11,6 +11,13 @@ public class Numbers {
         return BigDecimal.valueOf(value).setScale(2, BigDecimal.ROUND_UP).doubleValue();
     }
 
+    public static int roundDown(double value) {
+        if (Double.isNaN(value) || value == 0) {
+            return 0;
+        }
+        return BigDecimal.valueOf(value).setScale(0, BigDecimal.ROUND_DOWN).intValue();
+    }
+
     public static double roi(double initialCost, double currentCost) {
         double result = (currentCost - initialCost) / initialCost * 100;
         return round(result);

@@ -13,6 +13,9 @@ import java.util.Set;
 
 public class Context {
 
+    public static double accountBalance = 10.000; // максимальный размер позиции
+    public static double tradeCommission = 1; // процент с каждой сделки
+
     public enum ApiSource {
         RAPID, ALPHAVANTAGE, MARKETSTACK
     }
@@ -50,7 +53,6 @@ public class Context {
 
     // для тестирования на истоирческих данных
     public static boolean testMode;
-    public static double lots = 100;
     public static StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
     public static TakeProfitStrategy takeProfitStrategy = new TakeProfitFixedKeltnerTop(80);
     public static boolean massTesting;

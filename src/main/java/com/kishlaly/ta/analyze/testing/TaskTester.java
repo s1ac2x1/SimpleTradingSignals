@@ -218,7 +218,7 @@ public class TaskTester {
         result += "\t" + testing.printTP() + lineSeparator();
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
         result += testing.printTPSLPercent() + "%" + lineSeparator();
-        double balance = testing.getBalance();
+        double balance = testing.getBalance(); //TODO
         balance = balance - balance / 100 * 15;
         result += "\tTotal balance (minus 15% commissions) = " + Numbers.round(balance) + lineSeparator();
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + lineSeparator();
@@ -345,7 +345,8 @@ public class TaskTester {
             double takeProfit = takeProfitStrategy.calcualte(data, signalIndex);
 
             double openingPrice = signal.getClose() + 0.07;
-            double openPositionSize = Context.lots * openingPrice;
+            int lots = Numbers.roundDown(Context.accountBalance / openingPrice);
+            double openPositionSize = lots * openingPrice;
 
             boolean skip = openingPrice > takeProfit;
 
