@@ -39,7 +39,7 @@ public class RunUtils {
 //                    add(new ThreeDisplays_Buy_EFI_3());
 //                    add(new ThreeDisplays_Buy_Experiments());
                 }},
-                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(50));
+                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(75));
     }
 
     public static void testStrategiesOnSpecificDate_(String date) {
