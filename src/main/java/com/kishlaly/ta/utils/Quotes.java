@@ -178,5 +178,9 @@ public class Quotes {
         return quote.getLow() <= keltner.getLow() && quote.getHigh() >= keltner.getLow();
     }
 
+    public static boolean isGreen(Quote quote) {
+        return quote.getClose() > quote.getOpen();
+    }
+
 
 }
