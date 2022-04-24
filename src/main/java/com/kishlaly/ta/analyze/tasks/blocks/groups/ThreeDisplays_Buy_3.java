@@ -42,7 +42,7 @@ public class ThreeDisplays_Buy_3 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Проверить";
+        return "На втором месте по эффективности?";
     }
 
 }

@@ -22,8 +22,8 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500,
-                //SymbolsSource.SP500_RANDOM,
+                //SymbolsSource.SP500,
+                SymbolsSource.SP500_RANDOM,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
                 //SymbolsSource.SCREENER_MANY_P_1,
@@ -33,9 +33,9 @@ public class Main {
                 //SymbolsSource.TEST
         };
 
-        Context.testOnly = new ArrayList<String>() {{
-            add("AAPL");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("AAPL");
+//        }};
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -48,8 +48,8 @@ public class Main {
 
         //buyDaily();
         //testStrategiesOnSpecificDate_("15.03.2022");
-        testOneStrategy_();
-        //buildTasksAndStrategiesSummary_();
+        //testOneStrategy_();
+        buildTasksAndStrategiesSummary_();
 
         // Проверить Long_ScreenOne_SoftTrendCheck у всех стратегий, включающих первый экран
 

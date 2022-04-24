@@ -15,8 +15,8 @@ public class ThreeDisplays_Buy_2 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            //add(new Long_ScreenOne_StrictTrendCheck());
-            add(new Long_ScreenOne_EMA_ThreeAscending());
+            add(new Long_ScreenOne_StrictTrendCheck());
+            //add(new Long_ScreenOne_EMA_ThreeAscending());
 
             add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
             add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversold());
