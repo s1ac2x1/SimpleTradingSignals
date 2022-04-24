@@ -21,7 +21,7 @@ public class Long_ScreenOne_EMA_LastCrossesOrAbove implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         Quote lastQuote = screen.getLastQuote();
-        List<EMA> screen_2_EMA26 = screen.indicators.get(Indicator.EMA26);
+        List<EMA> screen_2_EMA26 = (List<EMA>) screen.indicators.get(Indicator.EMA26);
         EMA lastEMA26 = CollectionsTools.getFromEnd(screen_2_EMA26, 1);
         boolean lastBarCrossing = Quotes.isQuoteCrossedEMA(lastQuote, lastEMA26.getValue());
         boolean lastBarAbove = Quotes.isQuoteAboveEMA(lastQuote, lastEMA26.getValue());

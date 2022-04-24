@@ -17,7 +17,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 public class Long_ScreenTwo_MACD_LastAscending implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<MACD> screen_2_MACD = screen.indicators.get(Indicator.MACD);
+        List<MACD> screen_2_MACD = (List<MACD>) screen.indicators.get(Indicator.MACD);
         MACD screen_2_lastMACD = screen_2_MACD.get(screen_2_MACD.size() - 1);
         MACD screen_2_preLastMACD = screen_2_MACD.get(screen_2_MACD.size() - 2);
 

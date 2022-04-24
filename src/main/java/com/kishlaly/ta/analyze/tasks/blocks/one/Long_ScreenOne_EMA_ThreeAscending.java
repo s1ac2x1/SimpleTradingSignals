@@ -18,7 +18,7 @@ import static com.kishlaly.ta.utils.Quotes.isQuoteCrossedEMA;
 public class Long_ScreenOne_EMA_ThreeAscending implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<EMA> screen_1_EMA26 = screen.indicators.get(Indicator.EMA26);
+        List<EMA> screen_1_EMA26 = (List<EMA>) screen.indicators.get(Indicator.EMA26);
         EMA ema3 = CollectionsTools.getFromEnd(screen_1_EMA26, 3);
         EMA ema2 = CollectionsTools.getFromEnd(screen_1_EMA26, 2);
         EMA ema1 = CollectionsTools.getFromEnd(screen_1_EMA26, 1);

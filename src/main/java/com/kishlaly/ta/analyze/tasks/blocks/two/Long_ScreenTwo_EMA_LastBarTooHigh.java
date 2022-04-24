@@ -23,7 +23,7 @@ public class Long_ScreenTwo_EMA_LastBarTooHigh implements ScreenTwoBlock {
         Quote quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
         Quote quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
         Quote quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
-        List<EMA> screen_2_EMA13 = screen.indicators.get(Indicator.EMA13);
+        List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
         int screen_2_EMA13Count = screen_2_EMA13.size();
 
         boolean thirdCrossesEMA13 = quote3.getLow() < screen_2_EMA13.get(screen_2_EMA13Count - 3).getValue()

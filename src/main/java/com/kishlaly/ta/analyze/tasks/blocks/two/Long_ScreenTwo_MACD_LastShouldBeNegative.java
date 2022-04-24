@@ -16,7 +16,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 public class Long_ScreenTwo_MACD_LastShouldBeNegative implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<MACD> screenTwoMacdValues = screen.indicators.get(Indicator.MACD);
+        List<MACD> screenTwoMacdValues = (List<MACD>) screen.indicators.get(Indicator.MACD);
         double latestHistogramValue = CollectionsTools.getFromEnd(screenTwoMacdValues, 1).getHistogram();
 
         if (latestHistogramValue > 0) {

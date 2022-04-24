@@ -21,7 +21,7 @@ public class Long_ScreenTwo_Bollinger_Low_PreLastBelow implements ScreenTwoBlock
     @Override
     public BlockResult check(SymbolData screen) {
         List<Quote> quotes = screen.quotes;
-        List<Bollinger> screen_2_Bollinger = screen.indicators.get(Indicator.BOLLINGER);
+        List<Bollinger> screen_2_Bollinger = (List<Bollinger>) screen.indicators.get(Indicator.BOLLINGER);
         Quote quote_2 = CollectionsTools.getFromEnd(quotes, 2);
         Bollinger bollinger_2 = CollectionsTools.getFromEnd(screen_2_Bollinger, 2);
 

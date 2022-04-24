@@ -17,4 +17,8 @@ public abstract class EntityWithDate {
         this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
         this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
     }
+
+    public Long getTimestamp() {
+        return this.timestamp;
+    }
 }

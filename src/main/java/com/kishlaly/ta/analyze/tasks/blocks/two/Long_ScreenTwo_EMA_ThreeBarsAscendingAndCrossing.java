@@ -22,7 +22,7 @@ public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenT
         Quote quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
         Quote quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
         Quote quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
-        List<EMA> screen_2_EMA13 = screen.indicators.get(Indicator.EMA13);
+        List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
 
         // обязательное условие 1
         // убедиться сначала, что high у последних трех столбиков повышается

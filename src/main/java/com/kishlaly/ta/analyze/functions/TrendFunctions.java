@@ -15,7 +15,7 @@ public class TrendFunctions {
 
     // Главные правила проверки:
     // 1. Как минимум пловина из N последних баров должна быть правильного цвета (зеленые на восходящем тренде или красные на нисходящем)
-    //    так же все N не должны открываться и закрываться выше EMA26 (тень может пересекать)
+    //    так же все N не должны открываться и закрываться выше EMA26 (тень может пересекать) TODO зачем так строго?
     // 2. ЕМА должна расти последовательно
     // 3. если гистограмма MACD не растет последовательно - нормально
     //    главное, чтобы она не спускалась последовательно при росте ЕМА
@@ -61,7 +61,7 @@ public class TrendFunctions {
     // на недельном графике из примера ценовой столбик находится на шестой по счету плавно снижающейся гистограмме, это опасно
     public static boolean uptrendCheckOnLastBar(SymbolData symbolData) {
         Quote lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
-        List<EMA> ema = symbolData.indicators.get(Indicator.EMA26);
+        List<EMA> ema = (List<EMA>) symbolData.indicators.get(Indicator.EMA26);
         double lastEMA = ema.get(ema.size() - 1).getValue();
         return lastQuote.getOpen() < lastEMA && lastQuote.getClose() > lastEMA;
     }
@@ -69,7 +69,7 @@ public class TrendFunctions {
     // зеркальная логика uptrendCheckOnLastBar
     public static boolean downtrendCheckOnLastBar(SymbolData symbolData) {
         Quote lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
-        List<EMA> ema = symbolData.indicators.get(Indicator.EMA26);
+        List<EMA> ema = (List<EMA>) symbolData.indicators.get(Indicator.EMA26);
         double lastEMA = ema.get(ema.size() - 1).getValue();
         return lastQuote.getOpen() > lastEMA && lastQuote.getClose() < lastEMA;
     }
@@ -86,9 +86,9 @@ public class TrendFunctions {
     ) {
         List<Quote> quotes = symbolData.quotes;
         quotes = quotes.subList(quotes.size() - minBarsCount, quotes.size());
-        List<EMA> ema = symbolData.indicators.get(Indicator.EMA26);
+        List<EMA> ema = (List<EMA>) symbolData.indicators.get(Indicator.EMA26);
         ema = ema.subList(ema.size() - minBarsCount, ema.size());
-        List<MACD> macd = symbolData.indicators.get(Indicator.MACD);
+        List<MACD> macd = (List<MACD>) symbolData.indicators.get(Indicator.MACD);
         macd = macd.subList(macd.size() - minBarsCount, macd.size());
 
         for (int i = quotes.size() - barsToCheck; i < quotes.size(); i++) {

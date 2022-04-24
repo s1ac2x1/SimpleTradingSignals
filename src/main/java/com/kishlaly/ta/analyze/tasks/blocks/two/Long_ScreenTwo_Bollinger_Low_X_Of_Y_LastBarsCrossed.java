@@ -28,7 +28,7 @@ public class Long_ScreenTwo_Bollinger_Low_X_Of_Y_LastBarsCrossed implements Scre
             throw new RuntimeException("BOLLINGER_CROSSED_BOTTOM_BARS not defined");
         }
 
-        List<Bollinger> screen_2_Bollinger = screen.indicators.get(Indicator.BOLLINGER);
+        List<Bollinger> screen_2_Bollinger = (List<Bollinger>) screen.indicators.get(Indicator.BOLLINGER);
 
         int crossed = 0;
         for (int i = screen_2_Bollinger.size() - BOLLINGER_TOTAL_BARS_CHECK; i < screen_2_Bollinger.size(); i++) {

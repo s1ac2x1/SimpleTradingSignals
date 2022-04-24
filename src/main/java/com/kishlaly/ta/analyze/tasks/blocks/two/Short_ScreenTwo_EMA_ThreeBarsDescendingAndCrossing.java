@@ -27,7 +27,7 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
         boolean descendingBarLow = quote3.getLow() > quote2.getLow() && quote2.getLow() < quote1.getLow();
         boolean descendingBarClose = quote3.getClose() > quote2.getClose() && quote2.getClose() > quote1.getClose();
 
-        List<EMA> screen_2_EMA13 = screen.indicators.get(Indicator.EMA13);
+        List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
 
         if (!descendingBarLow) {
             Log.recordCode(BlockResultCode.QUOTE_LOW_NOT_LOWING_SCREEN_2, screen);

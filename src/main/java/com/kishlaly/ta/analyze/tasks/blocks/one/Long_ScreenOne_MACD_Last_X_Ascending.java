@@ -9,7 +9,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
+import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.analyze.BlockResultCode.X_HISTOGRAMS_NOT_ASCENDING_SCREEN_1;
 
 /**
  * последние X гистограмм растут последовательно
@@ -20,7 +21,7 @@ public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlock {
         if (ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK < 0) {
             throw new RuntimeException("ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK not set");
         }
-        List<MACD> screen_1_MACD = screen.indicators.get(Indicator.MACD);
+        List<MACD> screen_1_MACD = (List<MACD>) screen.indicators.get(Indicator.MACD);
         int count = 0;
         for (int i = screen_1_MACD.size() - ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK; i < screen_1_MACD.size() - 1; i++) {
             Double currentValue = screen_1_MACD.get(i).getHistogram();
@@ -37,4 +38,5 @@ public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlock {
         }
         return new BlockResult(screen.getLastQuote(), OK);
     }
+
 }

@@ -20,7 +20,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
     @Override
     public BlockResult check(SymbolData screen) {
         int screenTwoMinBarCount = screen.quotes.size();
-        List<MACD> screenTwoMacdValues = screen.indicators.get(Indicator.MACD);
+        List<MACD> screenTwoMacdValues = (List<MACD>) screen.indicators.get(Indicator.MACD);
 
         // строим массив из котировок с их гистрограммами
 

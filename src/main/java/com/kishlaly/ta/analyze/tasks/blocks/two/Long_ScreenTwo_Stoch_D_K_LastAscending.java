@@ -17,7 +17,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_K_D_NOT_ASCENDING_SC
 public class Long_ScreenTwo_Stoch_D_K_LastAscending implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);
+        List<Stoch> screen_2_Stochastic = (List<Stoch>) screen.indicators.get(Indicator.STOCH);
         Stoch screen_2_lastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
         Stoch screen_2_preLastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
 

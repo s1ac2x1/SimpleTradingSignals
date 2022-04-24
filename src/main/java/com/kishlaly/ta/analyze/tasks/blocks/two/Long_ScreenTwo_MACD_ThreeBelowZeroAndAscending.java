@@ -18,7 +18,7 @@ public class Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending implements ScreenTwo
 
     @Override
     public BlockResult check(SymbolData screen) {
-        List<MACD> screen_2_MACD = screen.indicators.get(Indicator.MACD);
+        List<MACD> screen_2_MACD = (List<MACD>) screen.indicators.get(Indicator.MACD);
         Double macd3 = CollectionsTools.getFromEnd(screen_2_MACD, 3).getHistogram(); // 3 от правого края
         Double macd2 = CollectionsTools.getFromEnd(screen_2_MACD, 2).getHistogram(); // 2 от правого края
         Double macd1 = CollectionsTools.getFromEnd(screen_2_MACD, 1).getHistogram(); // последняя

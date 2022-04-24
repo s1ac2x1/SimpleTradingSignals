@@ -20,7 +20,7 @@ public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwo
     @Override
     public BlockResult check(SymbolData screen) {
         List<Quote> screen_2_Quotes = screen.quotes;
-        List<EMA> screen_2_EMA13 = screen.indicators.get(Indicator.EMA13);
+        List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
         // обязательное условие 1
         // убедиться сначала, что high у последних ДВУХ столбиков повышается
         Quote preLastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 2);

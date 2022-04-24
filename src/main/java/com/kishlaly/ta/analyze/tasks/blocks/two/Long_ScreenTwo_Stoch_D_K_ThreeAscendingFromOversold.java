@@ -15,7 +15,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_OVERSOLD;
 public class Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromOversold implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);
+        List<Stoch> screen_2_Stochastic = (List<Stoch>) screen.indicators.get(Indicator.STOCH);
         Stoch stoch3 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 3);
         Stoch stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
         Stoch stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);

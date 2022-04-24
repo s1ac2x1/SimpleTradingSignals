@@ -20,7 +20,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_VALUES_TO
 public class Long_ScreenTwo_Stoch_D_K_SomeWereOversold implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<Stoch> screen_2_Stochastic = screen.indicators.get(Indicator.STOCH);
+        List<Stoch> screen_2_Stochastic = (List<Stoch>) screen.indicators.get(Indicator.STOCH);
 
         boolean wasOversoldRecently = false;
         for (int i = screen_2_Stochastic.size() - STOCH_VALUES_TO_CHECK; i < screen_2_Stochastic.size(); i++) {

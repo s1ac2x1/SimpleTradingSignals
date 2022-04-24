@@ -3,8 +3,11 @@ package com.kishlaly.ta.analyze.candles.patterns;
 import com.kishlaly.ta.analyze.candles.CandlePattern;
 import com.kishlaly.ta.analyze.candles.CandleResult;
 import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.IndicatorUtils;
+
+import java.util.List;
 
 /**
  * Ситуация: бычий тренд становится восприимчивым к новым продавцам
@@ -23,7 +26,7 @@ public class HangingMan implements CandlePattern {
     @Override
     public CandleResult check(SymbolData screen) {
         // ЕМА растет
-        if (IndicatorUtils.emaAscending(screen.indicators.get(Indicator.EMA13), 3, 4)) {
+        if (IndicatorUtils.emaAscending((List<EMA>) screen.indicators.get(Indicator.EMA13), 3, 4)) {
             // Тело находится в верхней части ценового диапазона
         }
 

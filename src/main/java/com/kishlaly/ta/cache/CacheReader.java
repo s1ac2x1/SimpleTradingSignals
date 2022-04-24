@@ -3,10 +3,7 @@ package com.kishlaly.ta.cache;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.model.Quote;
-import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.Timeframe;
-import com.kishlaly.ta.model.TimeframeIndicators;
+import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
@@ -22,10 +19,13 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+
+import static com.kishlaly.ta.utils.Dates.shortDateToZoned;
 
 /**
  * @author Vladimir Kishlaly
@@ -147,6 +147,10 @@ public class CacheReader {
                 }
                 quotes = quotes.stream().filter(Quote::valuesPesent).collect(Collectors.toList());
                 Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
+                if (Context.trimToDate != null) {
+                    ZonedDateTime filterAfter = shortDateToZoned(Context.trimToDate);
+                    quotes = quotes.stream().filter(quote -> quote.getTimestamp() <= filterAfter.toEpochSecond()).collect(Collectors.toList());
+                }
                 QuotesInMemoryCache.put(symbol, Context.timeframe, quotes);
                 return quotes;
             } catch (IOException e) {
@@ -227,7 +231,7 @@ public class CacheReader {
         List<Quote> quotes = loadQuotesFromDiskCache(symbol);
         screen.quotes = quotes;
         Arrays.stream(timeframeIndicators.indicators).forEach(indicator -> {
-            List data = calculateIndicatorFromCachedQuotes(symbol, quotes, indicator);
+            List<? extends EntityWithDate> data = calculateIndicatorFromCachedQuotes(symbol, quotes, indicator);
             screen.indicators.put(indicator, data);
         });
         return screen;

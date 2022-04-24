@@ -20,7 +20,7 @@ public class Long_ScreenTwo_Keltner_Bottom_X_FromEndCrossed implements ScreenTwo
         if (QUOTE_FROM_END_TO_USE < 0) {
             throw new RuntimeException("QUOTE_FROM_END_TO_USE not defined");
         }
-        List<Keltner> screen_2_Keltner = screen.indicators.get(Indicator.KELTNER);
+        List<Keltner> screen_2_Keltner = (List<Keltner>) screen.indicators.get(Indicator.KELTNER);
         Keltner keltner = screen_2_Keltner.get(screen_2_Keltner.size() - 1 - QUOTE_FROM_END_TO_USE);
         Quote quote = screen.quotes.get(screen.quotes.size() - 1 - QUOTE_FROM_END_TO_USE);
 

@@ -1,6 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
+import com.kishlaly.ta.model.EntityWithDate;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.*;
@@ -16,9 +17,11 @@ import org.ta4j.core.indicators.keltner.KeltnerChannelMiddleIndicator;
 import org.ta4j.core.indicators.keltner.KeltnerChannelUpperIndicator;
 import org.ta4j.core.indicators.statistics.StandardDeviationIndicator;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.kishlaly.ta.utils.Dates.shortDateToZoned;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class IndicatorUtils {
@@ -36,6 +39,7 @@ public class IndicatorUtils {
                 result.add(new EMA(quotes.get(i).getTimestamp(), ema.getValue(i).doubleValue()));
             }
             result = result.stream().filter(EMA::valuesPresent).collect(Collectors.toList());
+            result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(EMA::getTimestamp));
             IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe, period, result);
             return result;
@@ -66,6 +70,7 @@ public class IndicatorUtils {
                 result.add(new MACD(quotes.get(i).getTimestamp(), 0d, 0d, histogram));
             }
             result = result.stream().filter(MACD::valuesPresent).collect(Collectors.toList());
+            result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(MACD::getTimestamp));
             IndicatorsInMemoryCache.putMACD(symbol, Context.timeframe, result);
             return result;
@@ -86,6 +91,7 @@ public class IndicatorUtils {
                 result.add(new Keltner(quotes.get(i).getTimestamp(), low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
             }
             result = result.stream().filter(Keltner::valuesPresent).collect(Collectors.toList());
+            result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(Keltner::getTimestamp));
             IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe, result);
             return result;
@@ -104,6 +110,7 @@ public class IndicatorUtils {
                 result.add(new ATR(quotes.get(i).getTimestamp(), atrIndicator.getValue(i).doubleValue()));
             }
             result = result.stream().filter(ATR::valuesPresent).collect(Collectors.toList());
+            result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(ATR::getTimestamp));
             IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result);
             return result;
@@ -126,22 +133,11 @@ public class IndicatorUtils {
                 }
             }
             result = result.stream().filter(Stoch::valuesPresent).collect(Collectors.toList());
+            result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(Stoch::getTimestamp));
             IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result);
             return result;
         }
-    }
-
-    public static void trim(SymbolData screen) {
-        Map<Indicator, List> trimmedIndicators = new HashMap();
-        screen.indicators.forEach((indicator, values) -> {
-            if (values == null || values.isEmpty()) {
-                trimmedIndicators.put(indicator, new ArrayList());
-            } else {
-                trimmedIndicators.put(indicator, values.subList(values.size() - resolveMinBarsCount(screen.timeframe), values.size()));
-            }
-        });
-        screen.indicators = trimmedIndicators;
     }
 
     public static List<Bollinger> buildBollingerBands(String symbol, List<Quote> quotes) {
@@ -165,6 +161,8 @@ public class IndicatorUtils {
                 } catch (NumberFormatException e) {
                 }
             }
+            Collections.sort(result, Comparator.comparing(Bollinger::getTimestamp));
+            result = trimToDate(result);
             IndicatorsInMemoryCache.putBollinger(symbol, Context.timeframe, result);
             return result;
         }
@@ -198,6 +196,7 @@ public class IndicatorUtils {
 //                double efiValue = (todayQuote.getClose() - yesterdayQuote.getClose()) * todayQuote.getVolume();
 //                result.add(new ElderForceIndex(todayQuote.getTimestamp(), efiValue));
 //            }
+            result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(ElderForceIndex::getTimestamp));
             IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result);
             return result;
@@ -217,6 +216,27 @@ public class IndicatorUtils {
             }
         }
         return ascendingCount >= atLeast;
+    }
+
+    public static void trim(SymbolData screen) {
+        Map<Indicator, List<? extends EntityWithDate>> trimmedIndicators = new HashMap();
+        screen.indicators.forEach((indicator, values) -> {
+            if (values == null || values.isEmpty()) {
+                trimmedIndicators.put(indicator, new ArrayList());
+            } else {
+                trimmedIndicators.put(indicator, values.subList(values.size() - resolveMinBarsCount(screen.timeframe), values.size()));
+            }
+        });
+        screen.indicators = trimmedIndicators;
+    }
+
+    private static <T extends EntityWithDate> List<T> trimToDate(List<T> src) {
+        if (Context.trimToDate != null) {
+            ZonedDateTime filterAfter = shortDateToZoned(Context.trimToDate);
+            return src.stream().filter(ind -> ind.getTimestamp() <= filterAfter.toEpochSecond()).collect(Collectors.toList());
+        } else {
+            return src;
+        }
     }
 
 }

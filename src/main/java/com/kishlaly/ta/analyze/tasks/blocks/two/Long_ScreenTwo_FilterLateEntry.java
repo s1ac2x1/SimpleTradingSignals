@@ -17,7 +17,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.FILTER_BY_KELTN
 public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<Keltner> screen_2_Keltner = screen.indicators.get(Indicator.KELTNER);
+        List<Keltner> screen_2_Keltner = (List<Keltner>) screen.indicators.get(Indicator.KELTNER);
         if (FILTER_BY_KELTNER_ENABLED) {
             Keltner lastKeltnerData = CollectionsTools.getFromEnd(screen_2_Keltner, 1);
             double lastQuoteClose = screen.getLastQuote().getClose();

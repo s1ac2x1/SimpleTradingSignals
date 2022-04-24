@@ -19,7 +19,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 public class Short_ScreenTwo_EMA_LastBarTooLow implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<EMA> screen_2_EMA13 = screen.indicators.get(Indicator.EMA13);
+        List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
         Quote quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
         Quote quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
         Quote quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);

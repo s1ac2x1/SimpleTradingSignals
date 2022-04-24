@@ -12,7 +12,6 @@ import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
-import com.kishlaly.ta.utils.Dates;
 import com.kishlaly.ta.utils.Numbers;
 
 import java.io.File;
@@ -58,15 +57,6 @@ public class TaskTester {
                 List<BlockResult> blockResults = new ArrayList<>();
                 if (!isDataFilled(screen1, screen2)) {
                     return;
-                }
-                if (Context.trimToDate != null) {
-                    ZonedDateTime filterAfter = shortDateToZoned(Context.trimToDate);
-
-                    screen1.quotes = screen1.quotes.stream().filter(quote -> quote.getTimestamp() <= filterAfter.toEpochSecond()).collect(Collectors.toList());
-                    Collections.sort(screen1.quotes, Comparator.comparing(Quote::getTimestamp));
-
-                    screen2.quotes = screen2.quotes.stream().filter(quote -> quote.getTimestamp() <= filterAfter.toEpochSecond()).collect(Collectors.toList());
-                    Collections.sort(screen2.quotes, Comparator.comparing(Quote::getTimestamp));
                 }
                 try {
                     while (hasHistory(screen1, screen2)) {
@@ -461,7 +451,7 @@ public class TaskTester {
 
     private static void rewind(SymbolData screen, int i) {
         screen.quotes = screen.quotes.subList(0, screen.quotes.size() - i);
-        Map<Indicator, List> indicators = new HashMap<>();
+        Map<Indicator, List<? extends EntityWithDate>> indicators = new HashMap<>();
         screen.indicators.forEach((indicator, data) -> {
             indicators.put(indicator, data.subList(0, data.size() - i));
         });

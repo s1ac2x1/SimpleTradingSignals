@@ -17,7 +17,7 @@ public class Long_ScreenTwo_MACD_ThreeBelowZeroAndFigureU implements ScreenTwoBl
 
     @Override
     public BlockResult check(SymbolData screen) {
-        List<MACD> screen_2_MACD = screen.indicators.get(Indicator.MACD);
+        List<MACD> screen_2_MACD = (List<MACD>) screen.indicators.get(Indicator.MACD);
         Double macd3 = screen_2_MACD.get(screen_2_MACD.size() - 3).getHistogram(); // 3 от правого края
         Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram(); // 2 от правого края
         Double macd1 = screen_2_MACD.get(screen_2_MACD.size() - 1).getHistogram(); // последняя

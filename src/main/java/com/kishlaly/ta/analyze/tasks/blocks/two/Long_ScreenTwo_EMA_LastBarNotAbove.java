@@ -18,7 +18,7 @@ import static com.kishlaly.ta.utils.Quotes.isQuoteAboveEMA;
 public class Long_ScreenTwo_EMA_LastBarNotAbove implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<EMA> screen_2_EMA13 = screen.indicators.get(Indicator.EMA13);
+        List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
         if (isQuoteAboveEMA(screen.getLastQuote(), screen_2_EMA13.get(screen_2_EMA13.size() - 1).getValue())) {
             Log.recordCode(LAST_QUOTE_ABOVE_EMA_SCREEN_2, screen);
             Log.addDebugLine("Последний столбик выше EMA на втором экране");

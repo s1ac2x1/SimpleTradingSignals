@@ -20,7 +20,7 @@ import static com.kishlaly.ta.utils.Quotes.isQuoteBelowEMA;
 public class Long_ScreenTwo_EMA_TwoBarsBelow implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<EMA> screen_2_EMA13 = screen.indicators.get(Indicator.EMA13);
+        List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
         EMA ema13_2 = CollectionsTools.getFromEnd(screen_2_EMA13, 2);
         EMA ema13_1 = CollectionsTools.getFromEnd(screen_2_EMA13, 1);
         List<Quote> screen_2_Quotes = screen.quotes;
