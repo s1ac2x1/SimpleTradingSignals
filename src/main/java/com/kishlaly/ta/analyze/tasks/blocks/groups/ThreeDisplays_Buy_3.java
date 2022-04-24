@@ -3,14 +3,10 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_ThreeAscending;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK;
 
 // вдохновитель [D] CFLT 20 Dec 2021
 // первый экран - нету
@@ -39,7 +35,6 @@ public class ThreeDisplays_Buy_3 implements BlocksGroup {
             add(new Long_ScreenTwo_Bars_LastGreen());
             add(new Long_ScreenTwo_Bars_TwoAscending());
             add(new Long_ScreenTwo_EMA_TwoBarsBelow());
-            //add(new Long_ScreenTwo_Bollinger_Low_X_Of_Y_LastBarsCrossed());
             add(new Long_ScreenTwo_FilterLateEntry());
         }};
     }

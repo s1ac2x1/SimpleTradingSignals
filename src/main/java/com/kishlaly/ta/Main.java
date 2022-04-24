@@ -34,12 +34,12 @@ public class Main {
         };
 
         Context.testOnly = new ArrayList<String>() {{
-            add("KMI");
+            add("AAPL");
         }};
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
-        Context.trimToDate = "16.03.2022";
+        //Context.trimToDate = "15.03.2022";
 
         //buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
 
@@ -51,8 +51,9 @@ public class Main {
         testOneStrategy_();
         //buildTasksAndStrategiesSummary_();
 
-//        важное замечание: прошлый столбик на недельном графике должен быть зеленым.
-//        Проверить у всех стратегий, включающих первый экран
+        важное замечание:
+        сделать проверку тренда на первом экране: 1) последнее ЕМА26 выше 2) последний столбик зеленый
+        Проверить у всех стратегий, включающих первый экран
 
 
 //        закончить стратегии по EFI

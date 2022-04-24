@@ -48,7 +48,7 @@ public class RunUtils {
 
     public static void testOneStrategy_() {
         testOneStrategy(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY,
-                new ThreeDisplays_Buy_2(),
+                new ThreeDisplays_Buy_3(),
                 new StopLossFixedPrice(0.27),
                 new TakeProfitFixedKeltnerTop(80));
 
