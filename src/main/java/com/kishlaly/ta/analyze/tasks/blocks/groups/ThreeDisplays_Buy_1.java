@@ -26,6 +26,6 @@ public class ThreeDisplays_Buy_1 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Часто хорошие результаты";
+        return "Часто хорошие результаты, низкое число SL";
     }
 }
