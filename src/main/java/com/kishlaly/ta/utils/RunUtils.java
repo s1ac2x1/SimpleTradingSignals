@@ -59,6 +59,7 @@ public class RunUtils {
         run(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY, false,
                 new ThreeDisplays_Buy_1(),
                 new ThreeDisplays_Buy_2(),
+                new ThreeDisplays_Buy_3(),
                 new ThreeDisplays_Buy_4(),
                 new ThreeDisplays_Buy_8(),
                 new ThreeDisplays_Buy_9(),
