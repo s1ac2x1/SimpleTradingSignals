@@ -52,7 +52,7 @@ public class Main {
         buildTasksAndStrategiesSummary_();
 
         // Проверить Long_ScreenOne_SoftTrendCheck у всех стратегий, включающих первый экран
-        попробовать расширить Long_ScreenOne_SoftTrendCheck и требовать ДВА послдених зеленых столбика
+        //попробовать расширить Long_ScreenOne_SoftTrendCheck и требовать ДВА послдених зеленых столбика
 
 
 //        закончить стратегии по EFI
