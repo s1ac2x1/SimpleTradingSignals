@@ -37,15 +37,6 @@ import static com.kishlaly.ta.utils.FilesUtil.writeToFile;
 
 public class CacheBuilder {
 
-    /**
-     * cache/
-     * -----{timeframe}/
-     * -----------------{symbol}_quotes.txt
-     * -----------------{symbol}_ema13.txt
-     * -----------------{symbol}_ema26.txt
-     * -----------------{symbol}_macd.txt
-     * -----------------{symbol}_stoch.txt
-     */
     public static void buildCache(Timeframe[][] timeframes, boolean reloadMissed) {
         String folder = Context.outputFolder + "/cache";
         File directory = new File(folder);
