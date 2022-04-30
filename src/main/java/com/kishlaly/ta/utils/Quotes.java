@@ -63,15 +63,15 @@ public class Quotes {
         List<Quote> dayQuotes = new ArrayList<>();
         List<Quote> duringDay = new ArrayList<>();
         for (int i = 0; i < hourQuotes.size() - 1; i++) {
-            Quote currentHour = hourQuotes.get(i);
-            DayOfWeek currentHourDay = Dates.getTimeInExchangeZone(currentHour.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
-            Quote nextHour = hourQuotes.get(i + 1);
-            DayOfWeek nextHourDay = Dates.getTimeInExchangeZone(nextHour.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
-            if (currentHourDay == nextHourDay) {
-                duringDay.add(nextHour);
+            Quote currentQuote = hourQuotes.get(i);
+            DayOfWeek currentQuoteDayOfWeek = Dates.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
+            Quote nextQuote = hourQuotes.get(i + 1);
+            DayOfWeek nextQuoteDayOfWeek = Dates.getTimeInExchangeZone(nextQuote.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
+            if (currentQuoteDayOfWeek == nextQuoteDayOfWeek) {
+                duringDay.add(nextQuote);
             } else {
                 collectDayQuote(duringDay, dayQuotes);
-                duringDay.add(nextHour);
+                duringDay.add(nextQuote);
             }
         }
         collectDayQuote(duringDay, dayQuotes);
