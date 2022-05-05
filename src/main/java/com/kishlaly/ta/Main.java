@@ -22,20 +22,20 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500,
+                //SymbolsSource.SP500,
                 //SymbolsSource.SP500_RANDOM,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                //SymbolsSource.SCREENER_MANY_P_1,
-                //SymbolsSource.SCREENER_MANY_P_2,
-                //SymbolsSource.SCREENER_MANY_P_3,
+                SymbolsSource.SCREENER_MANY_P_1,
+                SymbolsSource.SCREENER_MANY_P_2,
+                SymbolsSource.SCREENER_MANY_P_3,
                 //SymbolsSource.SCREENER_MANY_RANDOM
                 //SymbolsSource.TEST
         };
 
-        Context.testOnly = new ArrayList<String>() {{
-            add("AAPL");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("AAPL");
+//        }};
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -46,13 +46,24 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        //buyDaily();
-        testStrategiesOnSpecificDate_("15.03.2022");
+        buyDaily();
+        //testStrategiesOnSpecificDate_("15.03.2022");
         //testOneStrategy_();
         //buildTasksAndStrategiesSummary_();
 
         // Проверить Long_ScreenOne_SoftTrendCheck у всех стратегий, включающих первый экран
         // попробовать расширить Long_ScreenOne_SoftTrendCheck и требовать ДВА послдених зеленых столбика
+
+        // стратегия
+        // 1 экран: прошлые две гистограммы MACD ниже нуля
+        //          последняя выше
+        // 2 экран: последний столбик зеленый
+
+        // стратегия
+        // 1 экран: нет
+        // 2 экран: три котировки зеленые
+        //          три котировки растут (high & low)
+        //          последняя пересекает ЕМА13
 
 
 //        закончить стратегии по EFI
