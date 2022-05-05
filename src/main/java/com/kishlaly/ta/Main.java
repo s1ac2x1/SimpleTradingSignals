@@ -33,9 +33,9 @@ public class Main {
                 //SymbolsSource.TEST
         };
 
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("KMI");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("AAPL");
+        }};
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -46,8 +46,8 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        buyDaily();
-        //testStrategiesOnSpecificDate_("15.03.2022");
+        //buyDaily();
+        testStrategiesOnSpecificDate_("15.03.2022");
         //testOneStrategy_();
         //buildTasksAndStrategiesSummary_();
 
