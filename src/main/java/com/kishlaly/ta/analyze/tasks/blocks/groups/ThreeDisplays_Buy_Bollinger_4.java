@@ -26,6 +26,6 @@ public class ThreeDisplays_Buy_Bollinger_4 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Наблюдать: цена пересекла нижнюю ленту красным столбиком";
+        return "Наблюдать: цена пересекла нижнюю ленту";
     }
 }

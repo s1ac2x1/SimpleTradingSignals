@@ -33,22 +33,22 @@ public class Main {
                 //SymbolsSource.TEST
         };
 
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("AAPL");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("ILMN");
+        }};
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
         //Context.trimToDate = "15.03.2022";
 
-        buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
+        //buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
 
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
         //buyDaily();
         //testStrategiesOnSpecificDate_("15.03.2022");
-        //testOneStrategy_();
+        testOneStrategy_();
         //buildTasksAndStrategiesSummary_();
 
         // Проверить Long_ScreenOne_SoftTrendCheck у всех стратегий, включающих первый экран
@@ -64,6 +64,13 @@ public class Main {
         // 2 экран: три котировки зеленые
         //          три котировки растут (high & low)
         //          последняя пересекает ЕМА13
+
+        // стратегия
+        // 1 экран: две котировки зеленые high растут
+        //          предпоследняя ниже ЕМА26
+        // 2 экран: последний столбик зеленый
+
+        // что если покупать только у границы каналов? есть ли уже такие стратегии?
 
 
 //        закончить стратегии по EFI
