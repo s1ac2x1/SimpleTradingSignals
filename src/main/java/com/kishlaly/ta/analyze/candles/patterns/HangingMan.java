@@ -28,6 +28,7 @@ public class HangingMan implements CandlePattern {
         // ЕМА растет
         if (IndicatorUtils.emaAscending((List<EMA>) screen.indicators.get(Indicator.EMA13), 3, 4)) {
             // Тело находится в верхней части ценового диапазона
+
         }
 
         return CandleResult.NO_RESULT;

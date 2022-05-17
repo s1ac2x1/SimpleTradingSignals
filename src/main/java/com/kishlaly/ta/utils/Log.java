@@ -70,9 +70,9 @@ public class Log {
         builder.append("</table>");
         FilesUtil.appendToFile(filename, builder.toString());
 
-        if (!symbolToGroups.isEmpty()) {
-            SpreadsheetUtils.createOrUpdateSheet(symbolToGroups);
-        }
+//        if (!symbolToGroups.isEmpty()) {
+//            SpreadsheetUtils.createOrUpdateSheet(symbolToGroups);
+//        }
     }
 
     public static void saveSignal(String filename) {

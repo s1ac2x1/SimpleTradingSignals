@@ -22,13 +22,13 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 
         Context.source = new SymbolsSource[]{
-                //SymbolsSource.SP500,
+                SymbolsSource.SP500,
                 //SymbolsSource.SP500_RANDOM,
                 //SymbolsSource.NAGA,
                 //SymbolsSource.SCREENER_FILTERED
-                SymbolsSource.SCREENER_MANY_P_1,
-                SymbolsSource.SCREENER_MANY_P_2,
-                SymbolsSource.SCREENER_MANY_P_3,
+                //SymbolsSource.SCREENER_MANY_P_1,
+                //SymbolsSource.SCREENER_MANY_P_2,
+                //SymbolsSource.SCREENER_MANY_P_3,
                 //SymbolsSource.SCREENER_MANY_RANDOM
                 //SymbolsSource.TEST
         };
@@ -41,12 +41,12 @@ public class Main {
         Context.yearsToAnalyze = 5;
         //Context.trimToDate = "15.03.2022";
 
-        //buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
+        buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
 
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        buyDaily();
+        //buyDaily();
         //testStrategiesOnSpecificDate_("15.03.2022");
         //testOneStrategy_();
         //buildTasksAndStrategiesSummary_();
