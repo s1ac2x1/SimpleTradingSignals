@@ -2,6 +2,8 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ public class ThreeDisplays_Buy_5 implements BlocksGroup {
             add(new ScreenBasicValidation());
 
             // результат лучше без первого экрана
-            // add(new Long_ScreenOne_StrictTrendCheck());
+            //add(new Long_ScreenOne_StrictTrendCheck());
+            add(new Long_ScreenOne_SoftTrendCheck());
 
             add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndFigureU());
             add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversold());

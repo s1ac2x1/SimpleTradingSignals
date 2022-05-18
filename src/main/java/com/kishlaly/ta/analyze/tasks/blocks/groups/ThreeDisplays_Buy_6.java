@@ -3,6 +3,8 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 
@@ -27,6 +29,9 @@ public class ThreeDisplays_Buy_6 implements BlocksGroup {
 
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
+
+            //add(new Long_ScreenOne_StrictTrendCheck());
+            add(new Long_ScreenOne_SoftTrendCheck());
 
             add(new Long_ScreenTwo_MACD_LastAscending());
             add(new Long_ScreenTwo_Stoch_D_TwoOrOneBelow_X());
