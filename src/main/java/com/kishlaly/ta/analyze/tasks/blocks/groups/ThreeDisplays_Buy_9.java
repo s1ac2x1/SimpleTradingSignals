@@ -4,16 +4,14 @@ import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Первый экран
- * + строгая проверка тренда
- * Второй экран
+ * Первый экран: последняя ЕМА выше и последний столбик зеленый
+ * Второй экран:
  * + было пересечение нижней лены Боллинжера одним из последних трех баров
  * + вторая и первая с конца котировки зеленые
  * + вторая и первая с конца котировки ниже ЕМА13
@@ -33,7 +31,6 @@ public class ThreeDisplays_Buy_9 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            //add(new Long_ScreenOne_StrictTrendCheck());
             add(new Long_ScreenOne_SoftTrendCheck());
 
             add(new Long_ScreenTwo_Bollinger_Low_X_Of_Y_LastBarsCrossed());
@@ -47,6 +44,6 @@ public class ThreeDisplays_Buy_9 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Поиск плавного волнообразного подъема из перепроданности. Очень редкий сигнал, но крайне мало SL";
+        return "Поиск плавного волнообразного подъема из перепроданности";
     }
 }

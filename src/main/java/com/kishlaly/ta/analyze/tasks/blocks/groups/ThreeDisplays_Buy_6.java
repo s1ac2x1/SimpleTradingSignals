@@ -4,7 +4,6 @@ import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Первого экрана нету
+ * Первый экран: последняя ЕМА выше и последний столбик зеленый
  * Второй экран:
  * 1) последняя гистограмма MACD повысилась
  * 2) одно из двух значений %D стохастика меньше 20
@@ -44,6 +43,6 @@ public class ThreeDisplays_Buy_6 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Хорошая доходность, но число SL сильно перевешивает";
+        return "Вариация поиска подъема из перепроданности. Хорошая доходность и число позиций";
     }
 }

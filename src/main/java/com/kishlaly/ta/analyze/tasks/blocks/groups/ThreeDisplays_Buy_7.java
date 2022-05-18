@@ -3,14 +3,14 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.*;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // модификация ThreeDisplays_Buy_4 для поиска ультра коротких позиций
-// 1 экран: нет
+// 1 экран: последняя ЕМА выше и последний столбик зеленый
 // 2 экран: добавлена проверка, чтобы последняя котировка не поднималась выше 10% от середины канала
 //
 // TP 50-70% от канала
@@ -25,7 +25,6 @@ public class ThreeDisplays_Buy_7 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            //add(new Long_ScreenOne_StrictTrendCheck());
             add(new Long_ScreenOne_SoftTrendCheck());
 
             add(new Long_ScreenTwo_Bars_TwoHighAscending());
@@ -38,7 +37,7 @@ public class ThreeDisplays_Buy_7 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Лучшая доходность, но дикое количество позиций (TP больше)";
+        return "Хорошая доходность, но много позиций";
     }
 
 }

@@ -3,18 +3,15 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_ThreeAscending;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Первый экран
- * 1) повышение трех последних EMA26 (нету проверок гистограммы и столбиков)
- * Второй экран
+ * Первый экран: последняя ЕМА выше и последний столбик зеленый
+ * Второй экран:
  * 1) две последние котировки ниже ЕМА13
  * 2) две последние котировки повышаются (low & high растут)
  * 3) последняя котировка зеленая
@@ -32,8 +29,6 @@ public class ThreeDisplays_Buy_8 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            //add(new Long_ScreenOne_EMA_ThreeAscending());
-            //add(new Long_ScreenOne_StrictTrendCheck());
             add(new Long_ScreenOne_SoftTrendCheck());
 
             add(new Long_ScreenTwo_EMA_TwoBarsBelow());
@@ -51,6 +46,6 @@ public class ThreeDisplays_Buy_8 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Поиск сильной перепроданности, но чаще всего это продолжение медвежьего тренда";
+        return "Поиск сильной перепроданности";
     }
 }

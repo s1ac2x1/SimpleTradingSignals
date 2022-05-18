@@ -24,11 +24,11 @@ public class RunUtils {
 //                    add(new ThreeDisplays_Buy_2());
 //                    add(new ThreeDisplays_Buy_3());
 //                    add(new ThreeDisplays_Buy_4());
-//                    add(new ThreeDisplays_Buy_5());
+                    add(new ThreeDisplays_Buy_5());
 //                    add(new ThreeDisplays_Buy_6());
 //                    add(new ThreeDisplays_Buy_7());
 //                    add(new ThreeDisplays_Buy_8());
-                    add(new ThreeDisplays_Buy_9());
+//                    add(new ThreeDisplays_Buy_9());
 //                    add(new ThreeDisplays_Buy_Bollinger_1());
 //                    add(new ThreeDisplays_Buy_Bollinger_1_2());
 //                    add(new ThreeDisplays_Buy_Bollinger_2());
@@ -57,15 +57,15 @@ public class RunUtils {
     public static void buyDaily() {
         Context.runGroups = Timeframe.DAY;
         run(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY, false,
-                new ThreeDisplays_Buy_1(),
-                new ThreeDisplays_Buy_2(),
-                new ThreeDisplays_Buy_3(),
-                new ThreeDisplays_Buy_4(),
+//                new ThreeDisplays_Buy_1(),
+//                new ThreeDisplays_Buy_2(),
+//                new ThreeDisplays_Buy_3(),
+                new ThreeDisplays_Buy_4()
 //                new ThreeDisplays_Buy_5(),
-                new ThreeDisplays_Buy_6(),
-                new ThreeDisplays_Buy_7(),
-                new ThreeDisplays_Buy_8(),
-                new ThreeDisplays_Buy_9()
+//                new ThreeDisplays_Buy_6(),
+//                new ThreeDisplays_Buy_7(),
+//                new ThreeDisplays_Buy_8(),
+//                new ThreeDisplays_Buy_9()
 //                new ThreeDisplays_Buy_Bollinger_1_2(),
 //                new ThreeDisplays_Buy_Bollinger_2()
         );
