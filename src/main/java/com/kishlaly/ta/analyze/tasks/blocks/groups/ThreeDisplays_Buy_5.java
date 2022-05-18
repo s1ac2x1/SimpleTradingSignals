@@ -37,7 +37,7 @@ public class ThreeDisplays_Buy_5 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Отслеживает U развороты индикаторов. Чуть хуже 1, 2 и 4";
+        return "Отслеживает U развороты индикаторов. Терпимое отношение TP/SL";
     }
 
 }
