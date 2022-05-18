@@ -3,6 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
@@ -32,7 +33,8 @@ public class ThreeDisplays_Buy_9 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            add(new Long_ScreenOne_StrictTrendCheck());
+            //add(new Long_ScreenOne_StrictTrendCheck());
+            add(new Long_ScreenOne_SoftTrendCheck());
 
             add(new Long_ScreenTwo_Bollinger_Low_X_Of_Y_LastBarsCrossed());
             add(new Long_ScreenTwo_Bars_TwoGreen());
