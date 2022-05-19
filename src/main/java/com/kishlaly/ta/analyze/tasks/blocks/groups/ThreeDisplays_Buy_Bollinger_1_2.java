@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_ThreeAscending;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Касание цены нижней ленты Боллинжера и намек на рост.
- * Первый экран: проверка тренда на трех ЕМА26
+ * Первый экран: последняя ЕМА выше и последний столбик зеленый
  * Второй экран:
  * + было пересечение нижней лены Боллинжера одним из последних трех баров
  * + две гистограммы MACD ниже нуля и последняя выше
@@ -31,7 +31,7 @@ public class ThreeDisplays_Buy_Bollinger_1_2 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            add(new Long_ScreenOne_EMA_ThreeAscending());
+            add(new Long_ScreenOne_SoftTrendCheck());
 
             add(new Long_ScreenTwo_Bollinger_Low_X_Of_Y_LastBarsCrossed());
             add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
