@@ -30,8 +30,8 @@ public class RunUtils {
 //                    add(new ThreeDisplays_Buy_8());
 //                    add(new ThreeDisplays_Buy_9());
 //                    add(new ThreeDisplays_Buy_Bollinger_1());
-                    add(new ThreeDisplays_Buy_Bollinger_1_2());
-//                    add(new ThreeDisplays_Buy_Bollinger_2());
+//                    add(new ThreeDisplays_Buy_Bollinger_1_2());
+                    add(new ThreeDisplays_Buy_Bollinger_2());
 //                    add(new ThreeDisplays_Buy_Bollinger_3());
 //                    add(new ThreeDisplays_Buy_Bollinger_4());
 //                    add(new ThreeDisplays_Buy_EFI_1());

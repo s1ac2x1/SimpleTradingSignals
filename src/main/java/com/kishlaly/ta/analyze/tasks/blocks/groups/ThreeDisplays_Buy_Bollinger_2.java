@@ -2,6 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Low_LastBarCrossed;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Low_PreLastBelow;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscending;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Редкое явление, когда цена уходит вниз за ленту Боллинжера
  * <p>
+ * Первый экран: последняя ЕМА выше и последний столбик зеленый
  * Второй экран:
  * + вторая с конца котировка ниже нижней ленты Боллинжера
  * + последняя котировка пересекает нижнюю ленту Боллинжера
@@ -25,6 +27,8 @@ public class ThreeDisplays_Buy_Bollinger_2 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
+            add(new Long_ScreenOne_SoftTrendCheck());
+
             add(new Long_ScreenTwo_Bollinger_Low_PreLastBelow());
             add(new Long_ScreenTwo_Bollinger_Low_LastBarCrossed());
             add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
@@ -35,6 +39,6 @@ public class ThreeDisplays_Buy_Bollinger_2 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Поиск выпадания за нижнюю ленту (проверки первого экране нету). Очень редко бывает, но SL почти нету";
+        return "Поиск выпадания за нижнюю ленту. Плохо работает";
     }
 }
