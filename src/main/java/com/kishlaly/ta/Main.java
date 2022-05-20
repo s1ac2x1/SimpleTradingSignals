@@ -33,9 +33,9 @@ public class Main {
 //                SymbolsSource.TEST
         };
 
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("ILMN");
-//        }};
+        Context.testOnly = new ArrayList<String>() {{
+            add("AAPL");
+        }};
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;

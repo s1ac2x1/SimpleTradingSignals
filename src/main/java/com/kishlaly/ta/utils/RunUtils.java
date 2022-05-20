@@ -2,6 +2,9 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
+import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileKeltnerBottom;
+import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileKeltnerMiddle;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitDisabled;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.Timeframe;
 
@@ -48,9 +51,9 @@ public class RunUtils {
 
     public static void testOneStrategy_() {
         testOneStrategy(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY,
-                new ThreeDisplays_Buy_5(),
+                new ThreeDisplays_Buy_Bollinger_3(),
                 new StopLossFixedPrice(0.27),
-                new TakeProfitFixedKeltnerTop(70));
+                new TakeProfitFixedKeltnerTop(300));
 
     }
 

@@ -12,6 +12,7 @@ import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.FilesUtil;
 import com.kishlaly.ta.utils.Numbers;
 
 import java.io.File;
@@ -320,7 +321,7 @@ public class TaskTester {
                 .filter(taskResult -> taskResult.isOk()) // берем только сигналы к входу
                 .forEach(taskResult -> testPosition(taskResult, historicalTesting));
         testLog.append(historicalTesting.getSymbol() + lineSeparator());
-        //FilesUtil.writeToFile(historicalTesting.getSymbol() + "_test_log.txt", testLog.toString());
+        FilesUtil.writeToFile(historicalTesting.getSymbol() + "_test_log.txt", testLog.toString());
     }
 
     private static void testPosition(BlockResult blockResult, HistoricalTesting historicalTesting) {
