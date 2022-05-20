@@ -22,8 +22,8 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 
         Context.source = new SymbolsSource[]{
-//                SymbolsSource.SP500,
-                SymbolsSource.SP500_RANDOM,
+                SymbolsSource.SP500,
+//                SymbolsSource.SP500_RANDOM,
 //                SymbolsSource.NAGA,
 //                SymbolsSource.SCREENER_FILTERED
 //                SymbolsSource.SCREENER_MANY_P_1,
@@ -48,8 +48,8 @@ public class Main {
 
         //buyDaily();
         //testStrategiesOnSpecificDate_("15.03.2022");
-        //testOneStrategy_();
-        buildTasksAndStrategiesSummary_();
+        testOneStrategy_();
+        //buildTasksAndStrategiesSummary_();
 
         // проверить Long_ScreenOne_SoftTrendCheck в тех стратегиях, где нету первого экрана
         // попробовать расширить Long_ScreenOne_SoftTrendCheck и требовать ДВА послдених зеленых столбика

@@ -17,7 +17,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.QUOTE_3_AND_QUOTE_2_NOT_BE
 /**
  * третья и вторая с конца котировки ниже нижней ленты Боллинжера
  */
-public class Long_ScreenTwo_Bollinger_Low_ThreeTwoBelow implements ScreenTwoBlock {
+public class Long_ScreenTwo_Bollinger_Bottom_ThreeTwoBelow implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Quote> quotes = screen.quotes;

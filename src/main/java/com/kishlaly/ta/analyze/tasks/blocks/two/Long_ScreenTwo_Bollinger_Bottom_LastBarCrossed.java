@@ -15,7 +15,7 @@ import static com.kishlaly.ta.utils.Quotes.isQuoteCrossedBollingerBottom;
 /**
  * последний столбик коснулся нижней ленты Боллинжера
  */
-public class Long_ScreenTwo_Bollinger_Low_LastBarCrossed implements ScreenTwoBlock {
+public class Long_ScreenTwo_Bollinger_Bottom_LastBarCrossed implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<Bollinger> screen_2_Bollinger = (List<Bollinger>) screen.indicators.get(Indicator.BOLLINGER);

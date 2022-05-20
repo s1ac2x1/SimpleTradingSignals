@@ -31,7 +31,7 @@ public class RunUtils {
 //                    add(new ThreeDisplays_Buy_9());
 //                    add(new ThreeDisplays_Buy_Bollinger_1());
 //                    add(new ThreeDisplays_Buy_Bollinger_1_2());
-                    add(new ThreeDisplays_Buy_Bollinger_2());
+//                    add(new ThreeDisplays_Buy_Bollinger_2());
 //                    add(new ThreeDisplays_Buy_Bollinger_3());
 //                    add(new ThreeDisplays_Buy_Bollinger_4());
 //                    add(new ThreeDisplays_Buy_EFI_1());
@@ -65,9 +65,8 @@ public class RunUtils {
                 new ThreeDisplays_Buy_6(),
                 new ThreeDisplays_Buy_7(),
                 new ThreeDisplays_Buy_8(),
-                new ThreeDisplays_Buy_9()
-//                new ThreeDisplays_Buy_Bollinger_1_2(),
-//                new ThreeDisplays_Buy_Bollinger_2()
+                new ThreeDisplays_Buy_9(),
+                new ThreeDisplays_Buy_Bollinger_1_2()
         );
     }
 
