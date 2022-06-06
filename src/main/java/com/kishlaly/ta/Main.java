@@ -33,9 +33,9 @@ public class Main {
 //                SymbolsSource.TEST
         };
 
-        Context.testOnly = new ArrayList<String>() {{
-            add("AAPL");
-        }};
+//        Context.testOnly = new ArrayList<String>() {{
+//            add("AAPL");
+//        }};
 
         Context.symbols = getSymbols();
         Context.yearsToAnalyze = 5;
@@ -46,9 +46,9 @@ public class Main {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
         ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
 
-        //buyDaily();
+        buyDaily();
         //testStrategiesOnSpecificDate_("15.03.2022");
-        testOneStrategy_();
+        //testOneStrategy_();
         //buildTasksAndStrategiesSummary_();
 
         // проверить Long_ScreenOne_SoftTrendCheck в тех стратегиях, где нету первого экрана
@@ -70,6 +70,19 @@ public class Main {
         // 1 экран: две котировки зеленые high растут
         //          предпоследняя ниже ЕМА26
         // 2 экран: последний столбик зеленый
+
+        // стратегия (вдохновитель [D] TWH 15.03.2022)
+        // 1 экран: нет
+        // 2 экран
+        //   предпоследняя котировка очень близко к нижней ленте Боллинжера
+        //   предпоследняя котировка зеленая
+        //   последняя котировка зеленая
+        //   гистограмма MACD отрицательная и растет
+        //   %D стохастика растет
+        //   предпоследняя %D стохастик ниже 10
+        // SL на уровне 2xATR
+        // TP на 70-80% канала Кельтнера
+
 
         // что если покупать только у границы каналов? есть ли уже такие стратегии?
 
