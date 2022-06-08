@@ -27,7 +27,7 @@ public class Dates {
         }
     }
 
-    // на входе может быть дата вида yyyy-MM-dd для дневного таймфрейма, поэтому сдвигаю часы на начало работы биржи
+    // on the input may be the date of the form yyyyy-MM-dd for the day timeframe, so I shift the clock to the beginning of the exchange
     public static ZonedDateTime getTimeInExchangeZone(String date, String exchangeTimezone) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(getDateFormat());
         switch (Context.timeframe) {
@@ -47,7 +47,7 @@ public class Dates {
         }
     }
 
-    // на входе может быть дата вида yyyy-MM-dd для дневного таймфрейма, поэтому сдвигаю часы на начало работы биржи
+    // on the input may be the date of the form yyyyy-MM-dd for the day timeframe, so I shift the clock to the beginning of the exchange
     public static ZonedDateTime getBarTimeInMyZone(String date, String exchangeTimezone) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(getDateFormat());
         switch (Context.timeframe) {
@@ -67,7 +67,7 @@ public class Dates {
         }
     }
 
-    // На входе точное время, поэтому не нужно сбрасывать часы на время открытия биржи
+    // At the entrance of the exact time, so there is no need to reset the clock at the time of the opening of the exchange
     public static ZonedDateTime getBarTimeInMyZone(Long timestamp, String exchangeTimezoneStr) {
         ZoneId exchangeTimezone = ZoneId.of(exchangeTimezoneStr);
         ZoneId myTimezone = ZoneId.of(Context.myTimezone);

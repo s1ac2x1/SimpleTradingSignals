@@ -17,13 +17,13 @@ public class HistoricalTesting {
     private TaskType taskType;
     private BlocksGroup blocksGroup;
 
-    // график с индикаторами
+    // indicator chart
     private SymbolData data;
 
-    // все результаты прогона по стратегии, прокручивая график на один столбик в прошлое
+    // all results of the strategy run, scrolling the graph one bar back in time
     private List<BlockResult> blockResults;
 
-    // тестирование открытия позиций по полученным сигналам к входу
+    // testing the opening of positions by the received signals for entry
     private Map<Quote, PositionTestResult> signalTestingResults = new HashMap<>();
 
     private StopLossStrategy stopLossStrategy;

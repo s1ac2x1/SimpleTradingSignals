@@ -22,17 +22,17 @@ public class Quotes {
                 Quote currentQuote = dailyQuotes.get(i);
                 Quote nextQuote = dailyQuotes.get(i + 1);
                 week.add(currentQuote);
-                // сверять день недели у следующей котировки и программно вычислять следующий день для текущей
+                // check the day of the week for the next quote and programmatically calculate the next day for the current one
                 ZonedDateTime currentQuoteDate = Dates.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome);
                 ZonedDateTime currentQuotePlusOneDayDate = Dates.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome).plusDays(1);
                 ZonedDateTime nextQuoteDate = Dates.getTimeInExchangeZone(nextQuote.getTimestamp(), Quote.exchangeTimezome);
-                // если следующая котировка ровно на один день позже - мы рамках рабочей недели
-                // если currentQuotePlusOneDayDate выходной день, то nextQuoteDate будет другой
+                // If the next quote is exactly one day later - we are within the working week
+                // if currentQuotePlusOneDayDate is a day off, then nextQuoteDate will be different
                 if (nextQuoteDate.getDayOfWeek() == currentQuotePlusOneDayDate.getDayOfWeek()) {
-                    // исключаем ситуацию вида:
-                    // неделя 1: пн вт ср чт _
-                    // неделя 2: -  -  -  -  пт
-                    // тут всегда будет разница в более чем пять дней
+                    // we exclude the situation like that:
+                    // week 1: MON TUE WED THU -
+                    // week 2: -    -   -   -  FRI
+                    // There will always be a difference of more than five days
                     long daysBetweenCurrentAndNextQuote = ChronoUnit.DAYS.between(currentQuoteDate, nextQuoteDate);
                     if (daysBetweenCurrentAndNextQuote < 5) {
                         week.add(currentQuote);
@@ -79,53 +79,11 @@ public class Quotes {
     }
 
     public static int resolveMinBarsCount(Timeframe timeframe) {
-        int min = 21; // меньше нельзя, иначе не сработает StopLossFixedPrice
-        // если агрегация на основе часовых котировок (которых ~550), то дневных будет ~35, а недельных нет смысла рассматривать
-        // если агрегация на основе дневных котировок (которых до 5500), то недельных будет до 1110
+        int min = 21;
+        // less is not allowed, otherwise StopLossFixedPrice will not work
+        // If the aggregation is based on hourly quotes (which are ~550), then the daily quotes will be ~35, and there is no point in considering weekly ones
+        // If the aggregation on the basis of daily quotes (which are up to 5500), then the weekly will be up to 1110
         return min;
-
-//        int notSet = -1;
-//        switch (timeframe) {
-//            case WEEK:
-//                if (Context.aggregationTimeframe == Timeframe.DAY) {
-//                    if (Context.testMode) {
-//                        return 4; // минимум для тестов
-//                    } else {
-//                        return 30; // 30 недель минимум, чтобы отлавливать в том числе молодые акции
-//                    }
-//                }
-//                if (Context.aggregationTimeframe == Timeframe.HOUR) {
-//                    throw new RuntimeException("Attemp to aggregate WEEK from HOUR - no sense");
-//                }
-//            case DAY:
-//                if (Context.aggregationTimeframe == Timeframe.DAY) {
-//                    if (Context.testMode) {
-//                        return 4; // минимум для тестов
-//                    } else {
-//                        return 150; // полгода
-//                    }
-//                }
-//                if (Context.aggregationTimeframe == Timeframe.HOUR) {
-//                    if (Context.testMode) {
-//                        return 11; // минимум для тестов
-//                    } else {
-//                        return 30; // по часовым котировкам получается до 35 дней собрать
-//                    }
-//                }
-//            case HOUR:
-//                if (Context.aggregationTimeframe == Timeframe.DAY) {
-//                    throw new RuntimeException("Attemp to aggregate HOUR from DAY - impossible");
-//                }
-//                if (Context.aggregationTimeframe == Timeframe.HOUR) {
-//                    if (Context.testMode) {
-//                        return 4; // минимум для тестов
-//                    } else {
-//                        return 80; // хотя бы 2 недели
-//                    }
-//                }
-//            default:
-//                return notSet;
-//        }
     }
 
     public static void trim(SymbolData screen) {

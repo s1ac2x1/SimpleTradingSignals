@@ -22,16 +22,10 @@ public class Main {
         Context.aggregationTimeframe = Timeframe.DAY;
 
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500,
-//                SymbolsSource.SP500_RANDOM,
-//                SymbolsSource.NAGA,
-//                SymbolsSource.SCREENER_FILTERED
-//                SymbolsSource.SCREENER_MANY_P_1,
-//                SymbolsSource.SCREENER_MANY_P_2,
-//                SymbolsSource.SCREENER_MANY_P_3,
-//                SymbolsSource.SCREENER_MANY_RANDOM
-//                SymbolsSource.TEST
+                SymbolsSource.SP500
         };
+
+        //папка кэш пусть входит в проект для примера
 
 //        Context.testOnly = new ArrayList<String>() {{
 //            add("AAPL");

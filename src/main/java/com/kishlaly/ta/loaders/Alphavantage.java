@@ -38,7 +38,7 @@ import static java.lang.Double.parseDouble;
 public class Alphavantage {
 
     private static Gson gson = new Gson();
-    private static String KEY = "F4ZNUB0VYAAMTSLP"; // premium, 75 req/min
+    private static String KEY = "F4ZNUB0VYAAMTSLP"; // premium, 75 req/min, expired
 
     /**
      * Load from alphavantage.co
