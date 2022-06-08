@@ -22,11 +22,11 @@ public class ThreeDisplays extends AbstractTask {
         public static int STOCH_VALUES_TO_CHECK = 5;
 
         // in percent from the middle to the top of the channel
-        public static int FILTER_BY_KELTNER = 40;
+        public static int FILTER_BY_KELTNER = 20;
 
         // filtering signals if a quote closed above FILTER_BY_KELTNER
         // tests show better results when this check is turned off
-        public static boolean FILTER_BY_KELTNER_ENABLED;
+        public static boolean FILTER_BY_KELTNER_ENABLED = true;
 
         // configurable indicator values
         public static int STOCH_CUSTOM = -1;

@@ -20,7 +20,8 @@ public class Context {
         RAPID, ALPHAVANTAGE, MARKETSTACK
     }
 
-    public static String outputFolder = "/Users/volodymyr/Investment/TA";
+    public static Timeframe[][] basicTimeframes = {{Timeframe.WEEK, Timeframe.DAY}};
+    public static String outputFolder = "data";
     public static ApiSource api = ApiSource.ALPHAVANTAGE;
     public static double parallelRequests = 10;
     public static double limitPerMinute = 75;

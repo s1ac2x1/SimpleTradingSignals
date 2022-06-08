@@ -2,9 +2,6 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
-import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileKeltnerBottom;
-import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileKeltnerMiddle;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitDisabled;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.Timeframe;
 
@@ -57,7 +54,7 @@ public class RunUtils {
 
     }
 
-    public static void buyDaily() {
+    public static void runAllDaily() {
         Context.runGroups = Timeframe.DAY;
         run(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY, false,
                 new ThreeDisplays_Buy_1(),
@@ -73,7 +70,7 @@ public class RunUtils {
         );
     }
 
-    public static void buyWeekly(Timeframe[][] timeframes) {
+    public static void runAllWeekly(Timeframe[][] timeframes) {
         Context.runGroups = Timeframe.WEEK;
         run(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY, false,
                 new FirstScreen_Buy_1()

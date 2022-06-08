@@ -1,15 +1,12 @@
 package com.kishlaly.ta;
 
-import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
 
-import java.util.ArrayList;
-
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
-import static com.kishlaly.ta.utils.RunUtils.*;
+import static com.kishlaly.ta.utils.RunUtils.runAllDaily;
 
 /**
  * @author Vladimir Kishlaly
@@ -18,83 +15,66 @@ import static com.kishlaly.ta.utils.RunUtils.*;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
         Context.aggregationTimeframe = Timeframe.DAY;
-
         Context.source = new SymbolsSource[]{
                 SymbolsSource.SP500
         };
-
-        //папка кэш пусть входит в проект для примера
-
 //        Context.testOnly = new ArrayList<String>() {{
 //            add("AAPL");
 //        }};
-
         Context.symbols = getSymbols();
-        Context.yearsToAnalyze = 5;
-        //Context.trimToDate = "15.03.2022";
-
-        //buildCache(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, false);
-
-        ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true;
-        ThreeDisplays.Config.FILTER_BY_KELTNER = 20;
-
-        buyDaily();
-        //testStrategiesOnSpecificDate_("15.03.2022");
-        //testOneStrategy_();
-        //buildTasksAndStrategiesSummary_();
-
-        // проверить Long_ScreenOne_SoftTrendCheck в тех стратегиях, где нету первого экрана
-        // попробовать расширить Long_ScreenOne_SoftTrendCheck и требовать ДВА послдених зеленых столбика
-        // вынести проверку первого экрана из type_4 в отдельную подгруппу и проверить на других стратегиях
-
-        // стратегия
-        // 1 экран: прошлые две гистограммы MACD ниже нуля
-        //          последняя выше
-        // 2 экран: последний столбик зеленый
-
-        // стратегия
-        // 1 экран: нет
-        // 2 экран: три котировки зеленые
-        //          три котировки растут (high & low)
-        //          последняя пересекает ЕМА13
-
-        // стратегия
-        // 1 экран: две котировки зеленые high растут
-        //          предпоследняя ниже ЕМА26
-        // 2 экран: последний столбик зеленый
-
-        // стратегия (вдохновитель [D] TWH 15.03.2022)
-        // 1 экран: нет
-        // 2 экран
-        //   предпоследняя котировка очень близко к нижней ленте Боллинжера
-        //   предпоследняя котировка зеленая
-        //   последняя котировка зеленая
-        //   гистограмма MACD отрицательная и растет
-        //   %D стохастика растет
-        //   предпоследняя %D стохастик ниже 10
-        // SL на уровне 2xATR
-        // TP на 70-80% канала Кельтнера
-
-
-        // что если покупать только у границы каналов? есть ли уже такие стратегии?
-
-
-//        закончить стратегии по EFI
-//           так же добавить в другие стратегии шаг "фильтровать точку входа, если EFI ниже нуля и проверить
-//        закончить другие стратегии, помеченные todo
-//        что там Элдер писал про анализ графиков и отклонения цен?
-//        дивергенции EFI
-
-// найти как скачать график по золоту (тикер GOLD?) и проанализвать касание ценой лент Боллинжера:
-//    касание нижней ленты - длинная позиция с TP чуть ниже среднейл ленты
-//    касание верхней ленты - короткая позиция с TP чуть выше средней
-// вопросы: нужно проверять долгосрочный тренд? какоие фреймы использовать - 2часа и 25минут?
-// протестировать все
-
-// было бы здорово протестировать декартово произведение всех групп
-
-
+        buildCache(Context.basicTimeframes, false);
+        runAllDaily();
     }
 }
+
+/*
+TODO
+
+try to expand Long_ScreenOne_SoftTrendCheck and require the last two green bars
+take the first screen check from type_4 into a separate subgroup and test it on other strategies
+
+new strategy
+1 screen: the last two MACD histograms are below zero
+          last one is rising
+2 screen: last bar is green
+
+new strategy
+1 screen: none
+2 screen: three last quotes green
+          three last quotes are rising (high & low)
+          the last quote crosses EMA13
+
+new strategy
+1 screen: two quotes are green and quote.high are rising
+          prelast is below EMA26
+2 screen: last quote is green
+
+new strategy (inspired by [D] TWH 15.03.2022)
+1 screen: none
+2 screen:
+         the prelast quote is very close to the bottom Bollinger band
+         the prelast quote is green
+         Last quote is green
+         MACD histogram is negative and growing
+         Stochastic %D is rising
+         prelast %D stochastic is below 10
+SL at 2xATR
+TP at 70-80% of Keltner channel
+
+what if we buy only at the border of the channels? are there already such strategies?
+
+Finish the EFI strategies
+also add in other strategies step "filter entry point if EFI is below zero" and test them
+finish other strategies marked todo
+What did Elder write about chart analysis and price deviations?
+EFI divergence
+
+Find how to download the chart for gold (ticker GOLD?) and analyze the price touching the Bollinger Bands:
+    touching the lower band - long position with TP just below the middle band
+    touching the upper band - short position with TP just above the average band
+    Questions: should I check the long-term trend? What frames should I use - 2 hours and 25 minutes?
+
+it would be great to test the Cartesian product of all groups
+ 
+ */

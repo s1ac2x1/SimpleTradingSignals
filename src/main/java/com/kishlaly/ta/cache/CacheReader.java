@@ -74,7 +74,7 @@ public class CacheReader {
         } else {
             Arrays.stream(Context.source).forEach(source -> {
                 try {
-                    List<String> lines = Files.readAllLines(new File(source.getFilename()).toPath(),
+                    List<String> lines = Files.readAllLines(new File(Context.outputFolder + "/" + source.getFilename()).toPath(),
                             Charset.defaultCharset());
                     if (source.isRandom()) {
                         Collections.shuffle(lines);
