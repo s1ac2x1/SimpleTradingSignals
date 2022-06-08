@@ -9,15 +9,15 @@ import java.util.ArrayList;
 
 import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
-import static com.kishlaly.ta.analyze.testing.TaskTester.testOneStrategy;
 import static com.kishlaly.ta.analyze.testing.TaskTester.testAllStrategiesOnSpecificDate;
+import static com.kishlaly.ta.analyze.testing.TaskTester.testOneStrategy;
 import static com.kishlaly.ta.cache.CacheBuilder.buildTasksAndStrategiesSummary;
 
 public class RunUtils {
 
     public static void buildTasksAndStrategiesSummary_() {
         buildTasksAndStrategiesSummary(
-                new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}},
+                Context.basicTimeframes,
                 THREE_DISPLAYS_BUY,
                 new ArrayList<BlocksGroup>() {{
 //                    add(new ThreeDisplays_Buy_1());
@@ -43,11 +43,11 @@ public class RunUtils {
     }
 
     public static void testStrategiesOnSpecificDate_(String date) {
-        testAllStrategiesOnSpecificDate(date, THREE_DISPLAYS_BUY, new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}});
+        testAllStrategiesOnSpecificDate(date, THREE_DISPLAYS_BUY, Context.basicTimeframes);
     }
 
     public static void testOneStrategy_() {
-        testOneStrategy(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY,
+        testOneStrategy(Context.basicTimeframes, THREE_DISPLAYS_BUY,
                 new ThreeDisplays_Buy_Bollinger_3(),
                 new StopLossFixedPrice(0.27),
                 new TakeProfitFixedKeltnerTop(300));
@@ -56,7 +56,7 @@ public class RunUtils {
 
     public static void runAllDaily() {
         Context.runGroups = Timeframe.DAY;
-        run(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY, false,
+        run(Context.basicTimeframes, THREE_DISPLAYS_BUY, false,
                 new ThreeDisplays_Buy_1(),
                 new ThreeDisplays_Buy_2(),
                 new ThreeDisplays_Buy_3(),
@@ -72,7 +72,7 @@ public class RunUtils {
 
     public static void runAllWeekly(Timeframe[][] timeframes) {
         Context.runGroups = Timeframe.WEEK;
-        run(new Timeframe[][]{{Timeframe.WEEK, Timeframe.DAY}}, THREE_DISPLAYS_BUY, false,
+        run(Context.basicTimeframes, THREE_DISPLAYS_BUY, false,
                 new FirstScreen_Buy_1()
                 //new FirstScreen_Buy_2()
         );

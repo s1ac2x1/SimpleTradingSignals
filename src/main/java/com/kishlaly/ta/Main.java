@@ -23,7 +23,7 @@ public class Main {
 //            add("AAPL");
 //        }};
         Context.symbols = getSymbols();
-        buildCache(Context.basicTimeframes, false);
+        //buildCache(Context.basicTimeframes, false);
         runAllDaily();
     }
 }
