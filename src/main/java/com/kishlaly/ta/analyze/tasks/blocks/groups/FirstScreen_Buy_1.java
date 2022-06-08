@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Возвращение цены к ЕМА на восходящем тренде
+ * Price returns to the EMA on an uptrend
  * <p>
- * Первый экран
- * 1) последний столбик зеленый
- * 2) последний столбик пересекает ЕМА26
- * 3) из последних 7 стобиков как минимум 4 полностью выше ЕМА26
+ * First screen
+ * 1) last bar is green
+ * 2) last bar crosses the EMA26
+ * 3) out of last 7 bars at least 4 are completely above EMA26
  * <p>
- * попробовать StopLossVolatileLocalMin
+ * SL: try StopLossVolatileLocalMin
  */
 public class FirstScreen_Buy_1 implements BlocksGroup {
     @Override
@@ -41,6 +41,6 @@ public class FirstScreen_Buy_1 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Ищет возвращение цены к ЕМА26 на восходящем тренде первого экрана";
+        return "Looking for the return of the price to EMA26 on the uptrend of the first screen";
     }
 }

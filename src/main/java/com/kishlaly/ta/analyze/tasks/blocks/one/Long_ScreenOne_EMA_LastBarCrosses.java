@@ -14,7 +14,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.utils.Quotes.isQuoteCrossedEMA;
 
 /**
- * последний столбик пересекает ЕМА26
+ * the last bar crosses the EMA26
  */
 public class Long_ScreenOne_EMA_LastBarCrosses implements ScreenOneBlock {
     @Override
@@ -22,7 +22,7 @@ public class Long_ScreenOne_EMA_LastBarCrosses implements ScreenOneBlock {
         List<EMA> screen_1_EMA26 = (List<EMA>) screen.indicators.get(Indicator.EMA26);
         if (!isQuoteCrossedEMA(screen.getLastQuote(), CollectionsTools.getFromEnd(screen_1_EMA26, 1).getValue())) {
             Log.recordCode(LAST_QUOTE_NOT_CROSSING_EMA_SCREEN_1, screen);
-            Log.addDebugLine("Последний столбик не пересекает ЕМА на долгосрочном экране");
+            Log.addDebugLine("The last bar does not cross the EMA on the long term screen");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTE_NOT_CROSSING_EMA_SCREEN_1);
         }
         return new BlockResult(screen.getLastQuote(), OK);

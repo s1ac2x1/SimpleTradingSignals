@@ -17,7 +17,7 @@ public class ScreenBasicValidation implements CommonBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         if (screen.quotes.isEmpty() || screen.quotes.size() < resolveMinBarsCount(screen.timeframe)) {
-            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen.timeframe.name());
+            Log.addDebugLine("There are not enough quotes for " + screen.timeframe.name());
             Log.recordCode(NO_DATA_QUOTES, screen);
             return new BlockResult(null, NO_DATA_QUOTES);
         }
@@ -30,7 +30,7 @@ public class ScreenBasicValidation implements CommonBlock {
         });
         if (!missingData.isEmpty()) {
             Log.recordCode(NO_DATA_INDICATORS, screen);
-            Log.addDebugLine("Нету данных по индикаторам: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
+            Log.addDebugLine("No indicator data: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
             return new BlockResult(null, NO_DATA_INDICATORS);
         }
 

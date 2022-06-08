@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Второй экран:
- * + Пересечение нижней ленты Боллинжера (цвет столбика неважен)
- *
- * вход в сделку на 7 центов выше последнего столбика
- * или TP у середины канала
+ * Second screen:
+ * + Intersection of the bottom Bollinger band (the color of the bar is not important)
+ * <p>
+ * entry 7 cents above the last bar
+ * or TP at the middle of the channel
  */
-//TODO закончить
+//TODO finish
 public class ThreeDisplays_Buy_Bollinger_4 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {
@@ -26,6 +26,6 @@ public class ThreeDisplays_Buy_Bollinger_4 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Наблюдать: цена пересекла нижнюю ленту";
+        return "Observe: the price has crossed the bottom band";
     }
 }

@@ -10,16 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Касание цены нижней ленты Боллинжера и намек на рост.
- * Первый экран: последняя ЕМА выше и последний столбик зеленый
- * Второй экран:
- * + было пересечение нижней лены Боллинжера одним из последних трех баров
- * + две гистограммы MACD ниже нуля и последняя выше
- * + две %D стохастика ниже 30 и последняя выше
- * + последний столбик зеленый и выше предыдущего
- * + фильтровать late entry
+ * Touching the bottom Bollinger band and a hint of growth.
+ * First screen: last EMA is higher and the last bar is green
+ * Second screen:
+ * + there was a crossing of the lower Bollinger band by one of the last three bars
+ * + two MACD histograms below zero and last one is growing
+ * + two %D stochastics below 30 and last one is growing
+ * + the last bar is green and higher than the previous one
+ * + filter late entry
  * <p>
- * SL можно скользящий по средней ленте Боллинжера
+ * SL can be sliding along the Bollinger average
  */
 public class ThreeDisplays_Buy_Bollinger_1_2 implements BlocksGroup {
     @Override
@@ -46,6 +46,6 @@ public class ThreeDisplays_Buy_Bollinger_1_2 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Цена недавно касалась нижней ленты. Хорошая доходность, среднее отношение TP/SL";
+        return "The price recently touched the lower band. Good returns, average TP/SL ratio";
     }
 }

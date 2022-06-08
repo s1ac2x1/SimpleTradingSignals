@@ -22,7 +22,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
         int screenTwoMinBarCount = screen.quotes.size();
         List<MACD> screenTwoMacdValues = (List<MACD>) screen.indicators.get(Indicator.MACD);
 
-        // строим массив из котировок с их гистрограммами
+        // build an array of quotes with their histograms
 
         List<HistogramQuote> histogramQuotes = new ArrayList<>();
         for (int i = 0; i < screenTwoMinBarCount; i++) {
@@ -30,12 +30,12 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             histogramQuotes.add(new HistogramQuote(histogram, screen.quotes.get(i)));
         }
 
-        // минимальный столбик гистограммы за весь период и соответствующая котировка
+        // the minimum bar of the histogram for the whole period and the corresponding quotation
 
         HistogramQuote quoteWithLowestHistogram = histogramQuotes.stream()
                 .min(Comparator.comparingDouble(HistogramQuote::getHistogramValue)).get();
 
-        // индекс этого столбика в массиве histogramQuotes
+        // the index of this column in the histogramQuotes array
 
         int indexOfMinHistogram = -1;
         for (int i = 0; i < histogramQuotes.size(); i++) {
@@ -45,10 +45,10 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                 break;
             }
         }
-        // не критично, но лучше, чтобы цена на уровне минимальной гистограммы была тоже минимальной от начала периода до этой точки
+        // not critical, but it is better that the price at the level of the minimum histogram was also the minimum from the beginning of the period to this point
         double minimalPriceForRangeUpToLowestHistogram;
 
-        // вдруг первый столбик содержит минимальную гистограмму
+        // if the first bar contains a minimum histogram
         if (indexOfMinHistogram == 0) {
             minimalPriceForRangeUpToLowestHistogram = histogramQuotes.get(0).quote.getClose();
         } else {
@@ -66,8 +66,8 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             Log.addDebugLine("Внимание: цена на дне гистограммы А (" + quoteWithLowestHistogram.histogramValue + " " + beautifyQuoteDate(quoteWithLowestHistogram.getQuote()) + ") не самая низкая в диапазоне");
         }
 
-        // поиск максимума, который следует за прошлым минимумом ("перелом медвежьего хребта")
-        // гистограмма должна вынырнуть выше нуля
+        // Finding a high that follows a past low ("breaking a bearish backbone")
+        // The histogram should pop out above zero
 
         int indexOfMaxHistogramBarAfterLowestLow = 0;
 
@@ -79,11 +79,11 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
 
         if (quoteWithHighestHistogramAfterLowestLow.histogramValue <= 0) {
             Log.recordCode(BlockResultCode.BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2, screen);
-            Log.addDebugLine("не произошло перелома медвежьего хребта");
+            Log.addDebugLine("there was no fracture of the bear's backbone");
             return new BlockResult(screen.getLastQuote(), BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2);
         }
 
-        // какой индекс у максимума
+        // what is the maximum index
 
         for (int i = indexOfMinHistogram; i < histogramQuotes.size(); i++) {
             if (histogramQuotes.get(i).histogramValue
@@ -93,7 +93,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             }
         }
 
-        // теперь нужно найти пересечения гистограммой нулевой линии сверху вниз
+        // now we need to find the histogram zero line crossings from top to bottom
 
         List<HistogramQuote> histogramQuotesFromMaxBar = histogramQuotes.subList(
                 indexOfMaxHistogramBarAfterLowestLow, histogramQuotes.size());
@@ -107,16 +107,16 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             }
         }
 
-        // сверяем значения цены в минимуме гистограммы и максимуме
+        // check the price values at the histogram minimum and maximum
 
         if (crossedZero) {
 
             double priceInLowestHistogramBar = quoteWithLowestHistogram.quote.getClose();
             double priceWhenHitogramCrossedZeroFromTop = quoteWhenHistogramCrossedZeroFromTop.quote.getClose();
 
-            // между точкой пересечения гистограммой нуля из вершины В и концом графика не должно быть положительных столбиков гистограммы
-            // потому что это уже может быть старая дивергенция
-            // это не фильтрует https://drive.google.com/file/d/1FYm6rib--9VmlNucXCmzdJnUIzrYjzPc/view?usp=sharing но это можно проверить вручную
+            // between the point of intersection of the histogram zero from vertex B and the end of the chart there should be no positive bars of the histogram
+            // because it may already be an old divergence
+            // howerver, it doesn't filter cases like https://drive.google.com/file/d/1FYm6rib--9VmlNucXCmzdJnUIzrYjzPc/view?usp=sharing
 
             int indexOfQuoteWhenHistogramCrossedZeroFromTop = 0;
             for (int i = 0; i < histogramQuotes.size(); i++) {
@@ -127,7 +127,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                 }
             }
 
-            // попытка избавитсья от ситуации https://drive.google.com/file/d/1OT1LBAdH1cZiGYJw0PDrwQ3NTpslqygY/view?usp=sharing
+            // Trying to get rid of the situation https://drive.google.com/file/d/1OT1LBAdH1cZiGYJw0PDrwQ3NTpslqygY/view?usp=sharing
 
             boolean foundFirstPositive = false;
             boolean foundSecondPositive = false;
@@ -154,12 +154,12 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             }
             if (foundSecondPositive) {
                 Log.recordCode(BlockResultCode.HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS, screen);
-                Log.addDebugLine("В точке " + beautifyQuoteDate(histogramQuotes.get(indexOfSecondPositive).quote) + " обнаружилась второая положительная область");
+                Log.addDebugLine("In the point " + beautifyQuoteDate(histogramQuotes.get(indexOfSecondPositive).quote) + " a second positive area was found");
                 return new BlockResult(screen.getLastQuote(), HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS);
             }
 
-            // это может быть началом тройной дивергенции, если цена продолжает падать
-            // пример: https://drive.google.com/file/d/1hm-LUXXtpghwNMnfbz93diLQOIyjy9dV/view?usp=sharing
+            // this could be the beginning of a triple divergence if the price keeps falling
+            // example: https://drive.google.com/file/d/1hm-LUXXtpghwNMnfbz93diLQOIyjy9dV/view?usp=sharing
 
             boolean histogramWentAboveZeroAgainAfterHistogramCrossedZeroFromTop = false;
             for (int i = indexOfQuoteWhenHistogramCrossedZeroFromTop; i < histogramQuotes.size();
@@ -173,61 +173,61 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                 if (Divergencies.BullishConfig.ALLOW_MULTIPLE_ISLANDS) {
                     if (histogramQuotes.get(histogramQuotes.size() - 1).getQuote().getClose()
                             < priceInLowestHistogramBar) {
-                        // ок, наблюдаем вручную
+                        // OK, we observe manually
                         Log.addDebugLine(
-                                "Внимание: после пересечениея гистограммы нуля из вершины В (" + beautifyQuoteDate(quoteWhenHistogramCrossedZeroFromTop.getQuote())
-                                        + ") встретилась еще одна область положительных гистограмм");
+                                "Note: after crossing the histogram zero from vertex B (" + beautifyQuoteDate(quoteWhenHistogramCrossedZeroFromTop.getQuote())
+                                        + ") another area of positive histograms was encountered");
                     } else {
                         Log.recordCode(HISTOGRAM_ISLANDS_HIGHER_PRICE, screen);
-                        Log.addDebugLine("После дна гистограммы А встретилось несколько положительных областей гистограмм, но у края цена выше, чем в А");
+                        Log.addDebugLine("After the bottom of the histogram A there are several positive areas of the histograms, but at the edge the price is higher than in A");
                         return new BlockResult(screen.getLastQuote(), HISTOGRAM_ISLANDS_HIGHER_PRICE);
                     }
                 } else {
                     Log.addDebugLine(
-                            "Запрет: после пересечениея гистограммы нуля из вершины В (" + beautifyQuoteDate(quoteWhenHistogramCrossedZeroFromTop.getQuote())
-                                    + ") встретилась еще одна область положительных гистограмм");
+                            "Forbidden: after the histogram crosses zero from vertex B (" + beautifyQuoteDate(quoteWhenHistogramCrossedZeroFromTop.getQuote())
+                                    + ") another area of positive histograms was encountered");
                 }
             }
 
-            // второе дно гистограммы не должно быть ниже половины первого дна
+            // the second bottom of the histogram should not be lower than half of the first bottom
 
             double lowestHistogramAfterCrossedZeroFromTop = histogramQuotes.subList(indexOfQuoteWhenHistogramCrossedZeroFromTop, histogramQuotes.size()).stream()
                     .min(Comparator.comparingDouble(HistogramQuote::getHistogramValue)).get().histogramValue;
             if (Math.abs(lowestHistogramAfterCrossedZeroFromTop) >= Math.abs(quoteWithLowestHistogram.histogramValue) / 100 * 60) {
                 Log.recordCode(HISTOGRAM_SECOND_BOTTOM_RATIO, screen);
-                Log.addDebugLine("Второе дно гистограммы больше " + Divergencies.BullishConfig.SECOND_BOTTOM_RATIO + "% глубины первого дна");
+                Log.addDebugLine("The second bottom of the histogram is larger than " + Divergencies.BullishConfig.SECOND_BOTTOM_RATIO + "% of the first bottom depth");
                 return new BlockResult(screen.getLastQuote(), HISTOGRAM_SECOND_BOTTOM_RATIO);
             }
 
-            // последний столбик гистограммы должен быть меньше предыдущего
+            // the last bar of the histogram should be smaller than the previous one
             HistogramQuote preLast = histogramQuotes.get(histogramQuotes.size() - 2);
             HistogramQuote last = histogramQuotes.get(histogramQuotes.size() - 1);
             if (Math.abs(last.histogramValue) >= Math.abs(preLast.histogramValue)) {
                 Log.recordCode(HISTOGRAM_LAST_BAR_NOT_LOWER, screen);
-                Log.addDebugLine("Последний столбик гистограммы не ниже предыдущего");
+                Log.addDebugLine("The last bar of the histogram is not lower than the previous one");
                 return new BlockResult(screen.getLastQuote(), HISTOGRAM_LAST_BAR_NOT_LOWER);
             }
 
-            // исплючаем длинные хвосты отрицательных гистограмм у правога края, которые часто бывают на нисходящем тренде на более крупном таймфрейме
+            // exclude long tails of negative histograms at the right edge, which often occur in a downtrend on a larger timeframe
             long tailCount = histogramQuotes.subList(indexOfQuoteWhenHistogramCrossedZeroFromTop, histogramQuotes.size()).stream().count();
             if (tailCount >= Divergencies.BullishConfig.MAX_TAIL_SIZE) {
                 Log.recordCode(NEGATIVE_HISTOGRAMS_LIMIT, screen);
-                Log.addDebugLine("У правого края скопилось " + tailCount + " отрицательных гистограмм (лимит: " + Divergencies.BullishConfig.MAX_TAIL_SIZE + ")");
+                Log.addDebugLine("At the right edge has piled " + tailCount + " negative histograms (limit: " + Divergencies.BullishConfig.MAX_TAIL_SIZE + ")");
                 return new BlockResult(screen.getLastQuote(), NEGATIVE_HISTOGRAMS_LIMIT);
             }
 
-            // цена должна образовать новую впадину
+            // the price should form a new valley
 
             if (priceWhenHitogramCrossedZeroFromTop
                     < priceInLowestHistogramBar) {
             } else {
                 Log.recordCode(DIVERGENCE_FAIL_AT_ZERO, screen);
-                Log.addDebugLine("Нету дивергенции: на спуске к нулю от В цена выше, чем в А");
+                Log.addDebugLine("No divergence: on the slope to zero from B the price is higher than in A");
                 return new BlockResult(screen.getLastQuote(), DIVERGENCE_FAIL_AT_ZERO);
             }
         } else {
             Log.recordCode(DIVERGENCE_FAIL_AT_TOP, screen);
-            Log.addDebugLine("гистограмма не опустилась от вершины B");
+            Log.addDebugLine("the histogram did not descend from the top of B");
             return new BlockResult(screen.getLastQuote(), DIVERGENCE_FAIL_AT_TOP);
         }
 

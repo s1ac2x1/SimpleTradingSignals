@@ -7,7 +7,7 @@ import com.kishlaly.ta.utils.IndicatorUtils;
 import java.util.List;
 
 /**
- * SL выбирается в нижней точке канала Кельтнера, который существует в сигнальной котировке
+ * SL is chosen at the lower point of the Keltner channel, which exists in the signal quote
  */
 public class StopLossFixedKeltnerBottom extends StopLossStrategy {
 

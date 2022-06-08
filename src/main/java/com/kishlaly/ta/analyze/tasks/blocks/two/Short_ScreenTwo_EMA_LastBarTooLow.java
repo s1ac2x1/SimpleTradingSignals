@@ -14,7 +14,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.LAST_BAR_BELOW_SCREEN_2;
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * нужно фильтровать ситуацию, когда третий и второй пересекают ЕМА13, а последний целиком ниже (то есть уже момент потерян)
+ * to filter the situation when the third and second cross EMA13, and the last one is entirely lower (that is, the moment is already lost)
  */
 public class Short_ScreenTwo_EMA_LastBarTooLow implements ScreenTwoBlock {
     @Override
@@ -32,7 +32,7 @@ public class Short_ScreenTwo_EMA_LastBarTooLow implements ScreenTwoBlock {
                 && quote1.getHigh() < CollectionsTools.getFromEnd(screen_2_EMA13, 1).getValue();
         if (thirdCrossesEMA13 && secondCrossesEMA13 && lastBelowEMA13) {
             Log.recordCode(LAST_BAR_BELOW_SCREEN_2, screen);
-            Log.addDebugLine("Третий и второй пересекли ЕМА13, а последний полностью ниже");
+            Log.addDebugLine("The third and second crossed the EMA13, and the last is completely below");
             return new BlockResult(screen.getLastQuote(), LAST_BAR_BELOW_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

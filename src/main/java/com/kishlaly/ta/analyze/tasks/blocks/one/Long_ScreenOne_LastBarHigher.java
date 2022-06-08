@@ -8,7 +8,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTES_NOT_ASCENDING_
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * последний столбик выше предпоследнего
+ * the last quote is higher than the penultimate one
  */
 public class Long_ScreenOne_LastBarHigher implements ScreenOneBlock {
     @Override
@@ -18,7 +18,7 @@ public class Long_ScreenOne_LastBarHigher implements ScreenOneBlock {
 
         if (!lastBarHigher) {
             Log.recordCode(LAST_QUOTES_NOT_ASCENDING_SCREEN_1, screen);
-            Log.addDebugLine("Последний столбик не выше предпоследнего на долгосрочном экране");
+            Log.addDebugLine("The last bar is not higher than the penultimate on the long-term screen");
             return new BlockResult(screen.getPreLastQuote(), LAST_QUOTES_NOT_ASCENDING_SCREEN_1);
         }
         return new BlockResult(screen.getPreLastQuote(), OK);

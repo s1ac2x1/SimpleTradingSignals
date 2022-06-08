@@ -12,7 +12,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTES_NOT_GREEN_SCRE
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * Две последние котировки - зеленые
+ * The last two quotes are green
  */
 public class Long_ScreenTwo_Bars_TwoGreen implements ScreenTwoBlock {
     @Override
@@ -25,7 +25,7 @@ public class Long_ScreenTwo_Bars_TwoGreen implements ScreenTwoBlock {
         boolean bothAreGreen = quote1Green && quote2Green;
         if (!bothAreGreen) {
             Log.recordCode(LAST_QUOTES_NOT_GREEN_SCREEN_2, screen);
-            Log.addDebugLine("Две последних котировки не зеленые на втором экране");
+            Log.addDebugLine("The last two quotes are not green on the second screen");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTES_NOT_GREEN_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

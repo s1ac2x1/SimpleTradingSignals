@@ -10,16 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Длительный плавный подъем гистограммы MACD на первом экране
+ * Long smooth rise of the MACD histogram on the first screen
  * <p>
- * Первый экран
- * 1) последние 6 гистограмм MACD растут последовательно
- * 2) 6, 5 и 4 с конца - отрицательные
- * 3) 3, 2 1 с конца - положительные
- * Второй экран
- * + для надежности пусть гистограмма MACD повышается из отрицательного уровня
+ * First screen
+ * 1) the last 6 MACD histograms go up in sequence
+ * 2) 6, 5 and 4 from the end are negative
+ * 3) 3, 2, 1 from the end are positive
+ * Second screen
+ * + for reliability let the MACD histogram go up from the negative level (can still stay negative)
  */
-//TODO закончить
+//TODO finish
 public class FirstScreen_Buy_2 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {
@@ -37,6 +37,6 @@ public class FirstScreen_Buy_2 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Ищет возвращение цены к ЕМА26 на восходящем тренде первого экрана";
+        return "Looking for the return of the price to EMA26 on the uptrend of the first screen";
     }
 }

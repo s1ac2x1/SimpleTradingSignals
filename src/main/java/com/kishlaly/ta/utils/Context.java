@@ -13,8 +13,8 @@ import java.util.Set;
 
 public class Context {
 
-    public static double accountBalance = 10_000; // максимальный размер позиции
-    public static int tradeCommission = 1; // процент с каждой сделки
+    public static double accountBalance = 10_000; // maximum position size
+    public static int tradeCommission = 1; // %
 
     public enum ApiSource {
         RAPID, ALPHAVANTAGE, MARKETSTACK
@@ -24,41 +24,38 @@ public class Context {
     public static ApiSource api = ApiSource.ALPHAVANTAGE;
     public static double parallelRequests = 10;
     public static double limitPerMinute = 75;
-    public static Timeframe timeframe = Timeframe.DAY; // по умолчению для тестов
-    public static Timeframe aggregationTimeframe = Timeframe.DAY; // на основе этого таймфрема агрегируются другие котировки
-    public static SymbolsSource[] source = {SymbolsSource.SP500, SymbolsSource.NAGA, SymbolsSource.SCREENER_FILTERED};
+    public static Timeframe timeframe = Timeframe.DAY;
+    public static Timeframe aggregationTimeframe = Timeframe.DAY;
+    public static SymbolsSource[] source = {SymbolsSource.SP500};
     public static List<String> testOnly = new ArrayList<>();
     public static Set<String> symbols;
     public static int yearsToAnalyze = 5;
     public static boolean lowPricesOnly;
     public static int lowPriceLimit = 20;
 
-    // чтобы конвертировать в мою таймзону и сравнивать с графиками TradingView
+    // to convert to my timezone and compare with TradingView charts
     public static String myTimezone = "Europe/Berlin";
 
-    // время работы NYSE и NASDAQ шесть с половиной часов или 390 минут
-    // используется для дневных баров
-    //public static int workingTime = 390;
-    public static int workingTime = 1440; // 1440 минут в сутках
+    public static int workingTime = 1440; // 1440 minutes in a day
 
-    // если меньше, то пропускать эту акцию
+    // If less, then skip this stock
     public static int minimumWeekBarsCount = 50;
     public static int minimumDayBarsCount = 100;
     public static int minimumHourBarsCount = 300;
 
-    // для логов
+    // for logs
     public static Timeframe logTimeframe1;
     public static Timeframe logTimeframe2;
     public static Timeframe runGroups;
 
-    // для тестирования на истоирческих данных
+    // for testing on historical data
     public static boolean testMode;
     public static StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
     public static TakeProfitStrategy takeProfitStrategy = new TakeProfitFixedKeltnerTop(80);
     public static boolean massTesting;
     public static List<TakeProfitStrategy> takeProfitStrategies;
 
-    // разное
+    // misc
     public static boolean trendCheckIncludeHistogram = true;
     public static boolean TRIM_DATA = true;
     public static String trimToDate;

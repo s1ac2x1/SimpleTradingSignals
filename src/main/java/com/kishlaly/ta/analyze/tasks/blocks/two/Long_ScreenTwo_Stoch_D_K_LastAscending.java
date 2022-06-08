@@ -12,7 +12,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_K_D_NOT_ASCENDING_SCREEN_2;
 
 /**
- * %D и %K последнего стохастика должны быть выше, чем у предпоследнего
+ * %D and %K of the last stochastic should be higher than that of the penultimate stochastic
  */
 public class Long_ScreenTwo_Stoch_D_K_LastAscending implements ScreenTwoBlock {
     @Override
@@ -25,7 +25,7 @@ public class Long_ScreenTwo_Stoch_D_K_LastAscending implements ScreenTwoBlock {
                 && screen_2_lastStoch.getSlowD() > screen_2_preLastStoch.getSlowD();
         if (!ascending) {
             Log.recordCode(STOCH_K_D_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("Стохастик не растет на втором экране");
+            Log.addDebugLine("Stochastic does not grow on the second screen");
             return new BlockResult(screen.getLastQuote(), STOCH_K_D_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

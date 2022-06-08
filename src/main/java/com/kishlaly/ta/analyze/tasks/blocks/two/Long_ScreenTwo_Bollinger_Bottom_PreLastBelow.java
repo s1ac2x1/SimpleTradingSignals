@@ -15,7 +15,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.analyze.BlockResultCode.QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2;
 
 /**
- * вторая с конца котировка ниже нижней ленты Боллинжера
+ * the second quote from the end below the bottom Bollinger band
  */
 public class Long_ScreenTwo_Bollinger_Bottom_PreLastBelow implements ScreenTwoBlock {
     @Override
@@ -29,7 +29,7 @@ public class Long_ScreenTwo_Bollinger_Bottom_PreLastBelow implements ScreenTwoBl
 
         if (!below) {
             Log.recordCode(QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2, screen);
-            Log.addDebugLine("Вторая с конца котировки не ниже нижней ленты Боллинжера на втором экране");
+            Log.addDebugLine("The second from the end of the quote is not lower than the bottom Bollinger band on the second screen");
             return new BlockResult(screen.getLastQuote(), QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Редкое явление, когда цена уходит вниз за ленту Боллинжера
+ * A rare occurrence when the price goes down beyond the Bollinger band
  * <p>
- * Первый экран: последняя ЕМА выше и последний столбик зеленый
- * Второй экран:
- * + вторая с конца котировка ниже нижней ленты Боллинжера
- * + последняя котировка пересекает нижнюю ленту Боллинжера
- * + 2 гистограммы MACD отрицательные и последняя выше
- * + последняя %D стохастика растет
+ * First screen: last EMA is higher and the last bar is green
+ * Second screen:
+ * + prelast quote is below bottom Bollinger band
+ * + last quote crosses the bottom Bollinger band
+ * + two last MACD histograms are negative and the last one is higher
+ * + Last %D stochastic is rising
  */
 public class ThreeDisplays_Buy_Bollinger_2 implements BlocksGroup {
     @Override
@@ -39,6 +39,6 @@ public class ThreeDisplays_Buy_Bollinger_2 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Поиск выпадания за нижнюю ленту. Плохо работает";
+        return "Finding the fallout behind the bottom band. Doesn't work well.";
     }
 }

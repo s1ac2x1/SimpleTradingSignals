@@ -11,19 +11,20 @@ import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// модификация buySignalType2 с попыткой остлеживания начала долгосрочного тренда
-// 1 экран: отслеживание начала движения выше ЕМА по двум столбикам
-//   последний столбик зеленый
-//   последний столбик выше предпоследнего
-//   последний столбик пересекает ЕМА26
-//   последняя гистограмма растет
-// 2 экран: смотреть на два последних столбика
-//   high последнего столбика выше предпоследнего
-//   последний столбик не выше ЕМА13
-//   последняя гистограмма растет
-//   %D и %K последнего стохастика должны быть выше, чем у предпоследнего
+// modification of buySignalType2 with an attempt to track the beginning of a long-term trend
 //
-// На исторических данных эта стратегия чаще всего дает лучший баланс и меньшее число SL позиций
+// 1 screen: tracking the beginning of a move above the EMA by two bars
+// last bar is green
+// last bar is higher than the penultimate one
+// last bar crosses EMA26
+// last histogram is going up
+// 2nd screen: look at the last two bars
+// last quote.high is bigger than the penultimate quote.high
+// last quote is not above EMA13
+// last histogram is going up
+// %D and %K of the last stochastic should be higher than the previous
+//
+// On historical data this strategy most often gives better returns and extremely low SL positions ratio
 public class ThreeDisplays_Buy_4 implements BlocksGroup {
 
     public List<TaskBlock> blocks() {
@@ -45,7 +46,7 @@ public class ThreeDisplays_Buy_4 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Лучший показатель TP/SL и цены";
+        return "The best TP/SL and price";
     }
 
 }

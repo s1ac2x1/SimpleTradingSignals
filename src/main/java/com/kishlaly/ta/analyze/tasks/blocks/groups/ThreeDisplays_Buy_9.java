@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Первый экран: последняя ЕМА выше и последний столбик зеленый
- * Второй экран:
- * + было пересечение нижней лены Боллинжера одним из последних трех баров
- * + вторая и первая с конца котировки зеленые
- * + вторая и первая с конца котировки ниже ЕМА13
- * + одно из трех последних %D стохастика ниже 20
- * + последняя гистограмма растет
+ * First screen: last EMA above and the last bar is green
+ * Second screen:
+ * + there was a crossing of the lower Bollinger band by one of the last three bars
+ * + second and first quotes from the end are green
+ * + second and first quotes from the end below EMA13
+ * + one of three last %D of stochastics is below 20
+ * + last histogram is rising
  * <p>
- * TP не выше 50% канала
+ * TP not higher than 50% of the channel
  */
 public class ThreeDisplays_Buy_9 implements BlocksGroup {
     @Override
@@ -44,6 +44,6 @@ public class ThreeDisplays_Buy_9 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Поиск плавного волнообразного подъема из перепроданности";
+        return "Searching for a smooth wave-like rise from oversold";
     }
 }

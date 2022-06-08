@@ -10,16 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Первый экран: последняя ЕМА выше и последний столбик зеленый
- * Второй экран:
- * 1) две последние котировки ниже ЕМА13
- * 2) две последние котировки повышаются (low & high растут)
- * 3) последняя котировка зеленая
- * 4) гистограмма МАСD отрицательная и повышается
- * 5) последние две %D стохастика ниже 20 и последняя выше предпоследней
- * 6) одна из двух последних %K стохастика ниже 20 и последняя выше предпоследней
+ * First screen: last EMA is rising and the last bar is green
+ * Second screen:
+ * 1) last two quotes are below EMA13
+ * 2) last two quotes rise (low & high rise)
+ * 3) last quote is green
+ * 4) MACD histogram is negative and last is rising
+ * 5) last two %D stochastics are below 20 and the last is rising
+ * 6) the last two %K stochastics are below 20 and the last one is rising
  * <p>
- * TP не выше 50% канала
+ * TP not higher than 50% of the channel
  */
 public class ThreeDisplays_Buy_8 implements BlocksGroup {
     @Override
@@ -46,6 +46,6 @@ public class ThreeDisplays_Buy_8 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Поиск сильной перепроданности";
+        return "Finding a strong oversold";
     }
 }

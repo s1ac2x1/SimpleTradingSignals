@@ -11,26 +11,26 @@ import java.util.List;
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
 
 /**
- * гистограмма должна быть ниже нуля и начать повышаться: проверить на ДВУХ последних значениях
+ * histogram should be below zero and start to rise: check on the last TWO values
  */
 public class Long_ScreenTwo_MACD_TwoBelowZeroAndAscending implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<MACD> screen_2_MACD = (List<MACD>) screen.indicators.get(Indicator.MACD);
-        Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram(); // 2 от правого края
-        Double macd1 = screen_2_MACD.get(screen_2_MACD.size() - 1).getHistogram(); // последняя
+        Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram();
+        Double macd1 = screen_2_MACD.get(screen_2_MACD.size() - 1).getHistogram();
 
         boolean histogramBelowZero = macd2 < 0 && macd1 < 0;
         if (!histogramBelowZero) {
             Log.recordCode(HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen);
-            Log.addDebugLine("Гистограмма на втором экране не ниже нуля");
+            Log.addDebugLine("The bar graph on the second screen is at least zero");
             return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2);
         }
 
         boolean ascendingHistogram = macd2 < macd1;
         if (!ascendingHistogram) {
             Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("Гистограмма на втором экране не повышается");
+            Log.addDebugLine("The histogram on the second screen does not increase");
             return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.SymbolData;
 import java.util.Comparator;
 
 /**
- * SL выбирается на N ниже самого низкого quote.low из 20 столбиков перед текущей котировкой
+ * SL is selected by {config} below the lowest quote.low of the {QUOTES_TO_FIND_MIN} bars before the current quote
  */
 public class StopLossVolatileLocalMin extends StopLossStrategy {
 

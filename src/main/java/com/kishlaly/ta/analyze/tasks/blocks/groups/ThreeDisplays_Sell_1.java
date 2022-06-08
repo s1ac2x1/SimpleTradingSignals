@@ -25,6 +25,6 @@ public class ThreeDisplays_Sell_1 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Первый шорт, наверно нестабилен";
+        return "The first short strategy. Not stable";
     }
 }

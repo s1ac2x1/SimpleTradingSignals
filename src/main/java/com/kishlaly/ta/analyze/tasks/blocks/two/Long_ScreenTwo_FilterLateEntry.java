@@ -27,7 +27,7 @@ public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlock {
             double ratio = diff / 100 * FILTER_BY_KELTNER;
             double maxAllowedCloseValue = middle + ratio;
             if (lastQuoteClose >= maxAllowedCloseValue) {
-                Log.addDebugLine("Последняя котировка закрылась выше " + FILTER_BY_KELTNER + "% расстояния от середины до вершины канала");
+                Log.addDebugLine("The last quote closed above " + FILTER_BY_KELTNER + "% of the distance from the middle to the top of the channel");
                 Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2, screen);
                 return new BlockResult(screen.getLastQuote(), QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2);
             }

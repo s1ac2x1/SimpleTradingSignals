@@ -13,7 +13,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2;
 
 /**
- * одно из двух значений %K стохастика меньше 20
+ * one of the two stochastic %K values is less than 20
  */
 public class Long_ScreenTwo_Stoch_K_TwoOrOneBelow_X implements ScreenTwoBlock {
     @Override
@@ -30,7 +30,7 @@ public class Long_ScreenTwo_Stoch_K_TwoOrOneBelow_X implements ScreenTwoBlock {
 
         if (!oneBelowExtraLow) {
             Log.recordCode(STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2, screen);
-            Log.addDebugLine("Один из двух последних %K стохастика не ниже 20 на втором экране");
+            Log.addDebugLine("One of the last two stochastic %Ks is at least 20 on the second screen");
             return new BlockResult(screen.getLastQuote(), STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

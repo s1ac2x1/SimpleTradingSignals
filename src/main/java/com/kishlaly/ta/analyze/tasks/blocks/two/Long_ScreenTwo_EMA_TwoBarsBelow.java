@@ -15,7 +15,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.QUOTES_NOT_BELOW_EMA_SCREE
 import static com.kishlaly.ta.utils.Quotes.isQuoteBelowEMA;
 
 /**
- * последние два бара полностью ниже ЕМА13
+ * the last two bars are completely below EMA13
  */
 public class Long_ScreenTwo_EMA_TwoBarsBelow implements ScreenTwoBlock {
     @Override
@@ -30,7 +30,7 @@ public class Long_ScreenTwo_EMA_TwoBarsBelow implements ScreenTwoBlock {
         boolean lastQuotesBelowEMA = isQuoteBelowEMA(quote2, ema13_2.getValue()) && isQuoteBelowEMA(quote1, ema13_1.getValue());
         if (!lastQuotesBelowEMA) {
             Log.recordCode(QUOTES_NOT_BELOW_EMA_SCREEN_2, screen);
-            Log.addDebugLine("Последние две котировки не ниже EMA13");
+            Log.addDebugLine("The last two quotes are not below EMA13");
             return new BlockResult(screen.getLastQuote(), QUOTES_NOT_BELOW_EMA_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

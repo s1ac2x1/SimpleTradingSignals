@@ -1,23 +1,23 @@
 package com.kishlaly.ta.analyze.tasks;
 
 /**
- * Для бычьей дивергенции цена акций должна быть выше $3, для медвежьей - выше $10. Объем торгов по
- * акции должен быть выше 500к в сутки (низкий объем торгов означает слабый интерес и частые
- * неожиданные скачки цен)
+ * For a bullish divergence, the stock price must be above $3; for a bearish divergence, it must be above $10. Trading volume on
+ * stock should be above 500k a day (low trading volume means weak interest and frequent
+ * sudden price swings).
  * <p>
- * Индикаторы:
+ * Indicators:
  * MACD (12 26 9 close)
- * EMA26 для бОльшего таймфрейма для фильтрации нисходящих трендов
+ * EMA26 for larger timeframe to filter downtrends
  * <p>
- * Поиск бычьих расхождений происходит в такой последовательности:
- * 1. Гистограмма MACD опускается до самого низкого минимума на отрезке из 100 столбиков
- * (можете задать свое значение). Таким образом определяется дно потенциального бычьего
- * расхождения A-B-C.
- * 2. Гистограмма MACD пересекает нулевую линию снизу вверх, «ломая хребет медведю». Так
- * определяется вершина потенциального бычьего расхождения.
- * 3. Когда акция достигает нового 100-дневного минимума, гистограмма MACD повторно пересекает
- * нулевую линию, но уже сверху вниз. В этой точке сканер и помечает акцию.
- * Пример: https://drive.google.com/file/d/1pd7Y92O3sMRRKHsTbsFoR6uYlhW33CyP/view?usp=sharing
+ * The search for bullish divergences occurs in this sequence:
+ * 1. The MACD histogram goes down to the lowest minimum on the 100 bar segment
+ * (you can set your own value). This is how the bottom of a potential bullish
+ * A-B-C divergence.
+ * 2. The MACD histogram crosses the zero line from bottom to top, "breaking the bear's backbone". So
+ * The top of a potential bullish divergence is determined.
+ * 3. When the stock reaches a new 100-day low, the MACD histogram crosses the nought line again.
+ * the nought line again, but from the top down. This is the point where the scanner marks the stock.
+ * Example: https://drive.google.com/file/d/1pd7Y92O3sMRRKHsTbsFoR6uYlhW33CyP/view?usp=sharing
  *
  * @author Vladimir Kishlaly
  * @since 18.11.2021
@@ -25,7 +25,7 @@ package com.kishlaly.ta.analyze.tasks;
 public class Divergencies extends AbstractTask {
 
     public static class BullishConfig {
-        public static boolean ALLOW_ON_BEARISH_TREND = true; // часто дивергенции бывают на горизонтальных долгосрочных трендах
+        public static boolean ALLOW_ON_BEARISH_TREND = true; // divergences often occur on horizontal long-term trends
         public static boolean ALLOW_MULTIPLE_ISLANDS = true;
         public static int MAX_TAIL_SIZE = 7;
         public static int SECOND_BOTTOM_RATIO = 80;

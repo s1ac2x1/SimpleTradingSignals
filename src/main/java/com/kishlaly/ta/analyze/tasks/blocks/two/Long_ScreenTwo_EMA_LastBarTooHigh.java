@@ -14,8 +14,8 @@ import static com.kishlaly.ta.analyze.BlockResultCode.LAST_BAR_ABOVE_SCREEN_2;
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * нужно фильтровать ситуацию, когда третий и второй пересекают ЕМА13, а послдений целиком выше (момент входа в сделку упущен)
- * третий может открыться и закрыться выше, и это допустимо: https://drive.google.com/file/d/15XkXFKBQbTjeNjBn03NrF9JawCBFaO5t/view?usp=sharing
+ * it is necessary to filter the situation when the third and second cross EMA13, and the last one is entirely higher (the moment of entering the trade is missed)
+ * the third can open and close higher, and this is acceptable: https://drive.google.com/file/d/15XkXFKBQbTjeNjBn03NrF9JawCBFaO5t/view?usp=sharing
  */
 public class Long_ScreenTwo_EMA_LastBarTooHigh implements ScreenTwoBlock {
     @Override
@@ -34,7 +34,7 @@ public class Long_ScreenTwo_EMA_LastBarTooHigh implements ScreenTwoBlock {
                 && quote1.getHigh() > screen_2_EMA13.get(screen_2_EMA13Count - 1).getValue();
         if (thirdCrossesEMA13 && secondCrossesEMA13 && lastAboveEMA13) {
             Log.recordCode(LAST_BAR_ABOVE_SCREEN_2, screen);
-            Log.addDebugLine("Третий и второй пересекли ЕМА13, а последний полностью выше");
+            Log.addDebugLine("The third and second crossed the EMA13, and the last is completely above");
             return new BlockResult(screen.getLastQuote(), LAST_BAR_ABOVE_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

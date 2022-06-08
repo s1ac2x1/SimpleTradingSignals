@@ -13,8 +13,8 @@ import java.util.List;
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
 
 /**
- * + последнее ЕМА26 выше
- * + последний столбик зеленый
+ * the last EMA26 is above
+ * the last quote is green
  */
 public class Long_ScreenOne_SoftTrendCheck implements ScreenOneBlock {
     @Override
@@ -27,13 +27,13 @@ public class Long_ScreenOne_SoftTrendCheck implements ScreenOneBlock {
 
         if (!ascending) {
             Log.recordCode(LAST_EMA_NOT_ASCENDING_SCREEN_1, screen);
-            Log.addDebugLine("Последнее ЕМА не выше на долгосрочном экране");
+            Log.addDebugLine("The last EMA is not higher on the long-term screen");
             return new BlockResult(screen.getLastQuote(), LAST_EMA_NOT_ASCENDING_SCREEN_1);
         }
 
         if (!Quotes.isGreen(screen.getLastQuote())) {
             Log.recordCode(QUOTE_NOT_GREEN_SCREEN_1, screen);
-            Log.addDebugLine("Последняя котировка не зеленая на долгосрочном экране");
+            Log.addDebugLine("The last quote is not green on the long-term screen");
             return new BlockResult(screen.getLastQuote(), QUOTE_NOT_GREEN_SCREEN_1);
         }
 

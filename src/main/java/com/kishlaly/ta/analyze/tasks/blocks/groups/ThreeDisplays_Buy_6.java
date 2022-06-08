@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Первый экран: последняя ЕМА выше и последний столбик зеленый
- * Второй экран:
- * 1) последняя гистограмма MACD повысилась
- * 2) одно из двух значений %D стохастика меньше 20
- * 3) две последние котировки ниже ЕМА13
- * 4) последняя котировка - зеленая
+ * First screen: last EMA is rising and the last quote is green
+ * Second screen:
+ * 1) the last MACD histogram is rising
+ * 2) one of two stochastic %D values is below 20
+ * 3) last two quotes are below EMA13
+ * 4) Last quote is green
  * <p>
- * TP не выше 50% расстояния от середины до вершины канала Кельтнера
+ * TP is not higher than 50% of the distance from the middle to the top of the Keltner channel
  */
 public class ThreeDisplays_Buy_6 implements BlocksGroup {
     @Override
@@ -29,7 +29,6 @@ public class ThreeDisplays_Buy_6 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            //add(new Long_ScreenOne_StrictTrendCheck());
             add(new Long_ScreenOne_SoftTrendCheck());
 
             add(new Long_ScreenTwo_MACD_LastAscending());
@@ -43,6 +42,6 @@ public class ThreeDisplays_Buy_6 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Вариация поиска подъема из перепроданности. Хорошая доходность и число позиций";
+        return "A variation on the search for a rise out of oversold. Good returns and number of positions";
     }
 }

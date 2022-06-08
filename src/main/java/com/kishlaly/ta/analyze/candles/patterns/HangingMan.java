@@ -10,24 +10,25 @@ import com.kishlaly.ta.utils.IndicatorUtils;
 import java.util.List;
 
 /**
- * Ситуация: бычий тренд становится восприимчивым к новым продавцам
- * Базовые признаки:
- * + ЕМА растет
- * + Цвет не имеет значения
- * + Тело находится в верхней части ценового диапазона
- * + Нижняя тень в два раза длиннее тела
- * + Верхняя тень отсутствует или очень короткая
- * Дополняющие признаки:
- * + Следующая котировка красная (необязательно)
- * + Следующая котировка открылась ниже тела повешенного (необязательно, но хороший признак)
+ * The situation: the bullish trend becomes susceptible to new sellers
+ * Baseline signs:
+ * + EMA grows
+ * + Color does not matter
+ * + Body is in the upper part of the price range
+ * + Lower shadow is twice as long as the body
+ * + Upper shadow is absent or very short
+ * Additional signs:
+ * + Next quote is red (optional)
+ * + Next quote opened below the hanging candle body (optional, but a good sign)
  */
+//TODO finish
 public class HangingMan implements CandlePattern {
 
     @Override
     public CandleResult check(SymbolData screen) {
-        // ЕМА растет
+        // EMA rises
         if (IndicatorUtils.emaAscending((List<EMA>) screen.indicators.get(Indicator.EMA13), 3, 4)) {
-            // Тело находится в верхней части ценового диапазона
+            // The body is in the upper part of the price range
 
         }
 

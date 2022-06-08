@@ -9,18 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Поиск сужения полос с признаками роста бычьего настроения
+ * Search for narrowing bands with signs of bullish growth
  * <p>
- * Второй экран:
- * + три последних значений верхней полосы уменьшаются -- может, проверять 4-5 последних значений? пример: 4 MAY 2022
- * + три последних значения нижней полосы растут       --  может, проверять 4-5 последних значений? пример: 4 MAY 2022
- * + три последние гистограммы MACD растут (необязательно все три ниже нуля!)
- * + последние 2 %D стохастика растут
- * + предпоследняя %D стохастика ниже 40
+ * Second screen:
+ * + the last three values of the upper band are declining -- maybe check the last 4-5 values? TODO
+ * + the last three values of the lower band are rising -- maybe check the last 4-5 values? TODO
+ * + the last three MACD histograms are rising (not necessarily all three below zero!)
+ * + last two %D of stochastics are going up
+ * + penultimate %D stochastic is below 40
  * <p>
- * SL скользящий по середине канала Кельтнера
+ * SL sliding in the middle of the Keltner channel
  * <p>
- * Пример: [D] AAPL 15.11.2021, 7.06.2021
+ * Example: [D] AAPL 15.11.2021, 7.06.2021
  */
 public class ThreeDisplays_Buy_Bollinger_3 implements BlocksGroup {
     @Override
@@ -41,6 +41,6 @@ public class ThreeDisplays_Buy_Bollinger_3 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Сужение полос Боллинжера с признаками роста бычьего настроения";
+        return "Narrowing of the Bollinger Bands with signs of bullish growth";
     }
 }

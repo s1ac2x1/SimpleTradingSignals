@@ -12,12 +12,10 @@ import java.util.List;
 
 public class TaskTypeDefaults {
 
-    // все декартово произведение или один из его вариантов?
+    // TODO the whole Cartesian product or one of its variants?
     private List<TaskBlock> customBlocks = new ArrayList<>();
 
-    // загрузить блоки из списка, подготовленным findBestStrategyForSymbols, если есть
-    // иначе если есть customVariants, то их
-    // иначе дефолтные через switch
+    // load blocks from the list prepared by findBestStrategyForSymbols, if any
     public static List<TaskBlock> get(TaskType taskType) {
         switch (taskType) {
             case THREE_DISPLAYS_BUY:

@@ -11,7 +11,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.NUMBER_OF_EMA26
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 /**
- * Строгая проверка тренда с использованием котировок, EMA26 и MACD
+ * Strict trend check using quotes, EMA26 and MACD
  */
 public class Short_ScreenOne_StrictTrendCheck implements ScreenOneBlock {
     @Override
@@ -19,7 +19,7 @@ public class Short_ScreenOne_StrictTrendCheck implements ScreenOneBlock {
         boolean downtrendCheckOnMultipleBars = TrendFunctions.downtrendCheckOnMultipleBars(screen, resolveMinBarsCount(screen.timeframe), NUMBER_OF_EMA26_VALUES_TO_CHECK);
         if (!downtrendCheckOnMultipleBars) {
             Log.recordCode(NO_DOWNTREND_SCREEN_1, screen);
-            Log.addDebugLine("Не обнаружен нисходящий тренд на долгосрочном экране");
+            Log.addDebugLine("No downtrend detected on the long-term screen");
             return new BlockResult(screen.getLastQuote(), NO_DOWNTREND_SCREEN_1);
         }
         return new BlockResult(screen.getLastQuote(), OK);

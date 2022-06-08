@@ -21,6 +21,6 @@ public class FirstTrustModel_Buy_1 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Первая трастовая модель";
+        return "The First Trust Model";
     }
 }

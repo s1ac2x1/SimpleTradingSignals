@@ -3,23 +3,24 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_ThreeAscending;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// вдохновитель [D] CFLT 20 Dec 2021
-// первый экран: последняя ЕМА выше и последний столбик зеленый
-// второй экран -
-//    перепроданность ниже 20 у ДВУХ значений медленной линии стохастика
-//    последняя гистограмма повышается
-//    последний бар зеленый
-//    последние два бара повышаются (quote.low & quote.high)
-//    последние два бара полностью ниже ЕМА13
-// вход на 7 центов выше закрытия последнего бара
-// TP на середине верхней половины канала Кельтнера
+// inspired by [D] CFLT 20 Dec 2021
+//
+// first screen: last EMA is risign and the last bar is green
+// second screen:
+// oversold below 20 at TWO %D stochastic values
+// last histogram is rising
+// last bar is green
+// last two bars go up (quote.low & quote.high)
+// last two bars fully below EMA13
+//
+// entry 7 cents above the close of the last bar
+// TP in the middle of the upper half of the Keltner channel
 public class ThreeDisplays_Buy_3 implements BlocksGroup {
 
     public List<TaskBlock> blocks() {
@@ -42,7 +43,7 @@ public class ThreeDisplays_Buy_3 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Часто хорошие результаты, но в среднем SL высоковат";
+        return "Often good results, but the average SL is high";
     }
 
 }

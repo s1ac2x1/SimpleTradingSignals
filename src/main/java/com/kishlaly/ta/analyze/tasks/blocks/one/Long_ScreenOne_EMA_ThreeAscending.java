@@ -9,11 +9,11 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
-import static com.kishlaly.ta.utils.Quotes.isQuoteCrossedEMA;
+import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.analyze.BlockResultCode.THREE_EMA_NOT_ASCENDING_SCREEN_1;
 
 /**
- * три последних значения растут
+ * the last three EMA are increasing
  */
 public class Long_ScreenOne_EMA_ThreeAscending implements ScreenOneBlock {
     @Override
@@ -27,7 +27,7 @@ public class Long_ScreenOne_EMA_ThreeAscending implements ScreenOneBlock {
 
         if (!ascending) {
             Log.recordCode(THREE_EMA_NOT_ASCENDING_SCREEN_1, screen);
-            Log.addDebugLine("Три значения ЕМА не растут на долгосрочном экране");
+            Log.addDebugLine("Three values of the EMA do not grow on the long-term screen");
             return new BlockResult(screen.getLastQuote(), THREE_EMA_NOT_ASCENDING_SCREEN_1);
         }
         return new BlockResult(screen.getLastQuote(), OK);

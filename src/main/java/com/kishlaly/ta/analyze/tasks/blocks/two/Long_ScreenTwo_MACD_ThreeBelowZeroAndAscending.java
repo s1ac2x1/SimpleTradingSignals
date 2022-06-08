@@ -12,28 +12,28 @@ import java.util.List;
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
 
 /**
- * гистограмма должна быть ниже нуля и начать повышаться на трех последних значениях
+ * histogram should be below zero and start to rise at the last three values
  */
 public class Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending implements ScreenTwoBlock {
 
     @Override
     public BlockResult check(SymbolData screen) {
         List<MACD> screen_2_MACD = (List<MACD>) screen.indicators.get(Indicator.MACD);
-        Double macd3 = CollectionsTools.getFromEnd(screen_2_MACD, 3).getHistogram(); // 3 от правого края
-        Double macd2 = CollectionsTools.getFromEnd(screen_2_MACD, 2).getHistogram(); // 2 от правого края
-        Double macd1 = CollectionsTools.getFromEnd(screen_2_MACD, 1).getHistogram(); // последняя
+        Double macd3 = CollectionsTools.getFromEnd(screen_2_MACD, 3).getHistogram();
+        Double macd2 = CollectionsTools.getFromEnd(screen_2_MACD, 2).getHistogram();
+        Double macd1 = CollectionsTools.getFromEnd(screen_2_MACD, 1).getHistogram();
 
         boolean histogramBelowZero = macd3 < 0 && macd2 < 0 && macd1 < 0;
         if (!histogramBelowZero) {
             Log.recordCode(HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen);
-            Log.addDebugLine("Гистограмма на втором экране не ниже нуля");
+            Log.addDebugLine("The bar graph on the second screen is at least zero");
             return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2);
         }
 
         boolean ascendingHistogram = macd3 < macd2 && macd2 < macd1;
         if (!ascendingHistogram) {
             Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("Гистограмма на втором экране не повышается");
+            Log.addDebugLine("The histogram on the second screen does not increase");
             return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

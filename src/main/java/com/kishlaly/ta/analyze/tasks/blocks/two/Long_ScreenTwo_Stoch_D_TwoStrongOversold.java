@@ -12,7 +12,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2;
 
 /**
- * перепроданность ниже 20 у ДВУХ значений медленной линии стохастика и она повышается
+ * oversold below 20 at TWO values of the slow stochastic line and it goes up
  */
 public class Long_ScreenTwo_Stoch_D_TwoStrongOversold implements ScreenTwoBlock {
     @Override
@@ -24,7 +24,7 @@ public class Long_ScreenTwo_Stoch_D_TwoStrongOversold implements ScreenTwoBlock 
         boolean oversold = stoch2.getSlowD() < 20 && stoch1.getSlowD() < 20;
         if (!oversold) {
             Log.recordCode(STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2, screen);
-            Log.addDebugLine("Два последних значения %D стохастика не ниже 20");
+            Log.addDebugLine("The last two stochastic %D values are at least 20");
             return new BlockResult(screen.getLastQuote(), STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

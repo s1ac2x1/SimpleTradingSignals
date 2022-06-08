@@ -12,7 +12,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTES_NOT_ASCENDING_
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * последние два бара повышаются (quote.low & quote.high)
+ * the last two bars go up (quote.low & quote.high)
  */
 public class Long_ScreenTwo_Bars_TwoAscending implements ScreenTwoBlock {
     @Override
@@ -24,7 +24,7 @@ public class Long_ScreenTwo_Bars_TwoAscending implements ScreenTwoBlock {
         boolean lowAndHightAscending = quote2.getLow() < quote1.getLow() && quote2.getHigh() < quote1.getHigh();
         if (!lowAndHightAscending) {
             Log.recordCode(LAST_QUOTES_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("Последние две котировки не растут последовательно на втором экране");
+            Log.addDebugLine("The last two quotes do not grow consistently on the second screen");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTES_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

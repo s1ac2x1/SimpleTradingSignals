@@ -11,27 +11,27 @@ import java.util.List;
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
 
 /**
- * гистограмма должна быть выше нуля и начать снижаться: проверить на трех последних значениях
+ * histogram should be above zero and start to decrease: check on the last three values
  */
 public class Short_ScreenTwo_MACD_ThreeAboveZeroAndDescending implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         List<MACD> screen_2_MACD = (List<MACD>) screen.indicators.get(Indicator.MACD);
-        Double macd3 = screen_2_MACD.get(screen_2_MACD.size() - 3).getHistogram(); // 3 от правого края
-        Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram(); // 2 от правого края
-        Double macd1 = screen_2_MACD.get(screen_2_MACD.size() - 1).getHistogram(); // последняя
+        Double macd3 = screen_2_MACD.get(screen_2_MACD.size() - 3).getHistogram();
+        Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram();
+        Double macd1 = screen_2_MACD.get(screen_2_MACD.size() - 1).getHistogram();
 
         boolean histogramAboveZero = macd3 > 0 && macd2 > 0 && macd1 > 0;
         if (!histogramAboveZero) {
             Log.recordCode(HISTOGRAM_NOT_ABOVE_ZERO_SCREEN_2, screen);
-            Log.addDebugLine("Гистограмма на втором экране не выше нуля");
+            Log.addDebugLine("Histogram on the second screen is not higher than zero");
             return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ABOVE_ZERO_SCREEN_2);
         }
 
         boolean descending = macd3 > macd2 && macd2 > macd1;
         if (!descending) {
             Log.recordCode(HISTOGRAM_NOT_DESCENDING_SCREEN_2, screen);
-            Log.addDebugLine("Гистограмма на втором экране не снижается");
+            Log.addDebugLine("The histogram on the second screen is not reduced");
             return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_DESCENDING_SCREEN_2);
         }
 

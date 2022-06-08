@@ -8,7 +8,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTE_NOT_GREEN_SCREE
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * последний столбик - зеленый
+ * the last quote is green
  */
 public class Long_ScreenOne_LastBarGreen implements ScreenOneBlock {
     @Override
@@ -16,7 +16,7 @@ public class Long_ScreenOne_LastBarGreen implements ScreenOneBlock {
         boolean lastBarIsGreen = screen.getLastQuote().getOpen() < screen.getLastQuote().getClose();
         if (!lastBarIsGreen) {
             Log.recordCode(LAST_QUOTE_NOT_GREEN_SCREEN_1, screen);
-            Log.addDebugLine("Последний столбик не зеленый на долгосрочном экране");
+            Log.addDebugLine("The last quote is not green on the long-term screen");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTE_NOT_GREEN_SCREEN_1);
         }
         return new BlockResult(screen.getLastQuote(), OK);

@@ -12,7 +12,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_D_NOT_U_SCREEN_2;
 
 /**
- * медленная стохастика рисует фигуру U на трех последних значениях
+ * slow stochastic draws the figure U on the last three values
  */
 public class Long_ScreenTwo_Stoch_D_ThreeFigureU implements ScreenTwoBlock {
     @Override
@@ -25,7 +25,7 @@ public class Long_ScreenTwo_Stoch_D_ThreeFigureU implements ScreenTwoBlock {
         boolean u = stoch3.getSlowD() > stoch2.getSlowD() && stoch2.getSlowD() < stoch1.getSlowD();
         if (!u) {
             Log.recordCode(STOCH_D_NOT_U_SCREEN_2, screen);
-            Log.addDebugLine("Стохастик %D не формирует фигуру U на втором экране");
+            Log.addDebugLine("Stochastic %D does not form a U-shape on the second screen");
             return new BlockResult(screen.getLastQuote(), STOCH_D_NOT_U_SCREEN_2);
         }
 

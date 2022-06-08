@@ -95,19 +95,21 @@ public class TaskTester {
                         signalResults.add(formatTestingSummary(testing));
                         Set<String> finalSignalResults = signalResults;
 
-                        // на данном этапе HistoricalTesting содержит тесты позиций по сигналам
-                        // а так же все результаты отказов
-                        // TaskResult.lastChartQuote может быть null, если стратегии не хватило котировок для теста
+                        // at this stage HistoricalTesting contains tests of positions by signals
+                        // as well as all failure results
+                        // TaskResult.lastChartQuote can be null if the strategy did not have enough quotes for the test
 
-                        // сначала печатаем отчет по позициям
+                        // first print the item report
                         printPositionsReport(screen2.timeframe, testing, finalSignalResults);
 
-                        // потом лог всех остальных котировок с указанием причины, почему стратегия дала отказ
+                        // then a log of all other quotes with the reason why the strategy failed
                         printNoSignalsReport(screen2.timeframe, testing, finalSignalResults);
 
                         readableOutput.put(key, signalResults);
                     }
                 }
+
+                // hint for GC
                 QuotesInMemoryCache.clear();
                 IndicatorsInMemoryCache.clear();
                 screen1.quotes.clear();
@@ -281,7 +283,7 @@ public class TaskTester {
         if (Context.symbols.size() > 1) {
             throw new RuntimeException("Only one symbol allowed here");
         }
-        // тут не важны SL/TP, а важно какой сигнал или код ошибки в конкретной дате
+        // SL/TP are not important here, it is important what signal or error code in a particular date
         Context.stopLossStrategy = new StopLossFixedPrice(0.27);
         Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
         BlocksGroup[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
@@ -309,9 +311,9 @@ public class TaskTester {
     }
 
     /**
-     * Простое тестирование длинных позиций
+     * Simple testing of long positions
      * <p>
-     * TODO адаптировать для коротких позиций тоже
+     * TODO implement inverted logic for short positions
      *
      * @param historicalTesting
      */
@@ -335,6 +337,8 @@ public class TaskTester {
                 break;
             }
         }
+
+        // minimal amount of quotes in the chart
         if (signalIndex > 11) {
 
             StopLossStrategy stopLossStrategy = historicalTesting.getStopLossStrategy();
@@ -382,7 +386,8 @@ public class TaskTester {
                 boolean gapUp = takeProfitStrategy.isEnabled()
                         ? nextQuote.getOpen() > takeProfit
                         : false;
-                // закрылся по TP
+
+                // closed on TP
                 if (tpInsideBar || tpAtHigh || gapUp) {
                     if (gapUp) {
                         takeProfit = nextQuote.getOpen();
@@ -400,7 +405,8 @@ public class TaskTester {
                 boolean slInsideBar = nextQuote.getLow() < stopLoss && nextQuote.getHigh() > stopLoss;
                 boolean slAtLow = nextQuote.getLow() == stopLoss;
                 boolean gapDown = nextQuote.getOpen() < stopLoss;
-                // закрылся по SL
+
+                // closed on SL
                 if (slInsideBar || slAtLow || gapDown) {
                     if (gapDown) {
                         stopLoss = nextQuote.getOpen();
@@ -414,11 +420,13 @@ public class TaskTester {
                     closePositionCost = closingPositionSize;
                     break;
                 }
-                // нельзя двигать SL вниз
+
+                // cannot move the SL down
                 if (stopLossStrategy.isVolatile() && stopLossStrategy.calculate(data, startPositionIndex) > stopLoss) {
                     stopLoss = stopLossStrategy.calculate(data, startPositionIndex);
                 }
-                // нельзя двигать TP вниз
+
+                // cannot move TP down
                 if (takeProfitStrategy.isVolatile() && takeProfitStrategy.calcualte(data, startPositionIndex) > takeProfit) {
                     takeProfit = takeProfitStrategy.calcualte(data, startPositionIndex);
                 }

@@ -9,13 +9,13 @@ import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 import java.util.ArrayList;
 import java.util.List;
 
-// модификация ThreeDisplays_Buy_4 для поиска ультра коротких позиций
-// 1 экран: последняя ЕМА выше и последний столбик зеленый
-// 2 экран: добавлена проверка, чтобы последняя котировка не поднималась выше 10% от середины канала
+// ThreeDisplays_Buy_4 modification to search for ultra-short positions
+// 1 screen: last EMA is higher and the last bar is green
+// 2 screen: added check that the last quote does not go higher than 10% from the middle of the channel
 //
-// TP 50-70% от канала
+// TP 50-70% of the channel
 //
-// на исторических тестах показывает хороший баланс, но количество SL позиций сильно больше TP
+// on historical tests shows a good balance, but the number of SL positions is much higher than the TP
 public class ThreeDisplays_Buy_7 implements BlocksGroup {
 
     public List<TaskBlock> blocks() {
@@ -37,7 +37,7 @@ public class ThreeDisplays_Buy_7 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Хорошая доходность, но много позиций";
+        return "Good returns, but a lot of positions";
     }
 
 }

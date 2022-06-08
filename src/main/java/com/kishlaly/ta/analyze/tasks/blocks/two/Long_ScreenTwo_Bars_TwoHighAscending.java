@@ -8,7 +8,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTES_NOT_ASCENDING_
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * high последнего столбика выше предпоследнего
+ * high of the last column above the penultimate one
  */
 public class Long_ScreenTwo_Bars_TwoHighAscending implements ScreenTwoBlock {
     @Override
@@ -16,7 +16,7 @@ public class Long_ScreenTwo_Bars_TwoHighAscending implements ScreenTwoBlock {
         boolean screen_2_check1 = screen.getLastQuote().getHigh() > screen.getPreLastQuote().getHigh();
         if (!screen_2_check1) {
             Log.recordCode(LAST_QUOTES_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("High последнего столбика не выше предпоследнего на втором экране");
+            Log.addDebugLine("High of the last column is not higher than the penultimate one on the second screen");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTES_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

@@ -14,7 +14,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_D_NOT_EXTRA_OVERSOLD_SCREEN_2;
 
 /**
- * последние две %D стохастика ниже ThreeDisplays.Config.STOCH_CUSTOM
+ * the last two %D stochastics below ThreeDisplays.Config.STOCH_CUSTOM
  */
 public class Long_ScreenTwo_Stoch_D_TwoBelow_X implements TaskBlock {
     @Override
@@ -31,7 +31,7 @@ public class Long_ScreenTwo_Stoch_D_TwoBelow_X implements TaskBlock {
 
         if (!bothBelowExtraLow) {
             Log.recordCode(STOCH_D_NOT_EXTRA_OVERSOLD_SCREEN_2, screen);
-            Log.addDebugLine("Оба последних %D стохастика не ниже 20 на втором экране");
+            Log.addDebugLine("Both last %D stochastics are at least " + ThreeDisplays.Config.STOCH_CUSTOM + " on the second screen");
             return new BlockResult(screen.getLastQuote(), STOCH_D_NOT_EXTRA_OVERSOLD_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

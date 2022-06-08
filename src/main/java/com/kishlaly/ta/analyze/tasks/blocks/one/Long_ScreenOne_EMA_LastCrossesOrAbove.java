@@ -15,7 +15,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTE_NOT_CROSSING_OR
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * последний столбик пересекает EMA26 или выше
+ * the last bar crosses the EMA26 or higher
  */
 public class Long_ScreenOne_EMA_LastCrossesOrAbove implements ScreenOneBlock {
     @Override
@@ -28,7 +28,7 @@ public class Long_ScreenOne_EMA_LastCrossesOrAbove implements ScreenOneBlock {
 
         if (!lastBarCrossing || !lastBarAbove) {
             Log.recordCode(LAST_QUOTE_NOT_CROSSING_OR_NOT_ABOVE_EMA_SCREEN_1, screen);
-            Log.addDebugLine("Последний столбик не пересекает или не выше EMA на долгосрочном экране");
+            Log.addDebugLine("The last bar does not cross or is not above the EMA on the long term screen");
             return new BlockResult(lastQuote, LAST_QUOTE_NOT_CROSSING_OR_NOT_ABOVE_EMA_SCREEN_1);
         }
         return new BlockResult(lastQuote, OK);

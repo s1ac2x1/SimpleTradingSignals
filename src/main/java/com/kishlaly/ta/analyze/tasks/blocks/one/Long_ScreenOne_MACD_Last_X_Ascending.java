@@ -13,7 +13,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 import static com.kishlaly.ta.analyze.BlockResultCode.X_HISTOGRAMS_NOT_ASCENDING_SCREEN_1;
 
 /**
- * последние X гистограмм растут последовательно
+ * the last X histograms grow consecutively
  */
 public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlock {
     @Override
@@ -33,7 +33,7 @@ public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlock {
 
         if (count < ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK) {
             Log.recordCode(X_HISTOGRAMS_NOT_ASCENDING_SCREEN_1, screen);
-            Log.addDebugLine(ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK + " гистограмм не растет на долгосрочном экране");
+            Log.addDebugLine(ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK + " histograms do not grow on the long-term screen");
             return new BlockResult(screen.getLastQuote(), X_HISTOGRAMS_NOT_ASCENDING_SCREEN_1);
         }
         return new BlockResult(screen.getLastQuote(), OK);

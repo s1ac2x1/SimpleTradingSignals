@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks;
 
 /**
- * Описана в книжке Булковского по свинговой торговле
+ * Described in Bulkowski's book on swing trading
  */
 public class FirstTrustModel extends AbstractTask {
 

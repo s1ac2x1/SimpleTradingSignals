@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.indicators.Keltner;
 import com.kishlaly.ta.utils.IndicatorUtils;
 
 /**
- * TP на уровне % от вершины канала Кельтнера в каждой новой точке
+ * TP at % of the top of the Keltner channel at each new point
  */
 public class TakeProfitVolatileKeltnerTop extends TakeProfitStrategy {
 

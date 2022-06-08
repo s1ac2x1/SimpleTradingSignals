@@ -14,7 +14,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.NOT_ALL_NEEDED_QUOTES_ABOU
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * из последних TOTAL стобиков как минимум ABOVE полностью выше ЕМА26
+ * of the latest {TOTAL} quotes at least {ABOVE} is completely above EMA26
  */
 public class Long_ScreenOne_EMA_X_OutOf_Y_Above implements ScreenOneBlock {
     @Override
@@ -35,7 +35,7 @@ public class Long_ScreenOne_EMA_X_OutOf_Y_Above implements ScreenOneBlock {
         }
         if (aboveEMA26 < ThreeDisplays.Config.EMA26_ABOVE_BARS) {
             Log.recordCode(NOT_ALL_NEEDED_QUOTES_ABOUT_EMA_SCREEN_1, screen);
-            Log.addDebugLine("Из последних " + ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK + " стобиков " + ThreeDisplays.Config.EMA26_ABOVE_BARS + " не находятся выше ЕМА26 на долгосрочном экране");
+            Log.addDebugLine("Out of the last " + ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK + " quotes " + ThreeDisplays.Config.EMA26_ABOVE_BARS + " are not above EMA26 on the long term screen");
             return new BlockResult(screen.getLastQuote(), NOT_ALL_NEEDED_QUOTES_ABOUT_EMA_SCREEN_1);
         }
 

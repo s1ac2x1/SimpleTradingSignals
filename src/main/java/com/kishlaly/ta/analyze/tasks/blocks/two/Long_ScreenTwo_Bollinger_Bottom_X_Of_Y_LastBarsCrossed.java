@@ -16,7 +16,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.BOLLINGER_TOTAL
 import static com.kishlaly.ta.utils.Quotes.isQuoteCrossedBollingerBottom;
 
 /**
- * X из последних Y столбиков коснулись нижней ленты Боллинжера
+ * X out of the last Y bars touched the bottom Bollinger band
  */
 public class Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed implements ScreenTwoBlock {
     @Override
@@ -41,7 +41,7 @@ public class Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed implements S
 
         if (crossed < BOLLINGER_CROSSED_BOTTOM_BARS) {
             Log.recordCode(LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2, screen);
-            Log.addDebugLine("X из последних Y столбиков не коснулись нижней ленты Боллинжера");
+            Log.addDebugLine("X out of the last Y bars did not touch the bottom Bollinger band");
             return new BlockResult(screen.getLastQuote(), LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

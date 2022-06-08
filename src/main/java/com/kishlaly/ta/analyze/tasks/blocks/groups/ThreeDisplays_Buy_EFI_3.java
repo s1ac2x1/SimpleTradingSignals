@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Первый экран не используется
- * На втором проверяются три значения EFI:
- * + все три последних значения отрицательные
- * + второе с конца значение ниже третьего с конца (нижняя точка фигуры U)
- * + последнее значение выше второго с конца (правая точка фигуры U)
+ * The first screen is not used.
+ * The second one checks the three EFI values:
+ * + all three last values are negative
+ * + the second from the end value is lower than the third from the end (the lower point of the figure U)
+ * + the last value is higher than the second from the end (the right point of the figure U)
  * <p>
- * SL скользящий по средней ленте Боллинжера или TP у вершины канала, если последняя котировка не очень высокая
+ * SL sliding on the average Bollinger band or TP at the top of the channel, if the last quote is not very high
  * <p>
- * !!! Нельзя перевернуть для шортов !!!
+ * Note: Can't flip for shorts
  */
-//TODO закончить
+//TODO implement
 public class ThreeDisplays_Buy_EFI_3 implements BlocksGroup {
     @Override
     public List<TaskBlock> blocks() {
@@ -33,6 +33,6 @@ public class ThreeDisplays_Buy_EFI_3 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "EFI фигура U ниже нуля";
+        return "EFI draws U below zero";
     }
 }

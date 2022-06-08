@@ -3,7 +3,6 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ public class ThreeDisplays_Buy_1 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            //add(new Long_ScreenOne_StrictTrendCheck());
             add(new Long_ScreenOne_SoftTrendCheck());
 
             add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending());
@@ -29,6 +27,6 @@ public class ThreeDisplays_Buy_1 implements BlocksGroup {
 
     @Override
     public String comments() {
-        return "Часто хорошие результаты, низкое число SL";
+        return "Often good results, low SL ratio";
     }
 }

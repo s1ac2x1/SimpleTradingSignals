@@ -21,7 +21,7 @@ public class Long_ScreenTwo_MACD_LastShouldBeNegative implements ScreenTwoBlock 
 
         if (latestHistogramValue > 0) {
             Log.recordCode(BlockResultCode.LAST_HISTOGRAM_ABOVE_ZERO_SCREEN_2, screen);
-            Log.addDebugLine("гистограмма у правого края выше нуля");
+            Log.addDebugLine("histogram at the right edge above zero");
             return new BlockResult(screen.getLastQuote(), LAST_HISTOGRAM_ABOVE_ZERO_SCREEN_2);
         }
         return new BlockResult(screen.getLastQuote(), OK);

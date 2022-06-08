@@ -13,7 +13,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.HISTOGRAM_NOT_ASCENDING_SC
 import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 
 /**
- * последняя гистограмма растет
+ * the last histogram grows
  */
 public class Long_ScreenOne_MACD_LastAscending implements ScreenOneBlock {
     @Override
@@ -25,7 +25,7 @@ public class Long_ScreenOne_MACD_LastAscending implements ScreenOneBlock {
         boolean check2 = screen_1_lastMACD.getHistogram() > screen_1_preLastMACD.getHistogram();
         if (!check2) {
             Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_1, screen);
-            Log.addDebugLine("Гистограмма не растет на долгосрочном экране");
+            Log.addDebugLine("The histogram does not grow on the long-term screen");
             return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_1);
         }
         return new BlockResult(screen.getLastQuote(), OK);

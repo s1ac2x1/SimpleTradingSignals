@@ -45,7 +45,7 @@ public class CacheBuilder {
         }
         AtomicReference<Set<String>> symbols = new AtomicReference<>(Context.symbols);
         Arrays.stream(timeframes).forEach(screens -> {
-            // загружаются только один таймфрейм Context.aggregationTimeframe
+            // only one timeframe is loaded Context.aggregationTimeframe
             Context.timeframe = aggregationTimeframe;
             if (reloadMissed) {
                 symbols.set(getMissedSymbols());
@@ -53,7 +53,7 @@ public class CacheBuilder {
             cacheQuotes(symbols.get());
         });
         double p = limitPerMinute / parallelRequests;
-        requestPeriod = (int) (p * 1000) + 1000; // +1 секунда для запаса
+        requestPeriod = (int) (p * 1000) + 1000; // +1 second for margin
         queueExecutor.scheduleAtFixedRate(() -> processQueue(), requestPeriod, requestPeriod, TimeUnit.MILLISECONDS);
         if (reloadMissed) {
             Arrays.stream(timeframes).forEach(screens -> {
@@ -80,7 +80,7 @@ public class CacheBuilder {
         if (requests.size() == 0) {
             queueExecutor.shutdownNow();
         }
-        // на запускать новые запросы к API, если еще не вся прошлая партия завершилась
+        // to run new requests to the API, if not all of the last batch has been completed
         for (int i = 0; i < callsInProgress.size(); i++) {
             if (!callsInProgress.get(i).isDone()) {
                 System.out.println("Previous batch is still in progress, skipping this round");
@@ -120,10 +120,10 @@ public class CacheBuilder {
         }
     }
 
-    // для каждого набора символов (SP500, NAGA, ...) создает файл best_{set}_{scree1}_{scree2}.txt
-    // в этом файле строки вида symbol=TaskType
-    // подразумевается, что каждому символу соответствует TaskType, который показал лучший результат на исторических данных
-    // при тестировании сигналов использовалась базовая пара StopLossFixedPrice(0.27) и TakeProfitFixedKeltnerTop(100)
+    // for each character set (SP500, NAGA, ...) creates a file best_{set}_{screen1}_{screen2}.txt
+    // in this file lines like symbol=TaskType
+    // it is assumed that each symbol corresponds to a TaskType, which showed the best result on historical data
+    // When testing signals we used the base pair StopLossFixedPrice(0.27) and TakeProfitFixedKeltnerTop(100)
     public static void findBestStrategyForSymbols(TaskType task) {
         if (source.length > 1) {
             throw new RuntimeException("Only one symbols source please");
@@ -135,7 +135,7 @@ public class CacheBuilder {
         Context.stopLossStrategy = new StopLossFixedPrice(0.27);
         Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
 
-        // TODO тут нужно протестировать декартово множество блоков
+        // TODO Here we need to test a Cartesian set of blocks
         //result.addAll(test(timeframes, task, BlocksGroup));
 
         Map<String, TaskType> winners = new HashMap<>();
@@ -145,7 +145,7 @@ public class CacheBuilder {
                     List<HistoricalTesting> testings = bySymbol.getValue();
                     Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
                     HistoricalTesting best = testings.get(testings.size() - 1);
-                    // TODO нужно сохранить маппинг symbol--taskType--blocks
+                    // TODO need to save the symbol--taskType--blocks mapping
                     winners.put(symbol, best.getTaskType());
                     System.out.println(symbol + " " + best.getTaskType().name() + " " + best.getBalance());
                 });

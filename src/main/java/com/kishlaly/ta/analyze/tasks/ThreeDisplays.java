@@ -1,31 +1,34 @@
 package com.kishlaly.ta.analyze.tasks;
 
 /**
- * Индикаторы:
- * EMA26 (close) на первом экране
- * MACD (12 26 9 close) на втором экране
- * EMA13 (close) на втором экране
- * STOCH (14 1 3 close) на втором экране
+ * Named after Alex Elder's famous three-displays-technique
+ * however, here is used only Longterm and Midterm
+ * <p>
+ * Indicators:
+ * EMA26 (close) on the first screen
+ * MACD (12 26 9 close) on the second screen
+ * EMA13 (close) on the second screen
+ * STOCH (14 1 3 close) on the second screen
  */
 public class ThreeDisplays extends AbstractTask {
 
     public static class Config {
 
-        // 3 дает меньше сигналов, но они надежнее
+        // 3 gives fewer signals, but they are more reliable
         public static int NUMBER_OF_EMA26_VALUES_TO_CHECK = 4;
 
         public static int STOCH_OVERSOLD = 40;
         public static int STOCH_OVERBOUGHT = 70;
         public static int STOCH_VALUES_TO_CHECK = 5;
 
-        // в процентах от середины до вершины канала
+        // in percent from the middle to the top of the channel
         public static int FILTER_BY_KELTNER = 40;
 
-        // фильтрация сигналов, если котировка закрылась выше FILTER_BY_KELTNER
-        // тесты показывают результат лучше, когда эта проверка выключена
+        // filtering signals if a quote closed above FILTER_BY_KELTNER
+        // tests show better results when this check is turned off
         public static boolean FILTER_BY_KELTNER_ENABLED;
 
-        // плавающие значения индикаторов
+        // configurable indicator values
         public static int STOCH_CUSTOM = -1;
         public static int EMA26_TOTAL_BARS_CHECK = -1;
         public static int EMA26_ABOVE_BARS = -1;

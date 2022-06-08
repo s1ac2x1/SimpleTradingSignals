@@ -13,7 +13,7 @@ public class ScreenSoftValidation implements CommonBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         if (screen.quotes.isEmpty() || screen.quotes.isEmpty()) {
-            Log.addDebugLine("Недостаточно ценовых столбиков для " + screen.symbol);
+            Log.addDebugLine("There are not enough quotes for " + screen.symbol);
             Log.recordCode(BlockResultCode.NO_DATA_QUOTES, screen);
             return new BlockResult(null, NO_DATA_QUOTES);
         }

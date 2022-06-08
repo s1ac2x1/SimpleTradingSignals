@@ -138,7 +138,7 @@ public class TaskRunner {
             SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
             SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
 
-            //пропускать символы, если у них на недельном фрейме меньше resolveMinBarsCount котировок
+            // skip symbols if they have less than resolveMinBarsCount quotes on the weekly frame
             if (screen1.quotes.size() < resolveMinBarsCount(screen1.timeframe)
                     || screen2.quotes.size() < resolveMinBarsCount(screen2.timeframe)) {
                 screen1.clear();
@@ -166,10 +166,10 @@ public class TaskRunner {
                 Arrays.stream(blocksGroups).forEach(blocksGroup -> {
                     System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " " + blocksGroup.getClass().getSimpleName() + " on " + symbol + " ...");
                     BlockResult blockResult = task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks());
-                    Log.addDebugLine(blockResult.isOk() ? "Вердикт: проверить" : "Вердикт: точно нет");
+                    Log.addDebugLine(blockResult.isOk() ? "To check" : "Nope");
                     Log.addDebugLine("");
                     if (blockResult.isOk()) {
-                        //TODO сюда можно добавить прогон по свечным моделям
+                        //TODO Here can be added a run on candlestick patterns
                         Log.addLine(symbol);
                         Signal signal = new Signal();
                         signal.timeframe1 = screen1.timeframe;
@@ -177,7 +177,7 @@ public class TaskRunner {
                         signal.symbol = symbol;
                         signal.task = task;
                         signals.add(signal);
-                        Log.addSummary(task.name(), blocksGroup, symbol); // TODO добавить список найденных свечных моделей
+                        Log.addSummary(task.name(), blocksGroup, symbol); // TODO add a list of found candlestick patterns
                     }
                 });
             } catch (Exception e) {

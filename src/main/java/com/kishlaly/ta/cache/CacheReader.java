@@ -44,8 +44,8 @@ public class CacheReader {
         AtomicInteger screenNumber = new AtomicInteger(0);
         Map<Timeframe, Set<String>> missedData = new HashMap<>();
         Arrays.stream(timeframes).forEach(screens -> {
-            // проверям только наличие котировок в кэше
-            // подразумевается, что загружаются только один Context.aggregationTimeframe
+            // only check the availability of quotes in the cache
+            // it is assumed that only one Context.aggregationTimeframe is loaded
             screenNumber.getAndIncrement();
             Context.timeframe = Context.aggregationTimeframe;
             List<String> missingQuotes = removeCachedQuotesSymbols(Context.symbols);

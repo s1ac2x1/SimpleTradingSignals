@@ -14,7 +14,7 @@ import java.util.List;
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
 
 /**
- * ценовые бары должны пересекать ЕМА13 и должны подниматься
+ * price bars should cross EMA13 and should go up
  */
 public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenTwoBlock {
     @Override
@@ -24,10 +24,9 @@ public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenT
         Quote quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
         List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
 
-        // обязательное условие 1
-        // убедиться сначала, что high у последних трех столбиков повышается
+        // prerequisite 1:
+        // make sure first that the last three columns increase
 
-        // наверно ascendingBarHigh=false + ascendingBarClose=false достаточно для отказа
         boolean ascendingBarHigh = quote3.getHigh() < quote2.getHigh() && quote2.getHigh() < quote1.getHigh();
         boolean ascendingBarClose = quote3.getClose() < quote2.getClose() && quote2.getClose() < quote1.getClose();
 
@@ -37,8 +36,8 @@ public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenT
             Log.addDebugLine("Quote.high не растет последовательно");
             if (!ascendingBarClose) {
                 Log.recordCode(BlockResultCode.QUOTE_CLOSE_NOT_GROWING_SCREEN_2, screen);
-                Log.addDebugLine("Quote.close не растет последовательно");
-                // третий с конца весь ниже ЕМА13, а второй и последний пересекли
+                Log.addDebugLine("Quote.close does not grow consistently");
+                // the third from the end all below EMA13, and the second and last crossed
                 boolean thirdBarBelowEMA13 = quote3.getLow() < screen_2_EMA13.get(screen_2_EMA13Count - 3).getValue()
                         && quote3.getHigh() < screen_2_EMA13.get(screen_2_EMA13Count - 3).getValue();
                 boolean secondBarCrossesEMA13 = quote2.getLow() <= screen_2_EMA13.get(screen_2_EMA13Count - 2).getValue()
@@ -47,22 +46,22 @@ public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenT
                         && quote1.getHigh() >= screen_2_EMA13.get(screen_2_EMA13Count - 1).getValue();
                 boolean crossingRule = thirdBarBelowEMA13 && (secondBarCrossesEMA13 || lastBarCrossesEMA13);
                 if (!crossingRule) {
-                    Log.addDebugLine("Третий с конца" + (thirdBarBelowEMA13 ? " " : " не ") + "ниже ЕМА13");
-                    Log.addDebugLine("Предпоследний" + (secondBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
-                    Log.addDebugLine("Последний" + (lastBarCrossesEMA13 ? " " : " не ") + "пересекает ЕМА13");
+                    Log.addDebugLine("Third from the end" + (thirdBarBelowEMA13 ? " " : " not ") + "below ЕМА13");
+                    Log.addDebugLine("Penultimate" + (secondBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
+                    Log.addDebugLine("Last" + (lastBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
                     Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen);
                     return new BlockResult(screen.getLastQuote(), CROSSING_RULE_VIOLATED_SCREEN_2);
                 } else {
                     Log.recordCode(BlockResultCode.CROSSING_RULE_PASSED_SCREEN_2, screen);
-                    Log.addDebugLine("Правило пересечения выполняется");
+                    Log.addDebugLine("The intersection rule is satisfied");
                 }
             } else {
                 Log.recordCode(BlockResultCode.QUOTE_CLOSE_GROWING_SCREEN_2, screen);
-                Log.addDebugLine("Есть рост Quote.close");
+                Log.addDebugLine("There is an increase in Quote.close");
             }
         } else {
             Log.recordCode(BlockResultCode.QUOTE_HIGH_GROWING_SCREEN_2, screen);
-            Log.addDebugLine("Есть рост Quote.high");
+            Log.addDebugLine("There is a rise in Quote.high");
         }
         return new BlockResult(screen.getLastQuote(), OK);
     }
