@@ -38,7 +38,7 @@ import static com.kishlaly.ta.utils.FilesUtil.writeToFile;
 public class CacheBuilder {
 
     public static void buildCache(Timeframe[][] timeframes, boolean reloadMissed) {
-        String folder = Context.outputFolder + "/cache";
+        String folder = Context.outputFolder + fileSeparator + "cache";
         File directory = new File(folder);
         if (!directory.exists()) {
             directory.mkdir();
@@ -59,7 +59,7 @@ public class CacheBuilder {
             Arrays.stream(timeframes).forEach(screens -> {
                 Arrays.stream(screens).forEach(screen -> {
                     Context.timeframe = screen;
-                    File file = new File(getFolder() + "/missed.txt");
+                    File file = new File(getFolder() + fileSeparator + "missed.txt");
                     if (file.exists()) {
                         file.delete();
                     }

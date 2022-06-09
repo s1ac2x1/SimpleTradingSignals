@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
+import static com.kishlaly.ta.utils.Context.*;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.shortDateToZoned;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
@@ -61,14 +62,7 @@ public class TaskTester {
                 }
                 try {
                     while (hasHistory(screen1, screen2)) {
-                        Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
-                        Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
-                        blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks()));
-                        if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
-                            rewind(screen1, 1);
-                        } else {
-                            rewind(screen2, 1);
-                        }
+                        rewind(task, blocksGroup, screen1, screen2, blockResults);
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -110,14 +104,7 @@ public class TaskTester {
                 }
 
                 // hint for GC
-                QuotesInMemoryCache.clear();
-                IndicatorsInMemoryCache.clear();
-                screen1.quotes.clear();
-                screen1.indicators.clear();
-                screen2.quotes.clear();
-                screen2.indicators.clear();
-                screen1 = null;
-                screen2 = null;
+                clean(screen1, screen2);
             });
             if (!Context.massTesting) {
                 readableOutput.forEach((key, data) -> {
@@ -126,13 +113,13 @@ public class TaskTester {
                 });
             }
         });
-        File directory = new File("tests");
+        File directory = new File(TESTS_FOLDER);
         if (!directory.exists()) {
             directory.mkdir();
         }
         if (!Context.massTesting) {
             try {
-                Files.write(Paths.get("tests/single.txt"), log.toString().getBytes());
+                Files.write(Paths.get(TESTS_FOLDER + fileSeparator + SINGLE_TXT), log.toString().getBytes());
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -144,12 +131,32 @@ public class TaskTester {
                 }
             });
             try {
-                Files.write(Paths.get("tests/mass.txt"), builder.toString().getBytes());
+                Files.write(Paths.get(TESTS_FOLDER + fileSeparator + MASS_TXT), builder.toString().getBytes());
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
         }
         return allTests;
+    }
+
+    private static void clean(SymbolData screen1, SymbolData screen2) {
+        QuotesInMemoryCache.clear();
+        IndicatorsInMemoryCache.clear();
+        screen1.quotes.clear();
+        screen1.indicators.clear();
+        screen2.quotes.clear();
+        screen2.indicators.clear();
+    }
+
+    private static void rewind(TaskType task, BlocksGroup blocksGroup, SymbolData screen1, SymbolData screen2, List<BlockResult> blockResults) {
+        Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
+        Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
+        blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks()));
+        if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
+            rewind(screen1, 1);
+        } else {
+            rewind(screen2, 1);
+        }
     }
 
     public static void printNoSignalsReport(Timeframe timeframe, HistoricalTesting testing, Set<String> finalSignalResults) {
@@ -231,20 +238,14 @@ public class TaskTester {
         long averagePositionDurationSeconds = testing.getAveragePositionDurationSeconds();
         switch (testing.getData().timeframe) {
             case DAY:
-                int minPositionDurationDays = (int) TimeUnit.SECONDS.toDays(minPositionDurationSeconds);
-                int maxPositionDurationDays = (int) TimeUnit.SECONDS.toDays(maxPositionDurationSeconds);
-                int avgPositionDurationDays = (int) TimeUnit.SECONDS.toDays(averagePositionDurationSeconds);
-                result += "\tmin duration = " + minPositionDurationDays + " days" + lineSeparator();
-                result += "\tmax duration = " + maxPositionDurationDays + " days " + longestPositionRange + lineSeparator();
-                result += "\tavg duration = " + avgPositionDurationDays + " days" + lineSeparator();
+                result += "\tmin duration = " + (int) TimeUnit.SECONDS.toDays(minPositionDurationSeconds) + " days" + lineSeparator();
+                result += "\tmax duration = " + (int) TimeUnit.SECONDS.toDays(maxPositionDurationSeconds) + " days " + longestPositionRange + lineSeparator();
+                result += "\tavg duration = " + (int) TimeUnit.SECONDS.toDays(averagePositionDurationSeconds) + " days" + lineSeparator();
                 break;
             case HOUR:
-                int minPositionDurationHours = (int) TimeUnit.SECONDS.toHours(minPositionDurationSeconds);
-                int maxPositionDurationHours = (int) TimeUnit.SECONDS.toHours(maxPositionDurationSeconds);
-                int avgPositionDurationHours = (int) TimeUnit.SECONDS.toHours(averagePositionDurationSeconds);
-                result += "\tmin duration = " + minPositionDurationHours + " hours" + lineSeparator();
-                result += "\tmax duration = " + maxPositionDurationHours + " hours" + lineSeparator(); // TODO сюда диапазон
-                result += "\tavg duration = " + avgPositionDurationHours + " hours" + lineSeparator();
+                result += "\tmin duration = " + (int) TimeUnit.SECONDS.toHours(minPositionDurationSeconds) + " hours" + lineSeparator();
+                result += "\tmax duration = " + (int) TimeUnit.SECONDS.toHours(maxPositionDurationSeconds) + " hours" + lineSeparator(); // TODO сюда диапазон
+                result += "\tavg duration = " + (int) TimeUnit.SECONDS.toHours(averagePositionDurationSeconds) + " hours" + lineSeparator();
                 break;
         }
         if (testing.searchSignalByProfit(testing.getMinProfit()) != null) {
@@ -339,7 +340,7 @@ public class TaskTester {
         }
 
         // minimal amount of quotes in the chart
-        if (signalIndex > 11) {
+        if (signalIndex > MIN_POSSIBLE_QUOTES) {
 
             StopLossStrategy stopLossStrategy = historicalTesting.getStopLossStrategy();
             double stopLoss = stopLossStrategy.calculate(data, signalIndex);

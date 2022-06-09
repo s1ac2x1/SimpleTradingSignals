@@ -46,9 +46,11 @@ public class RunUtils {
         testAllStrategiesOnSpecificDate(date, THREE_DISPLAYS_BUY, Context.basicTimeframes);
     }
 
-    public static void testOneStrategy_() {
-        testOneStrategy(Context.basicTimeframes, THREE_DISPLAYS_BUY,
-                new ThreeDisplays_Buy_Bollinger_3(),
+    public static void testOneStrategy_(BlocksGroup strategy) {
+        testOneStrategy(
+                Context.basicTimeframes,
+                THREE_DISPLAYS_BUY,
+                strategy,
                 new StopLossFixedPrice(0.27),
                 new TakeProfitFixedKeltnerTop(300));
 

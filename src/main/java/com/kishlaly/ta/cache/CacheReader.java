@@ -25,6 +25,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import static com.kishlaly.ta.utils.Context.fileSeparator;
 import static com.kishlaly.ta.utils.Dates.shortDateToZoned;
 
 /**
@@ -59,7 +60,7 @@ public class CacheReader {
         missedData.forEach((tf, quotes) -> {
             Context.timeframe = tf;
             try {
-                Files.write(Paths.get(getFolder() + "/missed.txt"), quotes.stream().collect(Collectors.joining(System.lineSeparator())).getBytes());
+                Files.write(Paths.get(getFolder() + fileSeparator + "missed.txt"), quotes.stream().collect(Collectors.joining(System.lineSeparator())).getBytes());
                 System.out.println("Logged " + quotes.size() + " missed " + tf.name() + " quotes");
             } catch (IOException e) {
                 System.out.println("Couldn't log missed quotes");
@@ -92,7 +93,7 @@ public class CacheReader {
     public static Set<String> getMissedSymbols() {
         List<String> stocksRaw = new ArrayList<>();
         try {
-            stocksRaw = Files.readAllLines(new File(getFolder() + "/missed.txt").toPath(),
+            stocksRaw = Files.readAllLines(new File(getFolder() + fileSeparator + "missed.txt").toPath(),
                     Charset.defaultCharset());
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -102,14 +103,14 @@ public class CacheReader {
 
     public static List<String> removeCachedIndicatorSymbols(Set<String> src, Indicator indicator) {
         return src.stream().filter(symbol -> {
-            File file = new File(getFolder() + "/" + symbol + "_" + indicator.name().toLowerCase() + ".txt");
+            File file = new File(getFolder() + fileSeparator + symbol + "_" + indicator.name().toLowerCase() + ".txt");
             return !file.exists();
         }).collect(Collectors.toList());
     }
 
     public static List<String> removeCachedQuotesSymbols(Set<String> src) {
         return src.stream().filter(symbol -> {
-            File file = new File(getFolder() + "/" + symbol + "_quotes.txt");
+            File file = new File(getFolder() + fileSeparator + symbol + "_quotes.txt");
             return !file.exists();
         }).collect(Collectors.toList());
     }
@@ -122,7 +123,7 @@ public class CacheReader {
             try {
                 List<Quote> quotes = gson.fromJson(
                         new String(
-                                Files.readAllBytes(Paths.get(getFolder() + "/" + symbol + "_quotes.txt"))),
+                                Files.readAllBytes(Paths.get(getFolder() + fileSeparator + symbol + "_quotes.txt"))),
                         new TypeToken<ArrayList<Quote>>() {
                         }.getType());
                 switch (Context.aggregationTimeframe) {
@@ -201,7 +202,7 @@ public class CacheReader {
                     type = null;
             }
             String json = new String(
-                    Files.readAllBytes(Paths.get(getFolder() + "/" + symbol + "_" + indicator.name().toLowerCase() + ".txt")));
+                    Files.readAllBytes(Paths.get(getFolder() + fileSeparator + symbol + "_" + indicator.name().toLowerCase() + ".txt")));
             List list = gson.fromJson(
                     json,
                     type);
@@ -238,7 +239,7 @@ public class CacheReader {
     }
 
     public static String getFolder() {
-        return Context.outputFolder + "/cache/" + Context.aggregationTimeframe.name().toLowerCase();
+        return Context.outputFolder + fileSeparator + "cache" + fileSeparator + Context.aggregationTimeframe.name().toLowerCase();
     }
 
     public static void clearCacheFolder(String name) {
