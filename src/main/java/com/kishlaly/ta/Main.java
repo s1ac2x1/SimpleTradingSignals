@@ -7,6 +7,7 @@ import com.kishlaly.ta.utils.Context;
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 import static com.kishlaly.ta.utils.RunUtils.runAllDaily;
+import static com.kishlaly.ta.utils.RunUtils.singleSymbol;
 
 /**
  * @author Vladimir Kishlaly
@@ -19,6 +20,7 @@ public class Main {
         Context.source = new SymbolsSource[]{
                 SymbolsSource.SP500
         };
+        //singleSymbol("AAPL"); // applicable for testing
         Context.symbols = getSymbols();
         buildCache(Context.basicTimeframes, false);
         runAllDaily();

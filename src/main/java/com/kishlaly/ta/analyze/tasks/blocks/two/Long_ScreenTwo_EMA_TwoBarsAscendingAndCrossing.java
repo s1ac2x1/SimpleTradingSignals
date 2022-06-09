@@ -41,7 +41,7 @@ public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwo
             return new BlockResult(screen.getLastQuote(), QUOTES_BELOW_EMA_SCREEN_2);
         }
 
-        // оба столбика выше ЕМА - отказ
+        // both quotes above the EMA - reject
         if (isQuoteAboveEMA(preLastQuote, preLastEMA.getValue()) && isQuoteAboveEMA(lastQuote, lastEMA.getValue())) {
             Log.addDebugLine("Both last two bars are above the EMA");
             Log.recordCode(QUOTES_ABOVE_EMA_SCREEN_2, screen);

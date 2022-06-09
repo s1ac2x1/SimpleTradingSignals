@@ -26,6 +26,7 @@ public class Context {
     public static double parallelRequests = 10;
     public static double limitPerMinute = 75;
     public static Timeframe timeframe = Timeframe.DAY;
+    // main aggregation timeframe. Weekly quotes will be calculated from it
     public static Timeframe aggregationTimeframe = Timeframe.DAY;
     public static SymbolsSource[] source = {SymbolsSource.SP500};
     public static List<String> testOnly = new ArrayList<>();
