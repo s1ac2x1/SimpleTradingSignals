@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Context.aggregationTimeframe = Timeframe.DAY;
         Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500_RANDOM
+                SymbolsSource.SP500
         };
         //singleSymbol("TER"); // for single test
         Context.symbols = getSymbols();
