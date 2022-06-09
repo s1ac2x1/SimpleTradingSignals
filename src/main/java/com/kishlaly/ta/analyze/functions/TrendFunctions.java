@@ -13,17 +13,17 @@ import java.util.function.Function;
 
 public class TrendFunctions {
 
-    // Главные правила проверки:
-    // 1. Как минимум пловина из N последних баров должна быть правильного цвета (зеленые на восходящем тренде или красные на нисходящем)
-    //    так же все N не должны открываться и закрываться выше EMA26 (тень может пересекать) TODO зачем так строго?
-    // 2. ЕМА должна расти последовательно
-    // 3. если гистограмма MACD не растет последовательно - нормально
-    //    главное, чтобы она не спускалась последовательно при росте ЕМА
+    // Main rules of verification:
+    // 1. At least half of the last N bars must be the right color (green on an uptrend or red on a downtrend)
+    //    Also, all N should not open and close above the EMA26 (the shadow may cross) TODO why so strict?
+    // 2. The EMA should rise sequentially
+    // 3. if the MACD histogram does not increase consistently - that's ok
+    //    the main thing is that it does not descend sequentially when the EMA grows
     //
-    // В будущем, можно подумать над такими случаями:
-    // 1) долгосрочный таймфрейм, ЕМА растет, гистограммы плавно спускается: https://drive.google.com/file/d/1l6aAV-qDseGkBqCQ4-cb3lB-hUy_R95G/view?usp=sharing
-    // 2) среднесрочный таймфрейм, осциллятор подает сигнал, гистограмма не противоречит, ценовые столбики тоже: https://drive.google.com/file/d/1tw_wUR9MXbT2zooD6dmH97bC9AwQCA3U/view?usp=sharing
-    // (вероятно, этот случай уже покрывается первым пунктом: проверка цвета половины из N последних баров)
+    // In the future, one might think about such cases:
+    // 1) Long-term timeframe, EMA rises, histogram descends smoothly: https://drive.google.com/file/d/1l6aAV-qDseGkBqCQ4-cb3lB-hUy_R95G/view?usp=sharing
+    // 2) medium-term timeframe, the oscillator gives a signal, the histogram does not contradict, the price bars too: https://drive.google.com/file/d/1tw_wUR9MXbT2zooD6dmH97bC9AwQCA3U/view?usp=sharing
+    // (this case is probably already covered by the first point: check the color of half of the last N bars)
     public static boolean uptrendCheckOnMultipleBars(
             SymbolData symbolData,
             int minBarsCount,
@@ -40,7 +40,7 @@ public class TrendFunctions {
         );
     }
 
-    // зеркальный аналог uptrendCheckOnMultipleBars
+    // mirror analog of uptrendCheckOnMultipleBars
     public static boolean downtrendCheckOnMultipleBars(SymbolData symbolData, int minBarsCount, int barsToCheck) {
         return abstractTrendCheckOnMultipleBars(
                 symbolData,
@@ -54,11 +54,11 @@ public class TrendFunctions {
         );
     }
 
-    // второй вариант: допускать, когда последний столбик на долгосрочном таймфрейме открылся ниже, но закрылся выше ЕМА
-    // пример недельного графика: https://drive.google.com/file/d/14PlpZMZV7lwsIwP2V7bww0LKSVjdn70Q/view?usp=sharing
-    // и идеальная точка входа на дневном: https://drive.google.com/file/d/1-a0ZtMuLQyuamez_402v6YkViNWzY6RS/view?usp=sharing
-    // мне не нравится этот способ, потому что не берется в рассчет гистограмма
-    // на недельном графике из примера ценовой столбик находится на шестой по счету плавно снижающейся гистограмме, это опасно
+    // the second option: allow when the last bar on the long term timeframe opened below, but closed above the EMA
+    // example of a weekly schedule: https://drive.google.com/file/d/14PlpZMZV7lwsIwP2V7bww0LKSVjdn70Q/view?usp=sharing
+    // and the ideal entry point on the daily: https://drive.google.com/file/d/1-a0ZtMuLQyuamez_402v6YkViNWzY6RS/view?usp=sharing
+    // I don't like this method because it doesn't take the histogram into account
+    // On the weekly chart from the example, the price bar is on the sixth histogram smoothly decreasing, this is dangerous
     public static boolean uptrendCheckOnLastBar(SymbolData symbolData) {
         Quote lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
         List<EMA> ema = (List<EMA>) symbolData.indicators.get(Indicator.EMA26);
@@ -66,7 +66,7 @@ public class TrendFunctions {
         return lastQuote.getOpen() < lastEMA && lastQuote.getClose() > lastEMA;
     }
 
-    // зеркальная логика uptrendCheckOnLastBar
+    // mirror logic uptrendCheckOnLastBar
     public static boolean downtrendCheckOnLastBar(SymbolData symbolData) {
         Quote lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
         List<EMA> ema = (List<EMA>) symbolData.indicators.get(Indicator.EMA26);
