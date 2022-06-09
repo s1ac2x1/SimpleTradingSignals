@@ -19,11 +19,8 @@ public class Main {
         Context.source = new SymbolsSource[]{
                 SymbolsSource.SP500
         };
-//        Context.testOnly = new ArrayList<String>() {{
-//            add("AAPL");
-//        }};
         Context.symbols = getSymbols();
-        //buildCache(Context.basicTimeframes, false);
+        buildCache(Context.basicTimeframes, false);
         runAllDaily();
     }
 }

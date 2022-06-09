@@ -80,5 +80,10 @@ public class RunUtils {
         );
     }
 
+    public static void singleSymbol(String symbol) {
+        Context.testOnly = new ArrayList<String>() {{
+            add(symbol);
+        }};
+    }
 
 }
