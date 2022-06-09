@@ -109,7 +109,7 @@ ThreeDisplays_Buy_3: TP/SL = 82/47
 ThreeDisplays_Buy_1: TP/SL = 448/247
 ```
 
-it means `ThreeDisplays_Buy_4` is the winner as it gave 281 profitable position and just 31 wer closed by StopLoss over the last 5 years tested on 30 random stocks. 
+it means `ThreeDisplays_Buy_4` is the winner as it gave 218 profitable positions and just 31 were closed by StopLoss over the last 5 years (can be extended) tested on 30 random stocks. 
 
 In terms of profit, the strategy `ThreeDisplays_Buy_7` has won, but look how many signals it produced: 632 + 237. The TP/SL ratio is still very good, but this strategy suits for more aggressive trading.
 
