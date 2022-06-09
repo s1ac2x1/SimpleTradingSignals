@@ -23,7 +23,7 @@ The naming conventions depict the purpose, eg: `Long_ScreenOne_EMA_LastBarCrosse
 
 Package `com.kishlaly.ta.analyze.tasks.blocks.groups` contains the list of all strategies. They have been build in a modular way, it's faster and more convenient to create new ones.
 
-For example, my one of the my favourite strategies `ThreeDisplays_Buy_2` has the following blocks:
+For example, one of my most favourite strategies `ThreeDisplays_Buy_2` has the following blocks:
 * validation
 * "soft" uptrend check: the last EMA26 is rising and the last quote is green
 * MACD histogram is below zero and rising on the last two values
