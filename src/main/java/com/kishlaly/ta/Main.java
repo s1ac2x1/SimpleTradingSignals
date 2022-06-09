@@ -27,6 +27,7 @@ public class Main {
         Context.symbols = getSymbols();
         buildCache(Context.basicTimeframes, false);
         RunUtils.buildTasksAndStrategiesSummary_();
+
     }
 }
 
