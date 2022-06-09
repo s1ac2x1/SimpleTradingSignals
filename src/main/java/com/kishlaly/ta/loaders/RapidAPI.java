@@ -40,7 +40,7 @@ public class RapidAPI {
                     .url(getURL(symbol))
                     .get()
                     .addHeader("x-rapidapi-host", "yh-finance.p.rapidapi.com")
-                    .addHeader("x-rapidapi-key", "82651f27d4msh281a1fd96d3f204p11f314jsn3b342c2c23a5")
+                    .addHeader("x-rapidapi-key", "")
                     .build();
 
             ResponseBody body = client.newCall(request).execute().body();
