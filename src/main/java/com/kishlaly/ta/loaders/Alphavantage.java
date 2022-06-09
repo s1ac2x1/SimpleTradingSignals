@@ -21,16 +21,13 @@ import java.util.*;
 import static java.lang.Double.parseDouble;
 
 /**
- * Для акций последняя цена всегда за конец прошлого дня независимо от таймфрейма
- * Для форекса и крипты есть внутредневные цены
+ * For stocks, the last price is always the end of the previous day, regardless of the timeframe
+ * There are intraday prices for forex and crypto
  * <p>
- * Таймзона всегда US/Eastern (проверить для форекса)
- * <p>
- * F4ZNUB0VYAAMTSLP
- * <p>
- * https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=60min&outputsize=full&apikey=F4ZNUB0VYAAMTSLP
- * https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=TER&&apikey=F4ZNUB0VYAAMTSLP
- * https://www.alphavantage.co/query?function=EMA&symbol=TER&apikey=F4ZNUB0VYAAMTSLP&series_type=close&time_period=26&interval=weekly
+ * The timezone is always US/Eastern
+ * https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=60min&outputsize=full&apikey=
+ * https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=TER&&apikey=
+ * https://www.alphavantage.co/query?function=EMA&symbol=TER&apikey=&series_type=close&time_period=26&interval=weekly
  *
  * @author Vladimir Kishlaly
  * @since 26.11.2021
@@ -92,6 +89,7 @@ public class Alphavantage {
         return quotes;
     }
 
+    // not used as all indicators are being calculated locally
     public static List<MACD> loadMACD(String symbol) {
         List<MACD> result = new ArrayList<>();
         String url = "https://www.alphavantage.co/query?function=MACD&symbol=" + symbol + "&interval=" + getInterval() + "&series_type=close&apikey=" + KEY;
@@ -125,6 +123,7 @@ public class Alphavantage {
         return result;
     }
 
+    // not used as all indicators are being calculated locally
     public static List<EMA> loadEMA(String symbol, int period) {
         List<EMA> result = new ArrayList<>();
         String url = "https://www.alphavantage.co/query?function=EMA&symbol=" + symbol + "&time_period=" + period + "&interval=" + getInterval() + "&series_type=close&apikey=" + KEY;
@@ -155,6 +154,7 @@ public class Alphavantage {
         return result;
     }
 
+    // not used as all indicators are being calculated locally
     public static List loadStoch(String symbol) {
         List<Stoch> result = new ArrayList<>();
         String url = "https://www.alphavantage.co/query?function=STOCH&symbol=" + symbol + "&interval=" + getInterval() + "&fastkperiod=14&slowkperiod=1&slowdperiod=3&apikey=" + KEY;
