@@ -225,6 +225,7 @@ public class TaskTester {
         String timeframesInfo = "[" + testing.getTaskType().getTimeframeForScreen(1) + "][" + testing.getTaskType().getTimeframeForScreen(2) + "]";
         String result = timeframesInfo + " " + testing.getData().symbol + " - " + testing.getTaskType().name() + " - " + testing.getBlocksGroup().getClass().getSimpleName() + lineSeparator();
         result += "\ttrendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + lineSeparator();
+        result += "\teach trade size = $" + accountBalance + lineSeparator();
         result += "\t" + testing.printSL() + lineSeparator();
         result += "\t" + testing.printTP() + lineSeparator();
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
@@ -321,10 +322,10 @@ public class TaskTester {
     private static void calculateStatistics(HistoricalTesting historicalTesting) {
         historicalTesting.getTaskResults()
                 .stream()
-                .filter(taskResult -> taskResult.isOk()) // берем только сигналы к входу
+                .filter(taskResult -> taskResult.isOk()) // take only the signals to the input
                 .forEach(taskResult -> testPosition(taskResult, historicalTesting));
         testLog.append(historicalTesting.getSymbol() + lineSeparator());
-        FilesUtil.writeToFile(historicalTesting.getSymbol() + "_test_log.txt", testLog.toString());
+        FilesUtil.writeToFile(outputFolder + fileSeparator + "stats" + fileSeparator + historicalTesting.getSymbol() + "_test_log.txt", testLog.toString());
     }
 
     private static void testPosition(BlockResult blockResult, HistoricalTesting historicalTesting) {

@@ -20,13 +20,13 @@ public class RunUtils {
                 Context.basicTimeframes,
                 THREE_DISPLAYS_BUY,
                 new ArrayList<BlocksGroup>() {{
-//                    add(new ThreeDisplays_Buy_1());
-//                    add(new ThreeDisplays_Buy_2());
-//                    add(new ThreeDisplays_Buy_3());
-//                    add(new ThreeDisplays_Buy_4());
-//                    add(new ThreeDisplays_Buy_5());
-//                    add(new ThreeDisplays_Buy_6());
-//                    add(new ThreeDisplays_Buy_7());
+                    add(new ThreeDisplays_Buy_1());
+                    add(new ThreeDisplays_Buy_2());
+                    add(new ThreeDisplays_Buy_3());
+                    add(new ThreeDisplays_Buy_4());
+                    add(new ThreeDisplays_Buy_5());
+                    add(new ThreeDisplays_Buy_6());
+                    add(new ThreeDisplays_Buy_7());
 //                    add(new ThreeDisplays_Buy_8());
 //                    add(new ThreeDisplays_Buy_9());
 //                    add(new ThreeDisplays_Buy_Bollinger_1());
@@ -52,7 +52,7 @@ public class RunUtils {
                 THREE_DISPLAYS_BUY,
                 strategy,
                 new StopLossFixedPrice(0.27),
-                new TakeProfitFixedKeltnerTop(300));
+                new TakeProfitFixedKeltnerTop(80));
 
     }
 
