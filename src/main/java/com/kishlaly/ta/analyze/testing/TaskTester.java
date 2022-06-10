@@ -448,7 +448,7 @@ public class TaskTester {
                 positionTestResult.setOpenPositionCost(openPositionSize);
                 positionTestResult.setClosePositionPrice(closePositionPrice);
                 positionTestResult.setClosePositionCost(closePositionCost);
-                testLog.append("\tcloce price: " + Numbers.round(closePositionPrice) + lineSeparator());
+                testLog.append("\tclose price: " + Numbers.round(closePositionPrice) + lineSeparator());
                 testLog.append("\tclosed: " + closePositionQuote.getNativeDate() + lineSeparator());
                 testLog.append("\tprofitable: " + profitable + lineSeparator());
                 testLog.append("\tgap up: " + caughtGapUp + lineSeparator());
