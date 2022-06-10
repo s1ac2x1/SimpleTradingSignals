@@ -125,7 +125,7 @@ signal 2019-03-11T09:30-04:00[US/Eastern]
 	SL: 53.95
 	TP: 57.61
 	open price: 56.33
-	cloce price: 57.61
+	close price: 57.61
 	closed: 2019-03-13T09:30-04:00[US/Eastern]
 	profitable: true
 	gap up: false
@@ -136,7 +136,7 @@ signal 2018-09-27T09:30-04:00[US/Eastern]
 	SL: 62.57
 	TP: 65.65
 	open price: 64.28
-	cloce price: 62.57
+	close price: 62.57
 	closed: 2018-10-11T09:30-04:00[US/Eastern]
 	profitable: false
 	gap up: false
