@@ -120,7 +120,7 @@ That output also has logs for all quotes: whether it was selected as signal or w
 ```
 
 ### Run all on specific date
-Useful for capturing the output of the all strategies on specific date. Useful when you noticed a good potential entrypoint on the chart and want to see which strategies are able to give a singal.
+Useful for capturing the output of the all strategies on specific date - when you noticed a good potential entrypoint on the chart and want to see which strategies are able to give a singal.
 
 Let's say by looking at the chart you've noticed a nice entry point for a long position for `AAPL` on 16th of Marh 2022:
 
