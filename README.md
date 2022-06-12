@@ -216,7 +216,7 @@ There are other TP/SL strategies, including volatile, that will follow the price
 The full list is in packages `com.kishlaly.ta.analyze.testing.tp` and `com.kishlaly.ta.analyze.testing.ls`
 
 By deafult I use these exit rules as they show more generic results:
-* fixed `StopLossFixedPrice(0.27)` which finds the minimal quote from the last 20 and sets SL 27 cent below
+* fixed `StopLossFixedPrice(0.27)` which finds the minimal quote from the last 20 and sets SL 27 cents below
 * fixed `TakeProfitFixedKeltnerTop(70)` which stops position when the next quote reached 70% of the height between average and top of Keltner channel indicator
 
 `RunUtils.buildTasksAndStrategiesSummary_()` also produced a more detailed report located at `data/stats` with output like
