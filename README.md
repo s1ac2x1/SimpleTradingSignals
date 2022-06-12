@@ -9,6 +9,14 @@ The main inspirations: Alexander Elder and Thomas Bulkowski
 
 From Mr. Elder's books I got great ideas about how to use several timeframes, and Mr. Bulkowski's books, as I think, are just created to be programmed into automatic scanners.
 
+* [Two Roads Diverged: Trading Divergences](https://www.amazon.de/-/en/gp/product/B006V3CWDS)
+* [Entries and Exits: Visits to Sixteen Trading Rooms](https://www.amazon.de/-/en/gp/product/B000SEKFG2)
+* [Step by Step Trading: The Essentials of Computerized Technical Trading](https://www.amazon.de/-/en/gp/product/B00VH7WMSI/)
+* [Study Guide for Sell and Sell Short](https://www.amazon.de/-/en/gp/product/0470200472)
+* [Encyclopedia of Chart Patterns](https://www.amazon.de/-/en/Thomas-N-Bulkowski/dp/1119739683)
+* [Chart Patterns: After the Buy ](https://www.amazon.de/-/en/Thomas-N-Bulkowski/dp/1119274907)
+* [Swing and Day Trading: Evolution of a Trader](https://www.amazon.de/-/en/Thomas-N-Bulkowski/dp/1118464222)
+
 ## Quotes provider
 Data source provider used inside is https://www.alphavantage.co/
 This is a paid service, however, I've included historical quotes for SP500 list in `data/cache` folder.
@@ -234,13 +242,3 @@ signal 2018-09-27T09:30-04:00[US/Eastern]
 	gap up: false
 	gap down: false
 ```
-
-### Nice books
-
-* [Two Roads Diverged: Trading Divergences](https://www.amazon.de/-/en/gp/product/B006V3CWDS)
-* [Entries and Exits: Visits to Sixteen Trading Rooms](https://www.amazon.de/-/en/gp/product/B000SEKFG2)
-* [Step by Step Trading: The Essentials of Computerized Technical Trading](https://www.amazon.de/-/en/gp/product/B00VH7WMSI/)
-* [Study Guide for Sell and Sell Short](https://www.amazon.de/-/en/gp/product/0470200472)
-* [Encyclopedia of Chart Patterns](https://www.amazon.de/-/en/Thomas-N-Bulkowski/dp/1119739683)
-* [Chart Patterns: After the Buy ](https://www.amazon.de/-/en/Thomas-N-Bulkowski/dp/1119274907)
-* [Swing and Day Trading: Evolution of a Trader](https://www.amazon.de/-/en/Thomas-N-Bulkowski/dp/1118464222)
