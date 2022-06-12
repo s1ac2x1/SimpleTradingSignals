@@ -1,26 +1,55 @@
+## History
+
 This project manifested itself as an auxiliary utility for analyzing historical stock price data. For a quick start I decided to use the excellent library for technical analysis https://github.com/ta4j/ta4j.
 
 After a while I found out that my project can be used for searching behavioral patterns of price charts, and now I am adding new strategies in my spare time.
 
+## Inspiration
 The main inspirations: Alexander Elder and Thomas Bulkowski
 
 From Mr. Elder's books I got great ideas about how to use several timeframes, and Mr. Bulkowski's books, as I think, are just created to be programmed into automatic scanners.
 
+## Quotes provider
 Data source provider used inside is https://www.alphavantage.co/
 This is a paid service, however, I've included historical quotes for SP500 list in `data/cache` folder.
 
-Key points:
-* build cache
-* analyze using various strategies
-* the outup will be in `data/signal` folder
-* debug information stored in `data/debug` folder
-* `RunUtils` has a lot of useful methods, among them are:
-  * `testOneStrategy` for single test
-  * `testStrategiesOnSpecificDate_` for capturing the output of the all strategies on specific date. Useful when you noticed a good potential entrypoint on the chart and want to see which strategies are able to give a singal
-  * `buildTasksAndStrategiesSummary_` is extremely useful to compare which strategy gives more return, more TP and less SL trades
+## Key points
+### Download and cache quotes
+The loading of historical data depends on the provider and the number of requests per second it allows.
+These values are configured by the parameters `limitPerMinute` and `parallelRequests`
 
+During data loading the log will display the maximum cache build time depending on the allowed API load.
+
+Example for 75 req/s for SP500:
+
+```text
+0:7:5 left...
+Loading DAY quotes...
+
+0:6:56 left...
+Loading DAY quotes...
+```
+
+### Indicators used
+* Exponential Moving Average with period 13 and 26 (depending on timeframe)
+* MACD (12/26/9)
+* Stochastic oscillator (14/1/3)
+* Keltner Channels
+* Bollinger Band
+* Elders Force Index
+* Average True Range
+
+### Output
+* `data/signal` for signals
+* `data/debug` for debug information 
+* `tests/single.txt` for single test
+* `tests/summary.txt` for summary
+* `data/stats` for another sort of detailed report
+
+### Naming conventions
 The naming conventions depict the purpose, eg: `Long_ScreenOne_EMA_LastBarCrosses` says it will check whether the last quote has crossed EMA on a long-term timeframe (aka screen-1) in order to open long position.
 
+### Whatn's inside
 Package `com.kishlaly.ta.analyze.tasks.blocks.groups` contains the list of all strategies. They have been build in a modular way, it's faster and more convenient to create new ones.
 
 For example, one of my most favourite strategies `ThreeDisplays_Buy_2` has the following blocks:
@@ -32,9 +61,10 @@ For example, one of my most favourite strategies `ThreeDisplays_Buy_2` has the f
 * last two quotes are ascending and one of them have crossed EMA-15 in a correct way
 * checks if it's already too late and price has jumped above the limit (in this case, above 20% from middle to top of Keltner channel indicator)
 
-and so on and so forth :)
 
-#### Example of testing single strategy
+`buildTasksAndStrategiesSummary_` is extremely useful to compare which strategy gives more return, more TP and less SL trades
+
+### Testing single strategy
 Let's see how much we could earn during the last 5 years on stock `TER` with `ThreeDisplays_Buy_2`:
 ```java
     public static void main(String[] args) throws Exception {
@@ -72,7 +102,66 @@ the output in `tests/single.txt` says:
 
 Well, 28 profitable positions out of 5 losses. The total net profit is $8703.6 (depositary and other broker's commisions are not included, just 1% per each trade like in InteractiveBrokers).
 
-That output also has logs for all quotes: whether it was selected as signal or why not.
+That output also has logs for all quotes: whether it was selected as signal or why not:
+
+```text
+    22 JULY 2021 --- LOSS -8.42% 26 days [till 17 AUGUST 2021]
+    23 JUNE 2021 --- PROFIT 4.72% 5 days [till 28 JUNE 2021]
+    19 MAY 2021 --- PROFIT 7.39% 9 days [till 28 MAY 2021]
+    18 MAY 2021 --- PROFIT 10.54% 10 days [till 28 MAY 2021]
+    14 MAY 2021 --- PROFIT 8.19% 14 days [till 28 MAY 2021]
+    7 MAY 2021 --- LOSS -9.29% (gap down) 4 days [till 11 MAY 2021]
+    16 MARCH 2021 --- PROFIT 12.14% 20 days [till 5 APRIL 2021]
+    15 MARCH 2021 --- PROFIT 12.47% 21 days [till 5 APRIL 2021]
+    10 FEBRUARY 2021 --- PROFIT 4.31% 1 days [till 11 FEBRUARY 2021]
+    9 FEBRUARY 2021 --- PROFIT 4.55% 2 days [till 11 FEBRUARY 2021]
+    5 FEBRUARY 2021 --- PROFIT 6.47% 6 days [till 11 FEBRUARY 2021]
+    ...
+```
+
+### Run all on specifica date
+Useful for capturing the output of the all strategies on specific date. Useful when you noticed a good potential entrypoint on the chart and want to see which strategies are able to give a singal.
+
+Let's say by looking at the chart you've noticed a nice entry point for a long position for `AAPL` on 16th of Marh 2022:
+
+![AAPL](https://github.com/s1ac2x1/SimpleTradingSignals/blob/master/img/AAPL_16_03_2022.png?raw=true)
+
+Let's find out how many strategies can find it:
+
+```java
+    public static void main(String[] args) throws Exception {
+        Context.aggregationTimeframe = Timeframe.DAY;
+        Context.source = new SymbolsSource[]{
+                SymbolsSource.SP500
+        };
+        singleSymbol("AAPL"); // for single test
+        Context.symbols = getSymbols();
+        //buildCache(Context.basicTimeframes, false);
+        RunUtils.testStrategiesOnSpecificDate_("16.03.2022");
+
+    }
+```
+
+take a look into console log:
+
+```text
+16.03.2022 ThreeDisplays_Buy_1 = OK
+16.03.2022 ThreeDisplays_Buy_2 = OK
+16.03.2022 ThreeDisplays_Buy_3 = STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2
+16.03.2022 ThreeDisplays_Buy_4 = LAST_QUOTES_NOT_ASCENDING_SCREEN_1
+16.03.2022 ThreeDisplays_Buy_5 = HISTOGRAM_NOT_ASCENDING_SCREEN_2
+16.03.2022 ThreeDisplays_Buy_6 = QUOTES_NOT_BELOW_EMA_SCREEN_2
+16.03.2022 ThreeDisplays_Buy_7 = OK
+16.03.2022 ThreeDisplays_Buy_8 = QUOTES_NOT_BELOW_EMA_SCREEN_2
+16.03.2022 ThreeDisplays_Buy_9 = QUOTES_NOT_BELOW_EMA_SCREEN_2
+16.03.2022 FirstScreen_Buy_1 = NOT_ALL_NEEDED_QUOTES_ABOUT_EMA_SCREEN_1
+16.03.2022 ThreeDisplays_Buy_Bollinger_1 = OK
+16.03.2022 ThreeDisplays_Buy_Bollinger_1_2 = OK
+16.03.2022 ThreeDisplays_Buy_Bollinger_2 = QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2
+16.03.2022 ThreeDisplays_Buy_Bollinger_3 = BOLLINGER_BOTTOM_NOT_ASCENDING_SCREEN_2
+```
+
+as we can see, five strategies would have responded that day, and the rest refused for various reasons.
 
 #### Comparing different strategies
 There is an option how to compare the performance of several strategies by using `RunUtils.buildTasksAndStrategiesSummary_()`
@@ -113,11 +202,14 @@ it means `ThreeDisplays_Buy_4` is the winner as it gave 218 profitable positions
 
 In terms of profit, the strategy `ThreeDisplays_Buy_7` has won, but look how many signals it produced: 632 + 237. The TP/SL ratio is still very good, but this strategy suits for more aggressive trading.
 
-Please note, that your can select which TP or SL strategy to use. By deafult I use:
+#### How to configure exit rules
+There are other TP/SL strategies, including volatile, that will follow the price based on some rules (but never set the SL lower or course). 
+
+The full list is in packages `com.kishlaly.ta.analyze.testing.tp` and `com.kishlaly.ta.analyze.testing.ls`
+
+By deafult I use these exit rules as they show more generic results:
 * fixed `StopLossFixedPrice(0.27)` which finds the minimal quote from the last 20 and sets SL 27 cent below
 * fixed `TakeProfitFixedKeltnerTop(70)` which stops position when the next quote reached 70% of the height between average and top of Keltner channel indicator
-
-There are other TP/SL strategies, including volatile, that will follow the price based on some rules (but never set the SL lower or course). Pls find them in `com.kishlaly.ta.analyze.testing.tp` and `com.kishlaly.ta.analyze.testing.ls`
 
 `RunUtils.buildTasksAndStrategiesSummary_()` also produced a more detailed report located at `data/stats` with output like
 ```text

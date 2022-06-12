@@ -42,6 +42,7 @@ public class RunUtils {
                 new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
     }
 
+    // format: dd.mm.yyyy
     public static void testStrategiesOnSpecificDate_(String date) {
         testAllStrategiesOnSpecificDate(date, THREE_DISPLAYS_BUY, Context.basicTimeframes);
     }
