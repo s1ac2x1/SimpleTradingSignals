@@ -57,7 +57,7 @@ Loading DAY quotes...
 ### Naming conventions
 The naming conventions depict the purpose, eg: `Long_ScreenOne_EMA_LastBarCrosses` says it will check whether the last quote has crossed EMA on a long-term timeframe (aka screen-1) in order to open long position.
 
-### Whatn's inside
+### What's inside
 Package `com.kishlaly.ta.analyze.tasks.blocks.groups` contains the list of all strategies. They have been build in a modular way, it's faster and more convenient to create new ones.
 
 For example, one of my most favourite strategies `ThreeDisplays_Buy_2` has the following blocks:
