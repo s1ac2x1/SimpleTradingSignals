@@ -56,7 +56,7 @@ public class RapidAPI {
             LinkedTreeMap meta = (LinkedTreeMap) m2.get("meta");
             String exchangeTimezoneName = (String) meta.get("exchangeTimezoneName");
 
-            ArrayList<Double> timestamps = (ArrayList) m2.get("timestamp");
+            List<Double> timestamps = (ArrayList) m2.get("timestamp");
             timestamps.forEach(entry -> {
 //                Quote quote = new Quote();
 //                long timestamp = entry.longValue();

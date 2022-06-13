@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
-import static com.kishlaly.ta.tests.TestConstants.AAPL_QUOTES_SIZE;
+import static com.kishlaly.ta.tests.TestConstants.AAPL_DAILY_QUOTES_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CacheTest {
@@ -17,7 +17,7 @@ public class CacheTest {
         List<Quote> quotes = CacheReader.loadQuotesFromDiskCache("AAPL");
         assertThat(quotes)
                 .isNotNull()
-                .hasSize(AAPL_QUOTES_SIZE);
+                .hasSize(AAPL_DAILY_QUOTES_SIZE);
     }
 
     @Test

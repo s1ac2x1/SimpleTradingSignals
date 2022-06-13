@@ -21,7 +21,7 @@ public class BaseKey {
     }
 
     public String getSymbol() {
-        return this.symbol;
+        return symbol;
     }
 
     public Timeframe getTimeframe() {

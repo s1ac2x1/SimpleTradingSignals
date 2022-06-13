@@ -39,7 +39,7 @@ public class CacheReader {
     public static ExecutorService apiExecutor = Executors.newCachedThreadPool();
     public static int requestPeriod;
     public static ConcurrentLinkedDeque<LoadRequest> requests = new ConcurrentLinkedDeque<>();
-    public static CopyOnWriteArrayList<Future> callsInProgress = new CopyOnWriteArrayList<>();
+    public static List<Future> callsInProgress = new CopyOnWriteArrayList<>();
 
     public static void checkCache(Timeframe[][] timeframes, TaskType[] tasks) {
         AtomicInteger screenNumber = new AtomicInteger(0);

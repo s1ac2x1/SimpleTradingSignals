@@ -1,11 +1,16 @@
 package com.kishlaly.ta;
 
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_2;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4;
 import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.RunUtils;
 
 import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
+import static com.kishlaly.ta.utils.RunUtils.singleSymbol;
 
 /**
  * @author Vladimir Kishlaly
@@ -18,10 +23,10 @@ public class Main {
         Context.source = new SymbolsSource[]{
                 SymbolsSource.SP500
         };
-        //singleSymbol("AAPL"); // for single test
+        singleSymbol("AAPL"); // for single test
         Context.symbols = getSymbols();
-        buildCache(Context.basicTimeframes, false);
-        //RunUtils.testStrategiesOnSpecificDate_("16.03.2022");
+        //buildCache(Context.basicTimeframes, false);
+        RunUtils.testOneStrategy_(new ThreeDisplays_Buy_4());
 
     }
 }
