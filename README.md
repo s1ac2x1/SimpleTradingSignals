@@ -28,7 +28,7 @@ These values are configured by the parameters `limitPerMinute` and `parallelRequ
 
 During data loading the log will display the maximum cache build time depending on the allowed API load.
 
-Example for 75 req/s for SP500:
+Example for 75 req/min for SP500:
 
 ```text
 0:7:5 left...
