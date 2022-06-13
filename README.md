@@ -95,7 +95,7 @@ the output in `tests/single.txt` says:
 	each trade size = $10000.0
 	SL [Fixed] price 0.27
 	TP [Fixed] Keltner 80% top 
-	TP/SL = 28/5 = 84.85% / 15.16%%
+	TP/SL = 28/5 = 84.85% / 15.16%
 	Total profit after 1% commissions per trade = 8703.6
 	Total profit / loss = 13216.56 / -4512.96
 	min duration = 1 days
