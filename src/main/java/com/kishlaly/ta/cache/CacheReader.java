@@ -160,7 +160,8 @@ public class CacheReader {
         }
     }
 
-    public static List calculateIndicatorFromCachedQuotes(String symbol, List<Quote> quotes, Indicator indicator) {
+    public static List calculateIndicatorFromCachedQuotes(String symbol, Indicator indicator) {
+        List<Quote> quotes = loadQuotesFromDiskCache(symbol);
         switch (indicator) {
             case MACD:
                 return IndicatorUtils.buildMACDHistogram(symbol, quotes);
@@ -232,7 +233,7 @@ public class CacheReader {
         List<Quote> quotes = loadQuotesFromDiskCache(symbol);
         screen.quotes = quotes;
         Arrays.stream(timeframeIndicators.indicators).forEach(indicator -> {
-            List<? extends EntityWithDate> data = calculateIndicatorFromCachedQuotes(symbol, quotes, indicator);
+            List<? extends EntityWithDate> data = calculateIndicatorFromCachedQuotes(symbol, indicator);
             screen.indicators.put(indicator, data);
         });
         return screen;

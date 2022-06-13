@@ -206,7 +206,7 @@ public class TaskRunner {
                             symbolData.timeframe = Context.timeframe;
                             List<Quote> quotes = loadQuotesFromDiskCache(symbol);
                             symbolData.quotes = quotes;
-                            Arrays.stream(indicators).forEach(indicator -> symbolData.indicators.put(MACD, calculateIndicatorFromCachedQuotes(symbol, quotes, MACD)));
+                            Arrays.stream(indicators).forEach(indicator -> symbolData.indicators.put(MACD, calculateIndicatorFromCachedQuotes(symbol, MACD)));
                             Log.addDebugLine("");
                             Log.addDebugLine(" === " + symbol + " === ");
                             try {
