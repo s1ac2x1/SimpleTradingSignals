@@ -1,8 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.EntityWithDate;
+import com.kishlaly.ta.model.AbstractModel;
 
-public class MACD extends EntityWithDate {
+public class MACD extends AbstractModel {
 
     private Double macd;
     private Double signal;

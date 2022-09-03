@@ -1,11 +1,11 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.EntityWithDate;
+import com.kishlaly.ta.model.AbstractModel;
 
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
 
-public class EMA extends EntityWithDate {
+public class EMA extends AbstractModel {
 
     private Double value;
 

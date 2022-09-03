@@ -462,7 +462,7 @@ public class TaskTester {
 
     private static void rewind(SymbolData screen, int i) {
         screen.quotes = screen.quotes.subList(0, screen.quotes.size() - i);
-        Map<Indicator, List<? extends EntityWithDate>> indicators = new HashMap<>();
+        Map<Indicator, List<? extends AbstractModel>> indicators = new HashMap<>();
         screen.indicators.forEach((indicator, data) -> {
             indicators.put(indicator, data.subList(0, data.size() - i));
         });

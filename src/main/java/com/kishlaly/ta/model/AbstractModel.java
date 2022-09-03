@@ -3,7 +3,7 @@ package com.kishlaly.ta.model;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
 
-public abstract class EntityWithDate {
+public abstract class AbstractModel {
 
     // in epoch seconds
     protected Long timestamp;
@@ -12,7 +12,7 @@ public abstract class EntityWithDate {
     protected String nativeDate;
     protected String myDate;
 
-    public EntityWithDate(final Long timestamp) {
+    public AbstractModel(final Long timestamp) {
         this.timestamp = timestamp;
         this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();
         this.myDate = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();

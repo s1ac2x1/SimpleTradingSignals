@@ -1,8 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.EntityWithDate;
+import com.kishlaly.ta.model.AbstractModel;
 
-public class Bollinger extends EntityWithDate {
+public class Bollinger extends AbstractModel {
 
     private double bottom;
     private double middle;

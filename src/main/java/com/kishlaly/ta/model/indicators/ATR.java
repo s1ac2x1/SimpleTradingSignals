@@ -1,8 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.EntityWithDate;
+import com.kishlaly.ta.model.AbstractModel;
 
-public class ATR extends EntityWithDate {
+public class ATR extends AbstractModel {
 
     private double value;
 

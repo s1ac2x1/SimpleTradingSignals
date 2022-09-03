@@ -233,7 +233,7 @@ public class CacheReader {
         List<Quote> quotes = loadQuotesFromDiskCache(symbol);
         screen.quotes = quotes;
         Arrays.stream(timeframeIndicators.indicators).forEach(indicator -> {
-            List<? extends EntityWithDate> data = calculateIndicatorFromCachedQuotes(symbol, indicator);
+            List<? extends AbstractModel> data = calculateIndicatorFromCachedQuotes(symbol, indicator);
             screen.indicators.put(indicator, data);
         });
         return screen;

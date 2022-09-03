@@ -1,8 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.EntityWithDate;
+import com.kishlaly.ta.model.AbstractModel;
 
-public class ElderForceIndex extends EntityWithDate {
+public class ElderForceIndex extends AbstractModel {
 
     private double value;
 
