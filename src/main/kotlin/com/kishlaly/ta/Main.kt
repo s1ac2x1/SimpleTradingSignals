@@ -1,4 +1,5 @@
 package com.kishlaly.ta
 
-class Main {
+fun main() {
+
 }
