@@ -1,8 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.AbstractModel;
+import com.kishlaly.ta.model.AbstractModelJava;
 
-public class Keltner extends AbstractModel {
+public class Keltner extends AbstractModelJava {
 
     private double low;
     private double middle;

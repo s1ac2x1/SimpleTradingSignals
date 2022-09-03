@@ -12,7 +12,7 @@ public class SymbolData {
     public String symbol;
     public Timeframe timeframe;
     public List<Quote> quotes;
-    public Map<Indicator, List<? extends AbstractModel>> indicators = new HashMap<>();
+    public Map<Indicator, List<? extends AbstractModelJava>> indicators = new HashMap<>();
 
     public Quote getLastQuote() {
         return quotes.get(quotes.size() - 1);

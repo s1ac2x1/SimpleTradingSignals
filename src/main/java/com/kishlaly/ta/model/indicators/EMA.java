@@ -1,11 +1,11 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.AbstractModel;
+import com.kishlaly.ta.model.AbstractModelJava;
 
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
 
-public class EMA extends AbstractModel {
+public class EMA extends AbstractModelJava {
 
     private Double value;
 

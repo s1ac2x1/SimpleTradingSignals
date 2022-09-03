@@ -10,7 +10,7 @@ import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
  * @author Vladimir Kishlaly
  * @since 16.11.2021
  */
-public class Quote extends AbstractModel implements Serializable {
+public class Quote extends AbstractModelJava implements Serializable {
 
     private double high;
     private double open;

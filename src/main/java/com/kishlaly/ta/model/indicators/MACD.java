@@ -1,8 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.AbstractModel;
+import com.kishlaly.ta.model.AbstractModelJava;
 
-public class MACD extends AbstractModel {
+public class MACD extends AbstractModelJava {
 
     private Double macd;
     private Double signal;

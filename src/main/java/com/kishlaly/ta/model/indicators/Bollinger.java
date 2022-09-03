@@ -1,8 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.AbstractModel;
+import com.kishlaly.ta.model.AbstractModelJava;
 
-public class Bollinger extends AbstractModel {
+public class Bollinger extends AbstractModelJava {
 
     private double bottom;
     private double middle;

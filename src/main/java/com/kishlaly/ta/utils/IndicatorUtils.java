@@ -1,7 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
-import com.kishlaly.ta.model.AbstractModel;
+import com.kishlaly.ta.model.AbstractModelJava;
 import com.kishlaly.ta.model.Quote;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.*;
@@ -219,7 +219,7 @@ public class IndicatorUtils {
     }
 
     public static void trim(SymbolData screen) {
-        Map<Indicator, List<? extends AbstractModel>> trimmedIndicators = new HashMap();
+        Map<Indicator, List<? extends AbstractModelJava>> trimmedIndicators = new HashMap();
         screen.indicators.forEach((indicator, values) -> {
             if (values == null || values.isEmpty()) {
                 trimmedIndicators.put(indicator, new ArrayList());
@@ -230,7 +230,7 @@ public class IndicatorUtils {
         screen.indicators = trimmedIndicators;
     }
 
-    private static <T extends AbstractModel> List<T> trimToDate(List<T> src) {
+    private static <T extends AbstractModelJava> List<T> trimToDate(List<T> src) {
         if (Context.trimToDate != null) {
             ZonedDateTime filterAfter = shortDateToZoned(Context.trimToDate);
             return src.stream().filter(ind -> ind.getTimestamp() <= filterAfter.toEpochSecond()).collect(Collectors.toList());

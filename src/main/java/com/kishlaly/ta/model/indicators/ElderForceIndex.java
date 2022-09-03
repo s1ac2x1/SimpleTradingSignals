@@ -1,8 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.AbstractModel;
+import com.kishlaly.ta.model.AbstractModelJava;
 
-public class ElderForceIndex extends AbstractModel {
+public class ElderForceIndex extends AbstractModelJava {
 
     private double value;
 

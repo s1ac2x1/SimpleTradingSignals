@@ -1,8 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.AbstractModel;
+import com.kishlaly.ta.model.AbstractModelJava;
 
-public class ATR extends AbstractModel {
+public class ATR extends AbstractModelJava {
 
     private double value;
 

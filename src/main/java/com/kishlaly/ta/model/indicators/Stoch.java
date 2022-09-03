@@ -1,11 +1,11 @@
 package com.kishlaly.ta.model.indicators;
 
-import com.kishlaly.ta.model.AbstractModel;
+import com.kishlaly.ta.model.AbstractModelJava;
 
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
 
-public class Stoch extends AbstractModel {
+public class Stoch extends AbstractModelJava {
     private Double slowD;
     private Double slowK;
 
