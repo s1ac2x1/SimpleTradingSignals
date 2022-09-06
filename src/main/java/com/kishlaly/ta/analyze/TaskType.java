@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze;
 import com.kishlaly.ta.analyze.tasks.AbstractTask;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.Screens;
+import com.kishlaly.ta.model.ScreensJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.TimeframeIndicatorsJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -66,7 +66,7 @@ public enum TaskType {
 
     TaskType(final Map<Integer, TimeframeJava> timeframes,
              final Map<Integer, IndicatorJava[]> indicators,
-             BiFunction<Screens, List<TaskBlock>, BlockResultJava> function) {
+             BiFunction<ScreensJava, List<TaskBlock>, BlockResultJava> function) {
         this.timeframes = timeframes;
         this.indicators = indicators;
         this.function = function;
@@ -74,7 +74,7 @@ public enum TaskType {
 
     private Map<Integer, TimeframeJava> timeframes;
     private Map<Integer, IndicatorJava[]> indicators;
-    private BiFunction<Screens, List<TaskBlock>, BlockResultJava> function;
+    private BiFunction<ScreensJava, List<TaskBlock>, BlockResultJava> function;
     private TimeframeIndicatorsJava timeframeIndicators;
     private List<TaskBlock> blocks = new ArrayList<>();
 
@@ -102,7 +102,7 @@ public enum TaskType {
         this.indicators.put(screen, indicators);
     }
 
-    public BiFunction<Screens, List<TaskBlock>, BlockResultJava> getFunction() {
+    public BiFunction<ScreensJava, List<TaskBlock>, BlockResultJava> getFunction() {
         return this.function;
     }
 

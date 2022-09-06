@@ -151,7 +151,7 @@ public class TaskTester {
     private static void rewind(TaskType task, BlocksGroup blocksGroup, SymbolDataJava screen1, SymbolDataJava screen2, List<BlockResultJava> blockResults) {
         QuoteJava lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
         QuoteJava lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
-        blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks()));
+        blockResults.add(task.getFunction().apply(new ScreensJava(screen1, screen2), blocksGroup.blocks()));
         if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
             rewind(screen1, 1);
         } else {
