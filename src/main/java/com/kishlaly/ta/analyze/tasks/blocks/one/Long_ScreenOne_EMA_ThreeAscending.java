@@ -9,8 +9,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
-import static com.kishlaly.ta.analyze.BlockResultCode.THREE_EMA_NOT_ASCENDING_SCREEN_1;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.THREE_EMA_NOT_ASCENDING_SCREEN_1;
 
 /**
  * the last three EMA are increasing

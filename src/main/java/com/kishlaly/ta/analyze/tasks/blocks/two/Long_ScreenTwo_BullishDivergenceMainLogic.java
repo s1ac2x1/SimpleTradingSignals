@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.analyze.BlockResultCode;
+import com.kishlaly.ta.model.BlockResultCode;
 import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.HistogramQuote;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCode.*;
 import static com.kishlaly.ta.utils.DatesJava.beautifyQuoteDate;
 
 public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock {

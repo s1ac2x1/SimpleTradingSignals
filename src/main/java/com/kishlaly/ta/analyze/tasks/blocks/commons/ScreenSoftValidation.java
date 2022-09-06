@@ -1,12 +1,12 @@
 package com.kishlaly.ta.analyze.tasks.blocks.commons;
 
-import com.kishlaly.ta.analyze.BlockResultCode;
+import com.kishlaly.ta.model.BlockResultCode;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.utils.Log;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.NO_DATA_QUOTES;
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.NO_DATA_QUOTES;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
 
 public class ScreenSoftValidation implements CommonBlock {
 

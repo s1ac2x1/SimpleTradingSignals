@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCode.*;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class ScreenBasicValidation implements CommonBlock {

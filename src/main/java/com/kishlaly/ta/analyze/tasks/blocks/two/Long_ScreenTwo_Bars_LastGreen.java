@@ -8,8 +8,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTE_NOT_GREEN_SCREEN_2;
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.LAST_QUOTE_NOT_GREEN_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
 
 /**
  * Last quote is green

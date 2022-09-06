@@ -10,8 +10,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.LAST_BAR_ABOVE_SCREEN_2;
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.LAST_BAR_ABOVE_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
 
 /**
  * it is necessary to filter the situation when the third and second cross EMA13, and the last one is entirely higher (the moment of entering the trade is missed)

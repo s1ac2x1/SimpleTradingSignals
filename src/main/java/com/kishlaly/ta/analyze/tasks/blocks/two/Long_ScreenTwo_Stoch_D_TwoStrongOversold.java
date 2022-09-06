@@ -8,8 +8,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
-import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2;
 
 /**
  * oversold below 20 at TWO values of the slow stochastic line and it goes up

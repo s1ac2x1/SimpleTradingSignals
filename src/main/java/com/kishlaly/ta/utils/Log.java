@@ -1,6 +1,6 @@
 package com.kishlaly.ta.utils;
 
-import com.kishlaly.ta.analyze.BlockResultCode;
+import com.kishlaly.ta.model.BlockResultCode;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
 import com.kishlaly.ta.model.SymbolData;
 

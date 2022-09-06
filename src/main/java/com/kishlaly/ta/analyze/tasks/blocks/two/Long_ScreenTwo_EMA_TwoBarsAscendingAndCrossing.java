@@ -10,7 +10,7 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCode.*;
 import static com.kishlaly.ta.utils.Quotes.*;
 
 /**

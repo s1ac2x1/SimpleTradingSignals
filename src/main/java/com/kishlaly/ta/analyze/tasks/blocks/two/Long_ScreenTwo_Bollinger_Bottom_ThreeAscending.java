@@ -9,8 +9,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.BOLLINGER_BOTTOM_NOT_ASCENDING_SCREEN_2;
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.BOLLINGER_BOTTOM_NOT_ASCENDING_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
 
 /**
  * the last three values of the lower band are increasing

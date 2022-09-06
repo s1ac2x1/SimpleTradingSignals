@@ -4,8 +4,8 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.utils.Log;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTES_NOT_ASCENDING_SCREEN_1;
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.LAST_QUOTES_NOT_ASCENDING_SCREEN_1;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
 
 /**
  * the last quote is higher than the penultimate one

@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.analyze.BlockResultCode;
+import com.kishlaly.ta.model.BlockResultCode;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
@@ -11,7 +11,7 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCode.*;
 
 /**
  * price bars should cross EMA13 and should decrease

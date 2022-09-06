@@ -8,8 +8,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
-import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_K_D_NOT_ASCENDING_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.STOCH_K_D_NOT_ASCENDING_SCREEN_2;
 
 /**
  * %D and %K of the last stochastic should be higher than that of the penultimate stochastic

@@ -1,4 +1,4 @@
-package com.kishlaly.ta.analyze;
+package com.kishlaly.ta.model;
 
 public enum BlockResultCode {
 

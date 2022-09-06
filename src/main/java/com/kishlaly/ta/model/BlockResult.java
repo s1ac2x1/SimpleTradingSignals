@@ -1,7 +1,5 @@
 package com.kishlaly.ta.model;
 
-import com.kishlaly.ta.analyze.BlockResultCode;
-
 public class BlockResult {
 
     private QuoteJava lastChartQuote;

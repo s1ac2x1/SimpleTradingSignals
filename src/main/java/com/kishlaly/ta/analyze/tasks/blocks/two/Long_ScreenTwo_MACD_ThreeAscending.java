@@ -9,8 +9,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.HISTOGRAM_NOT_ASCENDING_SCREEN_2;
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.HISTOGRAM_NOT_ASCENDING_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
 
 /**
  * the histogram rises on the last three values

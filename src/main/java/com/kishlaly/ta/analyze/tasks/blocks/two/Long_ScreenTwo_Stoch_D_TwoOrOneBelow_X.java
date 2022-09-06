@@ -9,8 +9,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
-import static com.kishlaly.ta.analyze.BlockResultCode.STOCH_D_NOT_EXTRA_OVERSOLD_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.STOCH_D_NOT_EXTRA_OVERSOLD_SCREEN_2;
 
 /**
  * one of the two stochastic %D values is less than ThreeDisplays.Config.STOCH_CUSTOM

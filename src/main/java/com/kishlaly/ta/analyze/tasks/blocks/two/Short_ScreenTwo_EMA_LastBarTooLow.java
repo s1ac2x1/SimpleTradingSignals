@@ -10,8 +10,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.LAST_BAR_BELOW_SCREEN_2;
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.LAST_BAR_BELOW_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
 
 /**
  * to filter the situation when the third and second cross EMA13, and the last one is entirely lower (that is, the moment is already lost)

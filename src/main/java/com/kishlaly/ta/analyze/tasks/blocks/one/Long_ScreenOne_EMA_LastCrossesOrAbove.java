@@ -11,8 +11,8 @@ import com.kishlaly.ta.utils.Quotes;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.LAST_QUOTE_NOT_CROSSING_OR_NOT_ABOVE_EMA_SCREEN_1;
-import static com.kishlaly.ta.analyze.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCode.LAST_QUOTE_NOT_CROSSING_OR_NOT_ABOVE_EMA_SCREEN_1;
+import static com.kishlaly.ta.model.BlockResultCode.OK;
 
 /**
  * the last bar crosses the EMA26 or higher

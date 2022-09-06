@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.analyze.BlockResultCode;
+import com.kishlaly.ta.model.BlockResultCode;
 import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
@@ -9,7 +9,7 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.Comparator;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCode.*;
 
 public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
     @Override

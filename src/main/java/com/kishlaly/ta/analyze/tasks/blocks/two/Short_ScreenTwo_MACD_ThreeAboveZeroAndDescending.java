@@ -8,7 +8,7 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCode.*;
 
 /**
  * histogram should be above zero and start to decrease: check on the last three values
