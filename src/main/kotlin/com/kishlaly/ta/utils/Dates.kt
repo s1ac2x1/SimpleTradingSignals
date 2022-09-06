@@ -15,7 +15,7 @@ class Dates {
 
         fun getBarTimeInMyZone(timestamp: Long, exchangeTimezoneStr: String): ZonedDateTime {
             val exchangeTimezone = ZoneId.of(exchangeTimezoneStr)
-            val myTimezone = ZoneId.of(Context.myTimezone)
+            val myTimezone = ZoneId.of(ContextJava.myTimezone)
 
             val exchangeLocalDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), exchangeTimezone)
             val exchangeZonedDateTime = exchangeLocalDateTime.atZone(exchangeTimezone)

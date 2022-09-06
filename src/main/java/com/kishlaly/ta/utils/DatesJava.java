@@ -18,7 +18,7 @@ public class DatesJava {
     }
 
     public static String getDateFormat() {
-        switch (Context.timeframe) {
+        switch (ContextJava.timeframe) {
             case HOUR:
                 return "yyyy-MM-dd HH:mm:ss";
             case WEEK:
@@ -30,7 +30,7 @@ public class DatesJava {
     // on the input may be the date of the form yyyyy-MM-dd for the day timeframe, so I shift the clock to the beginning of the exchange
     public static ZonedDateTime getTimeInExchangeZone(String date, String exchangeTimezone) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(getDateFormat());
-        switch (Context.timeframe) {
+        switch (ContextJava.timeframe) {
             case HOUR:
                 LocalDateTime localDate = LocalDateTime.parse(date, formatter);
                 return localDate
@@ -50,18 +50,18 @@ public class DatesJava {
     // on the input may be the date of the form yyyyy-MM-dd for the day timeframe, so I shift the clock to the beginning of the exchange
     public static ZonedDateTime getBarTimeInMyZone(String date, String exchangeTimezone) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(getDateFormat());
-        switch (Context.timeframe) {
+        switch (ContextJava.timeframe) {
             case HOUR:
                 LocalDateTime localDate = LocalDateTime.parse(date, formatter);
                 return localDate
                         .atZone(ZoneId.of(exchangeTimezone))
-                        .withZoneSameInstant(ZoneId.of(Context.myTimezone));
+                        .withZoneSameInstant(ZoneId.of(ContextJava.myTimezone));
             case WEEK:
             case DAY:
             default:
                 return LocalDate.parse(date, formatter)
                         .atStartOfDay(ZoneId.of(exchangeTimezone))
-                        .withZoneSameInstant(ZoneId.of(Context.myTimezone))
+                        .withZoneSameInstant(ZoneId.of(ContextJava.myTimezone))
                         .plus(9, ChronoUnit.HOURS)
                         .plus(30, ChronoUnit.MINUTES);
         }
@@ -70,7 +70,7 @@ public class DatesJava {
     // At the entrance of the exact time, so there is no need to reset the clock at the time of the opening of the exchange
     public static ZonedDateTime getBarTimeInMyZone(Long timestamp, String exchangeTimezoneStr) {
         ZoneId exchangeTimezone = ZoneId.of(exchangeTimezoneStr);
-        ZoneId myTimezone = ZoneId.of(Context.myTimezone);
+        ZoneId myTimezone = ZoneId.of(ContextJava.myTimezone);
 
         LocalDateTime exchangeLocalDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(timestamp), exchangeTimezone);
         ZonedDateTime exchangeZonedDateTime = exchangeLocalDateTime.atZone(exchangeTimezone);
@@ -87,7 +87,7 @@ public class DatesJava {
     }
 
     public static String getDuration(TimeframeJava timeframe, long start, long end) {
-        ZoneId timezone = ZoneId.of(Context.myTimezone);
+        ZoneId timezone = ZoneId.of(ContextJava.myTimezone);
         LocalDateTime startDate = LocalDateTime.ofInstant(Instant.ofEpochSecond(start), timezone);
         LocalDateTime endDate = LocalDateTime.ofInstant(Instant.ofEpochSecond(end), timezone);
         switch (timeframe) {

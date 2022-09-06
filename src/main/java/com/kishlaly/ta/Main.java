@@ -3,7 +3,7 @@ package com.kishlaly.ta;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4;
 import com.kishlaly.ta.model.SymbolsSourceJava;
 import com.kishlaly.ta.model.TimeframeJava;
-import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.RunUtils;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
@@ -16,12 +16,12 @@ import static com.kishlaly.ta.utils.RunUtils.singleSymbol;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Context.aggregationTimeframe = TimeframeJava.DAY;
-        Context.source = new SymbolsSourceJava[]{
+        ContextJava.aggregationTimeframe = TimeframeJava.DAY;
+        ContextJava.source = new SymbolsSourceJava[]{
                 SymbolsSourceJava.SP500
         };
         singleSymbol("AAPL"); // for single test
-        Context.symbols = getSymbols();
+        ContextJava.symbols = getSymbols();
         //buildCache(Context.basicTimeframes, false);
         RunUtils.testOneStrategy_(new ThreeDisplays_Buy_4());
 

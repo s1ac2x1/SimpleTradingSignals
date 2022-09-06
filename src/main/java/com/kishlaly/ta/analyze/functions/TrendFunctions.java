@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
-import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.ContextJava;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -115,7 +115,7 @@ public class TrendFunctions {
             }
         }
 
-        if (Context.trendCheckIncludeHistogram) {
+        if (ContextJava.trendCheckIncludeHistogram) {
             int histogramMovement1 = 0;
             int histogramMovement2 = 0;
             boolean macdMovingConstantly = false;

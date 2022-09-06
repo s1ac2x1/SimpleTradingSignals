@@ -3,7 +3,7 @@ package com.kishlaly.ta.misc;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.BarsJava;
-import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.ContextJava;
 import org.ta4j.core.*;
 import org.ta4j.core.analysis.criteria.pnl.GrossLossCriterion;
 import org.ta4j.core.analysis.criteria.pnl.GrossReturnCriterion;
@@ -59,8 +59,8 @@ public class MovingMomentumStrategy {
     }
 
     public static void main(String[] args) {
-        Context.aggregationTimeframe = TimeframeJava.DAY;
-        Context.timeframe = TimeframeJava.DAY;
+        ContextJava.aggregationTimeframe = TimeframeJava.DAY;
+        ContextJava.timeframe = TimeframeJava.DAY;
         String symbol = "TER";
         List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
         BarSeries series = BarsJava.build(quotes);

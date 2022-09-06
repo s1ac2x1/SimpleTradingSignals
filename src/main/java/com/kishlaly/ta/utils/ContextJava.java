@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class Context {
+public class ContextJava {
 
     public static double accountBalance = 10_000; // maximum position size
     public static int tradeCommission = 1; // %

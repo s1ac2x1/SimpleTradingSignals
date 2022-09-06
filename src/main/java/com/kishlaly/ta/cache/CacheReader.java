@@ -8,7 +8,7 @@ import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.model.indicators.StochJava;
-import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.IndicatorUtils;
 import com.kishlaly.ta.utils.Quotes;
 
@@ -25,7 +25,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.utils.Context.fileSeparator;
+import static com.kishlaly.ta.utils.ContextJava.fileSeparator;
 import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
 
 /**
@@ -48,17 +48,17 @@ public class CacheReader {
             // only check the availability of quotes in the cache
             // it is assumed that only one Context.aggregationTimeframe is loaded
             screenNumber.getAndIncrement();
-            Context.timeframe = Context.aggregationTimeframe;
-            List<String> missingQuotes = removeCachedQuotesSymbols(Context.symbols);
+            ContextJava.timeframe = ContextJava.aggregationTimeframe;
+            List<String> missingQuotes = removeCachedQuotesSymbols(ContextJava.symbols);
             Set<String> missingQuotesCollectedByScreen1 = missedData.get(screens[0]);
             if (missingQuotesCollectedByScreen1 == null) {
                 missingQuotesCollectedByScreen1 = new HashSet<>();
             }
             missingQuotesCollectedByScreen1.addAll(missingQuotes);
-            missedData.put(Context.timeframe, missingQuotesCollectedByScreen1);
+            missedData.put(ContextJava.timeframe, missingQuotesCollectedByScreen1);
         });
         missedData.forEach((tf, quotes) -> {
-            Context.timeframe = tf;
+            ContextJava.timeframe = tf;
             try {
                 Files.write(Paths.get(getFolder() + fileSeparator + "missed.txt"), quotes.stream().collect(Collectors.joining(System.lineSeparator())).getBytes());
                 System.out.println("Logged " + quotes.size() + " missed " + tf.name() + " quotes");
@@ -70,12 +70,12 @@ public class CacheReader {
 
     public static Set<String> getSymbols() {
         List<String> stocksRaw = new ArrayList<>();
-        if (!Context.testOnly.isEmpty()) {
-            stocksRaw.addAll(Context.testOnly);
+        if (!ContextJava.testOnly.isEmpty()) {
+            stocksRaw.addAll(ContextJava.testOnly);
         } else {
-            Arrays.stream(Context.source).forEach(source -> {
+            Arrays.stream(ContextJava.source).forEach(source -> {
                 try {
-                    List<String> lines = Files.readAllLines(new File(Context.outputFolder + "/" + source.getFilename()).toPath(),
+                    List<String> lines = Files.readAllLines(new File(ContextJava.outputFolder + "/" + source.getFilename()).toPath(),
                             Charset.defaultCharset());
                     if (source.isRandom()) {
                         Collections.shuffle(lines);
@@ -116,7 +116,7 @@ public class CacheReader {
     }
 
     public static List<QuoteJava> loadQuotesFromDiskCache(String symbol) {
-        List<QuoteJava> cachedQuotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
+        List<QuoteJava> cachedQuotes = QuotesInMemoryCache.get(symbol, ContextJava.timeframe);
         if (!cachedQuotes.isEmpty()) {
             return cachedQuotes;
         } else {
@@ -126,21 +126,21 @@ public class CacheReader {
                                 Files.readAllBytes(Paths.get(getFolder() + fileSeparator + symbol + "_quotes.txt"))),
                         new TypeToken<ArrayList<QuoteJava>>() {
                         }.getType());
-                switch (Context.aggregationTimeframe) {
+                switch (ContextJava.aggregationTimeframe) {
                     case DAY:
-                        if (Context.timeframe == TimeframeJava.WEEK) {
+                        if (ContextJava.timeframe == TimeframeJava.WEEK) {
                             quotes = Quotes.dayToWeek(quotes);
                         }
-                        if (Context.timeframe == TimeframeJava.HOUR) {
+                        if (ContextJava.timeframe == TimeframeJava.HOUR) {
                             throw new RuntimeException("Requested HOUR quotes, but aggregationTimeframe = DAY");
                         }
                         break;
                     case HOUR:
-                        if (Context.timeframe == TimeframeJava.WEEK) {
+                        if (ContextJava.timeframe == TimeframeJava.WEEK) {
                             quotes = Quotes.hourToDay(quotes);
                             quotes = Quotes.dayToWeek(quotes);
                         }
-                        if (Context.timeframe == TimeframeJava.DAY) {
+                        if (ContextJava.timeframe == TimeframeJava.DAY) {
                             quotes = Quotes.hourToDay(quotes);
                         }
                         break;
@@ -148,11 +148,11 @@ public class CacheReader {
                 }
                 quotes = quotes.stream().filter(QuoteJava::valuesPesent).collect(Collectors.toList());
                 Collections.sort(quotes, Comparator.comparing(QuoteJava::getTimestamp));
-                if (Context.trimToDate != null) {
-                    ZonedDateTime filterAfter = shortDateToZoned(Context.trimToDate);
+                if (ContextJava.trimToDate != null) {
+                    ZonedDateTime filterAfter = shortDateToZoned(ContextJava.trimToDate);
                     quotes = quotes.stream().filter(quote -> quote.getTimestamp() <= filterAfter.toEpochSecond()).collect(Collectors.toList());
                 }
-                QuotesInMemoryCache.put(symbol, Context.timeframe, quotes);
+                QuotesInMemoryCache.put(symbol, ContextJava.timeframe, quotes);
                 return quotes;
             } catch (IOException e) {
                 return Collections.emptyList();
@@ -226,7 +226,7 @@ public class CacheReader {
     }
 
     public static SymbolDataJava getSymbolData(TimeframeIndicatorsJava timeframeIndicators, String symbol) {
-        Context.timeframe = timeframeIndicators.timeframe;
+        ContextJava.timeframe = timeframeIndicators.timeframe;
         SymbolDataJava screen = new SymbolDataJava();
         screen.symbol = symbol;
         screen.timeframe = timeframeIndicators.timeframe;
@@ -240,7 +240,7 @@ public class CacheReader {
     }
 
     public static String getFolder() {
-        return Context.outputFolder + fileSeparator + "cache" + fileSeparator + Context.aggregationTimeframe.name().toLowerCase();
+        return ContextJava.outputFolder + fileSeparator + "cache" + fileSeparator + ContextJava.aggregationTimeframe.name().toLowerCase();
     }
 
     public static void clearCacheFolder(String name) {

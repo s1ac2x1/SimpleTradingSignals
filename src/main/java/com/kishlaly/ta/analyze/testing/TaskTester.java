@@ -11,7 +11,7 @@ import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.FilesUtil;
 import com.kishlaly.ta.utils.Numbers;
 
@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.analyze.testing.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.QuoteJava.exchangeTimezome;
-import static com.kishlaly.ta.utils.Context.*;
+import static com.kishlaly.ta.utils.ContextJava.*;
 import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
@@ -41,7 +41,7 @@ public class TaskTester {
     private static StringBuilder testLog = new StringBuilder();
 
     public static List<HistoricalTesting> test(TimeframeJava[][] timeframes, TaskType task, BlocksGroup blocksGroup) {
-        Context.testMode = true;
+        ContextJava.testMode = true;
         StringBuilder log = new StringBuilder();
         List<HistoricalTesting> allTests = new ArrayList<>();
         Arrays.stream(timeframes).forEach(screens -> {
@@ -49,8 +49,8 @@ public class TaskTester {
             task.updateTimeframeForScreen(2, screens[1]);
             Map<String, Set<String>> readableOutput = new HashMap<>();
             AtomicInteger currSymbol = new AtomicInteger(1);
-            int totalSymbols = Context.symbols.size();
-            Context.symbols.forEach(symbol -> {
+            int totalSymbols = ContextJava.symbols.size();
+            ContextJava.symbols.forEach(symbol -> {
                 System.out.println("[" + currSymbol + "/" + totalSymbols + "] Testing " + symbol);
                 currSymbol.getAndIncrement();
                 SymbolDataJava screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
@@ -69,16 +69,16 @@ public class TaskTester {
                 }
                 if (!blockResults.isEmpty()) {
                     HistoricalTesting testing = null;
-                    if (Context.massTesting) {
-                        if (Context.takeProfitStrategies != null) {
-                            Context.takeProfitStrategies.forEach(takeProfitStrategy -> {
-                                HistoricalTesting massTesting = new HistoricalTesting(task, blocksGroup, symbolDataForTesting, blockResults, Context.stopLossStrategy, takeProfitStrategy);
+                    if (ContextJava.massTesting) {
+                        if (ContextJava.takeProfitStrategies != null) {
+                            ContextJava.takeProfitStrategies.forEach(takeProfitStrategy -> {
+                                HistoricalTesting massTesting = new HistoricalTesting(task, blocksGroup, symbolDataForTesting, blockResults, ContextJava.stopLossStrategy, takeProfitStrategy);
                                 calculateStatistics(massTesting);
                                 allTests.add(massTesting);
                             });
                         }
                     } else {
-                        testing = new HistoricalTesting(task, blocksGroup, symbolDataForTesting, blockResults, Context.stopLossStrategy, Context.takeProfitStrategy);
+                        testing = new HistoricalTesting(task, blocksGroup, symbolDataForTesting, blockResults, ContextJava.stopLossStrategy, ContextJava.takeProfitStrategy);
                         calculateStatistics(testing);
                         allTests.add(testing);
                         String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
@@ -106,7 +106,7 @@ public class TaskTester {
                 // hint for GC
                 clean(screen1, screen2);
             });
-            if (!Context.massTesting) {
+            if (!ContextJava.massTesting) {
                 readableOutput.forEach((key, data) -> {
                     data.forEach(line -> log.append("    " + line).append(lineSeparator()));
                     log.append(lineSeparator());
@@ -117,7 +117,7 @@ public class TaskTester {
         if (!directory.exists()) {
             directory.mkdir();
         }
-        if (!Context.massTesting) {
+        if (!ContextJava.massTesting) {
             try {
                 Files.write(Paths.get(TESTS_FOLDER + fileSeparator + SINGLE_TXT), log.toString().getBytes());
             } catch (IOException e) {
@@ -126,7 +126,7 @@ public class TaskTester {
         } else {
             StringBuilder builder = new StringBuilder();
             allTests.forEach(testing -> {
-                if (Context.takeProfitStrategies != null) {
+                if (ContextJava.takeProfitStrategies != null) {
                     builder.append("TP: " + testing.printTP() + " => TP/SL = " + testing.printTPSLNumber() + " (" + testing.printTPSLPercent() + "); balance = " + testing.getBalance()).append(lineSeparator());
                 }
             });
@@ -224,14 +224,14 @@ public class TaskTester {
     public static String formatTestingSummary(HistoricalTesting testing) {
         String timeframesInfo = "[" + testing.getTaskType().getTimeframeForScreen(1) + "][" + testing.getTaskType().getTimeframeForScreen(2) + "]";
         String result = timeframesInfo + " " + testing.getData().symbol + " - " + testing.getTaskType().name() + " - " + testing.getBlocksGroup().getClass().getSimpleName() + lineSeparator();
-        result += "\ttrendCheckIncludeHistogram = " + Context.trendCheckIncludeHistogram + lineSeparator();
+        result += "\ttrendCheckIncludeHistogram = " + ContextJava.trendCheckIncludeHistogram + lineSeparator();
         result += "\teach trade size = $" + accountBalance + lineSeparator();
         result += "\t" + testing.printSL() + lineSeparator();
         result += "\t" + testing.printTP() + lineSeparator();
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
         result += testing.printTPSLPercent() + lineSeparator();
         double balance = testing.getBalance();
-        result += "\tTotal profit after " + Context.tradeCommission + "% commissions per trade = " + Numbers.round(balance) + lineSeparator();
+        result += "\tTotal profit after " + ContextJava.tradeCommission + "% commissions per trade = " + Numbers.round(balance) + lineSeparator();
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
@@ -275,19 +275,19 @@ public class TaskTester {
     }
 
     public static void testOneStrategy(TimeframeJava[][] timeframes, TaskType task, BlocksGroup blocksGroup, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
-        Context.stopLossStrategy = stopLossStrategy;
-        Context.takeProfitStrategy = takeProfitStrategy;
+        ContextJava.stopLossStrategy = stopLossStrategy;
+        ContextJava.takeProfitStrategy = takeProfitStrategy;
         System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
         test(timeframes, task, blocksGroup);
     }
 
     public static void testAllStrategiesOnSpecificDate(String datePart, TaskType task, TimeframeJava[][] timeframes) {
-        if (Context.symbols.size() > 1) {
+        if (ContextJava.symbols.size() > 1) {
             throw new RuntimeException("Only one symbol allowed here");
         }
         // SL/TP are not important here, it is important what signal or error code in a particular date
-        Context.stopLossStrategy = new StopLossFixedPrice(0.27);
-        Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
+        ContextJava.stopLossStrategy = new StopLossFixedPrice(0.27);
+        ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
         BlocksGroup[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
         List<HistoricalTesting> testings = Arrays.stream(blocksGroups).flatMap(blocksGroup -> test(timeframes, task, blocksGroup).stream()).collect(Collectors.toList());
         ZonedDateTime parsed = shortDateToZoned(datePart);
@@ -299,15 +299,15 @@ public class TaskTester {
     }
 
     public static void testMass(TimeframeJava[][] timeframes, TaskType task, BlocksGroup blocksGroup) {
-        Context.massTesting = true;
+        ContextJava.massTesting = true;
 
         StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
-        Context.stopLossStrategy = stopLossStrategy;
+        ContextJava.stopLossStrategy = stopLossStrategy;
 
-        Context.takeProfitStrategies = new ArrayList<>();
+        ContextJava.takeProfitStrategies = new ArrayList<>();
         for (int i = 80; i <= 100; i++) {
             TakeProfitStrategy tp = new TakeProfitFixedKeltnerTop(i);
-            Context.takeProfitStrategies.add(tp);
+            ContextJava.takeProfitStrategies.add(tp);
         }
         test(timeframes, task, blocksGroup);
     }
@@ -350,9 +350,9 @@ public class TaskTester {
             double takeProfit = takeProfitStrategy.calcualte(data, signalIndex);
 
             double openingPrice = signal.getClose() + 0.07;
-            int lots = Numbers.roundDown(Context.accountBalance / openingPrice);
+            int lots = Numbers.roundDown(ContextJava.accountBalance / openingPrice);
             double openPositionSize = lots * openingPrice;
-            double commissions = openPositionSize / 100 * Context.tradeCommission;
+            double commissions = openPositionSize / 100 * ContextJava.tradeCommission;
 
             boolean skip = openingPrice > takeProfit;
 

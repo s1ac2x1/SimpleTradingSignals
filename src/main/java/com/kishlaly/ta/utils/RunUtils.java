@@ -17,7 +17,7 @@ public class RunUtils {
 
     public static void buildTasksAndStrategiesSummary_() {
         buildTasksAndStrategiesSummary(
-                Context.basicTimeframes,
+                ContextJava.basicTimeframes,
                 THREE_DISPLAYS_BUY,
                 new ArrayList<BlocksGroup>() {{
                     add(new ThreeDisplays_Buy_1());
@@ -44,12 +44,12 @@ public class RunUtils {
 
     // format: dd.mm.yyyy
     public static void testStrategiesOnSpecificDate_(String date) {
-        testAllStrategiesOnSpecificDate(date, THREE_DISPLAYS_BUY, Context.basicTimeframes);
+        testAllStrategiesOnSpecificDate(date, THREE_DISPLAYS_BUY, ContextJava.basicTimeframes);
     }
 
     public static void testOneStrategy_(BlocksGroup strategy) {
         testOneStrategy(
-                Context.basicTimeframes,
+                ContextJava.basicTimeframes,
                 THREE_DISPLAYS_BUY,
                 strategy,
                 new StopLossFixedPrice(0.27),
@@ -58,8 +58,8 @@ public class RunUtils {
     }
 
     public static void runAllDaily() {
-        Context.runGroups = TimeframeJava.DAY;
-        run(Context.basicTimeframes, THREE_DISPLAYS_BUY, false,
+        ContextJava.runGroups = TimeframeJava.DAY;
+        run(ContextJava.basicTimeframes, THREE_DISPLAYS_BUY, false,
                 new ThreeDisplays_Buy_1(),
                 new ThreeDisplays_Buy_2(),
                 new ThreeDisplays_Buy_3(),
@@ -74,15 +74,15 @@ public class RunUtils {
     }
 
     public static void runAllWeekly(TimeframeJava[][] timeframes) {
-        Context.runGroups = TimeframeJava.WEEK;
-        run(Context.basicTimeframes, THREE_DISPLAYS_BUY, false,
+        ContextJava.runGroups = TimeframeJava.WEEK;
+        run(ContextJava.basicTimeframes, THREE_DISPLAYS_BUY, false,
                 new FirstScreen_Buy_1()
                 //new FirstScreen_Buy_2()
         );
     }
 
     public static void singleSymbol(String symbol) {
-        Context.testOnly = new ArrayList<String>() {{
+        ContextJava.testOnly = new ArrayList<String>() {{
             add(symbol);
         }};
     }

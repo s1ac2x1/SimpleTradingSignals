@@ -32,9 +32,9 @@ class Bars {
         }
 
         fun getBarDurationInMinutes(): Int {
-            return when (Context.timeframe) {
-                TimeframeJava.DAY -> Context.workingTime
-                TimeframeJava.WEEK -> Context.workingTime * 5
+            return when (ContextJava.timeframe) {
+                TimeframeJava.DAY -> ContextJava.workingTime
+                TimeframeJava.WEEK -> ContextJava.workingTime * 5
                 TimeframeJava.HOUR -> 60
                 else -> 60
             }

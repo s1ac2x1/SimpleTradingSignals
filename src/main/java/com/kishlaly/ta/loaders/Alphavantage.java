@@ -8,7 +8,7 @@ import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.model.indicators.StochJava;
-import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.DatesJava;
 import com.kishlaly.ta.utils.Quotes;
 import com.squareup.okhttp.OkHttpClient;
@@ -103,7 +103,7 @@ public class Alphavantage {
                     key);
             rawQuotes.forEach((k, v) -> {
                 String day = k;
-                if (Context.timeframe == TimeframeJava.HOUR) {
+                if (ContextJava.timeframe == TimeframeJava.HOUR) {
                     day += ":00";
                 }
                 Double macdValue = parseDouble(v.get("MACD"));
@@ -137,7 +137,7 @@ public class Alphavantage {
                     key);
             rawQuotes.forEach((k, v) -> {
                 String day = k;
-                if (Context.timeframe == TimeframeJava.HOUR) {
+                if (ContextJava.timeframe == TimeframeJava.HOUR) {
                     day += ":00";
                 }
                 Double ema = parseDouble(v.get("EMA"));
@@ -168,7 +168,7 @@ public class Alphavantage {
                     key);
             rawQuotes.forEach((k, v) -> {
                 String day = k;
-                if (Context.timeframe == TimeframeJava.HOUR) {
+                if (ContextJava.timeframe == TimeframeJava.HOUR) {
                     day += ":00";
                 }
                 Double slowD = parseDouble(v.get("SlowD"));
@@ -241,7 +241,7 @@ public class Alphavantage {
     }
 
     private static String getInterval() {
-        switch (Context.timeframe) {
+        switch (ContextJava.timeframe) {
             case HOUR:
                 return "60min";
             case WEEK:

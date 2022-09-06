@@ -7,7 +7,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.ResponseBody;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.ContextJava;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class RapidAPI {
     private static Gson gson = new Gson();
 
     private static String getURL(String symbol) {
-        switch (Context.timeframe) {
+        switch (ContextJava.timeframe) {
             case HOUR:
                 return "https://yh-finance.p.rapidapi.com/stock/v2/get-chart?interval=60m&symbol=" + symbol + "&range=1mo&region=US";
             case DAY:

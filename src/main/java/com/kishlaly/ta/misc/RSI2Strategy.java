@@ -3,7 +3,7 @@ package com.kishlaly.ta.misc;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.BarsJava;
-import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.ContextJava;
 import org.ta4j.core.*;
 import org.ta4j.core.analysis.criteria.pnl.GrossReturnCriterion;
 import org.ta4j.core.indicators.RSIIndicator;
@@ -49,8 +49,8 @@ public class RSI2Strategy {
     }
 
     public static void main(String[] args) {
-        Context.aggregationTimeframe = TimeframeJava.DAY;
-        Context.timeframe = TimeframeJava.DAY;
+        ContextJava.aggregationTimeframe = TimeframeJava.DAY;
+        ContextJava.timeframe = TimeframeJava.DAY;
         String symbol = "XOM";
         List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
         BarSeries series = BarsJava.build(quotes);

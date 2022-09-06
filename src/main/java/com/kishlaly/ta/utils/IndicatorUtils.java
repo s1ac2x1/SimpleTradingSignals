@@ -27,7 +27,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 public class IndicatorUtils {
 
     public static List<EMAJava> buildEMA(String symbol, List<QuoteJava> quotes, int period) {
-        List<EMAJava> cached = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period);
+        List<EMAJava> cached = IndicatorsInMemoryCache.getEMA(symbol, ContextJava.timeframe, period);
         if (!cached.isEmpty()) {
             return cached;
         } else {
@@ -41,13 +41,13 @@ public class IndicatorUtils {
             result = result.stream().filter(EMAJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(EMAJava::getTimestamp));
-            IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe, period, result);
+            IndicatorsInMemoryCache.putEMA(symbol, ContextJava.timeframe, period, result);
             return result;
         }
     }
 
     public static List<MACDJava> buildMACDHistogram(String symbol, List<QuoteJava> quotes) {
-        List<MACDJava> cached = IndicatorsInMemoryCache.getMACD(symbol, Context.timeframe);
+        List<MACDJava> cached = IndicatorsInMemoryCache.getMACD(symbol, ContextJava.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
@@ -72,13 +72,13 @@ public class IndicatorUtils {
             result = result.stream().filter(MACDJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(MACDJava::getTimestamp));
-            IndicatorsInMemoryCache.putMACD(symbol, Context.timeframe, result);
+            IndicatorsInMemoryCache.putMACD(symbol, ContextJava.timeframe, result);
             return result;
         }
     }
 
     public static List<KeltnerJava> buildKeltnerChannels(String symbol, List<QuoteJava> quotes) {
-        List<KeltnerJava> cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe);
+        List<KeltnerJava> cached = IndicatorsInMemoryCache.getKeltner(symbol, ContextJava.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
@@ -93,13 +93,13 @@ public class IndicatorUtils {
             result = result.stream().filter(KeltnerJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(KeltnerJava::getTimestamp));
-            IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe, result);
+            IndicatorsInMemoryCache.putKeltner(symbol, ContextJava.timeframe, result);
             return result;
         }
     }
 
     public static List<ATRJava> buildATR(String symbol, List<QuoteJava> quotes, int barCount) {
-        List<ATRJava> cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe, barCount);
+        List<ATRJava> cached = IndicatorsInMemoryCache.getATR(symbol, ContextJava.timeframe, barCount);
         if (!cached.isEmpty()) {
             return cached;
         } else {
@@ -112,13 +112,13 @@ public class IndicatorUtils {
             result = result.stream().filter(ATRJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(ATRJava::getTimestamp));
-            IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result);
+            IndicatorsInMemoryCache.putATR(symbol, ContextJava.timeframe, barCount, result);
             return result;
         }
     }
 
     public static List<StochJava> buildStochastic(String symbol, List<QuoteJava> quotes) {
-        List<StochJava> cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe);
+        List<StochJava> cached = IndicatorsInMemoryCache.getStoch(symbol, ContextJava.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
@@ -135,13 +135,13 @@ public class IndicatorUtils {
             result = result.stream().filter(StochJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(StochJava::getTimestamp));
-            IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result);
+            IndicatorsInMemoryCache.putStoch(symbol, ContextJava.timeframe, result);
             return result;
         }
     }
 
     public static List<BollingerJava> buildBollingerBands(String symbol, List<QuoteJava> quotes) {
-        List<BollingerJava> cached = IndicatorsInMemoryCache.getBollinger(symbol, Context.timeframe);
+        List<BollingerJava> cached = IndicatorsInMemoryCache.getBollinger(symbol, ContextJava.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
@@ -163,14 +163,14 @@ public class IndicatorUtils {
             }
             Collections.sort(result, Comparator.comparing(BollingerJava::getTimestamp));
             result = trimToDate(result);
-            IndicatorsInMemoryCache.putBollinger(symbol, Context.timeframe, result);
+            IndicatorsInMemoryCache.putBollinger(symbol, ContextJava.timeframe, result);
             return result;
         }
     }
 
     //TODO something is wrong here...
     public static List<ElderForceIndexJava> buildEFI(String symbol, List<QuoteJava> quotes) {
-        List<ElderForceIndexJava> cached = IndicatorsInMemoryCache.getEFI(symbol, Context.timeframe);
+        List<ElderForceIndexJava> cached = IndicatorsInMemoryCache.getEFI(symbol, ContextJava.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
@@ -198,7 +198,7 @@ public class IndicatorUtils {
 //            }
             result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(ElderForceIndexJava::getTimestamp));
-            IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result);
+            IndicatorsInMemoryCache.putEFI(symbol, ContextJava.timeframe, result);
             return result;
         }
     }
@@ -231,8 +231,8 @@ public class IndicatorUtils {
     }
 
     private static <T extends AbstractModelJava> List<T> trimToDate(List<T> src) {
-        if (Context.trimToDate != null) {
-            ZonedDateTime filterAfter = shortDateToZoned(Context.trimToDate);
+        if (ContextJava.trimToDate != null) {
+            ZonedDateTime filterAfter = shortDateToZoned(ContextJava.trimToDate);
             return src.stream().filter(ind -> ind.getTimestamp() <= filterAfter.toEpochSecond()).collect(Collectors.toList());
         } else {
             return src;

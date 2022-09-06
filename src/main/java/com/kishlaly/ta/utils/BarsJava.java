@@ -37,11 +37,11 @@ public class BarsJava {
     }
 
     public static int getBarDurationInMinutes() {
-        switch (Context.timeframe) {
+        switch (ContextJava.timeframe) {
             case DAY:
-                return Context.workingTime;
+                return ContextJava.workingTime;
             case WEEK:
-                return Context.workingTime * 5;
+                return ContextJava.workingTime * 5;
             case HOUR:
             default:
                 return 60;

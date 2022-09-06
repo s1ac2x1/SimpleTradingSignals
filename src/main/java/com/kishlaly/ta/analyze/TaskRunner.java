@@ -28,7 +28,7 @@ import static com.kishlaly.ta.cache.CacheBuilder.getSLStrategies;
 import static com.kishlaly.ta.cache.CacheBuilder.getTPStrategies;
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.model.indicators.IndicatorJava.MACD;
-import static com.kishlaly.ta.utils.Context.TRIM_DATA;
+import static com.kishlaly.ta.utils.ContextJava.TRIM_DATA;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 /**
@@ -43,8 +43,8 @@ public class TaskRunner {
         Arrays.stream(timeframes).forEach(screens -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
-            Context.logTimeframe1 = screens[0];
-            Context.logTimeframe2 = screens[1];
+            ContextJava.logTimeframe1 = screens[0];
+            ContextJava.logTimeframe2 = screens[1];
             twoTimeframeFunction(task, blocksGroups);
             System.out.println("\n");
             saveLog(task);
@@ -59,15 +59,15 @@ public class TaskRunner {
 
     public static void runBest(TimeframeJava[][] timeframes) {
         try {
-            FileUtils.deleteDirectory(new File(Context.outputFolder + "/debug"));
-            FileUtils.deleteDirectory(new File(Context.outputFolder + "/signal"));
+            FileUtils.deleteDirectory(new File(ContextJava.outputFolder + "/debug"));
+            FileUtils.deleteDirectory(new File(ContextJava.outputFolder + "/signal"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         String tf1 = timeframes[0][0].name().toLowerCase();
         String tf2 = timeframes[0][1].name().toLowerCase();
         StringBuilder content = new StringBuilder();
-        Arrays.stream(Context.source).forEach(source -> {
+        Arrays.stream(ContextJava.source).forEach(source -> {
             try {
                 String best = new String(Files.readAllBytes(Paths.get("best_" + source.name().toLowerCase() + "_" + tf1 + "_" + tf2 + ".txt")));
                 content.append(best).append(System.lineSeparator());
@@ -80,7 +80,7 @@ public class TaskRunner {
             String[] split = line.split("=");
             String symbol = split[0];
             TaskType task = TaskType.valueOf(split[1].toUpperCase());
-            Context.symbols = new HashSet<String>() {{
+            ContextJava.symbols = new HashSet<String>() {{
                 add(symbol);
             }};
             //run(timeframes, new TaskType[]{task}, false); TODO
@@ -99,13 +99,13 @@ public class TaskRunner {
             List<HistoricalTesting> result = new ArrayList<>();
             slStrategies.forEach(stopLossStrategy -> {
                 tpStrategies.forEach(takeProfitStrategy -> {
-                    Context.stopLossStrategy = stopLossStrategy;
-                    Context.takeProfitStrategy = takeProfitStrategy;
+                    ContextJava.stopLossStrategy = stopLossStrategy;
+                    ContextJava.takeProfitStrategy = takeProfitStrategy;
                     TimeframeJava[][] timeframes = {
                             {signal.timeframe1, signal.timeframe2},
                     };
                     System.out.println("Testing symbol " + symbolNumber.get() + "/" + totalSymbols + " with TP/SL " + testingStrategySet.get() + "/" + totalSLTPStrategies);
-                    Context.symbols = new HashSet<String>() {{
+                    ContextJava.symbols = new HashSet<String>() {{
                         add(signal.symbol);
                     }};
                     result.addAll(test(timeframes, signal.task, blocksGroup));
@@ -122,8 +122,8 @@ public class TaskRunner {
         });
         if (!suggestions.isEmpty()) {
             try {
-                String prefix = "[" + Context.logTimeframe1.name() + "][" + Context.logTimeframe2.name() + "]";
-                String fileName = Context.outputFolder + "/signal/optimal.txt";
+                String prefix = "[" + ContextJava.logTimeframe1.name() + "][" + ContextJava.logTimeframe2.name() + "]";
+                String fileName = ContextJava.outputFolder + "/signal/optimal.txt";
                 Files.write(Paths.get(fileName), suggestions.stream().collect(Collectors.joining(System.lineSeparator() + System.lineSeparator())).getBytes());
             } catch (IOException e) {
                 System.out.println(e.getMessage());
@@ -132,10 +132,10 @@ public class TaskRunner {
     }
 
     private static void twoTimeframeFunction(TaskType task, BlocksGroup... blocksGroups) {
-        Context.timeframe = task.getTimeframeIndicators(1).timeframe;
+        ContextJava.timeframe = task.getTimeframeIndicators(1).timeframe;
         AtomicInteger processingSymbol = new AtomicInteger(1);
-        int totalSymbols = Context.symbols.size();
-        Context.symbols.forEach(symbol -> {
+        int totalSymbols = ContextJava.symbols.size();
+        ContextJava.symbols.forEach(symbol -> {
             SymbolDataJava screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
             SymbolDataJava screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
 
@@ -154,7 +154,7 @@ public class TaskRunner {
                 IndicatorUtils.trim(screen2);
             }
 
-            if (Context.lowPricesOnly && screen2.quotes.get(screen2.quotes.size() - 1).getClose() > Context.lowPriceLimit) {
+            if (ContextJava.lowPricesOnly && screen2.quotes.get(screen2.quotes.size() - 1).getClose() > ContextJava.lowPriceLimit) {
                 screen1.clear();
                 screen2.clear();
                 System.out.println("Skipped high price stock");
@@ -200,11 +200,11 @@ public class TaskRunner {
                     .forEach(file -> {
                         try {
                             String symbol = file.getFileName().toString().replace("_quotes.txt", "");
-                            if (!Context.testOnly.isEmpty() && !Context.testOnly.contains(symbol)) {
+                            if (!ContextJava.testOnly.isEmpty() && !ContextJava.testOnly.contains(symbol)) {
                                 return;
                             }
                             SymbolDataJava symbolData = new SymbolDataJava();
-                            symbolData.timeframe = Context.timeframe;
+                            symbolData.timeframe = ContextJava.timeframe;
                             List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
                             symbolData.quotes = quotes;
                             Arrays.stream(indicators).forEach(indicator -> symbolData.indicators.put(MACD, calculateIndicatorFromCachedQuotes(symbol, MACD)));
@@ -231,16 +231,16 @@ public class TaskRunner {
     }
 
     private static void saveLog(TaskType task) {
-        File d = new File(Context.outputFolder + "/debug");
+        File d = new File(ContextJava.outputFolder + "/debug");
         if (!d.exists()) {
             d.mkdir();
         }
-        File s = new File(Context.outputFolder + "/signal");
+        File s = new File(ContextJava.outputFolder + "/signal");
         if (!s.exists()) {
             s.mkdir();
         }
-        String prefix = "[" + Context.logTimeframe1.name() + "][" + Context.logTimeframe2.name() + "][" + Context.source[0].name() + "]";
-        String customDebugFolder = Context.outputFolder + "/debug/" + prefix + task.name().toLowerCase();
+        String prefix = "[" + ContextJava.logTimeframe1.name() + "][" + ContextJava.logTimeframe2.name() + "][" + ContextJava.source[0].name() + "]";
+        String customDebugFolder = ContextJava.outputFolder + "/debug/" + prefix + task.name().toLowerCase();
         File d2 = new File(customDebugFolder);
         if (!d2.exists()) {
             d2.mkdir();
@@ -248,7 +248,7 @@ public class TaskRunner {
         //Log.saveSignal(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".txt");
         //Log.saveDebug(customDebugFolder + "/all.txt");
         //Log.saveCodes(customDebugFolder);
-        Log.saveSummary(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".html");
+        Log.saveSummary(ContextJava.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".html");
         Log.clear();
     }
 

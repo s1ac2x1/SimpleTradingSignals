@@ -12,7 +12,7 @@ import com.kishlaly.ta.analyze.testing.HistoricalTesting;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.Context;
+import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.FilesUtil;
 import com.kishlaly.ta.utils.Numbers;
 
@@ -32,21 +32,21 @@ import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheReader.*;
-import static com.kishlaly.ta.utils.Context.*;
+import static com.kishlaly.ta.utils.ContextJava.*;
 import static com.kishlaly.ta.utils.FilesUtil.writeToFile;
 
 public class CacheBuilder {
 
     public static void buildCache(TimeframeJava[][] timeframes, boolean reloadMissed) {
-        String folder = Context.outputFolder + fileSeparator + "cache";
+        String folder = ContextJava.outputFolder + fileSeparator + "cache";
         File directory = new File(folder);
         if (!directory.exists()) {
             directory.mkdir();
         }
-        AtomicReference<Set<String>> symbols = new AtomicReference<>(Context.symbols);
+        AtomicReference<Set<String>> symbols = new AtomicReference<>(ContextJava.symbols);
         Arrays.stream(timeframes).forEach(screens -> {
             // only one timeframe is loaded Context.aggregationTimeframe
-            Context.timeframe = aggregationTimeframe;
+            ContextJava.timeframe = aggregationTimeframe;
             if (reloadMissed) {
                 symbols.set(getMissedSymbols());
             }
@@ -58,7 +58,7 @@ public class CacheBuilder {
         if (reloadMissed) {
             Arrays.stream(timeframes).forEach(screens -> {
                 Arrays.stream(screens).forEach(screen -> {
-                    Context.timeframe = screen;
+                    ContextJava.timeframe = screen;
                     File file = new File(getFolder() + fileSeparator + "missed.txt");
                     if (file.exists()) {
                         file.delete();
@@ -91,7 +91,7 @@ public class CacheBuilder {
         if (request != null) {
             List<String> symbols = request.getSymbols();
             TimeframeJava timeframe = request.getTimeframe();
-            Context.timeframe = timeframe;
+            ContextJava.timeframe = timeframe;
             if (request.getType() == CacheType.QUOTE) {
                 System.out.println("Loading " + timeframe.name() + " quotes...");
                 symbols.forEach(symbol -> {
@@ -132,8 +132,8 @@ public class CacheBuilder {
                 {TimeframeJava.WEEK, TimeframeJava.DAY},
         };
         List<HistoricalTesting> result = new ArrayList<>();
-        Context.stopLossStrategy = new StopLossFixedPrice(0.27);
-        Context.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
+        ContextJava.stopLossStrategy = new StopLossFixedPrice(0.27);
+        ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
 
         // TODO Here we need to test a Cartesian set of blocks
         //result.addAll(test(timeframes, task, BlocksGroup));
@@ -153,7 +153,7 @@ public class CacheBuilder {
         winners.entrySet().stream().forEach(entry -> {
             builder.append(entry.getKey()).append("=").append(entry.getValue().name()).append(System.lineSeparator());
         });
-        writeToFile("best_" + Context.source[0].name().toLowerCase() + "_" + timeframes[0][0].name().toLowerCase() + "_" + timeframes[0][1].name().toLowerCase() + ".txt", builder.toString());
+        writeToFile("best_" + ContextJava.source[0].name().toLowerCase() + "_" + timeframes[0][0].name().toLowerCase() + "_" + timeframes[0][1].name().toLowerCase() + ".txt", builder.toString());
     }
 
     public static void saveTable(List<HistoricalTesting> result) {
@@ -218,16 +218,16 @@ public class CacheBuilder {
         if (stopLossStrategy == null || takeProfitStrategy == null) {
             getSLStrategies().forEach(sl -> {
                 getTPStrategies().forEach(tp -> {
-                    Context.stopLossStrategy = sl;
-                    Context.takeProfitStrategy = tp;
+                    ContextJava.stopLossStrategy = sl;
+                    ContextJava.takeProfitStrategy = tp;
                     System.out.println(current.get() + "/" + total + " " + sl + " / " + tp);
                     blocksGroups.forEach(group -> result.addAll(test(timeframes, task, group)));
                     current.getAndIncrement();
                 });
             });
         } else {
-            Context.stopLossStrategy = stopLossStrategy;
-            Context.takeProfitStrategy = takeProfitStrategy;
+            ContextJava.stopLossStrategy = stopLossStrategy;
+            ContextJava.takeProfitStrategy = takeProfitStrategy;
             blocksGroups.forEach(group -> result.addAll(test(timeframes, task, group)));
         }
         saveTable(result);
@@ -332,7 +332,7 @@ public class CacheBuilder {
 
     private static void saveIndicator(String symbol, IndicatorJava indicator, List values) {
         try {
-            String folder = Context.outputFolder + "/cache/" + Context.timeframe.name().toLowerCase();
+            String folder = ContextJava.outputFolder + "/cache/" + ContextJava.timeframe.name().toLowerCase();
             File directory = new File(folder);
             if (!directory.exists()) {
                 directory.mkdir();
@@ -362,18 +362,18 @@ public class CacheBuilder {
     private static void cacheQuotes(Set<String> symbols) {
         List<String> symbolsToCache = removeCachedQuotesSymbols(symbols);
         if (symbolsToCache.isEmpty()) {
-            System.out.println(Context.timeframe.name() + " quotes already cached");
+            System.out.println(ContextJava.timeframe.name() + " quotes already cached");
             return;
         }
         Lists.partition(symbolsToCache, (int) parallelRequests)
                 .forEach(chunk -> {
                     Optional<LoadRequest> existingRequest = requests.stream().filter(request -> request.getType() == CacheType.QUOTE
-                            && request.getTimeframe() == Context.timeframe
+                            && request.getTimeframe() == ContextJava.timeframe
                             && request.getSymbols().containsAll(chunk)).findFirst();
                     if (!existingRequest.isPresent()) {
-                        requests.offer(new LoadRequest(CacheType.QUOTE, Context.timeframe, chunk));
+                        requests.offer(new LoadRequest(CacheType.QUOTE, ContextJava.timeframe, chunk));
                     } else {
-                        System.out.println("Already in the queue: " + chunk.size() + " " + Context.timeframe.name() + " QUOTE");
+                        System.out.println("Already in the queue: " + chunk.size() + " " + ContextJava.timeframe.name() + " QUOTE");
                     }
                 });
     }
@@ -382,21 +382,21 @@ public class CacheBuilder {
         Arrays.stream(indicators).forEach(indicator -> {
             List<String> symbolsToCache = removeCachedIndicatorSymbols(symbols, indicator);
             if (symbolsToCache.isEmpty()) {
-                System.out.println(Context.timeframe + " " + indicator.name() + " already cached");
+                System.out.println(ContextJava.timeframe + " " + indicator.name() + " already cached");
                 return;
             }
             Lists.partition(symbolsToCache, (int) parallelRequests)
                     .forEach(chunk -> {
                         Optional<LoadRequest> existingRequest = requests.stream().filter(request -> request.getType() == CacheType.INDICATOR
-                                && request.getTimeframe() == Context.timeframe
+                                && request.getTimeframe() == ContextJava.timeframe
                                 && request.getIndicator() == indicator
                                 && request.getSymbols().containsAll(chunk)).findFirst();
                         if (!existingRequest.isPresent()) {
-                            LoadRequest loadRequest = new LoadRequest(CacheType.INDICATOR, Context.timeframe, chunk);
+                            LoadRequest loadRequest = new LoadRequest(CacheType.INDICATOR, ContextJava.timeframe, chunk);
                             loadRequest.setIndicator(indicator);
                             requests.offer(loadRequest);
                         } else {
-                            System.out.println("Already in the queue: " + chunk.size() + " " + Context.timeframe.name() + " " + indicator.name());
+                            System.out.println("Already in the queue: " + chunk.size() + " " + ContextJava.timeframe.name() + " " + indicator.name());
                         }
                     });
         });
@@ -404,7 +404,7 @@ public class CacheBuilder {
 
     private static void saveQuote(String symbol, List<QuoteJava> quotes) {
         try {
-            String folder = Context.outputFolder + "/cache/" + Context.timeframe.name().toLowerCase();
+            String folder = ContextJava.outputFolder + "/cache/" + ContextJava.timeframe.name().toLowerCase();
             File directory = new File(folder);
             if (!directory.exists()) {
                 directory.mkdir();
