@@ -1,4 +1,22 @@
 package com.kishlaly.ta.model
 
-class Quote {
+import kotlin.Double.Companion.NaN
+
+class Quote(
+        timestamp: Long,
+        val high: Double,
+        val open: Double,
+        val close: Double,
+        val low: Double,
+        val volume: Double) : AbstractModel(timestamp), java.io.Serializable {
+
+
+    fun valuesPesent(): Boolean {
+        return open != NaN
+                && close != NaN
+                && low != NaN
+                && high != NaN
+                && volume != NaN
+    }
+
 }
