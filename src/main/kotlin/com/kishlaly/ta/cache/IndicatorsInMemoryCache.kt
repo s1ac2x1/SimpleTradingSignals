@@ -49,11 +49,38 @@ class IndicatorsInMemoryCache {
         }
 
         fun getEMA(symbol: String, timeframe: Timeframe, period: Int): List<EMA> {
-            val cached = ema.getOrDefault(EMAKey(symbol, timeframe, period), emptyList())
-            return copy(cached)
+            return get(ema, EMAKey(symbol, timeframe, period))
         }
 
-        fun <T : AbstractModel> copy(source: List<out T>): List<T> {
+        fun getMACD(symbol: String, timeframe: Timeframe): List<MACD> {
+            return get(macd, MACDKey(symbol, timeframe))
+        }
+
+        fun getKeltner(symbol: String, timeframe: Timeframe): List<Keltner> {
+            return get(keltner, KeltnerKey(symbol, timeframe))
+        }
+
+        fun getATR(symbol: String, timeframe: Timeframe, period: Int): List<ATR> {
+            return get(atr, ATRKey(symbol, timeframe, period))
+        }
+
+        fun getStoch(symbol: String, timeframe: Timeframe): List<Stochastic> {
+            return get(stochastic, StochKey(symbol, timeframe))
+        }
+
+        fun getBollinger(symbol: String, timeframe: Timeframe): List<Bollinger> {
+            return get(bollinger, BollingerKey(symbol, timeframe))
+        }
+
+        fun getEFI(symbol: String, timeframe: Timeframe): List<ElderForceIndex> {
+            return get(efi, EFIKey(symbol, timeframe))
+        }
+
+        private fun <T : AbstractModel, K : BaseKey> get(map: ConcurrentHashMap<K, List<T>>, key: K): List<T> {
+            return copy(map.getOrDefault(key, emptyList()))
+        }
+
+        private fun <T : AbstractModel> copy(source: List<T>): List<T> {
             val copy = gson.fromJson<List<T>>(gson.toJson(source), object : TypeToken<List<T>>() {}.type)
             return copy.sortedBy { it.timestamp }
         }
