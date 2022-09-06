@@ -2,7 +2,7 @@ package com.kishlaly.ta.misc;
 
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.TimeframeJava;
-import com.kishlaly.ta.utils.Bars;
+import com.kishlaly.ta.utils.BarsJava;
 import com.kishlaly.ta.utils.Context;
 import org.ta4j.core.*;
 import org.ta4j.core.analysis.criteria.pnl.GrossReturnCriterion;
@@ -43,7 +43,7 @@ public class CCICorrectionStrategy {
         Context.timeframe = TimeframeJava.DAY;
         String symbol = "TER";
         List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
-        BarSeries barSeries = Bars.build(quotes);
+        BarSeries barSeries = BarsJava.build(quotes);
 
         Strategy strategy = buildStrategy(barSeries);
 

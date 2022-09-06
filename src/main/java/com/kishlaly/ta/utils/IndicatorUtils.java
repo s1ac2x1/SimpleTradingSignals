@@ -31,7 +31,7 @@ public class IndicatorUtils {
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            BarSeries barSeries = Bars.build(quotes);
+            BarSeries barSeries = BarsJava.build(quotes);
             ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
             EMAIndicator ema = new EMAIndicator(closePriceIndicator, period);
             List<EMAJava> result = new ArrayList<>();
@@ -52,7 +52,7 @@ public class IndicatorUtils {
             return cached;
         } else {
             List<MACDJava> result = new ArrayList<>();
-            BarSeries barSeries = Bars.build(quotes);
+            BarSeries barSeries = BarsJava.build(quotes);
 
             ClosePriceIndicator closePrice = new ClosePriceIndicator(barSeries);
             MACDIndicator macd = new MACDIndicator(closePrice);
@@ -82,7 +82,7 @@ public class IndicatorUtils {
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            BarSeries barSeries = Bars.build(quotes);
+            BarSeries barSeries = BarsJava.build(quotes);
             KeltnerChannelMiddleIndicator middle = new KeltnerChannelMiddleIndicator(barSeries, 20);
             KeltnerChannelLowerIndicator low = new KeltnerChannelLowerIndicator(middle, 2, 10);
             KeltnerChannelUpperIndicator top = new KeltnerChannelUpperIndicator(middle, 2, 10);
@@ -104,7 +104,7 @@ public class IndicatorUtils {
             return cached;
         } else {
             List<ATRJava> result = new ArrayList<>();
-            BarSeries barSeries = Bars.build(quotes);
+            BarSeries barSeries = BarsJava.build(quotes);
             ATRIndicator atrIndicator = new ATRIndicator(barSeries, barCount);
             for (int i = 0; i < quotes.size(); i++) {
                 result.add(new ATRJava(quotes.get(i).getTimestamp(), atrIndicator.getValue(i).doubleValue()));
@@ -123,7 +123,7 @@ public class IndicatorUtils {
             return cached;
         } else {
             List<StochJava> result = new ArrayList<>();
-            BarSeries barSeries = Bars.build(quotes);
+            BarSeries barSeries = BarsJava.build(quotes);
             StochasticOscillatorKIndicator stochK = new StochasticOscillatorKIndicator(barSeries, 14);
             StochasticOscillatorDIndicator stochD = new StochasticOscillatorDIndicator(stochK);
             for (int i = 0; i < quotes.size(); i++) {
@@ -146,7 +146,7 @@ public class IndicatorUtils {
             return cached;
         } else {
             List<BollingerJava> result = new ArrayList<>();
-            BarSeries barSeries = Bars.build(quotes);
+            BarSeries barSeries = BarsJava.build(quotes);
             ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
             SMAIndicator sma20 = new SMAIndicator(closePriceIndicator, 20);
             StandardDeviationIndicator standartDeviation = new StandardDeviationIndicator(closePriceIndicator, 20);
@@ -175,7 +175,7 @@ public class IndicatorUtils {
             return cached;
         } else {
             List<ElderForceIndexJava> result = new ArrayList<>();
-            BarSeries quoteSeries = Bars.build(quotes);
+            BarSeries quoteSeries = BarsJava.build(quotes);
             BarSeries efiSeries = new BaseBarSeries();
             for (int i = 0; i < quoteSeries.getBarCount() - 1; i++) {
                 QuoteJava todayQuote = quotes.get(i + 1);

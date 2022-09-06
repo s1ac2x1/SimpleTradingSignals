@@ -14,7 +14,7 @@ import static com.kishlaly.ta.utils.DatesJava.getTimeInExchangeZone;
  * @author Vladimir Kishlaly
  * @since 26.11.2021
  */
-public class Bars {
+public class BarsJava {
 
     public static BarSeries build(List<QuoteJava> quotes) {
         BarSeries initialBarSeries = new BaseBarSeries();
