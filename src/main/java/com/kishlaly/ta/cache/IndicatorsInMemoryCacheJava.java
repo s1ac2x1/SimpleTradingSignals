@@ -16,7 +16,7 @@ public class IndicatorsInMemoryCacheJava {
 
     private static ConcurrentHashMap<EMAKeyJava, List<EMAJava>> ema = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<MACDKey, List<MACDJava>> macd = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<KeltnerKEY, List<KeltnerJava>> keltner = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<KeltnerKeyJava, List<KeltnerJava>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKeyJava, List<ATRJava>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<StochJava>> stoch = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<BollingerKeyJava, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
@@ -31,7 +31,7 @@ public class IndicatorsInMemoryCacheJava {
     }
 
     public static void putKeltner(String symbol, TimeframeJava timeframe, List<KeltnerJava> data) {
-        keltner.put(new KeltnerKEY(symbol, timeframe), data);
+        keltner.put(new KeltnerKeyJava(symbol, timeframe), data);
     }
 
     public static void putATR(String symbol, TimeframeJava timeframe, int period, List<ATRJava> data) {
@@ -77,7 +77,7 @@ public class IndicatorsInMemoryCacheJava {
 
 
     public static List<KeltnerJava> getKeltner(String symbol, TimeframeJava timeframe) {
-        List<KeltnerJava> cached = keltner.getOrDefault(new KeltnerKEY(symbol, timeframe), Collections.emptyList());
+        List<KeltnerJava> cached = keltner.getOrDefault(new KeltnerKeyJava(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
             List<KeltnerJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<KeltnerJava>>() {
