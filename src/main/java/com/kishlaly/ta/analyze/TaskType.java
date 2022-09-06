@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.Screens;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.TimeframeIndicators;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
 
 import static com.kishlaly.ta.model.Timeframe.DAY;
 import static com.kishlaly.ta.model.Timeframe.WEEK;
-import static com.kishlaly.ta.model.indicators.Indicator.*;
+import static com.kishlaly.ta.model.indicators.IndicatorJava.*;
 
 public enum TaskType {
     MACD_BULLISH_DIVERGENCE(
@@ -24,9 +24,9 @@ public enum TaskType {
                 put(1, WEEK);
                 put(2, DAY);
             }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{MACD, KELTNER});
+            new HashMap<Integer, IndicatorJava[]>() {{
+                put(1, new IndicatorJava[]{EMA26, MACD});
+                put(2, new IndicatorJava[]{MACD, KELTNER});
             }},
             AbstractTask::check
     ),
@@ -35,9 +35,9 @@ public enum TaskType {
                 put(1, WEEK);
                 put(2, DAY);
             }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER, BOLLINGER, EFI});
+            new HashMap<Integer, IndicatorJava[]>() {{
+                put(1, new IndicatorJava[]{EMA26, MACD});
+                put(2, new IndicatorJava[]{EMA13, MACD, STOCH, KELTNER, BOLLINGER, EFI});
             }},
             AbstractTask::check
     ),
@@ -46,9 +46,9 @@ public enum TaskType {
                 put(1, WEEK);
                 put(2, DAY);
             }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER, BOLLINGER, EFI});
+            new HashMap<Integer, IndicatorJava[]>() {{
+                put(1, new IndicatorJava[]{EMA26, MACD});
+                put(2, new IndicatorJava[]{EMA13, MACD, STOCH, KELTNER, BOLLINGER, EFI});
             }},
             AbstractTask::check
     ),
@@ -57,15 +57,15 @@ public enum TaskType {
                 put(1, WEEK);
                 put(2, DAY);
             }},
-            new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
-                put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER});
+            new HashMap<Integer, IndicatorJava[]>() {{
+                put(1, new IndicatorJava[]{EMA26, MACD});
+                put(2, new IndicatorJava[]{EMA13, MACD, STOCH, KELTNER});
             }},
             AbstractTask::check
     );
 
     TaskType(final Map<Integer, Timeframe> timeframes,
-             final Map<Integer, Indicator[]> indicators,
+             final Map<Integer, IndicatorJava[]> indicators,
              BiFunction<Screens, List<TaskBlock>, BlockResult> function) {
         this.timeframes = timeframes;
         this.indicators = indicators;
@@ -73,7 +73,7 @@ public enum TaskType {
     }
 
     private Map<Integer, Timeframe> timeframes;
-    private Map<Integer, Indicator[]> indicators;
+    private Map<Integer, IndicatorJava[]> indicators;
     private BiFunction<Screens, List<TaskBlock>, BlockResult> function;
     private TimeframeIndicators timeframeIndicators;
     private List<TaskBlock> blocks = new ArrayList<>();
@@ -90,7 +90,7 @@ public enum TaskType {
         return timeframes.get(screen);
     }
 
-    public Indicator[] getIndicatorsForScreen(int screen) {
+    public IndicatorJava[] getIndicatorsForScreen(int screen) {
         return indicators.get(screen);
     }
 
@@ -98,7 +98,7 @@ public enum TaskType {
         timeframes.put(screen, timeframe);
     }
 
-    public void updateIndicatorsForScreen(int screen, Indicator[] indicators) {
+    public void updateIndicatorsForScreen(int screen, IndicatorJava[] indicators) {
         this.indicators.put(screen, indicators);
     }
 

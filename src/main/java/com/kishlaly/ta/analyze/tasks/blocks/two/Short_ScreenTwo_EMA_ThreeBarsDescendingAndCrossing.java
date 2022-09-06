@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
 
@@ -28,7 +28,7 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
         boolean descendingBarLow = quote3.getLow() > quote2.getLow() && quote2.getLow() < quote1.getLow();
         boolean descendingBarClose = quote3.getClose() > quote2.getClose() && quote2.getClose() > quote1.getClose();
 
-        List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(Indicator.EMA13);
+        List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
 
         if (!descendingBarLow) {
             Log.recordCode(BlockResultCode.QUOTE_LOW_NOT_LOWING_SCREEN_2, screen);

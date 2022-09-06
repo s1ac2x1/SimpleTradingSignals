@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.EMAJava;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.model.indicators.Stoch;
 import com.kishlaly.ta.utils.Context;
@@ -101,7 +101,7 @@ public class CacheReader {
         return new HashSet<>(stocksRaw);
     }
 
-    public static List<String> removeCachedIndicatorSymbols(Set<String> src, Indicator indicator) {
+    public static List<String> removeCachedIndicatorSymbols(Set<String> src, IndicatorJava indicator) {
         return src.stream().filter(symbol -> {
             File file = new File(getFolder() + fileSeparator + symbol + "_" + indicator.name().toLowerCase() + ".txt");
             return !file.exists();
@@ -160,7 +160,7 @@ public class CacheReader {
         }
     }
 
-    public static List calculateIndicatorFromCachedQuotes(String symbol, Indicator indicator) {
+    public static List calculateIndicatorFromCachedQuotes(String symbol, IndicatorJava indicator) {
         List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
         switch (indicator) {
             case MACD:
@@ -182,7 +182,7 @@ public class CacheReader {
         }
     }
 
-    public static List loadIndicatorFromDiskCache(String symbol, Indicator indicator) {
+    public static List loadIndicatorFromDiskCache(String symbol, IndicatorJava indicator) {
         try {
             Type type;
             switch (indicator) {

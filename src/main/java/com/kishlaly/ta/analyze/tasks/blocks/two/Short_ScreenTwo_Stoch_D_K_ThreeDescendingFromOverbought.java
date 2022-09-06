@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.Stoch;
 import com.kishlaly.ta.utils.Log;
 
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_OVERBOUGH
 public class Short_ScreenTwo_Stoch_D_K_ThreeDescendingFromOverbought implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<Stoch> screen_2_Stochastic = (List<Stoch>) screen.indicators.get(Indicator.STOCH);
+        List<Stoch> screen_2_Stochastic = (List<Stoch>) screen.indicators.get(IndicatorJava.STOCH);
         Stoch stoch3 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 3);
         Stoch stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
         Stoch stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);

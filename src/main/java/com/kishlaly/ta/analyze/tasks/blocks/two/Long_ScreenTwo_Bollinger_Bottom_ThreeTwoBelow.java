@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.BollingerJava;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
 import com.kishlaly.ta.utils.Quotes;
@@ -21,7 +21,7 @@ public class Long_ScreenTwo_Bollinger_Bottom_ThreeTwoBelow implements ScreenTwoB
     @Override
     public BlockResult check(SymbolData screen) {
         List<QuoteJava> quotes = screen.quotes;
-        List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(Indicator.BOLLINGER);
+        List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(IndicatorJava.BOLLINGER);
         QuoteJava quote_3 = CollectionsTools.getFromEnd(quotes, 3);
         QuoteJava quote_2 = CollectionsTools.getFromEnd(quotes, 2);
         BollingerJava bollinger_3 = CollectionsTools.getFromEnd(screen_2_Bollinger, 3);

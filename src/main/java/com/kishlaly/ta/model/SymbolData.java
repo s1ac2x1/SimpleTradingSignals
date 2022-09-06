@@ -1,6 +1,6 @@
 package com.kishlaly.ta.model;
 
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ public class SymbolData {
     public String symbol;
     public Timeframe timeframe;
     public List<QuoteJava> quotes;
-    public Map<Indicator, List<? extends AbstractModelJava>> indicators = new HashMap<>();
+    public Map<IndicatorJava, List<? extends AbstractModelJava>> indicators = new HashMap<>();
 
     public QuoteJava getLastQuote() {
         return quotes.get(quotes.size() - 1);

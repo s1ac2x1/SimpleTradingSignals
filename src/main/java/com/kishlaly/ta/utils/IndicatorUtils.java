@@ -219,7 +219,7 @@ public class IndicatorUtils {
     }
 
     public static void trim(SymbolData screen) {
-        Map<Indicator, List<? extends AbstractModelJava>> trimmedIndicators = new HashMap();
+        Map<IndicatorJava, List<? extends AbstractModelJava>> trimmedIndicators = new HashMap();
         screen.indicators.forEach((indicator, values) -> {
             if (values == null || values.isEmpty()) {
                 trimmedIndicators.put(indicator, new ArrayList());

@@ -11,7 +11,7 @@ import com.kishlaly.ta.loaders.Alphavantage;
 import com.kishlaly.ta.model.HistoricalTesting;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.Timeframe;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.FilesUtil;
 import com.kishlaly.ta.utils.Numbers;
@@ -105,7 +105,7 @@ public class CacheBuilder {
                 });
             }
             if (request.getType() == CacheType.INDICATOR) {
-                Indicator indicator = request.getIndicator();
+                IndicatorJava indicator = request.getIndicator();
                 System.out.println("Loading " + timeframe.name() + " " + indicator.name() + "...");
                 symbols.forEach(symbol -> {
                     Future<?> future = apiExecutor.submit(() -> {
@@ -330,7 +330,7 @@ public class CacheBuilder {
         }};
     }
 
-    private static void saveIndicator(String symbol, Indicator indicator, List values) {
+    private static void saveIndicator(String symbol, IndicatorJava indicator, List values) {
         try {
             String folder = Context.outputFolder + "/cache/" + Context.timeframe.name().toLowerCase();
             File directory = new File(folder);
@@ -344,7 +344,7 @@ public class CacheBuilder {
         }
     }
 
-    private static List loadIndicatorFromProvider(String symbol, Indicator indicator) {
+    private static List loadIndicatorFromProvider(String symbol, IndicatorJava indicator) {
         switch (indicator) {
             case MACD:
                 return Alphavantage.loadMACD(symbol);
@@ -378,7 +378,7 @@ public class CacheBuilder {
                 });
     }
 
-    private static void cacheIndicators(Set<String> symbols, Indicator[] indicators) {
+    private static void cacheIndicators(Set<String> symbols, IndicatorJava[] indicators) {
         Arrays.stream(indicators).forEach(indicator -> {
             List<String> symbolsToCache = removeCachedIndicatorSymbols(symbols, indicator);
             if (symbolsToCache.isEmpty()) {

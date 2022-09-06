@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
 
@@ -23,7 +23,7 @@ public class Long_ScreenTwo_EMA_LastBarTooHigh implements ScreenTwoBlock {
         QuoteJava quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
         QuoteJava quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
         QuoteJava quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
-        List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(Indicator.EMA13);
+        List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
         int screen_2_EMA13Count = screen_2_EMA13.size();
 
         boolean thirdCrossesEMA13 = quote3.getLow() < screen_2_EMA13.get(screen_2_EMA13Count - 3).getValue()

@@ -1,6 +1,6 @@
 package com.kishlaly.ta.cache;
 
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.Timeframe;
 
 import java.util.HashMap;
@@ -13,7 +13,7 @@ public class LoadRequest {
     private List<String> symbols;
     private CacheType cacheType;
     private Map<String, String> config = new HashMap<>();
-    private Indicator indicator;
+    private IndicatorJava indicator;
 
     public LoadRequest(final CacheType cacheType, final Timeframe timeframe, final List<String> symbols) {
         this.timeframe = timeframe;
@@ -53,11 +53,11 @@ public class LoadRequest {
         return config.get(name);
     }
 
-    public Indicator getIndicator() {
+    public IndicatorJava getIndicator() {
         return this.indicator;
     }
 
-    public void setIndicator(final Indicator indicator) {
+    public void setIndicator(final IndicatorJava indicator) {
         this.indicator = indicator;
     }
 }

@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.one;
 
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 public class Long_ScreenOne_MACD_LastAscending implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<MACD> screen_1_MACD = (List<MACD>) screen.indicators.get(Indicator.MACD);
+        List<MACD> screen_1_MACD = (List<MACD>) screen.indicators.get(IndicatorJava.MACD);
         MACD screen_1_lastMACD = CollectionsTools.getFromEnd(screen_1_MACD, 1);
         MACD screen_1_preLastMACD = CollectionsTools.getFromEnd(screen_1_MACD, 2);
 

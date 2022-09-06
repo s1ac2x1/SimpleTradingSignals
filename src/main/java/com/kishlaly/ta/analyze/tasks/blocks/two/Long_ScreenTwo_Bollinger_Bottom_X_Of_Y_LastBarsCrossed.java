@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.BollingerJava;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed implements S
             throw new RuntimeException("BOLLINGER_CROSSED_BOTTOM_BARS not defined");
         }
 
-        List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(Indicator.BOLLINGER);
+        List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(IndicatorJava.BOLLINGER);
 
         int crossed = 0;
         for (int i = screen_2_Bollinger.size() - BOLLINGER_TOTAL_BARS_CHECK; i < screen_2_Bollinger.size(); i++) {

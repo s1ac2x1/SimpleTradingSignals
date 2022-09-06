@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.commons;
 
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class ScreenBasicValidation implements CommonBlock {
             return new BlockResult(null, NO_DATA_QUOTES);
         }
 
-        List<Indicator> missingData = new ArrayList<>();
+        List<IndicatorJava> missingData = new ArrayList<>();
         screen.indicators.forEach((indicator, value) -> {
             if (value.isEmpty() || value.size() < resolveMinBarsCount(screen.timeframe)) {
                 missingData.add(indicator);

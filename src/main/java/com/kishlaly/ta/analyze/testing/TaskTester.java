@@ -10,7 +10,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.*;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.FilesUtil;
 import com.kishlaly.ta.utils.Numbers;
@@ -462,7 +462,7 @@ public class TaskTester {
 
     private static void rewind(SymbolData screen, int i) {
         screen.quotes = screen.quotes.subList(0, screen.quotes.size() - i);
-        Map<Indicator, List<? extends AbstractModelJava>> indicators = new HashMap<>();
+        Map<IndicatorJava, List<? extends AbstractModelJava>> indicators = new HashMap<>();
         screen.indicators.forEach((indicator, data) -> {
             indicators.put(indicator, data.subList(0, data.size() - i));
         });

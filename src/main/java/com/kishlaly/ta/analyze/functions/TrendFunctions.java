@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.functions;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.utils.Context;
 
@@ -61,7 +61,7 @@ public class TrendFunctions {
     // On the weekly chart from the example, the price bar is on the sixth histogram smoothly decreasing, this is dangerous
     public static boolean uptrendCheckOnLastBar(SymbolData symbolData) {
         QuoteJava lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
-        List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(Indicator.EMA26);
+        List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(IndicatorJava.EMA26);
         double lastEMA = ema.get(ema.size() - 1).getValue();
         return lastQuote.getOpen() < lastEMA && lastQuote.getClose() > lastEMA;
     }
@@ -69,7 +69,7 @@ public class TrendFunctions {
     // mirror logic uptrendCheckOnLastBar
     public static boolean downtrendCheckOnLastBar(SymbolData symbolData) {
         QuoteJava lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
-        List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(Indicator.EMA26);
+        List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(IndicatorJava.EMA26);
         double lastEMA = ema.get(ema.size() - 1).getValue();
         return lastQuote.getOpen() > lastEMA && lastQuote.getClose() < lastEMA;
     }
@@ -86,9 +86,9 @@ public class TrendFunctions {
     ) {
         List<QuoteJava> quotes = symbolData.quotes;
         quotes = quotes.subList(quotes.size() - minBarsCount, quotes.size());
-        List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(Indicator.EMA26);
+        List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(IndicatorJava.EMA26);
         ema = ema.subList(ema.size() - minBarsCount, ema.size());
-        List<MACD> macd = (List<MACD>) symbolData.indicators.get(Indicator.MACD);
+        List<MACD> macd = (List<MACD>) symbolData.indicators.get(IndicatorJava.MACD);
         macd = macd.subList(macd.size() - minBarsCount, macd.size());
 
         for (int i = quotes.size() - barsToCheck; i < quotes.size(); i++) {

@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.utils.Log;
 
@@ -17,7 +17,7 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 public class Long_ScreenTwo_MACD_LastAscending implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<MACD> screen_2_MACD = (List<MACD>) screen.indicators.get(Indicator.MACD);
+        List<MACD> screen_2_MACD = (List<MACD>) screen.indicators.get(IndicatorJava.MACD);
         MACD screen_2_lastMACD = screen_2_MACD.get(screen_2_MACD.size() - 1);
         MACD screen_2_preLastMACD = screen_2_MACD.get(screen_2_MACD.size() - 2);
 

@@ -7,7 +7,7 @@ import com.kishlaly.ta.cache.CacheReader;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.*;
-import com.kishlaly.ta.model.indicators.Indicator;
+import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.*;
 import org.apache.commons.io.FileUtils;
 
@@ -26,7 +26,7 @@ import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.getSLStrategies;
 import static com.kishlaly.ta.cache.CacheBuilder.getTPStrategies;
 import static com.kishlaly.ta.cache.CacheReader.*;
-import static com.kishlaly.ta.model.indicators.Indicator.MACD;
+import static com.kishlaly.ta.model.indicators.IndicatorJava.MACD;
 import static com.kishlaly.ta.utils.Context.TRIM_DATA;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
@@ -191,7 +191,7 @@ public class TaskRunner {
         });
     }
 
-    private static void singleTimeframeFunction(Function<SymbolData, Boolean> function, Indicator... indicators) {
+    private static void singleTimeframeFunction(Function<SymbolData, Boolean> function, IndicatorJava... indicators) {
         try (Stream<Path> paths = Files.walk(Paths.get(CacheReader.getFolder()))) {
             paths
                     .filter(Files::isRegularFile)
