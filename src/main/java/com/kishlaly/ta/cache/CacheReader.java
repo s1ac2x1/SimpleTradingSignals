@@ -225,7 +225,7 @@ public class CacheReader {
         }
     }
 
-    public static SymbolData getSymbolData(TimeframeIndicators timeframeIndicators, String symbol) {
+    public static SymbolData getSymbolData(TimeframeIndicatorsJava timeframeIndicators, String symbol) {
         Context.timeframe = timeframeIndicators.timeframe;
         SymbolData screen = new SymbolData();
         screen.symbol = symbol;
