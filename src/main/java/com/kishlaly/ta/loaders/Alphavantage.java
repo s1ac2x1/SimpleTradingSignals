@@ -7,7 +7,7 @@ import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
-import com.kishlaly.ta.model.indicators.Stoch;
+import com.kishlaly.ta.model.indicators.StochJava;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.DatesJava;
 import com.kishlaly.ta.utils.Quotes;
@@ -156,7 +156,7 @@ public class Alphavantage {
 
     // not used as all indicators are being calculated locally
     public static List loadStoch(String symbol) {
-        List<Stoch> result = new ArrayList<>();
+        List<StochJava> result = new ArrayList<>();
         String url = "https://www.alphavantage.co/query?function=STOCH&symbol=" + symbol + "&interval=" + getInterval() + "&fastkperiod=14&slowkperiod=1&slowdperiod=3&apikey=" + KEY;
         try {
             Map<String, Object> map = getResponse(url);
@@ -173,7 +173,7 @@ public class Alphavantage {
                 }
                 Double slowD = parseDouble(v.get("SlowD"));
                 Double slowK = parseDouble(v.get("SlowK"));
-                result.add(new Stoch(DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(), slowD, slowK));
+                result.add(new StochJava(DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(), slowD, slowK));
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -182,7 +182,7 @@ public class Alphavantage {
         if (result.size() < 10) {
             return Collections.emptyList();
         }
-        Collections.sort(result, Comparator.comparing(Stoch::getTimestamp));
+        Collections.sort(result, Comparator.comparing(StochJava::getTimestamp));
         return result;
     }
 

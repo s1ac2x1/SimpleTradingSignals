@@ -7,6 +7,6 @@ class MACD(timestamp: Long,
            val signal: Double,
            val histogram: Double) : AbstractModel(timestamp) {
 
-    fun valuesPresent() = macd != Double.NaN && signal != Double.NaN && histogram != Double.NaN
+    override fun valuesPresent() = macd != Double.NaN && signal != Double.NaN && histogram != Double.NaN
 
 }

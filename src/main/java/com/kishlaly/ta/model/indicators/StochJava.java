@@ -5,11 +5,11 @@ import com.kishlaly.ta.model.AbstractModelJava;
 import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.DatesJava.getTimeInExchangeZone;
 
-public class Stoch extends AbstractModelJava {
+public class StochJava extends AbstractModelJava {
     private Double slowD;
     private Double slowK;
 
-    public Stoch(final Long timestamp, final Double slowD, final Double slowK) {
+    public StochJava(final Long timestamp, final Double slowD, final Double slowK) {
         super(timestamp);
         this.slowD = slowD;
         this.slowK = slowK;

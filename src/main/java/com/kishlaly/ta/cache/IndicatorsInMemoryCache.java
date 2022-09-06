@@ -18,7 +18,7 @@ public class IndicatorsInMemoryCache {
     private static ConcurrentHashMap<MACDKey, List<MACDJava>> macd = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<KeltnerKEY, List<KeltnerJava>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKey, List<ATRJava>> atr = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<StochKey, List<StochJava>> stoch = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<BollingerKey, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<EFIKey, List<ElderForceIndexJava>> efi = new ConcurrentHashMap<>();
 
@@ -38,7 +38,7 @@ public class IndicatorsInMemoryCache {
         atr.put(new ATRKey(symbol, timeframe, period), data);
     }
 
-    public static void putStoch(String symbol, Timeframe timeframe, List<Stoch> data) {
+    public static void putStoch(String symbol, Timeframe timeframe, List<StochJava> data) {
         stoch.put(new StochKey(symbol, timeframe), data);
     }
 
@@ -102,13 +102,13 @@ public class IndicatorsInMemoryCache {
     }
 
 
-    public static List<Stoch> getStoch(String symbol, Timeframe timeframe) {
-        List<Stoch> cached = stoch.getOrDefault(new StochKey(symbol, timeframe), Collections.emptyList());
+    public static List<StochJava> getStoch(String symbol, Timeframe timeframe) {
+        List<StochJava> cached = stoch.getOrDefault(new StochKey(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
-            List<Stoch> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<Stoch>>() {
+            List<StochJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<StochJava>>() {
             }.getType());
-            Collections.sort(copy, Comparator.comparing(Stoch::getTimestamp));
+            Collections.sort(copy, Comparator.comparing(StochJava::getTimestamp));
             return copy;
         }
         return Collections.emptyList();

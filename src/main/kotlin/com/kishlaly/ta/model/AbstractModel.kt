@@ -19,5 +19,6 @@ abstract class AbstractModel {
         this.myDate = Dates.getBarTimeInMyZone(timestamp, exchangeTimezome).toString()
     }
 
+    abstract fun valuesPresent(): Boolean
 
 }

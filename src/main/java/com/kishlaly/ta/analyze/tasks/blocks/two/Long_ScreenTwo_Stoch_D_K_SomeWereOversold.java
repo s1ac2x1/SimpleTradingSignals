@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.model.indicators.Stoch;
+import com.kishlaly.ta.model.indicators.StochJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -20,11 +20,11 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_VALUES_TO
 public class Long_ScreenTwo_Stoch_D_K_SomeWereOversold implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<Stoch> screen_2_Stochastic = (List<Stoch>) screen.indicators.get(IndicatorJava.STOCH);
+        List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);
 
         boolean wasOversoldRecently = false;
         for (int i = screen_2_Stochastic.size() - STOCH_VALUES_TO_CHECK; i < screen_2_Stochastic.size(); i++) {
-            Stoch stoch = screen_2_Stochastic.get(i);
+            StochJava stoch = screen_2_Stochastic.get(i);
             if (stoch.getSlowD() <= STOCH_OVERSOLD || stoch.getSlowK() <= STOCH_OVERSOLD) {
                 wasOversoldRecently = true;
             }

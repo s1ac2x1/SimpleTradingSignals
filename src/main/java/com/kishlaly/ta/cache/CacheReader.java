@@ -7,7 +7,7 @@ import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
-import com.kishlaly.ta.model.indicators.Stoch;
+import com.kishlaly.ta.model.indicators.StochJava;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.IndicatorUtils;
 import com.kishlaly.ta.utils.Quotes;
@@ -196,7 +196,7 @@ public class CacheReader {
                     }.getType();
                     break;
                 case STOCH:
-                    type = new TypeToken<ArrayList<Stoch>>() {
+                    type = new TypeToken<ArrayList<StochJava>>() {
                     }.getType();
                     break;
                 default:
@@ -216,7 +216,7 @@ public class CacheReader {
                     Collections.sort(list, Comparator.comparing(EMAJava::getTimestamp));
                     break;
                 case STOCH:
-                    Collections.sort(list, Comparator.comparing(Stoch::getTimestamp));
+                    Collections.sort(list, Comparator.comparing(StochJava::getTimestamp));
                     break;
             }
             return list;

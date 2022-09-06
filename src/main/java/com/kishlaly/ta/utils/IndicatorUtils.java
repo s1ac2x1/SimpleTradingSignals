@@ -117,24 +117,24 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<Stoch> buildStochastic(String symbol, List<QuoteJava> quotes) {
-        List<Stoch> cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe);
+    public static List<StochJava> buildStochastic(String symbol, List<QuoteJava> quotes) {
+        List<StochJava> cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            List<Stoch> result = new ArrayList<>();
+            List<StochJava> result = new ArrayList<>();
             BarSeries barSeries = Bars.build(quotes);
             StochasticOscillatorKIndicator stochK = new StochasticOscillatorKIndicator(barSeries, 14);
             StochasticOscillatorDIndicator stochD = new StochasticOscillatorDIndicator(stochK);
             for (int i = 0; i < quotes.size(); i++) {
                 try {
-                    result.add(new Stoch(quotes.get(i).getTimestamp(), stochD.getValue(i).doubleValue(), stochK.getValue(i).doubleValue()));
+                    result.add(new StochJava(quotes.get(i).getTimestamp(), stochD.getValue(i).doubleValue(), stochK.getValue(i).doubleValue()));
                 } catch (NumberFormatException e) {
                 }
             }
-            result = result.stream().filter(Stoch::valuesPresent).collect(Collectors.toList());
+            result = result.stream().filter(StochJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
-            Collections.sort(result, Comparator.comparing(Stoch::getTimestamp));
+            Collections.sort(result, Comparator.comparing(StochJava::getTimestamp));
             IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result);
             return result;
         }
