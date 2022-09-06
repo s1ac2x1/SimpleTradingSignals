@@ -6,7 +6,7 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.model.indicators.Stoch;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.IndicatorUtils;
@@ -187,7 +187,7 @@ public class CacheReader {
             Type type;
             switch (indicator) {
                 case MACD:
-                    type = new TypeToken<ArrayList<MACD>>() {
+                    type = new TypeToken<ArrayList<MACDJava>>() {
                     }.getType();
                     break;
                 case EMA13:
@@ -209,7 +209,7 @@ public class CacheReader {
                     type);
             switch (indicator) {
                 case MACD:
-                    Collections.sort(list, Comparator.comparing(MACD::getTimestamp));
+                    Collections.sort(list, Comparator.comparing(MACDJava::getTimestamp));
                     break;
                 case EMA13:
                 case EMA26:

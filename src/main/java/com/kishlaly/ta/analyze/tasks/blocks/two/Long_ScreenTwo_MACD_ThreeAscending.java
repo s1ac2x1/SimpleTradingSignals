@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
 
@@ -19,7 +19,7 @@ public class Long_ScreenTwo_MACD_ThreeAscending implements ScreenTwoBlock {
 
     @Override
     public BlockResult check(SymbolData screen) {
-        List<MACD> screen_2_MACD = (List<MACD>) screen.indicators.get(IndicatorJava.MACD);
+        List<MACDJava> screen_2_MACD = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);
         Double macd3 = CollectionsTools.getFromEnd(screen_2_MACD, 3).getHistogram();
         Double macd2 = CollectionsTools.getFromEnd(screen_2_MACD, 2).getHistogram();
         Double macd1 = CollectionsTools.getFromEnd(screen_2_MACD, 1).getHistogram();

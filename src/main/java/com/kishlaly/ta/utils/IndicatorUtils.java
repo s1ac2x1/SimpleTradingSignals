@@ -46,12 +46,12 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<MACD> buildMACDHistogram(String symbol, List<QuoteJava> quotes) {
-        List<MACD> cached = IndicatorsInMemoryCache.getMACD(symbol, Context.timeframe);
+    public static List<MACDJava> buildMACDHistogram(String symbol, List<QuoteJava> quotes) {
+        List<MACDJava> cached = IndicatorsInMemoryCache.getMACD(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            List<MACD> result = new ArrayList<>();
+            List<MACDJava> result = new ArrayList<>();
             BarSeries barSeries = Bars.build(quotes);
 
             ClosePriceIndicator closePrice = new ClosePriceIndicator(barSeries);
@@ -67,11 +67,11 @@ public class IndicatorUtils {
 
             for (int i = 0; i < barSeries.getBarCount(); i++) {
                 double histogram = macd.getValue(i).minus(macdSignal.getValue(i)).doubleValue();
-                result.add(new MACD(quotes.get(i).getTimestamp(), 0d, 0d, histogram));
+                result.add(new MACDJava(quotes.get(i).getTimestamp(), 0d, 0d, histogram));
             }
-            result = result.stream().filter(MACD::valuesPresent).collect(Collectors.toList());
+            result = result.stream().filter(MACDJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
-            Collections.sort(result, Comparator.comparing(MACD::getTimestamp));
+            Collections.sort(result, Comparator.comparing(MACDJava::getTimestamp));
             IndicatorsInMemoryCache.putMACD(symbol, Context.timeframe, result);
             return result;
         }

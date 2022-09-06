@@ -15,7 +15,7 @@ public class IndicatorsInMemoryCache {
     private static Gson gson = new Gson();
 
     private static ConcurrentHashMap<EMAKey, List<EMAJava>> ema = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<MACDKey, List<MACD>> macd = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<MACDKey, List<MACDJava>> macd = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<KeltnerKEY, List<KeltnerJava>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKey, List<ATRJava>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
@@ -26,7 +26,7 @@ public class IndicatorsInMemoryCache {
         ema.put(new EMAKey(symbol, timeframe, period), data);
     }
 
-    public static void putMACD(String symbol, Timeframe timeframe, List<MACD> data) {
+    public static void putMACD(String symbol, Timeframe timeframe, List<MACDJava> data) {
         macd.put(new MACDKey(symbol, timeframe), data);
     }
 
@@ -63,13 +63,13 @@ public class IndicatorsInMemoryCache {
     }
 
 
-    public static List<MACD> getMACD(String symbol, Timeframe timeframe) {
-        List<MACD> cached = macd.getOrDefault(new MACDKey(symbol, timeframe), Collections.emptyList());
+    public static List<MACDJava> getMACD(String symbol, Timeframe timeframe) {
+        List<MACDJava> cached = macd.getOrDefault(new MACDKey(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
-            List<MACD> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<MACD>>() {
+            List<MACDJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<MACDJava>>() {
             }.getType());
-            Collections.sort(copy, Comparator.comparing(MACD::getTimestamp));
+            Collections.sort(copy, Comparator.comparing(MACDJava::getTimestamp));
             return copy;
         }
         return Collections.emptyList();

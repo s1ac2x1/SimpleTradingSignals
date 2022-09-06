@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.utils.Context;
 
 import java.util.List;
@@ -88,7 +88,7 @@ public class TrendFunctions {
         quotes = quotes.subList(quotes.size() - minBarsCount, quotes.size());
         List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(IndicatorJava.EMA26);
         ema = ema.subList(ema.size() - minBarsCount, ema.size());
-        List<MACD> macd = (List<MACD>) symbolData.indicators.get(IndicatorJava.MACD);
+        List<MACDJava> macd = (List<MACDJava>) symbolData.indicators.get(IndicatorJava.MACD);
         macd = macd.subList(macd.size() - minBarsCount, macd.size());
 
         for (int i = quotes.size() - barsToCheck; i < quotes.size(); i++) {

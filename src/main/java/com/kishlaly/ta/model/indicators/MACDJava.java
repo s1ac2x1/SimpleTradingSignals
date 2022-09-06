@@ -2,13 +2,13 @@ package com.kishlaly.ta.model.indicators;
 
 import com.kishlaly.ta.model.AbstractModelJava;
 
-public class MACD extends AbstractModelJava {
+public class MACDJava extends AbstractModelJava {
 
     private Double macd;
     private Double signal;
     private Double histogram;
 
-    public MACD(final Long timestamp, final Double macd, final Double signal, final Double histogram) {
+    public MACDJava(final Long timestamp, final Double macd, final Double signal, final Double histogram) {
         super(timestamp);
         this.macd = macd;
         this.signal = signal;

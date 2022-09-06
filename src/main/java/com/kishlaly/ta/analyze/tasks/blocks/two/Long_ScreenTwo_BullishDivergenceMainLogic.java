@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.HistogramQuote;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
     @Override
     public BlockResult check(SymbolData screen) {
         int screenTwoMinBarCount = screen.quotes.size();
-        List<MACD> screenTwoMacdValues = (List<MACD>) screen.indicators.get(IndicatorJava.MACD);
+        List<MACDJava> screenTwoMacdValues = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);
 
         // build an array of quotes with their histograms
 

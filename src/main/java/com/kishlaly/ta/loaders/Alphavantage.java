@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.EMAJava;
-import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.model.indicators.Stoch;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.DatesJava;
@@ -90,8 +90,8 @@ public class Alphavantage {
     }
 
     // not used as all indicators are being calculated locally
-    public static List<MACD> loadMACD(String symbol) {
-        List<MACD> result = new ArrayList<>();
+    public static List<MACDJava> loadMACD(String symbol) {
+        List<MACDJava> result = new ArrayList<>();
         String url = "https://www.alphavantage.co/query?function=MACD&symbol=" + symbol + "&interval=" + getInterval() + "&series_type=close&apikey=" + KEY;
         try {
             Map<String, Object> map = getResponse(url);
@@ -110,7 +110,7 @@ public class Alphavantage {
                 Double macdSignalValue
                         = Double.parseDouble(v.get("MACD_Signal"));
                 Double macdHist = parseDouble(v.get("MACD_Hist"));
-                result.add(new MACD(DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(), macdValue, macdSignalValue, macdHist));
+                result.add(new MACDJava(DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(), macdValue, macdSignalValue, macdHist));
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -119,7 +119,7 @@ public class Alphavantage {
         if (result.size() < 10) {
             return Collections.emptyList();
         }
-        Collections.sort(result, Comparator.comparing(MACD::getTimestamp));
+        Collections.sort(result, Comparator.comparing(MACDJava::getTimestamp));
         return result;
     }
 

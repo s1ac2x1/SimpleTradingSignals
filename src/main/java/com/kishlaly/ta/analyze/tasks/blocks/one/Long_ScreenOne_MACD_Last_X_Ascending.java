@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.model.indicators.MACD;
+import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlock {
         if (ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK < 0) {
             throw new RuntimeException("ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK not set");
         }
-        List<MACD> screen_1_MACD = (List<MACD>) screen.indicators.get(IndicatorJava.MACD);
+        List<MACDJava> screen_1_MACD = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);
         int count = 0;
         for (int i = screen_1_MACD.size() - ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK; i < screen_1_MACD.size() - 1; i++) {
             Double currentValue = screen_1_MACD.get(i).getHistogram();
