@@ -18,7 +18,7 @@ public class IndicatorsInMemoryCacheJava {
     private static ConcurrentHashMap<MACDKeyJava, List<MACDJava>> macd = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<KeltnerKeyJava, List<KeltnerJava>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKeyJava, List<ATRJava>> atr = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<StochKey, List<StochJava>> stoch = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<StochKeyJava, List<StochJava>> stoch = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<BollingerKeyJava, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<EFIKeyJava, List<ElderForceIndexJava>> efi = new ConcurrentHashMap<>();
 
@@ -39,7 +39,7 @@ public class IndicatorsInMemoryCacheJava {
     }
 
     public static void putStoch(String symbol, TimeframeJava timeframe, List<StochJava> data) {
-        stoch.put(new StochKey(symbol, timeframe), data);
+        stoch.put(new StochKeyJava(symbol, timeframe), data);
     }
 
     public static void putEFI(String symbol, TimeframeJava timeframe, List<ElderForceIndexJava> data) {
@@ -103,7 +103,7 @@ public class IndicatorsInMemoryCacheJava {
 
 
     public static List<StochJava> getStoch(String symbol, TimeframeJava timeframe) {
-        List<StochJava> cached = stoch.getOrDefault(new StochKey(symbol, timeframe), Collections.emptyList());
+        List<StochJava> cached = stoch.getOrDefault(new StochKeyJava(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
             List<StochJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<StochJava>>() {
