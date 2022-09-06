@@ -53,9 +53,9 @@ public class TaskTester {
             Context.symbols.forEach(symbol -> {
                 System.out.println("[" + currSymbol + "/" + totalSymbols + "] Testing " + symbol);
                 currSymbol.getAndIncrement();
-                SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
-                SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
-                SymbolData symbolDataForTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);
+                SymbolDataJava screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
+                SymbolDataJava screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
+                SymbolDataJava symbolDataForTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);
                 List<BlockResultJava> blockResults = new ArrayList<>();
                 if (!isDataFilled(screen1, screen2)) {
                     return;
@@ -139,7 +139,7 @@ public class TaskTester {
         return allTests;
     }
 
-    private static void clean(SymbolData screen1, SymbolData screen2) {
+    private static void clean(SymbolDataJava screen1, SymbolDataJava screen2) {
         QuotesInMemoryCache.clear();
         IndicatorsInMemoryCache.clear();
         screen1.quotes.clear();
@@ -148,7 +148,7 @@ public class TaskTester {
         screen2.indicators.clear();
     }
 
-    private static void rewind(TaskType task, BlocksGroup blocksGroup, SymbolData screen1, SymbolData screen2, List<BlockResultJava> blockResults) {
+    private static void rewind(TaskType task, BlocksGroup blocksGroup, SymbolDataJava screen1, SymbolDataJava screen2, List<BlockResultJava> blockResults) {
         QuoteJava lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
         QuoteJava lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
         blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks()));
@@ -332,7 +332,7 @@ public class TaskTester {
         PositionTestResult positionTestResult = new PositionTestResult();
         QuoteJava signal = blockResult.getLastChartQuote();
         int signalIndex = -1;
-        SymbolData data = historicalTesting.getData();
+        SymbolDataJava data = historicalTesting.getData();
         for (int i = 0; i < data.quotes.size(); i++) {
             if (data.quotes.get(i).getTimestamp().compareTo(signal.getTimestamp()) == 0) {
                 signalIndex = i;
@@ -460,7 +460,7 @@ public class TaskTester {
 
     }
 
-    private static void rewind(SymbolData screen, int i) {
+    private static void rewind(SymbolDataJava screen, int i) {
         screen.quotes = screen.quotes.subList(0, screen.quotes.size() - i);
         Map<IndicatorJava, List<? extends AbstractModelJava>> indicators = new HashMap<>();
         screen.indicators.forEach((indicator, data) -> {
@@ -469,7 +469,7 @@ public class TaskTester {
         screen.indicators = indicators;
     }
 
-    private static boolean isDataFilled(SymbolData screen1, SymbolData screen2) {
+    private static boolean isDataFilled(SymbolDataJava screen1, SymbolDataJava screen2) {
         AtomicBoolean filledData = new AtomicBoolean(true);
 
         int screenOneMinBarCount = resolveMinBarsCount(screen1.timeframe);
@@ -493,7 +493,7 @@ public class TaskTester {
         return filledData.get();
     }
 
-    private static boolean hasHistory(SymbolData screen1, SymbolData screen2) {
+    private static boolean hasHistory(SymbolDataJava screen1, SymbolDataJava screen2) {
         AtomicBoolean hasHistory = new AtomicBoolean(true);
         if (screen1.quotes.isEmpty() || screen2.quotes.isEmpty()) {
             hasHistory.set(false);

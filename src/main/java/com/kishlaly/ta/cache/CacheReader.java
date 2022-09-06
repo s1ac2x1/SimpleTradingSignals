@@ -225,9 +225,9 @@ public class CacheReader {
         }
     }
 
-    public static SymbolData getSymbolData(TimeframeIndicatorsJava timeframeIndicators, String symbol) {
+    public static SymbolDataJava getSymbolData(TimeframeIndicatorsJava timeframeIndicators, String symbol) {
         Context.timeframe = timeframeIndicators.timeframe;
-        SymbolData screen = new SymbolData();
+        SymbolDataJava screen = new SymbolDataJava();
         screen.symbol = symbol;
         screen.timeframe = timeframeIndicators.timeframe;
         List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);

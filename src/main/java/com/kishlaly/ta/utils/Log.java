@@ -2,7 +2,7 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.BlockResultCodeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,7 +11,7 @@ public class Log {
 
     private static StringBuilder log = new StringBuilder();
     private static StringBuilder debug = new StringBuilder();
-    private static Map<BlockResultCodeJava, List<SymbolData>> codes = new HashMap<>();
+    private static Map<BlockResultCodeJava, List<SymbolDataJava>> codes = new HashMap<>();
     private static Map<Key, Set<String>> summary = new HashMap<>();
 
     public static void addLine(String line) {
@@ -22,8 +22,8 @@ public class Log {
         debug.append(line).append(System.lineSeparator());
     }
 
-    public static void recordCode(BlockResultCodeJava code, SymbolData symbolData) {
-        List<SymbolData> existingRecord = codes.get(code);
+    public static void recordCode(BlockResultCodeJava code, SymbolDataJava symbolData) {
+        List<SymbolDataJava> existingRecord = codes.get(code);
         if (existingRecord == null) {
             existingRecord = new ArrayList<>();
         }

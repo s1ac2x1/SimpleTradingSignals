@@ -1,10 +1,10 @@
 package com.kishlaly.ta.analyze.tasks.blocks;
 
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 
 public interface TaskBlock {
 
-    BlockResultJava check(SymbolData screen);
+    BlockResultJava check(SymbolDataJava screen);
 
 }

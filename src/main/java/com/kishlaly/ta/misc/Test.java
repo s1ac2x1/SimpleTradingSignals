@@ -1,7 +1,7 @@
 package com.kishlaly.ta.misc;
 
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.Quotes;
@@ -17,7 +17,7 @@ public class Test {
         Context.aggregationTimeframe = TimeframeJava.DAY;
         Context.timeframe = TimeframeJava.DAY;
         String symbol = "KMI";
-        SymbolData screen2 = getSymbolData(THREE_DISPLAYS_BUY.getTimeframeIndicators(2), symbol);
+        SymbolDataJava screen2 = getSymbolData(THREE_DISPLAYS_BUY.getTimeframeIndicators(2), symbol);
         List<QuoteJava> weekly = Quotes.dayToWeek(Quotes.dayToWeek(screen2.quotes));
         System.out.println(weekly.size());
     }

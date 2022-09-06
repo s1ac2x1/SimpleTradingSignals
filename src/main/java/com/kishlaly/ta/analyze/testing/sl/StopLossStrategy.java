@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.testing.sl;
 
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 
 public abstract class StopLossStrategy {
 
@@ -24,7 +24,7 @@ public abstract class StopLossStrategy {
         return this.isVolatile;
     }
 
-    public abstract double calculate(SymbolData data, int signalIndex);
+    public abstract double calculate(SymbolDataJava data, int signalIndex);
 
     public abstract String toString();
 

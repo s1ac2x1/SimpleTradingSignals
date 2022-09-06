@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.testing.tp;
 
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 
 public abstract class TakeProfitStrategy {
 
@@ -29,7 +29,7 @@ public abstract class TakeProfitStrategy {
         this.enabled = enabled;
     }
 
-    public abstract double calcualte(SymbolData data, int signalIndex);
+    public abstract double calcualte(SymbolDataJava data, int signalIndex);
 
     public boolean isVolatile() {
         return this.isVolatile;

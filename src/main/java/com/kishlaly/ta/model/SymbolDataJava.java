@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SymbolData {
+public class SymbolDataJava {
 
     public String symbol;
     public TimeframeJava timeframe;
@@ -22,8 +22,8 @@ public class SymbolData {
         return quotes.get(quotes.size() - 2);
     }
 
-    public SymbolData copy() {
-        SymbolData copy = new SymbolData();
+    public SymbolDataJava copy() {
+        SymbolDataJava copy = new SymbolDataJava();
         copy.symbol = symbol;
         copy.timeframe = timeframe;
         copy.quotes = new ArrayList<>(quotes);

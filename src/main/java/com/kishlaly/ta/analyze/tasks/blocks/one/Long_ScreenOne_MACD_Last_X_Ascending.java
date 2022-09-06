@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.one;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.utils.Log;
@@ -17,7 +17,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.X_HISTOGRAMS_NOT_ASCENDI
  */
 public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         if (ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK < 0) {
             throw new RuntimeException("ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK not set");
         }

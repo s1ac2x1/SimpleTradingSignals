@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.one;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.Log;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Long_ScreenOne_EMA_X_OutOf_Y_Above implements ScreenOneBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         if (ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK < 0) {
             throw new RuntimeException("ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK not set");
         }

@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.StochJava;
 import com.kishlaly.ta.utils.Log;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_D_NOT_EXTRA_OVERSO
  */
 public class Long_ScreenTwo_Stoch_D_TwoBelow_X implements TaskBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);
         StochJava stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
         StochJava stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);

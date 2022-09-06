@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
 import com.kishlaly.ta.utils.CollectionsTools;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.FILTER_BY_KELTN
 
 public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         List<KeltnerJava> screen_2_Keltner = (List<KeltnerJava>) screen.indicators.get(IndicatorJava.KELTNER);
         if (FILTER_BY_KELTNER_ENABLED) {
             KeltnerJava lastKeltnerData = CollectionsTools.getFromEnd(screen_2_Keltner, 1);

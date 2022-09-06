@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.utils.Log;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 public class Long_ScreenTwo_MACD_ThreeBelowZeroAndFigureU implements ScreenTwoBlock {
 
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         List<MACDJava> screen_2_MACD = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);
         Double macd3 = screen_2_MACD.get(screen_2_MACD.size() - 3).getHistogram();
         Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram();

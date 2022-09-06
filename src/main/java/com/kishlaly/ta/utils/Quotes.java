@@ -1,7 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
@@ -86,7 +86,7 @@ public class Quotes {
         return min;
     }
 
-    public static void trim(SymbolData screen) {
+    public static void trim(SymbolDataJava screen) {
         if (screen.quotes != null && !screen.quotes.isEmpty()) {
             screen.quotes = screen.quotes.subList(screen.quotes.size() - resolveMinBarsCount(screen.timeframe), screen.quotes.size());
         } else {

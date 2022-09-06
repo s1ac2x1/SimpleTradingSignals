@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.one;
 
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionsTools;
@@ -19,7 +19,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Long_ScreenOne_EMA_LastCrossesOrAbove implements ScreenOneBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         QuoteJava lastQuote = screen.getLastQuote();
         List<EMAJava> screen_2_EMA26 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA26);
         EMAJava lastEMA26 = CollectionsTools.getFromEnd(screen_2_EMA26, 1);

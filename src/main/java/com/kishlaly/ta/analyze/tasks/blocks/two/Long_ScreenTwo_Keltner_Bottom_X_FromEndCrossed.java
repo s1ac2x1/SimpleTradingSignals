@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
 import com.kishlaly.ta.utils.Log;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.QUOTE_FROM_END_
 
 public class Long_ScreenTwo_Keltner_Bottom_X_FromEndCrossed implements ScreenTwoBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         if (QUOTE_FROM_END_TO_USE < 0) {
             throw new RuntimeException("QUOTE_FROM_END_TO_USE not defined");
         }

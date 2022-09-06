@@ -6,7 +6,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.Screens;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +15,8 @@ public class AbstractTask {
 
     public static BlockResultJava check(Screens screens, List<TaskBlock> blocks) {
 
-        SymbolData screen1 = screens.getScreen1().copy();
-        SymbolData screen2 = screens.getScreen2().copy();
+        SymbolDataJava screen1 = screens.getScreen1().copy();
+        SymbolDataJava screen2 = screens.getScreen2().copy();
 
         List<TaskBlock> commonBlocks = blocks
                 .stream()

@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultCodeJava;
 import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.HistogramQuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.utils.Log;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.utils.DatesJava.beautifyQuoteDate;
 
 public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         int screenTwoMinBarCount = screen.quotes.size();
         List<MACDJava> screenTwoMacdValues = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);
 

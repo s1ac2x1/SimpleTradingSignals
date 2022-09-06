@@ -6,7 +6,7 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.DatesJava;
 import com.kishlaly.ta.utils.Numbers;
@@ -22,7 +22,7 @@ public class HistoricalTesting {
     private BlocksGroup blocksGroup;
 
     // indicator chart
-    private SymbolData data;
+    private SymbolDataJava data;
 
     // all results of the strategy run, scrolling the graph one bar back in time
     private List<BlockResultJava> blockResults;
@@ -33,7 +33,7 @@ public class HistoricalTesting {
     private StopLossStrategy stopLossStrategy;
     private TakeProfitStrategy takeProfitStrategy;
 
-    public HistoricalTesting(TaskType taskType, BlocksGroup blocksGroup, final SymbolData data, final List<BlockResultJava> blockResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public HistoricalTesting(TaskType taskType, BlocksGroup blocksGroup, final SymbolDataJava data, final List<BlockResultJava> blockResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         this.taskType = taskType;
         this.blocksGroup = blocksGroup;
         this.data = data;
@@ -58,11 +58,11 @@ public class HistoricalTesting {
         return this.takeProfitStrategy;
     }
 
-    public SymbolData getData() {
+    public SymbolDataJava getData() {
         return this.data;
     }
 
-    public void setData(final SymbolData data) {
+    public void setData(final SymbolDataJava data) {
         this.data = data;
     }
 

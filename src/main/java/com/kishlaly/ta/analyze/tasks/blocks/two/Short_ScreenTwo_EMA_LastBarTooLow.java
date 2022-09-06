@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionsTools;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Short_ScreenTwo_EMA_LastBarTooLow implements ScreenTwoBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
         QuoteJava quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
         QuoteJava quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);

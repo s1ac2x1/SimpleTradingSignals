@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.testing.tp;
 
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 
 public class TakeProfitDisabled extends TakeProfitStrategy {
 
@@ -9,7 +9,7 @@ public class TakeProfitDisabled extends TakeProfitStrategy {
     }
 
     @Override
-    public double calcualte(SymbolData data, int signalIndex) {
+    public double calcualte(SymbolDataJava data, int signalIndex) {
         return -1;
     }
 

@@ -112,7 +112,7 @@ public class TaskRunner {
                     testingStrategySet.getAndIncrement();
                 });
             });
-            SymbolData screen2 = getSymbolData(signal.task.getTimeframeIndicators(2), signal.symbol);
+            SymbolDataJava screen2 = getSymbolData(signal.task.getTimeframeIndicators(2), signal.symbol);
             Collections.sort(result, Comparator.comparing(HistoricalTesting::getBalance));
             HistoricalTesting best = result.get(result.size() - 1);
             double stopLoss = best.getStopLossStrategy().calculate(screen2, screen2.quotes.size() - 1);
@@ -136,8 +136,8 @@ public class TaskRunner {
         AtomicInteger processingSymbol = new AtomicInteger(1);
         int totalSymbols = Context.symbols.size();
         Context.symbols.forEach(symbol -> {
-            SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
-            SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
+            SymbolDataJava screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
+            SymbolDataJava screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
 
             // skip symbols if they have less than resolveMinBarsCount quotes on the weekly frame
             if (screen1.quotes.size() < resolveMinBarsCount(screen1.timeframe)
@@ -192,7 +192,7 @@ public class TaskRunner {
         });
     }
 
-    private static void singleTimeframeFunction(Function<SymbolData, Boolean> function, IndicatorJava... indicators) {
+    private static void singleTimeframeFunction(Function<SymbolDataJava, Boolean> function, IndicatorJava... indicators) {
         try (Stream<Path> paths = Files.walk(Paths.get(CacheReader.getFolder()))) {
             paths
                     .filter(Files::isRegularFile)
@@ -203,7 +203,7 @@ public class TaskRunner {
                             if (!Context.testOnly.isEmpty() && !Context.testOnly.contains(symbol)) {
                                 return;
                             }
-                            SymbolData symbolData = new SymbolData();
+                            SymbolDataJava symbolData = new SymbolDataJava();
                             symbolData.timeframe = Context.timeframe;
                             List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
                             symbolData.quotes = quotes;

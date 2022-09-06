@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultCodeJava;
 import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.Comparator;
@@ -13,7 +13,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 
 public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         QuoteJava lastChartQuote = screen.quotes.get(screen.quotes.size() - 1);
         QuoteJava signal = lastChartQuote;
 

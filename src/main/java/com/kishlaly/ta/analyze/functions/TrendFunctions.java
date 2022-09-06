@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.functions;
 
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
@@ -25,7 +25,7 @@ public class TrendFunctions {
     // 2) medium-term timeframe, the oscillator gives a signal, the histogram does not contradict, the price bars too: https://drive.google.com/file/d/1tw_wUR9MXbT2zooD6dmH97bC9AwQCA3U/view?usp=sharing
     // (this case is probably already covered by the first point: check the color of half of the last N bars)
     public static boolean uptrendCheckOnMultipleBars(
-            SymbolData symbolData,
+            SymbolDataJava symbolData,
             int minBarsCount,
             int barsToCheck) {
         return abstractTrendCheckOnMultipleBars(
@@ -41,7 +41,7 @@ public class TrendFunctions {
     }
 
     // mirror analog of uptrendCheckOnMultipleBars
-    public static boolean downtrendCheckOnMultipleBars(SymbolData symbolData, int minBarsCount, int barsToCheck) {
+    public static boolean downtrendCheckOnMultipleBars(SymbolDataJava symbolData, int minBarsCount, int barsToCheck) {
         return abstractTrendCheckOnMultipleBars(
                 symbolData,
                 minBarsCount,
@@ -59,7 +59,7 @@ public class TrendFunctions {
     // and the ideal entry point on the daily: https://drive.google.com/file/d/1-a0ZtMuLQyuamez_402v6YkViNWzY6RS/view?usp=sharing
     // I don't like this method because it doesn't take the histogram into account
     // On the weekly chart from the example, the price bar is on the sixth histogram smoothly decreasing, this is dangerous
-    public static boolean uptrendCheckOnLastBar(SymbolData symbolData) {
+    public static boolean uptrendCheckOnLastBar(SymbolDataJava symbolData) {
         QuoteJava lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
         List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(IndicatorJava.EMA26);
         double lastEMA = ema.get(ema.size() - 1).getValue();
@@ -67,7 +67,7 @@ public class TrendFunctions {
     }
 
     // mirror logic uptrendCheckOnLastBar
-    public static boolean downtrendCheckOnLastBar(SymbolData symbolData) {
+    public static boolean downtrendCheckOnLastBar(SymbolDataJava symbolData) {
         QuoteJava lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
         List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(IndicatorJava.EMA26);
         double lastEMA = ema.get(ema.size() - 1).getValue();
@@ -75,7 +75,7 @@ public class TrendFunctions {
     }
 
     private static boolean abstractTrendCheckOnMultipleBars(
-            SymbolData symbolData,
+            SymbolDataJava symbolData,
             int minBarsCount,
             int barsToCheck,
             Function<QuoteJava, Boolean> barCorrectColor,

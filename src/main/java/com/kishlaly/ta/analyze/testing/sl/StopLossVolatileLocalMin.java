@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.testing.sl;
 
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 
 import java.util.Comparator;
 
@@ -17,7 +17,7 @@ public class StopLossVolatileLocalMin extends StopLossStrategy {
     }
 
     @Override
-    public double calculate(SymbolData data, int currentQuoteIndex) {
+    public double calculate(SymbolDataJava data, int currentQuoteIndex) {
         QuoteJava quoteWithMinimalLow = data.quotes.subList(currentQuoteIndex - QUOTES_TO_FIND_MIN, currentQuoteIndex).stream().min(Comparator.comparingDouble(quote -> quote.getLow())).get();
         double distance = (double) config;
         return quoteWithMinimalLow.getLow() - distance;

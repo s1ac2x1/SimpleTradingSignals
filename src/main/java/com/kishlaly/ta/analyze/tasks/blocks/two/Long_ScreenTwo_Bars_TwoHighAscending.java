@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.utils.Log;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.LAST_QUOTES_NOT_ASCENDING_SCREEN_2;
@@ -12,7 +12,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Long_ScreenTwo_Bars_TwoHighAscending implements ScreenTwoBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         boolean screen_2_check1 = screen.getLastQuote().getHigh() > screen.getPreLastQuote().getHigh();
         if (!screen_2_check1) {
             Log.recordCode(LAST_QUOTES_NOT_ASCENDING_SCREEN_2, screen);

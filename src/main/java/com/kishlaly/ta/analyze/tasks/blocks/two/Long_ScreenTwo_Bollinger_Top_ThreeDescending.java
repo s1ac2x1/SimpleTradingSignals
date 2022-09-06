@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionsTools;
@@ -17,7 +17,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Long_ScreenTwo_Bollinger_Top_ThreeDescending implements ScreenTwoBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(IndicatorJava.BOLLINGER);
         BollingerJava bollinger3 = CollectionsTools.getFromEnd(screen_2_Bollinger, 3);
         BollingerJava bollinger2 = CollectionsTools.getFromEnd(screen_2_Bollinger, 2);

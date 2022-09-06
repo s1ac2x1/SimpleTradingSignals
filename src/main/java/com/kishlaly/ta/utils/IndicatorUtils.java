@@ -3,7 +3,7 @@ package com.kishlaly.ta.utils;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.model.AbstractModelJava;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.*;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeries;
@@ -218,7 +218,7 @@ public class IndicatorUtils {
         return ascendingCount >= atLeast;
     }
 
-    public static void trim(SymbolData screen) {
+    public static void trim(SymbolDataJava screen) {
         Map<IndicatorJava, List<? extends AbstractModelJava>> trimmedIndicators = new HashMap();
         screen.indicators.forEach((indicator, values) -> {
             if (values == null || values.isEmpty()) {

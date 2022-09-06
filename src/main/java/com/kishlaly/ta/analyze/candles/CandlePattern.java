@@ -1,10 +1,9 @@
 package com.kishlaly.ta.analyze.candles;
 
-import com.kishlaly.ta.analyze.candles.CandleResult;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 
 public interface CandlePattern {
 
-    CandleResult check(SymbolData data);
+    CandleResult check(SymbolDataJava data);
 
 }

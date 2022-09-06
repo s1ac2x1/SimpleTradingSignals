@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.SymbolData;
+import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
 
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Long_ScreenTwo_Bars_LastGreen implements ScreenTwoBlock {
     @Override
-    public BlockResultJava check(SymbolData screen) {
+    public BlockResultJava check(SymbolDataJava screen) {
         List<QuoteJava> screen_2_Quotes = screen.quotes;
         QuoteJava quote1 = CollectionsTools.getFromEnd(screen_2_Quotes, 1);
 
