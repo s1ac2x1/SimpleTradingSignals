@@ -14,16 +14,16 @@ public class IndicatorsInMemoryCacheJava {
 
     private static Gson gson = new Gson();
 
-    private static ConcurrentHashMap<EMAKey, List<EMAJava>> ema = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<EMAKeyJava, List<EMAJava>> ema = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<MACDKey, List<MACDJava>> macd = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<KeltnerKEY, List<KeltnerJava>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKeyJava, List<ATRJava>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<StochJava>> stoch = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<BollingerKeyJava, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<EFIKey, List<ElderForceIndexJava>> efi = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<EFIKeyJava, List<ElderForceIndexJava>> efi = new ConcurrentHashMap<>();
 
     public static void putEMA(String symbol, TimeframeJava timeframe, int period, List<EMAJava> data) {
-        ema.put(new EMAKey(symbol, timeframe, period), data);
+        ema.put(new EMAKeyJava(symbol, timeframe, period), data);
     }
 
     public static void putMACD(String symbol, TimeframeJava timeframe, List<MACDJava> data) {
@@ -43,7 +43,7 @@ public class IndicatorsInMemoryCacheJava {
     }
 
     public static void putEFI(String symbol, TimeframeJava timeframe, List<ElderForceIndexJava> data) {
-        efi.put(new EFIKey(symbol, timeframe), data);
+        efi.put(new EFIKeyJava(symbol, timeframe), data);
     }
 
     public static void putBollinger(String symbol, TimeframeJava timeframe, List<BollingerJava> data) {
@@ -51,7 +51,7 @@ public class IndicatorsInMemoryCacheJava {
     }
 
     public static List<EMAJava> getEMA(String symbol, TimeframeJava timeframe, int period) {
-        List<EMAJava> cached = ema.getOrDefault(new EMAKey(symbol, timeframe, period), Collections.emptyList());
+        List<EMAJava> cached = ema.getOrDefault(new EMAKeyJava(symbol, timeframe, period), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
             List<EMAJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<EMAJava>>() {
@@ -127,7 +127,7 @@ public class IndicatorsInMemoryCacheJava {
     }
 
     public static List<ElderForceIndexJava> getEFI(String symbol, TimeframeJava timeframe) {
-        List<ElderForceIndexJava> cached = efi.getOrDefault(new EFIKey(symbol, timeframe), Collections.emptyList());
+        List<ElderForceIndexJava> cached = efi.getOrDefault(new EFIKeyJava(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
             List<ElderForceIndexJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<ElderForceIndexJava>>() {
