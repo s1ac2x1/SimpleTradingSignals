@@ -6,17 +6,16 @@ import com.kishlaly.ta.model.TimeframeJava
 import org.ta4j.core.BarSeries
 import org.ta4j.core.BaseBarSeries
 import java.time.Duration
-import java.time.ZonedDateTime
 
 class Bars {
 
     companion object {
 
         fun build(quotes: List<Quote>): BarSeries {
-            val initialBarSeries: BarSeries = BaseBarSeries()
+            val initialBarSeries = BaseBarSeries()
             quotes.forEach {
                 try {
-                    val timestamp: ZonedDateTime = Dates.getTimeInExchangeZone(it.timestamp, AbstractModelJava.exchangeTimezome)
+                    val timestamp = Dates.getTimeInExchangeZone(it.timestamp, AbstractModelJava.exchangeTimezome)
                     initialBarSeries.addBar(
                             Duration.ofMinutes(BarsJava.getBarDurationInMinutes().toLong()),
                             timestamp,
