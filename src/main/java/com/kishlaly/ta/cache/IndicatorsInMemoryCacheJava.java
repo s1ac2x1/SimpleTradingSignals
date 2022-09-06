@@ -15,7 +15,7 @@ public class IndicatorsInMemoryCacheJava {
     private static Gson gson = new Gson();
 
     private static ConcurrentHashMap<EMAKeyJava, List<EMAJava>> ema = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<MACDKey, List<MACDJava>> macd = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<MACDKeyJava, List<MACDJava>> macd = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<KeltnerKeyJava, List<KeltnerJava>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKeyJava, List<ATRJava>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<StochJava>> stoch = new ConcurrentHashMap<>();
@@ -27,7 +27,7 @@ public class IndicatorsInMemoryCacheJava {
     }
 
     public static void putMACD(String symbol, TimeframeJava timeframe, List<MACDJava> data) {
-        macd.put(new MACDKey(symbol, timeframe), data);
+        macd.put(new MACDKeyJava(symbol, timeframe), data);
     }
 
     public static void putKeltner(String symbol, TimeframeJava timeframe, List<KeltnerJava> data) {
@@ -64,7 +64,7 @@ public class IndicatorsInMemoryCacheJava {
 
 
     public static List<MACDJava> getMACD(String symbol, TimeframeJava timeframe) {
-        List<MACDJava> cached = macd.getOrDefault(new MACDKey(symbol, timeframe), Collections.emptyList());
+        List<MACDJava> cached = macd.getOrDefault(new MACDKeyJava(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
             List<MACDJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<MACDJava>>() {
