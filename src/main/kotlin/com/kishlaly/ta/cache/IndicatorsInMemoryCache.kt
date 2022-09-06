@@ -1,7 +1,9 @@
 package com.kishlaly.ta.cache
 
+import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import com.kishlaly.ta.cache.keys.*
+import com.kishlaly.ta.model.AbstractModel
 import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.model.indicators.*
 import java.util.concurrent.ConcurrentHashMap
@@ -21,7 +23,7 @@ class IndicatorsInMemoryCache {
         fun putEMA(symbol: String, timeframe: Timeframe, period: Int, data: List<EMA>) {
             ema[EMAKey(symbol, timeframe, period)] = data
         }
-        ®
+
         fun putMACD(symbol: String, timeframe: Timeframe, data: List<MACD>) {
             macd[MACDKey(symbol, timeframe)] = data
         }
@@ -46,6 +48,16 @@ class IndicatorsInMemoryCache {
             bollinger[BollingerKey(symbol, timeframe)] = data
         }
 
+        fun getEMA(symbol: String, timeframe: Timeframe, period: Int): List<EMA> {
+            val cached = ema.getOrDefault(EMAKey(symbol, timeframe, period), emptyList())
+            val json = gson.toJson(cached)
+            val copy = gson.fromJson<List<EMA>>(json, object : TypeToken<List<EMA>>() {}.type)
+            return copy.sortedBy { it.timestamp }
+        }
+
+        inline fun <reified T> copy(source: List<T>, destination: List<T>) {
+
+        }
 
     }
 
