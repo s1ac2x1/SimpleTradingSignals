@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Long_ScreenTwo_MACD_LastAscending implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<MACDJava> screen_2_MACD = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);
         MACDJava screen_2_lastMACD = screen_2_MACD.get(screen_2_MACD.size() - 1);
         MACDJava screen_2_preLastMACD = screen_2_MACD.get(screen_2_MACD.size() - 2);
@@ -25,8 +25,8 @@ public class Long_ScreenTwo_MACD_LastAscending implements ScreenTwoBlock {
         if (!ascending) {
             Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
             Log.addDebugLine("The histogram does not grow on the second screen");
-            return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

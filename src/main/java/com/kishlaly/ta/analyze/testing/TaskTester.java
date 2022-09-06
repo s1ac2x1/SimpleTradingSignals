@@ -56,7 +56,7 @@ public class TaskTester {
                 SymbolData screen1 = getSymbolData(task.getTimeframeIndicators(1), symbol);
                 SymbolData screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol);
                 SymbolData symbolDataForTesting = getSymbolData(task.getTimeframeIndicators(2), symbol);
-                List<BlockResult> blockResults = new ArrayList<>();
+                List<BlockResultJava> blockResults = new ArrayList<>();
                 if (!isDataFilled(screen1, screen2)) {
                     return;
                 }
@@ -148,7 +148,7 @@ public class TaskTester {
         screen2.indicators.clear();
     }
 
-    private static void rewind(TaskType task, BlocksGroup blocksGroup, SymbolData screen1, SymbolData screen2, List<BlockResult> blockResults) {
+    private static void rewind(TaskType task, BlocksGroup blocksGroup, SymbolData screen1, SymbolData screen2, List<BlockResultJava> blockResults) {
         QuoteJava lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
         QuoteJava lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
         blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks()));
@@ -293,7 +293,7 @@ public class TaskTester {
         ZonedDateTime parsed = shortDateToZoned(datePart);
         testings.forEach(testing -> {
             String groupName = testing.getBlocksGroup().getClass().getSimpleName();
-            BlockResult blockResult = testing.getTaskResults().stream().filter(taskResult -> taskResult.getLastChartQuote().getTimestamp() == parsed.toEpochSecond()).findFirst().get();
+            BlockResultJava blockResult = testing.getTaskResults().stream().filter(taskResult -> taskResult.getLastChartQuote().getTimestamp() == parsed.toEpochSecond()).findFirst().get();
             System.out.println(datePart + " " + groupName + " = " + blockResult.getCode());
         });
     }
@@ -328,7 +328,7 @@ public class TaskTester {
         FilesUtil.writeToFile(outputFolder + fileSeparator + "stats" + fileSeparator + historicalTesting.getSymbol() + "_test_log.txt", testLog.toString());
     }
 
-    private static void testPosition(BlockResult blockResult, HistoricalTesting historicalTesting) {
+    private static void testPosition(BlockResultJava blockResult, HistoricalTesting historicalTesting) {
         PositionTestResult positionTestResult = new PositionTestResult();
         QuoteJava signal = blockResult.getLastChartQuote();
         int signalIndex = -1;

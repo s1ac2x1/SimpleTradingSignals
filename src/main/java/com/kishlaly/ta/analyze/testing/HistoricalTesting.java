@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
@@ -25,7 +25,7 @@ public class HistoricalTesting {
     private SymbolData data;
 
     // all results of the strategy run, scrolling the graph one bar back in time
-    private List<BlockResult> blockResults;
+    private List<BlockResultJava> blockResults;
 
     // testing the opening of positions by the received signals for entry
     private Map<QuoteJava, PositionTestResult> signalTestingResults = new HashMap<>();
@@ -33,7 +33,7 @@ public class HistoricalTesting {
     private StopLossStrategy stopLossStrategy;
     private TakeProfitStrategy takeProfitStrategy;
 
-    public HistoricalTesting(TaskType taskType, BlocksGroup blocksGroup, final SymbolData data, final List<BlockResult> blockResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public HistoricalTesting(TaskType taskType, BlocksGroup blocksGroup, final SymbolData data, final List<BlockResultJava> blockResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         this.taskType = taskType;
         this.blocksGroup = blocksGroup;
         this.data = data;
@@ -66,11 +66,11 @@ public class HistoricalTesting {
         this.data = data;
     }
 
-    public List<BlockResult> getTaskResults() {
+    public List<BlockResultJava> getTaskResults() {
         return this.blockResults;
     }
 
-    public void setSignals(final List<BlockResult> blockResults) {
+    public void setSignals(final List<BlockResultJava> blockResults) {
         this.blockResults = blockResults;
     }
 

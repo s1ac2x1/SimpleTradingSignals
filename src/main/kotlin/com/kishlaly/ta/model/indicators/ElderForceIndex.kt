@@ -2,7 +2,7 @@ package com.kishlaly.ta.model.indicators
 
 import com.kishlaly.ta.model.AbstractModel
 
-class ElderForceIndex(timestamp: Long, val value: Double) : AbstractModel(timestamp) {
+data class ElderForceIndex(override val timestamp: Long, val value: Double) : AbstractModel(timestamp) {
 
     override fun valuesPresent() = value != Double.NaN
 

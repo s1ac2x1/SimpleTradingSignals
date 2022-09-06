@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Short_ScreenTwo_EMA_LastBarTooLow implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
         QuoteJava quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
         QuoteJava quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
@@ -33,8 +33,8 @@ public class Short_ScreenTwo_EMA_LastBarTooLow implements ScreenTwoBlock {
         if (thirdCrossesEMA13 && secondCrossesEMA13 && lastBelowEMA13) {
             Log.recordCode(LAST_BAR_BELOW_SCREEN_2, screen);
             Log.addDebugLine("The third and second crossed the EMA13, and the last is completely below");
-            return new BlockResult(screen.getLastQuote(), LAST_BAR_BELOW_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), LAST_BAR_BELOW_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

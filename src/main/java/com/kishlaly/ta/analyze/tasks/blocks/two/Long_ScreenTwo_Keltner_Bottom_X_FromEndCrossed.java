@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.QUOTE_FROM_END_
 
 public class Long_ScreenTwo_Keltner_Bottom_X_FromEndCrossed implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         if (QUOTE_FROM_END_TO_USE < 0) {
             throw new RuntimeException("QUOTE_FROM_END_TO_USE not defined");
         }
@@ -27,8 +27,8 @@ public class Long_ScreenTwo_Keltner_Bottom_X_FromEndCrossed implements ScreenTwo
         if (!Quotes.isQuoteCrossedKeltnerBottom(quote, keltner)) {
             Log.addDebugLine(QUOTE_FROM_END_TO_USE + " quote from the end the has not crossed the lower boundary of the Keltner channel");
             Log.recordCode(X_FROM_END_QUOTE_DIDNT_CROSSED_KELTNER_BOTTOM_SCREEN_2, screen);
-            return new BlockResult(screen.getLastQuote(), X_FROM_END_QUOTE_DIDNT_CROSSED_KELTNER_BOTTOM_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), X_FROM_END_QUOTE_DIDNT_CROSSED_KELTNER_BOTTOM_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.CommonBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock;
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.Screens;
 import com.kishlaly.ta.model.SymbolData;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class AbstractTask {
 
-    public static BlockResult check(Screens screens, List<TaskBlock> blocks) {
+    public static BlockResultJava check(Screens screens, List<TaskBlock> blocks) {
 
         SymbolData screen1 = screens.getScreen1().copy();
         SymbolData screen2 = screens.getScreen2().copy();
@@ -24,12 +24,12 @@ public class AbstractTask {
                 .collect(Collectors.toList());
 
         boolean commonBlocksSucceded = true;
-        BlockResult commonBlockLastResult = null;
+        BlockResultJava commonBlockLastResult = null;
 
         for (int i = 0; i < commonBlocks.size(); i++) {
             TaskBlock commonBlock = commonBlocks.get(i);
-            BlockResult check1 = commonBlock.check(screen1);
-            BlockResult check2 = commonBlock.check(screen2);
+            BlockResultJava check1 = commonBlock.check(screen1);
+            BlockResultJava check2 = commonBlock.check(screen2);
             if (!check1.isOk()) {
                 commonBlockLastResult = check1;
                 commonBlocksSucceded = false;
@@ -50,7 +50,7 @@ public class AbstractTask {
                 .collect(Collectors.toList());
 
         boolean screenOneAllBlocksValid = true;
-        BlockResult screenOneResult = null;
+        BlockResultJava screenOneResult = null;
 
         for (int i = 0; i < screenOneBlocks.size(); i++) {
             TaskBlock screenOneBlock = screenOneBlocks.get(i);
@@ -69,7 +69,7 @@ public class AbstractTask {
                 .stream()
                 .filter(block -> block instanceof ScreenTwoBlock)
                 .collect(Collectors.toList());
-        BlockResult screenTwoResult = null;
+        BlockResultJava screenTwoResult = null;
         for (int i = 0; i < screenTwoBlocks.size(); i++) {
             TaskBlock screenTwoBlock = screenTwoBlocks.get(i);
             screenTwoResult = screenTwoBlock.check(screen2);

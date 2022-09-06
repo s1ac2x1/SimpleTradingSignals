@@ -1,11 +1,11 @@
 package com.kishlaly.ta.model;
 
-public class BlockResult {
+public class BlockResultJava {
 
     private QuoteJava lastChartQuote;
     private BlockResultCodeJava code;
 
-    public BlockResult(final QuoteJava lastChartQuote, final BlockResultCodeJava code) {
+    public BlockResultJava(final QuoteJava lastChartQuote, final BlockResultCodeJava code) {
         this.lastChartQuote = lastChartQuote;
         this.code = code;
     }

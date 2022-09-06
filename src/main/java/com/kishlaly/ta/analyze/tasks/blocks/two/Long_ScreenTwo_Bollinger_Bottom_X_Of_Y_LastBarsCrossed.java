@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.BollingerJava;
@@ -20,7 +20,7 @@ import static com.kishlaly.ta.utils.Quotes.isQuoteCrossedBollingerBottom;
  */
 public class Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         if (BOLLINGER_TOTAL_BARS_CHECK < 0) {
             throw new RuntimeException("BOLLINGER_TOTAL_BARS_CHECK not defined");
         }
@@ -42,8 +42,8 @@ public class Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed implements S
         if (crossed < BOLLINGER_CROSSED_BOTTOM_BARS) {
             Log.recordCode(LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2, screen);
             Log.addDebugLine("X out of the last Y bars did not touch the bottom Bollinger band");
-            return new BlockResult(screen.getLastQuote(), LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

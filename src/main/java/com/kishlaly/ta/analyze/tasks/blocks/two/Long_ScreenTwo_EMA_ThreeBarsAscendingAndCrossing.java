@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultCodeJava;
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
  */
 public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         QuoteJava quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
         QuoteJava quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
         QuoteJava quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
@@ -50,7 +50,7 @@ public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenT
                     Log.addDebugLine("Penultimate" + (secondBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
                     Log.addDebugLine("Last" + (lastBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
                     Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen);
-                    return new BlockResult(screen.getLastQuote(), CROSSING_RULE_VIOLATED_SCREEN_2);
+                    return new BlockResultJava(screen.getLastQuote(), CROSSING_RULE_VIOLATED_SCREEN_2);
                 } else {
                     Log.recordCode(BlockResultCodeJava.CROSSING_RULE_PASSED_SCREEN_2, screen);
                     Log.addDebugLine("The intersection rule is satisfied");
@@ -63,6 +63,6 @@ public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenT
             Log.recordCode(BlockResultCodeJava.QUOTE_HIGH_GROWING_SCREEN_2, screen);
             Log.addDebugLine("There is a rise in Quote.high");
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

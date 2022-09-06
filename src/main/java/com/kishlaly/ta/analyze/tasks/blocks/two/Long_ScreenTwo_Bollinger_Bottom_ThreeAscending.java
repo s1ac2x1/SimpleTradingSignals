@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -17,7 +17,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Long_ScreenTwo_Bollinger_Bottom_ThreeAscending implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(IndicatorJava.BOLLINGER);
         BollingerJava bollinger3 = CollectionsTools.getFromEnd(screen_2_Bollinger, 3);
         BollingerJava bollinger2 = CollectionsTools.getFromEnd(screen_2_Bollinger, 2);
@@ -26,8 +26,8 @@ public class Long_ScreenTwo_Bollinger_Bottom_ThreeAscending implements ScreenTwo
         if (!ascending) {
             Log.recordCode(BOLLINGER_BOTTOM_NOT_ASCENDING_SCREEN_2, screen);
             Log.addDebugLine("The bottom Bollinger band does not narrow on the second screen");
-            return new BlockResult(screen.getLastQuote(), BOLLINGER_BOTTOM_NOT_ASCENDING_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), BOLLINGER_BOTTOM_NOT_ASCENDING_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

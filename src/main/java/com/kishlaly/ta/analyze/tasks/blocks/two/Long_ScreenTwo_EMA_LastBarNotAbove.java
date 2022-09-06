@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -17,13 +17,13 @@ import static com.kishlaly.ta.utils.Quotes.isQuoteAboveEMA;
  */
 public class Long_ScreenTwo_EMA_LastBarNotAbove implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
         if (isQuoteAboveEMA(screen.getLastQuote(), screen_2_EMA13.get(screen_2_EMA13.size() - 1).getValue())) {
             Log.recordCode(LAST_QUOTE_ABOVE_EMA_SCREEN_2, screen);
             Log.addDebugLine("Last bar above the EMA on the second screen");
-            return new BlockResult(screen.getLastQuote(), LAST_QUOTE_ABOVE_EMA_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), LAST_QUOTE_ABOVE_EMA_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultCodeJava;
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
  */
 public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         // make sure first that the last three columns are decreasing
         QuoteJava quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
         QuoteJava quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
@@ -49,7 +49,7 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
                     Log.addDebugLine("Penultimate" + (secondBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
                     Log.addDebugLine("Last" + (lastBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
                     Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen);
-                    return new BlockResult(screen.getLastQuote(), CROSSING_RULE_VIOLATED_SCREEN_2);
+                    return new BlockResultJava(screen.getLastQuote(), CROSSING_RULE_VIOLATED_SCREEN_2);
                 } else {
                     Log.recordCode(CROSSING_RULE_PASSED_SCREEN_2, screen);
                     Log.addDebugLine("The intersection rule is satisfied");
@@ -62,6 +62,6 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
             Log.recordCode(BlockResultCodeJava.QUOTE_HIGH_LOWING_SCREEN_2, screen);
             Log.addDebugLine("There is a drop in Quote.high");
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

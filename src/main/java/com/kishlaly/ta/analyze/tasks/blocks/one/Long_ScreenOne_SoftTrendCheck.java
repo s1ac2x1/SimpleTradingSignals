@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.one;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
  */
 public class Long_ScreenOne_SoftTrendCheck implements ScreenOneBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<EMAJava> screen_1_EMA26 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA26);
         EMAJava ema2 = CollectionsTools.getFromEnd(screen_1_EMA26, 2);
         EMAJava ema1 = CollectionsTools.getFromEnd(screen_1_EMA26, 1);
@@ -28,15 +28,15 @@ public class Long_ScreenOne_SoftTrendCheck implements ScreenOneBlock {
         if (!ascending) {
             Log.recordCode(LAST_EMA_NOT_ASCENDING_SCREEN_1, screen);
             Log.addDebugLine("The last EMA is not higher on the long-term screen");
-            return new BlockResult(screen.getLastQuote(), LAST_EMA_NOT_ASCENDING_SCREEN_1);
+            return new BlockResultJava(screen.getLastQuote(), LAST_EMA_NOT_ASCENDING_SCREEN_1);
         }
 
         if (!Quotes.isGreen(screen.getLastQuote())) {
             Log.recordCode(QUOTE_NOT_GREEN_SCREEN_1, screen);
             Log.addDebugLine("The last quote is not green on the long-term screen");
-            return new BlockResult(screen.getLastQuote(), QUOTE_NOT_GREEN_SCREEN_1);
+            return new BlockResultJava(screen.getLastQuote(), QUOTE_NOT_GREEN_SCREEN_1);
         }
 
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

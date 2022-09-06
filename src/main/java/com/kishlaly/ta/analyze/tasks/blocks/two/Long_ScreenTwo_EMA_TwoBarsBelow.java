@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
@@ -19,7 +19,7 @@ import static com.kishlaly.ta.utils.Quotes.isQuoteBelowEMA;
  */
 public class Long_ScreenTwo_EMA_TwoBarsBelow implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
         EMAJava ema13_2 = CollectionsTools.getFromEnd(screen_2_EMA13, 2);
         EMAJava ema13_1 = CollectionsTools.getFromEnd(screen_2_EMA13, 1);
@@ -31,8 +31,8 @@ public class Long_ScreenTwo_EMA_TwoBarsBelow implements ScreenTwoBlock {
         if (!lastQuotesBelowEMA) {
             Log.recordCode(QUOTES_NOT_BELOW_EMA_SCREEN_2, screen);
             Log.addDebugLine("The last two quotes are not below EMA13");
-            return new BlockResult(screen.getLastQuote(), QUOTES_NOT_BELOW_EMA_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), QUOTES_NOT_BELOW_EMA_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

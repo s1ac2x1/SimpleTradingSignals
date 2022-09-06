@@ -166,7 +166,7 @@ public class TaskRunner {
             try {
                 Arrays.stream(blocksGroups).forEach(blocksGroup -> {
                     System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " " + blocksGroup.getClass().getSimpleName() + " on " + symbol + " ...");
-                    BlockResult blockResult = task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks());
+                    BlockResultJava blockResult = task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks());
                     Log.addDebugLine(blockResult.isOk() ? "To check" : "Nope");
                     Log.addDebugLine("");
                     if (blockResult.isOk()) {

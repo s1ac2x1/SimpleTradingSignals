@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultCodeJava;
 import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.utils.Log;
@@ -13,7 +13,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 
 public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         QuoteJava lastChartQuote = screen.quotes.get(screen.quotes.size() - 1);
         QuoteJava signal = lastChartQuote;
 
@@ -32,19 +32,19 @@ public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
         if (nMonthsLowIndex < 0) {
             Log.addDebugLine("Not enough price bars to find a six-month low at " + screen.symbol);
             Log.recordCode(BlockResultCodeJava.NO_DATA_QUOTES, screen);
-            return new BlockResult(lastChartQuote, NO_DATA_QUOTES);
+            return new BlockResultJava(lastChartQuote, NO_DATA_QUOTES);
         }
 
         if (screen.quotes.size() - nMonthsLowIndex > 5) {
             Log.addDebugLine("The minimum is found far from the last three bars");
             Log.recordCode(N_MONTHS_LOW_IS_TOO_FAR_SCREEN_2, screen);
-            return new BlockResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_FAR_SCREEN_2);
+            return new BlockResultJava(lastChartQuote, N_MONTHS_LOW_IS_TOO_FAR_SCREEN_2);
         }
 
         if (nMonthsLowIndex + 2 >= screen.quotes.size()) {
             Log.addDebugLine("Minimum detected too close to the right edge");
             Log.recordCode(N_MONTHS_LOW_IS_TOO_CLOSE_SCREEN_2, screen);
-            return new BlockResult(lastChartQuote, N_MONTHS_LOW_IS_TOO_CLOSE_SCREEN_2);
+            return new BlockResultJava(lastChartQuote, N_MONTHS_LOW_IS_TOO_CLOSE_SCREEN_2);
         }
 
         // looking for at least two green bars after the minimum
@@ -54,9 +54,9 @@ public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
         if (!ascendingLastBars) {
             Log.addDebugLine("After the minimum there was no growth of two bars");
             Log.recordCode(QUOTES_NOT_ASCENDING_AFTER_MIN, screen);
-            return new BlockResult(lastChartQuote, QUOTES_NOT_ASCENDING_AFTER_MIN);
+            return new BlockResultJava(lastChartQuote, QUOTES_NOT_ASCENDING_AFTER_MIN);
         }
 
-        return new BlockResult(signal, OK);
+        return new BlockResultJava(signal, OK);
     }
 }

@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
@@ -19,7 +19,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Long_ScreenTwo_EMA_LastBarTooHigh implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         QuoteJava quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
         QuoteJava quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
         QuoteJava quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
@@ -35,8 +35,8 @@ public class Long_ScreenTwo_EMA_LastBarTooHigh implements ScreenTwoBlock {
         if (thirdCrossesEMA13 && secondCrossesEMA13 && lastAboveEMA13) {
             Log.recordCode(LAST_BAR_ABOVE_SCREEN_2, screen);
             Log.addDebugLine("The third and second crossed the EMA13, and the last is completely above");
-            return new BlockResult(screen.getLastQuote(), LAST_BAR_ABOVE_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), LAST_BAR_ABOVE_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

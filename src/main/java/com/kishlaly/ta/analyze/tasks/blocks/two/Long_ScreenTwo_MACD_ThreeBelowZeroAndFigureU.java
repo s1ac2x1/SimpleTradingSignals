@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 public class Long_ScreenTwo_MACD_ThreeBelowZeroAndFigureU implements ScreenTwoBlock {
 
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<MACDJava> screen_2_MACD = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);
         Double macd3 = screen_2_MACD.get(screen_2_MACD.size() - 3).getHistogram();
         Double macd2 = screen_2_MACD.get(screen_2_MACD.size() - 2).getHistogram();
@@ -26,15 +26,15 @@ public class Long_ScreenTwo_MACD_ThreeBelowZeroAndFigureU implements ScreenTwoBl
         if (!histogramBelowZero) {
             Log.recordCode(HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen);
             Log.addDebugLine("The histogram on the second screen is at least zero");
-            return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2);
         }
 
         boolean figureU = macd2 < macd3 && macd2 < macd1;
         if (!figureU) {
             Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
             Log.addDebugLine("The histogram on the second screen does not form a negative U");
-            return new BlockResult(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

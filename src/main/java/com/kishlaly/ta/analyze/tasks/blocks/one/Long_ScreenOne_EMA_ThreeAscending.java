@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.one;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -17,7 +17,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.THREE_EMA_NOT_ASCENDING_
  */
 public class Long_ScreenOne_EMA_ThreeAscending implements ScreenOneBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<EMAJava> screen_1_EMA26 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA26);
         EMAJava ema3 = CollectionsTools.getFromEnd(screen_1_EMA26, 3);
         EMAJava ema2 = CollectionsTools.getFromEnd(screen_1_EMA26, 2);
@@ -28,8 +28,8 @@ public class Long_ScreenOne_EMA_ThreeAscending implements ScreenOneBlock {
         if (!ascending) {
             Log.recordCode(THREE_EMA_NOT_ASCENDING_SCREEN_1, screen);
             Log.addDebugLine("Three values of the EMA do not grow on the long-term screen");
-            return new BlockResult(screen.getLastQuote(), THREE_EMA_NOT_ASCENDING_SCREEN_1);
+            return new BlockResultJava(screen.getLastQuote(), THREE_EMA_NOT_ASCENDING_SCREEN_1);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

@@ -9,7 +9,7 @@ abstract class AbstractModel {
     }
 
     // in epoch seconds
-    public val timestamp: Long
+    open public val timestamp: Long
     public val nativeDate: String
     public val myDate: String
 

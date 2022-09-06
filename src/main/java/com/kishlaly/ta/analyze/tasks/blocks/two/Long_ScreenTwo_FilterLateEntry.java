@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.FILTER_BY_KELTN
 
 public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<KeltnerJava> screen_2_Keltner = (List<KeltnerJava>) screen.indicators.get(IndicatorJava.KELTNER);
         if (FILTER_BY_KELTNER_ENABLED) {
             KeltnerJava lastKeltnerData = CollectionsTools.getFromEnd(screen_2_Keltner, 1);
@@ -29,9 +29,9 @@ public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlock {
             if (lastQuoteClose >= maxAllowedCloseValue) {
                 Log.addDebugLine("The last quote closed above " + FILTER_BY_KELTNER + "% of the distance from the middle to the top of the channel");
                 Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2, screen);
-                return new BlockResult(screen.getLastQuote(), QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2);
+                return new BlockResultJava(screen.getLastQuote(), QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2);
             }
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

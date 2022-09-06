@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.StochJava;
@@ -17,7 +17,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_D_NOT_EXTRA_OVERSO
  */
 public class Long_ScreenTwo_Stoch_D_TwoOrOneBelow_X implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);
         StochJava stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
         StochJava stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
@@ -31,8 +31,8 @@ public class Long_ScreenTwo_Stoch_D_TwoOrOneBelow_X implements ScreenTwoBlock {
         if (!oneBelowExtraLow) {
             Log.recordCode(STOCH_D_NOT_EXTRA_OVERSOLD_SCREEN_2, screen);
             Log.addDebugLine("One of the last two %D stochastics is not lower than " + ThreeDisplays.Config.STOCH_CUSTOM + " on the second screen");
-            return new BlockResult(screen.getLastQuote(), STOCH_D_NOT_EXTRA_OVERSOLD_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), STOCH_D_NOT_EXTRA_OVERSOLD_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

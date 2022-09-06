@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.StochJava;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_K_D_NOT_ASCENDING_
  */
 public class Long_ScreenTwo_Stoch_D_K_LastAscending implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);
         StochJava screen_2_lastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
         StochJava screen_2_preLastStoch = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
@@ -26,8 +26,8 @@ public class Long_ScreenTwo_Stoch_D_K_LastAscending implements ScreenTwoBlock {
         if (!ascending) {
             Log.recordCode(STOCH_K_D_NOT_ASCENDING_SCREEN_2, screen);
             Log.addDebugLine("Stochastic does not grow on the second screen");
-            return new BlockResult(screen.getLastQuote(), STOCH_K_D_NOT_ASCENDING_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), STOCH_K_D_NOT_ASCENDING_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

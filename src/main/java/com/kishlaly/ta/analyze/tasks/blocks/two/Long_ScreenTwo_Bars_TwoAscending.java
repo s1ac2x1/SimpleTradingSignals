@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.utils.CollectionsTools;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
  */
 public class Long_ScreenTwo_Bars_TwoAscending implements ScreenTwoBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         List<QuoteJava> screen_2_Quotes = screen.quotes;
         QuoteJava quote2 = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
         QuoteJava quote1 = CollectionsTools.getFromEnd(screen_2_Quotes, 1);
@@ -25,8 +25,8 @@ public class Long_ScreenTwo_Bars_TwoAscending implements ScreenTwoBlock {
         if (!lowAndHightAscending) {
             Log.recordCode(LAST_QUOTES_NOT_ASCENDING_SCREEN_2, screen);
             Log.addDebugLine("The last two quotes do not grow consistently on the second screen");
-            return new BlockResult(screen.getLastQuote(), LAST_QUOTES_NOT_ASCENDING_SCREEN_2);
+            return new BlockResultJava(screen.getLastQuote(), LAST_QUOTES_NOT_ASCENDING_SCREEN_2);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 }

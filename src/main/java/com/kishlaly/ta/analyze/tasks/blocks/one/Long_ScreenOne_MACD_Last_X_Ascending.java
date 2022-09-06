@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.one;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
@@ -17,7 +17,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.X_HISTOGRAMS_NOT_ASCENDI
  */
 public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlock {
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         if (ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK < 0) {
             throw new RuntimeException("ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK not set");
         }
@@ -34,9 +34,9 @@ public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlock {
         if (count < ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK) {
             Log.recordCode(X_HISTOGRAMS_NOT_ASCENDING_SCREEN_1, screen);
             Log.addDebugLine(ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK + " histograms do not grow on the long-term screen");
-            return new BlockResult(screen.getLastQuote(), X_HISTOGRAMS_NOT_ASCENDING_SCREEN_1);
+            return new BlockResultJava(screen.getLastQuote(), X_HISTOGRAMS_NOT_ASCENDING_SCREEN_1);
         }
-        return new BlockResult(screen.getLastQuote(), OK);
+        return new BlockResultJava(screen.getLastQuote(), OK);
     }
 
 }

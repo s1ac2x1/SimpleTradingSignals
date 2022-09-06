@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.commons;
 
-import com.kishlaly.ta.model.BlockResult;
+import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.Log;
@@ -15,11 +15,11 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 public class ScreenBasicValidation implements CommonBlock {
 
     @Override
-    public BlockResult check(SymbolData screen) {
+    public BlockResultJava check(SymbolData screen) {
         if (screen.quotes.isEmpty() || screen.quotes.size() < resolveMinBarsCount(screen.timeframe)) {
             Log.addDebugLine("There are not enough quotes for " + screen.timeframe.name());
             Log.recordCode(NO_DATA_QUOTES, screen);
-            return new BlockResult(null, NO_DATA_QUOTES);
+            return new BlockResultJava(null, NO_DATA_QUOTES);
         }
 
         List<IndicatorJava> missingData = new ArrayList<>();
@@ -31,10 +31,10 @@ public class ScreenBasicValidation implements CommonBlock {
         if (!missingData.isEmpty()) {
             Log.recordCode(NO_DATA_INDICATORS, screen);
             Log.addDebugLine("No indicator data: " + missingData.stream().map(indicator -> indicator.name()).collect(Collectors.joining(", ")));
-            return new BlockResult(null, NO_DATA_INDICATORS);
+            return new BlockResultJava(null, NO_DATA_INDICATORS);
         }
 
-        return new BlockResult(null, OK);
+        return new BlockResultJava(null, OK);
     }
 
 }
