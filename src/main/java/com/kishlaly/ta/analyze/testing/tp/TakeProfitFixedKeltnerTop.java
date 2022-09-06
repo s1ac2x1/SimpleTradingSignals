@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.testing.tp;
 
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.Keltner;
+import com.kishlaly.ta.model.indicators.KeltnerJava;
 import com.kishlaly.ta.utils.IndicatorUtils;
 
 /**
@@ -15,7 +15,7 @@ public class TakeProfitFixedKeltnerTop extends TakeProfitStrategy {
 
     @Override
     public double calcualte(SymbolData data, int signalIndex) {
-        Keltner keltner = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes).get(signalIndex);
+        KeltnerJava keltner = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes).get(signalIndex);
         int keltnerTopRatio = (int) getConfig();
         double middle = keltner.getMiddle();
         double top = keltner.getTop();

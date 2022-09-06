@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.testing.sl;
 
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.Keltner;
+import com.kishlaly.ta.model.indicators.KeltnerJava;
 import com.kishlaly.ta.utils.IndicatorUtils;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class StopLossFixedKeltnerBottom extends StopLossStrategy {
 
     @Override
     public double calculate(SymbolData data, int signalIndex) {
-        List<Keltner> keltnerChannels = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes);
+        List<KeltnerJava> keltnerChannels = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes);
         return keltnerChannels.get(signalIndex).getLow();
     }
 

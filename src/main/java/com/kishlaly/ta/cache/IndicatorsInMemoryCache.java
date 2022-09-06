@@ -16,7 +16,7 @@ public class IndicatorsInMemoryCache {
 
     private static ConcurrentHashMap<EMAKey, List<EMAJava>> ema = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<MACDKey, List<MACD>> macd = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<KeltnerKEY, List<Keltner>> keltner = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<KeltnerKEY, List<KeltnerJava>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKey, List<ATRJava>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<BollingerKey, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
@@ -30,7 +30,7 @@ public class IndicatorsInMemoryCache {
         macd.put(new MACDKey(symbol, timeframe), data);
     }
 
-    public static void putKeltner(String symbol, Timeframe timeframe, List<Keltner> data) {
+    public static void putKeltner(String symbol, Timeframe timeframe, List<KeltnerJava> data) {
         keltner.put(new KeltnerKEY(symbol, timeframe), data);
     }
 
@@ -76,13 +76,13 @@ public class IndicatorsInMemoryCache {
     }
 
 
-    public static List<Keltner> getKeltner(String symbol, Timeframe timeframe) {
-        List<Keltner> cached = keltner.getOrDefault(new KeltnerKEY(symbol, timeframe), Collections.emptyList());
+    public static List<KeltnerJava> getKeltner(String symbol, Timeframe timeframe) {
+        List<KeltnerJava> cached = keltner.getOrDefault(new KeltnerKEY(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
-            List<Keltner> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<Keltner>>() {
+            List<KeltnerJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<KeltnerJava>>() {
             }.getType());
-            Collections.sort(copy, Comparator.comparing(Keltner::getTimestamp));
+            Collections.sort(copy, Comparator.comparing(KeltnerJava::getTimestamp));
             return copy;
         }
         return Collections.emptyList();

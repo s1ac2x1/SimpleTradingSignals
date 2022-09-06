@@ -77,8 +77,8 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<Keltner> buildKeltnerChannels(String symbol, List<QuoteJava> quotes) {
-        List<Keltner> cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe);
+    public static List<KeltnerJava> buildKeltnerChannels(String symbol, List<QuoteJava> quotes) {
+        List<KeltnerJava> cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
@@ -86,13 +86,13 @@ public class IndicatorUtils {
             KeltnerChannelMiddleIndicator middle = new KeltnerChannelMiddleIndicator(barSeries, 20);
             KeltnerChannelLowerIndicator low = new KeltnerChannelLowerIndicator(middle, 2, 10);
             KeltnerChannelUpperIndicator top = new KeltnerChannelUpperIndicator(middle, 2, 10);
-            List<Keltner> result = new ArrayList<>();
+            List<KeltnerJava> result = new ArrayList<>();
             for (int i = 0; i < quotes.size(); i++) {
-                result.add(new Keltner(quotes.get(i).getTimestamp(), low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
+                result.add(new KeltnerJava(quotes.get(i).getTimestamp(), low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
             }
-            result = result.stream().filter(Keltner::valuesPresent).collect(Collectors.toList());
+            result = result.stream().filter(KeltnerJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
-            Collections.sort(result, Comparator.comparing(Keltner::getTimestamp));
+            Collections.sort(result, Comparator.comparing(KeltnerJava::getTimestamp));
             IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe, result);
             return result;
         }

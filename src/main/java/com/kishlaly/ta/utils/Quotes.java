@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.BollingerJava;
-import com.kishlaly.ta.model.indicators.Keltner;
+import com.kishlaly.ta.model.indicators.KeltnerJava;
 
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
@@ -132,7 +132,7 @@ public class Quotes {
         return quote.getLow() < bollinger.getBottom() && quote.getHigh() < bollinger.getBottom();
     }
 
-    public static boolean isQuoteCrossedKeltnerBottom(QuoteJava quote, Keltner keltner) {
+    public static boolean isQuoteCrossedKeltnerBottom(QuoteJava quote, KeltnerJava keltner) {
         return quote.getLow() <= keltner.getLow() && quote.getHigh() >= keltner.getLow();
     }
 

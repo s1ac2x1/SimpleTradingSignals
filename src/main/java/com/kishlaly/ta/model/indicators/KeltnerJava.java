@@ -2,13 +2,13 @@ package com.kishlaly.ta.model.indicators;
 
 import com.kishlaly.ta.model.AbstractModelJava;
 
-public class Keltner extends AbstractModelJava {
+public class KeltnerJava extends AbstractModelJava {
 
     private double low;
     private double middle;
     private double top;
 
-    public Keltner(final Long timestamp, final double low, final double middle, final double top) {
+    public KeltnerJava(final Long timestamp, final double low, final double middle, final double top) {
         super(timestamp);
         this.low = low;
         this.middle = middle;
