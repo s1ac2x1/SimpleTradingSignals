@@ -50,13 +50,12 @@ class IndicatorsInMemoryCache {
 
         fun getEMA(symbol: String, timeframe: Timeframe, period: Int): List<EMA> {
             val cached = ema.getOrDefault(EMAKey(symbol, timeframe, period), emptyList())
-            val json = gson.toJson(cached)
-            val copy = gson.fromJson<List<EMA>>(json, object : TypeToken<List<EMA>>() {}.type)
-            return copy.sortedBy { it.timestamp }
+            return copy(cached)
         }
 
-        inline fun <reified T> copy(source: List<T>, destination: List<T>) {
-
+        fun <T : AbstractModel> copy(source: List<out T>): List<T> {
+            val copy = gson.fromJson<List<T>>(gson.toJson(source), object : TypeToken<List<T>>() {}.type)
+            return copy.sortedBy { it.timestamp }
         }
 
     }
