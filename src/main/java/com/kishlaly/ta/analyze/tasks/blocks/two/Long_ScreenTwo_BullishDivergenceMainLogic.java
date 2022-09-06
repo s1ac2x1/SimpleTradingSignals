@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResultCode;
+import com.kishlaly.ta.model.BlockResultCodeJava;
 import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.HistogramQuote;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 import static com.kishlaly.ta.utils.DatesJava.beautifyQuoteDate;
 
 public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock {
@@ -78,7 +78,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                 .max(Comparator.comparingDouble(HistogramQuote::getHistogramValue)).get();
 
         if (quoteWithHighestHistogramAfterLowestLow.histogramValue <= 0) {
-            Log.recordCode(BlockResultCode.BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2, screen);
+            Log.recordCode(BlockResultCodeJava.BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2, screen);
             Log.addDebugLine("there was no fracture of the bear's backbone");
             return new BlockResult(screen.getLastQuote(), BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2);
         }
@@ -153,7 +153,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                 }
             }
             if (foundSecondPositive) {
-                Log.recordCode(BlockResultCode.HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS, screen);
+                Log.recordCode(BlockResultCodeJava.HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS, screen);
                 Log.addDebugLine("In the point " + beautifyQuoteDate(histogramQuotes.get(indexOfSecondPositive).quote) + " a second positive area was found");
                 return new BlockResult(screen.getLastQuote(), HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS);
             }

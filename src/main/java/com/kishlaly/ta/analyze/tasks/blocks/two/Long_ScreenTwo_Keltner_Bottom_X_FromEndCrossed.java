@@ -10,8 +10,8 @@ import com.kishlaly.ta.utils.Quotes;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.OK;
-import static com.kishlaly.ta.model.BlockResultCode.X_FROM_END_QUOTE_DIDNT_CROSSED_KELTNER_BOTTOM_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.X_FROM_END_QUOTE_DIDNT_CROSSED_KELTNER_BOTTOM_SCREEN_2;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.QUOTE_FROM_END_TO_USE;
 
 public class Long_ScreenTwo_Keltner_Bottom_X_FromEndCrossed implements ScreenTwoBlock {

@@ -8,8 +8,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.OK;
-import static com.kishlaly.ta.model.BlockResultCode.STOCH_NOT_DESCENDING_FROM_OVERBOUGHT_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_NOT_DESCENDING_FROM_OVERBOUGHT_SCREEN_2;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_OVERBOUGHT;
 
 /**

@@ -8,8 +8,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.OK;
-import static com.kishlaly.ta.model.BlockResultCode.STOCH_D_NOT_U_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_D_NOT_U_SCREEN_2;
 
 /**
  * slow stochastic draws the figure U on the last three values

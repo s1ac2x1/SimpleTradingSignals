@@ -1,6 +1,6 @@
 package com.kishlaly.ta.model;
 
-public enum BlockResultCode {
+public enum BlockResultCodeJava {
 
     OK,
     NO_DATA_QUOTES,

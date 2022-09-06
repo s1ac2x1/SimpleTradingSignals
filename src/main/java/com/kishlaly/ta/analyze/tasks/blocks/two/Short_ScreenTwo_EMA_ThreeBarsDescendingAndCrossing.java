@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResultCode;
+import com.kishlaly.ta.model.BlockResultCodeJava;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
@@ -11,7 +11,7 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 
 /**
  * price bars should cross EMA13 and should decrease
@@ -31,10 +31,10 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
 
         if (!descendingBarLow) {
-            Log.recordCode(BlockResultCode.QUOTE_LOW_NOT_LOWING_SCREEN_2, screen);
+            Log.recordCode(BlockResultCodeJava.QUOTE_LOW_NOT_LOWING_SCREEN_2, screen);
             Log.addDebugLine("Quote.low is not reduced consistently");
             if (!descendingBarClose) {
-                Log.recordCode(BlockResultCode.QUOTE_CLOSE_NOT_LOWING_SCREEN_2, screen);
+                Log.recordCode(BlockResultCodeJava.QUOTE_CLOSE_NOT_LOWING_SCREEN_2, screen);
                 Log.addDebugLine("Quote.close is not reduced consistently");
                 // the third from the end all above EMA13, and the second and last crossed it
                 boolean thirdBarAboveEMA13 = quote3.getLow() > CollectionsTools.getFromEnd(screen_2_EMA13, 3).getValue()
@@ -59,7 +59,7 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
                 Log.addDebugLine("There is a decrease in Quote.close");
             }
         } else {
-            Log.recordCode(BlockResultCode.QUOTE_HIGH_LOWING_SCREEN_2, screen);
+            Log.recordCode(BlockResultCodeJava.QUOTE_HIGH_LOWING_SCREEN_2, screen);
             Log.addDebugLine("There is a drop in Quote.high");
         }
         return new BlockResult(screen.getLastQuote(), OK);

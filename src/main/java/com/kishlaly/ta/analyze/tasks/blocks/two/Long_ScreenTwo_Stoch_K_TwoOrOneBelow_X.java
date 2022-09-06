@@ -9,8 +9,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.OK;
-import static com.kishlaly.ta.model.BlockResultCode.STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2;
 
 /**
  * one of the two stochastic %K values is less than 20

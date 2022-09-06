@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.model.BlockResultCode;
+import com.kishlaly.ta.model.BlockResultCodeJava;
 import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
@@ -9,7 +9,7 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.Comparator;
 
-import static com.kishlaly.ta.model.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 
 public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
     @Override
@@ -31,7 +31,7 @@ public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
         }
         if (nMonthsLowIndex < 0) {
             Log.addDebugLine("Not enough price bars to find a six-month low at " + screen.symbol);
-            Log.recordCode(BlockResultCode.NO_DATA_QUOTES, screen);
+            Log.recordCode(BlockResultCodeJava.NO_DATA_QUOTES, screen);
             return new BlockResult(lastChartQuote, NO_DATA_QUOTES);
         }
 

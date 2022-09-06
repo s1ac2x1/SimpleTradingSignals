@@ -10,8 +10,8 @@ import com.kishlaly.ta.utils.Quotes;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.NOT_ALL_NEEDED_QUOTES_ABOUT_EMA_SCREEN_1;
-import static com.kishlaly.ta.model.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.NOT_ALL_NEEDED_QUOTES_ABOUT_EMA_SCREEN_1;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 
 /**
  * of the latest {TOTAL} quotes at least {ABOVE} is completely above EMA26

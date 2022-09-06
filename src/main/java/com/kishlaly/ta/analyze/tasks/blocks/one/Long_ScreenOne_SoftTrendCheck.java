@@ -10,7 +10,7 @@ import com.kishlaly.ta.utils.Quotes;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.*;
+import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 
 /**
  * the last EMA26 is above

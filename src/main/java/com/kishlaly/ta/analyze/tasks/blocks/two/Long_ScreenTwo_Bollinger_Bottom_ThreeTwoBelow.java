@@ -11,8 +11,8 @@ import com.kishlaly.ta.utils.Quotes;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.OK;
-import static com.kishlaly.ta.model.BlockResultCode.QUOTE_3_AND_QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.QUOTE_3_AND_QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2;
 
 /**
  * the third and second quotes from the end below the bottom Bollinger band

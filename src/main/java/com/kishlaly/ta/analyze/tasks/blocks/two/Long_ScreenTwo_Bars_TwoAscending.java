@@ -8,8 +8,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.LAST_QUOTES_NOT_ASCENDING_SCREEN_2;
-import static com.kishlaly.ta.model.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.LAST_QUOTES_NOT_ASCENDING_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 
 /**
  * the last two bars go up (quote.low & quote.high)

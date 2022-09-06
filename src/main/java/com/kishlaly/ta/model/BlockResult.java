@@ -3,9 +3,9 @@ package com.kishlaly.ta.model;
 public class BlockResult {
 
     private QuoteJava lastChartQuote;
-    private BlockResultCode code;
+    private BlockResultCodeJava code;
 
-    public BlockResult(final QuoteJava lastChartQuote, final BlockResultCode code) {
+    public BlockResult(final QuoteJava lastChartQuote, final BlockResultCodeJava code) {
         this.lastChartQuote = lastChartQuote;
         this.code = code;
     }
@@ -18,12 +18,12 @@ public class BlockResult {
         this.lastChartQuote = lastChartQuote;
     }
 
-    public BlockResultCode getCode() {
+    public BlockResultCodeJava getCode() {
         return this.code;
     }
 
     public boolean isOk() {
-        return code == BlockResultCode.OK;
+        return code == BlockResultCodeJava.OK;
     }
 
 }

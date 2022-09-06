@@ -5,8 +5,8 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.utils.Log;
 
-import static com.kishlaly.ta.model.BlockResultCode.NO_DOWNTREND_SCREEN_1;
-import static com.kishlaly.ta.model.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.NO_DOWNTREND_SCREEN_1;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.NUMBER_OF_EMA26_VALUES_TO_CHECK;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 

@@ -4,8 +4,8 @@ import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.utils.Log;
 
-import static com.kishlaly.ta.model.BlockResultCode.LAST_QUOTES_NOT_ASCENDING_SCREEN_2;
-import static com.kishlaly.ta.model.BlockResultCode.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.LAST_QUOTES_NOT_ASCENDING_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 
 /**
  * high of the last column above the penultimate one

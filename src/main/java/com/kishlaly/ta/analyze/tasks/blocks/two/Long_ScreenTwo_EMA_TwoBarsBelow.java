@@ -10,8 +10,8 @@ import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
 
-import static com.kishlaly.ta.model.BlockResultCode.OK;
-import static com.kishlaly.ta.model.BlockResultCode.QUOTES_NOT_BELOW_EMA_SCREEN_2;
+import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
+import static com.kishlaly.ta.model.BlockResultCodeJava.QUOTES_NOT_BELOW_EMA_SCREEN_2;
 import static com.kishlaly.ta.utils.Quotes.isQuoteBelowEMA;
 
 /**
