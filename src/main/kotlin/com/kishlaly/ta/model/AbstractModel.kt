@@ -8,9 +8,10 @@ abstract class AbstractModel {
         val exchangeTimezome = "US/Eastern"
     }
 
-    protected val timestamp: Long
-    protected val nativeDate: String
-    protected val myDate: String
+    // in epoch seconds
+    val timestamp: Long
+    val nativeDate: String
+    val myDate: String
 
     constructor(timestamp: Long) {
         this.timestamp = timestamp
