@@ -4,19 +4,19 @@ import com.kishlaly.ta.model.TimeframeJava;
 
 import java.util.Objects;
 
-public class BaseKey {
+public class BaseKeyJava {
 
     protected String symbol;
     protected TimeframeJava timeframe;
     protected int period;
 
-    public BaseKey(final String symbol, final TimeframeJava timeframe, int period) {
+    public BaseKeyJava(final String symbol, final TimeframeJava timeframe, int period) {
         this.symbol = symbol;
         this.timeframe = timeframe;
         this.period = period;
     }
 
-    public BaseKey(final String symbol, final TimeframeJava timeframe) {
+    public BaseKeyJava(final String symbol, final TimeframeJava timeframe) {
         this(symbol, timeframe, 0);
     }
 
@@ -32,7 +32,7 @@ public class BaseKey {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
-        final BaseKey baseKey = (BaseKey) o;
+        final BaseKeyJava baseKey = (BaseKeyJava) o;
         return this.period == baseKey.period && this.symbol.equals(baseKey.symbol) && this.timeframe == baseKey.timeframe;
     }
 

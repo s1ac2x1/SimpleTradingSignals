@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.testing.sl;
 
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
-import com.kishlaly.ta.utils.IndicatorUtils;
+import com.kishlaly.ta.utils.IndicatorUtilsJava;
 
 public class StopLossVolatileKeltnerMiddle extends StopLossStrategy {
 
@@ -12,7 +12,7 @@ public class StopLossVolatileKeltnerMiddle extends StopLossStrategy {
 
     @Override
     public double calculate(SymbolDataJava data, int signalIndex) {
-        KeltnerJava keltner = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes).get(signalIndex);
+        KeltnerJava keltner = IndicatorUtilsJava.buildKeltnerChannels(data.symbol, data.quotes).get(signalIndex);
         return keltner.getMiddle();
     }
 

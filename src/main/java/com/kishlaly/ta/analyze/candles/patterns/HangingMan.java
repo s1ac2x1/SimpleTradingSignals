@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.candles.CandleResult;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.IndicatorUtils;
+import com.kishlaly.ta.utils.IndicatorUtilsJava;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class HangingMan implements CandlePattern {
     @Override
     public CandleResult check(SymbolDataJava screen) {
         // EMA rises
-        if (IndicatorUtils.emaAscending((List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13), 3, 4)) {
+        if (IndicatorUtilsJava.emaAscending((List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13), 3, 4)) {
             // The body is in the upper part of the price range
 
         }

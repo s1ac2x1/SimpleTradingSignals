@@ -10,16 +10,16 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class IndicatorsInMemoryCache {
+public class IndicatorsInMemoryCacheJava {
 
     private static Gson gson = new Gson();
 
     private static ConcurrentHashMap<EMAKey, List<EMAJava>> ema = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<MACDKey, List<MACDJava>> macd = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<KeltnerKEY, List<KeltnerJava>> keltner = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<ATRKey, List<ATRJava>> atr = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<ATRKeyJava, List<ATRJava>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<StochJava>> stoch = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<BollingerKey, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<BollingerKeyJava, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<EFIKey, List<ElderForceIndexJava>> efi = new ConcurrentHashMap<>();
 
     public static void putEMA(String symbol, TimeframeJava timeframe, int period, List<EMAJava> data) {
@@ -35,7 +35,7 @@ public class IndicatorsInMemoryCache {
     }
 
     public static void putATR(String symbol, TimeframeJava timeframe, int period, List<ATRJava> data) {
-        atr.put(new ATRKey(symbol, timeframe, period), data);
+        atr.put(new ATRKeyJava(symbol, timeframe, period), data);
     }
 
     public static void putStoch(String symbol, TimeframeJava timeframe, List<StochJava> data) {
@@ -47,7 +47,7 @@ public class IndicatorsInMemoryCache {
     }
 
     public static void putBollinger(String symbol, TimeframeJava timeframe, List<BollingerJava> data) {
-        bollinger.put(new BollingerKey(symbol, timeframe), data);
+        bollinger.put(new BollingerKeyJava(symbol, timeframe), data);
     }
 
     public static List<EMAJava> getEMA(String symbol, TimeframeJava timeframe, int period) {
@@ -90,7 +90,7 @@ public class IndicatorsInMemoryCache {
 
 
     public static List<ATRJava> getATR(String symbol, TimeframeJava timeframe, int period) {
-        List<ATRJava> cached = atr.getOrDefault(new ATRKey(symbol, timeframe, period), Collections.emptyList());
+        List<ATRJava> cached = atr.getOrDefault(new ATRKeyJava(symbol, timeframe, period), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
             List<ATRJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<ATRJava>>() {
@@ -115,7 +115,7 @@ public class IndicatorsInMemoryCache {
     }
 
     public static List<BollingerJava> getBollinger(String symbol, TimeframeJava timeframe) {
-        List<BollingerJava> cached = bollinger.getOrDefault(new BollingerKey(symbol, timeframe), Collections.emptyList());
+        List<BollingerJava> cached = bollinger.getOrDefault(new BollingerKeyJava(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
             List<BollingerJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<BollingerJava>>() {

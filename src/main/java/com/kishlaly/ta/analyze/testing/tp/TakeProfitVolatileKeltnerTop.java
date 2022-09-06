@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.testing.tp;
 
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
-import com.kishlaly.ta.utils.IndicatorUtils;
+import com.kishlaly.ta.utils.IndicatorUtilsJava;
 
 /**
  * TP at % of the top of the Keltner channel at each new point
@@ -15,7 +15,7 @@ public class TakeProfitVolatileKeltnerTop extends TakeProfitStrategy {
 
     @Override
     public double calcualte(SymbolDataJava data, int signalIndex) {
-        KeltnerJava keltner = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes).get(signalIndex);
+        KeltnerJava keltner = IndicatorUtilsJava.buildKeltnerChannels(data.symbol, data.quotes).get(signalIndex);
         int keltnerTopRatio = (int) getConfig();
         double middle = keltner.getMiddle();
         double top = keltner.getTop();

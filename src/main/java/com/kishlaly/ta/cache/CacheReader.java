@@ -9,7 +9,7 @@ import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.model.indicators.StochJava;
 import com.kishlaly.ta.utils.ContextJava;
-import com.kishlaly.ta.utils.IndicatorUtils;
+import com.kishlaly.ta.utils.IndicatorUtilsJava;
 import com.kishlaly.ta.utils.Quotes;
 
 import java.io.File;
@@ -164,19 +164,19 @@ public class CacheReader {
         List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
         switch (indicator) {
             case MACD:
-                return IndicatorUtils.buildMACDHistogram(symbol, quotes);
+                return IndicatorUtilsJava.buildMACDHistogram(symbol, quotes);
             case EMA13:
-                return IndicatorUtils.buildEMA(symbol, quotes, 13);
+                return IndicatorUtilsJava.buildEMA(symbol, quotes, 13);
             case EMA26:
-                return IndicatorUtils.buildEMA(symbol, quotes, 26);
+                return IndicatorUtilsJava.buildEMA(symbol, quotes, 26);
             case STOCH:
-                return IndicatorUtils.buildStochastic(symbol, quotes);
+                return IndicatorUtilsJava.buildStochastic(symbol, quotes);
             case KELTNER:
-                return IndicatorUtils.buildKeltnerChannels(symbol, quotes);
+                return IndicatorUtilsJava.buildKeltnerChannels(symbol, quotes);
             case BOLLINGER:
-                return IndicatorUtils.buildBollingerBands(symbol, quotes);
+                return IndicatorUtilsJava.buildBollingerBands(symbol, quotes);
             case EFI:
-                return IndicatorUtils.buildEFI(symbol, quotes);
+                return IndicatorUtilsJava.buildEFI(symbol, quotes);
             default:
                 return Collections.emptyList();
         }

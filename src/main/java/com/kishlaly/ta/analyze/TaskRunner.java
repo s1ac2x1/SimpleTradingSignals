@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.testing.HistoricalTesting;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.CacheReader;
-import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
+import com.kishlaly.ta.cache.IndicatorsInMemoryCacheJava;
 import com.kishlaly.ta.cache.QuotesInMemoryCache;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -51,7 +51,7 @@ public class TaskRunner {
         });
         if (findOptimal) {
             QuotesInMemoryCache.clear();
-            IndicatorsInMemoryCache.clear();
+            IndicatorsInMemoryCacheJava.clear();
             System.gc();
             //findOptimalSLTP(blocksGroups);
         }
@@ -150,8 +150,8 @@ public class TaskRunner {
             if (TRIM_DATA) {
                 Quotes.trim(screen1);
                 Quotes.trim(screen2);
-                IndicatorUtils.trim(screen1);
-                IndicatorUtils.trim(screen2);
+                IndicatorUtilsJava.trim(screen1);
+                IndicatorUtilsJava.trim(screen2);
             }
 
             if (ContextJava.lowPricesOnly && screen2.quotes.get(screen2.quotes.size() - 1).getClose() > ContextJava.lowPriceLimit) {
@@ -186,7 +186,7 @@ public class TaskRunner {
             }
             processingSymbol.getAndIncrement();
             QuotesInMemoryCache.clear();
-            IndicatorsInMemoryCache.clear();
+            IndicatorsInMemoryCacheJava.clear();
             screen1.clear();
             screen2.clear();
         });
