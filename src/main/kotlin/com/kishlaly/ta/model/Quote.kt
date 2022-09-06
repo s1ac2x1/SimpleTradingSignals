@@ -2,8 +2,8 @@ package com.kishlaly.ta.model
 
 import kotlin.Double.Companion.NaN
 
-class Quote(
-        timestamp: Long,
+data class Quote(
+        override val timestamp: Long,
         val high: Double,
         val open: Double,
         val close: Double,

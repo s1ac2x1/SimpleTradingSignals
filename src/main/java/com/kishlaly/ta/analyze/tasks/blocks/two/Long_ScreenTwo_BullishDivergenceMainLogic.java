@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 import com.kishlaly.ta.model.BlockResultCodeJava;
 import com.kishlaly.ta.analyze.tasks.Divergencies;
 import com.kishlaly.ta.model.BlockResultJava;
-import com.kishlaly.ta.model.HistogramQuote;
+import com.kishlaly.ta.model.HistogramQuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
@@ -24,16 +24,16 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
 
         // build an array of quotes with their histograms
 
-        List<HistogramQuote> histogramQuotes = new ArrayList<>();
+        List<HistogramQuoteJava> histogramQuotes = new ArrayList<>();
         for (int i = 0; i < screenTwoMinBarCount; i++) {
             double histogram = screenTwoMacdValues.get(i).getHistogram();
-            histogramQuotes.add(new HistogramQuote(histogram, screen.quotes.get(i)));
+            histogramQuotes.add(new HistogramQuoteJava(histogram, screen.quotes.get(i)));
         }
 
         // the minimum bar of the histogram for the whole period and the corresponding quotation
 
-        HistogramQuote quoteWithLowestHistogram = histogramQuotes.stream()
-                .min(Comparator.comparingDouble(HistogramQuote::getHistogramValue)).get();
+        HistogramQuoteJava quoteWithLowestHistogram = histogramQuotes.stream()
+                .min(Comparator.comparingDouble(HistogramQuoteJava::getHistogramValue)).get();
 
         // the index of this column in the histogramQuotes array
 
@@ -57,7 +57,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                     .min(Comparator.comparingDouble(v -> v.getQuote().getClose())).get().getQuote().getClose();
         }
 
-        HistogramQuote histogramQuoteWithMinimanPriceForTheWholeRange = histogramQuotes.stream()
+        HistogramQuoteJava histogramQuoteWithMinimanPriceForTheWholeRange = histogramQuotes.stream()
                 .filter(q -> q.getQuote().getClose() == minimalPriceForRangeUpToLowestHistogram)
                 .findFirst().get();
 
@@ -71,11 +71,11 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
 
         int indexOfMaxHistogramBarAfterLowestLow = 0;
 
-        List<HistogramQuote> histogramQuotesAfterLowestLow = histogramQuotes.subList(
+        List<HistogramQuoteJava> histogramQuotesAfterLowestLow = histogramQuotes.subList(
                 indexOfMinHistogram, histogramQuotes.size());
 
-        HistogramQuote quoteWithHighestHistogramAfterLowestLow = histogramQuotesAfterLowestLow.stream()
-                .max(Comparator.comparingDouble(HistogramQuote::getHistogramValue)).get();
+        HistogramQuoteJava quoteWithHighestHistogramAfterLowestLow = histogramQuotesAfterLowestLow.stream()
+                .max(Comparator.comparingDouble(HistogramQuoteJava::getHistogramValue)).get();
 
         if (quoteWithHighestHistogramAfterLowestLow.histogramValue <= 0) {
             Log.recordCode(BlockResultCodeJava.BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2, screen);
@@ -95,10 +95,10 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
 
         // now we need to find the histogram zero line crossings from top to bottom
 
-        List<HistogramQuote> histogramQuotesFromMaxBar = histogramQuotes.subList(
+        List<HistogramQuoteJava> histogramQuotesFromMaxBar = histogramQuotes.subList(
                 indexOfMaxHistogramBarAfterLowestLow, histogramQuotes.size());
         boolean crossedZero = false;
-        HistogramQuote quoteWhenHistogramCrossedZeroFromTop = null;
+        HistogramQuoteJava quoteWhenHistogramCrossedZeroFromTop = null;
         for (int i = indexOfMaxHistogramBarAfterLowestLow; i < histogramQuotes.size(); i++) {
             if (histogramQuotes.get(i).histogramValue < 0) {
                 crossedZero = true;
@@ -134,7 +134,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             boolean foundSecondNegativeAfterLowestLow = false;
             int indexOfSecondPositive = -1;
             for (int i = indexOfMinHistogram; i < histogramQuotes.size(); i++) {
-                HistogramQuote histogramQuote = histogramQuotes.get(i);
+                HistogramQuoteJava histogramQuote = histogramQuotes.get(i);
                 double histogramValue = histogramQuote.histogramValue;
                 if (histogramValue > 0) {
                     if (!foundSecondPositive) {
@@ -192,7 +192,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             // the second bottom of the histogram should not be lower than half of the first bottom
 
             double lowestHistogramAfterCrossedZeroFromTop = histogramQuotes.subList(indexOfQuoteWhenHistogramCrossedZeroFromTop, histogramQuotes.size()).stream()
-                    .min(Comparator.comparingDouble(HistogramQuote::getHistogramValue)).get().histogramValue;
+                    .min(Comparator.comparingDouble(HistogramQuoteJava::getHistogramValue)).get().histogramValue;
             if (Math.abs(lowestHistogramAfterCrossedZeroFromTop) >= Math.abs(quoteWithLowestHistogram.histogramValue) / 100 * 60) {
                 Log.recordCode(HISTOGRAM_SECOND_BOTTOM_RATIO, screen);
                 Log.addDebugLine("The second bottom of the histogram is larger than " + Divergencies.BullishConfig.SECOND_BOTTOM_RATIO + "% of the first bottom depth");
@@ -200,8 +200,8 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             }
 
             // the last bar of the histogram should be smaller than the previous one
-            HistogramQuote preLast = histogramQuotes.get(histogramQuotes.size() - 2);
-            HistogramQuote last = histogramQuotes.get(histogramQuotes.size() - 1);
+            HistogramQuoteJava preLast = histogramQuotes.get(histogramQuotes.size() - 2);
+            HistogramQuoteJava last = histogramQuotes.get(histogramQuotes.size() - 1);
             if (Math.abs(last.histogramValue) >= Math.abs(preLast.histogramValue)) {
                 Log.recordCode(HISTOGRAM_LAST_BAR_NOT_LOWER, screen);
                 Log.addDebugLine("The last bar of the histogram is not lower than the previous one");

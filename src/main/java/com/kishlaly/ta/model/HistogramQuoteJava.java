@@ -4,12 +4,12 @@ package com.kishlaly.ta.model;
  * @author Vladimir Kishlaly
  * @since 16.11.2021
  */
-public class HistogramQuote {
+public class HistogramQuoteJava {
 
     public double histogramValue;
     public QuoteJava quote;
 
-    public HistogramQuote(final double histogramValue, final QuoteJava quote) {
+    public HistogramQuoteJava(final double histogramValue, final QuoteJava quote) {
         this.histogramValue = histogramValue;
         this.quote = quote;
     }
