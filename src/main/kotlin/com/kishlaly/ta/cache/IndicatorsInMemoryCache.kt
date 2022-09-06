@@ -21,6 +21,30 @@ class IndicatorsInMemoryCache {
         fun putEMA(symbol: String, timeframe: Timeframe, period: Int, data: List<EMA>) {
             ema[EMAKey(symbol, timeframe, period)] = data
         }
+        ®
+        fun putMACD(symbol: String, timeframe: Timeframe, data: List<MACD>) {
+            macd[MACDKey(symbol, timeframe)] = data
+        }
+
+        fun putKeltner(symbol: String, timeframe: Timeframe, data: List<Keltner>) {
+            keltner[KeltnerKey(symbol, timeframe)] = data
+        }
+
+        fun putATR(symbol: String, timeframe: Timeframe, period: Int, data: List<ATR>) {
+            atr[ATRKey(symbol, timeframe, period)] = data
+        }
+
+        fun putStoch(symbol: String, timeframe: Timeframe, data: List<Stochastic>) {
+            stochastic[StochKey(symbol, timeframe)] = data
+        }
+
+        fun putEFI(symbol: String, timeframe: Timeframe, data: List<ElderForceIndex>) {
+            efi[EFIKey(symbol, timeframe)] = data
+        }
+
+        fun putBollinger(symbol: String, timeframe: Timeframe, data: List<Bollinger>) {
+            bollinger[BollingerKey(symbol, timeframe)] = data
+        }
 
 
     }
