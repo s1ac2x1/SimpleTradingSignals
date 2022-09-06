@@ -1,7 +1,7 @@
 package com.kishlaly.ta.misc;
 
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.Bars;
 import com.kishlaly.ta.utils.Context;
 import org.ta4j.core.*;
@@ -39,8 +39,8 @@ public class CCICorrectionStrategy {
     }
 
     public static void main(String[] args) {
-        Context.aggregationTimeframe = Timeframe.DAY;
-        Context.timeframe = Timeframe.DAY;
+        Context.aggregationTimeframe = TimeframeJava.DAY;
+        Context.timeframe = TimeframeJava.DAY;
         String symbol = "TER";
         List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
         BarSeries barSeries = Bars.build(quotes);

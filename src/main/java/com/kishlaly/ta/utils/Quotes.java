@@ -2,7 +2,7 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
 
@@ -78,7 +78,7 @@ public class Quotes {
         return dayQuotes;
     }
 
-    public static int resolveMinBarsCount(Timeframe timeframe) {
+    public static int resolveMinBarsCount(TimeframeJava timeframe) {
         int min = 21;
         // less is not allowed, otherwise StopLossFixedPrice will not work
         // If the aggregation is based on hourly quotes (which are ~550), then the daily quotes will be ~35, and there is no point in considering weekly ones

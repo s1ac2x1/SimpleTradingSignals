@@ -7,7 +7,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.DatesJava;
 import com.kishlaly.ta.utils.Numbers;
 
@@ -282,14 +282,14 @@ public class HistoricalTesting {
             this.closed = closed;
         }
 
-        public String getPositionDuration(Timeframe timeframe) {
+        public String getPositionDuration(TimeframeJava timeframe) {
             if (closed) {
                 return DatesJava.getDuration(timeframe, openedTimestamp, closedTimestamp);
             }
             return "";
         }
 
-        public long getPositionDurationInSeconds(Timeframe timeframe) {
+        public long getPositionDurationInSeconds(TimeframeJava timeframe) {
             return closedTimestamp - openedTimestamp;
         }
 

@@ -1,14 +1,11 @@
 package com.kishlaly.ta;
 
-import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1;
-import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_2;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4;
 import com.kishlaly.ta.model.SymbolsSource;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.RunUtils;
 
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 import static com.kishlaly.ta.utils.RunUtils.singleSymbol;
 
@@ -19,7 +16,7 @@ import static com.kishlaly.ta.utils.RunUtils.singleSymbol;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Context.aggregationTimeframe = Timeframe.DAY;
+        Context.aggregationTimeframe = TimeframeJava.DAY;
         Context.source = new SymbolsSource[]{
                 SymbolsSource.SP500
         };

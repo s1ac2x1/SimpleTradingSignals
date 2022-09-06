@@ -1,7 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -86,7 +86,7 @@ public class DatesJava {
         return exchangeZonedDateTime;
     }
 
-    public static String getDuration(Timeframe timeframe, long start, long end) {
+    public static String getDuration(TimeframeJava timeframe, long start, long end) {
         ZoneId timezone = ZoneId.of(Context.myTimezone);
         LocalDateTime startDate = LocalDateTime.ofInstant(Instant.ofEpochSecond(start), timezone);
         LocalDateTime endDate = LocalDateTime.ofInstant(Instant.ofEpochSecond(end), timezone);
@@ -110,7 +110,7 @@ public class DatesJava {
     }
 
     public static void main(String[] args) {
-        System.out.println(getDuration(Timeframe.DAY, 1632749400, 1633008600));
+        System.out.println(getDuration(TimeframeJava.DAY, 1632749400, 1633008600));
     }
 
 }

@@ -41,9 +41,9 @@ public class CacheReader {
     public static ConcurrentLinkedDeque<LoadRequest> requests = new ConcurrentLinkedDeque<>();
     public static List<Future> callsInProgress = new CopyOnWriteArrayList<>();
 
-    public static void checkCache(Timeframe[][] timeframes, TaskType[] tasks) {
+    public static void checkCache(TimeframeJava[][] timeframes, TaskType[] tasks) {
         AtomicInteger screenNumber = new AtomicInteger(0);
-        Map<Timeframe, Set<String>> missedData = new HashMap<>();
+        Map<TimeframeJava, Set<String>> missedData = new HashMap<>();
         Arrays.stream(timeframes).forEach(screens -> {
             // only check the availability of quotes in the cache
             // it is assumed that only one Context.aggregationTimeframe is loaded
@@ -128,19 +128,19 @@ public class CacheReader {
                         }.getType());
                 switch (Context.aggregationTimeframe) {
                     case DAY:
-                        if (Context.timeframe == Timeframe.WEEK) {
+                        if (Context.timeframe == TimeframeJava.WEEK) {
                             quotes = Quotes.dayToWeek(quotes);
                         }
-                        if (Context.timeframe == Timeframe.HOUR) {
+                        if (Context.timeframe == TimeframeJava.HOUR) {
                             throw new RuntimeException("Requested HOUR quotes, but aggregationTimeframe = DAY");
                         }
                         break;
                     case HOUR:
-                        if (Context.timeframe == Timeframe.WEEK) {
+                        if (Context.timeframe == TimeframeJava.WEEK) {
                             quotes = Quotes.hourToDay(quotes);
                             quotes = Quotes.dayToWeek(quotes);
                         }
-                        if (Context.timeframe == Timeframe.DAY) {
+                        if (Context.timeframe == TimeframeJava.DAY) {
                             quotes = Quotes.hourToDay(quotes);
                         }
                         break;

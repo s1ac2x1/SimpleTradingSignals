@@ -2,7 +2,7 @@ package com.kishlaly.ta.cache;
 
 import com.google.gson.Gson;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,11 +15,11 @@ public class QuotesInMemoryCache {
     private static ConcurrentHashMap<Key, List<QuoteJava>> cache = new ConcurrentHashMap<>();
     private static Gson gson = new Gson();
 
-    public static void put(String symbol, Timeframe timeframe, List<QuoteJava> quotes) {
+    public static void put(String symbol, TimeframeJava timeframe, List<QuoteJava> quotes) {
         cache.put(new Key(symbol, timeframe), quotes);
     }
 
-    public static List<QuoteJava> get(String symbol, Timeframe timeframe) {
+    public static List<QuoteJava> get(String symbol, TimeframeJava timeframe) {
         List<QuoteJava> cached = cache.getOrDefault(new Key(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
@@ -37,9 +37,9 @@ public class QuotesInMemoryCache {
 
     private static class Key {
         public String symbol;
-        public Timeframe timeframe;
+        public TimeframeJava timeframe;
 
-        public Key(final String symbol, final Timeframe timeframe) {
+        public Key(final String symbol, final TimeframeJava timeframe) {
             this.symbol = symbol;
             this.timeframe = timeframe;
         }

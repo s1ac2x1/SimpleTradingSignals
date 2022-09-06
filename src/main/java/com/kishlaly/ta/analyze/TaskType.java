@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.tasks.AbstractTask;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.Screens;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.TimeframeIndicators;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 
@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static com.kishlaly.ta.model.Timeframe.DAY;
-import static com.kishlaly.ta.model.Timeframe.WEEK;
+import static com.kishlaly.ta.model.TimeframeJava.DAY;
+import static com.kishlaly.ta.model.TimeframeJava.WEEK;
 import static com.kishlaly.ta.model.indicators.IndicatorJava.*;
 
 public enum TaskType {
     MACD_BULLISH_DIVERGENCE(
-            new HashMap<Integer, Timeframe>() {{
+            new HashMap<Integer, TimeframeJava>() {{
                 put(1, WEEK);
                 put(2, DAY);
             }},
@@ -31,7 +31,7 @@ public enum TaskType {
             AbstractTask::check
     ),
     THREE_DISPLAYS_BUY(
-            new HashMap<Integer, Timeframe>() {{
+            new HashMap<Integer, TimeframeJava>() {{
                 put(1, WEEK);
                 put(2, DAY);
             }},
@@ -42,7 +42,7 @@ public enum TaskType {
             AbstractTask::check
     ),
     THREE_DISPLAYS_SELL(
-            new HashMap<Integer, Timeframe>() {{
+            new HashMap<Integer, TimeframeJava>() {{
                 put(1, WEEK);
                 put(2, DAY);
             }},
@@ -53,7 +53,7 @@ public enum TaskType {
             AbstractTask::check
     ),
     FIRST_TRUST_MODEL(
-            new HashMap<Integer, Timeframe>() {{
+            new HashMap<Integer, TimeframeJava>() {{
                 put(1, WEEK);
                 put(2, DAY);
             }},
@@ -64,7 +64,7 @@ public enum TaskType {
             AbstractTask::check
     );
 
-    TaskType(final Map<Integer, Timeframe> timeframes,
+    TaskType(final Map<Integer, TimeframeJava> timeframes,
              final Map<Integer, IndicatorJava[]> indicators,
              BiFunction<Screens, List<TaskBlock>, BlockResultJava> function) {
         this.timeframes = timeframes;
@@ -72,7 +72,7 @@ public enum TaskType {
         this.function = function;
     }
 
-    private Map<Integer, Timeframe> timeframes;
+    private Map<Integer, TimeframeJava> timeframes;
     private Map<Integer, IndicatorJava[]> indicators;
     private BiFunction<Screens, List<TaskBlock>, BlockResultJava> function;
     private TimeframeIndicators timeframeIndicators;
@@ -86,7 +86,7 @@ public enum TaskType {
         this.blocks = blocks;
     }
 
-    public Timeframe getTimeframeForScreen(int screen) {
+    public TimeframeJava getTimeframeForScreen(int screen) {
         return timeframes.get(screen);
     }
 
@@ -94,7 +94,7 @@ public enum TaskType {
         return indicators.get(screen);
     }
 
-    public void updateTimeframeForScreen(int screen, Timeframe timeframe) {
+    public void updateTimeframeForScreen(int screen, TimeframeJava timeframe) {
         timeframes.put(screen, timeframe);
     }
 

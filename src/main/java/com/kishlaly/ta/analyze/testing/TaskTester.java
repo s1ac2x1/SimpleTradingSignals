@@ -40,7 +40,7 @@ public class TaskTester {
 
     private static StringBuilder testLog = new StringBuilder();
 
-    public static List<HistoricalTesting> test(Timeframe[][] timeframes, TaskType task, BlocksGroup blocksGroup) {
+    public static List<HistoricalTesting> test(TimeframeJava[][] timeframes, TaskType task, BlocksGroup blocksGroup) {
         Context.testMode = true;
         StringBuilder log = new StringBuilder();
         List<HistoricalTesting> allTests = new ArrayList<>();
@@ -159,7 +159,7 @@ public class TaskTester {
         }
     }
 
-    public static void printNoSignalsReport(Timeframe timeframe, HistoricalTesting testing, Set<String> finalSignalResults) {
+    public static void printNoSignalsReport(TimeframeJava timeframe, HistoricalTesting testing, Set<String> finalSignalResults) {
         finalSignalResults.add(lineSeparator());
         finalSignalResults.add(lineSeparator());
         finalSignalResults.add(lineSeparator());
@@ -173,7 +173,7 @@ public class TaskTester {
                 });
     }
 
-    public static void printPositionsReport(Timeframe timeframe, final HistoricalTesting testing, final Set<String> report) {
+    public static void printPositionsReport(TimeframeJava timeframe, final HistoricalTesting testing, final Set<String> report) {
         testing.getTaskResults()
                 .stream()
                 .filter(taskResult -> taskResult.getLastChartQuote() != null)
@@ -201,7 +201,7 @@ public class TaskTester {
                             String endDate = getBarTimeInMyZone(positionTestResult.getClosedTimestamp(), exchangeTimezome).toString();
                             ZonedDateTime parsed = ZonedDateTime.parse(endDate);
                             String parsedEndDate = parsed.getDayOfMonth() + " " + parsed.getMonth() + " " + parsed.getYear();
-                            if (timeframe == Timeframe.HOUR) {
+                            if (timeframe == TimeframeJava.HOUR) {
                                 parsedEndDate += " " + parsed.getHour() + ":" + parsed.getMinute();
                             }
                             line += " [till " + parsedEndDate + "]";
@@ -211,11 +211,11 @@ public class TaskTester {
                 });
     }
 
-    private static String formatDate(Timeframe timeframe, long timestamp) {
+    private static String formatDate(TimeframeJava timeframe, long timestamp) {
         String date = getBarTimeInMyZone(timestamp, exchangeTimezome).toString();
         ZonedDateTime parsedDate = ZonedDateTime.parse(date);
         date = parsedDate.getDayOfMonth() + " " + parsedDate.getMonth() + " " + parsedDate.getYear();
-        if (timeframe == Timeframe.HOUR) {
+        if (timeframe == TimeframeJava.HOUR) {
             date += " " + parsedDate.getHour() + ":" + parsedDate.getMinute();
         }
         return date;
@@ -274,14 +274,14 @@ public class TaskTester {
         return output;
     }
 
-    public static void testOneStrategy(Timeframe[][] timeframes, TaskType task, BlocksGroup blocksGroup, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public static void testOneStrategy(TimeframeJava[][] timeframes, TaskType task, BlocksGroup blocksGroup, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         Context.stopLossStrategy = stopLossStrategy;
         Context.takeProfitStrategy = takeProfitStrategy;
         System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
         test(timeframes, task, blocksGroup);
     }
 
-    public static void testAllStrategiesOnSpecificDate(String datePart, TaskType task, Timeframe[][] timeframes) {
+    public static void testAllStrategiesOnSpecificDate(String datePart, TaskType task, TimeframeJava[][] timeframes) {
         if (Context.symbols.size() > 1) {
             throw new RuntimeException("Only one symbol allowed here");
         }
@@ -298,7 +298,7 @@ public class TaskTester {
         });
     }
 
-    public static void testMass(Timeframe[][] timeframes, TaskType task, BlocksGroup blocksGroup) {
+    public static void testMass(TimeframeJava[][] timeframes, TaskType task, BlocksGroup blocksGroup) {
         Context.massTesting = true;
 
         StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);

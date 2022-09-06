@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.model.SymbolsSource;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,14 @@ public class Context {
         RAPID, ALPHAVANTAGE, MARKETSTACK
     }
 
-    public static Timeframe[][] basicTimeframes = {{Timeframe.WEEK, Timeframe.DAY}};
+    public static TimeframeJava[][] basicTimeframes = {{TimeframeJava.WEEK, TimeframeJava.DAY}};
     public static String outputFolder = "data";
     public static ApiSource api = ApiSource.ALPHAVANTAGE;
     public static double parallelRequests = 10;
     public static double limitPerMinute = 75;
-    public static Timeframe timeframe = Timeframe.DAY;
+    public static TimeframeJava timeframe = TimeframeJava.DAY;
     // main aggregation timeframe. Weekly quotes will be calculated from it
-    public static Timeframe aggregationTimeframe = Timeframe.DAY;
+    public static TimeframeJava aggregationTimeframe = TimeframeJava.DAY;
     public static SymbolsSource[] source = {SymbolsSource.SP500};
     public static List<String> testOnly = new ArrayList<>();
     public static Set<String> symbols;
@@ -46,9 +46,9 @@ public class Context {
     public static int minimumHourBarsCount = 300;
 
     // for logs
-    public static Timeframe logTimeframe1;
-    public static Timeframe logTimeframe2;
-    public static Timeframe runGroups;
+    public static TimeframeJava logTimeframe1;
+    public static TimeframeJava logTimeframe2;
+    public static TimeframeJava runGroups;
 
     // for testing on historical data
     public static boolean testMode;

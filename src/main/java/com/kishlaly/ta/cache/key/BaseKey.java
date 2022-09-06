@@ -1,22 +1,22 @@
 package com.kishlaly.ta.cache.key;
 
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 
 import java.util.Objects;
 
 public class BaseKey {
 
     protected String symbol;
-    protected Timeframe timeframe;
+    protected TimeframeJava timeframe;
     protected int period;
 
-    public BaseKey(final String symbol, final Timeframe timeframe, int period) {
+    public BaseKey(final String symbol, final TimeframeJava timeframe, int period) {
         this.symbol = symbol;
         this.timeframe = timeframe;
         this.period = period;
     }
 
-    public BaseKey(final String symbol, final Timeframe timeframe) {
+    public BaseKey(final String symbol, final TimeframeJava timeframe) {
         this(symbol, timeframe, 0);
     }
 
@@ -24,7 +24,7 @@ public class BaseKey {
         return symbol;
     }
 
-    public Timeframe getTimeframe() {
+    public TimeframeJava getTimeframe() {
         return this.timeframe;
     }
 

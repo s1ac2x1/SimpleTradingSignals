@@ -4,10 +4,10 @@ import com.kishlaly.ta.model.indicators.IndicatorJava;
 
 public class TimeframeIndicators {
 
-    public Timeframe timeframe;
+    public TimeframeJava timeframe;
     public IndicatorJava[] indicators;
 
-    public TimeframeIndicators(final Timeframe timeframe, final IndicatorJava[] indicators) {
+    public TimeframeIndicators(final TimeframeJava timeframe, final IndicatorJava[] indicators) {
         this.timeframe = timeframe;
         this.indicators = indicators;
     }

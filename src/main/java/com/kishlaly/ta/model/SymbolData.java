@@ -10,7 +10,7 @@ import java.util.Map;
 public class SymbolData {
 
     public String symbol;
-    public Timeframe timeframe;
+    public TimeframeJava timeframe;
     public List<QuoteJava> quotes;
     public Map<IndicatorJava, List<? extends AbstractModelJava>> indicators = new HashMap<>();
 

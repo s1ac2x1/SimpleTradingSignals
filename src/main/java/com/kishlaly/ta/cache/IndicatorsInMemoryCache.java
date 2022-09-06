@@ -2,7 +2,7 @@ package com.kishlaly.ta.cache;
 
 import com.google.gson.Gson;
 import com.kishlaly.ta.cache.key.*;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.*;
 
 import java.util.Collections;
@@ -22,35 +22,35 @@ public class IndicatorsInMemoryCache {
     private static ConcurrentHashMap<BollingerKey, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<EFIKey, List<ElderForceIndexJava>> efi = new ConcurrentHashMap<>();
 
-    public static void putEMA(String symbol, Timeframe timeframe, int period, List<EMAJava> data) {
+    public static void putEMA(String symbol, TimeframeJava timeframe, int period, List<EMAJava> data) {
         ema.put(new EMAKey(symbol, timeframe, period), data);
     }
 
-    public static void putMACD(String symbol, Timeframe timeframe, List<MACDJava> data) {
+    public static void putMACD(String symbol, TimeframeJava timeframe, List<MACDJava> data) {
         macd.put(new MACDKey(symbol, timeframe), data);
     }
 
-    public static void putKeltner(String symbol, Timeframe timeframe, List<KeltnerJava> data) {
+    public static void putKeltner(String symbol, TimeframeJava timeframe, List<KeltnerJava> data) {
         keltner.put(new KeltnerKEY(symbol, timeframe), data);
     }
 
-    public static void putATR(String symbol, Timeframe timeframe, int period, List<ATRJava> data) {
+    public static void putATR(String symbol, TimeframeJava timeframe, int period, List<ATRJava> data) {
         atr.put(new ATRKey(symbol, timeframe, period), data);
     }
 
-    public static void putStoch(String symbol, Timeframe timeframe, List<StochJava> data) {
+    public static void putStoch(String symbol, TimeframeJava timeframe, List<StochJava> data) {
         stoch.put(new StochKey(symbol, timeframe), data);
     }
 
-    public static void putEFI(String symbol, Timeframe timeframe, List<ElderForceIndexJava> data) {
+    public static void putEFI(String symbol, TimeframeJava timeframe, List<ElderForceIndexJava> data) {
         efi.put(new EFIKey(symbol, timeframe), data);
     }
 
-    public static void putBollinger(String symbol, Timeframe timeframe, List<BollingerJava> data) {
+    public static void putBollinger(String symbol, TimeframeJava timeframe, List<BollingerJava> data) {
         bollinger.put(new BollingerKey(symbol, timeframe), data);
     }
 
-    public static List<EMAJava> getEMA(String symbol, Timeframe timeframe, int period) {
+    public static List<EMAJava> getEMA(String symbol, TimeframeJava timeframe, int period) {
         List<EMAJava> cached = ema.getOrDefault(new EMAKey(symbol, timeframe, period), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
@@ -63,7 +63,7 @@ public class IndicatorsInMemoryCache {
     }
 
 
-    public static List<MACDJava> getMACD(String symbol, Timeframe timeframe) {
+    public static List<MACDJava> getMACD(String symbol, TimeframeJava timeframe) {
         List<MACDJava> cached = macd.getOrDefault(new MACDKey(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
@@ -76,7 +76,7 @@ public class IndicatorsInMemoryCache {
     }
 
 
-    public static List<KeltnerJava> getKeltner(String symbol, Timeframe timeframe) {
+    public static List<KeltnerJava> getKeltner(String symbol, TimeframeJava timeframe) {
         List<KeltnerJava> cached = keltner.getOrDefault(new KeltnerKEY(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
@@ -89,7 +89,7 @@ public class IndicatorsInMemoryCache {
     }
 
 
-    public static List<ATRJava> getATR(String symbol, Timeframe timeframe, int period) {
+    public static List<ATRJava> getATR(String symbol, TimeframeJava timeframe, int period) {
         List<ATRJava> cached = atr.getOrDefault(new ATRKey(symbol, timeframe, period), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
@@ -102,7 +102,7 @@ public class IndicatorsInMemoryCache {
     }
 
 
-    public static List<StochJava> getStoch(String symbol, Timeframe timeframe) {
+    public static List<StochJava> getStoch(String symbol, TimeframeJava timeframe) {
         List<StochJava> cached = stoch.getOrDefault(new StochKey(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
@@ -114,7 +114,7 @@ public class IndicatorsInMemoryCache {
         return Collections.emptyList();
     }
 
-    public static List<BollingerJava> getBollinger(String symbol, Timeframe timeframe) {
+    public static List<BollingerJava> getBollinger(String symbol, TimeframeJava timeframe) {
         List<BollingerJava> cached = bollinger.getOrDefault(new BollingerKey(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
@@ -126,7 +126,7 @@ public class IndicatorsInMemoryCache {
         return Collections.emptyList();
     }
 
-    public static List<ElderForceIndexJava> getEFI(String symbol, Timeframe timeframe) {
+    public static List<ElderForceIndexJava> getEFI(String symbol, TimeframeJava timeframe) {
         List<ElderForceIndexJava> cached = efi.getOrDefault(new EFIKey(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);

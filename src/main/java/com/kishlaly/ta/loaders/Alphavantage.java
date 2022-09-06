@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.model.indicators.StochJava;
@@ -42,7 +42,7 @@ public class Alphavantage {
      * <p>
      * Assuming Exchange Timezone = "US/Eastern"
      */
-    public static List<QuoteJava> loadQuotes(String symbol, Timeframe timeframe) {
+    public static List<QuoteJava> loadQuotes(String symbol, TimeframeJava timeframe) {
         List<QuoteJava> quotes = new ArrayList<>();
         String url = getQuotesUrl(symbol, timeframe);
         try {
@@ -103,7 +103,7 @@ public class Alphavantage {
                     key);
             rawQuotes.forEach((k, v) -> {
                 String day = k;
-                if (Context.timeframe == Timeframe.HOUR) {
+                if (Context.timeframe == TimeframeJava.HOUR) {
                     day += ":00";
                 }
                 Double macdValue = parseDouble(v.get("MACD"));
@@ -137,7 +137,7 @@ public class Alphavantage {
                     key);
             rawQuotes.forEach((k, v) -> {
                 String day = k;
-                if (Context.timeframe == Timeframe.HOUR) {
+                if (Context.timeframe == TimeframeJava.HOUR) {
                     day += ":00";
                 }
                 Double ema = parseDouble(v.get("EMA"));
@@ -168,7 +168,7 @@ public class Alphavantage {
                     key);
             rawQuotes.forEach((k, v) -> {
                 String day = k;
-                if (Context.timeframe == Timeframe.HOUR) {
+                if (Context.timeframe == TimeframeJava.HOUR) {
                     day += ":00";
                 }
                 Double slowD = parseDouble(v.get("SlowD"));
@@ -204,7 +204,7 @@ public class Alphavantage {
         return response;
     }
 
-    private static String getQuotesUrl(String symbol, Timeframe timeframe) {
+    private static String getQuotesUrl(String symbol, TimeframeJava timeframe) {
         String url;
         switch (timeframe) {
             case WEEK: {

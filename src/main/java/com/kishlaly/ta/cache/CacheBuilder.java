@@ -10,7 +10,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
 import com.kishlaly.ta.loaders.Alphavantage;
 import com.kishlaly.ta.analyze.testing.HistoricalTesting;
 import com.kishlaly.ta.model.QuoteJava;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.FilesUtil;
@@ -37,7 +37,7 @@ import static com.kishlaly.ta.utils.FilesUtil.writeToFile;
 
 public class CacheBuilder {
 
-    public static void buildCache(Timeframe[][] timeframes, boolean reloadMissed) {
+    public static void buildCache(TimeframeJava[][] timeframes, boolean reloadMissed) {
         String folder = Context.outputFolder + fileSeparator + "cache";
         File directory = new File(folder);
         if (!directory.exists()) {
@@ -90,7 +90,7 @@ public class CacheBuilder {
         LoadRequest request = requests.poll();
         if (request != null) {
             List<String> symbols = request.getSymbols();
-            Timeframe timeframe = request.getTimeframe();
+            TimeframeJava timeframe = request.getTimeframe();
             Context.timeframe = timeframe;
             if (request.getType() == CacheType.QUOTE) {
                 System.out.println("Loading " + timeframe.name() + " quotes...");
@@ -128,8 +128,8 @@ public class CacheBuilder {
         if (source.length > 1) {
             throw new RuntimeException("Only one symbols source please");
         }
-        Timeframe[][] timeframes = {
-                {Timeframe.WEEK, Timeframe.DAY},
+        TimeframeJava[][] timeframes = {
+                {TimeframeJava.WEEK, TimeframeJava.DAY},
         };
         List<HistoricalTesting> result = new ArrayList<>();
         Context.stopLossStrategy = new StopLossFixedPrice(0.27);
@@ -207,7 +207,7 @@ public class CacheBuilder {
         writeToFile("tests/table.html", table.toString());
     }
 
-    public static void buildTasksAndStrategiesSummary(Timeframe[][] timeframes,
+    public static void buildTasksAndStrategiesSummary(TimeframeJava[][] timeframes,
                                                       TaskType task,
                                                       List<BlocksGroup> blocksGroups,
                                                       StopLossStrategy stopLossStrategy,

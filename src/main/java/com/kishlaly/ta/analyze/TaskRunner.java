@@ -39,7 +39,7 @@ public class TaskRunner {
 
     public static List<Signal> signals = new ArrayList<>();
 
-    public static void run(Timeframe[][] timeframes, TaskType task, boolean findOptimal, BlocksGroup... blocksGroups) {
+    public static void run(TimeframeJava[][] timeframes, TaskType task, boolean findOptimal, BlocksGroup... blocksGroups) {
         Arrays.stream(timeframes).forEach(screens -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
@@ -57,7 +57,7 @@ public class TaskRunner {
         }
     }
 
-    public static void runBest(Timeframe[][] timeframes) {
+    public static void runBest(TimeframeJava[][] timeframes) {
         try {
             FileUtils.deleteDirectory(new File(Context.outputFolder + "/debug"));
             FileUtils.deleteDirectory(new File(Context.outputFolder + "/signal"));
@@ -101,7 +101,7 @@ public class TaskRunner {
                 tpStrategies.forEach(takeProfitStrategy -> {
                     Context.stopLossStrategy = stopLossStrategy;
                     Context.takeProfitStrategy = takeProfitStrategy;
-                    Timeframe[][] timeframes = {
+                    TimeframeJava[][] timeframes = {
                             {signal.timeframe1, signal.timeframe2},
                     };
                     System.out.println("Testing symbol " + symbolNumber.get() + "/" + totalSymbols + " with TP/SL " + testingStrategySet.get() + "/" + totalSLTPStrategies);
@@ -254,8 +254,8 @@ public class TaskRunner {
 
     public static class Signal {
         public String symbol;
-        public Timeframe timeframe1;
-        public Timeframe timeframe2;
+        public TimeframeJava timeframe1;
+        public TimeframeJava timeframe2;
         public TaskType task;
     }
 

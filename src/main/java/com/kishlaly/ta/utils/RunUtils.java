@@ -3,7 +3,7 @@ package com.kishlaly.ta.utils;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
-import com.kishlaly.ta.model.Timeframe;
+import com.kishlaly.ta.model.TimeframeJava;
 
 import java.util.ArrayList;
 
@@ -58,7 +58,7 @@ public class RunUtils {
     }
 
     public static void runAllDaily() {
-        Context.runGroups = Timeframe.DAY;
+        Context.runGroups = TimeframeJava.DAY;
         run(Context.basicTimeframes, THREE_DISPLAYS_BUY, false,
                 new ThreeDisplays_Buy_1(),
                 new ThreeDisplays_Buy_2(),
@@ -73,8 +73,8 @@ public class RunUtils {
         );
     }
 
-    public static void runAllWeekly(Timeframe[][] timeframes) {
-        Context.runGroups = Timeframe.WEEK;
+    public static void runAllWeekly(TimeframeJava[][] timeframes) {
+        Context.runGroups = TimeframeJava.WEEK;
         run(Context.basicTimeframes, THREE_DISPLAYS_BUY, false,
                 new FirstScreen_Buy_1()
                 //new FirstScreen_Buy_2()
