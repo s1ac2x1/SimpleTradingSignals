@@ -15,7 +15,7 @@ abstract class AbstractModel {
     constructor(timestamp: Long) {
         this.timestamp = timestamp
         this.nativeDate = Dates.getTimeInExchangeZone(timestamp, exchangeTimezome).toString()
-        this.myDate = ""
+        this.myDate = Dates.getBarTimeInMyZone(timestamp, exchangeTimezome).toString()
     }
 
 
