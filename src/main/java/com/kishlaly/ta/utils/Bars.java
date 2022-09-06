@@ -8,7 +8,7 @@ import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
+import static com.kishlaly.ta.utils.DatesJava.getTimeInExchangeZone;
 
 /**
  * @author Vladimir Kishlaly

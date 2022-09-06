@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.utils.Context.fileSeparator;
-import static com.kishlaly.ta.utils.Dates.shortDateToZoned;
+import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
 
 /**
  * @author Vladimir Kishlaly

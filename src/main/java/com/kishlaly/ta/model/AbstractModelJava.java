@@ -1,7 +1,7 @@
 package com.kishlaly.ta.model;
 
-import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
-import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
+import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
+import static com.kishlaly.ta.utils.DatesJava.getTimeInExchangeZone;
 
 public abstract class AbstractModelJava {
 

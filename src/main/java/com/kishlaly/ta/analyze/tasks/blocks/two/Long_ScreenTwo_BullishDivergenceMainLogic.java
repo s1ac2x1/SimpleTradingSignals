@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static com.kishlaly.ta.analyze.BlockResultCode.*;
-import static com.kishlaly.ta.utils.Dates.beautifyQuoteDate;
+import static com.kishlaly.ta.utils.DatesJava.beautifyQuoteDate;
 
 public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock {
     @Override

@@ -3,8 +3,8 @@ package com.kishlaly.ta.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
-import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
+import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
+import static com.kishlaly.ta.utils.DatesJava.getTimeInExchangeZone;
 
 /**
  * @author Vladimir Kishlaly

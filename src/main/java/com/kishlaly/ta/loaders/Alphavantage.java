@@ -9,7 +9,7 @@ import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.model.indicators.Stoch;
 import com.kishlaly.ta.utils.Context;
-import com.kishlaly.ta.utils.Dates;
+import com.kishlaly.ta.utils.DatesJava;
 import com.kishlaly.ta.utils.Quotes;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -71,7 +71,7 @@ public class Alphavantage {
                 String close = v.get("4. close");
                 String volume = v.get("5. volume");
                 quotes.add(new Quote(
-                        Dates.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(),
+                        DatesJava.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(),
                         parseDouble(high),
                         parseDouble(open),
                         parseDouble(close),
@@ -110,7 +110,7 @@ public class Alphavantage {
                 Double macdSignalValue
                         = Double.parseDouble(v.get("MACD_Signal"));
                 Double macdHist = parseDouble(v.get("MACD_Hist"));
-                result.add(new MACD(Dates.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(), macdValue, macdSignalValue, macdHist));
+                result.add(new MACD(DatesJava.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(), macdValue, macdSignalValue, macdHist));
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -141,7 +141,7 @@ public class Alphavantage {
                     day += ":00";
                 }
                 Double ema = parseDouble(v.get("EMA"));
-                result.add(new EMA(Dates.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(), ema));
+                result.add(new EMA(DatesJava.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(), ema));
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -173,7 +173,7 @@ public class Alphavantage {
                 }
                 Double slowD = parseDouble(v.get("SlowD"));
                 Double slowK = parseDouble(v.get("SlowK"));
-                result.add(new Stoch(Dates.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(), slowD, slowK));
+                result.add(new Stoch(DatesJava.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(), slowD, slowK));
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());

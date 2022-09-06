@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
  * @author Vladimir Kishlaly
  * @since 19.11.2021
  */
-public class Dates {
+public class DatesJava {
 
     public static String beautifyQuoteDate(Quote quote) {
         return getBarTimeInMyZone(quote.getTimestamp(), quote.exchangeTimezome).toString();

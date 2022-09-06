@@ -23,9 +23,9 @@ public class Quotes {
                 Quote nextQuote = dailyQuotes.get(i + 1);
                 week.add(currentQuote);
                 // check the day of the week for the next quote and programmatically calculate the next day for the current one
-                ZonedDateTime currentQuoteDate = Dates.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome);
-                ZonedDateTime currentQuotePlusOneDayDate = Dates.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome).plusDays(1);
-                ZonedDateTime nextQuoteDate = Dates.getTimeInExchangeZone(nextQuote.getTimestamp(), Quote.exchangeTimezome);
+                ZonedDateTime currentQuoteDate = DatesJava.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome);
+                ZonedDateTime currentQuotePlusOneDayDate = DatesJava.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome).plusDays(1);
+                ZonedDateTime nextQuoteDate = DatesJava.getTimeInExchangeZone(nextQuote.getTimestamp(), Quote.exchangeTimezome);
                 // If the next quote is exactly one day later - we are within the working week
                 // if currentQuotePlusOneDayDate is a day off, then nextQuoteDate will be different
                 if (nextQuoteDate.getDayOfWeek() == currentQuotePlusOneDayDate.getDayOfWeek()) {
@@ -64,9 +64,9 @@ public class Quotes {
         List<Quote> duringDay = new ArrayList<>();
         for (int i = 0; i < hourQuotes.size() - 1; i++) {
             Quote currentQuote = hourQuotes.get(i);
-            DayOfWeek currentQuoteDayOfWeek = Dates.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
+            DayOfWeek currentQuoteDayOfWeek = DatesJava.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
             Quote nextQuote = hourQuotes.get(i + 1);
-            DayOfWeek nextQuoteDayOfWeek = Dates.getTimeInExchangeZone(nextQuote.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
+            DayOfWeek nextQuoteDayOfWeek = DatesJava.getTimeInExchangeZone(nextQuote.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
             if (currentQuoteDayOfWeek == nextQuoteDayOfWeek) {
                 duringDay.add(nextQuote);
             } else {

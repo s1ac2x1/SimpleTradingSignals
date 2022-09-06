@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
-import com.kishlaly.ta.utils.Dates;
+import com.kishlaly.ta.utils.DatesJava;
 import com.kishlaly.ta.utils.Numbers;
 
 import java.util.HashMap;
@@ -280,7 +280,7 @@ public class HistoricalTesting {
 
         public String getPositionDuration(Timeframe timeframe) {
             if (closed) {
-                return Dates.getDuration(timeframe, openedTimestamp, closedTimestamp);
+                return DatesJava.getDuration(timeframe, openedTimestamp, closedTimestamp);
             }
             return "";
         }

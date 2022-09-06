@@ -21,7 +21,7 @@ import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.utils.Dates.shortDateToZoned;
+import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class IndicatorUtils {

@@ -31,8 +31,8 @@ import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.Quote.exchangeTimezome;
 import static com.kishlaly.ta.utils.Context.*;
-import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
-import static com.kishlaly.ta.utils.Dates.shortDateToZoned;
+import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
+import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
 import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 import static java.lang.System.lineSeparator;
 

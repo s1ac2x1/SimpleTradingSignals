@@ -1,5 +1,7 @@
 package com.kishlaly.ta.model
 
+import com.kishlaly.ta.utils.Dates
+
 abstract class AbstractModel {
 
     companion object {
@@ -12,7 +14,7 @@ abstract class AbstractModel {
 
     constructor(timestamp: Long) {
         this.timestamp = timestamp
-        this.nativeDate = ""
+        this.nativeDate = Dates.getTimeInExchangeZone(timestamp, exchangeTimezome).toString()
         this.myDate = ""
     }
 

@@ -2,8 +2,8 @@ package com.kishlaly.ta.model.indicators;
 
 import com.kishlaly.ta.model.AbstractModelJava;
 
-import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
-import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
+import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
+import static com.kishlaly.ta.utils.DatesJava.getTimeInExchangeZone;
 
 public class EMA extends AbstractModelJava {
 
