@@ -13,7 +13,7 @@ import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.ContextJava;
-import com.kishlaly.ta.utils.FilesUtil;
+import com.kishlaly.ta.utils.FileUtilsJava;
 import com.kishlaly.ta.utils.Numbers;
 
 import java.io.File;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.utils.ContextJava.*;
-import static com.kishlaly.ta.utils.FilesUtil.writeToFile;
+import static com.kishlaly.ta.utils.FileUtilsJava.writeToFile;
 
 public class CacheBuilder {
 
@@ -265,7 +265,7 @@ public class CacheBuilder {
         output.append(System.lineSeparator());
         roi.sort(Comparator.comparing(ROI::getRoi).reversed());
         roi.forEach(r -> output.append(r.groupName + ": " + Numbers.round(r.getRoi()) + " %" + System.lineSeparator()));
-        FilesUtil.writeToFile("tests/summary.txt", output.toString());
+        FileUtilsJava.writeToFile("tests/summary.txt", output.toString());
     }
 
     static class ROI {

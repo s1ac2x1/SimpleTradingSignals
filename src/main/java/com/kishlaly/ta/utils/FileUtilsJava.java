@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
-public class FilesUtil {
+public class FileUtilsJava {
 
     public static void appendToFile(String filename, String content) {
         File file = new File(filename);

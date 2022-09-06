@@ -32,7 +32,7 @@ public class Log {
     }
 
     public static void saveDebug(String filename) {
-        FilesUtil.appendToFile(filename, debug.toString());
+        FileUtilsJava.appendToFile(filename, debug.toString());
     }
 
     public static void saveSummary(String filename) {
@@ -68,7 +68,7 @@ public class Log {
                     builder.append("</tr>");
                 });
         builder.append("</table>");
-        FilesUtil.appendToFile(filename, builder.toString());
+        FileUtilsJava.appendToFile(filename, builder.toString());
 
 //        if (!symbolToGroups.isEmpty()) {
 //            SpreadsheetUtils.createOrUpdateSheet(symbolToGroups);
@@ -78,14 +78,14 @@ public class Log {
     public static void saveSignal(String filename) {
         String output = log.toString();
         if (!output.isEmpty()) {
-            FilesUtil.appendToFile(filename, output);
+            FileUtilsJava.appendToFile(filename, output);
         }
     }
 
     public static void saveCodes(String folder) {
         codes.forEach((code, symbols) -> {
             String s = symbols.stream().map(symbolData -> symbolData.symbol).collect(Collectors.joining(System.lineSeparator()));
-            FilesUtil.appendToFile(folder + "/" + code.name().toLowerCase() + ".txt", s);
+            FileUtilsJava.appendToFile(folder + "/" + code.name().toLowerCase() + ".txt", s);
         });
     }
 
