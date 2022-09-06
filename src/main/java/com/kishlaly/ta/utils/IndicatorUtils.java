@@ -98,20 +98,20 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<ATR> buildATR(String symbol, List<QuoteJava> quotes, int barCount) {
-        List<ATR> cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe, barCount);
+    public static List<ATRJava> buildATR(String symbol, List<QuoteJava> quotes, int barCount) {
+        List<ATRJava> cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe, barCount);
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            List<ATR> result = new ArrayList<>();
+            List<ATRJava> result = new ArrayList<>();
             BarSeries barSeries = Bars.build(quotes);
             ATRIndicator atrIndicator = new ATRIndicator(barSeries, barCount);
             for (int i = 0; i < quotes.size(); i++) {
-                result.add(new ATR(quotes.get(i).getTimestamp(), atrIndicator.getValue(i).doubleValue()));
+                result.add(new ATRJava(quotes.get(i).getTimestamp(), atrIndicator.getValue(i).doubleValue()));
             }
-            result = result.stream().filter(ATR::valuesPresent).collect(Collectors.toList());
+            result = result.stream().filter(ATRJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
-            Collections.sort(result, Comparator.comparing(ATR::getTimestamp));
+            Collections.sort(result, Comparator.comparing(ATRJava::getTimestamp));
             IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result);
             return result;
         }

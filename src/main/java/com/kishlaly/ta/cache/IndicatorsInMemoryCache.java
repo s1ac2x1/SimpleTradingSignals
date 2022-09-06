@@ -17,7 +17,7 @@ public class IndicatorsInMemoryCache {
     private static ConcurrentHashMap<EMAKey, List<EMA>> ema = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<MACDKey, List<MACD>> macd = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<KeltnerKEY, List<Keltner>> keltner = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<ATRKey, List<ATR>> atr = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<ATRKey, List<ATRJava>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<BollingerKey, List<Bollinger>> bollinger = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<EFIKey, List<ElderForceIndex>> efi = new ConcurrentHashMap<>();
@@ -34,7 +34,7 @@ public class IndicatorsInMemoryCache {
         keltner.put(new KeltnerKEY(symbol, timeframe), data);
     }
 
-    public static void putATR(String symbol, Timeframe timeframe, int period, List<ATR> data) {
+    public static void putATR(String symbol, Timeframe timeframe, int period, List<ATRJava> data) {
         atr.put(new ATRKey(symbol, timeframe, period), data);
     }
 
@@ -89,13 +89,13 @@ public class IndicatorsInMemoryCache {
     }
 
 
-    public static List<ATR> getATR(String symbol, Timeframe timeframe, int period) {
-        List<ATR> cached = atr.getOrDefault(new ATRKey(symbol, timeframe, period), Collections.emptyList());
+    public static List<ATRJava> getATR(String symbol, Timeframe timeframe, int period) {
+        List<ATRJava> cached = atr.getOrDefault(new ATRKey(symbol, timeframe, period), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
-            List<ATR> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<ATR>>() {
+            List<ATRJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<ATRJava>>() {
             }.getType());
-            Collections.sort(copy, Comparator.comparing(ATR::getTimestamp));
+            Collections.sort(copy, Comparator.comparing(ATRJava::getTimestamp));
             return copy;
         }
         return Collections.emptyList();
