@@ -10,7 +10,6 @@ data class Quote(
         val low: Double,
         val volume: Double) : AbstractModel(timestamp), java.io.Serializable {
 
-
     override fun valuesPresent(): Boolean {
         return open != NaN
                 && close != NaN
