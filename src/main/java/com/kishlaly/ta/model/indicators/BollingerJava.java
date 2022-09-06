@@ -2,13 +2,13 @@ package com.kishlaly.ta.model.indicators;
 
 import com.kishlaly.ta.model.AbstractModelJava;
 
-public class Bollinger extends AbstractModelJava {
+public class BollingerJava extends AbstractModelJava {
 
     private double bottom;
     private double middle;
     private double top;
 
-    public Bollinger(final Long timestamp, final double bottom, final double middle, final double top) {
+    public BollingerJava(final Long timestamp, final double bottom, final double middle, final double top) {
         super(timestamp);
         this.bottom = bottom;
         this.middle = middle;

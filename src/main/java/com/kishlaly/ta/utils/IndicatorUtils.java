@@ -140,12 +140,12 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<Bollinger> buildBollingerBands(String symbol, List<QuoteJava> quotes) {
-        List<Bollinger> cached = IndicatorsInMemoryCache.getBollinger(symbol, Context.timeframe);
+    public static List<BollingerJava> buildBollingerBands(String symbol, List<QuoteJava> quotes) {
+        List<BollingerJava> cached = IndicatorsInMemoryCache.getBollinger(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            List<Bollinger> result = new ArrayList<>();
+            List<BollingerJava> result = new ArrayList<>();
             BarSeries barSeries = Bars.build(quotes);
             ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
             SMAIndicator sma20 = new SMAIndicator(closePriceIndicator, 20);
@@ -157,11 +157,11 @@ public class IndicatorUtils {
 
             for (int i = 0; i < quotes.size(); i++) {
                 try {
-                    result.add(new Bollinger(quotes.get(i).getTimestamp(), bottom.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
+                    result.add(new BollingerJava(quotes.get(i).getTimestamp(), bottom.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()));
                 } catch (NumberFormatException e) {
                 }
             }
-            Collections.sort(result, Comparator.comparing(Bollinger::getTimestamp));
+            Collections.sort(result, Comparator.comparing(BollingerJava::getTimestamp));
             result = trimToDate(result);
             IndicatorsInMemoryCache.putBollinger(symbol, Context.timeframe, result);
             return result;

@@ -9,9 +9,9 @@ abstract class AbstractModel {
     }
 
     // in epoch seconds
-    val timestamp: Long
-    val nativeDate: String
-    val myDate: String
+    public val timestamp: Long
+    public val nativeDate: String
+    public val myDate: String
 
     constructor(timestamp: Long) {
         this.timestamp = timestamp

@@ -19,7 +19,7 @@ public class IndicatorsInMemoryCache {
     private static ConcurrentHashMap<KeltnerKEY, List<Keltner>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKey, List<ATRJava>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<BollingerKey, List<Bollinger>> bollinger = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<BollingerKey, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<EFIKey, List<ElderForceIndex>> efi = new ConcurrentHashMap<>();
 
     public static void putEMA(String symbol, Timeframe timeframe, int period, List<EMA> data) {
@@ -46,7 +46,7 @@ public class IndicatorsInMemoryCache {
         efi.put(new EFIKey(symbol, timeframe), data);
     }
 
-    public static void putBollinger(String symbol, Timeframe timeframe, List<Bollinger> data) {
+    public static void putBollinger(String symbol, Timeframe timeframe, List<BollingerJava> data) {
         bollinger.put(new BollingerKey(symbol, timeframe), data);
     }
 
@@ -114,13 +114,13 @@ public class IndicatorsInMemoryCache {
         return Collections.emptyList();
     }
 
-    public static List<Bollinger> getBollinger(String symbol, Timeframe timeframe) {
-        List<Bollinger> cached = bollinger.getOrDefault(new BollingerKey(symbol, timeframe), Collections.emptyList());
+    public static List<BollingerJava> getBollinger(String symbol, Timeframe timeframe) {
+        List<BollingerJava> cached = bollinger.getOrDefault(new BollingerKey(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
-            List<Bollinger> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<Bollinger>>() {
+            List<BollingerJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<BollingerJava>>() {
             }.getType());
-            Collections.sort(copy, Comparator.comparing(Bollinger::getTimestamp));
+            Collections.sort(copy, Comparator.comparing(BollingerJava::getTimestamp));
             return copy;
         }
         return Collections.emptyList();

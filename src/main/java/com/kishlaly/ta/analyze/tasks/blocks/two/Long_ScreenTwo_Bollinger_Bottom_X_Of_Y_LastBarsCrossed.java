@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.Bollinger;
+import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Log;
 
@@ -28,12 +28,12 @@ public class Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed implements S
             throw new RuntimeException("BOLLINGER_CROSSED_BOTTOM_BARS not defined");
         }
 
-        List<Bollinger> screen_2_Bollinger = (List<Bollinger>) screen.indicators.get(Indicator.BOLLINGER);
+        List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(Indicator.BOLLINGER);
 
         int crossed = 0;
         for (int i = screen_2_Bollinger.size() - BOLLINGER_TOTAL_BARS_CHECK; i < screen_2_Bollinger.size(); i++) {
             QuoteJava quote = screen.quotes.get(i);
-            Bollinger bollinger = screen_2_Bollinger.get(i);
+            BollingerJava bollinger = screen_2_Bollinger.get(i);
             if (isQuoteCrossedBollingerBottom(quote, bollinger)) {
                 crossed++;
             }

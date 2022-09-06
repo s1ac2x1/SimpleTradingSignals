@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.testing.sl;
 
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.Bollinger;
+import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.utils.IndicatorUtils;
 
 public class StopLossVolatileBollingerMiddle extends StopLossStrategy {
@@ -12,7 +12,7 @@ public class StopLossVolatileBollingerMiddle extends StopLossStrategy {
 
     @Override
     public double calculate(SymbolData data, int signalIndex) {
-        Bollinger bollinger = IndicatorUtils.buildBollingerBands(data.symbol, data.quotes).get(signalIndex);
+        BollingerJava bollinger = IndicatorUtils.buildBollingerBands(data.symbol, data.quotes).get(signalIndex);
         return bollinger.getMiddle();
     }
 

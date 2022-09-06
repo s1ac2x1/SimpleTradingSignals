@@ -3,7 +3,7 @@ package com.kishlaly.ta.utils;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
-import com.kishlaly.ta.model.indicators.Bollinger;
+import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.Keltner;
 
 import java.time.DayOfWeek;
@@ -124,11 +124,11 @@ public class Quotes {
         return quote.getLow() > emaValue && quote.getHigh() > emaValue;
     }
 
-    public static boolean isQuoteCrossedBollingerBottom(QuoteJava quote, Bollinger bollinger) {
+    public static boolean isQuoteCrossedBollingerBottom(QuoteJava quote, BollingerJava bollinger) {
         return quote.getLow() <= bollinger.getBottom() && quote.getHigh() >= bollinger.getBottom();
     }
 
-    public static boolean isQuoteBelowBollingerBottom(QuoteJava quote, Bollinger bollinger) {
+    public static boolean isQuoteBelowBollingerBottom(QuoteJava quote, BollingerJava bollinger) {
         return quote.getLow() < bollinger.getBottom() && quote.getHigh() < bollinger.getBottom();
     }
 
