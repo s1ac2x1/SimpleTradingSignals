@@ -28,7 +28,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
-import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
+import static com.kishlaly.ta.analyze.testing.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.QuoteJava.exchangeTimezome;
 import static com.kishlaly.ta.utils.Context.*;
 import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;

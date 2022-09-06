@@ -1,6 +1,7 @@
 package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
+import com.kishlaly.ta.analyze.testing.HistoricalTesting;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.CacheReader;

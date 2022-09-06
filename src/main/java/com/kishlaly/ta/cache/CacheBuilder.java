@@ -8,7 +8,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
 import com.kishlaly.ta.loaders.Alphavantage;
-import com.kishlaly.ta.model.HistoricalTesting;
+import com.kishlaly.ta.analyze.testing.HistoricalTesting;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
