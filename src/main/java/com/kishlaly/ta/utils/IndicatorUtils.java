@@ -26,21 +26,21 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class IndicatorUtils {
 
-    public static List<EMA> buildEMA(String symbol, List<QuoteJava> quotes, int period) {
-        List<EMA> cached = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period);
+    public static List<EMAJava> buildEMA(String symbol, List<QuoteJava> quotes, int period) {
+        List<EMAJava> cached = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period);
         if (!cached.isEmpty()) {
             return cached;
         } else {
             BarSeries barSeries = Bars.build(quotes);
             ClosePriceIndicator closePriceIndicator = new ClosePriceIndicator(barSeries);
             EMAIndicator ema = new EMAIndicator(closePriceIndicator, period);
-            List<EMA> result = new ArrayList<>();
+            List<EMAJava> result = new ArrayList<>();
             for (int i = 0; i < ema.getBarSeries().getBarCount(); i++) {
-                result.add(new EMA(quotes.get(i).getTimestamp(), ema.getValue(i).doubleValue()));
+                result.add(new EMAJava(quotes.get(i).getTimestamp(), ema.getValue(i).doubleValue()));
             }
-            result = result.stream().filter(EMA::valuesPresent).collect(Collectors.toList());
+            result = result.stream().filter(EMAJava::valuesPresent).collect(Collectors.toList());
             result = trimToDate(result);
-            Collections.sort(result, Comparator.comparing(EMA::getTimestamp));
+            Collections.sort(result, Comparator.comparing(EMAJava::getTimestamp));
             IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe, period, result);
             return result;
         }
@@ -203,14 +203,14 @@ public class IndicatorUtils {
         }
     }
 
-    public static boolean emaAscending(List<EMA> ema, int atLeast, int fromLast) {
+    public static boolean emaAscending(List<EMAJava> ema, int atLeast, int fromLast) {
         if (fromLast < 2) {
             throw new RuntimeException("EMA ascending check: required at least 2 values");
         }
         int ascendingCount = 0;
         for (int i = ema.size() - fromLast; i < ema.size() - 1; i++) {
-            EMA curr = ema.get(i);
-            EMA next = ema.get(i + 1);
+            EMAJava curr = ema.get(i);
+            EMAJava next = ema.get(i + 1);
             if (next.getValue() > curr.getValue()) {
                 ascendingCount++;
             }

@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
@@ -20,9 +20,9 @@ import static com.kishlaly.ta.utils.Quotes.isQuoteBelowEMA;
 public class Long_ScreenTwo_EMA_TwoBarsBelow implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
-        EMA ema13_2 = CollectionsTools.getFromEnd(screen_2_EMA13, 2);
-        EMA ema13_1 = CollectionsTools.getFromEnd(screen_2_EMA13, 1);
+        List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(Indicator.EMA13);
+        EMAJava ema13_2 = CollectionsTools.getFromEnd(screen_2_EMA13, 2);
+        EMAJava ema13_1 = CollectionsTools.getFromEnd(screen_2_EMA13, 1);
         List<QuoteJava> screen_2_Quotes = screen.quotes;
         QuoteJava quote2 = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
         QuoteJava quote1 = CollectionsTools.getFromEnd(screen_2_Quotes, 1);

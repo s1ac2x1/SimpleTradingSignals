@@ -5,7 +5,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.Timeframe;
-import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.model.indicators.Stoch;
 import com.kishlaly.ta.utils.Context;
@@ -124,8 +124,8 @@ public class Alphavantage {
     }
 
     // not used as all indicators are being calculated locally
-    public static List<EMA> loadEMA(String symbol, int period) {
-        List<EMA> result = new ArrayList<>();
+    public static List<EMAJava> loadEMA(String symbol, int period) {
+        List<EMAJava> result = new ArrayList<>();
         String url = "https://www.alphavantage.co/query?function=EMA&symbol=" + symbol + "&time_period=" + period + "&interval=" + getInterval() + "&series_type=close&apikey=" + KEY;
         try {
             Map<String, Object> map = getResponse(url);
@@ -141,7 +141,7 @@ public class Alphavantage {
                     day += ":00";
                 }
                 Double ema = parseDouble(v.get("EMA"));
-                result.add(new EMA(DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(), ema));
+                result.add(new EMAJava(DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(), ema));
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -150,7 +150,7 @@ public class Alphavantage {
         if (result.size() < 10) {
             return Collections.emptyList();
         }
-        Collections.sort(result, Comparator.comparing(EMA::getTimestamp));
+        Collections.sort(result, Comparator.comparing(EMAJava::getTimestamp));
         return result;
     }
 

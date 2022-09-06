@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
@@ -20,7 +20,7 @@ public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwo
     @Override
     public BlockResult check(SymbolData screen) {
         List<QuoteJava> screen_2_Quotes = screen.quotes;
-        List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
+        List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(Indicator.EMA13);
         // prerequisite 1:
         // make sure first that the last TWO columns go up
         QuoteJava preLastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
@@ -31,8 +31,8 @@ public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwo
             Log.addDebugLine("Quote.high does not grow consistently");
             return new BlockResult(screen.getLastQuote(), QUOTE_HIGH_NOT_GROWING_SCREEN_2);
         }
-        EMA preLastEMA = CollectionsTools.getFromEnd(screen_2_EMA13, 2);
-        EMA lastEMA = CollectionsTools.getFromEnd(screen_2_EMA13, 1);
+        EMAJava preLastEMA = CollectionsTools.getFromEnd(screen_2_EMA13, 2);
+        EMAJava lastEMA = CollectionsTools.getFromEnd(screen_2_EMA13, 1);
 
         // both quotes below EMA - reject
         if (isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteBelowEMA(lastQuote, lastEMA.getValue())) {

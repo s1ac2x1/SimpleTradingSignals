@@ -1,7 +1,7 @@
 package com.kishlaly.ta.tests;
 
 import com.kishlaly.ta.cache.CacheReader;
-import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.Indicator;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class IndicatorsTest {
 
     @Test
     public void testEMA13() {
-        List<EMA> ema13Values = CacheReader.calculateIndicatorFromCachedQuotes("AAPL", Indicator.EMA13);
+        List<EMAJava> ema13Values = CacheReader.calculateIndicatorFromCachedQuotes("AAPL", Indicator.EMA13);
         assertThat(ema13Values)
                 .isNotNull()
                 .hasSize(AAPL_DAILY_QUOTES_SIZE);

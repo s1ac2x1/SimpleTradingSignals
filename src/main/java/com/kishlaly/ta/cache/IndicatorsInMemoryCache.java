@@ -14,7 +14,7 @@ public class IndicatorsInMemoryCache {
 
     private static Gson gson = new Gson();
 
-    private static ConcurrentHashMap<EMAKey, List<EMA>> ema = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<EMAKey, List<EMAJava>> ema = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<MACDKey, List<MACD>> macd = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<KeltnerKEY, List<Keltner>> keltner = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKey, List<ATRJava>> atr = new ConcurrentHashMap<>();
@@ -22,7 +22,7 @@ public class IndicatorsInMemoryCache {
     private static ConcurrentHashMap<BollingerKey, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<EFIKey, List<ElderForceIndexJava>> efi = new ConcurrentHashMap<>();
 
-    public static void putEMA(String symbol, Timeframe timeframe, int period, List<EMA> data) {
+    public static void putEMA(String symbol, Timeframe timeframe, int period, List<EMAJava> data) {
         ema.put(new EMAKey(symbol, timeframe, period), data);
     }
 
@@ -50,13 +50,13 @@ public class IndicatorsInMemoryCache {
         bollinger.put(new BollingerKey(symbol, timeframe), data);
     }
 
-    public static List<EMA> getEMA(String symbol, Timeframe timeframe, int period) {
-        List<EMA> cached = ema.getOrDefault(new EMAKey(symbol, timeframe, period), Collections.emptyList());
+    public static List<EMAJava> getEMA(String symbol, Timeframe timeframe, int period) {
+        List<EMAJava> cached = ema.getOrDefault(new EMAKey(symbol, timeframe, period), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
-            List<EMA> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<EMA>>() {
+            List<EMAJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<EMAJava>>() {
             }.getType());
-            Collections.sort(copy, Comparator.comparing(EMA::getTimestamp));
+            Collections.sort(copy, Comparator.comparing(EMAJava::getTimestamp));
             return copy;
         }
         return Collections.emptyList();

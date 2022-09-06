@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.one;
 
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
@@ -19,9 +19,9 @@ import static com.kishlaly.ta.analyze.BlockResultCode.*;
 public class Long_ScreenOne_SoftTrendCheck implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<EMA> screen_1_EMA26 = (List<EMA>) screen.indicators.get(Indicator.EMA26);
-        EMA ema2 = CollectionsTools.getFromEnd(screen_1_EMA26, 2);
-        EMA ema1 = CollectionsTools.getFromEnd(screen_1_EMA26, 1);
+        List<EMAJava> screen_1_EMA26 = (List<EMAJava>) screen.indicators.get(Indicator.EMA26);
+        EMAJava ema2 = CollectionsTools.getFromEnd(screen_1_EMA26, 2);
+        EMAJava ema1 = CollectionsTools.getFromEnd(screen_1_EMA26, 1);
 
         boolean ascending = ema2.getValue() < ema1.getValue();
 

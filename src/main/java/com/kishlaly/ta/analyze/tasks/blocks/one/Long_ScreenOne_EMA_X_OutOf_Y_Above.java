@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.one;
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Log;
 import com.kishlaly.ta.utils.Quotes;
@@ -26,7 +26,7 @@ public class Long_ScreenOne_EMA_X_OutOf_Y_Above implements ScreenOneBlock {
             throw new RuntimeException("ThreeDisplays.Config.EMA26_ABOVE_BARS not set");
         }
 
-        List<EMA> screen_1_EMA26 = (List<EMA>) screen.indicators.get(Indicator.EMA26);
+        List<EMAJava> screen_1_EMA26 = (List<EMAJava>) screen.indicators.get(Indicator.EMA26);
         int aboveEMA26 = 0;
         for (int i = screen_1_EMA26.size() - ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK; i < screen_1_EMA26.size(); i++) {
             if (Quotes.isQuoteAboveEMA(screen.quotes.get(i), screen_1_EMA26.get(i).getValue())) {

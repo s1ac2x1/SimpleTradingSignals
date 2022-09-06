@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.functions;
 
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.utils.Context;
@@ -61,7 +61,7 @@ public class TrendFunctions {
     // On the weekly chart from the example, the price bar is on the sixth histogram smoothly decreasing, this is dangerous
     public static boolean uptrendCheckOnLastBar(SymbolData symbolData) {
         QuoteJava lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
-        List<EMA> ema = (List<EMA>) symbolData.indicators.get(Indicator.EMA26);
+        List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(Indicator.EMA26);
         double lastEMA = ema.get(ema.size() - 1).getValue();
         return lastQuote.getOpen() < lastEMA && lastQuote.getClose() > lastEMA;
     }
@@ -69,7 +69,7 @@ public class TrendFunctions {
     // mirror logic uptrendCheckOnLastBar
     public static boolean downtrendCheckOnLastBar(SymbolData symbolData) {
         QuoteJava lastQuote = symbolData.quotes.get(symbolData.quotes.size() - 1);
-        List<EMA> ema = (List<EMA>) symbolData.indicators.get(Indicator.EMA26);
+        List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(Indicator.EMA26);
         double lastEMA = ema.get(ema.size() - 1).getValue();
         return lastQuote.getOpen() > lastEMA && lastQuote.getClose() < lastEMA;
     }
@@ -79,14 +79,14 @@ public class TrendFunctions {
             int minBarsCount,
             int barsToCheck,
             Function<QuoteJava, Boolean> barCorrectColor,
-            BiFunction<QuoteJava, EMA, Boolean> quoteEmaIntersectionCheck,
+            BiFunction<QuoteJava, EMAJava, Boolean> quoteEmaIntersectionCheck,
             BiFunction<Double, Double, Boolean> emaMoveCheck,
             BiFunction<Double, Double, Boolean> histogramCheck1,
             BiFunction<Double, Double, Boolean> histogramCheck2
     ) {
         List<QuoteJava> quotes = symbolData.quotes;
         quotes = quotes.subList(quotes.size() - minBarsCount, quotes.size());
-        List<EMA> ema = (List<EMA>) symbolData.indicators.get(Indicator.EMA26);
+        List<EMAJava> ema = (List<EMAJava>) symbolData.indicators.get(Indicator.EMA26);
         ema = ema.subList(ema.size() - minBarsCount, ema.size());
         List<MACD> macd = (List<MACD>) symbolData.indicators.get(Indicator.MACD);
         macd = macd.subList(macd.size() - minBarsCount, macd.size());

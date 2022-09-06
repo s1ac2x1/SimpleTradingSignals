@@ -5,11 +5,11 @@ import com.kishlaly.ta.model.AbstractModelJava;
 import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.DatesJava.getTimeInExchangeZone;
 
-public class EMA extends AbstractModelJava {
+public class EMAJava extends AbstractModelJava {
 
     private Double value;
 
-    public EMA(final Long timestamp, final Double value) {
+    public EMAJava(final Long timestamp, final Double value) {
         super(timestamp);
         this.value = value;
         this.nativeDate = getTimeInExchangeZone(timestamp, exchangeTimezome).toString();

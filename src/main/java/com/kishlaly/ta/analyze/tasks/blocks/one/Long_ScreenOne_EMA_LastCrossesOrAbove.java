@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.one;
 import com.kishlaly.ta.model.BlockResult;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
-import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
@@ -21,8 +21,8 @@ public class Long_ScreenOne_EMA_LastCrossesOrAbove implements ScreenOneBlock {
     @Override
     public BlockResult check(SymbolData screen) {
         QuoteJava lastQuote = screen.getLastQuote();
-        List<EMA> screen_2_EMA26 = (List<EMA>) screen.indicators.get(Indicator.EMA26);
-        EMA lastEMA26 = CollectionsTools.getFromEnd(screen_2_EMA26, 1);
+        List<EMAJava> screen_2_EMA26 = (List<EMAJava>) screen.indicators.get(Indicator.EMA26);
+        EMAJava lastEMA26 = CollectionsTools.getFromEnd(screen_2_EMA26, 1);
         boolean lastBarCrossing = Quotes.isQuoteCrossedEMA(lastQuote, lastEMA26.getValue());
         boolean lastBarAbove = Quotes.isQuoteAboveEMA(lastQuote, lastEMA26.getValue());
 

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kishlaly.ta.analyze.TaskType;
 import com.kishlaly.ta.model.*;
-import com.kishlaly.ta.model.indicators.EMA;
+import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.model.indicators.MACD;
 import com.kishlaly.ta.model.indicators.Stoch;
@@ -192,7 +192,7 @@ public class CacheReader {
                     break;
                 case EMA13:
                 case EMA26:
-                    type = new TypeToken<ArrayList<EMA>>() {
+                    type = new TypeToken<ArrayList<EMAJava>>() {
                     }.getType();
                     break;
                 case STOCH:
@@ -213,7 +213,7 @@ public class CacheReader {
                     break;
                 case EMA13:
                 case EMA26:
-                    Collections.sort(list, Comparator.comparing(EMA::getTimestamp));
+                    Collections.sort(list, Comparator.comparing(EMAJava::getTimestamp));
                     break;
                 case STOCH:
                     Collections.sort(list, Comparator.comparing(Stoch::getTimestamp));
