@@ -1,7 +1,7 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4;
-import com.kishlaly.ta.model.SymbolsSource;
+import com.kishlaly.ta.model.SymbolsSourceJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.Context;
 import com.kishlaly.ta.utils.RunUtils;
@@ -17,8 +17,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Context.aggregationTimeframe = TimeframeJava.DAY;
-        Context.source = new SymbolsSource[]{
-                SymbolsSource.SP500
+        Context.source = new SymbolsSourceJava[]{
+                SymbolsSourceJava.SP500
         };
         singleSymbol("AAPL"); // for single test
         Context.symbols = getSymbols();

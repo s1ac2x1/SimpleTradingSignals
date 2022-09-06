@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
-import com.kishlaly.ta.model.SymbolsSource;
+import com.kishlaly.ta.model.SymbolsSourceJava;
 import com.kishlaly.ta.model.TimeframeJava;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class Context {
     public static TimeframeJava timeframe = TimeframeJava.DAY;
     // main aggregation timeframe. Weekly quotes will be calculated from it
     public static TimeframeJava aggregationTimeframe = TimeframeJava.DAY;
-    public static SymbolsSource[] source = {SymbolsSource.SP500};
+    public static SymbolsSourceJava[] source = {SymbolsSourceJava.SP500};
     public static List<String> testOnly = new ArrayList<>();
     public static Set<String> symbols;
     public static int yearsToAnalyze = 5;

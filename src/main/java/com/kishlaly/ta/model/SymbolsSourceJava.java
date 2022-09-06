@@ -1,6 +1,6 @@
 package com.kishlaly.ta.model;
 
-public enum SymbolsSource {
+public enum SymbolsSourceJava {
     SP500("symbols" + System.getProperty("file.separator") + "sp500.txt", false),
     SP500_RANDOM("symbols" + System.getProperty("file.separator") + "sp500.txt", true),
 
@@ -19,7 +19,7 @@ public enum SymbolsSource {
     private String filename;
     private boolean random;
 
-    SymbolsSource(final String filename, boolean random) {
+    SymbolsSourceJava(final String filename, boolean random) {
         this.filename = filename;
         this.random = random;
     }
