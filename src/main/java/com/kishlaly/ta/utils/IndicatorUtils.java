@@ -169,12 +169,12 @@ public class IndicatorUtils {
     }
 
     //TODO something is wrong here...
-    public static List<ElderForceIndex> buildEFI(String symbol, List<QuoteJava> quotes) {
-        List<ElderForceIndex> cached = IndicatorsInMemoryCache.getEFI(symbol, Context.timeframe);
+    public static List<ElderForceIndexJava> buildEFI(String symbol, List<QuoteJava> quotes) {
+        List<ElderForceIndexJava> cached = IndicatorsInMemoryCache.getEFI(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
         } else {
-            List<ElderForceIndex> result = new ArrayList<>();
+            List<ElderForceIndexJava> result = new ArrayList<>();
             BarSeries quoteSeries = Bars.build(quotes);
             BarSeries efiSeries = new BaseBarSeries();
             for (int i = 0; i < quoteSeries.getBarCount() - 1; i++) {
@@ -188,7 +188,7 @@ public class IndicatorUtils {
             for (int i = 0; i < efiSeries.getBarCount(); i++) {
                 double efiSmoothed = efiEMA13.getValue(i).doubleValue();
                 Long timestamp = efiSeries.getBar(i).getEndTime().toEpochSecond();
-                result.add(new ElderForceIndex(timestamp, efiSmoothed));
+                result.add(new ElderForceIndexJava(timestamp, efiSmoothed));
             }
 //            for (int i = 0; i < quotes.size() - 1; i++) {
 //                Quote todayQuote = quotes.get(i + 1);
@@ -197,7 +197,7 @@ public class IndicatorUtils {
 //                result.add(new ElderForceIndex(todayQuote.getTimestamp(), efiValue));
 //            }
             result = trimToDate(result);
-            Collections.sort(result, Comparator.comparing(ElderForceIndex::getTimestamp));
+            Collections.sort(result, Comparator.comparing(ElderForceIndexJava::getTimestamp));
             IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result);
             return result;
         }

@@ -20,7 +20,7 @@ public class IndicatorsInMemoryCache {
     private static ConcurrentHashMap<ATRKey, List<ATRJava>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<BollingerKey, List<BollingerJava>> bollinger = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<EFIKey, List<ElderForceIndex>> efi = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<EFIKey, List<ElderForceIndexJava>> efi = new ConcurrentHashMap<>();
 
     public static void putEMA(String symbol, Timeframe timeframe, int period, List<EMA> data) {
         ema.put(new EMAKey(symbol, timeframe, period), data);
@@ -42,7 +42,7 @@ public class IndicatorsInMemoryCache {
         stoch.put(new StochKey(symbol, timeframe), data);
     }
 
-    public static void putEFI(String symbol, Timeframe timeframe, List<ElderForceIndex> data) {
+    public static void putEFI(String symbol, Timeframe timeframe, List<ElderForceIndexJava> data) {
         efi.put(new EFIKey(symbol, timeframe), data);
     }
 
@@ -126,13 +126,13 @@ public class IndicatorsInMemoryCache {
         return Collections.emptyList();
     }
 
-    public static List<ElderForceIndex> getEFI(String symbol, Timeframe timeframe) {
-        List<ElderForceIndex> cached = efi.getOrDefault(new EFIKey(symbol, timeframe), Collections.emptyList());
+    public static List<ElderForceIndexJava> getEFI(String symbol, Timeframe timeframe) {
+        List<ElderForceIndexJava> cached = efi.getOrDefault(new EFIKey(symbol, timeframe), Collections.emptyList());
         if (!cached.isEmpty()) {
             String json = gson.toJson(cached);
-            List<ElderForceIndex> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<ElderForceIndex>>() {
+            List<ElderForceIndexJava> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<ElderForceIndexJava>>() {
             }.getType());
-            Collections.sort(copy, Comparator.comparing(ElderForceIndex::getTimestamp));
+            Collections.sort(copy, Comparator.comparing(ElderForceIndexJava::getTimestamp));
             return copy;
         }
         return Collections.emptyList();

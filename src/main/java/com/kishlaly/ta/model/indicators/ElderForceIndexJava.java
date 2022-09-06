@@ -2,11 +2,11 @@ package com.kishlaly.ta.model.indicators;
 
 import com.kishlaly.ta.model.AbstractModelJava;
 
-public class ElderForceIndex extends AbstractModelJava {
+public class ElderForceIndexJava extends AbstractModelJava {
 
     private double value;
 
-    public ElderForceIndex(final Long timestamp, final double value) {
+    public ElderForceIndexJava(final Long timestamp, final double value) {
         super(timestamp);
         this.value = value;
     }
