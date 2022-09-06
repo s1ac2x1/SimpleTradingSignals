@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
-import com.kishlaly.ta.utils.CollectionsTools;
+import com.kishlaly.ta.utils.CollectionUtilsJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlock {
     public BlockResultJava check(SymbolDataJava screen) {
         List<KeltnerJava> screen_2_Keltner = (List<KeltnerJava>) screen.indicators.get(IndicatorJava.KELTNER);
         if (FILTER_BY_KELTNER_ENABLED) {
-            KeltnerJava lastKeltnerData = CollectionsTools.getFromEnd(screen_2_Keltner, 1);
+            KeltnerJava lastKeltnerData = CollectionUtilsJava.getFromEnd(screen_2_Keltner, 1);
             double lastQuoteClose = screen.getLastQuote().getClose();
             double middle = lastKeltnerData.getMiddle();
             double top = lastKeltnerData.getTop();

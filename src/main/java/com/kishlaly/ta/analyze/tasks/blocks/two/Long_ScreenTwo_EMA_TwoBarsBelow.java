@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.CollectionsTools;
+import com.kishlaly.ta.utils.CollectionUtilsJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -21,11 +21,11 @@ public class Long_ScreenTwo_EMA_TwoBarsBelow implements ScreenTwoBlock {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
-        EMAJava ema13_2 = CollectionsTools.getFromEnd(screen_2_EMA13, 2);
-        EMAJava ema13_1 = CollectionsTools.getFromEnd(screen_2_EMA13, 1);
+        EMAJava ema13_2 = CollectionUtilsJava.getFromEnd(screen_2_EMA13, 2);
+        EMAJava ema13_1 = CollectionUtilsJava.getFromEnd(screen_2_EMA13, 1);
         List<QuoteJava> screen_2_Quotes = screen.quotes;
-        QuoteJava quote2 = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
-        QuoteJava quote1 = CollectionsTools.getFromEnd(screen_2_Quotes, 1);
+        QuoteJava quote2 = CollectionUtilsJava.getFromEnd(screen_2_Quotes, 2);
+        QuoteJava quote1 = CollectionUtilsJava.getFromEnd(screen_2_Quotes, 1);
 
         boolean lastQuotesBelowEMA = isQuoteBelowEMA(quote2, ema13_2.getValue()) && isQuoteBelowEMA(quote1, ema13_1.getValue());
         if (!lastQuotesBelowEMA) {

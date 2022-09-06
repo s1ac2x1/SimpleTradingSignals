@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.CollectionsTools;
+import com.kishlaly.ta.utils.CollectionUtilsJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -23,16 +23,16 @@ public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwo
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
         // prerequisite 1:
         // make sure first that the last TWO columns go up
-        QuoteJava preLastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
-        QuoteJava lastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 1);
+        QuoteJava preLastQuote = CollectionUtilsJava.getFromEnd(screen_2_Quotes, 2);
+        QuoteJava lastQuote = CollectionUtilsJava.getFromEnd(screen_2_Quotes, 1);
         boolean ascendingBarHigh = preLastQuote.getHigh() < lastQuote.getHigh();
         if (!ascendingBarHigh) {
             Log.recordCode(QUOTE_HIGH_NOT_GROWING_SCREEN_2, screen);
             Log.addDebugLine("Quote.high does not grow consistently");
             return new BlockResultJava(screen.getLastQuote(), QUOTE_HIGH_NOT_GROWING_SCREEN_2);
         }
-        EMAJava preLastEMA = CollectionsTools.getFromEnd(screen_2_EMA13, 2);
-        EMAJava lastEMA = CollectionsTools.getFromEnd(screen_2_EMA13, 1);
+        EMAJava preLastEMA = CollectionUtilsJava.getFromEnd(screen_2_EMA13, 2);
+        EMAJava lastEMA = CollectionUtilsJava.getFromEnd(screen_2_EMA13, 1);
 
         // both quotes below EMA - reject
         if (isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteBelowEMA(lastQuote, lastEMA.getValue())) {

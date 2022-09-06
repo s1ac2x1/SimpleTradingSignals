@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.CollectionsTools;
+import com.kishlaly.ta.utils.CollectionUtilsJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -19,9 +19,9 @@ public class Long_ScreenTwo_Bollinger_Top_ThreeDescending implements ScreenTwoBl
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(IndicatorJava.BOLLINGER);
-        BollingerJava bollinger3 = CollectionsTools.getFromEnd(screen_2_Bollinger, 3);
-        BollingerJava bollinger2 = CollectionsTools.getFromEnd(screen_2_Bollinger, 2);
-        BollingerJava bollinger1 = CollectionsTools.getFromEnd(screen_2_Bollinger, 1);
+        BollingerJava bollinger3 = CollectionUtilsJava.getFromEnd(screen_2_Bollinger, 3);
+        BollingerJava bollinger2 = CollectionUtilsJava.getFromEnd(screen_2_Bollinger, 2);
+        BollingerJava bollinger1 = CollectionUtilsJava.getFromEnd(screen_2_Bollinger, 1);
         boolean descending = bollinger3.getTop() > bollinger2.getTop() && bollinger2.getTop() > bollinger1.getTop();
         if (!descending) {
             Log.recordCode(BOLLINGER_TOP_NOT_DESCENDING_SCREEN_2, screen);

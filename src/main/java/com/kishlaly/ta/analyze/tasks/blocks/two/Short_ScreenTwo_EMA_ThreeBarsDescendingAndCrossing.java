@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.CollectionsTools;
+import com.kishlaly.ta.utils.CollectionUtilsJava;
 import com.kishlaly.ta.utils.Log;
 
 import java.util.List;
@@ -20,9 +20,9 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         // make sure first that the last three columns are decreasing
-        QuoteJava quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
-        QuoteJava quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
-        QuoteJava quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
+        QuoteJava quote3 = CollectionUtilsJava.getFromEnd(screen.quotes, 3);
+        QuoteJava quote2 = CollectionUtilsJava.getFromEnd(screen.quotes, 2);
+        QuoteJava quote1 = CollectionUtilsJava.getFromEnd(screen.quotes, 1);
 
         // descendingBarLow=false + descendingBarClose=false is enough to fail
         boolean descendingBarLow = quote3.getLow() > quote2.getLow() && quote2.getLow() < quote1.getLow();
@@ -37,12 +37,12 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
                 Log.recordCode(BlockResultCodeJava.QUOTE_CLOSE_NOT_LOWING_SCREEN_2, screen);
                 Log.addDebugLine("Quote.close is not reduced consistently");
                 // the third from the end all above EMA13, and the second and last crossed it
-                boolean thirdBarAboveEMA13 = quote3.getLow() > CollectionsTools.getFromEnd(screen_2_EMA13, 3).getValue()
-                        && quote3.getHigh() > CollectionsTools.getFromEnd(screen_2_EMA13, 3).getValue();
-                boolean secondBarCrossesEMA13 = quote2.getLow() <= CollectionsTools.getFromEnd(screen_2_EMA13, 2).getValue()
-                        && quote2.getHigh() >= CollectionsTools.getFromEnd(screen_2_EMA13, 2).getValue();
-                boolean lastBarCrossesEMA13 = quote1.getLow() <= CollectionsTools.getFromEnd(screen_2_EMA13, 1).getValue()
-                        && quote1.getHigh() >= CollectionsTools.getFromEnd(screen_2_EMA13, 1).getValue();
+                boolean thirdBarAboveEMA13 = quote3.getLow() > CollectionUtilsJava.getFromEnd(screen_2_EMA13, 3).getValue()
+                        && quote3.getHigh() > CollectionUtilsJava.getFromEnd(screen_2_EMA13, 3).getValue();
+                boolean secondBarCrossesEMA13 = quote2.getLow() <= CollectionUtilsJava.getFromEnd(screen_2_EMA13, 2).getValue()
+                        && quote2.getHigh() >= CollectionUtilsJava.getFromEnd(screen_2_EMA13, 2).getValue();
+                boolean lastBarCrossesEMA13 = quote1.getLow() <= CollectionUtilsJava.getFromEnd(screen_2_EMA13, 1).getValue()
+                        && quote1.getHigh() >= CollectionUtilsJava.getFromEnd(screen_2_EMA13, 1).getValue();
                 boolean crossingRule = thirdBarAboveEMA13 && (secondBarCrossesEMA13 || lastBarCrossesEMA13);
                 if (!crossingRule) {
                     Log.addDebugLine("Third from the end" + (thirdBarAboveEMA13 ? " " : " not ") + "above ЕМА13");
