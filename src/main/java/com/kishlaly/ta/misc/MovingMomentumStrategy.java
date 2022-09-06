@@ -1,6 +1,6 @@
 package com.kishlaly.ta.misc;
 
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Bars;
 import com.kishlaly.ta.utils.Context;
@@ -62,7 +62,7 @@ public class MovingMomentumStrategy {
         Context.aggregationTimeframe = Timeframe.DAY;
         Context.timeframe = Timeframe.DAY;
         String symbol = "TER";
-        List<Quote> quotes = loadQuotesFromDiskCache(symbol);
+        List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
         BarSeries series = Bars.build(quotes);
 
         // Building the trading strategy

@@ -7,9 +7,9 @@ package com.kishlaly.ta.model;
 public class HistogramQuote {
 
     public double histogramValue;
-    public Quote quote;
+    public QuoteJava quote;
 
-    public HistogramQuote(final double histogramValue, final Quote quote) {
+    public HistogramQuote(final double histogramValue, final QuoteJava quote) {
         this.histogramValue = histogramValue;
         this.quote = quote;
     }
@@ -22,11 +22,11 @@ public class HistogramQuote {
         this.histogramValue = histogramValue;
     }
 
-    public Quote getQuote() {
+    public QuoteJava getQuote() {
         return this.quote;
     }
 
-    public void setQuote(final Quote quote) {
+    public void setQuote(final QuoteJava quote) {
         this.quote = quote;
     }
 }

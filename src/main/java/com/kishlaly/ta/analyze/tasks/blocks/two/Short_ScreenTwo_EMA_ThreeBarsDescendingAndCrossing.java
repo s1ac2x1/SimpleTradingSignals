@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.analyze.BlockResultCode;
 import com.kishlaly.ta.model.BlockResult;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -20,9 +20,9 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
     @Override
     public BlockResult check(SymbolData screen) {
         // make sure first that the last three columns are decreasing
-        Quote quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
-        Quote quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
-        Quote quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
+        QuoteJava quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
+        QuoteJava quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
+        QuoteJava quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
 
         // descendingBarLow=false + descendingBarClose=false is enough to fail
         boolean descendingBarLow = quote3.getLow() > quote2.getLow() && quote2.getLow() < quote1.getLow();

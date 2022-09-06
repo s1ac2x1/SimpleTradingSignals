@@ -9,7 +9,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
 import com.kishlaly.ta.loaders.Alphavantage;
 import com.kishlaly.ta.model.HistoricalTesting;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.Indicator;
 import com.kishlaly.ta.utils.Context;
@@ -96,7 +96,7 @@ public class CacheBuilder {
                 System.out.println("Loading " + timeframe.name() + " quotes...");
                 symbols.forEach(symbol -> {
                     Future<?> future = apiExecutor.submit(() -> {
-                        List<Quote> quotes = Alphavantage.loadQuotes(symbol, timeframe);
+                        List<QuoteJava> quotes = Alphavantage.loadQuotes(symbol, timeframe);
                         if (!quotes.isEmpty()) {
                             saveQuote(symbol, quotes);
                         }
@@ -402,7 +402,7 @@ public class CacheBuilder {
         });
     }
 
-    private static void saveQuote(String symbol, List<Quote> quotes) {
+    private static void saveQuote(String symbol, List<QuoteJava> quotes) {
         try {
             String folder = Context.outputFolder + "/cache/" + Context.timeframe.name().toLowerCase();
             File directory = new File(folder);
@@ -411,7 +411,7 @@ public class CacheBuilder {
             }
             ZoneId zone = ZoneId.of(myTimezone);
             int currentYear = LocalDateTime.ofInstant(Instant.now(), zone).getYear();
-            List<Quote> filteredByHistory = quotes.stream().filter(quote -> {
+            List<QuoteJava> filteredByHistory = quotes.stream().filter(quote -> {
                 int quoteYear = LocalDateTime.ofInstant(Instant.ofEpochSecond(quote.getTimestamp()), zone).getYear();
                 return currentYear - quoteYear <= yearsToAnalyze;
             }).collect(Collectors.toList());

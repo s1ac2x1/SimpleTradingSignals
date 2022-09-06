@@ -1,6 +1,6 @@
 package com.kishlaly.ta.utils;
 
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.Timeframe;
 
 import java.time.*;
@@ -13,7 +13,7 @@ import java.time.temporal.ChronoUnit;
  */
 public class DatesJava {
 
-    public static String beautifyQuoteDate(Quote quote) {
+    public static String beautifyQuoteDate(QuoteJava quote) {
         return getBarTimeInMyZone(quote.getTimestamp(), quote.exchangeTimezome).toString();
     }
 

@@ -115,16 +115,16 @@ public class CacheReader {
         }).collect(Collectors.toList());
     }
 
-    public static List<Quote> loadQuotesFromDiskCache(String symbol) {
-        List<Quote> cachedQuotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
+    public static List<QuoteJava> loadQuotesFromDiskCache(String symbol) {
+        List<QuoteJava> cachedQuotes = QuotesInMemoryCache.get(symbol, Context.timeframe);
         if (!cachedQuotes.isEmpty()) {
             return cachedQuotes;
         } else {
             try {
-                List<Quote> quotes = gson.fromJson(
+                List<QuoteJava> quotes = gson.fromJson(
                         new String(
                                 Files.readAllBytes(Paths.get(getFolder() + fileSeparator + symbol + "_quotes.txt"))),
-                        new TypeToken<ArrayList<Quote>>() {
+                        new TypeToken<ArrayList<QuoteJava>>() {
                         }.getType());
                 switch (Context.aggregationTimeframe) {
                     case DAY:
@@ -146,8 +146,8 @@ public class CacheReader {
                         break;
                     default:
                 }
-                quotes = quotes.stream().filter(Quote::valuesPesent).collect(Collectors.toList());
-                Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
+                quotes = quotes.stream().filter(QuoteJava::valuesPesent).collect(Collectors.toList());
+                Collections.sort(quotes, Comparator.comparing(QuoteJava::getTimestamp));
                 if (Context.trimToDate != null) {
                     ZonedDateTime filterAfter = shortDateToZoned(Context.trimToDate);
                     quotes = quotes.stream().filter(quote -> quote.getTimestamp() <= filterAfter.toEpochSecond()).collect(Collectors.toList());
@@ -161,7 +161,7 @@ public class CacheReader {
     }
 
     public static List calculateIndicatorFromCachedQuotes(String symbol, Indicator indicator) {
-        List<Quote> quotes = loadQuotesFromDiskCache(symbol);
+        List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
         switch (indicator) {
             case MACD:
                 return IndicatorUtils.buildMACDHistogram(symbol, quotes);
@@ -230,7 +230,7 @@ public class CacheReader {
         SymbolData screen = new SymbolData();
         screen.symbol = symbol;
         screen.timeframe = timeframeIndicators.timeframe;
-        List<Quote> quotes = loadQuotesFromDiskCache(symbol);
+        List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
         screen.quotes = quotes;
         Arrays.stream(timeframeIndicators.indicators).forEach(indicator -> {
             List<? extends AbstractModelJava> data = calculateIndicatorFromCachedQuotes(symbol, indicator);

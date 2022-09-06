@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResult;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -20,9 +20,9 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 public class Long_ScreenTwo_EMA_LastBarTooHigh implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        Quote quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
-        Quote quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
-        Quote quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
+        QuoteJava quote3 = CollectionsTools.getFromEnd(screen.quotes, 3);
+        QuoteJava quote2 = CollectionsTools.getFromEnd(screen.quotes, 2);
+        QuoteJava quote1 = CollectionsTools.getFromEnd(screen.quotes, 1);
         List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
         int screen_2_EMA13Count = screen_2_EMA13.size();
 

@@ -11,14 +11,14 @@ public class SymbolData {
 
     public String symbol;
     public Timeframe timeframe;
-    public List<Quote> quotes;
+    public List<QuoteJava> quotes;
     public Map<Indicator, List<? extends AbstractModelJava>> indicators = new HashMap<>();
 
-    public Quote getLastQuote() {
+    public QuoteJava getLastQuote() {
         return quotes.get(quotes.size() - 1);
     }
 
-    public Quote getPreLastQuote() {
+    public QuoteJava getPreLastQuote() {
         return quotes.get(quotes.size() - 2);
     }
 

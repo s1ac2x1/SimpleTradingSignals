@@ -1,7 +1,7 @@
 package com.kishlaly.ta.tests;
 
 import com.kishlaly.ta.cache.CacheReader;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.utils.Quotes;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +13,8 @@ public class AggregationTest {
 
     @Test
     public void dayToWeekAggregationTest() {
-        List<Quote> dailyQuotes = CacheReader.loadQuotesFromDiskCache("AAPL");
-        List<Quote> weeklyQuotes = Quotes.dayToWeek(dailyQuotes);
+        List<QuoteJava> dailyQuotes = CacheReader.loadQuotesFromDiskCache("AAPL");
+        List<QuoteJava> weeklyQuotes = Quotes.dayToWeek(dailyQuotes);
         assertThat(weeklyQuotes).isNotNull().hasSize(296);
         TestUtils.checkPropertiesAndValues(
                 weeklyQuotes.get(weeklyQuotes.size() - 1),

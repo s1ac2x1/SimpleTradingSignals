@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.testing.sl;
 
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.ATR;
 import com.kishlaly.ta.utils.IndicatorUtils;
@@ -18,7 +18,7 @@ public class StopLossVolatileATR extends StopLossStrategy {
 
     @Override
     public double calculate(SymbolData data, int currentQuoteIndex) {
-        Quote signal = data.quotes.get(currentQuoteIndex);
+        QuoteJava signal = data.quotes.get(currentQuoteIndex);
         List<ATR> atrs = IndicatorUtils.buildATR(data.symbol, data.quotes, 22);
         return signal.getLow() - (2 * atrs.get(currentQuoteIndex).getValue());
     }

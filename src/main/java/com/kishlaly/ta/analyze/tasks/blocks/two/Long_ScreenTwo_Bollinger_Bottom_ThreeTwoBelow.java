@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResult;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.Bollinger;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -20,10 +20,10 @@ import static com.kishlaly.ta.analyze.BlockResultCode.QUOTE_3_AND_QUOTE_2_NOT_BE
 public class Long_ScreenTwo_Bollinger_Bottom_ThreeTwoBelow implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<Quote> quotes = screen.quotes;
+        List<QuoteJava> quotes = screen.quotes;
         List<Bollinger> screen_2_Bollinger = (List<Bollinger>) screen.indicators.get(Indicator.BOLLINGER);
-        Quote quote_3 = CollectionsTools.getFromEnd(quotes, 3);
-        Quote quote_2 = CollectionsTools.getFromEnd(quotes, 2);
+        QuoteJava quote_3 = CollectionsTools.getFromEnd(quotes, 3);
+        QuoteJava quote_2 = CollectionsTools.getFromEnd(quotes, 2);
         Bollinger bollinger_3 = CollectionsTools.getFromEnd(screen_2_Bollinger, 3);
         Bollinger bollinger_2 = CollectionsTools.getFromEnd(screen_2_Bollinger, 2);
 

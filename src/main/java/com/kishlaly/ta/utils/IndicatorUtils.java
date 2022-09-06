@@ -2,7 +2,7 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache;
 import com.kishlaly.ta.model.AbstractModelJava;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.*;
 import org.ta4j.core.BarSeries;
@@ -26,7 +26,7 @@ import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
 
 public class IndicatorUtils {
 
-    public static List<EMA> buildEMA(String symbol, List<Quote> quotes, int period) {
+    public static List<EMA> buildEMA(String symbol, List<QuoteJava> quotes, int period) {
         List<EMA> cached = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period);
         if (!cached.isEmpty()) {
             return cached;
@@ -46,7 +46,7 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<MACD> buildMACDHistogram(String symbol, List<Quote> quotes) {
+    public static List<MACD> buildMACDHistogram(String symbol, List<QuoteJava> quotes) {
         List<MACD> cached = IndicatorsInMemoryCache.getMACD(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
@@ -77,7 +77,7 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<Keltner> buildKeltnerChannels(String symbol, List<Quote> quotes) {
+    public static List<Keltner> buildKeltnerChannels(String symbol, List<QuoteJava> quotes) {
         List<Keltner> cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
@@ -98,7 +98,7 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<ATR> buildATR(String symbol, List<Quote> quotes, int barCount) {
+    public static List<ATR> buildATR(String symbol, List<QuoteJava> quotes, int barCount) {
         List<ATR> cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe, barCount);
         if (!cached.isEmpty()) {
             return cached;
@@ -117,7 +117,7 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<Stoch> buildStochastic(String symbol, List<Quote> quotes) {
+    public static List<Stoch> buildStochastic(String symbol, List<QuoteJava> quotes) {
         List<Stoch> cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
@@ -140,7 +140,7 @@ public class IndicatorUtils {
         }
     }
 
-    public static List<Bollinger> buildBollingerBands(String symbol, List<Quote> quotes) {
+    public static List<Bollinger> buildBollingerBands(String symbol, List<QuoteJava> quotes) {
         List<Bollinger> cached = IndicatorsInMemoryCache.getBollinger(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
@@ -169,7 +169,7 @@ public class IndicatorUtils {
     }
 
     //TODO something is wrong here...
-    public static List<ElderForceIndex> buildEFI(String symbol, List<Quote> quotes) {
+    public static List<ElderForceIndex> buildEFI(String symbol, List<QuoteJava> quotes) {
         List<ElderForceIndex> cached = IndicatorsInMemoryCache.getEFI(symbol, Context.timeframe);
         if (!cached.isEmpty()) {
             return cached;
@@ -178,8 +178,8 @@ public class IndicatorUtils {
             BarSeries quoteSeries = Bars.build(quotes);
             BarSeries efiSeries = new BaseBarSeries();
             for (int i = 0; i < quoteSeries.getBarCount() - 1; i++) {
-                Quote todayQuote = quotes.get(i + 1);
-                Quote yesterdayQuote = quotes.get(i);
+                QuoteJava todayQuote = quotes.get(i + 1);
+                QuoteJava yesterdayQuote = quotes.get(i);
                 double efiValue = (todayQuote.getClose() - yesterdayQuote.getClose()) * todayQuote.getVolume();
                 efiSeries.addBar(quoteSeries.getBar(i + 1).getEndTime(), 0d, 0d, 0d, efiValue, 0d);
             }

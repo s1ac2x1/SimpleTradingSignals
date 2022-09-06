@@ -4,19 +4,19 @@ import com.kishlaly.ta.analyze.BlockResultCode;
 
 public class BlockResult {
 
-    private Quote lastChartQuote;
+    private QuoteJava lastChartQuote;
     private BlockResultCode code;
 
-    public BlockResult(final Quote lastChartQuote, final BlockResultCode code) {
+    public BlockResult(final QuoteJava lastChartQuote, final BlockResultCode code) {
         this.lastChartQuote = lastChartQuote;
         this.code = code;
     }
 
-    public Quote getLastChartQuote() {
+    public QuoteJava getLastChartQuote() {
         return this.lastChartQuote;
     }
 
-    public void setLastChartQuote(final Quote lastChartQuote) {
+    public void setLastChartQuote(final QuoteJava lastChartQuote) {
         this.lastChartQuote = lastChartQuote;
     }
 

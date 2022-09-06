@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.ResponseBody;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.utils.Context;
 
 import java.lang.reflect.Type;
@@ -32,8 +32,8 @@ public class RapidAPI {
         }
     }
 
-    public static List<Quote> load(String symbol) {
-        List<Quote> quotes = new ArrayList<>();
+    public static List<QuoteJava> load(String symbol) {
+        List<QuoteJava> quotes = new ArrayList<>();
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()

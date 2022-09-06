@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.two;
 import com.kishlaly.ta.analyze.BlockResultCode;
 import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
 import com.kishlaly.ta.model.BlockResult;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.utils.Log;
 
@@ -14,12 +14,12 @@ import static com.kishlaly.ta.analyze.BlockResultCode.*;
 public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        Quote lastChartQuote = screen.quotes.get(screen.quotes.size() - 1);
-        Quote signal = lastChartQuote;
+        QuoteJava lastChartQuote = screen.quotes.get(screen.quotes.size() - 1);
+        QuoteJava signal = lastChartQuote;
 
         // look for the minimum for the last MONTHS months in one of the last 10 columns
         int days = FirstTrustModel.Config.MONTHS * 21;
-        Quote nMonthsLow = screen.quotes.subList(screen.quotes.size() - days, screen.quotes.size())
+        QuoteJava nMonthsLow = screen.quotes.subList(screen.quotes.size() - days, screen.quotes.size())
                 .stream()
                 .min(Comparator.comparing(quote -> quote.getLow())).get();
         int nMonthsLowIndex = -1;
@@ -48,8 +48,8 @@ public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlock {
         }
 
         // looking for at least two green bars after the minimum
-        Quote quote_1_afterMin = screen.quotes.get(screen.quotes.size() - nMonthsLowIndex + 1);
-        Quote quote_2_afterMin = screen.quotes.get(screen.quotes.size() - nMonthsLowIndex + 2);
+        QuoteJava quote_1_afterMin = screen.quotes.get(screen.quotes.size() - nMonthsLowIndex + 1);
+        QuoteJava quote_2_afterMin = screen.quotes.get(screen.quotes.size() - nMonthsLowIndex + 2);
         boolean ascendingLastBars = quote_1_afterMin.getOpen() < quote_1_afterMin.getClose() && quote_2_afterMin.getOpen() < quote_2_afterMin.getClose();
         if (!ascendingLastBars) {
             Log.addDebugLine("After the minimum there was no growth of two bars");

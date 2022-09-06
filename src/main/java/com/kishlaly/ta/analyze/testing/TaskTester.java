@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
 import static com.kishlaly.ta.model.HistoricalTesting.PositionTestResult;
-import static com.kishlaly.ta.model.Quote.exchangeTimezome;
+import static com.kishlaly.ta.model.QuoteJava.exchangeTimezome;
 import static com.kishlaly.ta.utils.Context.*;
 import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
@@ -149,8 +149,8 @@ public class TaskTester {
     }
 
     private static void rewind(TaskType task, BlocksGroup blocksGroup, SymbolData screen1, SymbolData screen2, List<BlockResult> blockResults) {
-        Quote lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
-        Quote lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
+        QuoteJava lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
+        QuoteJava lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
         blockResults.add(task.getFunction().apply(new Screens(screen1, screen2), blocksGroup.blocks()));
         if (lastScreen2Quote.getTimestamp() < lastScreen1Quote.getTimestamp()) {
             rewind(screen1, 1);
@@ -180,7 +180,7 @@ public class TaskTester {
                 .filter(taskResult -> taskResult.isOk())
                 .forEach(taskResult -> {
                     String line = "";
-                    Quote quote = taskResult.getLastChartQuote();
+                    QuoteJava quote = taskResult.getLastChartQuote();
                     String quoteDateFormatted = formatDate(timeframe, quote.getTimestamp());
 
                     // результаты тестирования сигналов
@@ -330,7 +330,7 @@ public class TaskTester {
 
     private static void testPosition(BlockResult blockResult, HistoricalTesting historicalTesting) {
         PositionTestResult positionTestResult = new PositionTestResult();
-        Quote signal = blockResult.getLastChartQuote();
+        QuoteJava signal = blockResult.getLastChartQuote();
         int signalIndex = -1;
         SymbolData data = historicalTesting.getData();
         for (int i = 0; i < data.quotes.size(); i++) {
@@ -374,11 +374,11 @@ public class TaskTester {
             double roi = 0;
             double closePositionPrice = 0;
             double closePositionCost = 0;
-            Quote closePositionQuote = null;
+            QuoteJava closePositionQuote = null;
 
             while (!skip && startPositionIndex < data.quotes.size() - 1) {
                 startPositionIndex++;
-                Quote nextQuote = data.quotes.get(startPositionIndex);
+                QuoteJava nextQuote = data.quotes.get(startPositionIndex);
                 boolean tpInsideBar = takeProfitStrategy.isEnabled()
                         ? nextQuote.getLow() < takeProfit && nextQuote.getHigh() > takeProfit
                         : false;

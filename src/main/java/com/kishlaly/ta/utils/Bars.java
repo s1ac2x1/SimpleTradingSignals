@@ -1,6 +1,6 @@
 package com.kishlaly.ta.utils;
 
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeries;
 
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.utils.DatesJava.getTimeInExchangeZone;
  */
 public class Bars {
 
-    public static BarSeries build(List<Quote> quotes) {
+    public static BarSeries build(List<QuoteJava> quotes) {
         BarSeries initialBarSeries = new BaseBarSeries();
         quotes.forEach(quote -> {
             try {

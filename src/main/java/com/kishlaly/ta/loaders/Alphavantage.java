@@ -3,7 +3,7 @@ package com.kishlaly.ta.loaders;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.MACD;
@@ -42,8 +42,8 @@ public class Alphavantage {
      * <p>
      * Assuming Exchange Timezone = "US/Eastern"
      */
-    public static List<Quote> loadQuotes(String symbol, Timeframe timeframe) {
-        List<Quote> quotes = new ArrayList<>();
+    public static List<QuoteJava> loadQuotes(String symbol, Timeframe timeframe) {
+        List<QuoteJava> quotes = new ArrayList<>();
         String url = getQuotesUrl(symbol, timeframe);
         try {
             Map<String, Object> map = getResponse(url);
@@ -70,8 +70,8 @@ public class Alphavantage {
                 String low = v.get("3. low");
                 String close = v.get("4. close");
                 String volume = v.get("5. volume");
-                quotes.add(new Quote(
-                        DatesJava.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(),
+                quotes.add(new QuoteJava(
+                        DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(),
                         parseDouble(high),
                         parseDouble(open),
                         parseDouble(close),
@@ -85,7 +85,7 @@ public class Alphavantage {
         if (quotes.size() < Quotes.resolveMinBarsCount(timeframe)) {
             return Collections.emptyList();
         }
-        Collections.sort(quotes, Comparator.comparing(Quote::getTimestamp));
+        Collections.sort(quotes, Comparator.comparing(QuoteJava::getTimestamp));
         return quotes;
     }
 
@@ -110,7 +110,7 @@ public class Alphavantage {
                 Double macdSignalValue
                         = Double.parseDouble(v.get("MACD_Signal"));
                 Double macdHist = parseDouble(v.get("MACD_Hist"));
-                result.add(new MACD(DatesJava.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(), macdValue, macdSignalValue, macdHist));
+                result.add(new MACD(DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(), macdValue, macdSignalValue, macdHist));
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -141,7 +141,7 @@ public class Alphavantage {
                     day += ":00";
                 }
                 Double ema = parseDouble(v.get("EMA"));
-                result.add(new EMA(DatesJava.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(), ema));
+                result.add(new EMA(DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(), ema));
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -173,7 +173,7 @@ public class Alphavantage {
                 }
                 Double slowD = parseDouble(v.get("SlowD"));
                 Double slowK = parseDouble(v.get("SlowK"));
-                result.add(new Stoch(DatesJava.getTimeInExchangeZone(day, Quote.exchangeTimezome).toEpochSecond(), slowD, slowK));
+                result.add(new Stoch(DatesJava.getTimeInExchangeZone(day, QuoteJava.exchangeTimezome).toEpochSecond(), slowD, slowK));
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());

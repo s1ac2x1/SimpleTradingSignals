@@ -24,7 +24,7 @@ public class HistoricalTesting {
     private List<BlockResult> blockResults;
 
     // testing the opening of positions by the received signals for entry
-    private Map<Quote, PositionTestResult> signalTestingResults = new HashMap<>();
+    private Map<QuoteJava, PositionTestResult> signalTestingResults = new HashMap<>();
 
     private StopLossStrategy stopLossStrategy;
     private TakeProfitStrategy takeProfitStrategy;
@@ -70,11 +70,11 @@ public class HistoricalTesting {
         this.blockResults = blockResults;
     }
 
-    public void addTestResult(Quote signal, PositionTestResult positionTestResult) {
+    public void addTestResult(QuoteJava signal, PositionTestResult positionTestResult) {
         signalTestingResults.put(signal, positionTestResult);
     }
 
-    public PositionTestResult getResult(Quote signal) {
+    public PositionTestResult getResult(QuoteJava signal) {
         return signalTestingResults.get(signal);
     }
 
@@ -195,7 +195,7 @@ public class HistoricalTesting {
     }
 
     public PositionTestResult searchSignalByLongestPosition() {
-        Optional<Map.Entry<Quote, PositionTestResult>> first = signalTestingResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getPositionDurationInSeconds(data.timeframe) == getMaxPositionDurationSeconds()).findFirst();
+        Optional<Map.Entry<QuoteJava, PositionTestResult>> first = signalTestingResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getPositionDurationInSeconds(data.timeframe) == getMaxPositionDurationSeconds()).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {
@@ -204,7 +204,7 @@ public class HistoricalTesting {
     }
 
     public PositionTestResult searchSignalByProfit(double value) {
-        Optional<Map.Entry<Quote, PositionTestResult>> first = signalTestingResults.entrySet()
+        Optional<Map.Entry<QuoteJava, PositionTestResult>> first = signalTestingResults.entrySet()
                 .stream()
                 .filter(entrySet -> entrySet.getValue().isProfitable() && entrySet.getValue().getProfit() == value).findFirst();
         if (first.isPresent()) {
@@ -215,7 +215,7 @@ public class HistoricalTesting {
     }
 
     public PositionTestResult searchSignalByLoss(double value) {
-        Optional<Map.Entry<Quote, PositionTestResult>> first = signalTestingResults.entrySet()
+        Optional<Map.Entry<QuoteJava, PositionTestResult>> first = signalTestingResults.entrySet()
                 .stream()
                 .filter(entrySet -> !entrySet.getValue().isProfitable() && entrySet.getValue().getLoss() == value).findFirst();
         if (first.isPresent()) {

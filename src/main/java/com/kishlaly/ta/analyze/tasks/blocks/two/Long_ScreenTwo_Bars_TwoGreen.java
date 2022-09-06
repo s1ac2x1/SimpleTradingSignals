@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResult;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.utils.CollectionsTools;
 import com.kishlaly.ta.utils.Log;
@@ -17,9 +17,9 @@ import static com.kishlaly.ta.analyze.BlockResultCode.OK;
 public class Long_ScreenTwo_Bars_TwoGreen implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<Quote> screen_2_Quotes = screen.quotes;
-        Quote quote2 = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
-        Quote quote1 = CollectionsTools.getFromEnd(screen_2_Quotes, 1);
+        List<QuoteJava> screen_2_Quotes = screen.quotes;
+        QuoteJava quote2 = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
+        QuoteJava quote1 = CollectionsTools.getFromEnd(screen_2_Quotes, 1);
         boolean quote2Green = quote2.getClose() > quote2.getOpen();
         boolean quote1Green = quote1.getClose() > quote1.getOpen();
         boolean bothAreGreen = quote1Green && quote2Green;

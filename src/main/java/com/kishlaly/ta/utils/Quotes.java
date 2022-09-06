@@ -1,6 +1,6 @@
 package com.kishlaly.ta.utils;
 
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.model.indicators.Bollinger;
@@ -13,19 +13,19 @@ import java.util.*;
 
 public class Quotes {
 
-    public static List<Quote> dayToWeek(List<Quote> dailyQuotes) {
-        List<Quote> weeklyQuotes = new ArrayList<>();
-        Set<Quote> week = new HashSet<>();
-        List<Quote> weekSorted;
+    public static List<QuoteJava> dayToWeek(List<QuoteJava> dailyQuotes) {
+        List<QuoteJava> weeklyQuotes = new ArrayList<>();
+        Set<QuoteJava> week = new HashSet<>();
+        List<QuoteJava> weekSorted;
         for (int i = 0; i < dailyQuotes.size() - 1; i++) {
             try {
-                Quote currentQuote = dailyQuotes.get(i);
-                Quote nextQuote = dailyQuotes.get(i + 1);
+                QuoteJava currentQuote = dailyQuotes.get(i);
+                QuoteJava nextQuote = dailyQuotes.get(i + 1);
                 week.add(currentQuote);
                 // check the day of the week for the next quote and programmatically calculate the next day for the current one
-                ZonedDateTime currentQuoteDate = DatesJava.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome);
-                ZonedDateTime currentQuotePlusOneDayDate = DatesJava.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome).plusDays(1);
-                ZonedDateTime nextQuoteDate = DatesJava.getTimeInExchangeZone(nextQuote.getTimestamp(), Quote.exchangeTimezome);
+                ZonedDateTime currentQuoteDate = DatesJava.getTimeInExchangeZone(currentQuote.getTimestamp(), QuoteJava.exchangeTimezome);
+                ZonedDateTime currentQuotePlusOneDayDate = DatesJava.getTimeInExchangeZone(currentQuote.getTimestamp(), QuoteJava.exchangeTimezome).plusDays(1);
+                ZonedDateTime nextQuoteDate = DatesJava.getTimeInExchangeZone(nextQuote.getTimestamp(), QuoteJava.exchangeTimezome);
                 // If the next quote is exactly one day later - we are within the working week
                 // if currentQuotePlusOneDayDate is a day off, then nextQuoteDate will be different
                 if (nextQuoteDate.getDayOfWeek() == currentQuotePlusOneDayDate.getDayOfWeek()) {
@@ -40,14 +40,14 @@ public class Quotes {
                     }
                 } else {
                     weekSorted = new ArrayList<>(week);
-                    Collections.sort(weekSorted, Comparator.comparing(Quote::getTimestamp));
+                    Collections.sort(weekSorted, Comparator.comparing(QuoteJava::getTimestamp));
                     long timestamp = weekSorted.get(0).getTimestamp();
                     double high = weekSorted.stream().mapToDouble(q -> q.getHigh()).max().getAsDouble();
                     double open = weekSorted.get(0).getOpen();
                     double close = weekSorted.get(week.size() - 1).getClose();
                     double low = weekSorted.stream().mapToDouble(q -> q.getLow()).min().getAsDouble();
                     double volume = weekSorted.stream().mapToDouble(q -> q.getVolume()).sum();
-                    Quote weeklyQuote = new Quote(timestamp, Numbers.round(high), open, close, Numbers.round(low), volume);
+                    QuoteJava weeklyQuote = new QuoteJava(timestamp, Numbers.round(high), open, close, Numbers.round(low), volume);
                     weeklyQuotes.add(weeklyQuote);
                     week.clear();
                 }
@@ -55,18 +55,18 @@ public class Quotes {
                 System.out.println(e);
             }
         }
-        Collections.sort(weeklyQuotes, Comparator.comparing(Quote::getTimestamp));
+        Collections.sort(weeklyQuotes, Comparator.comparing(QuoteJava::getTimestamp));
         return weeklyQuotes;
     }
 
-    public static List<Quote> hourToDay(List<Quote> hourQuotes) {
-        List<Quote> dayQuotes = new ArrayList<>();
-        List<Quote> duringDay = new ArrayList<>();
+    public static List<QuoteJava> hourToDay(List<QuoteJava> hourQuotes) {
+        List<QuoteJava> dayQuotes = new ArrayList<>();
+        List<QuoteJava> duringDay = new ArrayList<>();
         for (int i = 0; i < hourQuotes.size() - 1; i++) {
-            Quote currentQuote = hourQuotes.get(i);
-            DayOfWeek currentQuoteDayOfWeek = DatesJava.getTimeInExchangeZone(currentQuote.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
-            Quote nextQuote = hourQuotes.get(i + 1);
-            DayOfWeek nextQuoteDayOfWeek = DatesJava.getTimeInExchangeZone(nextQuote.getTimestamp(), Quote.exchangeTimezome).getDayOfWeek();
+            QuoteJava currentQuote = hourQuotes.get(i);
+            DayOfWeek currentQuoteDayOfWeek = DatesJava.getTimeInExchangeZone(currentQuote.getTimestamp(), QuoteJava.exchangeTimezome).getDayOfWeek();
+            QuoteJava nextQuote = hourQuotes.get(i + 1);
+            DayOfWeek nextQuoteDayOfWeek = DatesJava.getTimeInExchangeZone(nextQuote.getTimestamp(), QuoteJava.exchangeTimezome).getDayOfWeek();
             if (currentQuoteDayOfWeek == nextQuoteDayOfWeek) {
                 duringDay.add(nextQuote);
             } else {
@@ -94,9 +94,9 @@ public class Quotes {
         }
     }
 
-    private static void collectDayQuote(List<Quote> hourQuotesInsideOneDay, List<Quote> dayQuotes) {
-        List<Quote> dayQuotesSorted = new ArrayList<>(hourQuotesInsideOneDay);
-        Collections.sort(dayQuotesSorted, Comparator.comparing(Quote::getTimestamp));
+    private static void collectDayQuote(List<QuoteJava> hourQuotesInsideOneDay, List<QuoteJava> dayQuotes) {
+        List<QuoteJava> dayQuotesSorted = new ArrayList<>(hourQuotesInsideOneDay);
+        Collections.sort(dayQuotesSorted, Comparator.comparing(QuoteJava::getTimestamp));
         if (dayQuotesSorted.isEmpty()) {
             System.out.println("Warning: hourQuotesInsideOneDay is empty");
             return;
@@ -107,36 +107,36 @@ public class Quotes {
         double close = dayQuotesSorted.get(dayQuotesSorted.size() - 1).getClose();
         double low = dayQuotesSorted.stream().mapToDouble(q -> q.getLow()).min().getAsDouble();
         double volume = dayQuotesSorted.stream().mapToDouble(q -> q.getVolume()).sum();
-        Quote dayQuote = new Quote(timestamp, Numbers.round(high), open, close, Numbers.round(low), volume);
+        QuoteJava dayQuote = new QuoteJava(timestamp, Numbers.round(high), open, close, Numbers.round(low), volume);
         dayQuotes.add(dayQuote);
         hourQuotesInsideOneDay.clear();
     }
 
-    public static boolean isQuoteCrossedEMA(Quote quote, double emaValue) {
+    public static boolean isQuoteCrossedEMA(QuoteJava quote, double emaValue) {
         return quote.getLow() <= emaValue && quote.getHigh() >= emaValue;
     }
 
-    public static boolean isQuoteBelowEMA(Quote quote, double emaValue) {
+    public static boolean isQuoteBelowEMA(QuoteJava quote, double emaValue) {
         return quote.getLow() < emaValue && quote.getHigh() < emaValue;
     }
 
-    public static boolean isQuoteAboveEMA(Quote quote, double emaValue) {
+    public static boolean isQuoteAboveEMA(QuoteJava quote, double emaValue) {
         return quote.getLow() > emaValue && quote.getHigh() > emaValue;
     }
 
-    public static boolean isQuoteCrossedBollingerBottom(Quote quote, Bollinger bollinger) {
+    public static boolean isQuoteCrossedBollingerBottom(QuoteJava quote, Bollinger bollinger) {
         return quote.getLow() <= bollinger.getBottom() && quote.getHigh() >= bollinger.getBottom();
     }
 
-    public static boolean isQuoteBelowBollingerBottom(Quote quote, Bollinger bollinger) {
+    public static boolean isQuoteBelowBollingerBottom(QuoteJava quote, Bollinger bollinger) {
         return quote.getLow() < bollinger.getBottom() && quote.getHigh() < bollinger.getBottom();
     }
 
-    public static boolean isQuoteCrossedKeltnerBottom(Quote quote, Keltner keltner) {
+    public static boolean isQuoteCrossedKeltnerBottom(QuoteJava quote, Keltner keltner) {
         return quote.getLow() <= keltner.getLow() && quote.getHigh() >= keltner.getLow();
     }
 
-    public static boolean isGreen(Quote quote) {
+    public static boolean isGreen(QuoteJava quote) {
         return quote.getClose() > quote.getOpen();
     }
 

@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResult;
-import com.kishlaly.ta.model.Quote;
+import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolData;
 import com.kishlaly.ta.model.indicators.EMA;
 import com.kishlaly.ta.model.indicators.Indicator;
@@ -19,12 +19,12 @@ import static com.kishlaly.ta.utils.Quotes.*;
 public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwoBlock {
     @Override
     public BlockResult check(SymbolData screen) {
-        List<Quote> screen_2_Quotes = screen.quotes;
+        List<QuoteJava> screen_2_Quotes = screen.quotes;
         List<EMA> screen_2_EMA13 = (List<EMA>) screen.indicators.get(Indicator.EMA13);
         // prerequisite 1:
         // make sure first that the last TWO columns go up
-        Quote preLastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
-        Quote lastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 1);
+        QuoteJava preLastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 2);
+        QuoteJava lastQuote = CollectionsTools.getFromEnd(screen_2_Quotes, 1);
         boolean ascendingBarHigh = preLastQuote.getHigh() < lastQuote.getHigh();
         if (!ascendingBarHigh) {
             Log.recordCode(QUOTE_HIGH_NOT_GROWING_SCREEN_2, screen);
