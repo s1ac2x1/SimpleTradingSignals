@@ -5,8 +5,8 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
 import com.kishlaly.ta.model.ApiSource
-import com.kishlaly.ta.model.SymbolsSourceJava
-import com.kishlaly.ta.model.TimeframeJava
+import com.kishlaly.ta.model.SymbolsSource
+import com.kishlaly.ta.model.Timeframe
 
 class Context {
 
@@ -15,16 +15,16 @@ class Context {
 
         var tradeCommission = 1 // %
 
-        var basicTimeframes = arrayOf(arrayOf(TimeframeJava.WEEK, TimeframeJava.DAY))
+        var basicTimeframes = arrayOf(arrayOf(Timeframe.WEEK, Timeframe.DAY))
         var outputFolder = "data"
         var api = ApiSource.ALPHAVANTAGE
         var parallelRequests = 10.0
         var limitPerMinute = 75.0
-        var timeframe = TimeframeJava.DAY
+        var timeframe = Timeframe.DAY
 
         // main aggregation timeframe. Weekly quotes will be calculated from it
-        var aggregationTimeframe = TimeframeJava.DAY
-        var source = arrayOf(SymbolsSourceJava.SP500)
+        var aggregationTimeframe = Timeframe.DAY
+        var source = arrayOf(SymbolsSource.SP500)
         var testOnly: List<String> = ArrayList()
         var symbols: Set<String>? = null
         var yearsToAnalyze = 5
@@ -43,9 +43,9 @@ class Context {
         var minimumHourBarsCount = 300
 
         // for logs
-        var logTimeframe1: TimeframeJava? = null
-        var logTimeframe2: TimeframeJava? = null
-        var runGroups: TimeframeJava? = null
+        var logTimeframe1: Timeframe? = null
+        var logTimeframe2: Timeframe? = null
+        var runGroups: Timeframe? = null
 
         // for testing on historical data
         var testMode = false
