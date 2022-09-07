@@ -1,7 +1,8 @@
 package com.kishlaly.ta.utils
 
 import com.kishlaly.ta.model.Quote
-import com.kishlaly.ta.model.QuoteJava
+import com.kishlaly.ta.model.exchangeTimezome
+import java.time.DayOfWeek
 import java.time.temporal.ChronoUnit
 
 class Quotes {
@@ -11,7 +12,7 @@ class Quotes {
         fun dayToWeek(dailyQuotes: List<Quote>): List<Quote> {
             val weeklyQuotes = mutableListOf<Quote>()
             val week = mutableSetOf<Quote>()
-            var weekSorted = mutableListOf<Quote>()
+            var weekSorted: MutableList<Quote>
             for (i in dailyQuotes.indices - 1) {
                 try {
                     val currentQuote = dailyQuotes[i]
@@ -19,10 +20,9 @@ class Quotes {
                     week.add(currentQuote)
 
                     // check the day of the week for the next quote and programmatically calculate the next day for the current one
-                    // check the day of the week for the next quote and programmatically calculate the next day for the current one
-                    val currentQuoteDate = Dates.getTimeInExchangeZone(currentQuote.timestamp, QuoteJava.exchangeTimezome)
-                    val currentQuotePlusOneDayDate = Dates.getTimeInExchangeZone(currentQuote.timestamp, QuoteJava.exchangeTimezome).plusDays(1)
-                    val nextQuoteDate = Dates.getTimeInExchangeZone(nextQuote.timestamp, QuoteJava.exchangeTimezome)
+                    val currentQuoteDate = Dates.getTimeInExchangeZone(currentQuote.timestamp, exchangeTimezome)
+                    val currentQuotePlusOneDayDate = Dates.getTimeInExchangeZone(currentQuote.timestamp, exchangeTimezome).plusDays(1)
+                    val nextQuoteDate = Dates.getTimeInExchangeZone(nextQuote.timestamp, exchangeTimezome)
 
                     // If the next quote is exactly one day later - we are within the working week
                     // if currentQuotePlusOneDayDate is a day off, then nextQuoteDate will be different
@@ -43,10 +43,10 @@ class Quotes {
                         } else {
                             weekSorted = mutableListOf(*week.toTypedArray())
                             weekSorted.sortBy { it.timestamp }
-                            val timestamp: Long = weekSorted[0].timestamp
+                            val timestamp = weekSorted.first().timestamp
                             val high = weekSorted.map { it.high }.max()
-                            val open: Double = weekSorted.first().open
-                            val close: Double = weekSorted.last().close
+                            val open = weekSorted.first().open
+                            val close = weekSorted.last().close
                             val low = weekSorted.map { it.low }.min()
                             val volume = weekSorted.map { it.volume }.sum()
                             val weeklyQuote = Quote(timestamp, high.round(), open, close, low.round(), volume)
@@ -58,8 +58,43 @@ class Quotes {
                     println(e)
                 }
             }
-            weeklyQuotes.sortBy { it.timestamp }
-            return weeklyQuotes
+            return weeklyQuotes.sortedBy { it.timestamp }
+        }
+
+        fun hourToDay(hourQuotes: List<Quote>): List<Quote> {
+            val dayQuotes = mutableListOf<Quote>()
+            val duringDay = mutableListOf<Quote>()
+            for (i in 0 until hourQuotes.size - 1) {
+                val currentQuote = hourQuotes[i]
+                val currentQuoteDayOfWeek: DayOfWeek = Dates.getTimeInExchangeZone(currentQuote.timestamp, exchangeTimezome).getDayOfWeek()
+                val nextQuote = hourQuotes[i + 1]
+                val nextQuoteDayOfWeek = Dates.getTimeInExchangeZone(nextQuote.timestamp, exchangeTimezome).dayOfWeek
+                if (currentQuoteDayOfWeek == nextQuoteDayOfWeek) {
+                    duringDay.add(nextQuote)
+                } else {
+                    collectDayQuote(duringDay, dayQuotes)
+                    duringDay.add(nextQuote)
+                }
+            }
+            collectDayQuote(duringDay, dayQuotes)
+            return dayQuotes
+        }
+
+        private fun collectDayQuote(hourQuotesInsideOneDay: MutableList<Quote>, dayQuotes: MutableList<Quote>) {
+            val dayQuotesSorted = mutableListOf<Quote>(*hourQuotesInsideOneDay.toTypedArray()).sortedBy { it.timestamp }
+            dayQuotesSorted.ifEmpty {
+                println("Warning: hourQuotesInsideOneDay is empty")
+                return
+            }
+            val timestamp = dayQuotesSorted.first().timestamp
+            val high = dayQuotesSorted.map { it.high }.max()
+            val open = dayQuotesSorted.first().open
+            val close = dayQuotesSorted.last().close
+            val low = dayQuotesSorted.map { it.low }.min()
+            val volume = dayQuotesSorted.map { it.volume }.max()
+            val dayQuote = Quote(timestamp, high.round(), open, close, low.round(), volume)
+            dayQuotes.add(dayQuote)
+            hourQuotesInsideOneDay.clear()
         }
 
     }

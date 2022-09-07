@@ -2,11 +2,9 @@ package com.kishlaly.ta.model
 
 import com.kishlaly.ta.utils.Dates
 
-abstract class AbstractModel {
+public const val exchangeTimezome = "US/Eastern"
 
-    companion object {
-        val exchangeTimezome = "US/Eastern"
-    }
+abstract class AbstractModel {
 
     // in epoch seconds
     open public val timestamp: Long
