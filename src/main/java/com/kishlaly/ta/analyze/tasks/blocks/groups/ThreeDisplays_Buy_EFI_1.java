@@ -18,7 +18,7 @@ import java.util.List;
  * !!! Can't flip for shorts !!!
  */
 //TODO finish
-public class ThreeDisplays_Buy_EFI_1 implements BlocksGroup {
+public class ThreeDisplays_Buy_EFI_1 implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         ThreeDisplays.Config.STOCH_CUSTOM = 30;

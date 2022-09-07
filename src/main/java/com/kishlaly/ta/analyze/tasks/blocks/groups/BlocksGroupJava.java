@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 
 import java.util.List;
 
-public interface BlocksGroup {
+public interface BlocksGroupJava {
 
     List<TaskBlockJava> blocks();
 

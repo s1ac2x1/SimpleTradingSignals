@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * an experimental strategy for trying out different ideas that come to mind
  */
-public class ThreeDisplays_Buy_Experiments implements BlocksGroup {
+public class ThreeDisplays_Buy_Experiments implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         ThreeDisplays.Config.STOCH_CUSTOM = 30;

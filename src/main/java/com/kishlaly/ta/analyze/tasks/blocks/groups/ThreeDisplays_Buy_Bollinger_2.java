@@ -21,7 +21,7 @@ import java.util.List;
  * + two last MACD histograms are negative and the last one is higher
  * + Last %D stochastic is rising
  */
-public class ThreeDisplays_Buy_Bollinger_2 implements BlocksGroup {
+public class ThreeDisplays_Buy_Bollinger_2 implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         return new ArrayList<TaskBlockJava>() {{

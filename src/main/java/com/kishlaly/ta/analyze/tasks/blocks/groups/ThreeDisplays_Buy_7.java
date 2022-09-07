@@ -16,7 +16,7 @@ import java.util.List;
 // TP 50-70% of the channel
 //
 // on historical tests shows a good balance, but the number of SL positions is much higher than the TP
-public class ThreeDisplays_Buy_7 implements BlocksGroup {
+public class ThreeDisplays_Buy_7 implements BlocksGroupJava {
 
     public List<TaskBlockJava> blocks() {
         Config.FILTER_BY_KELTNER_ENABLED = true;

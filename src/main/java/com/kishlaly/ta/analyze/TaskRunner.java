@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze;
 
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.HistoricalTesting;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
@@ -39,7 +39,7 @@ public class TaskRunner {
 
     public static List<Signal> signals = new ArrayList<>();
 
-    public static void run(TimeframeJava[][] timeframes, TaskType task, boolean findOptimal, BlocksGroup... blocksGroups) {
+    public static void run(TimeframeJava[][] timeframes, TaskType task, boolean findOptimal, BlocksGroupJava... blocksGroups) {
         Arrays.stream(timeframes).forEach(screens -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
@@ -87,7 +87,7 @@ public class TaskRunner {
         });
     }
 
-    private static void findOptimalSLTP(BlocksGroup blocksGroup) {
+    private static void findOptimalSLTP(BlocksGroupJava blocksGroup) {
         List<String> suggestions = new ArrayList<>();
         AtomicInteger symbolNumber = new AtomicInteger(1);
         int totalSymbols = signals.size();
@@ -131,7 +131,7 @@ public class TaskRunner {
         }
     }
 
-    private static void twoTimeframeFunction(TaskType task, BlocksGroup... blocksGroups) {
+    private static void twoTimeframeFunction(TaskType task, BlocksGroupJava... blocksGroups) {
         ContextJava.timeframe = task.getTimeframeIndicators(1).timeframe;
         AtomicInteger processingSymbol = new AtomicInteger(1);
         int totalSymbols = ContextJava.symbols.size();

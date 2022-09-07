@@ -20,7 +20,7 @@ import java.util.List;
  * + for reliability let the MACD histogram go up from the negative level (can still stay negative)
  */
 //TODO finish
-public class FirstScreen_Buy_2 implements BlocksGroup {
+public class FirstScreen_Buy_2 implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK = 6;

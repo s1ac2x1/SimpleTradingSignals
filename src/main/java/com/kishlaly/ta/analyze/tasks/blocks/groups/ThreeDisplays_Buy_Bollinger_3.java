@@ -22,7 +22,7 @@ import java.util.List;
  * <p>
  * Example: [D] AAPL 15.11.2021, 7.06.2021
  */
-public class ThreeDisplays_Buy_Bollinger_3 implements BlocksGroup {
+public class ThreeDisplays_Buy_Bollinger_3 implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         ThreeDisplays.Config.STOCH_CUSTOM = 40;

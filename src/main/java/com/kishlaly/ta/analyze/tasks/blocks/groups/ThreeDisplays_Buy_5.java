@@ -15,7 +15,7 @@ import java.util.List;
  * <p>
  * Works better with TP 70% of the channel
  */
-public class ThreeDisplays_Buy_5 implements BlocksGroup {
+public class ThreeDisplays_Buy_5 implements BlocksGroupJava {
 
     public List<TaskBlockJava> blocks() {
         return new ArrayList<TaskBlockJava>() {{

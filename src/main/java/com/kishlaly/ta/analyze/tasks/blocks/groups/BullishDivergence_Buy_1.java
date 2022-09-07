@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.kishlaly.ta.analyze.tasks.Divergencies.BullishConfig.ALLOW_ON_BEARISH_TREND;
 
-public class BullishDivergence_Buy_1 implements BlocksGroup {
+public class BullishDivergence_Buy_1 implements BlocksGroupJava {
 
     public List<TaskBlockJava> blocks() {
         return new ArrayList<TaskBlockJava>() {{

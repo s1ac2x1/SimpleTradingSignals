@@ -21,7 +21,7 @@ import java.util.List;
  * <p>
  * SL can be sliding on the average Bollinger band
  */
-public class ThreeDisplays_Buy_Bollinger_1 implements BlocksGroup {
+public class ThreeDisplays_Buy_Bollinger_1 implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3;

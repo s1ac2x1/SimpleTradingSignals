@@ -8,7 +8,7 @@ import com.kishlaly.ta.utils.ContextJava;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FirstTrustModel_Buy_1 implements BlocksGroup {
+public class FirstTrustModel_Buy_1 implements BlocksGroupJava {
 
     public List<TaskBlockJava> blocks() {
         ContextJava.TRIM_DATA = false;

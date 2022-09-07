@@ -1,7 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.model.BlockResultCodeJava;
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 
 import java.util.*;
@@ -37,10 +37,10 @@ public class LogJava {
 
     public static void saveSummary(String filename) {
         StringBuilder builder = new StringBuilder();
-        Map<String, Set<BlocksGroup>> symbolToGroups = new HashMap<>();
+        Map<String, Set<BlocksGroupJava>> symbolToGroups = new HashMap<>();
         summary.forEach((key, symbols) -> {
             symbols.forEach(symbol -> {
-                Set<BlocksGroup> symbolGroups = symbolToGroups.get(symbol);
+                Set<BlocksGroupJava> symbolGroups = symbolToGroups.get(symbol);
                 if (symbolGroups == null) {
                     symbolGroups = new HashSet<>();
                     symbolToGroups.put(symbol, symbolGroups);
@@ -51,7 +51,7 @@ public class LogJava {
 
         builder.append("<table style=\"border: 1px solid;\">");
 
-        Comparator<Map.Entry<String, Set<BlocksGroup>>> comparator = Comparator.comparingInt(entry -> entry.getValue().size());
+        Comparator<Map.Entry<String, Set<BlocksGroupJava>>> comparator = Comparator.comparingInt(entry -> entry.getValue().size());
         symbolToGroups
                 .entrySet()
                 .stream()
@@ -95,7 +95,7 @@ public class LogJava {
         codes = new HashMap<>();
     }
 
-    public static void addSummary(String name, BlocksGroup blocksGroup, String symbol) {
+    public static void addSummary(String name, BlocksGroupJava blocksGroup, String symbol) {
         KeyJava key = new KeyJava(name, blocksGroup);
         if (summary.get(key) == null) {
             summary.put(key, new HashSet<>());
@@ -105,9 +105,9 @@ public class LogJava {
 
     public static class KeyJava {
         private String taskName;
-        private BlocksGroup blocksGroup;
+        private BlocksGroupJava blocksGroup;
 
-        public KeyJava(final String taskName, final BlocksGroup blocksGroup) {
+        public KeyJava(final String taskName, final BlocksGroupJava blocksGroup) {
             this.taskName = taskName;
             this.blocksGroup = blocksGroup;
         }
@@ -116,7 +116,7 @@ public class LogJava {
             return this.taskName;
         }
 
-        public BlocksGroup getBlocksGroup() {
+        public BlocksGroupJava getBlocksGroup() {
             return this.blocksGroup;
         }
 

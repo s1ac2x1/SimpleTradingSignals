@@ -19,7 +19,7 @@ public class RunUtils {
         buildTasksAndStrategiesSummary(
                 ContextJava.basicTimeframes,
                 THREE_DISPLAYS_BUY,
-                new ArrayList<BlocksGroup>() {{
+                new ArrayList<BlocksGroupJava>() {{
                     add(new ThreeDisplays_Buy_1());
                     add(new ThreeDisplays_Buy_2());
                     add(new ThreeDisplays_Buy_3());
@@ -47,7 +47,7 @@ public class RunUtils {
         testAllStrategiesOnSpecificDate(date, THREE_DISPLAYS_BUY, ContextJava.basicTimeframes);
     }
 
-    public static void testOneStrategy_(BlocksGroup strategy) {
+    public static void testOneStrategy_(BlocksGroupJava strategy) {
         testOneStrategy(
                 ContextJava.basicTimeframes,
                 THREE_DISPLAYS_BUY,

@@ -25,7 +25,7 @@ import java.util.List;
 // %D and %K of the last stochastic should be higher than the previous
 //
 // On historical data this strategy most often gives better returns and extremely low SL positions ratio
-public class ThreeDisplays_Buy_4 implements BlocksGroup {
+public class ThreeDisplays_Buy_4 implements BlocksGroupJava {
 
     public List<TaskBlockJava> blocks() {
         return new ArrayList<TaskBlockJava>() {{

@@ -4,10 +4,10 @@ import com.kishlaly.ta.analyze.TaskType;
 
 public class BlockGroupsUtils {
 
-    public static BlocksGroup[] getAllGroups(TaskType taskType) {
+    public static BlocksGroupJava[] getAllGroups(TaskType taskType) {
         switch (taskType) {
             case THREE_DISPLAYS_BUY:
-                return new BlocksGroup[]{
+                return new BlocksGroupJava[]{
                         new ThreeDisplays_Buy_1(),
                         new ThreeDisplays_Buy_2(),
                         new ThreeDisplays_Buy_3(),
@@ -29,7 +29,7 @@ public class BlockGroupsUtils {
                         new ThreeDisplays_Buy_EFI_3(),
                 };
             default:
-                return new BlocksGroup[]{};
+                return new BlocksGroupJava[]{};
         }
     }
 

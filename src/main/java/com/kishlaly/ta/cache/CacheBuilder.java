@@ -2,7 +2,7 @@ package com.kishlaly.ta.cache;
 
 import com.google.common.collect.Lists;
 import com.kishlaly.ta.analyze.TaskType;
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.sl.*;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
@@ -174,7 +174,7 @@ public class CacheBuilder {
                             .collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup))
                             .entrySet().stream()
                             .forEach(byTask -> {
-                                BlocksGroup blocksGroup = byTask.getKey();
+                                BlocksGroupJava blocksGroup = byTask.getKey();
                                 List<HistoricalTesting> historicalTestings = byTask.getValue();
                                 HistoricalTesting best = historicalTestings.get(historicalTestings.size() - 1);
                                 innerTable.append("<tr>");
@@ -209,7 +209,7 @@ public class CacheBuilder {
 
     public static void buildTasksAndStrategiesSummary(TimeframeJava[][] timeframes,
                                                       TaskType task,
-                                                      List<BlocksGroup> blocksGroups,
+                                                      List<BlocksGroupJava> blocksGroups,
                                                       StopLossStrategy stopLossStrategy,
                                                       TakeProfitStrategy takeProfitStrategy) {
         List<HistoricalTesting> result = new ArrayList<>();
@@ -238,9 +238,9 @@ public class CacheBuilder {
         TreeMap<Double, String> balances = new TreeMap<>(Collections.reverseOrder());
         List<TPSL> tpSL = new ArrayList<>();
         List<ROI> roi = new ArrayList<>();
-        Map<BlocksGroup, List<HistoricalTesting>> byGroup = result.stream().collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup));
+        Map<BlocksGroupJava, List<HistoricalTesting>> byGroup = result.stream().collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup));
         byGroup.entrySet().stream().forEach(entry -> {
-            BlocksGroup group = entry.getKey();
+            BlocksGroupJava group = entry.getKey();
             List<HistoricalTesting> testings = entry.getValue();
             double totalBalance = testings.stream().map(HistoricalTesting::getBalance).mapToDouble(Double::doubleValue).sum();
             totalBalance = Numbers.round(totalBalance);
