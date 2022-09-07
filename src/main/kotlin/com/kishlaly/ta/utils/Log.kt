@@ -72,6 +72,12 @@ class Log {
             }
         }
 
+        fun clear() {
+            log.clear()
+            debug.clear();
+            codes.clear()
+        }
+
 
     }
 
