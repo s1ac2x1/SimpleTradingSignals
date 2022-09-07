@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.one;
 
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 
-public interface ScreenOneBlock extends TaskBlock {
+public interface ScreenOneBlock extends TaskBlockJava {
 
 }

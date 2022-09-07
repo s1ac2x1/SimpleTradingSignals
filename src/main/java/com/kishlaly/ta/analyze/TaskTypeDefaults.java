@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze;
 
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BullishDivergence_Buy_1;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.FirstTrustModel_Buy_1;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1;
@@ -13,10 +13,10 @@ import java.util.List;
 public class TaskTypeDefaults {
 
     // TODO the whole Cartesian product or one of its variants?
-    private List<TaskBlock> customBlocks = new ArrayList<>();
+    private List<TaskBlockJava> customBlocks = new ArrayList<>();
 
     // load blocks from the list prepared by findBestStrategyForSymbols, if any
-    public static List<TaskBlock> get(TaskType taskType) {
+    public static List<TaskBlockJava> get(TaskType taskType) {
         switch (taskType) {
             case THREE_DISPLAYS_BUY:
                 return new ThreeDisplays_Buy_1().blocks();
@@ -31,11 +31,11 @@ public class TaskTypeDefaults {
         }
     }
 
-    public List<TaskBlock> getCustomBlocks() {
+    public List<TaskBlockJava> getCustomBlocks() {
         return this.customBlocks;
     }
 
-    public void setCustomBlocks(final List<TaskBlock> customBlocks) {
+    public void setCustomBlocks(final List<TaskBlockJava> customBlocks) {
         this.customBlocks = customBlocks;
     }
 

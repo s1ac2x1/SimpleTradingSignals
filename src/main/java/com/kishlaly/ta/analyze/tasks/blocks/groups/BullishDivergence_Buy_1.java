@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_BullishDivergenceMainLogic;
@@ -12,8 +12,8 @@ import static com.kishlaly.ta.analyze.tasks.Divergencies.BullishConfig.ALLOW_ON_
 
 public class BullishDivergence_Buy_1 implements BlocksGroup {
 
-    public List<TaskBlock> blocks() {
-        return new ArrayList<TaskBlock>() {{
+    public List<TaskBlockJava> blocks() {
+        return new ArrayList<TaskBlockJava>() {{
             add(new ScreenBasicValidation());
             if (!ALLOW_ON_BEARISH_TREND) {
                 add(new Long_ScreenOne_StrictTrendCheck());

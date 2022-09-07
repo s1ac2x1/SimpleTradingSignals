@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_D_NOT_EXTRA_OVERSO
 /**
  * the last two %D stochastics below ThreeDisplays.Config.STOCH_CUSTOM
  */
-public class Long_ScreenTwo_Stoch_D_TwoBelow_X implements TaskBlock {
+public class Long_ScreenTwo_Stoch_D_TwoBelow_X implements TaskBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);

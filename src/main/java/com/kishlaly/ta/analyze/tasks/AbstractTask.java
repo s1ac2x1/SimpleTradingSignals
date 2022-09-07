@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks;
 
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.CommonBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock;
@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 
 public class AbstractTask {
 
-    public static BlockResultJava check(ScreensJava screens, List<TaskBlock> blocks) {
+    public static BlockResultJava check(ScreensJava screens, List<TaskBlockJava> blocks) {
 
         SymbolDataJava screen1 = screens.getScreen1().copy();
         SymbolDataJava screen2 = screens.getScreen2().copy();
 
-        List<TaskBlock> commonBlocks = blocks
+        List<TaskBlockJava> commonBlocks = blocks
                 .stream()
                 .filter(block -> block instanceof CommonBlock)
                 .collect(Collectors.toList());
@@ -27,7 +27,7 @@ public class AbstractTask {
         BlockResultJava commonBlockLastResult = null;
 
         for (int i = 0; i < commonBlocks.size(); i++) {
-            TaskBlock commonBlock = commonBlocks.get(i);
+            TaskBlockJava commonBlock = commonBlocks.get(i);
             BlockResultJava check1 = commonBlock.check(screen1);
             BlockResultJava check2 = commonBlock.check(screen2);
             if (!check1.isOk()) {
@@ -44,7 +44,7 @@ public class AbstractTask {
             return commonBlockLastResult;
         }
 
-        List<TaskBlock> screenOneBlocks = blocks
+        List<TaskBlockJava> screenOneBlocks = blocks
                 .stream()
                 .filter(block -> block instanceof ScreenOneBlock)
                 .collect(Collectors.toList());
@@ -53,7 +53,7 @@ public class AbstractTask {
         BlockResultJava screenOneResult = null;
 
         for (int i = 0; i < screenOneBlocks.size(); i++) {
-            TaskBlock screenOneBlock = screenOneBlocks.get(i);
+            TaskBlockJava screenOneBlock = screenOneBlocks.get(i);
             screenOneResult = screenOneBlock.check(screen1);
             if (!screenOneResult.isOk()) {
                 screenOneAllBlocksValid = false;
@@ -65,13 +65,13 @@ public class AbstractTask {
             return screenOneResult;
         }
 
-        List<TaskBlock> screenTwoBlocks = blocks
+        List<TaskBlockJava> screenTwoBlocks = blocks
                 .stream()
                 .filter(block -> block instanceof ScreenTwoBlock)
                 .collect(Collectors.toList());
         BlockResultJava screenTwoResult = null;
         for (int i = 0; i < screenTwoBlocks.size(); i++) {
-            TaskBlock screenTwoBlock = screenTwoBlocks.get(i);
+            TaskBlockJava screenTwoBlock = screenTwoBlocks.get(i);
             screenTwoResult = screenTwoBlock.check(screen2);
             if (!screenTwoResult.isOk()) {
                 break;

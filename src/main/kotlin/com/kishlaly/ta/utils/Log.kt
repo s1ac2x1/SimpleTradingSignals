@@ -16,7 +16,7 @@ class Log {
 
     }
 
-    class Key {
+    class Key(val taskName: String, val) {
 
     }
 

@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosses;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen;
@@ -27,8 +27,8 @@ import java.util.List;
 // On historical data this strategy most often gives better returns and extremely low SL positions ratio
 public class ThreeDisplays_Buy_4 implements BlocksGroup {
 
-    public List<TaskBlock> blocks() {
-        return new ArrayList<TaskBlock>() {{
+    public List<TaskBlockJava> blocks() {
+        return new ArrayList<TaskBlockJava>() {{
             add(new ScreenBasicValidation());
 
             add(new Long_ScreenOne_LastBarGreen());

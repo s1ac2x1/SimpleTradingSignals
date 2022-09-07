@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config;
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
@@ -18,11 +18,11 @@ import java.util.List;
 // on historical tests shows a good balance, but the number of SL positions is much higher than the TP
 public class ThreeDisplays_Buy_7 implements BlocksGroup {
 
-    public List<TaskBlock> blocks() {
+    public List<TaskBlockJava> blocks() {
         Config.FILTER_BY_KELTNER_ENABLED = true;
         Config.FILTER_BY_KELTNER = 10;
 
-        return new ArrayList<TaskBlock>() {{
+        return new ArrayList<TaskBlockJava>() {{
             add(new ScreenBasicValidation());
 
             add(new Long_ScreenOne_SoftTrendCheck());

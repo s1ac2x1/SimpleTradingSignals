@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
@@ -23,8 +23,8 @@ import java.util.List;
 // TP in the middle of the upper half of the Keltner channel
 public class ThreeDisplays_Buy_3 implements BlocksGroup {
 
-    public List<TaskBlock> blocks() {
-        return new ArrayList<TaskBlock>() {{
+    public List<TaskBlockJava> blocks() {
+        return new ArrayList<TaskBlockJava>() {{
             ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3;
             ThreeDisplays.Config.BOLLINGER_CROSSED_BOTTOM_BARS = 1;
 

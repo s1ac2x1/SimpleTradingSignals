@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
-import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Bottom_LastBarCrossed;
@@ -23,8 +23,8 @@ import java.util.List;
  */
 public class ThreeDisplays_Buy_Bollinger_2 implements BlocksGroup {
     @Override
-    public List<TaskBlock> blocks() {
-        return new ArrayList<TaskBlock>() {{
+    public List<TaskBlockJava> blocks() {
+        return new ArrayList<TaskBlockJava>() {{
             add(new ScreenBasicValidation());
 
             add(new Long_ScreenOne_SoftTrendCheck());
