@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 import static com.kishlaly.ta.model.BlockResultCodeJava.QUOTES_NOT_BELOW_EMA_SCREEN_2;
-import static com.kishlaly.ta.utils.Quotes.isQuoteBelowEMA;
+import static com.kishlaly.ta.utils.QuotesJava.isQuoteBelowEMA;
 
 /**
  * the last two bars are completely below EMA13

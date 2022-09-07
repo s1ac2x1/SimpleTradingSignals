@@ -10,7 +10,7 @@ import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.model.indicators.StochJava;
 import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.DatesJava;
-import com.kishlaly.ta.utils.Quotes;
+import com.kishlaly.ta.utils.QuotesJava;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.ResponseBody;
@@ -82,7 +82,7 @@ public class Alphavantage {
             System.out.println(e.getMessage());
             return Collections.emptyList();
         }
-        if (quotes.size() < Quotes.resolveMinBarsCount(timeframe)) {
+        if (quotes.size() < QuotesJava.resolveMinBarsCount(timeframe)) {
             return Collections.emptyList();
         }
         Collections.sort(quotes, Comparator.comparing(QuoteJava::getTimestamp));

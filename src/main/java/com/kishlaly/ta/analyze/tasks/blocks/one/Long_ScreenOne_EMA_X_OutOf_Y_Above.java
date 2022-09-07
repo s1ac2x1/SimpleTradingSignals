@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.LogJava;
-import com.kishlaly.ta.utils.Quotes;
+import com.kishlaly.ta.utils.QuotesJava;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class Long_ScreenOne_EMA_X_OutOf_Y_Above implements ScreenOneBlock {
         List<EMAJava> screen_1_EMA26 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA26);
         int aboveEMA26 = 0;
         for (int i = screen_1_EMA26.size() - ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK; i < screen_1_EMA26.size(); i++) {
-            if (Quotes.isQuoteAboveEMA(screen.quotes.get(i), screen_1_EMA26.get(i).getValue())) {
+            if (QuotesJava.isQuoteAboveEMA(screen.quotes.get(i), screen_1_EMA26.get(i).getValue())) {
                 aboveEMA26++;
             }
         }

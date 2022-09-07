@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
+import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
 
 public class IndicatorUtilsJava {
 

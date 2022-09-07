@@ -10,7 +10,7 @@ import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.model.indicators.StochJava;
 import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.IndicatorUtilsJava;
-import com.kishlaly.ta.utils.Quotes;
+import com.kishlaly.ta.utils.QuotesJava;
 
 import java.io.File;
 import java.io.IOException;
@@ -129,7 +129,7 @@ public class CacheReader {
                 switch (ContextJava.aggregationTimeframe) {
                     case DAY:
                         if (ContextJava.timeframe == TimeframeJava.WEEK) {
-                            quotes = Quotes.dayToWeek(quotes);
+                            quotes = QuotesJava.dayToWeek(quotes);
                         }
                         if (ContextJava.timeframe == TimeframeJava.HOUR) {
                             throw new RuntimeException("Requested HOUR quotes, but aggregationTimeframe = DAY");
@@ -137,11 +137,11 @@ public class CacheReader {
                         break;
                     case HOUR:
                         if (ContextJava.timeframe == TimeframeJava.WEEK) {
-                            quotes = Quotes.hourToDay(quotes);
-                            quotes = Quotes.dayToWeek(quotes);
+                            quotes = QuotesJava.hourToDay(quotes);
+                            quotes = QuotesJava.dayToWeek(quotes);
                         }
                         if (ContextJava.timeframe == TimeframeJava.DAY) {
-                            quotes = Quotes.hourToDay(quotes);
+                            quotes = QuotesJava.hourToDay(quotes);
                         }
                         break;
                     default:

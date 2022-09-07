@@ -7,7 +7,7 @@ import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
 import com.kishlaly.ta.utils.LogJava;
-import com.kishlaly.ta.utils.Quotes;
+import com.kishlaly.ta.utils.QuotesJava;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class Long_ScreenOne_EMA_LastCrossesOrAbove implements ScreenOneBlock {
         QuoteJava lastQuote = screen.getLastQuote();
         List<EMAJava> screen_2_EMA26 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA26);
         EMAJava lastEMA26 = CollectionUtilsJava.getFromEnd(screen_2_EMA26, 1);
-        boolean lastBarCrossing = Quotes.isQuoteCrossedEMA(lastQuote, lastEMA26.getValue());
-        boolean lastBarAbove = Quotes.isQuoteAboveEMA(lastQuote, lastEMA26.getValue());
+        boolean lastBarCrossing = QuotesJava.isQuoteCrossedEMA(lastQuote, lastEMA26.getValue());
+        boolean lastBarAbove = QuotesJava.isQuoteAboveEMA(lastQuote, lastEMA26.getValue());
 
         if (!lastBarCrossing || !lastBarAbove) {
             LogJava.recordCode(LAST_QUOTE_NOT_CROSSING_OR_NOT_ABOVE_EMA_SCREEN_1, screen);

@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.LAST_QUOTE_NOT_CROSSING_EMA_SCREEN_1;
 import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
-import static com.kishlaly.ta.utils.Quotes.isQuoteCrossedEMA;
+import static com.kishlaly.ta.utils.QuotesJava.isQuoteCrossedEMA;
 
 /**
  * the last bar crosses the EMA26

@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-public class Quotes {
+public class QuotesJava {
 
     public static List<QuoteJava> dayToWeek(List<QuoteJava> dailyQuotes) {
         List<QuoteJava> weeklyQuotes = new ArrayList<>();

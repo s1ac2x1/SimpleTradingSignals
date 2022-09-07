@@ -8,7 +8,7 @@ import com.kishlaly.ta.utils.LogJava;
 import static com.kishlaly.ta.model.BlockResultCodeJava.NO_UPTREND_SCREEN_1;
 import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.NUMBER_OF_EMA26_VALUES_TO_CHECK;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
+import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
 
 /**
  * Strict trend check using quotes, EMA26 and MACD

@@ -33,7 +33,7 @@ import static com.kishlaly.ta.model.QuoteJava.exchangeTimezome;
 import static com.kishlaly.ta.utils.ContextJava.*;
 import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
+import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
 import static java.lang.System.lineSeparator;
 
 public class TaskTester {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.*;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
+import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
 
 public class ScreenBasicValidation implements CommonBlock {
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.LAST_QUOTE_ABOVE_EMA_SCREEN_2;
 import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
-import static com.kishlaly.ta.utils.Quotes.isQuoteAboveEMA;
+import static com.kishlaly.ta.utils.QuotesJava.isQuoteAboveEMA;
 
 /**
  * last bar no higher than EMA13

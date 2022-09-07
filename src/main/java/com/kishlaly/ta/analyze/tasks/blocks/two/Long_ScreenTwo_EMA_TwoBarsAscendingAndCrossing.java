@@ -11,7 +11,7 @@ import com.kishlaly.ta.utils.LogJava;
 import java.util.List;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.*;
-import static com.kishlaly.ta.utils.Quotes.*;
+import static com.kishlaly.ta.utils.QuotesJava.*;
 
 /**
  * Quotes should cross EMA13 and should go up

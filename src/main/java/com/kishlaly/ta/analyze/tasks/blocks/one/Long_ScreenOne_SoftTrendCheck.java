@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
 import com.kishlaly.ta.utils.LogJava;
-import com.kishlaly.ta.utils.Quotes;
+import com.kishlaly.ta.utils.QuotesJava;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class Long_ScreenOne_SoftTrendCheck implements ScreenOneBlock {
             return new BlockResultJava(screen.getLastQuote(), LAST_EMA_NOT_ASCENDING_SCREEN_1);
         }
 
-        if (!Quotes.isGreen(screen.getLastQuote())) {
+        if (!QuotesJava.isGreen(screen.getLastQuote())) {
             LogJava.recordCode(QUOTE_NOT_GREEN_SCREEN_1, screen);
             LogJava.addDebugLine("The last quote is not green on the long-term screen");
             return new BlockResultJava(screen.getLastQuote(), QUOTE_NOT_GREEN_SCREEN_1);

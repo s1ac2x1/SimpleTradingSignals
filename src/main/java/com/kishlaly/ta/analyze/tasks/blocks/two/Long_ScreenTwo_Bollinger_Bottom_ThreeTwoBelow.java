@@ -7,7 +7,7 @@ import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
 import com.kishlaly.ta.utils.LogJava;
-import com.kishlaly.ta.utils.Quotes;
+import com.kishlaly.ta.utils.QuotesJava;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class Long_ScreenTwo_Bollinger_Bottom_ThreeTwoBelow implements ScreenTwoB
         BollingerJava bollinger_3 = CollectionUtilsJava.getFromEnd(screen_2_Bollinger, 3);
         BollingerJava bollinger_2 = CollectionUtilsJava.getFromEnd(screen_2_Bollinger, 2);
 
-        boolean below = Quotes.isQuoteBelowBollingerBottom(quote_3, bollinger_3) && Quotes.isQuoteBelowBollingerBottom(quote_2, bollinger_2);
+        boolean below = QuotesJava.isQuoteBelowBollingerBottom(quote_3, bollinger_3) && QuotesJava.isQuoteBelowBollingerBottom(quote_2, bollinger_2);
 
         if (!below) {
             LogJava.recordCode(QUOTE_3_AND_QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2, screen);

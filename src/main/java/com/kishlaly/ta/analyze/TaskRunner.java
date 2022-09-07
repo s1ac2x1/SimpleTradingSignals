@@ -29,7 +29,7 @@ import static com.kishlaly.ta.cache.CacheBuilder.getTPStrategies;
 import static com.kishlaly.ta.cache.CacheReader.*;
 import static com.kishlaly.ta.model.indicators.IndicatorJava.MACD;
 import static com.kishlaly.ta.utils.ContextJava.TRIM_DATA;
-import static com.kishlaly.ta.utils.Quotes.resolveMinBarsCount;
+import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
 
 /**
  * @author Vladimir Kishlaly
@@ -148,8 +148,8 @@ public class TaskRunner {
             }
 
             if (TRIM_DATA) {
-                Quotes.trim(screen1);
-                Quotes.trim(screen2);
+                QuotesJava.trim(screen1);
+                QuotesJava.trim(screen2);
                 IndicatorUtilsJava.trim(screen1);
                 IndicatorUtilsJava.trim(screen2);
             }
