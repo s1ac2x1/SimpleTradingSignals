@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.StochJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -29,8 +29,8 @@ public class Long_ScreenTwo_Stoch_K_TwoOrOneBelow_X implements ScreenTwoBlock {
         boolean oneBelowExtraLow = stoch2.getSlowK() < ThreeDisplays.Config.STOCH_CUSTOM || stoch1.getSlowK() < ThreeDisplays.Config.STOCH_CUSTOM;
 
         if (!oneBelowExtraLow) {
-            Log.recordCode(STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2, screen);
-            Log.addDebugLine("One of the last two stochastic %Ks is at least 20 on the second screen");
+            LogJava.recordCode(STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2, screen);
+            LogJava.addDebugLine("One of the last two stochastic %Ks is at least 20 on the second screen");
             return new BlockResultJava(screen.getLastQuote(), STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

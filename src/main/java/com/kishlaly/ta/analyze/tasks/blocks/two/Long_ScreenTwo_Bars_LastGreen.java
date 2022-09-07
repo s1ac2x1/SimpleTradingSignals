@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -22,8 +22,8 @@ public class Long_ScreenTwo_Bars_LastGreen implements ScreenTwoBlock {
 
         boolean quote1Green = quote1.getClose() > quote1.getOpen();
         if (!quote1Green) {
-            Log.recordCode(LAST_QUOTE_NOT_GREEN_SCREEN_2, screen);
-            Log.addDebugLine("The last quote is not green on the second screen");
+            LogJava.recordCode(LAST_QUOTE_NOT_GREEN_SCREEN_2, screen);
+            LogJava.addDebugLine("The last quote is not green on the second screen");
             return new BlockResultJava(screen.getLastQuote(), LAST_QUOTE_NOT_GREEN_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

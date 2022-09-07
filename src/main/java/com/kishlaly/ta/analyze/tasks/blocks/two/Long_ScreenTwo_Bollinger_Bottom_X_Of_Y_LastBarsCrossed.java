@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -40,8 +40,8 @@ public class Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed implements S
         }
 
         if (crossed < BOLLINGER_CROSSED_BOTTOM_BARS) {
-            Log.recordCode(LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2, screen);
-            Log.addDebugLine("X out of the last Y bars did not touch the bottom Bollinger band");
+            LogJava.recordCode(LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2, screen);
+            LogJava.addDebugLine("X out of the last Y bars did not touch the bottom Bollinger band");
             return new BlockResultJava(screen.getLastQuote(), LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

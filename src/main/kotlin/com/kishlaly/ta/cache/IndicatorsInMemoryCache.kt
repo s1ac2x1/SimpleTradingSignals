@@ -24,56 +24,56 @@ class IndicatorsInMemoryCache {
             ema[EMAKey(symbol, timeframe, period)] = data
         }
 
-        fun putMACD(symbol: String, timeframe: Timeframe, data: List<MACD>) {
-            macd[MACDKey(symbol, timeframe)] = data
-        }
-
-        fun putKeltner(symbol: String, timeframe: Timeframe, data: List<Keltner>) {
-            keltner[KeltnerKey(symbol, timeframe)] = data
-        }
-
-        fun putATR(symbol: String, timeframe: Timeframe, period: Int, data: List<ATR>) {
-            atr[ATRKey(symbol, timeframe, period)] = data
-        }
-
-        fun putStoch(symbol: String, timeframe: Timeframe, data: List<Stochastic>) {
-            stochastic[StochKey(symbol, timeframe)] = data
-        }
-
-        fun putEFI(symbol: String, timeframe: Timeframe, data: List<ElderForceIndex>) {
-            efi[EFIKey(symbol, timeframe)] = data
-        }
-
-        fun putBollinger(symbol: String, timeframe: Timeframe, data: List<Bollinger>) {
-            bollinger[BollingerKey(symbol, timeframe)] = data
-        }
-
         fun getEMA(symbol: String, timeframe: Timeframe, period: Int): List<EMA> {
             return get(ema, EMAKey(symbol, timeframe, period))
+        }
+
+        fun putMACD(symbol: String, timeframe: Timeframe, data: List<MACD>) {
+            macd[MACDKey(symbol, timeframe)] = data
         }
 
         fun getMACD(symbol: String, timeframe: Timeframe): List<MACD> {
             return get(macd, MACDKey(symbol, timeframe))
         }
 
+        fun putKeltner(symbol: String, timeframe: Timeframe, data: List<Keltner>) {
+            keltner[KeltnerKey(symbol, timeframe)] = data
+        }
+
         fun getKeltner(symbol: String, timeframe: Timeframe): List<Keltner> {
             return get(keltner, KeltnerKey(symbol, timeframe))
+        }
+
+        fun putATR(symbol: String, timeframe: Timeframe, period: Int, data: List<ATR>) {
+            atr[ATRKey(symbol, timeframe, period)] = data
         }
 
         fun getATR(symbol: String, timeframe: Timeframe, period: Int): List<ATR> {
             return get(atr, ATRKey(symbol, timeframe, period))
         }
 
+        fun putStoch(symbol: String, timeframe: Timeframe, data: List<Stochastic>) {
+            stochastic[StochKey(symbol, timeframe)] = data
+        }
+
         fun getStoch(symbol: String, timeframe: Timeframe): List<Stochastic> {
             return get(stochastic, StochKey(symbol, timeframe))
         }
 
-        fun getBollinger(symbol: String, timeframe: Timeframe): List<Bollinger> {
-            return get(bollinger, BollingerKey(symbol, timeframe))
+        fun putEFI(symbol: String, timeframe: Timeframe, data: List<ElderForceIndex>) {
+            efi[EFIKey(symbol, timeframe)] = data
         }
 
         fun getEFI(symbol: String, timeframe: Timeframe): List<ElderForceIndex> {
             return get(efi, EFIKey(symbol, timeframe))
+        }
+
+        fun putBollinger(symbol: String, timeframe: Timeframe, data: List<Bollinger>) {
+            bollinger[BollingerKey(symbol, timeframe)] = data
+        }
+
+        fun getBollinger(symbol: String, timeframe: Timeframe): List<Bollinger> {
+            return get(bollinger, BollingerKey(symbol, timeframe))
         }
 
         private fun <T : AbstractModel, K : BaseKey> get(map: ConcurrentHashMap<K, List<T>>, key: K): List<T> {

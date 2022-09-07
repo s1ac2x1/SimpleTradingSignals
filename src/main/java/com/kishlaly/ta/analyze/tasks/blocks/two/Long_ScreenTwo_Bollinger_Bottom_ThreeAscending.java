@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class Long_ScreenTwo_Bollinger_Bottom_ThreeAscending implements ScreenTwo
         BollingerJava bollinger1 = CollectionUtilsJava.getFromEnd(screen_2_Bollinger, 1);
         boolean ascending = bollinger3.getBottom() < bollinger2.getBottom() && bollinger2.getBottom() < bollinger1.getBottom();
         if (!ascending) {
-            Log.recordCode(BOLLINGER_BOTTOM_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("The bottom Bollinger band does not narrow on the second screen");
+            LogJava.recordCode(BOLLINGER_BOTTOM_NOT_ASCENDING_SCREEN_2, screen);
+            LogJava.addDebugLine("The bottom Bollinger band does not narrow on the second screen");
             return new BlockResultJava(screen.getLastQuote(), BOLLINGER_BOTTOM_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

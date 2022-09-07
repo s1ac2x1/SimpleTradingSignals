@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.StochJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class Long_ScreenTwo_Stoch_D_TwoStrongOversold implements ScreenTwoBlock 
 
         boolean oversold = stoch2.getSlowD() < 20 && stoch1.getSlowD() < 20;
         if (!oversold) {
-            Log.recordCode(STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2, screen);
-            Log.addDebugLine("The last two stochastic %D values are at least 20");
+            LogJava.recordCode(STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2, screen);
+            LogJava.addDebugLine("The last two stochastic %D values are at least 20");
             return new BlockResultJava(screen.getLastQuote(), STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

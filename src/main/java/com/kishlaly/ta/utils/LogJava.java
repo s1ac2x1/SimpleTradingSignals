@@ -7,12 +7,12 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Log {
+public class LogJava {
 
     private static StringBuilder log = new StringBuilder();
     private static StringBuilder debug = new StringBuilder();
     private static Map<BlockResultCodeJava, List<SymbolDataJava>> codes = new HashMap<>();
-    private static Map<Key, Set<String>> summary = new HashMap<>();
+    private static Map<KeyJava, Set<String>> summary = new HashMap<>();
 
     public static void addLine(String line) {
         log.append(line).append(System.lineSeparator());
@@ -96,18 +96,18 @@ public class Log {
     }
 
     public static void addSummary(String name, BlocksGroup blocksGroup, String symbol) {
-        Key key = new Key(name, blocksGroup);
+        KeyJava key = new KeyJava(name, blocksGroup);
         if (summary.get(key) == null) {
             summary.put(key, new HashSet<>());
         }
         summary.get(key).add(symbol);
     }
 
-    public static class Key {
+    public static class KeyJava {
         private String taskName;
         private BlocksGroup blocksGroup;
 
-        public Key(final String taskName, final BlocksGroup blocksGroup) {
+        public KeyJava(final String taskName, final BlocksGroup blocksGroup) {
             this.taskName = taskName;
             this.blocksGroup = blocksGroup;
         }
@@ -124,7 +124,7 @@ public class Log {
         public boolean equals(final Object o) {
             if (this == o) return true;
             if (o == null || this.getClass() != o.getClass()) return false;
-            final Key key = (Key) o;
+            final KeyJava key = (KeyJava) o;
             return this.taskName.equals(key.taskName) && this.blocksGroup.equals(key.blocksGroup);
         }
 

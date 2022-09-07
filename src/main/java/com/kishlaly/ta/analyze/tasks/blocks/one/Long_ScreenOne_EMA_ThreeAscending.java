@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -26,8 +26,8 @@ public class Long_ScreenOne_EMA_ThreeAscending implements ScreenOneBlock {
         boolean ascending = ema3.getValue() < ema2.getValue() && ema2.getValue() < ema1.getValue();
 
         if (!ascending) {
-            Log.recordCode(THREE_EMA_NOT_ASCENDING_SCREEN_1, screen);
-            Log.addDebugLine("Three values of the EMA do not grow on the long-term screen");
+            LogJava.recordCode(THREE_EMA_NOT_ASCENDING_SCREEN_1, screen);
+            LogJava.addDebugLine("Three values of the EMA do not grow on the long-term screen");
             return new BlockResultJava(screen.getLastQuote(), THREE_EMA_NOT_ASCENDING_SCREEN_1);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

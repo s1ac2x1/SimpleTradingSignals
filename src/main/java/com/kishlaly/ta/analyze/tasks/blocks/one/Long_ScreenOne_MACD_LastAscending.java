@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class Long_ScreenOne_MACD_LastAscending implements ScreenOneBlock {
 
         boolean check2 = screen_1_lastMACD.getHistogram() > screen_1_preLastMACD.getHistogram();
         if (!check2) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_1, screen);
-            Log.addDebugLine("The histogram does not grow on the long-term screen");
+            LogJava.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_1, screen);
+            LogJava.addDebugLine("The histogram does not grow on the long-term screen");
             return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_1);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

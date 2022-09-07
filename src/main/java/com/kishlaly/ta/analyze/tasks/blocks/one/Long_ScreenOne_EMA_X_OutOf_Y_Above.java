@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 import com.kishlaly.ta.utils.Quotes;
 
 import java.util.List;
@@ -34,8 +34,8 @@ public class Long_ScreenOne_EMA_X_OutOf_Y_Above implements ScreenOneBlock {
             }
         }
         if (aboveEMA26 < ThreeDisplays.Config.EMA26_ABOVE_BARS) {
-            Log.recordCode(NOT_ALL_NEEDED_QUOTES_ABOUT_EMA_SCREEN_1, screen);
-            Log.addDebugLine("Out of the last " + ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK + " quotes " + ThreeDisplays.Config.EMA26_ABOVE_BARS + " are not above EMA26 on the long term screen");
+            LogJava.recordCode(NOT_ALL_NEEDED_QUOTES_ABOUT_EMA_SCREEN_1, screen);
+            LogJava.addDebugLine("Out of the last " + ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK + " quotes " + ThreeDisplays.Config.EMA26_ABOVE_BARS + " are not above EMA26 on the long term screen");
             return new BlockResultJava(screen.getLastQuote(), NOT_ALL_NEEDED_QUOTES_ABOUT_EMA_SCREEN_1);
         }
 

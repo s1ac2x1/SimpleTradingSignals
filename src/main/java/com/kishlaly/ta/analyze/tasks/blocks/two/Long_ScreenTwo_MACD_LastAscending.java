@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class Long_ScreenTwo_MACD_LastAscending implements ScreenTwoBlock {
 
         boolean ascending = screen_2_lastMACD.getHistogram() > screen_2_preLastMACD.getHistogram();
         if (!ascending) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("The histogram does not grow on the second screen");
+            LogJava.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
+            LogJava.addDebugLine("The histogram does not grow on the second screen");
             return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

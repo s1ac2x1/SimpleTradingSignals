@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 import com.kishlaly.ta.utils.Quotes;
 
 import java.util.List;
@@ -28,8 +28,8 @@ public class Long_ScreenTwo_Bollinger_Bottom_PreLastBelow implements ScreenTwoBl
         boolean below = Quotes.isQuoteBelowBollingerBottom(quote_2, bollinger_2);
 
         if (!below) {
-            Log.recordCode(QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2, screen);
-            Log.addDebugLine("The second from the end of the quote is not lower than the bottom Bollinger band on the second screen");
+            LogJava.recordCode(QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2, screen);
+            LogJava.addDebugLine("The second from the end of the quote is not lower than the bottom Bollinger band on the second screen");
             return new BlockResultJava(screen.getLastQuote(), QUOTE_2_NOT_BELOW_BOLLINGER_BOTTOM_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

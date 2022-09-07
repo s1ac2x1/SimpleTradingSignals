@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -20,8 +20,8 @@ public class Long_ScreenTwo_EMA_LastBarNotAbove implements ScreenTwoBlock {
     public BlockResultJava check(SymbolDataJava screen) {
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
         if (isQuoteAboveEMA(screen.getLastQuote(), screen_2_EMA13.get(screen_2_EMA13.size() - 1).getValue())) {
-            Log.recordCode(LAST_QUOTE_ABOVE_EMA_SCREEN_2, screen);
-            Log.addDebugLine("Last bar above the EMA on the second screen");
+            LogJava.recordCode(LAST_QUOTE_ABOVE_EMA_SCREEN_2, screen);
+            LogJava.addDebugLine("Last bar above the EMA on the second screen");
             return new BlockResultJava(screen.getLastQuote(), LAST_QUOTE_ABOVE_EMA_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

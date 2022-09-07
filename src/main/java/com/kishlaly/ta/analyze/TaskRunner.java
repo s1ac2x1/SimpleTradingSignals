@@ -161,24 +161,24 @@ public class TaskRunner {
                 return;
             }
 
-            Log.addDebugLine("");
-            Log.addDebugLine(" === " + symbol + " === ");
+            LogJava.addDebugLine("");
+            LogJava.addDebugLine(" === " + symbol + " === ");
             try {
                 Arrays.stream(blocksGroups).forEach(blocksGroup -> {
                     System.out.println("[" + processingSymbol.get() + "/" + totalSymbols + "] Applying " + task.name() + " " + blocksGroup.getClass().getSimpleName() + " on " + symbol + " ...");
                     BlockResultJava blockResult = task.getFunction().apply(new ScreensJava(screen1, screen2), blocksGroup.blocks());
-                    Log.addDebugLine(blockResult.isOk() ? "To check" : "Nope");
-                    Log.addDebugLine("");
+                    LogJava.addDebugLine(blockResult.isOk() ? "To check" : "Nope");
+                    LogJava.addDebugLine("");
                     if (blockResult.isOk()) {
                         //TODO Here can be added a run on candlestick patterns
-                        Log.addLine(symbol);
+                        LogJava.addLine(symbol);
                         Signal signal = new Signal();
                         signal.timeframe1 = screen1.timeframe;
                         signal.timeframe2 = screen2.timeframe;
                         signal.symbol = symbol;
                         signal.task = task;
                         signals.add(signal);
-                        Log.addSummary(task.name(), blocksGroup, symbol); // TODO add a list of found candlestick patterns
+                        LogJava.addSummary(task.name(), blocksGroup, symbol); // TODO add a list of found candlestick patterns
                     }
                 });
             } catch (Exception e) {
@@ -208,14 +208,14 @@ public class TaskRunner {
                             List<QuoteJava> quotes = loadQuotesFromDiskCache(symbol);
                             symbolData.quotes = quotes;
                             Arrays.stream(indicators).forEach(indicator -> symbolData.indicators.put(MACD, calculateIndicatorFromCachedQuotes(symbol, MACD)));
-                            Log.addDebugLine("");
-                            Log.addDebugLine(" === " + symbol + " === ");
+                            LogJava.addDebugLine("");
+                            LogJava.addDebugLine(" === " + symbol + " === ");
                             try {
                                 Boolean signal = function.apply(symbolData);
-                                Log.addDebugLine(signal ? "Вердикт: проверить" : "Вердикт: точно нет");
-                                Log.addDebugLine("");
+                                LogJava.addDebugLine(signal ? "Вердикт: проверить" : "Вердикт: точно нет");
+                                LogJava.addDebugLine("");
                                 if (signal) {
-                                    Log.addLine(symbol);
+                                    LogJava.addLine(symbol);
                                 }
                             } catch (Exception e) {
                                 System.out.println("Function failed for symbol " + symbol + " with message: " + e.getMessage());
@@ -248,8 +248,8 @@ public class TaskRunner {
         //Log.saveSignal(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".txt");
         //Log.saveDebug(customDebugFolder + "/all.txt");
         //Log.saveCodes(customDebugFolder);
-        Log.saveSummary(ContextJava.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".html");
-        Log.clear();
+        LogJava.saveSummary(ContextJava.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".html");
+        LogJava.clear();
     }
 
     public static class Signal {

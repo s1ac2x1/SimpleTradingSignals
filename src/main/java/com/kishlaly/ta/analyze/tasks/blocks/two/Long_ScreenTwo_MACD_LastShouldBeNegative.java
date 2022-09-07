@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -20,8 +20,8 @@ public class Long_ScreenTwo_MACD_LastShouldBeNegative implements ScreenTwoBlock 
         double latestHistogramValue = CollectionUtilsJava.getFromEnd(screenTwoMacdValues, 1).getHistogram();
 
         if (latestHistogramValue > 0) {
-            Log.recordCode(BlockResultCodeJava.LAST_HISTOGRAM_ABOVE_ZERO_SCREEN_2, screen);
-            Log.addDebugLine("histogram at the right edge above zero");
+            LogJava.recordCode(BlockResultCodeJava.LAST_HISTOGRAM_ABOVE_ZERO_SCREEN_2, screen);
+            LogJava.addDebugLine("histogram at the right edge above zero");
             return new BlockResultJava(screen.getLastQuote(), LAST_HISTOGRAM_ABOVE_ZERO_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.StochJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -30,8 +30,8 @@ public class Long_ScreenTwo_Stoch_D_K_SomeWereOversold implements ScreenTwoBlock
             }
         }
         if (!wasOversoldRecently) {
-            Log.recordCode(STOCH_D_K_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2, screen);
-            Log.addDebugLine("Stochastic was not oversold on the last " + STOCH_VALUES_TO_CHECK + " values");
+            LogJava.recordCode(STOCH_D_K_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2, screen);
+            LogJava.addDebugLine("Stochastic was not oversold on the last " + STOCH_VALUES_TO_CHECK + " values");
             return new BlockResultJava(screen.getLastQuote(), STOCH_D_K_WAS_NOT_OVERSOLD_RECENTLY_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

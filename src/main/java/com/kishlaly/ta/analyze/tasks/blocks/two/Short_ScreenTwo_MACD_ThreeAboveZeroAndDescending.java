@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -23,15 +23,15 @@ public class Short_ScreenTwo_MACD_ThreeAboveZeroAndDescending implements ScreenT
 
         boolean histogramAboveZero = macd3 > 0 && macd2 > 0 && macd1 > 0;
         if (!histogramAboveZero) {
-            Log.recordCode(HISTOGRAM_NOT_ABOVE_ZERO_SCREEN_2, screen);
-            Log.addDebugLine("Histogram on the second screen is not higher than zero");
+            LogJava.recordCode(HISTOGRAM_NOT_ABOVE_ZERO_SCREEN_2, screen);
+            LogJava.addDebugLine("Histogram on the second screen is not higher than zero");
             return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_NOT_ABOVE_ZERO_SCREEN_2);
         }
 
         boolean descending = macd3 > macd2 && macd2 > macd1;
         if (!descending) {
-            Log.recordCode(HISTOGRAM_NOT_DESCENDING_SCREEN_2, screen);
-            Log.addDebugLine("The histogram on the second screen is not reduced");
+            LogJava.recordCode(HISTOGRAM_NOT_DESCENDING_SCREEN_2, screen);
+            LogJava.addDebugLine("The histogram on the second screen is not reduced");
             return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_NOT_DESCENDING_SCREEN_2);
         }
 

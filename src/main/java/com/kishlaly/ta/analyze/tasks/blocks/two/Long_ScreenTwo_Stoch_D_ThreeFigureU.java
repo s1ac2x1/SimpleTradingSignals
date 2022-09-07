@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.StochJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class Long_ScreenTwo_Stoch_D_ThreeFigureU implements ScreenTwoBlock {
 
         boolean u = stoch3.getSlowD() > stoch2.getSlowD() && stoch2.getSlowD() < stoch1.getSlowD();
         if (!u) {
-            Log.recordCode(STOCH_D_NOT_U_SCREEN_2, screen);
-            Log.addDebugLine("Stochastic %D does not form a U-shape on the second screen");
+            LogJava.recordCode(STOCH_D_NOT_U_SCREEN_2, screen);
+            LogJava.addDebugLine("Stochastic %D does not form a U-shape on the second screen");
             return new BlockResultJava(screen.getLastQuote(), STOCH_D_NOT_U_SCREEN_2);
         }
 

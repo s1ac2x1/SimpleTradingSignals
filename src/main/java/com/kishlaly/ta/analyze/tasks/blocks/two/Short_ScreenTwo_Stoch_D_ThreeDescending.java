@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.StochJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class Short_ScreenTwo_Stoch_D_ThreeDescending implements ScreenTwoBlock {
         // %D decreases (it is enough that the last one is lower than the last two)
         boolean ascendingStochastic = stoch1.getSlowD() < stoch2.getSlowD() && stoch1.getSlowD() < stoch3.getSlowD();
         if (!ascendingStochastic) {
-            Log.recordCode(STOCH_NOT_DESCENDING_SCREEN_2, screen);
-            Log.addDebugLine("Stochastic %D does not decrease on the second screen");
+            LogJava.recordCode(STOCH_NOT_DESCENDING_SCREEN_2, screen);
+            LogJava.addDebugLine("Stochastic %D does not decrease on the second screen");
             return new BlockResultJava(screen.getLastQuote(), STOCH_NOT_DESCENDING_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

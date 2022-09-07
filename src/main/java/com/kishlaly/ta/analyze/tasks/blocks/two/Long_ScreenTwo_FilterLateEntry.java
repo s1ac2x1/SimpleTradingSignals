@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -27,8 +27,8 @@ public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlock {
             double ratio = diff / 100 * FILTER_BY_KELTNER;
             double maxAllowedCloseValue = middle + ratio;
             if (lastQuoteClose >= maxAllowedCloseValue) {
-                Log.addDebugLine("The last quote closed above " + FILTER_BY_KELTNER + "% of the distance from the middle to the top of the channel");
-                Log.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2, screen);
+                LogJava.addDebugLine("The last quote closed above " + FILTER_BY_KELTNER + "% of the distance from the middle to the top of the channel");
+                LogJava.recordCode(QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2, screen);
                 return new BlockResultJava(screen.getLastQuote(), QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2);
             }
         }

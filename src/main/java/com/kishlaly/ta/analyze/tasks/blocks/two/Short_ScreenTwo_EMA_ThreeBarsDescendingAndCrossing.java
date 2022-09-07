@@ -7,7 +7,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -31,11 +31,11 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);
 
         if (!descendingBarLow) {
-            Log.recordCode(BlockResultCodeJava.QUOTE_LOW_NOT_LOWING_SCREEN_2, screen);
-            Log.addDebugLine("Quote.low is not reduced consistently");
+            LogJava.recordCode(BlockResultCodeJava.QUOTE_LOW_NOT_LOWING_SCREEN_2, screen);
+            LogJava.addDebugLine("Quote.low is not reduced consistently");
             if (!descendingBarClose) {
-                Log.recordCode(BlockResultCodeJava.QUOTE_CLOSE_NOT_LOWING_SCREEN_2, screen);
-                Log.addDebugLine("Quote.close is not reduced consistently");
+                LogJava.recordCode(BlockResultCodeJava.QUOTE_CLOSE_NOT_LOWING_SCREEN_2, screen);
+                LogJava.addDebugLine("Quote.close is not reduced consistently");
                 // the third from the end all above EMA13, and the second and last crossed it
                 boolean thirdBarAboveEMA13 = quote3.getLow() > CollectionUtilsJava.getFromEnd(screen_2_EMA13, 3).getValue()
                         && quote3.getHigh() > CollectionUtilsJava.getFromEnd(screen_2_EMA13, 3).getValue();
@@ -45,22 +45,22 @@ public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements Scree
                         && quote1.getHigh() >= CollectionUtilsJava.getFromEnd(screen_2_EMA13, 1).getValue();
                 boolean crossingRule = thirdBarAboveEMA13 && (secondBarCrossesEMA13 || lastBarCrossesEMA13);
                 if (!crossingRule) {
-                    Log.addDebugLine("Third from the end" + (thirdBarAboveEMA13 ? " " : " not ") + "above ЕМА13");
-                    Log.addDebugLine("Penultimate" + (secondBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
-                    Log.addDebugLine("Last" + (lastBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
-                    Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen);
+                    LogJava.addDebugLine("Third from the end" + (thirdBarAboveEMA13 ? " " : " not ") + "above ЕМА13");
+                    LogJava.addDebugLine("Penultimate" + (secondBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
+                    LogJava.addDebugLine("Last" + (lastBarCrossesEMA13 ? " " : " not ") + "crossed ЕМА13");
+                    LogJava.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen);
                     return new BlockResultJava(screen.getLastQuote(), CROSSING_RULE_VIOLATED_SCREEN_2);
                 } else {
-                    Log.recordCode(CROSSING_RULE_PASSED_SCREEN_2, screen);
-                    Log.addDebugLine("The intersection rule is satisfied");
+                    LogJava.recordCode(CROSSING_RULE_PASSED_SCREEN_2, screen);
+                    LogJava.addDebugLine("The intersection rule is satisfied");
                 }
             } else {
-                Log.recordCode(QUOTE_CLOSE_LOWING_SCREEN_2, screen);
-                Log.addDebugLine("There is a decrease in Quote.close");
+                LogJava.recordCode(QUOTE_CLOSE_LOWING_SCREEN_2, screen);
+                LogJava.addDebugLine("There is a decrease in Quote.close");
             }
         } else {
-            Log.recordCode(BlockResultCodeJava.QUOTE_HIGH_LOWING_SCREEN_2, screen);
-            Log.addDebugLine("There is a drop in Quote.high");
+            LogJava.recordCode(BlockResultCodeJava.QUOTE_HIGH_LOWING_SCREEN_2, screen);
+            LogJava.addDebugLine("There is a drop in Quote.high");
         }
         return new BlockResultJava(screen.getLastQuote(), OK);
     }

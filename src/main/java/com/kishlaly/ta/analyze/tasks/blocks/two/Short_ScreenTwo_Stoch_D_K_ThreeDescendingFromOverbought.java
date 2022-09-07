@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.StochJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -32,8 +32,8 @@ public class Short_ScreenTwo_Stoch_D_K_ThreeDescendingFromOverbought implements 
                 && (stoch1.getSlowD() < stoch3.getSlowD());
 
         if (!isOverboughtK || !isOverboughtD) {
-            Log.recordCode(STOCH_NOT_DESCENDING_FROM_OVERBOUGHT_SCREEN_2, screen);
-            Log.addDebugLine("Stochastic is not going down from overbought " + STOCH_OVERBOUGHT + ". %D: " + isOverboughtD + "; %K: " + isOverboughtK);
+            LogJava.recordCode(STOCH_NOT_DESCENDING_FROM_OVERBOUGHT_SCREEN_2, screen);
+            LogJava.addDebugLine("Stochastic is not going down from overbought " + STOCH_OVERBOUGHT + ". %D: " + isOverboughtD + "; %K: " + isOverboughtK);
             return new BlockResultJava(screen.getLastQuote(), STOCH_NOT_DESCENDING_FROM_OVERBOUGHT_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

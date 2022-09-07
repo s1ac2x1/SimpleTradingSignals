@@ -7,7 +7,7 @@ import com.kishlaly.ta.model.HistogramQuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -63,7 +63,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
 
         if (quoteWithLowestHistogram.getQuote().getClose()
                 > minimalPriceForRangeUpToLowestHistogram) {
-            Log.addDebugLine("Внимание: цена на дне гистограммы А (" + quoteWithLowestHistogram.histogramValue + " " + beautifyQuoteDate(quoteWithLowestHistogram.getQuote()) + ") не самая низкая в диапазоне");
+            LogJava.addDebugLine("Внимание: цена на дне гистограммы А (" + quoteWithLowestHistogram.histogramValue + " " + beautifyQuoteDate(quoteWithLowestHistogram.getQuote()) + ") не самая низкая в диапазоне");
         }
 
         // Finding a high that follows a past low ("breaking a bearish backbone")
@@ -78,8 +78,8 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                 .max(Comparator.comparingDouble(HistogramQuoteJava::getHistogramValue)).get();
 
         if (quoteWithHighestHistogramAfterLowestLow.histogramValue <= 0) {
-            Log.recordCode(BlockResultCodeJava.BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2, screen);
-            Log.addDebugLine("there was no fracture of the bear's backbone");
+            LogJava.recordCode(BlockResultCodeJava.BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2, screen);
+            LogJava.addDebugLine("there was no fracture of the bear's backbone");
             return new BlockResultJava(screen.getLastQuote(), BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2);
         }
 
@@ -153,8 +153,8 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                 }
             }
             if (foundSecondPositive) {
-                Log.recordCode(BlockResultCodeJava.HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS, screen);
-                Log.addDebugLine("In the point " + beautifyQuoteDate(histogramQuotes.get(indexOfSecondPositive).quote) + " a second positive area was found");
+                LogJava.recordCode(BlockResultCodeJava.HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS, screen);
+                LogJava.addDebugLine("In the point " + beautifyQuoteDate(histogramQuotes.get(indexOfSecondPositive).quote) + " a second positive area was found");
                 return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_MULTIPLE_POSITIVE_ISLANDS);
             }
 
@@ -174,16 +174,16 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                     if (histogramQuotes.get(histogramQuotes.size() - 1).getQuote().getClose()
                             < priceInLowestHistogramBar) {
                         // OK, we observe manually
-                        Log.addDebugLine(
+                        LogJava.addDebugLine(
                                 "Note: after crossing the histogram zero from vertex B (" + beautifyQuoteDate(quoteWhenHistogramCrossedZeroFromTop.getQuote())
                                         + ") another area of positive histograms was encountered");
                     } else {
-                        Log.recordCode(HISTOGRAM_ISLANDS_HIGHER_PRICE, screen);
-                        Log.addDebugLine("After the bottom of the histogram A there are several positive areas of the histograms, but at the edge the price is higher than in A");
+                        LogJava.recordCode(HISTOGRAM_ISLANDS_HIGHER_PRICE, screen);
+                        LogJava.addDebugLine("After the bottom of the histogram A there are several positive areas of the histograms, but at the edge the price is higher than in A");
                         return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_ISLANDS_HIGHER_PRICE);
                     }
                 } else {
-                    Log.addDebugLine(
+                    LogJava.addDebugLine(
                             "Forbidden: after the histogram crosses zero from vertex B (" + beautifyQuoteDate(quoteWhenHistogramCrossedZeroFromTop.getQuote())
                                     + ") another area of positive histograms was encountered");
                 }
@@ -194,8 +194,8 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             double lowestHistogramAfterCrossedZeroFromTop = histogramQuotes.subList(indexOfQuoteWhenHistogramCrossedZeroFromTop, histogramQuotes.size()).stream()
                     .min(Comparator.comparingDouble(HistogramQuoteJava::getHistogramValue)).get().histogramValue;
             if (Math.abs(lowestHistogramAfterCrossedZeroFromTop) >= Math.abs(quoteWithLowestHistogram.histogramValue) / 100 * 60) {
-                Log.recordCode(HISTOGRAM_SECOND_BOTTOM_RATIO, screen);
-                Log.addDebugLine("The second bottom of the histogram is larger than " + Divergencies.BullishConfig.SECOND_BOTTOM_RATIO + "% of the first bottom depth");
+                LogJava.recordCode(HISTOGRAM_SECOND_BOTTOM_RATIO, screen);
+                LogJava.addDebugLine("The second bottom of the histogram is larger than " + Divergencies.BullishConfig.SECOND_BOTTOM_RATIO + "% of the first bottom depth");
                 return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_SECOND_BOTTOM_RATIO);
             }
 
@@ -203,16 +203,16 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             HistogramQuoteJava preLast = histogramQuotes.get(histogramQuotes.size() - 2);
             HistogramQuoteJava last = histogramQuotes.get(histogramQuotes.size() - 1);
             if (Math.abs(last.histogramValue) >= Math.abs(preLast.histogramValue)) {
-                Log.recordCode(HISTOGRAM_LAST_BAR_NOT_LOWER, screen);
-                Log.addDebugLine("The last bar of the histogram is not lower than the previous one");
+                LogJava.recordCode(HISTOGRAM_LAST_BAR_NOT_LOWER, screen);
+                LogJava.addDebugLine("The last bar of the histogram is not lower than the previous one");
                 return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_LAST_BAR_NOT_LOWER);
             }
 
             // exclude long tails of negative histograms at the right edge, which often occur in a downtrend on a larger timeframe
             long tailCount = histogramQuotes.subList(indexOfQuoteWhenHistogramCrossedZeroFromTop, histogramQuotes.size()).stream().count();
             if (tailCount >= Divergencies.BullishConfig.MAX_TAIL_SIZE) {
-                Log.recordCode(NEGATIVE_HISTOGRAMS_LIMIT, screen);
-                Log.addDebugLine("At the right edge has piled " + tailCount + " negative histograms (limit: " + Divergencies.BullishConfig.MAX_TAIL_SIZE + ")");
+                LogJava.recordCode(NEGATIVE_HISTOGRAMS_LIMIT, screen);
+                LogJava.addDebugLine("At the right edge has piled " + tailCount + " negative histograms (limit: " + Divergencies.BullishConfig.MAX_TAIL_SIZE + ")");
                 return new BlockResultJava(screen.getLastQuote(), NEGATIVE_HISTOGRAMS_LIMIT);
             }
 
@@ -221,13 +221,13 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             if (priceWhenHitogramCrossedZeroFromTop
                     < priceInLowestHistogramBar) {
             } else {
-                Log.recordCode(DIVERGENCE_FAIL_AT_ZERO, screen);
-                Log.addDebugLine("No divergence: on the slope to zero from B the price is higher than in A");
+                LogJava.recordCode(DIVERGENCE_FAIL_AT_ZERO, screen);
+                LogJava.addDebugLine("No divergence: on the slope to zero from B the price is higher than in A");
                 return new BlockResultJava(screen.getLastQuote(), DIVERGENCE_FAIL_AT_ZERO);
             }
         } else {
-            Log.recordCode(DIVERGENCE_FAIL_AT_TOP, screen);
-            Log.addDebugLine("the histogram did not descend from the top of B");
+            LogJava.recordCode(DIVERGENCE_FAIL_AT_TOP, screen);
+            LogJava.addDebugLine("the histogram did not descend from the top of B");
             return new BlockResultJava(screen.getLastQuote(), DIVERGENCE_FAIL_AT_TOP);
         }
 

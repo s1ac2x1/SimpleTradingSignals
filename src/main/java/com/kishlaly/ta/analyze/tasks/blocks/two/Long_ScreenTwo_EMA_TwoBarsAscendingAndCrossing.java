@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.CollectionUtilsJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -27,8 +27,8 @@ public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwo
         QuoteJava lastQuote = CollectionUtilsJava.getFromEnd(screen_2_Quotes, 1);
         boolean ascendingBarHigh = preLastQuote.getHigh() < lastQuote.getHigh();
         if (!ascendingBarHigh) {
-            Log.recordCode(QUOTE_HIGH_NOT_GROWING_SCREEN_2, screen);
-            Log.addDebugLine("Quote.high does not grow consistently");
+            LogJava.recordCode(QUOTE_HIGH_NOT_GROWING_SCREEN_2, screen);
+            LogJava.addDebugLine("Quote.high does not grow consistently");
             return new BlockResultJava(screen.getLastQuote(), QUOTE_HIGH_NOT_GROWING_SCREEN_2);
         }
         EMAJava preLastEMA = CollectionUtilsJava.getFromEnd(screen_2_EMA13, 2);
@@ -36,15 +36,15 @@ public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwo
 
         // both quotes below EMA - reject
         if (isQuoteBelowEMA(preLastQuote, preLastEMA.getValue()) && isQuoteBelowEMA(lastQuote, lastEMA.getValue())) {
-            Log.addDebugLine("Both last two bars are below the EMA");
-            Log.recordCode(QUOTES_BELOW_EMA_SCREEN_2, screen);
+            LogJava.addDebugLine("Both last two bars are below the EMA");
+            LogJava.recordCode(QUOTES_BELOW_EMA_SCREEN_2, screen);
             return new BlockResultJava(screen.getLastQuote(), QUOTES_BELOW_EMA_SCREEN_2);
         }
 
         // both quotes above the EMA - reject
         if (isQuoteAboveEMA(preLastQuote, preLastEMA.getValue()) && isQuoteAboveEMA(lastQuote, lastEMA.getValue())) {
-            Log.addDebugLine("Both last two bars are above the EMA");
-            Log.recordCode(QUOTES_ABOVE_EMA_SCREEN_2, screen);
+            LogJava.addDebugLine("Both last two bars are above the EMA");
+            LogJava.recordCode(QUOTES_ABOVE_EMA_SCREEN_2, screen);
             return new BlockResultJava(screen.getLastQuote(), QUOTES_ABOVE_EMA_SCREEN_2);
         }
 
@@ -63,8 +63,8 @@ public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwo
 
         boolean crossingOk = crossingRule1 || crossingRule2 || crossingRule3 || crossingRule4;
         if (!crossingOk) {
-            Log.addDebugLine("The rule of EMA crossing is not fulfilled");
-            Log.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen);
+            LogJava.addDebugLine("The rule of EMA crossing is not fulfilled");
+            LogJava.recordCode(CROSSING_RULE_VIOLATED_SCREEN_2, screen);
             return new BlockResultJava(screen.getLastQuote(), CROSSING_RULE_VIOLATED_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);

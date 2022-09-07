@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.model.indicators.MACDJava;
-import com.kishlaly.ta.utils.Log;
+import com.kishlaly.ta.utils.LogJava;
 
 import java.util.List;
 
@@ -24,15 +24,15 @@ public class Long_ScreenTwo_MACD_ThreeBelowZeroAndFigureU implements ScreenTwoBl
 
         boolean histogramBelowZero = macd3 < 0 && macd2 < 0 && macd1 < 0;
         if (!histogramBelowZero) {
-            Log.recordCode(HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen);
-            Log.addDebugLine("The histogram on the second screen is at least zero");
+            LogJava.recordCode(HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen);
+            LogJava.addDebugLine("The histogram on the second screen is at least zero");
             return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2);
         }
 
         boolean figureU = macd2 < macd3 && macd2 < macd1;
         if (!figureU) {
-            Log.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
-            Log.addDebugLine("The histogram on the second screen does not form a negative U");
+            LogJava.recordCode(HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen);
+            LogJava.addDebugLine("The histogram on the second screen does not form a negative U");
             return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_NOT_ASCENDING_SCREEN_2);
         }
         return new BlockResultJava(screen.getLastQuote(), OK);
