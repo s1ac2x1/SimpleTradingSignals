@@ -3,6 +3,7 @@ package com.kishlaly.ta.utils
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.model.BlockResultCode
 import com.kishlaly.ta.model.SymbolData
+import java.util.*
 
 class Log {
 
@@ -54,6 +55,24 @@ class Log {
             builder.append("</table>")
             FileUtils.appendToFile(filename, builder.toString())
         }
+
+        fun saveSignal(filename: String) {
+            val output = log.toString()
+            if (!output.isEmpty()) {
+                FileUtils.appendToFile(filename, output)
+            }
+        }
+
+        fun saveCodes(folder: String) {
+            codes.forEach { code, symbols ->
+                val s = symbols
+                        .map { it.symbol }
+                        .joinToString { System.lineSeparator() }
+                FileUtils.appendToFile(folder + "/" + code.name.lowercase(Locale.getDefault()) + ".txt", s)
+            }
+        }
+
+
     }
 
     data class Key(val taskName: String, val blocksGroup: BlocksGroup) {
