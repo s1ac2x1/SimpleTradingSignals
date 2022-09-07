@@ -3,6 +3,7 @@ package com.kishlaly.ta.utils
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.model.BlockResultCode
 import com.kishlaly.ta.model.SymbolData
+import com.kishlaly.ta.utils.LogJava.KeyJava
 import java.util.*
 
 class Log {
@@ -78,6 +79,11 @@ class Log {
             codes.clear()
         }
 
+        fun addSummary(name: String, blocksGroup: BlocksGroup, symbol: String) {
+            val key = Key(name, blocksGroup)
+            summary.putIfAbsent(key, mutableSetOf())
+            summary[key]?.add(symbol)
+        }
 
     }
 
