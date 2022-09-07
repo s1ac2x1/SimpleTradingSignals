@@ -14,7 +14,7 @@ import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.FileUtilsJava;
-import com.kishlaly.ta.utils.Numbers;
+import com.kishlaly.ta.utils.NumbersJava;
 
 import java.io.File;
 import java.io.IOException;
@@ -243,7 +243,7 @@ public class CacheBuilder {
             BlocksGroupJava group = entry.getKey();
             List<HistoricalTesting> testings = entry.getValue();
             double totalBalance = testings.stream().map(HistoricalTesting::getBalance).mapToDouble(Double::doubleValue).sum();
-            totalBalance = Numbers.round(totalBalance);
+            totalBalance = NumbersJava.round(totalBalance);
             String groupName = group.getClass().getSimpleName();
             balances.put(totalBalance, groupName);
             long tp = testings.stream().mapToLong(t -> t.getProfitablePositionsCount()).sum();
@@ -264,7 +264,7 @@ public class CacheBuilder {
         tpSL.forEach(tpsl -> output.append(tpsl.groupName + ": TP/SL = " + tpsl.getTp() + "/" + tpsl.getSl() + System.lineSeparator()));
         output.append(System.lineSeparator());
         roi.sort(Comparator.comparing(ROI::getRoi).reversed());
-        roi.forEach(r -> output.append(r.groupName + ": " + Numbers.round(r.getRoi()) + " %" + System.lineSeparator()));
+        roi.forEach(r -> output.append(r.groupName + ": " + NumbersJava.round(r.getRoi()) + " %" + System.lineSeparator()));
         FileUtilsJava.writeToFile("tests/summary.txt", output.toString());
     }
 

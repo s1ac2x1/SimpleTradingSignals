@@ -2,7 +2,7 @@ package com.kishlaly.ta.utils;
 
 import java.math.BigDecimal;
 
-public class Numbers {
+public class NumbersJava {
 
     public static double round(double value) {
         if (Double.isNaN(value) || value == 0) {

@@ -47,7 +47,7 @@ public class Quotes {
                     double close = weekSorted.get(week.size() - 1).getClose();
                     double low = weekSorted.stream().mapToDouble(q -> q.getLow()).min().getAsDouble();
                     double volume = weekSorted.stream().mapToDouble(q -> q.getVolume()).sum();
-                    QuoteJava weeklyQuote = new QuoteJava(timestamp, Numbers.round(high), open, close, Numbers.round(low), volume);
+                    QuoteJava weeklyQuote = new QuoteJava(timestamp, NumbersJava.round(high), open, close, NumbersJava.round(low), volume);
                     weeklyQuotes.add(weeklyQuote);
                     week.clear();
                 }
@@ -107,7 +107,7 @@ public class Quotes {
         double close = dayQuotesSorted.get(dayQuotesSorted.size() - 1).getClose();
         double low = dayQuotesSorted.stream().mapToDouble(q -> q.getLow()).min().getAsDouble();
         double volume = dayQuotesSorted.stream().mapToDouble(q -> q.getVolume()).sum();
-        QuoteJava dayQuote = new QuoteJava(timestamp, Numbers.round(high), open, close, Numbers.round(low), volume);
+        QuoteJava dayQuote = new QuoteJava(timestamp, NumbersJava.round(high), open, close, NumbersJava.round(low), volume);
         dayQuotes.add(dayQuote);
         hourQuotesInsideOneDay.clear();
     }

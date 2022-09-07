@@ -13,7 +13,7 @@ import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.FileUtilsJava;
-import com.kishlaly.ta.utils.Numbers;
+import com.kishlaly.ta.utils.NumbersJava;
 
 import java.io.File;
 import java.io.IOException;
@@ -231,7 +231,7 @@ public class TaskTester {
         result += "\tTP/SL = " + testing.printTPSLNumber() + " = ";
         result += testing.printTPSLPercent() + lineSeparator();
         double balance = testing.getBalance();
-        result += "\tTotal profit after " + ContextJava.tradeCommission + "% commissions per trade = " + Numbers.round(balance) + lineSeparator();
+        result += "\tTotal profit after " + ContextJava.tradeCommission + "% commissions per trade = " + NumbersJava.round(balance) + lineSeparator();
         result += "\tTotal profit / loss = " + testing.getTotalProfit() + " / " + testing.getTotalLoss() + lineSeparator();
         long minPositionDurationSeconds = testing.getMinPositionDurationSeconds();
         long maxPositionDurationSeconds = testing.getMaxPositionDurationSeconds();
@@ -350,7 +350,7 @@ public class TaskTester {
             double takeProfit = takeProfitStrategy.calcualte(data, signalIndex);
 
             double openingPrice = signal.getClose() + 0.07;
-            int lots = Numbers.roundDown(ContextJava.accountBalance / openingPrice);
+            int lots = NumbersJava.roundDown(ContextJava.accountBalance / openingPrice);
             double openPositionSize = lots * openingPrice;
             double commissions = openPositionSize / 100 * ContextJava.tradeCommission;
 
@@ -358,9 +358,9 @@ public class TaskTester {
 
             if (!skip) {
                 testLog.append("signal " + signal.getNativeDate() + lineSeparator());
-                testLog.append("\tSL: " + Numbers.round(stopLoss) + lineSeparator());
-                testLog.append("\tTP: " + Numbers.round(takeProfit) + lineSeparator());
-                testLog.append("\topen price: " + Numbers.round(openingPrice) + lineSeparator());
+                testLog.append("\tSL: " + NumbersJava.round(stopLoss) + lineSeparator());
+                testLog.append("\tTP: " + NumbersJava.round(takeProfit) + lineSeparator());
+                testLog.append("\topen price: " + NumbersJava.round(openingPrice) + lineSeparator());
             } else {
                 testLog.append("signal " + signal.getNativeDate() + " SKIPPED");
             }
@@ -396,7 +396,7 @@ public class TaskTester {
                     }
                     double closingPositionSize = lots * takeProfit;
                     profit = closingPositionSize - openPositionSize;
-                    roi = Numbers.roi(openPositionSize, closingPositionSize);
+                    roi = NumbersJava.roi(openPositionSize, closingPositionSize);
                     profitable = true;
                     closePositionQuote = nextQuote;
                     caughtGapUp = gapUp;
@@ -417,7 +417,7 @@ public class TaskTester {
                     loss = closingPositionSize - openPositionSize;
                     closePositionQuote = nextQuote;
                     caughtGapDown = gapDown;
-                    roi = Numbers.roi(openPositionSize, closingPositionSize);
+                    roi = NumbersJava.roi(openPositionSize, closingPositionSize);
                     closePositionPrice = stopLoss;
                     closePositionCost = closingPositionSize;
                     break;
@@ -443,12 +443,12 @@ public class TaskTester {
                 positionTestResult.setLoss(loss);
                 positionTestResult.setGapUp(caughtGapUp);
                 positionTestResult.setGapDown(caughtGapDown);
-                positionTestResult.setRoi(Numbers.round(roi));
+                positionTestResult.setRoi(NumbersJava.round(roi));
                 positionTestResult.setOpenPositionPrice(openingPrice);
                 positionTestResult.setOpenPositionCost(openPositionSize);
                 positionTestResult.setClosePositionPrice(closePositionPrice);
                 positionTestResult.setClosePositionCost(closePositionCost);
-                testLog.append("\tclose price: " + Numbers.round(closePositionPrice) + lineSeparator());
+                testLog.append("\tclose price: " + NumbersJava.round(closePositionPrice) + lineSeparator());
                 testLog.append("\tclosed: " + closePositionQuote.getNativeDate() + lineSeparator());
                 testLog.append("\tprofitable: " + profitable + lineSeparator());
                 testLog.append("\tgap up: " + caughtGapUp + lineSeparator());

@@ -9,7 +9,7 @@ import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.DatesJava;
-import com.kishlaly.ta.utils.Numbers;
+import com.kishlaly.ta.utils.NumbersJava;
 
 import java.util.HashMap;
 import java.util.List;
@@ -88,7 +88,7 @@ public class HistoricalTesting {
         if (allPositions == 0) {
             return 0;
         }
-        return Numbers.percent(profitablePositions, allPositions);
+        return NumbersJava.percent(profitablePositions, allPositions);
     }
 
     public double getLossRatio() {
@@ -97,7 +97,7 @@ public class HistoricalTesting {
         if (allPositions == 0) {
             return 0;
         }
-        return Numbers.percent(lossPossitions, allPositions);
+        return NumbersJava.percent(lossPossitions, allPositions);
     }
 
     public long getProfitablePositionsCount() {
@@ -134,21 +134,21 @@ public class HistoricalTesting {
     }
 
     public double getMinProfit() {
-        return Numbers.round(signalTestingResults.entrySet()
+        return NumbersJava.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getProfit()).min().orElse(0));
     }
 
     public double getMaxProfit() {
-        return Numbers.round(signalTestingResults.entrySet()
+        return NumbersJava.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getProfit()).max().orElse(0));
     }
 
     public double getAvgProfit() {
-        return Numbers.round(signalTestingResults.entrySet()
+        return NumbersJava.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getProfit()).average().orElse(0));
@@ -156,7 +156,7 @@ public class HistoricalTesting {
 
     // find the max of negative number
     public double getMinLoss() {
-        return Numbers.round(signalTestingResults.entrySet()
+        return NumbersJava.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getLoss()).max().orElse(0));
@@ -164,35 +164,35 @@ public class HistoricalTesting {
 
     // find the min of negative number
     public double getMaxLoss() {
-        return Numbers.round(signalTestingResults.entrySet()
+        return NumbersJava.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getLoss()).min().orElse(0));
     }
 
     public double getAvgLoss() {
-        return Numbers.round(signalTestingResults.entrySet()
+        return NumbersJava.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getLoss()).average().orElse(0));
     }
 
     public double getTotalProfit() {
-        return Numbers.round(signalTestingResults.entrySet()
+        return NumbersJava.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getProfit() - entry.getValue().getCommissions()).sum());
     }
 
     public double getAverageRoi() {
-        return Numbers.round(signalTestingResults.entrySet()
+        return NumbersJava.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getRoi()).average().orElse(0));
     }
 
     public double getTotalLoss() {
-        return Numbers.round(signalTestingResults.entrySet()
+        return NumbersJava.round(signalTestingResults.entrySet()
                 .stream()
                 .filter(entry -> !entry.getValue().isProfitable())
                 .mapToDouble(entry -> entry.getValue().getLoss() - entry.getValue().getCommissions()).sum());
@@ -246,7 +246,7 @@ public class HistoricalTesting {
     }
 
     public double getBalance() {
-        return Numbers.round(getTotalProfit() + getTotalLoss()); // loss is negative
+        return NumbersJava.round(getTotalProfit() + getTotalLoss()); // loss is negative
     }
 
     public String getSymbol() {
@@ -302,7 +302,7 @@ public class HistoricalTesting {
         }
 
         public double getProfit() {
-            return Numbers.round(this.profit);
+            return NumbersJava.round(this.profit);
         }
 
         public void setProfit(final double profit) {
@@ -318,7 +318,7 @@ public class HistoricalTesting {
         }
 
         public double getLoss() {
-            return Numbers.round(this.loss);
+            return NumbersJava.round(this.loss);
         }
 
         public void setLoss(final double loss) {
