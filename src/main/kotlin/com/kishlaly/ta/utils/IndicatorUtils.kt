@@ -2,7 +2,7 @@ package com.kishlaly.ta.utils
 
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache
 import com.kishlaly.ta.config.Context
-import com.kishlaly.ta.model.AbstractModelJava
+import com.kishlaly.ta.model.AbstractModel
 import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.indicators.EMA
 import org.ta4j.core.indicators.EMAIndicator
@@ -30,9 +30,9 @@ class IndicatorUtils {
             }
         }
 
-        private fun <T : AbstractModelJava?> trimToDate(src: MutableList<T>): MutableList<T> {
-            return if (ContextJava.trimToDate != null) {
-                val filterAfter = DatesJava.shortDateToZoned(ContextJava.trimToDate)
+        private fun <T : AbstractModel> trimToDate(src: MutableList<T>): MutableList<T> {
+            return if (Context.trimToDate != null) {
+                val filterAfter = Dates.shortDateToZoned(Context.trimToDate!!)
                 src.filter { ind: T -> ind!!.timestamp <= filterAfter.toEpochSecond() }.toMutableList()
             } else {
                 src
