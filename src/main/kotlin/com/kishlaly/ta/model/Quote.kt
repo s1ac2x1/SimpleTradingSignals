@@ -1,5 +1,7 @@
 package com.kishlaly.ta.model
 
+import com.kishlaly.ta.model.indicators.Bollinger
+import com.kishlaly.ta.model.indicators.Keltner
 import kotlin.Double.Companion.NaN
 
 data class Quote(
@@ -19,3 +21,17 @@ data class Quote(
     }
 
 }
+
+fun Quote.isCrossesEMA(ema: Double) = low <= ema && high >= ema
+
+fun Quote.isBelowEMA(ema: Double) = low < ema && high < ema
+
+fun Quote.isAboveEMA(ema: Double) = low > ema && high > ema
+
+fun Quote.isCrossesBollingerBottom(bollinger: Bollinger) = low <= bollinger.bottom && high >= bollinger.bottom
+
+fun Quote.isBelowBollingerBottom(bollinger: Bollinger) = low < bollinger.bottom && high < bollinger.bottom
+
+fun Quote.isCrossesKeltnerBottom(keltner: Keltner) = low <= keltner.low && high >= keltner.low
+
+fun Quote.isGreen() = close > open
