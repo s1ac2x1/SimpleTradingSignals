@@ -45,7 +45,7 @@ class Log {
                         builder.append("<tr style=\"border: 1px solid;\">")
                         builder.append("<td style=\"border: 1px solid; vertical-align: top text-align: left;\">" + entry + "</td>")
                         builder.append("<td style=\"border: 1px solid; vertical-align: top; text-align: left;\">")
-                        entry.value.forEach { group: BlocksGroup ->
+                        entry.value.forEach { group ->
                             builder.append(group.javaClass.simpleName + "<br>")
                             builder.append(group.comments() + "<br><br>")
                         }
