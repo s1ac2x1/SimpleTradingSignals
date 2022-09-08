@@ -1,11 +1,14 @@
 package com.kishlaly.ta.cache
 
 import com.google.gson.Gson
-import com.kishlaly.ta.analyze.TaskTypeJava
+import com.google.gson.reflect.TypeToken
+import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.config.Context
+import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.model.indicators.Indicator
-import com.kishlaly.ta.utils.ContextJava
+import com.kishlaly.ta.utils.Dates
+import com.kishlaly.ta.utils.Quotes
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files
@@ -24,10 +27,10 @@ class CacheReader {
         var queueExecutor = Executors.newScheduledThreadPool(1)
         var apiExecutor = Executors.newCachedThreadPool()
         var requestPeriod = 0
-        var requests = ConcurrentLinkedDeque<LoadRequestJava>()
+        var requests = ConcurrentLinkedDeque<LoadRequest>()
         var callsInProgress = CopyOnWriteArrayList<Future<*>>()
 
-        fun checkCache(timeframes: Array<Array<Timeframe>>, tasks: Array<TaskTypeJava>) {
+        fun checkCache(timeframes: Array<Array<Timeframe>>, tasks: Array<TaskType>) {
             val screenNumber = AtomicInteger(0)
             val missedData = mutableMapOf<Timeframe, MutableSet<String>>()
             timeframes.forEach { screens ->
@@ -45,7 +48,7 @@ class CacheReader {
                 Context.timeframe = tf
                 try {
                     Files.write(
-                        Paths.get("${getFolder()}${ContextJava.fileSeparator}missed.txt"),
+                        Paths.get("${getFolder()}${Context.fileSeparator}missed.txt"),
                         quotes.joinToString { System.lineSeparator() }.toByteArray()
                     )
                     println("Logged ${quotes.size} missed ${tf.name} quotes")
@@ -62,7 +65,7 @@ class CacheReader {
                 collector.toSet()
             } else {
                 Context.source.forEach { source ->
-                    var lines = File("${ContextJava.outputFolder}/${source.filename}").readLines()
+                    var lines = File("${Context.outputFolder}/${source.filename}").readLines()
                     if (source.random) {
                         lines = lines.shuffled().subList(0, 30)
                     }
@@ -76,22 +79,65 @@ class CacheReader {
             return File("${getFolder()}${Context.fileSeparator}missed.txt").readLines().toSet()
         }
 
-        fun removeCachedQuotesSymbols(src: Set<String>): List<String> {
-            return src.filter { symbol: String ->
-                val file = File("${getFolder()}${ContextJava.fileSeparator}${symbol}_quotes.txt")
-                !file.exists()
-            }.toList()
-        }
-
         fun removeCachedIndicatorSymbols(src: Set<String>, indicator: Indicator): List<String> {
             return src.filter { symbol ->
                 File("${getFolder()}${Context.fileSeparator}${symbol}${indicator.name.lowercase()}.txt").exists()
             }.toList()
         }
 
+        fun removeCachedQuotesSymbols(src: Set<String>): List<String> {
+            return src.filter { symbol: String ->
+                val file = File("${getFolder()}${Context.fileSeparator}${symbol}_quotes.txt")
+                !file.exists()
+            }.toList()
+        }
+
+        fun loadQuotesFromDiskCache(symbol: String): List<Quote> {
+            val cachedQuotes = QuotesInMemoryCache[symbol, Context.timeframe]
+            return if (!cachedQuotes.isEmpty()) {
+                cachedQuotes
+            } else {
+                try {
+                    var quotes = gson.fromJson<List<Quote>>(
+                        File("${getFolder()}${Context.fileSeparator}${symbol}_quotes.txt").readText(),
+                        object : TypeToken<List<Quote>>() {}.type
+                    )
+                    when (Context.aggregationTimeframe) {
+                        Timeframe.DAY -> {
+                            if (Context.timeframe == Timeframe.WEEK) {
+                                quotes = Quotes.dayToWeek(quotes)
+                            }
+                            if (Context.timeframe == Timeframe.HOUR) {
+                                throw RuntimeException("Requested HOUR quotes, but aggregationTimeframe = DAY")
+                            }
+                        }
+                        Timeframe.HOUR -> {
+                            if (Context.timeframe == Timeframe.WEEK) {
+                                quotes = Quotes.hourToDay(quotes)
+                                quotes = Quotes.dayToWeek(quotes)
+                            }
+                            if (Context.timeframe == Timeframe.DAY) {
+                                quotes = Quotes.hourToDay(quotes)
+                            }
+                        }
+                        else -> {}
+                    }
+                    quotes = quotes.filter { it.valuesPresent() }.sortedBy { it.timestamp }
+                    Context.trimToDate?.let {
+                        val filterAfter = Dates.shortDateToZoned(Context.trimToDate!!)
+                        quotes = quotes.filter { it.timestamp <= filterAfter.toEpochSecond() }
+                    }
+                    QuotesInMemoryCache.put(symbol, Context.timeframe, quotes)
+                    quotes
+                } catch (e: Exception) {
+                    emptyList<Quote>()
+                }
+            }
+        }
+
         fun getFolder(): String {
             return "${Context.outputFolder}${Context.fileSeparator}cache${Context.fileSeparator}${
-                ContextJava.aggregationTimeframe.name.lowercase(
+                Context.aggregationTimeframe.name.lowercase(
                     Locale.getDefault()
                 )
             }"
