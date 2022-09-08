@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.kishlaly.ta.analyze.TaskTypeJava
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.Timeframe
+import com.kishlaly.ta.model.indicators.Indicator
 import com.kishlaly.ta.utils.ContextJava
 import java.io.File
 import java.io.IOException
@@ -43,8 +44,10 @@ class CacheReader {
             missedData.forEach { tf, quotes ->
                 Context.timeframe = tf
                 try {
-                    Files.write(Paths.get("${getFolder()}${ContextJava.fileSeparator}missed.txt"),
-                            quotes.joinToString { System.lineSeparator() }.toByteArray())
+                    Files.write(
+                        Paths.get("${getFolder()}${ContextJava.fileSeparator}missed.txt"),
+                        quotes.joinToString { System.lineSeparator() }.toByteArray()
+                    )
                     println("Logged ${quotes.size} missed ${tf.name} quotes")
                 } catch (e: IOException) {
                     println("Couldn't log missed quotes")
@@ -69,6 +72,10 @@ class CacheReader {
             }
         }
 
+        fun getMissedSymbols(): Set<String> {
+            return File("${getFolder()}${Context.fileSeparator}missed.txt").readLines().toSet()
+        }
+
         fun removeCachedQuotesSymbols(src: Set<String>): List<String> {
             return src.filter { symbol: String ->
                 val file = File("${getFolder()}${ContextJava.fileSeparator}${symbol}_quotes.txt")
@@ -76,8 +83,18 @@ class CacheReader {
             }.toList()
         }
 
+        fun removeCachedIndicatorSymbols(src: Set<String>, indicator: Indicator): List<String> {
+            return src.filter { symbol ->
+                File("${getFolder()}${Context.fileSeparator}${symbol}${indicator.name.lowercase()}.txt").exists()
+            }.toList()
+        }
+
         fun getFolder(): String {
-            return "${Context.outputFolder}${Context.fileSeparator}cache${Context.fileSeparator}${ContextJava.aggregationTimeframe.name.lowercase(Locale.getDefault())}"
+            return "${Context.outputFolder}${Context.fileSeparator}cache${Context.fileSeparator}${
+                ContextJava.aggregationTimeframe.name.lowercase(
+                    Locale.getDefault()
+                )
+            }"
         }
 
 
