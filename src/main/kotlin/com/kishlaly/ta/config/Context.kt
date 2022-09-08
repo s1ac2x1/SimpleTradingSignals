@@ -26,7 +26,7 @@ class Context {
         var aggregationTimeframe = Timeframe.DAY
         var source = arrayOf(SymbolsSource.SP500)
         var testOnly: List<String> = ArrayList()
-        var symbols: Set<String>? = null
+        var symbols = setOf<String>()
         var yearsToAnalyze = 5
         var lowPricesOnly = false
         var lowPriceLimit = 20
