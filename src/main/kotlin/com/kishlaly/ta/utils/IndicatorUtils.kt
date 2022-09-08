@@ -4,6 +4,7 @@ import com.kishlaly.ta.cache.IndicatorsInMemoryCache
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.AbstractModel
 import com.kishlaly.ta.model.Quote
+import com.kishlaly.ta.model.SymbolData
 import com.kishlaly.ta.model.indicators.*
 import org.ta4j.core.BarSeries
 import org.ta4j.core.BaseBarSeries
@@ -189,6 +190,32 @@ class IndicatorUtils {
                 val result = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }
                 IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result)
                 result
+            }
+        }
+
+        fun emaAscending(ema: List<EMA>, atLeast: Int, fromLast: Int): Boolean {
+            if (fromLast < 2) {
+                throw RuntimeException("EMA ascending check: required at least 2 values")
+            }
+            var ascendingCount = 0
+            for (i in ema.size - fromLast until ema.size - 1) {
+                val curr = ema[i]
+                val next = ema[i + 1]
+                if (next.value > curr.value) {
+                    ascendingCount++
+                }
+            }
+            return ascendingCount >= atLeast
+        }
+
+        fun trim(screen: SymbolData) {
+            val trimmedIndicators = mutableMapOf<Indicator, List<AbstractModel>>()
+            screen.indicators.forEach { indicator, values ->
+                if (values.isNullOrEmpty()) {
+                    trimmedIndicators.put(indicator, mutableListOf())
+                } else {
+                    trimmedIndicators[indicator] = values.subList(values.size - Quotes.resolveMinBarsCount(screen.timeframe), values.size)
+                }
             }
         }
 

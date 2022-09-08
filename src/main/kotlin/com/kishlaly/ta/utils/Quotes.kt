@@ -1,6 +1,7 @@
 package com.kishlaly.ta.utils
 
 import com.kishlaly.ta.model.Quote
+import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.model.exchangeTimezome
 import java.time.DayOfWeek
 import java.time.temporal.ChronoUnit
@@ -96,6 +97,14 @@ class Quotes {
             dayQuotes.add(dayQuote)
             hourQuotesInsideOneDay.clear()
         }
+
+        fun resolveMinBarsCount(timeframe: Timeframe): Int {
+            // less is not allowed, otherwise StopLossFixedPrice will not work
+            // If the aggregation is based on hourly quotes (which are ~550), then the daily quotes will be ~35, and there is no point in considering weekly ones
+            // If the aggregation on the basis of daily quotes (which are up to 5500), then the weekly will be up to 1110
+            return 21
+        }
+
 
     }
 
