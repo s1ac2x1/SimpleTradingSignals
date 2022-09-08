@@ -38,7 +38,7 @@ public class CacheReader {
     public static ScheduledExecutorService queueExecutor = Executors.newScheduledThreadPool(1);
     public static ExecutorService apiExecutor = Executors.newCachedThreadPool();
     public static int requestPeriod;
-    public static ConcurrentLinkedDeque<LoadRequest> requests = new ConcurrentLinkedDeque<>();
+    public static ConcurrentLinkedDeque<LoadRequestJava> requests = new ConcurrentLinkedDeque<>();
     public static List<Future> callsInProgress = new CopyOnWriteArrayList<>();
 
     public static void checkCache(TimeframeJava[][] timeframes, TaskType[] tasks) {

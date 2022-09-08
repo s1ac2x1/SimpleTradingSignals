@@ -7,15 +7,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LoadRequest {
+public class LoadRequestJava {
 
     private TimeframeJava timeframe;
     private List<String> symbols;
-    private CacheType cacheType;
+    private CacheTypeJava cacheType;
     private Map<String, String> config = new HashMap<>();
     private IndicatorJava indicator;
 
-    public LoadRequest(final CacheType cacheType, final TimeframeJava timeframe, final List<String> symbols) {
+    public LoadRequestJava(final CacheTypeJava cacheType, final TimeframeJava timeframe, final List<String> symbols) {
         this.timeframe = timeframe;
         this.symbols = symbols;
         this.cacheType = cacheType;
@@ -37,11 +37,11 @@ public class LoadRequest {
         this.symbols = symbols;
     }
 
-    public CacheType getType() {
+    public CacheTypeJava getType() {
         return this.cacheType;
     }
 
-    public void setType(final CacheType cacheType) {
+    public void setType(final CacheTypeJava cacheType) {
         this.cacheType = cacheType;
     }
 

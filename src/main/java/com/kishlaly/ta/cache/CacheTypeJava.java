@@ -1,5 +1,5 @@
 package com.kishlaly.ta.cache;
 
-public enum CacheType {
+public enum CacheTypeJava {
     QUOTE, INDICATOR;
 }

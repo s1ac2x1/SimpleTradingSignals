@@ -87,12 +87,12 @@ public class CacheBuilder {
                 return;
             }
         }
-        LoadRequest request = requests.poll();
+        LoadRequestJava request = requests.poll();
         if (request != null) {
             List<String> symbols = request.getSymbols();
             TimeframeJava timeframe = request.getTimeframe();
             ContextJava.timeframe = timeframe;
-            if (request.getType() == CacheType.QUOTE) {
+            if (request.getType() == CacheTypeJava.QUOTE) {
                 System.out.println("Loading " + timeframe.name() + " quotes...");
                 symbols.forEach(symbol -> {
                     Future<?> future = apiExecutor.submit(() -> {
@@ -104,7 +104,7 @@ public class CacheBuilder {
                     callsInProgress.add(future);
                 });
             }
-            if (request.getType() == CacheType.INDICATOR) {
+            if (request.getType() == CacheTypeJava.INDICATOR) {
                 IndicatorJava indicator = request.getIndicator();
                 System.out.println("Loading " + timeframe.name() + " " + indicator.name() + "...");
                 symbols.forEach(symbol -> {
@@ -367,11 +367,11 @@ public class CacheBuilder {
         }
         Lists.partition(symbolsToCache, (int) parallelRequests)
                 .forEach(chunk -> {
-                    Optional<LoadRequest> existingRequest = requests.stream().filter(request -> request.getType() == CacheType.QUOTE
+                    Optional<LoadRequestJava> existingRequest = requests.stream().filter(request -> request.getType() == CacheTypeJava.QUOTE
                             && request.getTimeframe() == ContextJava.timeframe
                             && request.getSymbols().containsAll(chunk)).findFirst();
                     if (!existingRequest.isPresent()) {
-                        requests.offer(new LoadRequest(CacheType.QUOTE, ContextJava.timeframe, chunk));
+                        requests.offer(new LoadRequestJava(CacheTypeJava.QUOTE, ContextJava.timeframe, chunk));
                     } else {
                         System.out.println("Already in the queue: " + chunk.size() + " " + ContextJava.timeframe.name() + " QUOTE");
                     }
@@ -387,12 +387,12 @@ public class CacheBuilder {
             }
             Lists.partition(symbolsToCache, (int) parallelRequests)
                     .forEach(chunk -> {
-                        Optional<LoadRequest> existingRequest = requests.stream().filter(request -> request.getType() == CacheType.INDICATOR
+                        Optional<LoadRequestJava> existingRequest = requests.stream().filter(request -> request.getType() == CacheTypeJava.INDICATOR
                                 && request.getTimeframe() == ContextJava.timeframe
                                 && request.getIndicator() == indicator
                                 && request.getSymbols().containsAll(chunk)).findFirst();
                         if (!existingRequest.isPresent()) {
-                            LoadRequest loadRequest = new LoadRequest(CacheType.INDICATOR, ContextJava.timeframe, chunk);
+                            LoadRequestJava loadRequest = new LoadRequestJava(CacheTypeJava.INDICATOR, ContextJava.timeframe, chunk);
                             loadRequest.setIndicator(indicator);
                             requests.offer(loadRequest);
                         } else {
