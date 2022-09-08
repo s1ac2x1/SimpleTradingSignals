@@ -25,13 +25,17 @@ class CacheReader {
 
         fun checkCache(timeframes: Array<Array<Timeframe>>, tasks: Array<TaskTypeJava>) {
             val screenNumber = AtomicInteger(0)
-            val missedData = mutableMapOf<Timeframe, Set<String>>()
-            timeframes.forEach { timeframe ->
+            val missedData = mutableMapOf<Timeframe, MutableSet<String>>()
+            timeframes.forEach { screens ->
                 // only check the availability of quotes in the cache
                 // it is assumed that only one Context.aggregationTimeframe is loaded
                 screenNumber.getAndIncrement()
                 Context.timeframe = Context.aggregationTimeframe
                 val missingQuotes = removeCachedQuotesSymbols(Context.symbols)
+                val missingQuotesCollectedByScreen1 = missedData[screens[0]]
+                missedData.putIfAbsent(screens[0], mutableSetOf())
+                missingQuotesCollectedByScreen1?.addAll(missingQuotes)
+                missedData[Context.timeframe] = missingQuotesCollectedByScreen1!!
             }
         }
 
