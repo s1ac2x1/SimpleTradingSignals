@@ -4,14 +4,9 @@ import com.kishlaly.ta.cache.IndicatorsInMemoryCache
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.AbstractModel
 import com.kishlaly.ta.model.Quote
-import com.kishlaly.ta.model.indicators.ATR
-import com.kishlaly.ta.model.indicators.EMA
-import com.kishlaly.ta.model.indicators.Keltner
-import com.kishlaly.ta.model.indicators.MACD
+import com.kishlaly.ta.model.indicators.*
 import org.ta4j.core.BaseBarSeries
-import org.ta4j.core.indicators.ATRIndicator
-import org.ta4j.core.indicators.EMAIndicator
-import org.ta4j.core.indicators.MACDIndicator
+import org.ta4j.core.indicators.*
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
 import org.ta4j.core.indicators.keltner.KeltnerChannelLowerIndicator
 import org.ta4j.core.indicators.keltner.KeltnerChannelMiddleIndicator
@@ -111,6 +106,30 @@ class IndicatorUtils {
                 IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result)
                 emptyList()
             }
+        }
+
+        fun buildStochastic(symbol: String, quotes: List<Quote>): List<Stochastic> {
+            val cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe)
+            return if (!cached.isEmpty()) {
+                cached
+            } else {
+                var collector = mutableListOf<Stochastic>()
+                val barSeries = Bars.build(quotes)
+                val stochK = StochasticOscillatorKIndicator(barSeries, 14)
+                val stochD = StochasticOscillatorDIndicator(stochK)
+                for (i in quotes.indices) {
+                    try {
+                        collector.add(Stochastic(quotes[i].timestamp, stochD.getValue(i).doubleValue(), stochK.getValue(i).doubleValue()))
+                    } catch (e: NumberFormatException) {
+                    }
+                }
+                collector = collector.filter { it.valuesPresent() }.toMutableList()
+                collector = trimToDate(collector)
+                val result = collector.sortedBy { it.timestamp }
+                IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result)
+                result
+            }
+
         }
 
         private fun <T : AbstractModel> trimToDate(src: MutableList<T>): MutableList<T> {
