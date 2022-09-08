@@ -52,6 +52,23 @@ class CacheReader {
             }
         }
 
+        fun getSymbols(): Set<String> {
+            val collector = mutableListOf<String>()
+            return if (!Context.testOnly.isEmpty()) {
+                collector.addAll(Context.testOnly)
+                collector.toSet()
+            } else {
+                Context.source.forEach { source ->
+                    var lines = File("${ContextJava.outputFolder}/${source.filename}").readLines()
+                    if (source.random) {
+                        lines = lines.shuffled().subList(0, 30)
+                    }
+                    collector.addAll(lines)
+                }
+                collector.toSet()
+            }
+        }
+
         fun removeCachedQuotesSymbols(src: Set<String>): List<String> {
             return src.filter { symbol: String ->
                 val file = File("${getFolder()}${ContextJava.fileSeparator}${symbol}_quotes.txt")
