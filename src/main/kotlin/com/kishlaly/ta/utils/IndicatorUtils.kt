@@ -5,6 +5,7 @@ import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.AbstractModel
 import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.indicators.*
+import org.ta4j.core.BarSeries
 import org.ta4j.core.BaseBarSeries
 import org.ta4j.core.indicators.*
 import org.ta4j.core.indicators.bollinger.BollingerBandsLowerIndicator
@@ -157,6 +158,39 @@ class IndicatorUtils {
             }
         }
 
+        //TODO something is wrong here...
+        open fun buildEFI(symbol: String, quotes: List<Quote>): List<ElderForceIndex> {
+            val cached = IndicatorsInMemoryCache.getEFI(symbol, Context.timeframe)
+            return if (!cached.isEmpty()) {
+                cached
+            } else {
+                var collector = mutableListOf<ElderForceIndex>()
+                val quoteSeries = Bars.build(quotes)
+                val efiSeries: BarSeries = BaseBarSeries()
+                for (i in 0 until quoteSeries.barCount - 1) {
+                    val todayQuote = quotes[i + 1]
+                    val yesterdayQuote = quotes[i]
+                    val efiValue = (todayQuote.close - yesterdayQuote.close) * todayQuote.volume
+                    efiSeries.addBar(quoteSeries.getBar(i + 1).endTime, 0.0, 0.0, 0.0, efiValue, 0.0)
+                }
+                val efiClosePriceIndicator = ClosePriceIndicator(efiSeries)
+                val efiEMA13 = EMAIndicator(efiClosePriceIndicator, 13)
+                for (i in 0 until efiSeries.barCount) {
+                    val efiSmoothed = efiEMA13.getValue(i).doubleValue()
+                    val timestamp = efiSeries.getBar(i).endTime.toEpochSecond()
+                    collector.add(ElderForceIndex(timestamp, efiSmoothed))
+                }
+//            for (int i = 0; i < quotes.size() - 1; i++) {
+//                Quote todayQuote = quotes.get(i + 1);
+//                Quote yesterdayQuote = quotes.get(i);
+//                double efiValue = (todayQuote.getClose() - yesterdayQuote.getClose()) * todayQuote.getVolume();
+//                result.add(new ElderForceIndex(todayQuote.getTimestamp(), efiValue));
+//            }
+                val result = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }
+                IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result)
+                result
+            }
+        }
 
         private fun <T : AbstractModel> trimToDate(src: MutableList<T>): MutableList<T> {
             return if (Context.trimToDate != null) {
