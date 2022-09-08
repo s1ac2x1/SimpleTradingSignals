@@ -4,14 +4,15 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.config.Context
-import com.kishlaly.ta.model.Quote
-import com.kishlaly.ta.model.Timeframe
+import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
 import com.kishlaly.ta.utils.Dates
+import com.kishlaly.ta.utils.IndicatorUtils
 import com.kishlaly.ta.utils.Quotes
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedDeque
@@ -124,7 +125,7 @@ class CacheReader {
                     }
                     quotes = quotes.filter { it.valuesPresent() }.sortedBy { it.timestamp }
                     Context.trimToDate?.let {
-                        val filterAfter = Dates.shortDateToZoned(Context.trimToDate!!)
+                        val filterAfter = Dates.shortDateToZoned(it)
                         quotes = quotes.filter { it.timestamp <= filterAfter.toEpochSecond() }
                     }
                     QuotesInMemoryCache.put(symbol, Context.timeframe, quotes)
@@ -135,6 +136,29 @@ class CacheReader {
             }
         }
 
+        fun calculateIndicatorFromCachedQuotes(symbol: String, indicator: Indicator): List<out AbstractModel> {
+            val quotes = loadQuotesFromDiskCache(symbol)
+            return when (indicator) {
+                Indicator.MACD -> IndicatorUtils.buildMACDHistogram(symbol, quotes)
+                Indicator.EMA13 -> IndicatorUtils.buildEMA(symbol, quotes, 13)
+                Indicator.EMA26 -> IndicatorUtils.buildEMA(symbol, quotes, 26)
+                Indicator.STOCH -> IndicatorUtils.buildStochastic(symbol, quotes)
+                Indicator.KELTNER -> IndicatorUtils.buildKeltnerChannels(symbol, quotes)
+                Indicator.BOLLINGER -> IndicatorUtils.buildBollingerBands(symbol, quotes)
+                Indicator.EFI -> IndicatorUtils.buildEFI(symbol, quotes)
+            }
+        }
+
+        fun getSymbolData(timeframeIndicators: TimeframeIndicators, symbol: String): SymbolData {
+            Context.timeframe = timeframeIndicators.timeframe
+            val screen = SymbolData(symbol, timeframeIndicators.timeframe, loadQuotesFromDiskCache(symbol))
+            timeframeIndicators.indicators.forEach { indicator ->
+                val data = calculateIndicatorFromCachedQuotes(symbol, indicator)
+                screen.indicators.put(indicator, data)
+            }
+            return screen
+        }
+
         fun getFolder(): String {
             return "${Context.outputFolder}${Context.fileSeparator}cache${Context.fileSeparator}${
                 Context.aggregationTimeframe.name.lowercase(
@@ -143,6 +167,16 @@ class CacheReader {
             }"
         }
 
+        fun clearCacheFolder(name: String) {
+            try {
+                Files.walk(Paths.get(name))
+                    .sorted(Comparator.reverseOrder())
+                    .map { obj: Path -> obj.toFile() }
+                    .forEach { obj: File -> obj.delete() }
+            } catch (e: IOException) {
+                println(e.message)
+            }
+        }
 
     }
 
