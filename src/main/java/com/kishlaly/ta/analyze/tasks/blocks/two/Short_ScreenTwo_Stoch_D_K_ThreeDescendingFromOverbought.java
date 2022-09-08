@@ -15,7 +15,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_OVERBOUGH
 /**
  * overbought check
  */
-public class Short_ScreenTwo_Stoch_D_K_ThreeDescendingFromOverbought implements ScreenTwoBlock {
+public class Short_ScreenTwo_Stoch_D_K_ThreeDescendingFromOverbought implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);

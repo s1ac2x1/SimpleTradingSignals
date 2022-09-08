@@ -10,7 +10,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * the last quote is higher than the penultimate one
  */
-public class Long_ScreenOne_LastBarHigher implements ScreenOneBlock {
+public class Long_ScreenOne_LastBarHigher implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         boolean lastBarHigher = screen.getLastQuote().getLow() > screen.getPreLastQuote().getLow()

@@ -8,8 +8,8 @@ import com.kishlaly.ta.utils.QuotesJava;
 
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
-import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
+import static com.kishlaly.ta.analyze.TaskTypeJava.THREE_DISPLAYS_BUY;
+import static com.kishlaly.ta.cache.CacheReaderJava.getSymbolData;
 
 public class Test {
 

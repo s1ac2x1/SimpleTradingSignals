@@ -2,7 +2,7 @@ package com.kishlaly.ta.cache;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.EMAJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -32,7 +32,7 @@ import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
  * @author Vladimir Kishlaly
  * @since 18.11.2021
  */
-public class CacheReader {
+public class CacheReaderJava {
 
     public static Gson gson = new Gson();
     public static ScheduledExecutorService queueExecutor = Executors.newScheduledThreadPool(1);
@@ -41,7 +41,7 @@ public class CacheReader {
     public static ConcurrentLinkedDeque<LoadRequestJava> requests = new ConcurrentLinkedDeque<>();
     public static List<Future> callsInProgress = new CopyOnWriteArrayList<>();
 
-    public static void checkCache(TimeframeJava[][] timeframes, TaskType[] tasks) {
+    public static void checkCache(TimeframeJava[][] timeframes, TaskTypeJava[] tasks) {
         AtomicInteger screenNumber = new AtomicInteger(0);
         Map<TimeframeJava, Set<String>> missedData = new HashMap<>();
         Arrays.stream(timeframes).forEach(screens -> {

@@ -17,7 +17,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.QUOTE_2_NOT_BELOW_BOLLIN
 /**
  * the second quote from the end below the bottom Bollinger band
  */
-public class Long_ScreenTwo_Bollinger_Bottom_PreLastBelow implements ScreenTwoBlock {
+public class Long_ScreenTwo_Bollinger_Bottom_PreLastBelow implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<QuoteJava> quotes = screen.quotes;

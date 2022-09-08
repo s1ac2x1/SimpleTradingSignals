@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze;
 
-import com.kishlaly.ta.analyze.tasks.AbstractTask;
+import com.kishlaly.ta.analyze.tasks.AbstractTaskJava;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.ScreensJava;
@@ -18,7 +18,7 @@ import static com.kishlaly.ta.model.TimeframeJava.DAY;
 import static com.kishlaly.ta.model.TimeframeJava.WEEK;
 import static com.kishlaly.ta.model.indicators.IndicatorJava.*;
 
-public enum TaskType {
+public enum TaskTypeJava {
     MACD_BULLISH_DIVERGENCE(
             new HashMap<Integer, TimeframeJava>() {{
                 put(1, WEEK);
@@ -28,7 +28,7 @@ public enum TaskType {
                 put(1, new IndicatorJava[]{EMA26, MACD});
                 put(2, new IndicatorJava[]{MACD, KELTNER});
             }},
-            AbstractTask::check
+            AbstractTaskJava::check
     ),
     THREE_DISPLAYS_BUY(
             new HashMap<Integer, TimeframeJava>() {{
@@ -39,7 +39,7 @@ public enum TaskType {
                 put(1, new IndicatorJava[]{EMA26, MACD});
                 put(2, new IndicatorJava[]{EMA13, MACD, STOCH, KELTNER, BOLLINGER, EFI});
             }},
-            AbstractTask::check
+            AbstractTaskJava::check
     ),
     THREE_DISPLAYS_SELL(
             new HashMap<Integer, TimeframeJava>() {{
@@ -50,7 +50,7 @@ public enum TaskType {
                 put(1, new IndicatorJava[]{EMA26, MACD});
                 put(2, new IndicatorJava[]{EMA13, MACD, STOCH, KELTNER, BOLLINGER, EFI});
             }},
-            AbstractTask::check
+            AbstractTaskJava::check
     ),
     FIRST_TRUST_MODEL(
             new HashMap<Integer, TimeframeJava>() {{
@@ -61,12 +61,12 @@ public enum TaskType {
                 put(1, new IndicatorJava[]{EMA26, MACD});
                 put(2, new IndicatorJava[]{EMA13, MACD, STOCH, KELTNER});
             }},
-            AbstractTask::check
+            AbstractTaskJava::check
     );
 
-    TaskType(final Map<Integer, TimeframeJava> timeframes,
-             final Map<Integer, IndicatorJava[]> indicators,
-             BiFunction<ScreensJava, List<TaskBlockJava>, BlockResultJava> function) {
+    TaskTypeJava(final Map<Integer, TimeframeJava> timeframes,
+                 final Map<Integer, IndicatorJava[]> indicators,
+                 BiFunction<ScreensJava, List<TaskBlockJava>, BlockResultJava> function) {
         this.timeframes = timeframes;
         this.indicators = indicators;
         this.function = function;

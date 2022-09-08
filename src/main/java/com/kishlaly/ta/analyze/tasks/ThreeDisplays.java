@@ -10,7 +10,7 @@ package com.kishlaly.ta.analyze.tasks;
  * EMA13 (close) on the second screen
  * STOCH (14 1 3 close) on the second screen
  */
-public class ThreeDisplays extends AbstractTask {
+public class ThreeDisplays extends AbstractTaskJava {
 
     public static class Config {
 

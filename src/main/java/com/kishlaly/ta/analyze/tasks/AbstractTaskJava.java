@@ -1,9 +1,9 @@
 package com.kishlaly.ta.analyze.tasks;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
-import com.kishlaly.ta.analyze.tasks.blocks.commons.CommonBlock;
-import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock;
-import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock;
+import com.kishlaly.ta.analyze.tasks.blocks.commons.CommonBlockJava;
+import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlockJava;
+import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlockJava;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.ScreensJava;
 import com.kishlaly.ta.model.SymbolDataJava;
@@ -11,7 +11,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AbstractTask {
+public class AbstractTaskJava {
 
     public static BlockResultJava check(ScreensJava screens, List<TaskBlockJava> blocks) {
 
@@ -20,7 +20,7 @@ public class AbstractTask {
 
         List<TaskBlockJava> commonBlocks = blocks
                 .stream()
-                .filter(block -> block instanceof CommonBlock)
+                .filter(block -> block instanceof CommonBlockJava)
                 .collect(Collectors.toList());
 
         boolean commonBlocksSucceded = true;
@@ -46,7 +46,7 @@ public class AbstractTask {
 
         List<TaskBlockJava> screenOneBlocks = blocks
                 .stream()
-                .filter(block -> block instanceof ScreenOneBlock)
+                .filter(block -> block instanceof ScreenOneBlockJava)
                 .collect(Collectors.toList());
 
         boolean screenOneAllBlocksValid = true;
@@ -67,7 +67,7 @@ public class AbstractTask {
 
         List<TaskBlockJava> screenTwoBlocks = blocks
                 .stream()
-                .filter(block -> block instanceof ScreenTwoBlock)
+                .filter(block -> block instanceof ScreenTwoBlockJava)
                 .collect(Collectors.toList());
         BlockResultJava screenTwoResult = null;
         for (int i = 0; i < screenTwoBlocks.size(); i++) {

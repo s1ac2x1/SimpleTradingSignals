@@ -14,7 +14,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_NOT_DESCENDING_SCR
 /**
  * stochastic should decrease from the overbought zone
  */
-public class Short_ScreenTwo_Stoch_D_ThreeDescending implements ScreenTwoBlock {
+public class Short_ScreenTwo_Stoch_D_ThreeDescending implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);

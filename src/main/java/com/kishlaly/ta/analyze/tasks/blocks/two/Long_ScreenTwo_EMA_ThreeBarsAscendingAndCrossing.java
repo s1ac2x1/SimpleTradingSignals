@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 /**
  * price bars should cross EMA13 and should go up
  */
-public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenTwoBlock {
+public class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         QuoteJava quote3 = CollectionUtilsJava.getFromEnd(screen.quotes, 3);

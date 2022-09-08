@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.testing;
 
-import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtils;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.cache.CacheReader.getSymbolData;
+import static com.kishlaly.ta.cache.CacheReaderJava.getSymbolData;
 import static com.kishlaly.ta.analyze.testing.HistoricalTesting.PositionTestResult;
 import static com.kishlaly.ta.model.QuoteJava.exchangeTimezome;
 import static com.kishlaly.ta.utils.ContextJava.*;
@@ -40,7 +40,7 @@ public class TaskTester {
 
     private static StringBuilder testLog = new StringBuilder();
 
-    public static List<HistoricalTesting> test(TimeframeJava[][] timeframes, TaskType task, BlocksGroupJava blocksGroup) {
+    public static List<HistoricalTesting> test(TimeframeJava[][] timeframes, TaskTypeJava task, BlocksGroupJava blocksGroup) {
         ContextJava.testMode = true;
         StringBuilder log = new StringBuilder();
         List<HistoricalTesting> allTests = new ArrayList<>();
@@ -148,7 +148,7 @@ public class TaskTester {
         screen2.indicators.clear();
     }
 
-    private static void rewind(TaskType task, BlocksGroupJava blocksGroup, SymbolDataJava screen1, SymbolDataJava screen2, List<BlockResultJava> blockResults) {
+    private static void rewind(TaskTypeJava task, BlocksGroupJava blocksGroup, SymbolDataJava screen1, SymbolDataJava screen2, List<BlockResultJava> blockResults) {
         QuoteJava lastScreen1Quote = screen1.quotes.get(screen1.quotes.size() - 1);
         QuoteJava lastScreen2Quote = screen2.quotes.get(screen2.quotes.size() - 1);
         blockResults.add(task.getFunction().apply(new ScreensJava(screen1, screen2), blocksGroup.blocks()));
@@ -274,14 +274,14 @@ public class TaskTester {
         return output;
     }
 
-    public static void testOneStrategy(TimeframeJava[][] timeframes, TaskType task, BlocksGroupJava blocksGroup, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public static void testOneStrategy(TimeframeJava[][] timeframes, TaskTypeJava task, BlocksGroupJava blocksGroup, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         ContextJava.stopLossStrategy = stopLossStrategy;
         ContextJava.takeProfitStrategy = takeProfitStrategy;
         System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
         test(timeframes, task, blocksGroup);
     }
 
-    public static void testAllStrategiesOnSpecificDate(String datePart, TaskType task, TimeframeJava[][] timeframes) {
+    public static void testAllStrategiesOnSpecificDate(String datePart, TaskTypeJava task, TimeframeJava[][] timeframes) {
         if (ContextJava.symbols.size() > 1) {
             throw new RuntimeException("Only one symbol allowed here");
         }
@@ -298,7 +298,7 @@ public class TaskTester {
         });
     }
 
-    public static void testMass(TimeframeJava[][] timeframes, TaskType task, BlocksGroupJava blocksGroup) {
+    public static void testMass(TimeframeJava[][] timeframes, TaskTypeJava task, BlocksGroupJava blocksGroup) {
         ContextJava.massTesting = true;
 
         StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);

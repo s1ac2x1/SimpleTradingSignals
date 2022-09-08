@@ -13,7 +13,7 @@ import java.util.List;
 import static com.kishlaly.ta.model.BlockResultCodeJava.LAST_HISTOGRAM_ABOVE_ZERO_SCREEN_2;
 import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 
-public class Long_ScreenTwo_MACD_LastShouldBeNegative implements ScreenTwoBlock {
+public class Long_ScreenTwo_MACD_LastShouldBeNegative implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<MACDJava> screenTwoMacdValues = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);

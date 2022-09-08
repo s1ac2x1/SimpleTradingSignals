@@ -1,10 +1,10 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
-import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.TaskTypeJava;
 
 public class BlockGroupsUtils {
 
-    public static BlocksGroupJava[] getAllGroups(TaskType taskType) {
+    public static BlocksGroupJava[] getAllGroups(TaskTypeJava taskType) {
         switch (taskType) {
             case THREE_DISPLAYS_BUY:
                 return new BlocksGroupJava[]{

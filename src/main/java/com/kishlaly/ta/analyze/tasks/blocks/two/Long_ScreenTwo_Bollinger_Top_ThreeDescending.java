@@ -15,7 +15,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * the last three values of the upper bar are decreasing
  */
-public class Long_ScreenTwo_Bollinger_Top_ThreeDescending implements ScreenTwoBlock {
+public class Long_ScreenTwo_Bollinger_Top_ThreeDescending implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(IndicatorJava.BOLLINGER);

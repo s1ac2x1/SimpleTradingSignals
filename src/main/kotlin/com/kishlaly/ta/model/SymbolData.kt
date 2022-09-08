@@ -7,4 +7,10 @@ data class SymbolData(
         val timeframe: Timeframe,
         val quotes: List<Quote>,
         val indicators: Map<Indicator, List<out AbstractModel>>) {
+
+
+    val lastQuote: Quote
+        get() {
+            return quotes.last()
+        }
 }

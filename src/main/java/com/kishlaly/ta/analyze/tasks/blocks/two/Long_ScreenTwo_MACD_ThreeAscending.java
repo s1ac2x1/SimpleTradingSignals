@@ -15,7 +15,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * the histogram rises on the last three values
  */
-public class Long_ScreenTwo_MACD_ThreeAscending implements ScreenTwoBlock {
+public class Long_ScreenTwo_MACD_ThreeAscending implements ScreenTwoBlockJava {
 
     @Override
     public BlockResultJava check(SymbolDataJava screen) {

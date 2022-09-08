@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.testing;
 
-import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class HistoricalTesting {
 
-    private TaskType taskType;
+    private TaskTypeJava taskType;
     private BlocksGroupJava blocksGroup;
 
     // indicator chart
@@ -33,7 +33,7 @@ public class HistoricalTesting {
     private StopLossStrategy stopLossStrategy;
     private TakeProfitStrategy takeProfitStrategy;
 
-    public HistoricalTesting(TaskType taskType, BlocksGroupJava blocksGroup, final SymbolDataJava data, final List<BlockResultJava> blockResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public HistoricalTesting(TaskTypeJava taskType, BlocksGroupJava blocksGroup, final SymbolDataJava data, final List<BlockResultJava> blockResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
         this.taskType = taskType;
         this.blocksGroup = blocksGroup;
         this.data = data;
@@ -42,7 +42,7 @@ public class HistoricalTesting {
         this.takeProfitStrategy = takeProfitStrategy;
     }
 
-    public TaskType getTaskType() {
+    public TaskTypeJava getTaskType() {
         return this.taskType;
     }
 

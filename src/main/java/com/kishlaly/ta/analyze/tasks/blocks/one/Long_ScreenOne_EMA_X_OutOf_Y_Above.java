@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * of the latest {TOTAL} quotes at least {ABOVE} is completely above EMA26
  */
-public class Long_ScreenOne_EMA_X_OutOf_Y_Above implements ScreenOneBlock {
+public class Long_ScreenOne_EMA_X_OutOf_Y_Above implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         if (ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK < 0) {

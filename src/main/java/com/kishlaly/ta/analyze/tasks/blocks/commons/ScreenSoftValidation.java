@@ -8,7 +8,7 @@ import com.kishlaly.ta.utils.LogJava;
 import static com.kishlaly.ta.model.BlockResultCodeJava.NO_DATA_QUOTES;
 import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 
-public class ScreenSoftValidation implements CommonBlock {
+public class ScreenSoftValidation implements CommonBlockJava {
 
     @Override
     public BlockResultJava check(SymbolDataJava screen) {

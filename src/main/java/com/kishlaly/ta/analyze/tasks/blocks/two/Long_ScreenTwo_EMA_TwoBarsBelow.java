@@ -17,7 +17,7 @@ import static com.kishlaly.ta.utils.QuotesJava.isQuoteBelowEMA;
 /**
  * the last two bars are completely below EMA13
  */
-public class Long_ScreenTwo_EMA_TwoBarsBelow implements ScreenTwoBlock {
+public class Long_ScreenTwo_EMA_TwoBarsBelow implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);

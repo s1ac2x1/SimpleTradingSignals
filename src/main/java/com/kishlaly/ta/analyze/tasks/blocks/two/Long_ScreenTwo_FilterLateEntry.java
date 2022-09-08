@@ -14,7 +14,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.QUOTE_CLOSED_ABOVE_KELTN
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.FILTER_BY_KELTNER;
 import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED;
 
-public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlock {
+public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<KeltnerJava> screen_2_Keltner = (List<KeltnerJava>) screen.indicators.get(IndicatorJava.KELTNER);

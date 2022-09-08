@@ -14,7 +14,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_K_NOT_ASCENDING_SC
 /**
  * the slow line at the right edge is above
  */
-public class Long_ScreenTwo_Stoch_D_LastAscending implements ScreenTwoBlock {
+public class Long_ScreenTwo_Stoch_D_LastAscending implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);

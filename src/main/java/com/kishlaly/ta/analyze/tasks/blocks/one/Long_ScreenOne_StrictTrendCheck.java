@@ -13,7 +13,7 @@ import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
 /**
  * Strict trend check using quotes, EMA26 and MACD
  */
-public class Long_ScreenOne_StrictTrendCheck implements ScreenOneBlock {
+public class Long_ScreenOne_StrictTrendCheck implements ScreenOneBlockJava {
 
     @Override
     public BlockResultJava check(SymbolDataJava screen) {

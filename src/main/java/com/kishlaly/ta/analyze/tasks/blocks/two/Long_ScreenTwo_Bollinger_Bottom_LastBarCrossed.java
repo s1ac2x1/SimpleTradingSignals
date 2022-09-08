@@ -15,7 +15,7 @@ import static com.kishlaly.ta.utils.QuotesJava.isQuoteCrossedBollingerBottom;
 /**
  * the last bar crossed the lower Bollinger band
  */
-public class Long_ScreenTwo_Bollinger_Bottom_LastBarCrossed implements ScreenTwoBlock {
+public class Long_ScreenTwo_Bollinger_Bottom_LastBarCrossed implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(IndicatorJava.BOLLINGER);

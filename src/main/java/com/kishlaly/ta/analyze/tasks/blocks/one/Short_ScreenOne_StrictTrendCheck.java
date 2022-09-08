@@ -13,7 +13,7 @@ import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
 /**
  * Strict trend check using quotes, EMA26 and MACD
  */
-public class Short_ScreenOne_StrictTrendCheck implements ScreenOneBlock {
+public class Short_ScreenOne_StrictTrendCheck implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         boolean downtrendCheckOnMultipleBars = TrendFunctions.downtrendCheckOnMultipleBars(screen, resolveMinBarsCount(screen.timeframe), NUMBER_OF_EMA26_VALUES_TO_CHECK);

@@ -16,7 +16,7 @@ import java.util.List;
 import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 import static com.kishlaly.ta.utils.DatesJava.beautifyQuoteDate;
 
-public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock {
+public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         int screenTwoMinBarCount = screen.quotes.size();

@@ -13,7 +13,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 /**
  * histogram should be above zero and start to decrease: check on the last three values
  */
-public class Short_ScreenTwo_MACD_ThreeAboveZeroAndDescending implements ScreenTwoBlock {
+public class Short_ScreenTwo_MACD_ThreeAboveZeroAndDescending implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<MACDJava> screen_2_MACD = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);

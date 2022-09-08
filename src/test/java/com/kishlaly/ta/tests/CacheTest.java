@@ -1,6 +1,6 @@
 package com.kishlaly.ta.tests;
 
-import com.kishlaly.ta.cache.CacheReader;
+import com.kishlaly.ta.cache.CacheReaderJava;
 import com.kishlaly.ta.model.QuoteJava;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class CacheTest {
 
     @Test
     public void loadQuotesFromDiskCacheTest() throws IOException {
-        List<QuoteJava> quotes = CacheReader.loadQuotesFromDiskCache("AAPL");
+        List<QuoteJava> quotes = CacheReaderJava.loadQuotesFromDiskCache("AAPL");
         assertThat(quotes)
                 .isNotNull()
                 .hasSize(AAPL_DAILY_QUOTES_SIZE);
@@ -22,7 +22,7 @@ public class CacheTest {
 
     @Test
     public void quoteStructureTest() throws IOException {
-        List<QuoteJava> quotes = CacheReader.loadQuotesFromDiskCache("AAPL");
+        List<QuoteJava> quotes = CacheReaderJava.loadQuotesFromDiskCache("AAPL");
         TestUtils.checkPropertiesAndValues(
                 quotes.get(quotes.size() - 1),
                 new String[]{"open", "close", "high", "low", "volume", "timestamp"},

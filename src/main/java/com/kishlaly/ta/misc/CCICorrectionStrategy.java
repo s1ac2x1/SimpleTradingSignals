@@ -13,7 +13,7 @@ import org.ta4j.core.rules.UnderIndicatorRule;
 
 import java.util.List;
 
-import static com.kishlaly.ta.cache.CacheReader.loadQuotesFromDiskCache;
+import static com.kishlaly.ta.cache.CacheReaderJava.loadQuotesFromDiskCache;
 
 public class CCICorrectionStrategy {
 

@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.HistoricalTesting;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
-import com.kishlaly.ta.cache.CacheReader;
+import com.kishlaly.ta.cache.CacheReaderJava;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCacheJava;
 import com.kishlaly.ta.cache.QuotesInMemoryCacheJava;
 import com.kishlaly.ta.model.*;
@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
 import static com.kishlaly.ta.cache.CacheBuilder.getSLStrategies;
 import static com.kishlaly.ta.cache.CacheBuilder.getTPStrategies;
-import static com.kishlaly.ta.cache.CacheReader.*;
+import static com.kishlaly.ta.cache.CacheReaderJava.*;
 import static com.kishlaly.ta.model.indicators.IndicatorJava.MACD;
 import static com.kishlaly.ta.utils.ContextJava.TRIM_DATA;
 import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
@@ -39,7 +39,7 @@ public class TaskRunner {
 
     public static List<Signal> signals = new ArrayList<>();
 
-    public static void run(TimeframeJava[][] timeframes, TaskType task, boolean findOptimal, BlocksGroupJava... blocksGroups) {
+    public static void run(TimeframeJava[][] timeframes, TaskTypeJava task, boolean findOptimal, BlocksGroupJava... blocksGroups) {
         Arrays.stream(timeframes).forEach(screens -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
@@ -79,7 +79,7 @@ public class TaskRunner {
         Arrays.stream(lines).forEach(line -> {
             String[] split = line.split("=");
             String symbol = split[0];
-            TaskType task = TaskType.valueOf(split[1].toUpperCase());
+            TaskTypeJava task = TaskTypeJava.valueOf(split[1].toUpperCase());
             ContextJava.symbols = new HashSet<String>() {{
                 add(symbol);
             }};
@@ -131,7 +131,7 @@ public class TaskRunner {
         }
     }
 
-    private static void twoTimeframeFunction(TaskType task, BlocksGroupJava... blocksGroups) {
+    private static void twoTimeframeFunction(TaskTypeJava task, BlocksGroupJava... blocksGroups) {
         ContextJava.timeframe = task.getTimeframeIndicators(1).timeframe;
         AtomicInteger processingSymbol = new AtomicInteger(1);
         int totalSymbols = ContextJava.symbols.size();
@@ -193,7 +193,7 @@ public class TaskRunner {
     }
 
     private static void singleTimeframeFunction(Function<SymbolDataJava, Boolean> function, IndicatorJava... indicators) {
-        try (Stream<Path> paths = Files.walk(Paths.get(CacheReader.getFolder()))) {
+        try (Stream<Path> paths = Files.walk(Paths.get(CacheReaderJava.getFolder()))) {
             paths
                     .filter(Files::isRegularFile)
                     .filter(file -> file.getFileName().toString().contains("quotes"))
@@ -230,7 +230,7 @@ public class TaskRunner {
         }
     }
 
-    private static void saveLog(TaskType task) {
+    private static void saveLog(TaskTypeJava task) {
         File d = new File(ContextJava.outputFolder + "/debug");
         if (!d.exists()) {
             d.mkdir();
@@ -256,7 +256,7 @@ public class TaskRunner {
         public String symbol;
         public TimeframeJava timeframe1;
         public TimeframeJava timeframe2;
-        public TaskType task;
+        public TaskTypeJava task;
     }
 
 }

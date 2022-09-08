@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 /**
  * price bars should cross EMA13 and should decrease
  */
-public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements ScreenTwoBlock {
+public class Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         // make sure first that the last three columns are decreasing

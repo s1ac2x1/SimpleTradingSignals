@@ -16,7 +16,7 @@ public class TaskTypeDefaults {
     private List<TaskBlockJava> customBlocks = new ArrayList<>();
 
     // load blocks from the list prepared by findBestStrategyForSymbols, if any
-    public static List<TaskBlockJava> get(TaskType taskType) {
+    public static List<TaskBlockJava> get(TaskTypeJava taskType) {
         switch (taskType) {
             case THREE_DISPLAYS_BUY:
                 return new ThreeDisplays_Buy_1().blocks();

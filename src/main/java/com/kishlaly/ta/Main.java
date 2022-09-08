@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.RunUtils;
 
-import static com.kishlaly.ta.cache.CacheReader.getSymbols;
+import static com.kishlaly.ta.cache.CacheReaderJava.getSymbols;
 import static com.kishlaly.ta.utils.RunUtils.singleSymbol;
 
 /**

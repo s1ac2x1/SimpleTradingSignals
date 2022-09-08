@@ -1,7 +1,7 @@
 package com.kishlaly.ta.cache;
 
 import com.google.common.collect.Lists;
-import com.kishlaly.ta.analyze.TaskType;
+import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.sl.*;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
-import static com.kishlaly.ta.cache.CacheReader.*;
+import static com.kishlaly.ta.cache.CacheReaderJava.*;
 import static com.kishlaly.ta.utils.ContextJava.*;
 import static com.kishlaly.ta.utils.FileUtilsJava.writeToFile;
 
@@ -124,7 +124,7 @@ public class CacheBuilder {
     // in this file lines like symbol=TaskType
     // it is assumed that each symbol corresponds to a TaskType, which showed the best result on historical data
     // When testing signals we used the base pair StopLossFixedPrice(0.27) and TakeProfitFixedKeltnerTop(100)
-    public static void findBestStrategyForSymbols(TaskType task) {
+    public static void findBestStrategyForSymbols(TaskTypeJava task) {
         if (source.length > 1) {
             throw new RuntimeException("Only one symbols source please");
         }
@@ -138,7 +138,7 @@ public class CacheBuilder {
         // TODO Here we need to test a Cartesian set of blocks
         //result.addAll(test(timeframes, task, BlocksGroup));
 
-        Map<String, TaskType> winners = new HashMap<>();
+        Map<String, TaskTypeJava> winners = new HashMap<>();
         result.stream().collect(Collectors.groupingBy(HistoricalTesting::getSymbol))
                 .entrySet().stream().forEach(bySymbol -> {
                     String symbol = bySymbol.getKey();
@@ -208,7 +208,7 @@ public class CacheBuilder {
     }
 
     public static void buildTasksAndStrategiesSummary(TimeframeJava[][] timeframes,
-                                                      TaskType task,
+                                                      TaskTypeJava task,
                                                       List<BlocksGroupJava> blocksGroups,
                                                       StopLossStrategy stopLossStrategy,
                                                       TakeProfitStrategy takeProfitStrategy) {

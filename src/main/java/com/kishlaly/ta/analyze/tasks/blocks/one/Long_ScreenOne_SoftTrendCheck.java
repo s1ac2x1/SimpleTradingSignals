@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.*;
  * the last EMA26 is above
  * the last quote is green
  */
-public class Long_ScreenOne_SoftTrendCheck implements ScreenOneBlock {
+public class Long_ScreenOne_SoftTrendCheck implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<EMAJava> screen_1_EMA26 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA26);
