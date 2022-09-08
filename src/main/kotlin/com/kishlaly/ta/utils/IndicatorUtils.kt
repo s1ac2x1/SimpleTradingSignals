@@ -4,10 +4,12 @@ import com.kishlaly.ta.cache.IndicatorsInMemoryCache
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.AbstractModel
 import com.kishlaly.ta.model.Quote
+import com.kishlaly.ta.model.indicators.ATR
 import com.kishlaly.ta.model.indicators.EMA
 import com.kishlaly.ta.model.indicators.Keltner
 import com.kishlaly.ta.model.indicators.MACD
 import org.ta4j.core.BaseBarSeries
+import org.ta4j.core.indicators.ATRIndicator
 import org.ta4j.core.indicators.EMAIndicator
 import org.ta4j.core.indicators.MACDIndicator
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
@@ -92,6 +94,24 @@ class IndicatorUtils {
             }
         }
 
+        fun buildATR(symbol: String, quotes: List<Quote>, barCount: Int): List<ATR> {
+            val cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe, barCount)
+            return if (!cached.isEmpty()) {
+                cached
+            } else {
+                var collector = mutableListOf<ATR>()
+                val barSeries = Bars.build(quotes)
+                val atrIndicator = ATRIndicator(barSeries, barCount)
+                for (i in quotes.indices) {
+                    collector.add(ATR(quotes[i].timestamp, atrIndicator.getValue(i).doubleValue()))
+                }
+                collector = collector.filter { it.valuesPresent() }.toMutableList()
+                collector = trimToDate(collector)
+                val result = collector.sortedBy { it.timestamp }
+                IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result)
+                emptyList()
+            }
+        }
 
         private fun <T : AbstractModel> trimToDate(src: MutableList<T>): MutableList<T> {
             return if (Context.trimToDate != null) {
