@@ -6,6 +6,9 @@ import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.utils.ContextJava
 import java.io.File
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedDeque
 import java.util.concurrent.CopyOnWriteArrayList
@@ -36,6 +39,16 @@ class CacheReader {
                 missedData.putIfAbsent(screens[0], mutableSetOf())
                 missingQuotesCollectedByScreen1?.addAll(missingQuotes)
                 missedData[Context.timeframe] = missingQuotesCollectedByScreen1!!
+            }
+            missedData.forEach { tf, quotes ->
+                Context.timeframe = tf
+                try {
+                    Files.write(Paths.get("${getFolder()}${ContextJava.fileSeparator}missed.txt"),
+                            quotes.joinToString { System.lineSeparator() }.toByteArray())
+                    println("Logged ${quotes.size} missed ${tf.name} quotes")
+                } catch (e: IOException) {
+                    println("Couldn't log missed quotes")
+                }
             }
         }
 
