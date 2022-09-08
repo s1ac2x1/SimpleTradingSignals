@@ -5,11 +5,15 @@ import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.AbstractModel
 import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.indicators.EMA
+import com.kishlaly.ta.model.indicators.Keltner
 import com.kishlaly.ta.model.indicators.MACD
 import org.ta4j.core.BaseBarSeries
 import org.ta4j.core.indicators.EMAIndicator
 import org.ta4j.core.indicators.MACDIndicator
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
+import org.ta4j.core.indicators.keltner.KeltnerChannelLowerIndicator
+import org.ta4j.core.indicators.keltner.KeltnerChannelMiddleIndicator
+import org.ta4j.core.indicators.keltner.KeltnerChannelUpperIndicator
 
 class IndicatorUtils {
 
@@ -64,6 +68,30 @@ class IndicatorUtils {
                 result
             }
         }
+
+        fun buildKeltnerChannels(symbol: String, quotes: List<Quote>): List<Keltner> {
+            val cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe)
+            return if (!cached.isEmpty()) {
+                cached
+            } else {
+                val barSeries = Bars.build(quotes)
+                val middle = KeltnerChannelMiddleIndicator(barSeries, 20)
+                val low = KeltnerChannelLowerIndicator(middle, 2.0, 10)
+                val top = KeltnerChannelUpperIndicator(middle, 2.0, 10)
+
+                var collector = mutableListOf<Keltner>()
+                for (i in quotes.indices) {
+                    collector.add(Keltner(quotes[i].timestamp, low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()))
+                }
+                collector = collector.filter { it.valuesPresent() }.toMutableList()
+                collector = trimToDate(collector)
+
+                val result = collector.sortedBy { it.timestamp }
+                IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe, result)
+                result
+            }
+        }
+
 
         private fun <T : AbstractModel> trimToDate(src: MutableList<T>): MutableList<T> {
             return if (Context.trimToDate != null) {
