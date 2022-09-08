@@ -7,10 +7,14 @@ import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.indicators.*
 import org.ta4j.core.BaseBarSeries
 import org.ta4j.core.indicators.*
+import org.ta4j.core.indicators.bollinger.BollingerBandsLowerIndicator
+import org.ta4j.core.indicators.bollinger.BollingerBandsMiddleIndicator
+import org.ta4j.core.indicators.bollinger.BollingerBandsUpperIndicator
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator
 import org.ta4j.core.indicators.keltner.KeltnerChannelLowerIndicator
 import org.ta4j.core.indicators.keltner.KeltnerChannelMiddleIndicator
 import org.ta4j.core.indicators.keltner.KeltnerChannelUpperIndicator
+import org.ta4j.core.indicators.statistics.StandardDeviationIndicator
 
 class IndicatorUtils {
 
@@ -29,8 +33,8 @@ class IndicatorUtils {
                     collector.add(EMA(quotes[i].timestamp, ema.getValue(i).doubleValue()))
                 }
 
-                collector = collector.filter { it.valuesPresent() }.toMutableList()
-                var result = trimToDate<EMA>(collector).sortedBy { it.timestamp }
+                collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
+                var result = trimToDate<EMA>(collector)
                 IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe, period, result)
                 result
             }
@@ -59,8 +63,8 @@ class IndicatorUtils {
                     val histogram = macd.getValue(i).minus(macdSignal.getValue(i)).doubleValue()
                     collector.add(MACD(quotes[i].timestamp, 0.0, 0.0, histogram))
                 }
-                collector = collector.filter { it.valuesPresent() }.toMutableList()
-                val result = trimToDate(collector).sortedBy { it.timestamp }
+                collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
+                val result = trimToDate(collector)
                 IndicatorsInMemoryCache.putMACD(symbol, Context.timeframe, result)
                 result
             }
@@ -80,10 +84,8 @@ class IndicatorUtils {
                 for (i in quotes.indices) {
                     collector.add(Keltner(quotes[i].timestamp, low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()))
                 }
-                collector = collector.filter { it.valuesPresent() }.toMutableList()
-                collector = trimToDate(collector)
-
-                val result = collector.sortedBy { it.timestamp }
+                collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
+                val result = trimToDate(collector)
                 IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe, result)
                 result
             }
@@ -100,9 +102,8 @@ class IndicatorUtils {
                 for (i in quotes.indices) {
                     collector.add(ATR(quotes[i].timestamp, atrIndicator.getValue(i).doubleValue()))
                 }
-                collector = collector.filter { it.valuesPresent() }.toMutableList()
-                collector = trimToDate(collector)
-                val result = collector.sortedBy { it.timestamp }
+                collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
+                val result = trimToDate(collector)
                 IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result)
                 emptyList()
             }
@@ -123,19 +124,44 @@ class IndicatorUtils {
                     } catch (e: NumberFormatException) {
                     }
                 }
-                collector = collector.filter { it.valuesPresent() }.toMutableList()
-                collector = trimToDate(collector)
-                val result = collector.sortedBy { it.timestamp }
+                collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
+                var result = trimToDate(collector)
                 IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result)
                 result
             }
 
         }
 
+        fun buildBollingerBands(symbol: String, quotes: List<Quote>): List<Bollinger> {
+            val cached = IndicatorsInMemoryCache.getBollinger(symbol, Context.timeframe)
+            return if (!cached.isEmpty()) {
+                cached
+            } else {
+                var collector = mutableListOf<Bollinger>()
+                val barSeries = Bars.build(quotes)
+                val closePriceIndicator = ClosePriceIndicator(barSeries)
+                val sma20 = SMAIndicator(closePriceIndicator, 20)
+                val standartDeviation = StandardDeviationIndicator(closePriceIndicator, 20)
+                val middle = BollingerBandsMiddleIndicator(sma20)
+                val bottom = BollingerBandsLowerIndicator(middle, standartDeviation)
+                val top = BollingerBandsUpperIndicator(middle, standartDeviation)
+                for (i in quotes.indices) {
+                    try {
+                        collector.add(Bollinger(quotes[i].timestamp, bottom.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()))
+                    } catch (e: NumberFormatException) {
+                    }
+                }
+                collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
+                val result = trimToDate(collector)
+                result
+            }
+        }
+
+
         private fun <T : AbstractModel> trimToDate(src: MutableList<T>): MutableList<T> {
             return if (Context.trimToDate != null) {
                 val filterAfter = Dates.shortDateToZoned(Context.trimToDate!!)
-                src.filter { ind: T -> ind!!.timestamp <= filterAfter.toEpochSecond() }.toMutableList()
+                src.filter { it.timestamp <= filterAfter.toEpochSecond() }.toMutableList()
             } else {
                 src
             }
