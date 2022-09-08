@@ -8,7 +8,7 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCacheJava;
-import com.kishlaly.ta.cache.QuotesInMemoryCache;
+import com.kishlaly.ta.cache.QuotesInMemoryCacheJava;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.ContextJava;
@@ -140,7 +140,7 @@ public class TaskTester {
     }
 
     private static void clean(SymbolDataJava screen1, SymbolDataJava screen2) {
-        QuotesInMemoryCache.clear();
+        QuotesInMemoryCacheJava.clear();
         IndicatorsInMemoryCacheJava.clear();
         screen1.quotes.clear();
         screen1.indicators.clear();

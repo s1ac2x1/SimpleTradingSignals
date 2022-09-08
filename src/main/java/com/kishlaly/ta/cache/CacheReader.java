@@ -116,7 +116,7 @@ public class CacheReader {
     }
 
     public static List<QuoteJava> loadQuotesFromDiskCache(String symbol) {
-        List<QuoteJava> cachedQuotes = QuotesInMemoryCache.get(symbol, ContextJava.timeframe);
+        List<QuoteJava> cachedQuotes = QuotesInMemoryCacheJava.get(symbol, ContextJava.timeframe);
         if (!cachedQuotes.isEmpty()) {
             return cachedQuotes;
         } else {
@@ -152,7 +152,7 @@ public class CacheReader {
                     ZonedDateTime filterAfter = shortDateToZoned(ContextJava.trimToDate);
                     quotes = quotes.stream().filter(quote -> quote.getTimestamp() <= filterAfter.toEpochSecond()).collect(Collectors.toList());
                 }
-                QuotesInMemoryCache.put(symbol, ContextJava.timeframe, quotes);
+                QuotesInMemoryCacheJava.put(symbol, ContextJava.timeframe, quotes);
                 return quotes;
             } catch (IOException e) {
                 return Collections.emptyList();

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class QuotesInMemoryCache {
+public class QuotesInMemoryCacheJava {
 
     private static ConcurrentHashMap<Key, List<QuoteJava>> cache = new ConcurrentHashMap<>();
     private static Gson gson = new Gson();

@@ -6,7 +6,7 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.cache.CacheReader;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCacheJava;
-import com.kishlaly.ta.cache.QuotesInMemoryCache;
+import com.kishlaly.ta.cache.QuotesInMemoryCacheJava;
 import com.kishlaly.ta.model.*;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
 import com.kishlaly.ta.utils.*;
@@ -50,7 +50,7 @@ public class TaskRunner {
             saveLog(task);
         });
         if (findOptimal) {
-            QuotesInMemoryCache.clear();
+            QuotesInMemoryCacheJava.clear();
             IndicatorsInMemoryCacheJava.clear();
             System.gc();
             //findOptimalSLTP(blocksGroups);
@@ -185,7 +185,7 @@ public class TaskRunner {
                 System.out.println("Function failed for symbol " + symbol + " with message: " + e.getMessage());
             }
             processingSymbol.getAndIncrement();
-            QuotesInMemoryCache.clear();
+            QuotesInMemoryCacheJava.clear();
             IndicatorsInMemoryCacheJava.clear();
             screen1.clear();
             screen2.clear();
