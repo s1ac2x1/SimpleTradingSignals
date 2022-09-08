@@ -3,12 +3,12 @@ package com.kishlaly.ta.cache;
 import com.google.common.collect.Lists;
 import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
+import com.kishlaly.ta.analyze.testing.HistoricalTesting;
 import com.kishlaly.ta.analyze.testing.sl.*;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
 import com.kishlaly.ta.loaders.Alphavantage;
-import com.kishlaly.ta.analyze.testing.HistoricalTesting;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -35,7 +35,7 @@ import static com.kishlaly.ta.cache.CacheReaderJava.*;
 import static com.kishlaly.ta.utils.ContextJava.*;
 import static com.kishlaly.ta.utils.FileUtilsJava.writeToFile;
 
-public class CacheBuilder {
+public class CacheBuilderJava {
 
     public static void buildCache(TimeframeJava[][] timeframes, boolean reloadMissed) {
         String folder = ContextJava.outputFolder + fileSeparator + "cache";

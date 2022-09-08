@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.kishlaly.ta.analyze.testing.TaskTester.test;
-import static com.kishlaly.ta.cache.CacheBuilder.getSLStrategies;
-import static com.kishlaly.ta.cache.CacheBuilder.getTPStrategies;
+import static com.kishlaly.ta.cache.CacheBuilderJava.getSLStrategies;
+import static com.kishlaly.ta.cache.CacheBuilderJava.getTPStrategies;
 import static com.kishlaly.ta.cache.CacheReaderJava.*;
 import static com.kishlaly.ta.model.indicators.IndicatorJava.MACD;
 import static com.kishlaly.ta.utils.ContextJava.TRIM_DATA;

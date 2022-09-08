@@ -11,7 +11,7 @@ import static com.kishlaly.ta.analyze.TaskRunner.run;
 import static com.kishlaly.ta.analyze.TaskTypeJava.THREE_DISPLAYS_BUY;
 import static com.kishlaly.ta.analyze.testing.TaskTester.testAllStrategiesOnSpecificDate;
 import static com.kishlaly.ta.analyze.testing.TaskTester.testOneStrategy;
-import static com.kishlaly.ta.cache.CacheBuilder.buildTasksAndStrategiesSummary;
+import static com.kishlaly.ta.cache.CacheBuilderJava.buildTasksAndStrategiesSummary;
 
 public class RunUtils {
 
