@@ -15,6 +15,7 @@ abstract class AbstractTask {
             val screen1 = screens.screen1.copy()
             val screen2 = screens.screen2.copy()
 
+            // common blocks
             val commonBlocks = blocks.filter { it is CommonBlock }.toList()
             var commonBlocksSucceded = true
 
@@ -37,6 +38,7 @@ abstract class AbstractTask {
                 return commonBlockLastResult!!
             }
 
+            // screen 1 blocks
             val screenOneBlocks = blocks.filter { it is ScreenOneBlock }.toList()
             var screenOneAllBlocksValid = true
             var screenOneResult: BlockResult? = null
@@ -54,6 +56,7 @@ abstract class AbstractTask {
                 return screenOneResult!!
             }
 
+            // screen 2
             val screenTwoBlocks = blocks.filter { it is ScreenTwoBlock }.toList()
             var screenTwoResult: BlockResult? = null
             for (i in screenTwoBlocks.indices) {
