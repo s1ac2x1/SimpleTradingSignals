@@ -20,13 +20,15 @@ class IndicatorUtils {
                 val barSeries = Bars.build(quotes)
                 val closePriceIndicator = ClosePriceIndicator(barSeries)
                 val ema = EMAIndicator(closePriceIndicator, period)
-                var result: MutableList<EMA> = mutableListOf()
+                var collector: MutableList<EMA> = mutableListOf()
                 for (i in 0 until ema.barSeries.barCount) {
-                    result.add(EMA(quotes[i].timestamp, ema.getValue(i).doubleValue()))
+                    collector.add(EMA(quotes[i].timestamp, ema.getValue(i).doubleValue()))
                 }
 
-                result = result.filter { it.valuesPresent() }.toMutableList()
-                result = trimToDate<EMA>(result)
+                collector = collector.filter { it.valuesPresent() }.toMutableList()
+                var result = trimToDate<EMA>(collector).sortedBy { it.timestamp }
+                IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe, period, result)
+                return result
             }
         }
 
