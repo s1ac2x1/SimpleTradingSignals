@@ -5,6 +5,8 @@ import com.google.gson.internal.LinkedTreeMap
 import com.google.gson.reflect.TypeToken
 import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.Timeframe
+import com.kishlaly.ta.model.exchangeTimezome
+import com.kishlaly.ta.utils.Dates
 import com.kishlaly.ta.utils.Quotes
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
@@ -50,6 +52,13 @@ class Alphavantage {
                         val low = v.get("3. low")
                         val close = v.get("4. close")
                         val volume = v.get("5. volume")
+                        quotes.add(Quote(
+                                Dates.getTimeInExchangeZone(day, exchangeTimezome).toEpochSecond(),
+                                high!!.toDouble(),
+                                open!!.toDouble(),
+                                close!!.toDouble(),
+                                low!!.toDouble(),
+                                volume!!.toDouble()))
 
                     }
                 } ?: return emptyList()
