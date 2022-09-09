@@ -42,9 +42,10 @@ class Alphavantage {
                         Timeframe.DAY -> "Time Series (Daily)"
                         Timeframe.HOUR -> "Time Series (60min)"
                     }
-                    respone.get(key)?.forEach { k, v ->
+                    val rawQuotes = respone.get(key) as LinkedTreeMap<String, LinkedTreeMap<String, String>>
+                    rawQuotes.forEach { k, v ->
                         val day = k
-                        val open = v.get["1. open"]
+                        val open = v.get("1. open")
                         val high = v.get("2. high")
                         val low = v.get("3. low")
                         val close = v.get("4. close")
@@ -63,13 +64,13 @@ class Alphavantage {
             return quotes.sortedBy { it.timestamp }
         }
 
-        fun getResponse(url: String): LinkedTreeMap<String, LinkedTreeMap<String, String>>? {
+        fun getResponse(url: String): Map<String, Object>? {
             return try {
                 val httpClient = OkHttpClient()
                 val request = Request.Builder().url(url).get().build()
                 val body = httpClient.newCall(request).execute().body()
-                gson.fromJson<LinkedTreeMap<String, LinkedTreeMap<String, String>>>(body.string(),
-                        object : TypeToken<LinkedTreeMap<String, LinkedTreeMap<String, String>>>() {}.type)
+                gson.fromJson<Map<String, Object>>(body.string(),
+                        object : TypeToken<Map<String, Object>>() {}.type)
             } catch (e: Exception) {
                 null
             }
