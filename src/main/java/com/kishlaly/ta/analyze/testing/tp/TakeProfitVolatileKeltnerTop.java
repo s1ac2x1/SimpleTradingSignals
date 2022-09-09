@@ -7,7 +7,7 @@ import com.kishlaly.ta.utils.IndicatorUtilsJava;
 /**
  * TP at % of the top of the Keltner channel at each new point
  */
-public class TakeProfitVolatileKeltnerTop extends TakeProfitStrategy {
+public class TakeProfitVolatileKeltnerTop extends TakeProfitStrategyJava {
 
     public TakeProfitVolatileKeltnerTop(Object config) {
         super(config, true);

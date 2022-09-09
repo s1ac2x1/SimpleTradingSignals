@@ -3,10 +3,10 @@ package com.kishlaly.ta.cache;
 import com.google.common.collect.Lists;
 import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
-import com.kishlaly.ta.analyze.testing.HistoricalTesting;
+import com.kishlaly.ta.analyze.testing.HistoricalTestingJava;
 import com.kishlaly.ta.analyze.testing.sl.*;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
 import com.kishlaly.ta.loaders.AlphavantageJava;
 import com.kishlaly.ta.model.QuoteJava;
@@ -131,7 +131,7 @@ public class CacheBuilderJava {
         TimeframeJava[][] timeframes = {
                 {TimeframeJava.WEEK, TimeframeJava.DAY},
         };
-        List<HistoricalTesting> result = new ArrayList<>();
+        List<HistoricalTestingJava> result = new ArrayList<>();
         ContextJava.stopLossStrategy = new StopLossFixedPrice(0.27);
         ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
 
@@ -139,12 +139,12 @@ public class CacheBuilderJava {
         //result.addAll(test(timeframes, task, BlocksGroup));
 
         Map<String, TaskTypeJava> winners = new HashMap<>();
-        result.stream().collect(Collectors.groupingBy(HistoricalTesting::getSymbol))
+        result.stream().collect(Collectors.groupingBy(HistoricalTestingJava::getSymbol))
                 .entrySet().stream().forEach(bySymbol -> {
                     String symbol = bySymbol.getKey();
-                    List<HistoricalTesting> testings = bySymbol.getValue();
-                    Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
-                    HistoricalTesting best = testings.get(testings.size() - 1);
+                    List<HistoricalTestingJava> testings = bySymbol.getValue();
+                    Collections.sort(testings, Comparator.comparing(HistoricalTestingJava::getBalance));
+                    HistoricalTestingJava best = testings.get(testings.size() - 1);
                     // TODO need to save the symbol--taskType--blocks mapping
                     winners.put(symbol, best.getTaskType());
                     System.out.println(symbol + " " + best.getTaskType().name() + " " + best.getBalance());
@@ -156,11 +156,11 @@ public class CacheBuilderJava {
         writeToFile("best_" + ContextJava.source[0].name().toLowerCase() + "_" + timeframes[0][0].name().toLowerCase() + "_" + timeframes[0][1].name().toLowerCase() + ".txt", builder.toString());
     }
 
-    public static void saveTable(List<HistoricalTesting> result) {
+    public static void saveTable(List<HistoricalTestingJava> result) {
         StringBuilder table = new StringBuilder("<table>");
         result
                 .stream()
-                .collect(Collectors.groupingBy(HistoricalTesting::getSymbol))
+                .collect(Collectors.groupingBy(HistoricalTestingJava::getSymbol))
                 .entrySet().stream()
                 .forEach(bySymbol -> {
                     String symbol = bySymbol.getKey();
@@ -168,15 +168,15 @@ public class CacheBuilderJava {
                     table.append("<td style=\"vertical-align: left;\">" + symbol + "</td>");
                     table.append("<td>");
                     StringBuilder innerTable = new StringBuilder("<table>");
-                    List<HistoricalTesting> testings = bySymbol.getValue();
-                    Collections.sort(testings, Comparator.comparing(HistoricalTesting::getBalance));
+                    List<HistoricalTestingJava> testings = bySymbol.getValue();
+                    Collections.sort(testings, Comparator.comparing(HistoricalTestingJava::getBalance));
                     testings.stream()
-                            .collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup))
+                            .collect(Collectors.groupingBy(HistoricalTestingJava::getBlocksGroup))
                             .entrySet().stream()
                             .forEach(byTask -> {
                                 BlocksGroupJava blocksGroup = byTask.getKey();
-                                List<HistoricalTesting> historicalTestings = byTask.getValue();
-                                HistoricalTesting best = historicalTestings.get(historicalTestings.size() - 1);
+                                List<HistoricalTestingJava> historicalTestings = byTask.getValue();
+                                HistoricalTestingJava best = historicalTestings.get(historicalTestings.size() - 1);
                                 innerTable.append("<tr>");
                                 innerTable.append("<td style=\"vertical-align: top text-align: left;\">" + blocksGroup.getClass().getSimpleName() + "</td>");
                                 innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>");
@@ -210,9 +210,9 @@ public class CacheBuilderJava {
     public static void buildTasksAndStrategiesSummary(TimeframeJava[][] timeframes,
                                                       TaskTypeJava task,
                                                       List<BlocksGroupJava> blocksGroups,
-                                                      StopLossStrategy stopLossStrategy,
-                                                      TakeProfitStrategy takeProfitStrategy) {
-        List<HistoricalTesting> result = new ArrayList<>();
+                                                      StopLossStrategyJava stopLossStrategy,
+                                                      TakeProfitStrategyJava takeProfitStrategy) {
+        List<HistoricalTestingJava> result = new ArrayList<>();
         int total = getSLStrategies().size() * getTPStrategies().size();
         AtomicInteger current = new AtomicInteger(1);
         if (stopLossStrategy == null || takeProfitStrategy == null) {
@@ -234,15 +234,15 @@ public class CacheBuilderJava {
         saveSummaryPerGroup(result);
     }
 
-    private static void saveSummaryPerGroup(List<HistoricalTesting> result) {
+    private static void saveSummaryPerGroup(List<HistoricalTestingJava> result) {
         TreeMap<Double, String> balances = new TreeMap<>(Collections.reverseOrder());
         List<TPSL> tpSL = new ArrayList<>();
         List<ROI> roi = new ArrayList<>();
-        Map<BlocksGroupJava, List<HistoricalTesting>> byGroup = result.stream().collect(Collectors.groupingBy(HistoricalTesting::getBlocksGroup));
+        Map<BlocksGroupJava, List<HistoricalTestingJava>> byGroup = result.stream().collect(Collectors.groupingBy(HistoricalTestingJava::getBlocksGroup));
         byGroup.entrySet().stream().forEach(entry -> {
             BlocksGroupJava group = entry.getKey();
-            List<HistoricalTesting> testings = entry.getValue();
-            double totalBalance = testings.stream().map(HistoricalTesting::getBalance).mapToDouble(Double::doubleValue).sum();
+            List<HistoricalTestingJava> testings = entry.getValue();
+            double totalBalance = testings.stream().map(HistoricalTestingJava::getBalance).mapToDouble(Double::doubleValue).sum();
             totalBalance = NumbersJava.round(totalBalance);
             String groupName = group.getClass().getSimpleName();
             balances.put(totalBalance, groupName);
@@ -310,8 +310,8 @@ public class CacheBuilderJava {
         }
     }
 
-    public static List<StopLossStrategy> getSLStrategies() {
-        return new ArrayList<StopLossStrategy>() {{
+    public static List<StopLossStrategyJava> getSLStrategies() {
+        return new ArrayList<StopLossStrategyJava>() {{
             add(new StopLossFixedPrice(0.27));
             add(new StopLossFixedKeltnerBottom());
             add(new StopLossVolatileKeltnerBottom(80));
@@ -321,8 +321,8 @@ public class CacheBuilderJava {
         }};
     }
 
-    public static List<TakeProfitStrategy> getTPStrategies() {
-        return new ArrayList<TakeProfitStrategy>() {{
+    public static List<TakeProfitStrategyJava> getTPStrategies() {
+        return new ArrayList<TakeProfitStrategyJava>() {{
             add(new TakeProfitFixedKeltnerTop(80));
             add(new TakeProfitFixedKeltnerTop(100));
             add(new TakeProfitVolatileKeltnerTop(80));

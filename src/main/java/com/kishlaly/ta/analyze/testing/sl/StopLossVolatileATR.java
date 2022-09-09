@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * SL = Current low – (2 × ATR)
  */
-public class StopLossVolatileATR extends StopLossStrategy {
+public class StopLossVolatileATR extends StopLossStrategyJava {
 
     public StopLossVolatileATR() {
         super(null, true);

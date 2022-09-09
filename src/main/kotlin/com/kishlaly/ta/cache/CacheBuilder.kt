@@ -1,7 +1,7 @@
 package com.kishlaly.ta.cache
 
 import com.google.common.collect.Lists
-import com.kishlaly.ta.analyze.testing.HistoricalTesting
+import com.kishlaly.ta.analyze.testing.HistoricalTestingJava
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.loaders.Alphavantage
 import com.kishlaly.ta.model.Quote
@@ -94,6 +94,10 @@ class CacheBuilder {
                 }
             }
         }
+    }
+
+    fun saveTable(result: List<HistoricalTestingJava>) {
+
     }
 
     private fun saveQuote(symbol: String, quotes: List<Quote>) {

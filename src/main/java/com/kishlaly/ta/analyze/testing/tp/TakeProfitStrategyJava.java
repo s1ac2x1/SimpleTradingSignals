@@ -2,13 +2,13 @@ package com.kishlaly.ta.analyze.testing.tp;
 
 import com.kishlaly.ta.model.SymbolDataJava;
 
-public abstract class TakeProfitStrategy {
+public abstract class TakeProfitStrategyJava {
 
     protected Object config;
     protected boolean enabled = true;
     protected boolean isVolatile;
 
-    public TakeProfitStrategy(final Object config, final boolean isVolatile) {
+    public TakeProfitStrategyJava(final Object config, final boolean isVolatile) {
         this.config = config;
         this.isVolatile = isVolatile;
     }

@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.BollingerJava;
 import com.kishlaly.ta.utils.IndicatorUtilsJava;
 
-public class StopLossVolatileBollingerMiddle extends StopLossStrategy {
+public class StopLossVolatileBollingerMiddle extends StopLossStrategyJava {
 
     public StopLossVolatileBollingerMiddle() {
         super(null, true);

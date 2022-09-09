@@ -2,8 +2,8 @@ package com.kishlaly.ta.analyze.testing;
 
 import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
-import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategyJava;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class HistoricalTesting {
+public class HistoricalTestingJava {
 
     private TaskTypeJava taskType;
     private BlocksGroupJava blocksGroup;
@@ -28,12 +28,12 @@ public class HistoricalTesting {
     private List<BlockResultJava> blockResults;
 
     // testing the opening of positions by the received signals for entry
-    private Map<QuoteJava, PositionTestResult> signalTestingResults = new HashMap<>();
+    private Map<QuoteJava, PositionTestResultJava> signalTestingResults = new HashMap<>();
 
-    private StopLossStrategy stopLossStrategy;
-    private TakeProfitStrategy takeProfitStrategy;
+    private StopLossStrategyJava stopLossStrategy;
+    private TakeProfitStrategyJava takeProfitStrategy;
 
-    public HistoricalTesting(TaskTypeJava taskType, BlocksGroupJava blocksGroup, final SymbolDataJava data, final List<BlockResultJava> blockResults, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public HistoricalTestingJava(TaskTypeJava taskType, BlocksGroupJava blocksGroup, final SymbolDataJava data, final List<BlockResultJava> blockResults, StopLossStrategyJava stopLossStrategy, TakeProfitStrategyJava takeProfitStrategy) {
         this.taskType = taskType;
         this.blocksGroup = blocksGroup;
         this.data = data;
@@ -50,11 +50,11 @@ public class HistoricalTesting {
         return this.blocksGroup;
     }
 
-    public StopLossStrategy getStopLossStrategy() {
+    public StopLossStrategyJava getStopLossStrategy() {
         return this.stopLossStrategy;
     }
 
-    public TakeProfitStrategy getTakeProfitStrategy() {
+    public TakeProfitStrategyJava getTakeProfitStrategy() {
         return this.takeProfitStrategy;
     }
 
@@ -74,11 +74,11 @@ public class HistoricalTesting {
         this.blockResults = blockResults;
     }
 
-    public void addTestResult(QuoteJava signal, PositionTestResult positionTestResult) {
+    public void addTestResult(QuoteJava signal, PositionTestResultJava positionTestResult) {
         signalTestingResults.put(signal, positionTestResult);
     }
 
-    public PositionTestResult getResult(QuoteJava signal) {
+    public PositionTestResultJava getResult(QuoteJava signal) {
         return signalTestingResults.get(signal);
     }
 
@@ -198,8 +198,8 @@ public class HistoricalTesting {
                 .mapToDouble(entry -> entry.getValue().getLoss() - entry.getValue().getCommissions()).sum());
     }
 
-    public PositionTestResult searchSignalByLongestPosition() {
-        Optional<Map.Entry<QuoteJava, PositionTestResult>> first = signalTestingResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getPositionDurationInSeconds(data.timeframe) == getMaxPositionDurationSeconds()).findFirst();
+    public PositionTestResultJava searchSignalByLongestPosition() {
+        Optional<Map.Entry<QuoteJava, PositionTestResultJava>> first = signalTestingResults.entrySet().stream().filter(entrySet -> entrySet.getValue().getPositionDurationInSeconds(data.timeframe) == getMaxPositionDurationSeconds()).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {
@@ -207,8 +207,8 @@ public class HistoricalTesting {
         }
     }
 
-    public PositionTestResult searchSignalByProfit(double value) {
-        Optional<Map.Entry<QuoteJava, PositionTestResult>> first = signalTestingResults.entrySet()
+    public PositionTestResultJava searchSignalByProfit(double value) {
+        Optional<Map.Entry<QuoteJava, PositionTestResultJava>> first = signalTestingResults.entrySet()
                 .stream()
                 .filter(entrySet -> entrySet.getValue().isProfitable() && entrySet.getValue().getProfit() == value).findFirst();
         if (first.isPresent()) {
@@ -218,8 +218,8 @@ public class HistoricalTesting {
         }
     }
 
-    public PositionTestResult searchSignalByLoss(double value) {
-        Optional<Map.Entry<QuoteJava, PositionTestResult>> first = signalTestingResults.entrySet()
+    public PositionTestResultJava searchSignalByLoss(double value) {
+        Optional<Map.Entry<QuoteJava, PositionTestResultJava>> first = signalTestingResults.entrySet()
                 .stream()
                 .filter(entrySet -> !entrySet.getValue().isProfitable() && entrySet.getValue().getLoss() == value).findFirst();
         if (first.isPresent()) {
@@ -253,7 +253,7 @@ public class HistoricalTesting {
         return data.symbol;
     }
 
-    public static class PositionTestResult {
+    public static class PositionTestResultJava {
 
         private long openedTimestamp;
         private long closedTimestamp;

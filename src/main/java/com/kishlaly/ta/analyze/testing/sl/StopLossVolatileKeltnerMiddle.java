@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.KeltnerJava;
 import com.kishlaly.ta.utils.IndicatorUtilsJava;
 
-public class StopLossVolatileKeltnerMiddle extends StopLossStrategy {
+public class StopLossVolatileKeltnerMiddle extends StopLossStrategyJava {
 
     public StopLossVolatileKeltnerMiddle() {
         super(null, true);

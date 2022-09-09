@@ -1,9 +1,9 @@
 package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
-import com.kishlaly.ta.analyze.testing.HistoricalTesting;
-import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.HistoricalTestingJava;
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategyJava;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava;
 import com.kishlaly.ta.cache.CacheReaderJava;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCacheJava;
 import com.kishlaly.ta.cache.QuotesInMemoryCacheJava;
@@ -91,12 +91,12 @@ public class TaskRunner {
         List<String> suggestions = new ArrayList<>();
         AtomicInteger symbolNumber = new AtomicInteger(1);
         int totalSymbols = signals.size();
-        List<StopLossStrategy> slStrategies = getSLStrategies();
-        List<TakeProfitStrategy> tpStrategies = getTPStrategies();
+        List<StopLossStrategyJava> slStrategies = getSLStrategies();
+        List<TakeProfitStrategyJava> tpStrategies = getTPStrategies();
         int totalSLTPStrategies = slStrategies.size() * tpStrategies.size();
         signals.forEach(signal -> {
             AtomicInteger testingStrategySet = new AtomicInteger(1);
-            List<HistoricalTesting> result = new ArrayList<>();
+            List<HistoricalTestingJava> result = new ArrayList<>();
             slStrategies.forEach(stopLossStrategy -> {
                 tpStrategies.forEach(takeProfitStrategy -> {
                     ContextJava.stopLossStrategy = stopLossStrategy;
@@ -113,8 +113,8 @@ public class TaskRunner {
                 });
             });
             SymbolDataJava screen2 = getSymbolData(signal.task.getTimeframeIndicators(2), signal.symbol);
-            Collections.sort(result, Comparator.comparing(HistoricalTesting::getBalance));
-            HistoricalTesting best = result.get(result.size() - 1);
+            Collections.sort(result, Comparator.comparing(HistoricalTestingJava::getBalance));
+            HistoricalTestingJava best = result.get(result.size() - 1);
             double stopLoss = best.getStopLossStrategy().calculate(screen2, screen2.quotes.size() - 1);
             double takeProfit = best.getTakeProfitStrategy().calcualte(screen2, screen2.quotes.size() - 1);
             suggestions.add(signal.symbol + System.lineSeparator() + "SL: " + NumbersJava.round(stopLoss) + "; TP: " + NumbersJava.round(takeProfit) + System.lineSeparator() + best.getStopLossStrategy() + System.lineSeparator() + best.getTakeProfitStrategy());

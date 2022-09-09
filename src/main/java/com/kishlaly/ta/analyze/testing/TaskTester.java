@@ -4,9 +4,9 @@ import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtils;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
-import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategyJava;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCacheJava;
 import com.kishlaly.ta.cache.QuotesInMemoryCacheJava;
 import com.kishlaly.ta.model.*;
@@ -28,7 +28,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.kishlaly.ta.cache.CacheReaderJava.getSymbolData;
-import static com.kishlaly.ta.analyze.testing.HistoricalTesting.PositionTestResult;
+import static com.kishlaly.ta.analyze.testing.HistoricalTestingJava.PositionTestResultJava;
 import static com.kishlaly.ta.model.QuoteJava.exchangeTimezome;
 import static com.kishlaly.ta.utils.ContextJava.*;
 import static com.kishlaly.ta.utils.DatesJava.getBarTimeInMyZone;
@@ -40,10 +40,10 @@ public class TaskTester {
 
     private static StringBuilder testLog = new StringBuilder();
 
-    public static List<HistoricalTesting> test(TimeframeJava[][] timeframes, TaskTypeJava task, BlocksGroupJava blocksGroup) {
+    public static List<HistoricalTestingJava> test(TimeframeJava[][] timeframes, TaskTypeJava task, BlocksGroupJava blocksGroup) {
         ContextJava.testMode = true;
         StringBuilder log = new StringBuilder();
-        List<HistoricalTesting> allTests = new ArrayList<>();
+        List<HistoricalTestingJava> allTests = new ArrayList<>();
         Arrays.stream(timeframes).forEach(screens -> {
             task.updateTimeframeForScreen(1, screens[0]);
             task.updateTimeframeForScreen(2, screens[1]);
@@ -68,17 +68,17 @@ public class TaskTester {
                     System.out.println(e.getMessage());
                 }
                 if (!blockResults.isEmpty()) {
-                    HistoricalTesting testing = null;
+                    HistoricalTestingJava testing = null;
                     if (ContextJava.massTesting) {
                         if (ContextJava.takeProfitStrategies != null) {
                             ContextJava.takeProfitStrategies.forEach(takeProfitStrategy -> {
-                                HistoricalTesting massTesting = new HistoricalTesting(task, blocksGroup, symbolDataForTesting, blockResults, ContextJava.stopLossStrategy, takeProfitStrategy);
+                                HistoricalTestingJava massTesting = new HistoricalTestingJava(task, blocksGroup, symbolDataForTesting, blockResults, ContextJava.stopLossStrategy, takeProfitStrategy);
                                 calculateStatistics(massTesting);
                                 allTests.add(massTesting);
                             });
                         }
                     } else {
-                        testing = new HistoricalTesting(task, blocksGroup, symbolDataForTesting, blockResults, ContextJava.stopLossStrategy, ContextJava.takeProfitStrategy);
+                        testing = new HistoricalTestingJava(task, blocksGroup, symbolDataForTesting, blockResults, ContextJava.stopLossStrategy, ContextJava.takeProfitStrategy);
                         calculateStatistics(testing);
                         allTests.add(testing);
                         String key = "[" + screens[0].name() + "][" + screens[1] + "] " + task.name() + " - " + symbol;
@@ -159,7 +159,7 @@ public class TaskTester {
         }
     }
 
-    public static void printNoSignalsReport(TimeframeJava timeframe, HistoricalTesting testing, Set<String> finalSignalResults) {
+    public static void printNoSignalsReport(TimeframeJava timeframe, HistoricalTestingJava testing, Set<String> finalSignalResults) {
         finalSignalResults.add(lineSeparator());
         finalSignalResults.add(lineSeparator());
         finalSignalResults.add(lineSeparator());
@@ -173,7 +173,7 @@ public class TaskTester {
                 });
     }
 
-    public static void printPositionsReport(TimeframeJava timeframe, final HistoricalTesting testing, final Set<String> report) {
+    public static void printPositionsReport(TimeframeJava timeframe, final HistoricalTestingJava testing, final Set<String> report) {
         testing.getTaskResults()
                 .stream()
                 .filter(taskResult -> taskResult.getLastChartQuote() != null)
@@ -185,7 +185,7 @@ public class TaskTester {
 
                     // результаты тестирования сигналов
                     if (taskResult.isOk()) {
-                        PositionTestResult positionTestResult = testing.getResult(quote);
+                        PositionTestResultJava positionTestResult = testing.getResult(quote);
                         if (!positionTestResult.isClosed()) {
                             line += " NOT CLOSED";
                         } else {
@@ -221,7 +221,7 @@ public class TaskTester {
         return date;
     }
 
-    public static String formatTestingSummary(HistoricalTesting testing) {
+    public static String formatTestingSummary(HistoricalTestingJava testing) {
         String timeframesInfo = "[" + testing.getTaskType().getTimeframeForScreen(1) + "][" + testing.getTaskType().getTimeframeForScreen(2) + "]";
         String result = timeframesInfo + " " + testing.getData().symbol + " - " + testing.getTaskType().name() + " - " + testing.getBlocksGroup().getClass().getSimpleName() + lineSeparator();
         result += "\ttrendCheckIncludeHistogram = " + ContextJava.trendCheckIncludeHistogram + lineSeparator();
@@ -265,8 +265,8 @@ public class TaskTester {
         return result;
     }
 
-    private static String formatRange(HistoricalTesting testing, Function<HistoricalTesting, PositionTestResult> function) {
-        PositionTestResult positionTestResult = function.apply(testing);
+    private static String formatRange(HistoricalTestingJava testing, Function<HistoricalTestingJava, PositionTestResultJava> function) {
+        PositionTestResultJava positionTestResult = function.apply(testing);
         String output = "";
         if (positionTestResult != null) {
             output = "[" + formatDate(testing.getData().timeframe, positionTestResult.getOpenedTimestamp()) + " - " + formatDate(testing.getData().timeframe, positionTestResult.getClosedTimestamp()) + "]";
@@ -274,7 +274,7 @@ public class TaskTester {
         return output;
     }
 
-    public static void testOneStrategy(TimeframeJava[][] timeframes, TaskTypeJava task, BlocksGroupJava blocksGroup, StopLossStrategy stopLossStrategy, TakeProfitStrategy takeProfitStrategy) {
+    public static void testOneStrategy(TimeframeJava[][] timeframes, TaskTypeJava task, BlocksGroupJava blocksGroup, StopLossStrategyJava stopLossStrategy, TakeProfitStrategyJava takeProfitStrategy) {
         ContextJava.stopLossStrategy = stopLossStrategy;
         ContextJava.takeProfitStrategy = takeProfitStrategy;
         System.out.println(stopLossStrategy + " / " + takeProfitStrategy);
@@ -289,7 +289,7 @@ public class TaskTester {
         ContextJava.stopLossStrategy = new StopLossFixedPrice(0.27);
         ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
         BlocksGroupJava[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
-        List<HistoricalTesting> testings = Arrays.stream(blocksGroups).flatMap(blocksGroup -> test(timeframes, task, blocksGroup).stream()).collect(Collectors.toList());
+        List<HistoricalTestingJava> testings = Arrays.stream(blocksGroups).flatMap(blocksGroup -> test(timeframes, task, blocksGroup).stream()).collect(Collectors.toList());
         ZonedDateTime parsed = shortDateToZoned(datePart);
         testings.forEach(testing -> {
             String groupName = testing.getBlocksGroup().getClass().getSimpleName();
@@ -301,12 +301,12 @@ public class TaskTester {
     public static void testMass(TimeframeJava[][] timeframes, TaskTypeJava task, BlocksGroupJava blocksGroup) {
         ContextJava.massTesting = true;
 
-        StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
+        StopLossStrategyJava stopLossStrategy = new StopLossFixedPrice(0.27);
         ContextJava.stopLossStrategy = stopLossStrategy;
 
         ContextJava.takeProfitStrategies = new ArrayList<>();
         for (int i = 80; i <= 100; i++) {
-            TakeProfitStrategy tp = new TakeProfitFixedKeltnerTop(i);
+            TakeProfitStrategyJava tp = new TakeProfitFixedKeltnerTop(i);
             ContextJava.takeProfitStrategies.add(tp);
         }
         test(timeframes, task, blocksGroup);
@@ -319,7 +319,7 @@ public class TaskTester {
      *
      * @param historicalTesting
      */
-    private static void calculateStatistics(HistoricalTesting historicalTesting) {
+    private static void calculateStatistics(HistoricalTestingJava historicalTesting) {
         historicalTesting.getTaskResults()
                 .stream()
                 .filter(taskResult -> taskResult.isOk()) // take only the signals to the input
@@ -328,8 +328,8 @@ public class TaskTester {
         FileUtilsJava.writeToFile(outputFolder + fileSeparator + "stats" + fileSeparator + historicalTesting.getSymbol() + "_test_log.txt", testLog.toString());
     }
 
-    private static void testPosition(BlockResultJava blockResult, HistoricalTesting historicalTesting) {
-        PositionTestResult positionTestResult = new PositionTestResult();
+    private static void testPosition(BlockResultJava blockResult, HistoricalTestingJava historicalTesting) {
+        PositionTestResultJava positionTestResult = new PositionTestResultJava();
         QuoteJava signal = blockResult.getLastChartQuote();
         int signalIndex = -1;
         SymbolDataJava data = historicalTesting.getData();
@@ -343,10 +343,10 @@ public class TaskTester {
         // minimal amount of quotes in the chart
         if (signalIndex > MIN_POSSIBLE_QUOTES) {
 
-            StopLossStrategy stopLossStrategy = historicalTesting.getStopLossStrategy();
+            StopLossStrategyJava stopLossStrategy = historicalTesting.getStopLossStrategy();
             double stopLoss = stopLossStrategy.calculate(data, signalIndex);
 
-            TakeProfitStrategy takeProfitStrategy = historicalTesting.getTakeProfitStrategy();
+            TakeProfitStrategyJava takeProfitStrategy = historicalTesting.getTakeProfitStrategy();
             double takeProfit = takeProfitStrategy.calcualte(data, signalIndex);
 
             double openingPrice = signal.getClose() + 0.07;

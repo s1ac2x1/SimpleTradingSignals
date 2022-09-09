@@ -1,9 +1,9 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
-import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy;
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategyJava;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava;
 import com.kishlaly.ta.model.SymbolsSourceJava;
 import com.kishlaly.ta.model.TimeframeJava;
 
@@ -52,10 +52,10 @@ public class ContextJava {
 
     // for testing on historical data
     public static boolean testMode;
-    public static StopLossStrategy stopLossStrategy = new StopLossFixedPrice(0.27);
-    public static TakeProfitStrategy takeProfitStrategy = new TakeProfitFixedKeltnerTop(80);
+    public static StopLossStrategyJava stopLossStrategy = new StopLossFixedPrice(0.27);
+    public static TakeProfitStrategyJava takeProfitStrategy = new TakeProfitFixedKeltnerTop(80);
     public static boolean massTesting;
-    public static List<TakeProfitStrategy> takeProfitStrategies;
+    public static List<TakeProfitStrategyJava> takeProfitStrategies;
 
     // misc
     public static boolean trendCheckIncludeHistogram = true;

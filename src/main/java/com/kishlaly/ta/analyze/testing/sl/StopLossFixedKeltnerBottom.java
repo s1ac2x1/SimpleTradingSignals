@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * SL is chosen at the lower point of the Keltner channel, which exists in the signal quote
  */
-public class StopLossFixedKeltnerBottom extends StopLossStrategy {
+public class StopLossFixedKeltnerBottom extends StopLossStrategyJava {
 
     public StopLossFixedKeltnerBottom() {
         super(null, false);

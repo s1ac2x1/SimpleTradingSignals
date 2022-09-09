@@ -1,9 +1,9 @@
 package com.kishlaly.ta.config
 
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
-import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategyJava
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava
 import com.kishlaly.ta.model.ApiSource
 import com.kishlaly.ta.model.SymbolsSource
 import com.kishlaly.ta.model.Timeframe
@@ -49,10 +49,10 @@ class Context {
 
         // for testing on historical data
         var testMode = false
-        var stopLossStrategy: StopLossStrategy = StopLossFixedPrice(0.27)
-        var takeProfitStrategy: TakeProfitStrategy = TakeProfitFixedKeltnerTop(80)
+        var stopLossStrategy: StopLossStrategyJava = StopLossFixedPrice(0.27)
+        var takeProfitStrategy: TakeProfitStrategyJava = TakeProfitFixedKeltnerTop(80)
         var massTesting = false
-        var takeProfitStrategies: List<TakeProfitStrategy>? = null
+        var takeProfitStrategies: List<TakeProfitStrategyJava>? = null
 
         // misc
         var trendCheckIncludeHistogram = true

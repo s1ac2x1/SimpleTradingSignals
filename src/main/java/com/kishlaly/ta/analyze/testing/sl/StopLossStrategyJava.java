@@ -2,12 +2,12 @@ package com.kishlaly.ta.analyze.testing.sl;
 
 import com.kishlaly.ta.model.SymbolDataJava;
 
-public abstract class StopLossStrategy {
+public abstract class StopLossStrategyJava {
 
     protected Object config;
     protected boolean isVolatile;
 
-    public StopLossStrategy(final Object config, boolean isVolatile) {
+    public StopLossStrategyJava(final Object config, boolean isVolatile) {
         this.config = config;
         this.isVolatile = isVolatile;
     }

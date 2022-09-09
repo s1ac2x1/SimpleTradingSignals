@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.testing.tp;
 
 import com.kishlaly.ta.model.SymbolDataJava;
 
-public class TakeProfitDisabled extends TakeProfitStrategy {
+public class TakeProfitDisabled extends TakeProfitStrategyJava {
 
     public TakeProfitDisabled() {
         super(null, false);
