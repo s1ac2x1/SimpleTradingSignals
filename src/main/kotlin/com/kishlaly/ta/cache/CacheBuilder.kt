@@ -1,10 +1,18 @@
 package com.kishlaly.ta.cache
 
 import com.google.common.collect.Lists
+import com.kishlaly.ta.analyze.testing.HistoricalTesting
 import com.kishlaly.ta.config.Context
-import com.kishlaly.ta.loaders.AlphavantageJava
+import com.kishlaly.ta.loaders.Alphavantage
+import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.Timeframe
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
 
@@ -75,19 +83,33 @@ class CacheBuilder {
             Context.timeframe = timeframe
             if (request.cacheType == CacheType.QUOTE) {
                 println("Loading ${timeframe.name} quotes...")
-                symbols.forEach { symbol: String? ->
+                symbols.forEach { symbol ->
                     val future = CacheReader.apiExecutor.submit {
-                        val quotes = AlphavantageJava.loadQuotes(symbol, timeframe)
+                        val quotes = Alphavantage.loadQuotes(symbol, timeframe)
                         if (!quotes.isEmpty()) {
                             saveQuote(symbol, quotes)
                         }
                     }
-                    CacheReaderJava.callsInProgress.add(future)
+                    CacheReader.callsInProgress.add(future)
                 }
             }
-
         }
+    }
 
+    private fun saveQuote(symbol: String, quotes: List<Quote>) {
+        val folder = "${Context.outputFolder}/cache/{${Context.timeframe.name.lowercase()}}"
+        val directory: File = File(folder)
+        if (!directory.exists()) {
+            directory.mkdir()
+        }
+        val zone = ZoneId.of(Context.myTimezone)
+        val currentYear = LocalDateTime.ofInstant(Instant.now(), zone).year
+        val filteredByHistory = quotes.filter {
+            val quoteYear = LocalDateTime.ofInstant(Instant.ofEpochSecond(it.timestamp), zone).year
+            currentYear - quoteYear <= Context.yearsToAnalyze
+        }
+        val json = CacheReader.gson.toJson(filteredByHistory)
+        Files.write(Paths.get("${folder}/${symbol}_quotes.txt"), json.toByteArray())
     }
 
 }
