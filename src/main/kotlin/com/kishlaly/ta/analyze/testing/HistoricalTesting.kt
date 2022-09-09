@@ -48,5 +48,26 @@ class HistoricalTesting(
 
     fun getLossPositionsCount() = signalTestingResults.entries.filter { !it.value.profitable }.count()
 
+    fun getMinPositionDurationSeconds() = positionDuration().min()
+
+    fun getAveragePositionDurationSeconds() = positionDuration().average()
+
+    fun getMaxPositionDurationSeconds() = positionDuration().max()
+
+    fun getMinProfit() = profitsCollection().min()
+
+    fun getAvgProfit() = profitsCollection().average()
+
+    fun getMaxProfit() = profitsCollection().max()
+
+    private fun profitsCollection() = signalTestingResults.entries
+            .filter { it.value.profitable }
+            .filter { it.value.profit != null }
+            .map { it.value.profit!! }
+
+    private fun positionDuration() = signalTestingResults.entries
+            .filter { it.value.closed }
+            .map { it.value.getPositionDurationInSeconds(data.timeframe) }
+
 
 }
