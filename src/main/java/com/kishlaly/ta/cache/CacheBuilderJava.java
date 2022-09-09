@@ -8,7 +8,7 @@ import com.kishlaly.ta.analyze.testing.sl.*;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
-import com.kishlaly.ta.loaders.Alphavantage;
+import com.kishlaly.ta.loaders.AlphavantageJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -96,7 +96,7 @@ public class CacheBuilderJava {
                 System.out.println("Loading " + timeframe.name() + " quotes...");
                 symbols.forEach(symbol -> {
                     Future<?> future = apiExecutor.submit(() -> {
-                        List<QuoteJava> quotes = Alphavantage.loadQuotes(symbol, timeframe);
+                        List<QuoteJava> quotes = AlphavantageJava.loadQuotes(symbol, timeframe);
                         if (!quotes.isEmpty()) {
                             saveQuote(symbol, quotes);
                         }
@@ -347,13 +347,13 @@ public class CacheBuilderJava {
     private static List loadIndicatorFromProvider(String symbol, IndicatorJava indicator) {
         switch (indicator) {
             case MACD:
-                return Alphavantage.loadMACD(symbol);
+                return AlphavantageJava.loadMACD(symbol);
             case EMA26:
-                return Alphavantage.loadEMA(symbol, 26);
+                return AlphavantageJava.loadEMA(symbol, 26);
             case EMA13:
-                return Alphavantage.loadEMA(symbol, 13);
+                return AlphavantageJava.loadEMA(symbol, 13);
             case STOCH:
-                return Alphavantage.loadStoch(symbol);
+                return AlphavantageJava.loadStoch(symbol);
             default:
                 return Collections.emptyList();
         }

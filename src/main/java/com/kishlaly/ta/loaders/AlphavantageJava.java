@@ -32,7 +32,7 @@ import static java.lang.Double.parseDouble;
  * @author Vladimir Kishlaly
  * @since 26.11.2021
  */
-public class Alphavantage {
+public class AlphavantageJava {
 
     private static Gson gson = new Gson();
     private static String KEY = "F4ZNUB0VYAAMTSLP"; // premium, 75 req/min, expired
