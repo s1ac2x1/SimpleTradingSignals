@@ -6,13 +6,13 @@ import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.loaders.Alphavantage
 import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.Timeframe
+import com.kishlaly.ta.utils.ContextJava
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
 
@@ -24,7 +24,7 @@ class CacheBuilder {
             directory.mkdir()
         }
         val symbols = AtomicReference(Context.symbols)
-        timeframes.forEach { screens ->
+        timeframes.forEach { _ ->
             // only one timeframe is loaded Context.aggregationTimeframe
             Context.timeframe = Context.aggregationTimeframe
             if (reloadMissed) {
@@ -34,7 +34,23 @@ class CacheBuilder {
         }
         val p = Context.limitPerMinute / Context.parallelRequests
         CacheReader.requestPeriod = (p * 1000).toInt() + 1000 // +1 second for margin
-        CacheReader.queueExecutor.scheduleAtFixedRate({ CacheBuilder.processQueue() }, CacheReader.requestPeriod.toLong(), CacheReader.requestPeriod.toLong(), TimeUnit.MILLISECONDS)
+        CacheReader.queueExecutor.scheduleAtFixedRate(
+            { processQueue() },
+            CacheReader.requestPeriod.toLong(),
+            CacheReader.requestPeriod.toLong(),
+            TimeUnit.MILLISECONDS
+        )
+        if (reloadMissed) {
+            timeframes.forEach { screens ->
+                screens.forEach { screen ->
+                    Context.timeframe = screen
+                    val file = File(CacheReader.getFolder() + ContextJava.fileSeparator + "missed.txt")
+                    if (file.exists()) {
+                        file.delete()
+                    }
+                }
+            }
+        }
     }
 
     private fun cacheQuotes(symbols: Set<String>) {
@@ -44,18 +60,18 @@ class CacheBuilder {
             return
         }
         Lists.partition(symbolsToCache, Context.parallelRequests.toInt())
-                .forEach { chunk ->
-                    val existingRequest = CacheReader.requests.filter { request ->
-                        request.cacheType == CacheType.QUOTE
-                                && request.timeframe == Context.timeframe
-                                && request.symbols.containsAll(chunk)
-                    }.firstOrNull()
-                    existingRequest?.let {
-                        println("Already in the queue: ${chunk.size} ${Context.timeframe.name} QUOTE")
-                    } ?: run {
-                        CacheReader.requests.offer(LoadRequest(CacheType.QUOTE, Context.timeframe, chunk))
-                    }
+            .forEach { chunk ->
+                val existingRequest = CacheReader.requests.filter { request ->
+                    request.cacheType == CacheType.QUOTE
+                            && request.timeframe == Context.timeframe
+                            && request.symbols.containsAll(chunk)
+                }.firstOrNull()
+                existingRequest?.let {
+                    println("Already in the queue: ${chunk.size} ${Context.timeframe.name} QUOTE")
+                } ?: run {
+                    CacheReader.requests.offer(LoadRequest(CacheType.QUOTE, Context.timeframe, chunk))
                 }
+            }
     }
 
     fun processQueue() {
@@ -97,6 +113,7 @@ class CacheBuilder {
     }
 
     fun saveTable(result: List<HistoricalTestingJava>) {
+        val table = StringBuilder("<table>")
 
     }
 
