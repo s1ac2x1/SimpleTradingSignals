@@ -105,7 +105,20 @@ class HistoricalTesting(
             .firstOrNull()
     }
 
+    fun printSL() = stopLossStrategy.toString()
 
+    fun printTP() = takeProfitStrategy.toString()
+
+    fun printTPSLNumber() = "${getProfitablePositionsCount()}/${getLossPositionsCount()}"
+
+    fun printTPSLPercent() = "${getSuccessfulRatio()}% / ${getLossRatio()}%"
+
+    // loss is negative
+    fun getBalance() = (getTotalProfit() + getTotalLoss()).round()
+
+    fun getSymbol(): String? {
+        return data.symbol
+    }
 
     private fun lossesCollection() = signalTestingResults.entries
         .filter { !it.value.profitable }
