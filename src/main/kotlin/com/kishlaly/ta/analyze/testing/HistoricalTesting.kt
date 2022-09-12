@@ -8,17 +8,19 @@ import com.kishlaly.ta.model.BlockResult
 import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.SymbolData
 import com.kishlaly.ta.utils.Numbers
+import com.kishlaly.ta.utils.round
 
 class HistoricalTesting(
-        val taskType: TaskType,
-        val blocksGroup: BlocksGroup,
-        // indicator chart
-        val data: SymbolData,
-        // all results of the strategy run, scrolling the graph one bar back in time
-        val blocksResults: List<BlockResult>,
-        val stopLossStrategy: StopLossStrategy,
-        val takeProfitStrategy: TakeProfitStrategy,
-        val signalTestingResults: MutableMap<Quote, PositionTestResult> = mutableMapOf()) {
+    val taskType: TaskType,
+    val blocksGroup: BlocksGroup,
+    // indicator chart
+    val data: SymbolData,
+    // all results of the strategy run, scrolling the graph one bar back in time
+    val blocksResults: List<BlockResult>,
+    val stopLossStrategy: StopLossStrategy,
+    val takeProfitStrategy: TakeProfitStrategy,
+    val signalTestingResults: MutableMap<Quote, PositionTestResult> = mutableMapOf()
+) {
 
     fun addTestResult(signal: Quote, positionTestResult: PositionTestResult) {
         signalTestingResults.put(signal, positionTestResult)
@@ -50,24 +52,34 @@ class HistoricalTesting(
 
     fun getMinPositionDurationSeconds() = positionDuration().min()
 
-    fun getAveragePositionDurationSeconds() = positionDuration().average()
+    fun getAveragePositionDurationSeconds() = positionDuration().average().round()
 
     fun getMaxPositionDurationSeconds() = positionDuration().max()
 
     fun getMinProfit() = profitsCollection().min()
 
-    fun getAvgProfit() = profitsCollection().average()
+    fun getAvgProfit() = profitsCollection().average().round()
 
     fun getMaxProfit() = profitsCollection().max()
 
+    fun getMinLoss() = lossesCollection().min()
+
+    fun getAvgLoss() = lossesCollection().average().round()
+
+    fun getMaxLoss() = lossesCollection().max()
+
+    private fun lossesCollection() = signalTestingResults.entries
+        .filter { !it.value.profitable }
+        .map { it.value.loss!! }
+
     private fun profitsCollection() = signalTestingResults.entries
-            .filter { it.value.profitable }
-            .filter { it.value.profit != null }
-            .map { it.value.profit!! }
+        .filter { it.value.profitable }
+        .filter { it.value.profit != null }
+        .map { it.value.profit!! }
 
     private fun positionDuration() = signalTestingResults.entries
-            .filter { it.value.closed }
-            .map { it.value.getPositionDurationInSeconds(data.timeframe) }
+        .filter { it.value.closed }
+        .map { it.value.getPositionDurationInSeconds(data.timeframe) }
 
 
 }
