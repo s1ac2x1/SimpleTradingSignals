@@ -83,6 +83,30 @@ class HistoricalTesting(
         .map { it.value.loss!! - it.value.commissions!! }
         .sum()
 
+    fun searchSignalByLongestPosition(): PositionTestResult? {
+        val maxPositionDurationSeconds = getMaxPositionDurationSeconds()
+        return signalTestingResults.entries
+            .filter { it.value.getPositionDurationInSeconds(data.timeframe) == maxPositionDurationSeconds }
+            .map { it.value }
+            .firstOrNull()
+    }
+
+    fun searchSignalByLoss(loss: Double): PositionTestResult? {
+        return signalTestingResults.entries
+            .filter { !it.value.profitable && it.value.loss == loss }
+            .map { it.value }
+            .firstOrNull()
+    }
+
+    fun searchSignalByProfit(profit: Double): PositionTestResult? {
+        return signalTestingResults.entries
+            .filter { it.value.profitable && it.value.profit == profit }
+            .map { it.value }
+            .firstOrNull()
+    }
+
+
+
     private fun lossesCollection() = signalTestingResults.entries
         .filter { !it.value.profitable }
         .map { it.value.loss!! }

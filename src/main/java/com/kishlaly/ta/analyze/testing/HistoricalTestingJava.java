@@ -207,10 +207,10 @@ public class HistoricalTestingJava {
         }
     }
 
-    public PositionTestResultJava searchSignalByProfit(double value) {
+    public PositionTestResultJava searchSignalByLoss(double value) {
         Optional<Map.Entry<QuoteJava, PositionTestResultJava>> first = signalTestingResults.entrySet()
                 .stream()
-                .filter(entrySet -> entrySet.getValue().isProfitable() && entrySet.getValue().getProfit() == value).findFirst();
+                .filter(entrySet -> !entrySet.getValue().isProfitable() && entrySet.getValue().getLoss() == value).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {
@@ -218,10 +218,10 @@ public class HistoricalTestingJava {
         }
     }
 
-    public PositionTestResultJava searchSignalByLoss(double value) {
+    public PositionTestResultJava searchSignalByProfit(double value) {
         Optional<Map.Entry<QuoteJava, PositionTestResultJava>> first = signalTestingResults.entrySet()
                 .stream()
-                .filter(entrySet -> !entrySet.getValue().isProfitable() && entrySet.getValue().getLoss() == value).findFirst();
+                .filter(entrySet -> entrySet.getValue().isProfitable() && entrySet.getValue().getProfit() == value).findFirst();
         if (first.isPresent()) {
             return first.get().getValue();
         } else {
