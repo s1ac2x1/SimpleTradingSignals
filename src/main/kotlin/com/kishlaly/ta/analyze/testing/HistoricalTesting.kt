@@ -68,6 +68,21 @@ class HistoricalTesting(
 
     fun getMaxLoss() = lossesCollection().max()
 
+    fun getTotalProfit() = signalTestingResults.entries
+        .filter { it.value.profitable }
+        .map { it.value.profit!! - it.value.commissions!! }
+        .sum()
+
+    fun getAverageRoi() = signalTestingResults.entries
+        .filter { it.value.profitable }
+        .map { it.value.roi!! }
+        .average().round()
+
+    fun getTotalLoss() = signalTestingResults.entries
+        .filter { !it.value.profitable }
+        .map { it.value.loss!! - it.value.commissions!! }
+        .sum()
+
     private fun lossesCollection() = signalTestingResults.entries
         .filter { !it.value.profitable }
         .map { it.value.loss!! }
