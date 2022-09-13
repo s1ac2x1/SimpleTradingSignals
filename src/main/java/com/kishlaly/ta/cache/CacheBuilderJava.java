@@ -132,7 +132,7 @@ public class CacheBuilderJava {
                 {TimeframeJava.WEEK, TimeframeJava.DAY},
         };
         List<HistoricalTestingJava> result = new ArrayList<>();
-        ContextJava.stopLossStrategy = new StopLossFixedPrice(0.27);
+        ContextJava.stopLossStrategy = new StopLossFixedPriceJava(0.27);
         ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
 
         // TODO Here we need to test a Cartesian set of blocks
@@ -312,7 +312,7 @@ public class CacheBuilderJava {
 
     public static List<StopLossStrategyJava> getSLStrategies() {
         return new ArrayList<StopLossStrategyJava>() {{
-            add(new StopLossFixedPrice(0.27));
+            add(new StopLossFixedPriceJava(0.27));
             add(new StopLossFixedKeltnerBottomJava());
             add(new StopLossVolatileKeltnerBottom(80));
             add(new StopLossVolatileKeltnerBottom(100));

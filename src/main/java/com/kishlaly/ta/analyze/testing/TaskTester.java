@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.testing;
 import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtils;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
-import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
+import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPriceJava;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategyJava;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava;
@@ -286,7 +286,7 @@ public class TaskTester {
             throw new RuntimeException("Only one symbol allowed here");
         }
         // SL/TP are not important here, it is important what signal or error code in a particular date
-        ContextJava.stopLossStrategy = new StopLossFixedPrice(0.27);
+        ContextJava.stopLossStrategy = new StopLossFixedPriceJava(0.27);
         ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
         BlocksGroupJava[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
         List<HistoricalTestingJava> testings = Arrays.stream(blocksGroups).flatMap(blocksGroup -> test(timeframes, task, blocksGroup).stream()).collect(Collectors.toList());
@@ -301,7 +301,7 @@ public class TaskTester {
     public static void testMass(TimeframeJava[][] timeframes, TaskTypeJava task, BlocksGroupJava blocksGroup) {
         ContextJava.massTesting = true;
 
-        StopLossStrategyJava stopLossStrategy = new StopLossFixedPrice(0.27);
+        StopLossStrategyJava stopLossStrategy = new StopLossFixedPriceJava(0.27);
         ContextJava.stopLossStrategy = stopLossStrategy;
 
         ContextJava.takeProfitStrategies = new ArrayList<>();

@@ -1,7 +1,7 @@
 package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
-import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
+import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPriceJava;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.TimeframeJava;
 
@@ -39,7 +39,7 @@ public class RunUtils {
 //                    add(new ThreeDisplays_Buy_EFI_3());
 //                    add(new ThreeDisplays_Buy_Experiments());
                 }},
-                new StopLossFixedPrice(0.27), new TakeProfitFixedKeltnerTop(70));
+                new StopLossFixedPriceJava(0.27), new TakeProfitFixedKeltnerTop(70));
     }
 
     // format: dd.mm.yyyy
@@ -52,7 +52,7 @@ public class RunUtils {
                 ContextJava.basicTimeframes,
                 THREE_DISPLAYS_BUY,
                 strategy,
-                new StopLossFixedPrice(0.27),
+                new StopLossFixedPriceJava(0.27),
                 new TakeProfitFixedKeltnerTop(80));
 
     }

@@ -8,11 +8,11 @@ import java.util.Comparator;
 /**
  * SL is selected by {config} below the lowest quote.low of the {LAST_QUOTES_TO_FIND_MIN} bars before the signal quote
  */
-public class StopLossFixedPrice extends StopLossStrategyJava {
+public class StopLossFixedPriceJava extends StopLossStrategyJava {
 
     public static int LAST_QUOTES_TO_FIND_MIN = 20;
 
-    public StopLossFixedPrice(Object config) {
+    public StopLossFixedPriceJava(Object config) {
         super(config, false);
     }
 
