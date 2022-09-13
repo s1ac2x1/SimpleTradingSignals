@@ -5,7 +5,7 @@ import com.kishlaly.ta.model.indicators.Indicator
 data class SymbolData(
     val symbol: String,
     val timeframe: Timeframe,
-    val quotes: List<Quote>,
+    var quotes: List<Quote>,
     var indicators: MutableMap<Indicator, List<out AbstractModel>> = mutableMapOf()
 ) {
 
