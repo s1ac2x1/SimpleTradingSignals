@@ -1,12 +1,17 @@
 package com.kishlaly.ta.cache
 
 import com.google.common.collect.Lists
+import com.kishlaly.ta.analyze.TaskType
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.testing.HistoricalTestingJava
+import com.kishlaly.ta.analyze.testing.sl.*
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.loaders.Alphavantage
 import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.utils.ContextJava
+import com.kishlaly.ta.utils.FileUtils
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -114,7 +119,59 @@ class CacheBuilder {
 
     fun saveTable(result: List<HistoricalTestingJava>) {
         val table = StringBuilder("<table>")
+        val groupBy = result
+            .groupBy { it.symbol }
+            .forEach { bySymbol ->
+                val symbol = bySymbol.key
+                table.append("<tr>")
+                table.append("<td style=\"vertical-align: left;\">$symbol</td>")
+                table.append("<td>")
+                val innerTable = StringBuilder("<table>")
+                val testings = bySymbol.value.sortedBy { it.balance }
+                testings.groupBy { it.blocksGroup }.entries
+                    .forEach { byTask ->
+                        val blocksGroup = byTask.key
+                        val historicalTestings = byTask.value
+                        val best = historicalTestings[historicalTestings.size - 1]
+                        innerTable.append("<tr>")
+                        innerTable.append("<td style=\"vertical-align: top text-align: left;\">${blocksGroup.javaClass.simpleName}</td>")
+                        innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>")
 
+                        innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">${best.printTPSLNumber()}</td>")
+                        innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>")
+
+                        innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">${best.printTPSLPercent()}</td>")
+                        innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>")
+
+                        innerTable.append("<td style=\"vertical-align: top text-align: left;\">${best.balance}</td>")
+                        innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>")
+
+                        innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">${best.stopLossStrategy}</td>")
+                        innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>")
+
+                        innerTable.append("<td style=\"vertical-align: top text-align: left; white-space: nowrap;\">${best.takeProfitStrategy}</td>")
+                        innerTable.append("<td style=\"vertical-align: top text-align: center;\">&nbsp;&nbsp;&nbsp;</td>")
+
+                        innerTable.append("</tr>")
+                    }
+                innerTable.append("</table>")
+                table.append(innerTable)
+                table.append("</td>")
+                table.append("</tr>")
+            }
+        table.append("</table>")
+        FileUtils.writeToFile("tests/table.html", table.toString())
+    }
+
+    fun buildTasksAndStrategiesSummary(
+        timeframes: Array<Array<Timeframe>>,
+        task: TaskType,
+        blocksGroups: List<BlocksGroup>,
+        stopLossStrategy: StopLossStrategy,
+        takeProfitStrategy: TakeProfitStrategy
+    ) {
+        val result = mutableListOf<HistoricalTestingJava>()
+        val total = getSLStrategies().size * getTPStrategies().size
     }
 
     private fun saveQuote(symbol: String, quotes: List<Quote>) {
