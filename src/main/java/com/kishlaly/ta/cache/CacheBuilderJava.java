@@ -313,7 +313,7 @@ public class CacheBuilderJava {
     public static List<StopLossStrategyJava> getSLStrategies() {
         return new ArrayList<StopLossStrategyJava>() {{
             add(new StopLossFixedPrice(0.27));
-            add(new StopLossFixedKeltnerBottom());
+            add(new StopLossFixedKeltnerBottomJava());
             add(new StopLossVolatileKeltnerBottom(80));
             add(new StopLossVolatileKeltnerBottom(100));
             add(new StopLossVolatileLocalMin(0.27));
