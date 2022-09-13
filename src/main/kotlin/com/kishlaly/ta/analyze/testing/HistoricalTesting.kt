@@ -22,6 +22,17 @@ class HistoricalTesting(
     val signalTestingResults: MutableMap<Quote, PositionTestResult> = mutableMapOf()
 ) {
 
+    val symbol: String
+        get() {
+            return data.symbol
+        }
+
+    // loss is negative
+    val balance: Double
+        get() {
+            return (getTotalProfit() + getTotalLoss()).round()
+        }
+
     fun addTestResult(signal: Quote, positionTestResult: PositionTestResult) {
         signalTestingResults.put(signal, positionTestResult)
     }
@@ -112,13 +123,6 @@ class HistoricalTesting(
     fun printTPSLNumber() = "${getProfitablePositionsCount()}/${getLossPositionsCount()}"
 
     fun printTPSLPercent() = "${getSuccessfulRatio()}% / ${getLossRatio()}%"
-
-    // loss is negative
-    fun getBalance() = (getTotalProfit() + getTotalLoss()).round()
-
-    fun getSymbol(): String? {
-        return data.symbol
-    }
 
     private fun lossesCollection() = signalTestingResults.entries
         .filter { !it.value.profitable }

@@ -3,7 +3,7 @@ package com.kishlaly.ta.cache
 import com.google.common.collect.Lists
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
-import com.kishlaly.ta.analyze.testing.HistoricalTestingJava
+import com.kishlaly.ta.analyze.testing.HistoricalTesting
 import com.kishlaly.ta.analyze.testing.sl.*
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
@@ -12,7 +12,6 @@ import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.loaders.Alphavantage
 import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.Timeframe
-import com.kishlaly.ta.utils.ContextJava
 import com.kishlaly.ta.utils.FileUtils
 import java.io.File
 import java.nio.file.Files
@@ -52,7 +51,7 @@ class CacheBuilder {
             timeframes.forEach { screens ->
                 screens.forEach { screen ->
                     Context.timeframe = screen
-                    val file = File(CacheReader.getFolder() + ContextJava.fileSeparator + "missed.txt")
+                    val file = File(CacheReader.getFolder() + Context.fileSeparator + "missed.txt")
                     if (file.exists()) {
                         file.delete()
                     }
@@ -120,7 +119,7 @@ class CacheBuilder {
         }
     }
 
-    fun saveTable(result: List<HistoricalTestingJava>) {
+    fun saveTable(result: List<HistoricalTesting>) {
         val table = StringBuilder("<table>")
         val groupBy = result
             .groupBy { it.symbol }
@@ -173,16 +172,26 @@ class CacheBuilder {
         stopLossStrategy: StopLossStrategy,
         takeProfitStrategy: TakeProfitStrategy
     ) {
-        val result = mutableListOf<HistoricalTestingJava>()
+        val result = mutableListOf<HistoricalTesting>()
         val total = getSLStrategies().size * getTPStrategies().size
         val current = AtomicInteger(1)
         if (stopLossStrategy == null || takeProfitStrategy == null) {
             getSLStrategies().forEach { sl ->
                 getTPStrategies().forEach { tp ->
-                    Context.stopLossStrategy = sl;
+                    Context.stopLossStrategy = sl
+                    Context.takeProfitStrategy = tp
+                    println("${current.get().toString()}/${total} ${sl} / ${tp}")
+                    blocksGroups.forEach { group -> result.addAll(test(timeframes, task, group)) }
+                    current.getAndIncrement()
                 }
             }
+        } else {
+            Context.stopLossStrategy = stopLossStrategy
+            Context.takeProfitStrategy = takeProfitStrategy
+            blocksGroups.forEach { group -> result.addAll(test(timeframes, task, group)) }
         }
+        saveTable(result)
+        saveSummaryPerGroup(result)
     }
 
     fun getSLStrategies() = listOf<StopLossStrategy>(
