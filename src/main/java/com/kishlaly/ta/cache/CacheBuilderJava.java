@@ -314,8 +314,8 @@ public class CacheBuilderJava {
         return new ArrayList<StopLossStrategyJava>() {{
             add(new StopLossFixedPriceJava(0.27));
             add(new StopLossFixedKeltnerBottomJava());
-            add(new StopLossVolatileKeltnerBottom(80));
-            add(new StopLossVolatileKeltnerBottom(100));
+            add(new StopLossVolatileKeltnerBottomJava(80));
+            add(new StopLossVolatileKeltnerBottomJava(100));
             add(new StopLossVolatileLocalMin(0.27));
             add(new StopLossVolatileATRJava());
         }};
