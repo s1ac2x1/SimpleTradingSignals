@@ -49,10 +49,10 @@ class Context {
 
         // for testing on historical data
         var testMode = false
-        var stopLossStrategy = StopLossFixedPrice(0.27)
-        var takeProfitStrategy = TakeProfitFixedKeltnerTop(80)
+        var stopLossStrategy: StopLossStrategy = StopLossFixedPrice(0.27)
+        var takeProfitStrategy: TakeProfitStrategy = TakeProfitFixedKeltnerTop(80)
         var massTesting = false
-        var takeProfitStrategies: List<TakeProfitStrategy> = null
+        var takeProfitStrategies: List<TakeProfitStrategy>? = null
 
         // misc
         var trendCheckIncludeHistogram = true
