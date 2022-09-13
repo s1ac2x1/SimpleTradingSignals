@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.TaskTypeJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.HistoricalTestingJava;
 import com.kishlaly.ta.analyze.testing.sl.*;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTopJava;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
 import com.kishlaly.ta.loaders.AlphavantageJava;
@@ -133,7 +133,7 @@ public class CacheBuilderJava {
         };
         List<HistoricalTestingJava> result = new ArrayList<>();
         ContextJava.stopLossStrategy = new StopLossFixedPriceJava(0.27);
-        ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTop(100);
+        ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTopJava(100);
 
         // TODO Here we need to test a Cartesian set of blocks
         //result.addAll(test(timeframes, task, BlocksGroup));
@@ -323,8 +323,8 @@ public class CacheBuilderJava {
 
     public static List<TakeProfitStrategyJava> getTPStrategies() {
         return new ArrayList<TakeProfitStrategyJava>() {{
-            add(new TakeProfitFixedKeltnerTop(80));
-            add(new TakeProfitFixedKeltnerTop(100));
+            add(new TakeProfitFixedKeltnerTopJava(80));
+            add(new TakeProfitFixedKeltnerTopJava(100));
             add(new TakeProfitVolatileKeltnerTop(80));
             add(new TakeProfitVolatileKeltnerTop(100));
         }};

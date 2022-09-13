@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.testing.tp
 
 import com.kishlaly.ta.model.SymbolData
 
-class TakeProfitDisabled : TakeProfitStrategy() {
+class TakeProfitDisabled : TakeProfitStrategy(enabled = false) {
 
     override fun calculate(data: SymbolData, signalIndex: Int) = -1.0
 

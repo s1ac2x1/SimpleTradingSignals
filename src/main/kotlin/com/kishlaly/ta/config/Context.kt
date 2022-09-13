@@ -2,7 +2,7 @@ package com.kishlaly.ta.config
 
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPriceJava
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategyJava
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTopJava
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava
 import com.kishlaly.ta.model.ApiSource
 import com.kishlaly.ta.model.SymbolsSource
@@ -51,7 +51,8 @@ class Context {
         var testMode = false
         var stopLossStrategy: StopLossStrategyJava =
             StopLossFixedPriceJava(0.27)
-        var takeProfitStrategy: TakeProfitStrategyJava = TakeProfitFixedKeltnerTop(80)
+        var takeProfitStrategy: TakeProfitStrategyJava =
+            TakeProfitFixedKeltnerTopJava(80)
         var massTesting = false
         var takeProfitStrategies: List<TakeProfitStrategyJava>? = null
 

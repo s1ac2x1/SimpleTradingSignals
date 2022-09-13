@@ -7,9 +7,9 @@ import com.kishlaly.ta.utils.IndicatorUtilsJava;
 /**
  * TP at % level from the middle to the top of the Keltner channel
  */
-public class TakeProfitFixedKeltnerTop extends TakeProfitStrategyJava {
+public class TakeProfitFixedKeltnerTopJava extends TakeProfitStrategyJava {
 
-    public TakeProfitFixedKeltnerTop(Object config) {
+    public TakeProfitFixedKeltnerTopJava(Object config) {
         super(config, false);
     }
 

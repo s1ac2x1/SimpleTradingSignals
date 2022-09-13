@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtils;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPriceJava;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategyJava;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTopJava;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava;
 import com.kishlaly.ta.cache.IndicatorsInMemoryCacheJava;
 import com.kishlaly.ta.cache.QuotesInMemoryCacheJava;
@@ -287,7 +287,7 @@ public class TaskTester {
         }
         // SL/TP are not important here, it is important what signal or error code in a particular date
         ContextJava.stopLossStrategy = new StopLossFixedPriceJava(0.27);
-        ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTop(30);
+        ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTopJava(30);
         BlocksGroupJava[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
         List<HistoricalTestingJava> testings = Arrays.stream(blocksGroups).flatMap(blocksGroup -> test(timeframes, task, blocksGroup).stream()).collect(Collectors.toList());
         ZonedDateTime parsed = shortDateToZoned(datePart);
@@ -306,7 +306,7 @@ public class TaskTester {
 
         ContextJava.takeProfitStrategies = new ArrayList<>();
         for (int i = 80; i <= 100; i++) {
-            TakeProfitStrategyJava tp = new TakeProfitFixedKeltnerTop(i);
+            TakeProfitStrategyJava tp = new TakeProfitFixedKeltnerTopJava(i);
             ContextJava.takeProfitStrategies.add(tp);
         }
         test(timeframes, task, blocksGroup);
