@@ -7,7 +7,7 @@ import com.kishlaly.ta.analyze.testing.HistoricalTestingJava;
 import com.kishlaly.ta.analyze.testing.sl.*;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTopJava;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava;
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTopJava;
 import com.kishlaly.ta.loaders.AlphavantageJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.TimeframeJava;
@@ -325,8 +325,8 @@ public class CacheBuilderJava {
         return new ArrayList<TakeProfitStrategyJava>() {{
             add(new TakeProfitFixedKeltnerTopJava(80));
             add(new TakeProfitFixedKeltnerTopJava(100));
-            add(new TakeProfitVolatileKeltnerTop(80));
-            add(new TakeProfitVolatileKeltnerTop(100));
+            add(new TakeProfitVolatileKeltnerTopJava(80));
+            add(new TakeProfitVolatileKeltnerTopJava(100));
         }};
     }
 
