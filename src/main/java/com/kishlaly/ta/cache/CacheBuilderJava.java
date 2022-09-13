@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.analyze.testing.TaskTesterJava.test;
 import static com.kishlaly.ta.cache.CacheReaderJava.*;
 import static com.kishlaly.ta.utils.ContextJava.*;
 import static com.kishlaly.ta.utils.FileUtilsJava.writeToFile;

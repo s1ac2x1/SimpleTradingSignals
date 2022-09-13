@@ -36,7 +36,7 @@ import static com.kishlaly.ta.utils.DatesJava.shortDateToZoned;
 import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
 import static java.lang.System.lineSeparator;
 
-public class TaskTester {
+public class TaskTesterJava {
 
     private static StringBuilder testLog = new StringBuilder();
 

@@ -23,7 +23,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.kishlaly.ta.analyze.testing.TaskTester.test;
+import static com.kishlaly.ta.analyze.testing.TaskTesterJava.test;
 import static com.kishlaly.ta.cache.CacheBuilderJava.getSLStrategies;
 import static com.kishlaly.ta.cache.CacheBuilderJava.getTPStrategies;
 import static com.kishlaly.ta.cache.CacheReaderJava.*;
