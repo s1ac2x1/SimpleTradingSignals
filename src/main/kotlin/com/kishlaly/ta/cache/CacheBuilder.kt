@@ -5,7 +5,9 @@ import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.testing.HistoricalTestingJava
 import com.kishlaly.ta.analyze.testing.sl.*
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitVolatileKeltnerTop
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.loaders.Alphavantage
 import com.kishlaly.ta.model.Quote
@@ -173,6 +175,22 @@ class CacheBuilder {
         val result = mutableListOf<HistoricalTestingJava>()
         val total = getSLStrategies().size * getTPStrategies().size
     }
+
+    fun getSLStrategies() = listOf<StopLossStrategy>(
+        StopLossFixedPrice(0.27),
+        StopLossFixedKeltnerBottom(),
+        StopLossVolatileKeltnerBottom(80),
+        StopLossVolatileKeltnerBottom(100),
+        StopLossVolatileLocalMin(0.27),
+        StopLossVolatileATR()
+    )
+
+    fun getTPStrategies() = listOf<TakeProfitStrategy>(
+        TakeProfitFixedKeltnerTop(80),
+        TakeProfitFixedKeltnerTop(100),
+        TakeProfitVolatileKeltnerTop(80),
+        TakeProfitVolatileKeltnerTop(100)
+    )
 
     private fun saveQuote(symbol: String, quotes: List<Quote>) {
         val folder = "${Context.outputFolder}/cache/{${Context.timeframe.name.lowercase()}}"
