@@ -6,7 +6,12 @@ import com.kishlaly.ta.cache.CacheReader
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
+import com.kishlaly.ta.utils.FileUtils
 import com.kishlaly.ta.utils.Quotes
+import java.io.File
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -27,7 +32,7 @@ class TaskTester {
             timeframes.forEach { screens ->
                 task.updateTimeframeForScreen(1, screens[0])
                 task.updateTimeframeForScreen(2, screens[1])
-                val readableOutput = mutableMapOf<String, Set<String>>()
+                val readableOutput = mutableMapOf<String, MutableSet<String>>()
                 val currSymbol = AtomicInteger(1)
                 val totalSymbols = Context.symbols.size
                 Context.symbols.forEach { symbol ->
@@ -48,10 +53,109 @@ class TaskTester {
                         println(e.message)
                     }
                     if (!blockResults.isEmpty()) {
-                        
+                        var testing: HistoricalTesting? = null
+                        if (Context.massTesting) {
+                            if (Context.takeProfitStrategies != null) {
+                                Context.takeProfitStrategies.forEach { takeProfitStrategy ->
+                                    val massTesting = HistoricalTesting(
+                                        task,
+                                        blocksGroup,
+                                        symbolDataForTesting,
+                                        blockResults,
+                                        Context.stopLossStrategy,
+                                        takeProfitStrategy
+                                    )
+                                    calculateStatistics(massTesting)
+                                    allTests.add(massTesting)
+                                }
+                            }
+                        } else {
+                            testing = HistoricalTesting(
+                                task,
+                                blocksGroup,
+                                symbolDataForTesting,
+                                blockResults,
+                                Context.stopLossStrategy,
+                                Context.takeProfitStrategy
+                            )
+                            calculateStatistics(testing)
+                            allTests.add(testing)
+                            val key = "[${screens[0].name}][${screens[1]}] ${task.name} - ${symbol}"
+                            readableOutput.putIfAbsent(key, mutableSetOf())
+                            val signalResults = readableOutput[key]
+                            signalResults!!.add(formatTestingSummary(testing))
+
+                            // at this stage HistoricalTesting contains tests of positions by signals
+                            // as well as all failure results
+                            // TaskResult.lastChartQuote can be null if the strategy did not have enough quotes for the test
+
+                            // first print the item report
+
+                            printPositionsReport(screen2.timeframe, testing, signalResults)
+
+                            // then a log of all other quotes with the reason why the strategy failed
+
+                            // then a log of all other quotes with the reason why the strategy failed
+                            printNoSignalsReport(screen2.timeframe, testing, signalResults)
+
+                            readableOutput[key] = signalResults
+
+                        }
+                    }
+
+                    // hint for GC
+                    clean(screen1, screen2)
+                }
+                if (!Context.massTesting) {
+                    readableOutput.forEach { (key, data) ->
+                        data.forEach { log.append("    $it").append(System.lineSeparator()) }
+                        log.append(System.lineSeparator())
                     }
                 }
             }
+            val directory = File(Context.TESTS_FOLDER)
+            if (!directory.exists()) {
+                directory.mkdir()
+            }
+            if (!Context.massTesting) {
+                try {
+                    Files.write(
+                        Paths.get(Context.TESTS_FOLDER + Context.fileSeparator + Context.SINGLE_TXT),
+                        log.toString().toByteArray()
+                    )
+                } catch (e: IOException) {
+                    println(e.message)
+                }
+            } else {
+                val builder = StringBuilder()
+                allTests.forEach { testing ->
+                    if (Context.takeProfitStrategies != null) {
+                        builder
+                            .append("TP: ${testing.printTP()} => TP/SL = ${testing.printTPSLNumber()} (${testing.printTPSLPercent()}); balance = ${testing.balance}")
+                            .append(System.lineSeparator())
+                    }
+                    try {
+                        Files.write(
+                            Paths.get(Context.TESTS_FOLDER + Context.fileSeparator + Context.MASS_TXT),
+                            builder.toString().toByteArray()
+                        )
+                    } catch (e: IOException) {
+                        println(e.message)
+                    }
+                }
+            }
+            return allTests
+        }
+
+        private fun calculateStatistics(historicalTesting: HistoricalTesting) {
+            historicalTesting.blocksResults
+                .filter { it.isOk() }
+                .forEach { testPosition(it, historicalTesting) }
+            testLog.append(historicalTesting.symbol + System.lineSeparator())
+            FileUtils.writeToFile(
+                "${Context.outputFolder}${Context.fileSeparator}stats${Context.fileSeparator}${historicalTesting.symbol}_test_log.txt",
+                TaskTester.testLog.toString()
+            )
         }
 
         private fun rewind(

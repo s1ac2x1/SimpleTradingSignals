@@ -52,7 +52,7 @@ class Context {
         var stopLossStrategy: StopLossStrategy = StopLossFixedPrice(0.27)
         var takeProfitStrategy: TakeProfitStrategy = TakeProfitFixedKeltnerTop(80)
         var massTesting = false
-        var takeProfitStrategies: List<TakeProfitStrategy>? = null
+        var takeProfitStrategies: List<TakeProfitStrategy> = mutableListOf()
 
         // misc
         var trendCheckIncludeHistogram = true
