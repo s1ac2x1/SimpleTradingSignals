@@ -21,6 +21,7 @@ import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
 
 class CacheBuilder {
@@ -174,6 +175,14 @@ class CacheBuilder {
     ) {
         val result = mutableListOf<HistoricalTestingJava>()
         val total = getSLStrategies().size * getTPStrategies().size
+        val current = AtomicInteger(1)
+        if (stopLossStrategy == null || takeProfitStrategy == null) {
+            getSLStrategies().forEach { sl ->
+                getTPStrategies().forEach { tp ->
+                    Context.stopLossStrategy = sl;
+                }
+            }
+        }
     }
 
     fun getSLStrategies() = listOf<StopLossStrategy>(
