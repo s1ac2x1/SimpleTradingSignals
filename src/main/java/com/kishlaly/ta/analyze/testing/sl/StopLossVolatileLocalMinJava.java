@@ -8,11 +8,11 @@ import java.util.Comparator;
 /**
  * SL is selected by {config} below the lowest quote.low of the {QUOTES_TO_FIND_MIN} bars before the current quote
  */
-public class StopLossVolatileLocalMin extends StopLossStrategyJava {
+public class StopLossVolatileLocalMinJava extends StopLossStrategyJava {
 
     public static int QUOTES_TO_FIND_MIN = 20;
 
-    public StopLossVolatileLocalMin(Object config) {
+    public StopLossVolatileLocalMinJava(Object config) {
         super(config, true);
     }
 
