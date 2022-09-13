@@ -317,7 +317,7 @@ public class CacheBuilderJava {
             add(new StopLossVolatileKeltnerBottom(80));
             add(new StopLossVolatileKeltnerBottom(100));
             add(new StopLossVolatileLocalMin(0.27));
-            add(new StopLossVolatileATR());
+            add(new StopLossVolatileATRJava());
         }};
     }
 
