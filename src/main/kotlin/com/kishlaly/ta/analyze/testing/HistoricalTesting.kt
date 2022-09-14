@@ -47,23 +47,23 @@ class HistoricalTesting(
 
     val lossPositionsCount = signalTestingResults.entries.filter { !it.value.profitable }.count()
 
-    fun getMinPositionDurationSeconds() = positionDuration().min()
+    val minPositionDurationSeconds = positionDurationCollection().min()
 
-    fun getAveragePositionDurationSeconds() = positionDuration().average().round()
+    val averagePositionDurationSeconds = positionDurationCollection().average().round()
 
-    fun getMaxPositionDurationSeconds() = positionDuration().max()
+    val maxPositionDurationSeconds = positionDurationCollection().max()
 
-    fun getMinProfit() = profitsCollection().min()
+    val minProfit = profitsCollection().min()
 
-    fun getAvgProfit() = profitsCollection().average().round()
+    val avgProfit = profitsCollection().average().round()
 
-    fun getMaxProfit() = profitsCollection().max()
+    val maxProfit = profitsCollection().max()
 
-    fun getMinLoss() = lossesCollection().min()
+    val minLoss = lossesCollection().min()
 
-    fun getAvgLoss() = lossesCollection().average().round()
+    val avgLoss = lossesCollection().average().round()
 
-    fun getMaxLoss() = lossesCollection().max()
+    val maxLoss = lossesCollection().max()
 
     val totalProfit: Double
         get() = signalTestingResults.entries
@@ -90,7 +90,6 @@ class HistoricalTesting(
     fun getResult(signal: Quote) = signalTestingResults.get(signal)
 
     fun searchSignalByLongestPosition(): PositionTestResult? {
-        val maxPositionDurationSeconds = getMaxPositionDurationSeconds()
         return signalTestingResults.entries
             .filter { it.value.getPositionDurationInSeconds(data.timeframe) == maxPositionDurationSeconds }
             .map { it.value }
@@ -115,9 +114,9 @@ class HistoricalTesting(
 
     fun printTP() = takeProfitStrategy.toString()
 
-    fun printTPSLNumber() = "${getProfitablePositionsCount()}/${getLossPositionsCount()}"
+    fun printTPSLNumber() = "${profitablePositionsCount}/${lossPositionsCount}"
 
-    fun printTPSLPercent() = "${getSuccessfulRatio()}% / ${getLossRatio()}%"
+    fun printTPSLPercent() = "${successfulRatio}% / ${lossRatio}%"
 
     private fun lossesCollection() = signalTestingResults.entries
         .filter { !it.value.profitable }
@@ -128,7 +127,7 @@ class HistoricalTesting(
         .filter { it.value.profit != null }
         .map { it.value.profit!! }
 
-    private fun positionDuration() = signalTestingResults.entries
+    private fun positionDurationCollection() = signalTestingResults.entries
         .filter { it.value.closed }
         .map { it.value.getPositionDurationInSeconds(data.timeframe) }
 
