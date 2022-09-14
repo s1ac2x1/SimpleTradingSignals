@@ -6,10 +6,13 @@ import com.kishlaly.ta.cache.CacheReader
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
+import com.kishlaly.ta.utils.ContextJava
 import com.kishlaly.ta.utils.FileUtils
 import com.kishlaly.ta.utils.Quotes
+import com.kishlaly.ta.utils.round
 import java.io.File
 import java.io.IOException
+import java.lang.System.lineSeparator
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.concurrent.atomic.AtomicBoolean
@@ -108,8 +111,8 @@ class TaskTester {
                 }
                 if (!Context.massTesting) {
                     readableOutput.forEach { (key, data) ->
-                        data.forEach { log.append("    $it").append(System.lineSeparator()) }
-                        log.append(System.lineSeparator())
+                        data.forEach { log.append("    $it").append(lineSeparator()) }
+                        log.append(lineSeparator())
                     }
                 }
             }
@@ -132,7 +135,7 @@ class TaskTester {
                     if (Context.takeProfitStrategies != null) {
                         builder
                             .append("TP: ${testing.printTP()} => TP/SL = ${testing.printTPSLNumber()} (${testing.printTPSLPercent()}); balance = ${testing.balance}")
-                            .append(System.lineSeparator())
+                            .append(lineSeparator())
                     }
                     try {
                         Files.write(
@@ -151,7 +154,7 @@ class TaskTester {
             historicalTesting.blocksResults
                 .filter { it.isOk() }
                 .forEach { testPosition(it, historicalTesting) }
-            testLog.append(historicalTesting.symbol + System.lineSeparator())
+            testLog.append(historicalTesting.symbol + lineSeparator())
             FileUtils.writeToFile(
                 "${Context.outputFolder}${Context.fileSeparator}stats${Context.fileSeparator}${historicalTesting.symbol}_test_log.txt",
                 TaskTester.testLog.toString()
@@ -228,6 +231,38 @@ class TaskTester {
                 }
             }
             return hasHistory.get()
+        }
+
+        fun formatTestingSummary(testing: HistoricalTesting): String {
+            val timeframesInfo =
+                "[${testing.taskType.getTimeframeForScreen(1)}][${testing.taskType.getTimeframeForScreen(2)}]"
+            val result = StringBuilder()
+
+            result
+                .append(timeframesInfo).append(" ")
+                .append(testing.data.symbol).append(" - ")
+                .append(testing.taskType.name).append(" - ")
+                .append(testing.blocksGroup.javaClass.getSimpleName()).append(lineSeparator())
+
+            result
+                .append("\ttrendCheckIncludeHistogram = ")
+                .append(Context.trendCheckIncludeHistogram).append(lineSeparator())
+
+            result
+                .append("\teach trade size = $").append(Context.accountBalance).append(lineSeparator())
+
+            result.append("\t${testing.printSL()}${lineSeparator()}")
+            result.append("\t${testing.printTP()}${lineSeparator()}")
+            result.append("\tTP/SL = ").append(testing.printTPSLNumber()).append(" = ")
+            result.append(testing.printTPSLPercent()).append(lineSeparator())
+
+            result
+                .append("\tTotal profit after ").append(Context.tradeCommission)
+                .append("% commissions per trade = ").append(testing.balance.round())
+                .append(lineSeparator())
+
+            result.append("\tTotal profit / loss = ").append(testing.getTotalProfit())
+
         }
 
     }

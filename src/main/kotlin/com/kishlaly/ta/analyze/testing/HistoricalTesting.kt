@@ -22,44 +22,30 @@ class HistoricalTesting(
     val signalTestingResults: MutableMap<Quote, PositionTestResult> = mutableMapOf()
 ) {
 
-    val symbol: String
-        get() {
-            return data.symbol
-        }
+    val symbol = data.symbol
 
     // loss is negative
-    val balance: Double
+    val balance = (totalProfit + totalLoss).round()
+
+    val successfulRatio: Double
         get() {
-            return (getTotalProfit() + getTotalLoss()).round()
+            return if (allPositionsCount == 0) {
+                0.0
+            } else Numbers.percent(profitablePositionsCount.toDouble(), allPositionsCount.toDouble())
         }
 
-    fun addTestResult(signal: Quote, positionTestResult: PositionTestResult) {
-        signalTestingResults.put(signal, positionTestResult)
-    }
+    val lossRatio: Double
+        get() {
+            return if (allPositionsCount == 0) {
+                0.0
+            } else Numbers.percent(lossPositionsCount.toDouble(), allPositionsCount.toDouble())
+        }
 
-    fun getResult(signal: Quote) = signalTestingResults.get(signal)
+    val allPositionsCount = signalTestingResults.entries.filter { it.value.closed }.count()
 
-    fun getSuccessfulRatio(): Double {
-        val allPositions = getAllPositionsCount()
-        val profitablePositions = getProfitablePositionsCount()
-        return if (allPositions == 0) {
-            0.0
-        } else Numbers.percent(profitablePositions.toDouble(), allPositions.toDouble())
-    }
+    val profitablePositionsCount = signalTestingResults.entries.filter { it.value.profitable }.count()
 
-    fun getLossRatio(): Double {
-        val allPositions = getAllPositionsCount()
-        val lossPossitions = getLossPositionsCount()
-        return if (allPositions == 0) {
-            0.0
-        } else Numbers.percent(lossPossitions.toDouble(), allPositions.toDouble())
-    }
-
-    fun getAllPositionsCount() = signalTestingResults.entries.filter { it.value.closed }.count()
-
-    fun getProfitablePositionsCount() = signalTestingResults.entries.filter { it.value.profitable }.count()
-
-    fun getLossPositionsCount() = signalTestingResults.entries.filter { !it.value.profitable }.count()
+    val lossPositionsCount = signalTestingResults.entries.filter { !it.value.profitable }.count()
 
     fun getMinPositionDurationSeconds() = positionDuration().min()
 
@@ -79,20 +65,29 @@ class HistoricalTesting(
 
     fun getMaxLoss() = lossesCollection().max()
 
-    fun getTotalProfit() = signalTestingResults.entries
-        .filter { it.value.profitable }
-        .map { it.value.profit!! - it.value.commissions!! }
-        .sum()
+    val totalProfit: Double
+        get() = signalTestingResults.entries
+            .filter { it.value.profitable }
+            .map { it.value.profit!! - it.value.commissions!! }
+            .sum()
 
-    fun getAverageRoi() = signalTestingResults.entries
-        .filter { it.value.profitable }
-        .map { it.value.roi!! }
-        .average().round()
+    val averageRoi: Double
+        get() = signalTestingResults.entries
+            .filter { it.value.profitable }
+            .map { it.value.roi!! }
+            .average().round()
 
-    fun getTotalLoss() = signalTestingResults.entries
-        .filter { !it.value.profitable }
-        .map { it.value.loss!! - it.value.commissions!! }
-        .sum()
+    val totalLoss: Double
+        get() = signalTestingResults.entries
+            .filter { !it.value.profitable }
+            .map { it.value.loss!! - it.value.commissions!! }
+            .sum()
+
+    fun addTestResult(signal: Quote, positionTestResult: PositionTestResult) {
+        signalTestingResults.put(signal, positionTestResult)
+    }
+
+    fun getResult(signal: Quote) = signalTestingResults.get(signal)
 
     fun searchSignalByLongestPosition(): PositionTestResult? {
         val maxPositionDurationSeconds = getMaxPositionDurationSeconds()
