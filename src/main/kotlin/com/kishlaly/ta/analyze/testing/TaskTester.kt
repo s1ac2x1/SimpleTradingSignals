@@ -92,10 +92,7 @@ class TaskTester {
                             // TaskResult.lastChartQuote can be null if the strategy did not have enough quotes for the test
 
                             // first print the item report
-
                             printPositionsReport(screen2.timeframe, testing, signalResults)
-
-                            // then a log of all other quotes with the reason why the strategy failed
 
                             // then a log of all other quotes with the reason why the strategy failed
                             printNoSignalsReport(screen2.timeframe, testing, signalResults)
@@ -299,6 +296,36 @@ class TaskTester {
             result.append("\tavg profit / loss = ${testing.avgProfit} / ${testing.avgLoss}").append(lineSeparator())
 
             return result.toString()
+        }
+
+        fun printPositionsReport(timeframe: Timeframe, testing: HistoricalTesting, report: Set<String>) {
+            testing.blocksResults
+                .filter { it.lastChartQuote != null }
+                .filter { it.isOk() }
+                .forEach { taskResult ->
+                    val line = StringBuilder()
+                    val quote = taskResult.lastChartQuote
+                    val quoteDateFormatted = formatDate(timeframe, quote.timestamp)
+                    // результаты тестирования сигналов
+                    val positionTestResult = testing.getResult(quote);
+                    if (!positionTestResult!!.closed) {
+                        line.append(" NOT CLOSED")
+                    } else {
+                        line.append(if (positionTestResult.profitable) "PROFIT " else "LOSS ")
+                        line.append(positionTestResult.roi).append("%")
+                        line.append(if (positionTestResult.gapUp) " (gap up)" else "")
+                        line.append(if (positionTestResult.gapDown) " (gap down)" else "")
+                        line.append(" ${positionTestResult.getPositionDuration(timeframe)}")
+                        val endDate =
+                            Dates.getBarTimeInMyZone(positionTestResult.closedTimestamp!!, exchangeTimezome).toString()
+                        val parsed = ZonedDateTime.parse(endDate)
+                        var parsedEndDate = parsed.dayOfMonth.toString() + " " + parsed.month + " " + parsed.year
+                        if (timeframe == Timeframe.HOUR) {
+                            parsedEndDate += " ${parsed.hour}:${parsed.minute}"
+                        }
+                        line.append(" [till ${parsedEndDate}]")
+                    }
+                }
         }
 
         private fun formatByTPSL(
