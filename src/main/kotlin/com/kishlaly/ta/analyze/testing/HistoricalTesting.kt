@@ -103,6 +103,8 @@ class HistoricalTesting(
             .firstOrNull()
     }
 
+    // TODO do not pass here value from the same object, but rather rename
+    // TODO the same for other similar methods
     fun searchSignalByProfit(profit: Double): PositionTestResult? {
         return signalTestingResults.entries
             .filter { it.value.profitable && it.value.profit == profit }

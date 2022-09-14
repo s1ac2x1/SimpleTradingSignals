@@ -6,15 +6,14 @@ import com.kishlaly.ta.cache.CacheReader
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
-import com.kishlaly.ta.utils.ContextJava
-import com.kishlaly.ta.utils.FileUtils
-import com.kishlaly.ta.utils.Quotes
-import com.kishlaly.ta.utils.round
+import com.kishlaly.ta.utils.*
 import java.io.File
 import java.io.IOException
 import java.lang.System.lineSeparator
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.time.ZonedDateTime
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -261,8 +260,90 @@ class TaskTester {
                 .append("% commissions per trade = ").append(testing.balance.round())
                 .append(lineSeparator())
 
-            result.append("\tTotal profit / loss = ").append(testing.getTotalProfit())
+            result.append("\tTotal profit / loss = ${testing.totalProfit}")
+                .append(" /${testing.totalLoss}").append(lineSeparator())
 
+            val longestPositionRange = formatRange(testing) { it.searchSignalByLongestPosition() }
+            when (testing.data.timeframe) {
+                Timeframe.DAY -> {
+                    result
+                        .append("\tmin duration = ")
+                        .append(TimeUnit.SECONDS.toDays(testing.minPositionDurationSeconds))
+                        .append(" days").append(lineSeparator())
+                        .append("\tmax duration = ")
+                        .append(TimeUnit.SECONDS.toDays(testing.maxPositionDurationSeconds))
+                        .append(" days ").append(longestPositionRange).append(lineSeparator())
+                        .append("\tavg duration = ")
+                        .append(TimeUnit.SECONDS.toDays(testing.averagePositionDurationSeconds.toLong()))
+                        .append(" days").append(lineSeparator())
+                }
+                Timeframe.HOUR -> {
+                    result
+                        .append("\tmin duration = ")
+                        .append(TimeUnit.SECONDS.toHours(testing.minPositionDurationSeconds))
+                        .append(" hours").append(lineSeparator())
+                        .append("\tmax duration = ")
+                        .append(TimeUnit.SECONDS.toHours(testing.maxPositionDurationSeconds))
+                        .append(" hours").append(lineSeparator()) // TODO сюда тоже диапазон
+                        .append("\tavg duration = ")
+                        .append(TimeUnit.SECONDS.toHours(testing.averagePositionDurationSeconds.toLong()))
+                        .append(" hours").append(lineSeparator())
+
+                }
+                else -> {}
+            }
+            testing.searchSignalByProfit(testing.minProfit)?.let { byMinProfit ->
+                result
+                    .append("\tmin profit = ")
+                    .append(byMinProfit.roi)
+                    .append("% ")
+                    .append(formatRange(testing, byMinProfit))
+                    .append(lineSeparator())
+            }
+            return result.toString()
+        }
+
+        private fun formatRange(
+            testing: HistoricalTesting,
+            positionTestResult: PositionTestResult
+        ): String {
+            val output = StringBuilder()
+            positionTestResult?.let {
+                output
+                    .append("[")
+                    .append(
+                        formatDate(
+                            testing.data.timeframe,
+                            positionTestResult.openedTimestamp!!
+                        )
+                    )
+                    .append(" - ")
+                    .append(
+                        formatDate(
+                            testing.data.timeframe,
+                            positionTestResult.closedTimestamp!!
+                        )
+                    )
+                    .append("]")
+            }
+            return output.toString()
+        }
+
+        private fun formatRange(
+            testing: HistoricalTesting,
+            function: (HistoricalTesting) -> PositionTestResult?
+        ): String {
+            return formatRange(testing, function(testing)!!)
+        }
+
+        private fun formatDate(timeframe: Timeframe, timestamp: Long): String {
+            var date = Dates.getBarTimeInMyZone(timestamp, exchangeTimezome).toString()
+            val parsedDate = ZonedDateTime.parse(date)
+            date = "${parsedDate.dayOfMonth.toString()} ${parsedDate.month} ${parsedDate.year}"
+            if (timeframe == Timeframe.HOUR) {
+                date += " ${parsedDate.hour}:${parsedDate.minute}"
+            }
+            return date
         }
 
     }
