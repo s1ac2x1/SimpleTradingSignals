@@ -2,11 +2,16 @@ package com.kishlaly.ta.analyze.testing
 
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
-import com.kishlaly.ta.cache.*
+import com.kishlaly.ta.cache.CacheReader
+import com.kishlaly.ta.cache.IndicatorsInMemoryCache
+import com.kishlaly.ta.cache.QuotesInMemoryCache
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
-import com.kishlaly.ta.utils.*
+import com.kishlaly.ta.utils.Dates
+import com.kishlaly.ta.utils.FileUtils
+import com.kishlaly.ta.utils.Quotes
+import com.kishlaly.ta.utils.round
 import java.io.File
 import java.io.IOException
 import java.lang.System.lineSeparator
@@ -412,6 +417,10 @@ class TaskTester {
             IndicatorsInMemoryCache.clear()
             screen1.indicators.clear()
             screen2.indicators.clear()
+        }
+
+        private fun testPosition(blockResult: BlockResult, historicalTesting: HistoricalTesting) {
+
         }
 
     }
