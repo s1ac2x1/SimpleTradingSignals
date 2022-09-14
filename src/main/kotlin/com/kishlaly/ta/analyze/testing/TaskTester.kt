@@ -292,12 +292,27 @@ class TaskTester {
                 }
                 else -> {}
             }
-            testing.searchSignalByProfit(testing.minProfit)?.let { byMinProfit ->
+            result.append(formatByTPSL(testing, testing.searchSignalByProfit(testing.minProfit), "\tmin profit = "))
+            result.append(formatByTPSL(testing, testing.searchSignalByProfit(testing.maxProfit), "\tmax profit = "))
+            result.append(formatByTPSL(testing, testing.searchSignalByProfit(testing.minLoss), "\tmin loss = "))
+            result.append(formatByTPSL(testing, testing.searchSignalByProfit(testing.maxLoss), "\tmax loss = "))
+            result.append("\tavg profit / loss = ${testing.avgProfit} / ${testing.avgLoss}").append(lineSeparator())
+
+            return result.toString()
+        }
+
+        private fun formatByTPSL(
+            testing: HistoricalTesting,
+            positionTestResult: PositionTestResult?,
+            title: String
+        ): String {
+            val result = StringBuilder()
+            positionTestResult?.let { value ->
                 result
-                    .append("\tmin profit = ")
-                    .append(byMinProfit.roi)
+                    .append(title)
+                    .append(value.roi)
                     .append("% ")
-                    .append(formatRange(testing, byMinProfit))
+                    .append(formatRange(testing, value))
                     .append(lineSeparator())
             }
             return result.toString()
