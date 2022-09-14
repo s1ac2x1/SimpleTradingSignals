@@ -85,6 +85,14 @@ class IndicatorsInMemoryCache {
             return copy.sortedBy { it.timestamp }
         }
 
+        fun clear() {
+            ema.clear()
+            macd.clear()
+            keltner.clear()
+            atr.clear()
+            stochastic.clear()
+        }
+
     }
 
 }

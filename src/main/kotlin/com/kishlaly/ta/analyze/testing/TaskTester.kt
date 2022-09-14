@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.testing
 
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
-import com.kishlaly.ta.cache.CacheReader
+import com.kishlaly.ta.cache.*
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
@@ -298,7 +298,7 @@ class TaskTester {
             return result.toString()
         }
 
-        fun printPositionsReport(timeframe: Timeframe, testing: HistoricalTesting, report: Set<String>) {
+        fun printPositionsReport(timeframe: Timeframe, testing: HistoricalTesting, report: MutableSet<String>) {
             testing.blocksResults
                 .filter { it.lastChartQuote != null }
                 .filter { it.isOk() }
@@ -325,6 +325,25 @@ class TaskTester {
                         }
                         line.append(" [till ${parsedEndDate}]")
                     }
+                    report.add(quoteDateFormatted + " --- " + line)
+                }
+        }
+
+        fun printNoSignalsReport(
+            timeframe: Timeframe,
+            testing: HistoricalTesting,
+            signalResults: MutableSet<String>
+        ) {
+            signalResults.add(lineSeparator())
+            signalResults.add(lineSeparator())
+            signalResults.add(lineSeparator())
+            testing.blocksResults
+                .filter { it.lastChartQuote != null }
+                .filter { !it.isOk() }
+                .forEach { taskResult ->
+                    val quoteDateFormatted =
+                        formatDate(timeframe, taskResult.lastChartQuote.timestamp)
+                    signalResults.add("${quoteDateFormatted} ### ${taskResult.code}")
                 }
         }
 
@@ -386,6 +405,13 @@ class TaskTester {
                 date += " ${parsedDate.hour}:${parsedDate.minute}"
             }
             return date
+        }
+
+        private fun clean(screen1: SymbolData, screen2: SymbolData) {
+            QuotesInMemoryCache.clear()
+            IndicatorsInMemoryCache.clear()
+            screen1.indicators.clear()
+            screen2.indicators.clear()
         }
 
     }
