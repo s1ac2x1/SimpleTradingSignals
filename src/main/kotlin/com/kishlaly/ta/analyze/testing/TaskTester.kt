@@ -2,6 +2,7 @@ package com.kishlaly.ta.analyze.testing
 
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava
 import com.kishlaly.ta.cache.CacheReader
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache
 import com.kishlaly.ta.cache.QuotesInMemoryCache
@@ -420,6 +421,26 @@ class TaskTester {
         }
 
         private fun testPosition(blockResult: BlockResult, historicalTesting: HistoricalTesting) {
+            val positionTestResult = PositionTestResult()
+            val signal = blockResult.lastChartQuote
+            var signalIndex = -1
+            for (i in 0 until historicalTesting.data.quotes.size) {
+                if (historicalTesting.data.quotes[i].timestamp.compareTo(signal.timestamp) == 0) {
+                    signalIndex = i
+                    break
+                }
+            }
+            // minimal amount of quotes in the chart
+            if (signalIndex <= Context.MIN_POSSIBLE_QUOTES) {
+                return
+            }
+            val data = historicalTesting.data
+
+            val stopLossStrategy = historicalTesting.stopLossStrategy
+            val stopLoss = stopLossStrategy.calculate(data, signalIndex)
+
+            val takeProfitStrategy = historicalTesting.takeProfitStrategy
+            val takeProfit = takeProfitStrategy.calcualte(data, signalIndex)
 
         }
 
