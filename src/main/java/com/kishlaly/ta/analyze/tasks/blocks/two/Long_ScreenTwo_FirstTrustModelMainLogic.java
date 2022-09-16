@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultCodeJava;
-import com.kishlaly.ta.analyze.tasks.FirstTrustModel;
+import com.kishlaly.ta.analyze.tasks.FirstTrustModelJava;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
@@ -18,7 +18,7 @@ public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlockJa
         QuoteJava signal = lastChartQuote;
 
         // look for the minimum for the last MONTHS months in one of the last 10 columns
-        int days = FirstTrustModel.Config.MONTHS * 21;
+        int days = FirstTrustModelJava.Config.MONTHS * 21;
         QuoteJava nMonthsLow = screen.quotes.subList(screen.quotes.size() - days, screen.quotes.size())
                 .stream()
                 .min(Comparator.comparing(quote -> quote.getLow())).get();
