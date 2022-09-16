@@ -35,7 +35,7 @@ import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
  * @author Vladimir Kishlaly
  * @since 18.11.2021
  */
-public class TaskRunner {
+public class TaskRunnerJava {
 
     public static List<Signal> signals = new ArrayList<>();
 

@@ -1,6 +1,7 @@
 package com.kishlaly.ta.utils
 
 import com.kishlaly.ta.model.Quote
+import com.kishlaly.ta.model.SymbolData
 import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.model.exchangeTimezome
 import java.time.DayOfWeek
@@ -22,7 +23,8 @@ class Quotes {
 
                     // check the day of the week for the next quote and programmatically calculate the next day for the current one
                     val currentQuoteDate = Dates.getTimeInExchangeZone(currentQuote.timestamp, exchangeTimezome)
-                    val currentQuotePlusOneDayDate = Dates.getTimeInExchangeZone(currentQuote.timestamp, exchangeTimezome).plusDays(1)
+                    val currentQuotePlusOneDayDate =
+                        Dates.getTimeInExchangeZone(currentQuote.timestamp, exchangeTimezome).plusDays(1)
                     val nextQuoteDate = Dates.getTimeInExchangeZone(nextQuote.timestamp, exchangeTimezome)
 
                     // If the next quote is exactly one day later - we are within the working week
@@ -67,7 +69,8 @@ class Quotes {
             val duringDay = mutableListOf<Quote>()
             for (i in 0 until hourQuotes.size - 1) {
                 val currentQuote = hourQuotes[i]
-                val currentQuoteDayOfWeek: DayOfWeek = Dates.getTimeInExchangeZone(currentQuote.timestamp, exchangeTimezome).getDayOfWeek()
+                val currentQuoteDayOfWeek: DayOfWeek =
+                    Dates.getTimeInExchangeZone(currentQuote.timestamp, exchangeTimezome).getDayOfWeek()
                 val nextQuote = hourQuotes[i + 1]
                 val nextQuoteDayOfWeek = Dates.getTimeInExchangeZone(nextQuote.timestamp, exchangeTimezome).dayOfWeek
                 if (currentQuoteDayOfWeek == nextQuoteDayOfWeek) {
@@ -105,6 +108,16 @@ class Quotes {
             return 21
         }
 
+        fun trim(screen: SymbolData) {
+            if (!screen.quotes.isNullOrEmpty()) {
+                screen.quotes = screen.quotes.subList(
+                    screen.quotes.size - resolveMinBarsCount(screen.timeframe),
+                    screen.quotes.size
+                )
+            } else {
+                screen.quotes = listOf()
+            }
+        }
 
     }
 

@@ -13,4 +13,8 @@ data class SymbolData(
         get() {
             return quotes.last()
         }
+
+    fun clear() {
+        indicators.clear()
+    }
 }
