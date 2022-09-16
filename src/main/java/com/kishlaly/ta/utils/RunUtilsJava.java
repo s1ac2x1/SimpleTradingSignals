@@ -13,7 +13,7 @@ import static com.kishlaly.ta.analyze.testing.TaskTesterJava.testAllStrategiesOn
 import static com.kishlaly.ta.analyze.testing.TaskTesterJava.testOneStrategy;
 import static com.kishlaly.ta.cache.CacheBuilderJava.buildTasksAndStrategiesSummary;
 
-public class RunUtils {
+public class RunUtilsJava {
 
     public static void buildTasksAndStrategiesSummary_() {
         buildTasksAndStrategiesSummary(

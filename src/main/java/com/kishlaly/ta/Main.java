@@ -4,10 +4,10 @@ import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4;
 import com.kishlaly.ta.model.SymbolsSourceJava;
 import com.kishlaly.ta.model.TimeframeJava;
 import com.kishlaly.ta.utils.ContextJava;
-import com.kishlaly.ta.utils.RunUtils;
+import com.kishlaly.ta.utils.RunUtilsJava;
 
 import static com.kishlaly.ta.cache.CacheReaderJava.getSymbols;
-import static com.kishlaly.ta.utils.RunUtils.singleSymbol;
+import static com.kishlaly.ta.utils.RunUtilsJava.singleSymbol;
 
 /**
  * @author Vladimir Kishlaly
@@ -23,7 +23,7 @@ public class Main {
         singleSymbol("AAPL"); // for single test
         ContextJava.symbols = getSymbols();
         //buildCache(Context.basicTimeframes, false);
-        RunUtils.testOneStrategy_(new ThreeDisplays_Buy_4());
+        RunUtilsJava.testOneStrategy_(new ThreeDisplays_Buy_4());
 
     }
 }
