@@ -30,7 +30,29 @@ class TrendFunctions {
             minBarCount: Int,
             barsToCheck: Int
         ): Boolean {
-            return abstractTrendCheckOnMultipleBars()
+            return abstractTrendCheckOnMultipleBars(
+                symbolData,
+                minBarCount,
+                barsToCheck,
+                { quote: Quote -> quote.open < quote.close },
+                { quote: Quote, ema: EMA -> quote.open > ema.value && quote.close > ema.value },
+                { next: Double, curr: Double -> next <= curr },
+                { curr: Double, next: Double -> curr < next },
+                { curr: Double, next: Double -> curr > next }
+            )
+        }
+
+        fun downtrendCheckOnMultipleBars(symbolData: SymbolData, minBarsCount: Int, barsToCheck: Int): Boolean {
+            return abstractTrendCheckOnMultipleBars(
+                symbolData,
+                minBarsCount,
+                barsToCheck,
+                { quote: Quote -> quote.open > quote.close },
+                { quote: Quote, ema: EMA -> quote.open < ema.value && quote.close < ema.value },
+                { next: Double, curr: Double -> next >= curr },
+                { curr: Double, next: Double -> curr > next },
+                { curr: Double, next: Double -> curr < next }
+            )
         }
 
         private fun abstractTrendCheckOnMultipleBars(
