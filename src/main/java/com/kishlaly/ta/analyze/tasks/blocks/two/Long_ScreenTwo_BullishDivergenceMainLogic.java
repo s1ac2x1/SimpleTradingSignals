@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
 import com.kishlaly.ta.model.BlockResultCodeJava;
-import com.kishlaly.ta.analyze.tasks.Divergencies;
+import com.kishlaly.ta.analyze.tasks.DivergenciesJava;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.HistogramQuoteJava;
 import com.kishlaly.ta.model.SymbolDataJava;
@@ -170,7 +170,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
             }
 
             if (histogramWentAboveZeroAgainAfterHistogramCrossedZeroFromTop) {
-                if (Divergencies.BullishConfig.ALLOW_MULTIPLE_ISLANDS) {
+                if (DivergenciesJava.BullishConfig.ALLOW_MULTIPLE_ISLANDS) {
                     if (histogramQuotes.get(histogramQuotes.size() - 1).getQuote().getClose()
                             < priceInLowestHistogramBar) {
                         // OK, we observe manually
@@ -195,7 +195,7 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
                     .min(Comparator.comparingDouble(HistogramQuoteJava::getHistogramValue)).get().histogramValue;
             if (Math.abs(lowestHistogramAfterCrossedZeroFromTop) >= Math.abs(quoteWithLowestHistogram.histogramValue) / 100 * 60) {
                 LogJava.recordCode(HISTOGRAM_SECOND_BOTTOM_RATIO, screen);
-                LogJava.addDebugLine("The second bottom of the histogram is larger than " + Divergencies.BullishConfig.SECOND_BOTTOM_RATIO + "% of the first bottom depth");
+                LogJava.addDebugLine("The second bottom of the histogram is larger than " + DivergenciesJava.BullishConfig.SECOND_BOTTOM_RATIO + "% of the first bottom depth");
                 return new BlockResultJava(screen.getLastQuote(), HISTOGRAM_SECOND_BOTTOM_RATIO);
             }
 
@@ -210,9 +210,9 @@ public class Long_ScreenTwo_BullishDivergenceMainLogic implements ScreenTwoBlock
 
             // exclude long tails of negative histograms at the right edge, which often occur in a downtrend on a larger timeframe
             long tailCount = histogramQuotes.subList(indexOfQuoteWhenHistogramCrossedZeroFromTop, histogramQuotes.size()).stream().count();
-            if (tailCount >= Divergencies.BullishConfig.MAX_TAIL_SIZE) {
+            if (tailCount >= DivergenciesJava.BullishConfig.MAX_TAIL_SIZE) {
                 LogJava.recordCode(NEGATIVE_HISTOGRAMS_LIMIT, screen);
-                LogJava.addDebugLine("At the right edge has piled " + tailCount + " negative histograms (limit: " + Divergencies.BullishConfig.MAX_TAIL_SIZE + ")");
+                LogJava.addDebugLine("At the right edge has piled " + tailCount + " negative histograms (limit: " + DivergenciesJava.BullishConfig.MAX_TAIL_SIZE + ")");
                 return new BlockResultJava(screen.getLastQuote(), NEGATIVE_HISTOGRAMS_LIMIT);
             }
 

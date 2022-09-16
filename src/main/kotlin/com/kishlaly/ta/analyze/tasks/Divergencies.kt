@@ -1,4 +1,4 @@
-package com.kishlaly.ta.analyze.tasks;
+package com.kishlaly.ta.analyze.tasks
 
 /**
  * For a bullish divergence, the stock price must be above $3; for a bearish divergence, it must be above $10. Trading volume on
@@ -22,13 +22,13 @@ package com.kishlaly.ta.analyze.tasks;
  * @author Vladimir Kishlaly
  * @since 18.11.2021
  */
-public class Divergencies extends AbstractTaskJava {
+class Divergencies {
 
-    public static class BullishConfig {
-        public static boolean ALLOW_ON_BEARISH_TREND = true; // divergences often occur on horizontal long-term trends
-        public static boolean ALLOW_MULTIPLE_ISLANDS = true;
-        public static int MAX_TAIL_SIZE = 7;
-        public static int SECOND_BOTTOM_RATIO = 80;
+    object BullishConfig {
+        var ALLOW_ON_BEARISH_TREND = true // divergences often occur on horizontal long-term trends
+        var ALLOW_MULTIPLE_ISLANDS = true
+        var MAX_TAIL_SIZE = 7
+        var SECOND_BOTTOM_RATIO = 80
     }
 
 }

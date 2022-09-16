@@ -8,7 +8,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_BullishDivergence
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.kishlaly.ta.analyze.tasks.Divergencies.BullishConfig.ALLOW_ON_BEARISH_TREND;
+import static com.kishlaly.ta.analyze.tasks.DivergenciesJava.BullishConfig.ALLOW_ON_BEARISH_TREND;
 
 public class BullishDivergence_Buy_1 implements BlocksGroupJava {
 
