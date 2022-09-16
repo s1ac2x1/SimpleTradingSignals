@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.one;
 
-import com.kishlaly.ta.analyze.functions.TrendFunctions;
+import com.kishlaly.ta.analyze.functions.TrendFunctionsJava;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.utils.LogJava;
@@ -17,7 +17,7 @@ public class Long_ScreenOne_StrictTrendCheck implements ScreenOneBlockJava {
 
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
-        boolean uptrendCheckOnMultipleBars = TrendFunctions.uptrendCheckOnMultipleBars(screen, resolveMinBarsCount(screen.timeframe), NUMBER_OF_EMA26_VALUES_TO_CHECK);
+        boolean uptrendCheckOnMultipleBars = TrendFunctionsJava.uptrendCheckOnMultipleBars(screen, resolveMinBarsCount(screen.timeframe), NUMBER_OF_EMA26_VALUES_TO_CHECK);
         if (!uptrendCheckOnMultipleBars) {
             LogJava.recordCode(NO_UPTREND_SCREEN_1, screen);
             LogJava.addDebugLine("No uptrend detected on the long-term screen");

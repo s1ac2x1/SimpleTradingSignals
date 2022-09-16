@@ -6,7 +6,7 @@ data class SymbolData(
     val symbol: String,
     val timeframe: Timeframe,
     var quotes: List<Quote>,
-    var indicators: MutableMap<Indicator, List<out AbstractModel>> = mutableMapOf()
+    var indicators: MutableMap<Indicator, List<AbstractModel>> = mutableMapOf()
 ) {
 
     val lastQuote: Quote

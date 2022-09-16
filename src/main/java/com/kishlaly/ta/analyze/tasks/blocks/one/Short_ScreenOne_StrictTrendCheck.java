@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.one;
 
-import com.kishlaly.ta.analyze.functions.TrendFunctions;
+import com.kishlaly.ta.analyze.functions.TrendFunctionsJava;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.utils.LogJava;
@@ -16,7 +16,7 @@ import static com.kishlaly.ta.utils.QuotesJava.resolveMinBarsCount;
 public class Short_ScreenOne_StrictTrendCheck implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
-        boolean downtrendCheckOnMultipleBars = TrendFunctions.downtrendCheckOnMultipleBars(screen, resolveMinBarsCount(screen.timeframe), NUMBER_OF_EMA26_VALUES_TO_CHECK);
+        boolean downtrendCheckOnMultipleBars = TrendFunctionsJava.downtrendCheckOnMultipleBars(screen, resolveMinBarsCount(screen.timeframe), NUMBER_OF_EMA26_VALUES_TO_CHECK);
         if (!downtrendCheckOnMultipleBars) {
             LogJava.recordCode(NO_DOWNTREND_SCREEN_1, screen);
             LogJava.addDebugLine("No downtrend detected on the long-term screen");

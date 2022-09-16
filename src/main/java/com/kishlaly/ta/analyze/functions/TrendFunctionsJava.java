@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class TrendFunctions {
+public class TrendFunctionsJava {
 
     // Main rules of verification:
     // 1. At least half of the last N bars must be the right color (green on an uptrend or red on a downtrend)
