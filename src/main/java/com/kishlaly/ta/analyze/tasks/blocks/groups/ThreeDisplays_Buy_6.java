@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
-import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPriceJava;
@@ -27,7 +27,7 @@ public class ThreeDisplays_Buy_6 implements BlocksGroupJava {
         StopLossFixedPriceJava.LAST_QUOTES_TO_FIND_MIN = 40;
 
         return new ArrayList<TaskBlockJava>() {{
-            add(new ScreenBasicValidation());
+            add(new ScreenBasicValidationJava());
 
             add(new Long_ScreenOne_SoftTrendCheck());
 

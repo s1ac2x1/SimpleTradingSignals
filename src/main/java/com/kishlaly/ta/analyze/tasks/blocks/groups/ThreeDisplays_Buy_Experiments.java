@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
-import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_ThreeAscending;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FilterLateEntry;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending;
@@ -20,7 +20,7 @@ public class ThreeDisplays_Buy_Experiments implements BlocksGroupJava {
         ThreeDisplaysJava.Config.STOCH_CUSTOM = 30;
 
         return new ArrayList<TaskBlockJava>() {{
-            add(new ScreenBasicValidation());
+            add(new ScreenBasicValidationJava());
 
             add(new Long_ScreenOne_EMA_ThreeAscending());
 

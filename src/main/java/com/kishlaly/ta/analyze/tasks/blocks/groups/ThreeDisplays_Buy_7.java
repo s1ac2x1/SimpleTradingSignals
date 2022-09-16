@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava.Config;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
-import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
@@ -23,7 +23,7 @@ public class ThreeDisplays_Buy_7 implements BlocksGroupJava {
         Config.FILTER_BY_KELTNER = 10;
 
         return new ArrayList<TaskBlockJava>() {{
-            add(new ScreenBasicValidation());
+            add(new ScreenBasicValidationJava());
 
             add(new Long_ScreenOne_SoftTrendCheck());
 

@@ -22,7 +22,7 @@ data class Quote(
     }
 
     companion object {
-        fun empty() = Quote(-1, -1.0, -1.0, -1.0, -1.0, -1.0)
+        fun NaN() = Quote(-1, -1.0, -1.0, -1.0, -1.0, -1.0)
     }
 
 }

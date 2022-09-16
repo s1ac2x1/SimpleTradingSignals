@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
-import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
+import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Short_ScreenOne_StrictTrendCheck;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
@@ -12,7 +12,7 @@ public class ThreeDisplays_Sell_1 implements BlocksGroupJava {
 
     public List<TaskBlockJava> blocks() {
         return new ArrayList<TaskBlockJava>() {{
-            add(new ScreenBasicValidation());
+            add(new ScreenBasicValidationJava());
             add(new Short_ScreenOne_StrictTrendCheck());
 
             add(new Short_ScreenTwo_MACD_ThreeAboveZeroAndDescending());
