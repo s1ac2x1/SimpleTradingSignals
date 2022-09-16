@@ -4,7 +4,7 @@ import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.utils.Dates
 
 class PositionTestResult(
-        val openedTimestamp: Long? = null,
+        var openedTimestamp: Long? = null,
         var closedTimestamp: Long? = null,
         var openPositionPrice: Double? = null,
         var openPositionCost: Double? = null,

@@ -2,17 +2,13 @@ package com.kishlaly.ta.analyze.testing
 
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
-import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategyJava
 import com.kishlaly.ta.cache.CacheReader
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache
 import com.kishlaly.ta.cache.QuotesInMemoryCache
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
-import com.kishlaly.ta.utils.Dates
-import com.kishlaly.ta.utils.FileUtils
-import com.kishlaly.ta.utils.Quotes
-import com.kishlaly.ta.utils.round
+import com.kishlaly.ta.utils.*
 import java.io.File
 import java.io.IOException
 import java.lang.System.lineSeparator
@@ -437,11 +433,117 @@ class TaskTester {
             val data = historicalTesting.data
 
             val stopLossStrategy = historicalTesting.stopLossStrategy
-            val stopLoss = stopLossStrategy.calculate(data, signalIndex)
+            var stopLoss = stopLossStrategy.calculate(data, signalIndex)
 
             val takeProfitStrategy = historicalTesting.takeProfitStrategy
-            val takeProfit = takeProfitStrategy.calcualte(data, signalIndex)
+            var takeProfit = takeProfitStrategy.calculate(data, signalIndex)
 
+            val openingPrice = signal.close + 0.07
+            val lots = (Context.accountBalance / openingPrice).roundDown()
+            val openPositionSize = lots * openingPrice
+            val commissions = openPositionSize / 100 * Context.tradeCommission
+
+            val skip = openingPrice > takeProfit
+            if (!skip) {
+                testLog.append("signal ${signal.nativeDate}${lineSeparator()}")
+                testLog.append("\tSL: ${stopLoss.round()}${lineSeparator()}")
+                testLog.append("\tTP: ${takeProfit.round()}${lineSeparator()}")
+                testLog.append("\topen price: ${openingPrice.round()}${lineSeparator()}")
+            } else {
+                testLog.append("signal ${signal.nativeDate} SKIPPED")
+            }
+
+            var startPositionIndex = signalIndex
+            var profit = 0.0
+            var loss = 0.0
+            var profitable = false
+            var caughtGapUp = false
+            var caughtGapDown = false
+            var roi = 0.0
+            var closePositionPrice = 0.0
+            var closePositionCost = 0.0
+            var closePositionQuote = Quote.empty()
+
+            while (!skip && startPositionIndex < data.quotes.size - 1) {
+                startPositionIndex++
+                val nextQuote = data.quotes.get(startPositionIndex);
+                val tpInsideBar =
+                    if (takeProfitStrategy.enabled) nextQuote.low < takeProfit && nextQuote.high > takeProfit else false
+                val tpAtHigh = if (takeProfitStrategy.enabled) nextQuote.high == takeProfit else false
+                val gapUp = if (takeProfitStrategy.enabled) nextQuote.open > takeProfit else false
+
+                // closed on TP
+                if (tpInsideBar || tpAtHigh || gapUp) {
+                    if (gapUp) {
+                        takeProfit = nextQuote.open
+                    }
+                    val closingPositionSize = lots * takeProfit
+                    profit = closingPositionSize - openPositionSize
+                    roi = Numbers.roi(openPositionSize, closingPositionSize)
+                    profitable = true
+                    closePositionQuote = nextQuote
+                    caughtGapUp = gapUp
+                    closePositionPrice = takeProfit
+                    closePositionCost = closePositionPrice
+                    break
+                }
+
+                val slInsideBar = nextQuote.low < stopLoss && nextQuote.high > stopLoss
+                val slAtLow = nextQuote.low == stopLoss
+                val gapDown: Boolean = nextQuote.open < stopLoss
+
+                // closed on SL
+                if (slInsideBar || slAtLow || gapDown) {
+                    if (gapDown) {
+                        stopLoss = nextQuote.open
+                    }
+                    val closingPositionSize = lots * stopLoss
+                    loss = closingPositionSize - openPositionSize
+                    closePositionQuote = nextQuote
+                    caughtGapDown = gapDown
+                    roi = Numbers.roi(openPositionSize, closingPositionSize)
+                    closePositionPrice = stopLoss
+                    closePositionCost = closingPositionSize
+                    break
+                }
+
+                // cannot move the SL down
+                if (stopLossStrategy.isVolatile && stopLossStrategy.calculate(data, startPositionIndex) > stopLoss) {
+                    stopLoss = stopLossStrategy.calculate(data, startPositionIndex)
+                }
+
+                // cannot move TP down
+                if (takeProfitStrategy.isVolatile && takeProfitStrategy.calculate(
+                        data,
+                        startPositionIndex
+                    ) > takeProfit
+                ) {
+                    takeProfit = takeProfitStrategy.calculate(data, startPositionIndex)
+                }
+            }
+            if (closePositionQuote != null) {
+                positionTestResult.openedTimestamp = signal.timestamp
+                positionTestResult.closedTimestamp = closePositionQuote.timestamp
+                positionTestResult.closed = true
+                positionTestResult.profitable = profitable
+                positionTestResult.profit = profit
+                positionTestResult.commissions = commissions
+                positionTestResult.loss = loss
+                positionTestResult.gapUp = caughtGapUp
+                positionTestResult.gapDown = caughtGapDown
+                positionTestResult.roi = NumbersJava.round(roi)
+                positionTestResult.openPositionPrice = openingPrice
+                positionTestResult.openPositionCost = openPositionSize
+                positionTestResult.closePositionPrice = closePositionPrice
+                positionTestResult.closePositionCost = closePositionCost
+                testLog.append("\tclose price: ${closePositionPrice.round()}${lineSeparator()}")
+                testLog.append("\tclosed: ${closePositionQuote.nativeDate}${lineSeparator()}")
+                testLog.append("\tprofitable: ${profitable}${lineSeparator()}")
+                testLog.append("\tgap up: ${caughtGapUp}${lineSeparator()}")
+                testLog.append("\tgap down: ${caughtGapDown}${lineSeparator()}")
+            }
+            historicalTesting.addTestResult(signal, positionTestResult)
+            testLog.append(lineSeparator() + lineSeparator())
         }
 
     }
