@@ -4,6 +4,7 @@ import com.google.common.collect.Lists
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.testing.HistoricalTesting
+import com.kishlaly.ta.analyze.testing.TaskTester.Companion.test
 import com.kishlaly.ta.analyze.testing.sl.*
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
@@ -13,12 +14,15 @@ import com.kishlaly.ta.loaders.Alphavantage
 import com.kishlaly.ta.model.Quote
 import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.utils.FileUtils
+import com.kishlaly.ta.utils.round
 import java.io.File
+import java.lang.System.lineSeparator
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicReference
@@ -196,6 +200,40 @@ class CacheBuilder {
             saveSummaryPerGroup(result)
         }
 
+        fun saveSummaryPerGroup(result: List<HistoricalTesting>) {
+            val balances = TreeMap<Double, String>(Collections.reverseOrder())
+            var tpSL = mutableListOf<TPSL>()
+            var roi = mutableListOf<ROI>()
+            result
+                .groupBy { it.blocksGroup }
+                .entries.forEach { entry ->
+                    val group = entry.key
+                    val testings = entry.value
+                    val totalBalance = testings.map { it.balance }.sum().round()
+                    val groupName = group.javaClass.simpleName
+                    balances.put(totalBalance, groupName)
+                    val tp = testings.sumOf { it.profitablePositionsCount }
+                    val sl = testings.sumOf { it.lossPositionsCount }
+                    tpSL.add(TPSL(groupName, tp, sl))
+                    val roi_ = testings.map { it.averageRoi }.average()
+                    roi.add(ROI(groupName, roi_))
+                }
+            val output = StringBuilder()
+            balances.forEach { (k, v) -> output.append("${v}: ${k} ${lineSeparator()}") }
+            output.append(lineSeparator())
+            val c = Comparator { o1: TPSL, o2: TPSL ->
+                val l1 = if (o1.sl > 0) o1.tp / o1.sl else o1.tp
+                val l2 = if (o2.sl > 0) o2.tp / o2.sl else o2.tp
+                (l1 - l2).toInt()
+            }
+            tpSL.sortWith(c.reversed())
+            tpSL.forEach { output.append("${it.groupName}: TP/SL = ${it.tp} / ${it.sl} ${lineSeparator()}") }
+            output.append(lineSeparator())
+            roi.sortByDescending { it.roi }
+            roi.forEach { output.append("${it.groupName}: ${it.roi.round()}% ${lineSeparator()}") }
+            FileUtils.writeToFile("tests/summary.txt", output.toString())
+        }
+
         fun getSLStrategies() = listOf<StopLossStrategy>(
             StopLossFixedPrice(0.27),
             StopLossFixedKeltnerBottom(),
@@ -231,3 +269,7 @@ class CacheBuilder {
     }
 
 }
+
+data class TPSL(val groupName: String, val tp: Int, val sl: Int)
+
+data class ROI(val groupName: String, val roi: Double)
