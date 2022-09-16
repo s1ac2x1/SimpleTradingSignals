@@ -8,8 +8,13 @@ import com.kishlaly.ta.cache.QuotesInMemoryCache
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.Screens
 import com.kishlaly.ta.model.Timeframe
-import com.kishlaly.ta.utils.*
+import com.kishlaly.ta.utils.ContextJava
+import com.kishlaly.ta.utils.IndicatorUtils
+import com.kishlaly.ta.utils.Log
+import com.kishlaly.ta.utils.Quotes
 import com.kishlaly.ta.utils.Quotes.Companion.resolveMinBarsCount
+import java.io.File
+import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 
 class TaskRunner {
@@ -29,7 +34,7 @@ class TaskRunner {
                 task.updateTimeframeForScreen(2, screens[1])
                 Context.logTimeframe1 = screens[0]
                 Context.logTimeframe2 = screens[1]
-                twoTimeframeFunction(task, blocksGroups)
+                twoTimeframeFunction(task, *blocksGroups)
                 println("\n")
                 saveLog(task)
             }
@@ -96,6 +101,30 @@ class TaskRunner {
                 screen1.clear()
                 screen2.clear()
             }
+        }
+
+        private fun saveLog(task: TaskType) {
+            val d = File(Context.outputFolder + "/debug")
+            if (!d.exists()) {
+                d.mkdir()
+            }
+            val s = File(Context.outputFolder + "/signal")
+            if (!s.exists()) {
+                s.mkdir()
+            }
+            val prefix =
+                "[${Context.logTimeframe1?.name}][${Context.logTimeframe2?.name}][${Context.source[0].name}]"
+            val customDebugFolder =
+                Context.outputFolder + "/debug/" + prefix + task.name.lowercase(Locale.getDefault())
+            val d2 = File(customDebugFolder)
+            if (!d2.exists()) {
+                d2.mkdir()
+            }
+            //Log.saveSignal(Context.outputFolder + "/signal/" + prefix + task.name().toLowerCase() + ".txt");
+            //Log.saveDebug(customDebugFolder + "/all.txt");
+            //Log.saveCodes(customDebugFolder);
+            Log.saveSummary(ContextJava.outputFolder + "/signal/" + prefix + task.name.lowercase(Locale.getDefault()) + ".html")
+            Log.clear()
         }
     }
 
