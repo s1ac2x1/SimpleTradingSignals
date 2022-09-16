@@ -11,8 +11,8 @@ import java.util.List;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 import static com.kishlaly.ta.model.BlockResultCodeJava.QUOTE_CLOSED_ABOVE_KELTNER_RULE_SCREEN_2;
-import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.FILTER_BY_KELTNER;
-import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED;
+import static com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava.Config.FILTER_BY_KELTNER;
+import static com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava.Config.FILTER_BY_KELTNER_ENABLED;
 
 public class Long_ScreenTwo_FilterLateEntry implements ScreenTwoBlockJava {
     @Override

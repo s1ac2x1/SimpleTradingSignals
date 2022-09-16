@@ -22,7 +22,7 @@ package com.kishlaly.ta.analyze.tasks
  * @author Vladimir Kishlaly
  * @since 18.11.2021
  */
-class Divergencies {
+class Divergencies : AbstractTask() {
 
     object BullishConfig {
         var ALLOW_ON_BEARISH_TREND = true // divergences often occur on horizontal long-term trends

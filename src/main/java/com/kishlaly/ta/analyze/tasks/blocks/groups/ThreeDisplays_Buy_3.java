@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
-import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
+import com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
@@ -25,8 +25,8 @@ public class ThreeDisplays_Buy_3 implements BlocksGroupJava {
 
     public List<TaskBlockJava> blocks() {
         return new ArrayList<TaskBlockJava>() {{
-            ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3;
-            ThreeDisplays.Config.BOLLINGER_CROSSED_BOTTOM_BARS = 1;
+            ThreeDisplaysJava.Config.BOLLINGER_TOTAL_BARS_CHECK = 3;
+            ThreeDisplaysJava.Config.BOLLINGER_CROSSED_BOTTOM_BARS = 1;
 
             add(new ScreenBasicValidation());
 

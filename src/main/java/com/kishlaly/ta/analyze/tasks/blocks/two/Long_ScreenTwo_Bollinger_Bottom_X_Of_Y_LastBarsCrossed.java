@@ -11,8 +11,8 @@ import java.util.List;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.LAST_QUOTE_NOT_CROSSED_BOLLINGER_BOTTOM_SCREEN_2;
 import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
-import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.BOLLINGER_CROSSED_BOTTOM_BARS;
-import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK;
+import static com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava.Config.BOLLINGER_CROSSED_BOTTOM_BARS;
+import static com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava.Config.BOLLINGER_TOTAL_BARS_CHECK;
 import static com.kishlaly.ta.utils.QuotesJava.isQuoteCrossedBollingerBottom;
 
 /**

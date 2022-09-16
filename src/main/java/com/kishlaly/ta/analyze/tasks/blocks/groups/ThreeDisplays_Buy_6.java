@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
-import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
+import com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
@@ -23,7 +23,7 @@ import java.util.List;
 public class ThreeDisplays_Buy_6 implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
-        ThreeDisplays.Config.STOCH_CUSTOM = 20;
+        ThreeDisplaysJava.Config.STOCH_CUSTOM = 20;
         StopLossFixedPriceJava.LAST_QUOTES_TO_FIND_MIN = 40;
 
         return new ArrayList<TaskBlockJava>() {{

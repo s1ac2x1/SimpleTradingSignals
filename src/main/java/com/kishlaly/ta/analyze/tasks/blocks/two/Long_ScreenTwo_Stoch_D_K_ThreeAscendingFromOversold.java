@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_D_K_NOT_ASCENDING_FROM_OVERSOLD_SCREEN_2;
-import static com.kishlaly.ta.analyze.tasks.ThreeDisplays.Config.STOCH_OVERSOLD;
+import static com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava.Config.STOCH_OVERSOLD;
 
 public class Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromOversold implements ScreenTwoBlockJava {
     @Override

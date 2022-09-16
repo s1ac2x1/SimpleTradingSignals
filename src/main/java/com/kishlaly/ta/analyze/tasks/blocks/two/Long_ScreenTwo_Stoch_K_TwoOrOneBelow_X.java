@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two;
 
-import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
+import com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava;
 import com.kishlaly.ta.model.BlockResultJava;
 import com.kishlaly.ta.model.SymbolDataJava;
 import com.kishlaly.ta.model.indicators.IndicatorJava;
@@ -22,11 +22,11 @@ public class Long_ScreenTwo_Stoch_K_TwoOrOneBelow_X implements ScreenTwoBlockJav
         StochJava stoch2 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 2);
         StochJava stoch1 = screen_2_Stochastic.get(screen_2_Stochastic.size() - 1);
 
-        if (ThreeDisplays.Config.STOCH_CUSTOM < 0) {
+        if (ThreeDisplaysJava.Config.STOCH_CUSTOM < 0) {
             throw new RuntimeException("ThreeDisplays.Config.STOCH_CUSTOM not set");
         }
 
-        boolean oneBelowExtraLow = stoch2.getSlowK() < ThreeDisplays.Config.STOCH_CUSTOM || stoch1.getSlowK() < ThreeDisplays.Config.STOCH_CUSTOM;
+        boolean oneBelowExtraLow = stoch2.getSlowK() < ThreeDisplaysJava.Config.STOCH_CUSTOM || stoch1.getSlowK() < ThreeDisplaysJava.Config.STOCH_CUSTOM;
 
         if (!oneBelowExtraLow) {
             LogJava.recordCode(STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2, screen);

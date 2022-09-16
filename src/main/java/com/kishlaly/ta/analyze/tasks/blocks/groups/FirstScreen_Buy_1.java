@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
-import com.kishlaly.ta.analyze.tasks.ThreeDisplays;
+import com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosses;
@@ -24,8 +24,8 @@ import java.util.List;
 public class FirstScreen_Buy_1 implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
-        ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK = 7;
-        ThreeDisplays.Config.EMA26_ABOVE_BARS = 4;
+        ThreeDisplaysJava.Config.EMA26_TOTAL_BARS_CHECK = 7;
+        ThreeDisplaysJava.Config.EMA26_ABOVE_BARS = 4;
 
         return new ArrayList<TaskBlockJava>() {{
             add(new ScreenBasicValidation());
