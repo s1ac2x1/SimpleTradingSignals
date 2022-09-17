@@ -15,7 +15,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.THREE_EMA_NOT_ASCENDING_
 /**
  * the last three EMA are increasing
  */
-public class Long_ScreenOne_EMA_ThreeAscending implements ScreenOneBlockJava {
+public class Long_ScreenOne_EMA_ThreeAscendingJava implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<EMAJava> screen_1_EMA26 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA26);
