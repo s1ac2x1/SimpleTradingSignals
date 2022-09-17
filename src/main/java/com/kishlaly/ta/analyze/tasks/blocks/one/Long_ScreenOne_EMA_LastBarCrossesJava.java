@@ -16,7 +16,7 @@ import static com.kishlaly.ta.utils.QuotesJava.isQuoteCrossedEMA;
 /**
  * the last bar crosses the EMA26
  */
-public class Long_ScreenOne_EMA_LastBarCrosses implements ScreenOneBlockJava {
+public class Long_ScreenOne_EMA_LastBarCrossesJava implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<EMAJava> screen_1_EMA26 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA26);

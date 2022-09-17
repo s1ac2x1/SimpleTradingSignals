@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosses;
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrossesJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarHigher;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_MACD_LastAscending;
@@ -33,7 +33,7 @@ public class ThreeDisplays_Buy_4 implements BlocksGroupJava {
 
             add(new Long_ScreenOne_LastBarGreen());
             add(new Long_ScreenOne_LastBarHigher());
-            add(new Long_ScreenOne_EMA_LastBarCrosses());
+            add(new Long_ScreenOne_EMA_LastBarCrossesJava());
             add(new Long_ScreenOne_MACD_LastAscending());
 
             add(new Long_ScreenTwo_Bars_TwoHighAscending());
