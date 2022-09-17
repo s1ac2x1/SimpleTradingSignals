@@ -8,6 +8,9 @@ import com.kishlaly.ta.model.indicators.Indicator
 import com.kishlaly.ta.model.isCrossesEMA
 import com.kishlaly.ta.utils.Log
 
+/**
+ * the last bar crosses the EMA26
+ */
 class Long_ScreenOne_EMA_LastBarCrosses : ScreenOneBlock {
     override fun check(screen: SymbolData): BlockResult {
         val screen_1_EMA26 = screen.indicators[Indicator.EMA26] as List<EMA>

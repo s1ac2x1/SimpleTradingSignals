@@ -17,7 +17,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * the last bar crosses the EMA26 or higher
  */
-public class Long_ScreenOne_EMA_LastCrossesOrAbove implements ScreenOneBlockJava {
+public class Long_ScreenOne_EMA_LastCrossesOrAboveJava implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         QuoteJava lastQuote = screen.getLastQuote();
