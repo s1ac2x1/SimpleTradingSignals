@@ -17,4 +17,7 @@ data class SymbolData(
     fun clear() {
         indicators.clear()
     }
+
+    fun indicator(indicator: Indicator) = indicators[indicator]
+
 }
