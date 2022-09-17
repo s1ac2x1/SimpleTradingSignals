@@ -15,7 +15,7 @@ class Long_ScreenOne_EMA_X_OutOf_Y_Above : ScreenOneBlock {
         if (ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK < 0) {
             throw RuntimeException("ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK not set")
         }
-        if (ThreeDisplays.Config.EMA26_ABOVE_BARS < 0) {
+        if (ThreeDisplays.Config.EMA26_ABOVE_BARS < 0)
             throw RuntimeException("ThreeDisplays.Config.EMA26_ABOVE_BARS not set")
         }
 
