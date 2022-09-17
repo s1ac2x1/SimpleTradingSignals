@@ -1,5 +1,6 @@
 package com.kishlaly.ta.utils
 
+import com.kishlaly.ta.model.SymbolData
 import java.math.BigDecimal
 
 fun Double.round(): Double {
@@ -14,3 +15,5 @@ fun Double.roundDown(): Double {
     } else BigDecimal.valueOf(this).setScale(2, BigDecimal.ROUND_DOWN).toDouble()
 }
 
+fun SymbolData.isValid() =
+    !quotes.isNullOrEmpty() && quotes.size >= Quotes.resolveMinBarsCount(timeframe)
