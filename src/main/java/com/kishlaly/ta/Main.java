@@ -31,6 +31,8 @@ public class Main {
 /*
 TODO
 
+проверить все стратегии снова, потому что в процессе рефакторинга я находил ошибки в блоках
+
 try to expand Long_ScreenOne_SoftTrendCheck and require the last two green bars
 take the first screen check from type_4 into a separate subgroup and test it on other strategies
 
