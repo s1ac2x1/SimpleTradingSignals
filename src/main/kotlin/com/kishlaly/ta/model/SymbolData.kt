@@ -9,15 +9,11 @@ data class SymbolData(
     private var indicators: MutableMap<Indicator, List<AbstractModel>> = mutableMapOf()
 ) {
 
-    val lastQuote: Quote
-        get() {
-            return quotes.last()
-        }
+    val lastQuote = quotes.last()
 
-    val preLastQuote: Quote
-        get() {
-            return quotes[quotes.size - 2]
-        }
+    val preLastQuote = quotes[quotes.size - 2]
+
+    val quotesCount = quotes.size
 
     fun clear() {
         indicators.clear()
@@ -25,10 +21,10 @@ data class SymbolData(
 
     fun indicator(indicator: Indicator) = indicators[indicator]
 
+    fun allIndicators() = listOf(indicators)
+
     fun quote(index: Int) = quotes[index]
 
     fun allQuotes() = listOf(quotes)
-
-    fun allIndicators() = listOf(indicators)
 
 }
