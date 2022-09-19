@@ -2,6 +2,7 @@ package com.kishlaly.ta.model
 
 enum class BlockResultCode {
     OK,
+    CONFIGURATION_ERROR,
     NO_DATA_QUOTES,
     NO_DATA_INDICATORS,
     NO_DATA_MACD,
