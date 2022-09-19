@@ -15,7 +15,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * the last three values of the lower band are increasing
  */
-public class Long_ScreenTwo_Bollinger_Bottom_ThreeAscending implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_Bollinger_Bottom_ThreeAscendingJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<BollingerJava> screen_2_Bollinger = (List<BollingerJava>) screen.indicators.get(IndicatorJava.BOLLINGER);
