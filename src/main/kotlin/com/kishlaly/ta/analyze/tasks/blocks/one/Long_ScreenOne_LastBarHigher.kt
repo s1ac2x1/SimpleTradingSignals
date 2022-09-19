@@ -5,6 +5,9 @@ import com.kishlaly.ta.model.BlockResultCode
 import com.kishlaly.ta.model.SymbolData
 import com.kishlaly.ta.utils.Log
 
+/**
+ * the last quote is higher than the penultimate one
+ */
 class Long_ScreenOne_LastBarHigher : ScreenOneBlock {
     override fun check(screen: SymbolData): BlockResult {
         val lastBarHigher = (screen.lastQuote.low > screen.preLastQuote.low

@@ -17,7 +17,7 @@ class Long_ScreenOne_EMA_X_OutOf_Y_Above : ScreenOneBlock {
     override fun check(screen: SymbolData): BlockResult {
         if (ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK < 0 || ThreeDisplays.Config.EMA26_ABOVE_BARS < 0) {
             println("ThreeDisplays.Config is wrong")
-            return BlockResult(screen.lastQuote, BlockResultCode.CONFIGURATION_ERROR)
+            return BlockResult.configurationError(screen.lastQuote)
         }
 
         val screen_1_EMA26 = screen.indicator(Indicator.EMA26) as List<EMA>

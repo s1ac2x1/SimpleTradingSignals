@@ -15,7 +15,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.X_HISTOGRAMS_NOT_ASCENDI
 /**
  * the last X histograms grow consecutively
  */
-public class Long_ScreenOne_MACD_Last_X_Ascending implements ScreenOneBlockJava {
+public class Long_ScreenOne_MACD_Last_X_AscendingJava implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         if (ThreeDisplaysJava.Config.EMA26_TOTAL_BARS_CHECK < 0) {
