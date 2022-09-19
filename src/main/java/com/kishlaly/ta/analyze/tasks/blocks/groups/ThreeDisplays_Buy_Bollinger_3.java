@@ -30,7 +30,7 @@ public class ThreeDisplays_Buy_Bollinger_3 implements BlocksGroupJava {
         return new ArrayList<TaskBlockJava>() {{
             add(new ScreenBasicValidationJava());
 
-            add(new Long_ScreenTwo_Bollinger_Top_ThreeDescending());
+            add(new Long_ScreenTwo_Bollinger_Top_ThreeDescendingJava());
             add(new Long_ScreenTwo_Bollinger_Bottom_ThreeAscendingJava());
             add(new Long_ScreenTwo_MACD_ThreeAscending());
             add(new Long_ScreenTwo_Stoch_D_TwoAscending());
