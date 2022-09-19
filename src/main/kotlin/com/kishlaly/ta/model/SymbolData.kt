@@ -14,6 +14,11 @@ data class SymbolData(
             return quotes.last()
         }
 
+    val preLastQuote: Quote
+        get() {
+            return quotes[quotes.size - 2]
+        }
+
     fun clear() {
         indicators.clear()
     }
