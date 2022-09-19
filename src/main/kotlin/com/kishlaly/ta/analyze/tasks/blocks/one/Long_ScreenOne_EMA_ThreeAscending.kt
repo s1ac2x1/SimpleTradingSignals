@@ -13,7 +13,7 @@ import com.kishlaly.ta.utils.Log
  */
 class Long_ScreenOne_EMA_ThreeAscending : ScreenOneBlock {
     override fun check(screen: SymbolData): BlockResult {
-        val screen_1_EMA26 = screen.indicators[Indicator.EMA26] as List<EMA>
+        val screen_1_EMA26 = screen.indicator(Indicator.EMA26) as List<EMA>
         val ema3 = CollectionUtils.getFromEnd<EMA>(screen_1_EMA26, 3)
         val ema2 = CollectionUtils.getFromEnd<EMA>(screen_1_EMA26, 2)
         val ema1 = CollectionUtils.getFromEnd<EMA>(screen_1_EMA26, 1)
