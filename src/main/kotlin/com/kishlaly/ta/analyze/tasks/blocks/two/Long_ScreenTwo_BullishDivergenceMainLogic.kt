@@ -1,10 +1,13 @@
 package com.kishlaly.ta.analyze.tasks.blocks.two
 
 import com.kishlaly.ta.model.BlockResult
+import com.kishlaly.ta.model.BlockResultCode
 import com.kishlaly.ta.model.HistogramQuote
 import com.kishlaly.ta.model.SymbolData
 import com.kishlaly.ta.model.indicators.Indicator
 import com.kishlaly.ta.model.indicators.MACD
+import com.kishlaly.ta.utils.Dates
+import com.kishlaly.ta.utils.Log
 
 class Long_ScreenTwo_BullishDivergenceMainLogic : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
@@ -39,8 +42,62 @@ class Long_ScreenTwo_BullishDivergenceMainLogic : ScreenTwoBlock {
         if (indexOfMinHistogram == 0) {
             minimalPriceForRangeUpToLowestHistogram = histogramQuotes[0].quote.close
         } else {
-            minimalPriceForRangeUpToLowestHistogram = histogramQuotes.subList(0, indexOfMinHistogram).
+            //minimalPriceForRangeUpToLowestHistogram = histogramQuotes.subList(0, indexOfMinHistogram).minBy { it.quote.close }
+            minimalPriceForRangeUpToLowestHistogram =
+                histogramQuotes.subList(0, indexOfMinHistogram).minWith(compareBy { it.quote.close }).quote.close
         }
+
+        val histogramQuoteWithMinimanPriceForTheWholeRange =
+            histogramQuotes.filter { it.quote.close == minimalPriceForRangeUpToLowestHistogram }.first()
+        if (quoteWithLowestHistogram.quote.close > minimalPriceForRangeUpToLowestHistogram
+        ) {
+            Log.addDebugLine(
+                "Внимание: цена на дне гистограммы А (" + quoteWithLowestHistogram!!.histogramValue + " " + Dates.beautifyQuoteDate(
+                    quoteWithLowestHistogram.quote
+                ) + ") не самая низкая в диапазоне"
+            )
+        }
+
+        // Finding a high that follows a past low ("breaking a bearish backbone")
+        // The histogram should pop out above zero
+
+
+        var indexOfMaxHistogramBarAfterLowestLow = 0
+
+        val histogramQuotesAfterLowestLow = histogramQuotes.subList(indexOfMinHistogram, histogramQuotes.size)
+        val quoteWithHighestHistogramAfterLowestLow =
+            histogramQuotesAfterLowestLow.maxWith(compareBy { it.histogramValue })
+
+        if (quoteWithHighestHistogramAfterLowestLow.histogramValue <= 0) {
+            Log.recordCode(BlockResultCode.BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2, screen)
+            Log.addDebugLine("there was no fracture of the bear's backbone")
+            return BlockResult(screen.lastQuote, BlockResultCode.BEARISH_BACKBONE_NOT_CRACKED_SCREEN_2)
+        }
+
+        // what is the maximum index
+
+        for (i in indexOfMinHistogram until histogramQuotes.size) {
+            if (histogramQuotes[i].histogramValue == quoteWithHighestHistogramAfterLowestLow.histogramValue) {
+                indexOfMaxHistogramBarAfterLowestLow = i
+                break
+            }
+        }
+
+        // now we need to find the histogram zero line crossings from top to bottom
+
+        val histogramQuotesFromMaxBar =
+            histogramQuotes.subList(indexOfMaxHistogramBarAfterLowestLow, histogramQuotes.size)
+        var crossedZero = false
+        var quoteWhenHistogramCrossedZeroFromTop: HistogramQuote? = null
+        for (i in indexOfMaxHistogramBarAfterLowestLow until histogramQuotes.size) {
+            if (histogramQuotes[i].histogramValue < 0) {
+                crossedZero = true
+                quoteWhenHistogramCrossedZeroFromTop = histogramQuotes[i]
+                break
+            }
+        }
+
+        // check the price values at the histogram minimum and maximum
 
     }
 }
