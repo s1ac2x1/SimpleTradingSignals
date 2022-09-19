@@ -14,7 +14,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * the last two bars go up (quote.low & quote.high)
  */
-public class Long_ScreenTwo_Bars_TwoAscending implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_Bars_TwoAscendingJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<QuoteJava> screen_2_Quotes = screen.quotes;
