@@ -15,6 +15,8 @@ data class SymbolData(
 
     val quotesCount = quotes.size
 
+    val allQuotes = quotes
+
     fun clear() {
         indicators.clear()
     }
@@ -24,7 +26,5 @@ data class SymbolData(
     fun allIndicators() = listOf(indicators)
 
     fun quote(index: Int) = quotes[index]
-
-    fun allQuotes() = listOf(quotes)
 
 }
