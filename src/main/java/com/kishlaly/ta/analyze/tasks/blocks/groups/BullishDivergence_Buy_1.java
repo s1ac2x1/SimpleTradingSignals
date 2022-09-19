@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheckJava;
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_BullishDivergenceMainLogic;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_BullishDivergenceMainLogicJava;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class BullishDivergence_Buy_1 implements BlocksGroupJava {
                 add(new Long_ScreenOne_StrictTrendCheckJava());
             }
 
-            add(new Long_ScreenTwo_BullishDivergenceMainLogic());
+            add(new Long_ScreenTwo_BullishDivergenceMainLogicJava());
         }};
     }
 
