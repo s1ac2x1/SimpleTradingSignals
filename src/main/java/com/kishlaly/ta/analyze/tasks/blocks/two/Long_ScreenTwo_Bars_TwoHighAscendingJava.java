@@ -10,7 +10,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * high of the last column above the penultimate one
  */
-public class Long_ScreenTwo_Bars_TwoHighAscending implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_Bars_TwoHighAscendingJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         boolean screen_2_check1 = screen.getLastQuote().getHigh() > screen.getPreLastQuote().getHigh();
