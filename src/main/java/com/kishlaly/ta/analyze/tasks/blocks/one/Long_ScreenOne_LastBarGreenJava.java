@@ -10,7 +10,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * the last quote is green
  */
-public class Long_ScreenOne_LastBarGreen implements ScreenOneBlockJava {
+public class Long_ScreenOne_LastBarGreenJava implements ScreenOneBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         boolean lastBarIsGreen = screen.getLastQuote().getOpen() < screen.getLastQuote().getClose();
