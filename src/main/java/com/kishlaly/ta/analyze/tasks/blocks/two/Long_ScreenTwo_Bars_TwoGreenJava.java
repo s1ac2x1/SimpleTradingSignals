@@ -14,7 +14,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * The last two quotes are green
  */
-public class Long_ScreenTwo_Bars_TwoGreen implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_Bars_TwoGreenJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<QuoteJava> screen_2_Quotes = screen.quotes;
