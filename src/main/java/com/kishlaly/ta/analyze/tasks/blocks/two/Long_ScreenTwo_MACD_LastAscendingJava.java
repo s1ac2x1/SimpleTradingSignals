@@ -14,7 +14,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * the last histogram grows
  */
-public class Long_ScreenTwo_MACD_LastAscending implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_MACD_LastAscendingJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<MACDJava> screen_2_MACD = (List<MACDJava>) screen.indicators.get(IndicatorJava.MACD);
