@@ -36,7 +36,7 @@ public class ThreeDisplays_Buy_3 implements BlocksGroupJava {
             add(new Long_ScreenTwo_MACD_LastAscending());
             add(new Long_ScreenTwo_Bars_LastGreenJava());
             add(new Long_ScreenTwo_Bars_TwoAscendingJava());
-            add(new Long_ScreenTwo_EMA_TwoBarsBelow());
+            add(new Long_ScreenTwo_EMA_TwoBarsBelowJava());
             add(new Long_ScreenTwo_FilterLateEntry());
         }};
     }
