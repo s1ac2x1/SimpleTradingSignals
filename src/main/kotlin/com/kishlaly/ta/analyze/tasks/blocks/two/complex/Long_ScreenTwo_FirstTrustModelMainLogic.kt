@@ -53,6 +53,5 @@ class Long_ScreenTwo_FirstTrustModelMainLogic : ScreenTwoBlock {
         }
 
         return BlockResult(signal, BlockResultCode.OK)
-
     }
 }
