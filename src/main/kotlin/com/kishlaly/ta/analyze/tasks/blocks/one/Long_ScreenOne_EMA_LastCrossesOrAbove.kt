@@ -11,9 +11,8 @@ import com.kishlaly.ta.utils.Log
 class Long_ScreenOne_EMA_LastCrossesOrAbove : ScreenOneBlock {
     override fun check(screen: SymbolData): BlockResult {
         val screen_1_EMA26 = screen.indicator(Indicator.EMA26) as List<EMA>
-        val lasteEMA26 = screen_1_EMA26.last().value
-        val lastBarCrossing = screen.lastQuote.isCrossesEMA(lasteEMA26)
-        val lastBarAbove = screen.lastQuote.isAboveEMA(lasteEMA26)
+        val lastBarCrossing = screen.lastQuote.crosses(screen_1_EMA26.last())
+        val lastBarAbove = screen.lastQuote above screen_1_EMA26.last()
 
         if (!lastBarCrossing || !lastBarAbove) {
             Log.recordCode(BlockResultCode.LAST_QUOTE_NOT_CROSSING_OR_NOT_ABOVE_EMA_SCREEN_1, screen)

@@ -28,16 +28,16 @@ data class Quote(
 
 }
 
-fun Quote.isCrossesEMA(ema: EMA) = low <= ema.value && high >= ema.value
+infix fun Quote.crosses(ema: EMA) = low <= ema.value && high >= ema.value
 
-fun Quote.isBelowEMA(ema: EMA) = low < ema.value && high < ema.value
+infix fun Quote.below(ema: EMA) = low < ema.value && high < ema.value
 
-fun Quote.isAboveEMA(ema: EMA) = low > ema.value && high > ema.value
+infix fun Quote.above(ema: EMA) = low > ema.value && high > ema.value
 
-fun Quote.isCrossesBollingerBottom(bollinger: Bollinger) = low <= bollinger.bottom && high >= bollinger.bottom
+infix fun Quote.crossesBollingerBottom(bollinger: Bollinger) = low <= bollinger.bottom && high >= bollinger.bottom
 
-fun Quote.isBelowBollingerBottom(bollinger: Bollinger) = low < bollinger.bottom && high < bollinger.bottom
+infix fun Quote.belowBollingerBottom(bollinger: Bollinger) = low < bollinger.bottom && high < bollinger.bottom
 
-fun Quote.isCrossesKeltnerBottom(keltner: Keltner) = low <= keltner.low && high >= keltner.low
+infix fun Quote.crossesKeltnerBottom(keltner: Keltner) = low <= keltner.low && high >= keltner.low
 
 fun Quote.isGreen() = close > open

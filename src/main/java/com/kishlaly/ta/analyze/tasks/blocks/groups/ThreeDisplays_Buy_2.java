@@ -19,7 +19,7 @@ public class ThreeDisplays_Buy_2 implements BlocksGroupJava {
             add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
             add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversold());
             add(new Long_ScreenTwo_Stoch_D_LastAscending());
-            add(new Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing());
+            add(new Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossingJava());
             add(new Long_ScreenTwo_FilterLateEntry());
         }};
     }

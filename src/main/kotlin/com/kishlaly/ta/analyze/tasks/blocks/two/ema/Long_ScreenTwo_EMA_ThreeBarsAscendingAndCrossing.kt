@@ -1,5 +1,6 @@
-package com.kishlaly.ta.analyze.tasks.blocks.two
+package com.kishlaly.ta.analyze.tasks.blocks.two.ema
 
+import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock
 import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.EMA
 import com.kishlaly.ta.model.indicators.Indicator
@@ -33,11 +34,11 @@ class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing : ScreenTwoBlock {
                 Log.recordCode(BlockResultCode.QUOTE_CLOSE_NOT_GROWING_SCREEN_2, screen)
                 Log.addDebugLine("Quote.close does not grow consistently")
                 // the third from the end all below EMA13, and the second and last crossed
-                val crossingRule = quote3.isBelowEMA(ema3) && (quote2.isCrossesEMA(ema2) || quote1.isCrossesEMA(ema1))
+                val crossingRule = quote3 below ema3 && (quote2.crosses(ema2) || quote1.crosses(ema1))
                 if (!crossingRule) {
-                    Log.addDebugLine("Third from the end" + (if (quote3.isBelowEMA(ema3)) " " else " not ") + "below ЕМА13")
-                    Log.addDebugLine("Penultimate" + (if (quote2.isCrossesEMA(ema2)) " " else " not ") + "crossed ЕМА13")
-                    Log.addDebugLine("Last" + (if (quote1.isCrossesEMA(ema1)) " " else " not ") + "crossed ЕМА13")
+                    Log.addDebugLine("Third from the end" + (if (quote3 below ema3) " " else " not ") + "below ЕМА13")
+                    Log.addDebugLine("Penultimate" + (if (quote2.crosses(ema2)) " " else " not ") + "crossed ЕМА13")
+                    Log.addDebugLine("Last" + (if (quote1.crosses(ema1)) " " else " not ") + "crossed ЕМА13")
                     Log.recordCode(BlockResultCode.CROSSING_RULE_VIOLATED_SCREEN_2, screen)
                     return BlockResult(screen.lastQuote, BlockResultCode.CROSSING_RULE_VIOLATED_SCREEN_2)
                 } else {

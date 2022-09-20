@@ -4,9 +4,9 @@ import com.kishlaly.ta.analyze.tasks.ThreeDisplays
 import com.kishlaly.ta.model.BlockResult
 import com.kishlaly.ta.model.BlockResultCode
 import com.kishlaly.ta.model.SymbolData
+import com.kishlaly.ta.model.above
 import com.kishlaly.ta.model.indicators.EMA
 import com.kishlaly.ta.model.indicators.Indicator
-import com.kishlaly.ta.model.isAboveEMA
 import com.kishlaly.ta.utils.Log
 
 /**
@@ -23,7 +23,7 @@ class Long_ScreenOne_EMA_X_OutOf_Y_Above : ScreenOneBlock {
         val screen_1_EMA26 = screen.indicator(Indicator.EMA26) as List<EMA>
         var aboveEMA26 = 0
         for (i in screen_1_EMA26.size - ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK until screen_1_EMA26.size) {
-            if (screen.quote(i).isAboveEMA(screen_1_EMA26[i].value)) {
+            if (screen.quote(i) above screen_1_EMA26[i]) {
                 aboveEMA26++
             }
         }

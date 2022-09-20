@@ -16,7 +16,7 @@ import static com.kishlaly.ta.utils.QuotesJava.*;
 /**
  * Quotes should cross EMA13 and should go up
  */
-public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossing implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_EMA_TwoBarsAscendingAndCrossingJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<QuoteJava> screen_2_Quotes = screen.quotes;
