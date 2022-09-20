@@ -11,7 +11,7 @@ import java.util.Comparator;
 
 import static com.kishlaly.ta.model.BlockResultCodeJava.*;
 
-public class Long_ScreenTwo_FirstTrustModelMainLogic implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_FirstTrustModelMainLogicJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         QuoteJava lastChartQuote = screen.quotes.get(screen.quotes.size() - 1);

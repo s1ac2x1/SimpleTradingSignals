@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenSoftValidationJava;
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FirstTrustModelMainLogic;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FirstTrustModelMainLogicJava;
 import com.kishlaly.ta.utils.ContextJava;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class FirstTrustModel_Buy_1 implements BlocksGroupJava {
 
         return new ArrayList<TaskBlockJava>() {{
             add(new ScreenSoftValidationJava());
-            add(new Long_ScreenTwo_FirstTrustModelMainLogic());
+            add(new Long_ScreenTwo_FirstTrustModelMainLogicJava());
         }};
     }
 
