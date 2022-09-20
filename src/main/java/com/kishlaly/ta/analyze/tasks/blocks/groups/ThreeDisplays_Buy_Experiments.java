@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_ThreeAscendingJava;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FilterLateEntryJava;
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_ThreeBelowZeroAndAscendingJava;
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_LastAscending;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class ThreeDisplays_Buy_Experiments implements BlocksGroupJava {
 
             add(new Long_ScreenOne_EMA_ThreeAscendingJava());
 
-            add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending());
+            add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscendingJava());
             add(new Long_ScreenTwo_Stoch_D_LastAscending());
             add(new Long_ScreenTwo_FilterLateEntryJava());
         }};
