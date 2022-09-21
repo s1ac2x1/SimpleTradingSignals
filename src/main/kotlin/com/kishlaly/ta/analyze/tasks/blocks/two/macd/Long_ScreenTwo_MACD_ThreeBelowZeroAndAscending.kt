@@ -13,17 +13,17 @@ import com.kishlaly.ta.utils.MACDUtils
 class Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
         val utils = MACDUtils(screen)
-        val histogramBelowZero = utils.getFromEnd(3).histogram < 0
-                && utils.getFromEnd(2).histogram < 0
-                && utils.getFromEnd(1).histogram < 0
+        val histogramBelowZero = utils.last(3).histogram < 0
+                && utils.last(2).histogram < 0
+                && utils.last(1).histogram < 0
         if (!histogramBelowZero) {
             Log.recordCode(BlockResultCode.HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen)
             Log.addDebugLine("The bar graph on the second screen is at least zero")
             return BlockResult(screen.lastQuote, BlockResultCode.HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2)
         }
 
-        val ascendingHistogram = utils.getFromEnd(3).histogram < utils.getFromEnd(2).histogram
-                && utils.getFromEnd(2).histogram < utils.getFromEnd(1).histogram
+        val ascendingHistogram = utils.last(3).histogram < utils.last(2).histogram
+                && utils.last(2).histogram < utils.last(1).histogram
         if (!ascendingHistogram) {
             Log.recordCode(BlockResultCode.HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen)
             Log.addDebugLine("The histogram on the second screen does not increase")

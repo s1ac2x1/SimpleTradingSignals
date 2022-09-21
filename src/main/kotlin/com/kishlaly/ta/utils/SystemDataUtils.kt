@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.indicators.MACD
 
 class MACDUtils(val symbolData: SymbolData) {
 
-    fun getFromEnd(index: Int): MACD {
+    fun last(index: Int): MACD {
         val values = symbolData.indicator(Indicator.MACD) as List<MACD>
         return values[values.size - index]
     }

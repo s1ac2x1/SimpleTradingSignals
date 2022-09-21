@@ -8,25 +8,22 @@ import com.kishlaly.ta.utils.Log
 import com.kishlaly.ta.utils.MACDUtils
 
 /**
- * histogram should be below zero and start to rise at the last three values
+ * histogram should be below zero and start to rise: check on the last TWO values
  */
-class Long_ScreenTwo_MACD_ThreeBelowZeroAndFigureU : ScreenTwoBlock {
+class Long_ScreenTwo_MACD_TwoBelowZeroAndAscending : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
-        val utils = MACDUtils(screen)
-        val histogramBelowZero = utils.last(3).histogram < 0
-                && utils.last(2).histogram < 0
-                && utils.last(1).histogram < 0
+        val macd = MACDUtils(screen)
+        val histogramBelowZero = macd.last(2).histogram < 0 && macd.last(1).histogram < 0
         if (!histogramBelowZero) {
             Log.recordCode(BlockResultCode.HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen)
-            Log.addDebugLine("The histogram on the second screen is at least zero")
+            Log.addDebugLine("The bar graph on the second screen is at least zero")
             return BlockResult(screen.lastQuote, BlockResultCode.HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2)
         }
 
-        val figureU = utils.last(2).histogram < utils.last(3).histogram
-                && utils.last(2).histogram < utils.last(1).histogram
-        if (!figureU) {
+        val ascendingHistogram = macd.last(2).histogram < macd.last(1).histogram
+        if (!ascendingHistogram) {
             Log.recordCode(BlockResultCode.HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen)
-            Log.addDebugLine("The histogram on the second screen does not form a negative U")
+            Log.addDebugLine("The histogram on the second screen does not increase")
             return BlockResult(screen.lastQuote, BlockResultCode.HISTOGRAM_NOT_ASCENDING_SCREEN_2)
         }
         return BlockResult(screen.lastQuote, BlockResultCode.OK)

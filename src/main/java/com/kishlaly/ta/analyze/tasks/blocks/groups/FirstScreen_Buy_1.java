@@ -6,7 +6,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrossesJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_X_OutOf_Y_AboveJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreenJava;
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscending;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscendingJava;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class FirstScreen_Buy_1 implements BlocksGroupJava {
             add(new Long_ScreenOne_EMA_LastBarCrossesJava());
             add(new Long_ScreenOne_EMA_X_OutOf_Y_AboveJava());
 
-            add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscending());
+            add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscendingJava());
         }};
 
     }
