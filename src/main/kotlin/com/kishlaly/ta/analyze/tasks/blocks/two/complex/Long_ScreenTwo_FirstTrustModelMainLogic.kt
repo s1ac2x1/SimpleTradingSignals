@@ -14,10 +14,10 @@ class Long_ScreenTwo_FirstTrustModelMainLogic : ScreenTwoBlock {
 
         // look for the minimum for the last MONTHS months in one of the last 10 columns
         val days = FirstTrustModel.Config.MONTHS * 21
-        val nMonthsLow = screen.allQuotes.subList(screen.quotesCount - days, screen.quotesCount)
+        val nMonthsLow = screen.quotes.subList(screen.quotesCount - days, screen.quotesCount)
             .minWith(compareBy { it.low })
         var nMonthsLowIndex = -1
-        for (i in screen.allQuotes.indices) {
+        for (i in screen.quotes.indices) {
             if (screen.quote(i).timestamp.compareTo(nMonthsLow.timestamp) == 0) {
                 nMonthsLowIndex = i
                 break

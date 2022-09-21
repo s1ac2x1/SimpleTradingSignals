@@ -21,6 +21,7 @@ dependencies {
     implementation("commons-io:commons-io:2.11.0")
     implementation("org.apache.commons:commons-math3:3.6.1")
     implementation("org.jetbrains:annotations:15.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")

@@ -12,7 +12,7 @@ import com.kishlaly.ta.utils.Log
  */
 class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
-        val quote3 = CollectionUtils.getFromEnd<Quote>(screen.allQuotes, 3)
+        val quote3 = CollectionUtils.getFromEnd<Quote>(screen.quotes, 3)
         val quote2 = screen.preLastQuote
         val quote1 = screen.lastQuote
 

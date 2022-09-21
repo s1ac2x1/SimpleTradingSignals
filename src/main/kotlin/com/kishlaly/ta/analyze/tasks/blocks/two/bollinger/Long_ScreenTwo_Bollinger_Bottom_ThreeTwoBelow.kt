@@ -13,8 +13,8 @@ import com.kishlaly.ta.utils.Log
 class Long_ScreenTwo_Bollinger_Bottom_ThreeTwoBelow : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
         val screen_2_Bollinger = screen.indicator(Indicator.BOLLINGER) as List<Bollinger>
-        val quote_3 = CollectionUtils.getFromEnd<Quote>(screen.allQuotes, 3)
-        val quote_2 = CollectionUtils.getFromEnd<Quote>(screen.allQuotes, 2)
+        val quote_3 = CollectionUtils.getFromEnd<Quote>(screen.quotes, 3)
+        val quote_2 = CollectionUtils.getFromEnd<Quote>(screen.quotes, 2)
         val bollinger_3 = CollectionUtils.getFromEnd<Bollinger>(screen_2_Bollinger, 3)
         val bollinger_2 = CollectionUtils.getFromEnd<Bollinger>(screen_2_Bollinger, 2)
 

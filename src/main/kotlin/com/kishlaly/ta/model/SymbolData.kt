@@ -5,8 +5,8 @@ import com.kishlaly.ta.model.indicators.Indicator
 data class SymbolData(
     val symbol: String,
     val timeframe: Timeframe,
-    private var quotes: List<Quote>,
-    private var indicators: MutableMap<Indicator, List<AbstractModel>> = mutableMapOf()
+    var quotes: List<Quote>,
+    var indicators: MutableMap<Indicator, List<AbstractModel>> = mutableMapOf()
 ) {
 
     val lastQuote = quotes.last()
@@ -15,7 +15,9 @@ data class SymbolData(
 
     val quotesCount = quotes.size
 
-    val allQuotes = quotes
+    val isEmptyQuotes = quotes.isEmpty()
+
+    val isEmptyIndicators = indicators.isEmpty()
 
     fun clear() {
         indicators.clear()
@@ -23,8 +25,5 @@ data class SymbolData(
 
     fun indicator(indicator: Indicator) = indicators[indicator]
 
-    fun allIndicators() = listOf(indicators)
-
-    fun quote(index: Int) = quotes[index]
-
+    infix fun quote(index: Int) = quotes[index]
 }

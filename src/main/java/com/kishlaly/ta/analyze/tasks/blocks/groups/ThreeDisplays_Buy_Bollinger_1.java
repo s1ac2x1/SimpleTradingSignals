@@ -4,8 +4,13 @@ import com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheckJava;
-import com.kishlaly.ta.analyze.tasks.blocks.two.*;
-import com.kishlaly.ta.analyze.tasks.blocks.two.bollinger.Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bars_LastGreenJava;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bars_TwoAscendingJava;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossedJava;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FilterLateEntryJava;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscendingJava;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_LastAscending;
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_TwoBelow_X;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +40,7 @@ public class ThreeDisplays_Buy_Bollinger_1 implements BlocksGroupJava {
             //add(new Long_ScreenOne_StrictTrendCheck());
             add(new Long_ScreenOne_SoftTrendCheckJava());
 
-            add(new Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed());
+            add(new Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossedJava());
             add(new Long_ScreenTwo_MACD_TwoBelowZeroAndAscendingJava());
             add(new Long_ScreenTwo_Stoch_D_TwoBelow_X());
             add(new Long_ScreenTwo_Stoch_D_LastAscending());

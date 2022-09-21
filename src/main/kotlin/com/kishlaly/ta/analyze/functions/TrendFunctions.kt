@@ -66,8 +66,8 @@ class TrendFunctions {
             histogramCheck2: BiFunction<Double, Double, Boolean>
         ): Boolean {
             val quotes = trim(symbolData.quotes, minBarsCount)
-            val ema = trim(symbolData.indicators[Indicator.EMA26]!!, minBarsCount)
-            val macd = trim(symbolData.indicators[Indicator.MACD]!!, minBarsCount)
+            val ema = trim(symbolData.indicator(Indicator.EMA26)!!, minBarsCount)
+            val macd = trim(symbolData.indicator(Indicator.MACD)!!, minBarsCount)
             for (i in quotes.size - barsToCheck until quotes.size) {
                 if (!quoteEmaIntersectionCheck.apply(quotes[i] as Quote, ema[i] as EMA)) {
                     return false

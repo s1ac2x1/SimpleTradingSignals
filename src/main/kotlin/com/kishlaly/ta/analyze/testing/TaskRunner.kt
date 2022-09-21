@@ -49,8 +49,8 @@ class TaskRunner {
                 val screen2 = getSymbolData(task.getTimeframeIndicators(2), symbol)
 
                 // skip symbols if they have less than resolveMinBarsCount quotes on the weekly frame
-                if (screen1.quotes.size < resolveMinBarsCount(screen1.timeframe)
-                    || screen2.quotes.size < resolveMinBarsCount(screen2.timeframe)
+                if (screen1.quotesCount < resolveMinBarsCount(screen1.timeframe)
+                    || screen2.quotesCount < resolveMinBarsCount(screen2.timeframe)
                 ) {
                     screen1.clear()
                     screen2.clear()
@@ -64,7 +64,7 @@ class TaskRunner {
                     IndicatorUtils.trim(screen2)
                 }
 
-                if (Context.lowPricesOnly && screen2.quotes[screen2.quotes.size - 1].close > Context.lowPriceLimit) {
+                if (Context.lowPricesOnly && screen2.quote(screen2.quotesCount - 1).close > Context.lowPriceLimit) {
                     screen1.clear()
                     screen2.clear()
                     println("Skipped high price stock")

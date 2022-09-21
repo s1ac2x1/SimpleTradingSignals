@@ -166,8 +166,8 @@ class TaskTester {
             screen2: SymbolData,
             blockResults: MutableList<BlockResult>
         ) {
-            val lastScreen1Quote = screen1.quotes[screen1.quotes.size - 1]
-            val lastScreen2Quote = screen2.quotes[screen2.quotes.size - 1]
+            val lastScreen1Quote = screen1.lastQuote
+            val lastScreen2Quote = screen2.lastQuote
             blockResults.add(task.function.apply(Screens(screen1, screen2), blocksGroup.blocks()))
             if (lastScreen2Quote.timestamp < lastScreen1Quote.timestamp) {
                 rewind(screen1, 1)
@@ -462,7 +462,7 @@ class TaskTester {
             var roi = 0.0
             var closePositionPrice = 0.0
             var closePositionCost = 0.0
-            var closePositionQuote = Quote.empty()
+            var closePositionQuote = Quote.NaN()
 
             while (!skip && startPositionIndex < data.quotes.size - 1) {
                 startPositionIndex++

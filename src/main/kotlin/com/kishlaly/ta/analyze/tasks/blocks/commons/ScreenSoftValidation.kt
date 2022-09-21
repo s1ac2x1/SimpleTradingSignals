@@ -8,7 +8,7 @@ import com.kishlaly.ta.utils.Log
 
 class ScreenSoftValidation : CommonBlock {
     override fun check(screen: SymbolData): BlockResult {
-        if (screen.quotes.isEmpty() || screen.indicators.isEmpty()) {
+        if (screen.isEmptyQuotes || screen.isEmptyIndicators) {
             Log.addDebugLine("There are not enough quotes for ${screen.symbol}")
             Log.recordCode(BlockResultCode.NO_DATA_QUOTES, screen)
             return BlockResult(Quote.NaN(), BlockResultCode.NO_DATA_QUOTES)

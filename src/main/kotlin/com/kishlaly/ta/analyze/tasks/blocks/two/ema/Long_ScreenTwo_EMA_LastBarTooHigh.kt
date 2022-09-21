@@ -16,8 +16,8 @@ import com.kishlaly.ta.utils.Log
  */
 class Long_ScreenTwo_EMA_LastBarTooHigh : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
-        val quote3 = CollectionUtils.getFromEnd<Quote>(screen.allQuotes, 3)
-        val quote2 = CollectionUtils.getFromEnd<Quote>(screen.allQuotes, 2)
+        val quote3 = CollectionUtils.getFromEnd<Quote>(screen.quotes, 3)
+        val quote2 = CollectionUtils.getFromEnd<Quote>(screen.quotes, 2)
         val quote1 = screen.lastQuote
 
         val screen_2_EMA13 = screen.indicator(Indicator.EMA13) as List<EMA>

@@ -34,7 +34,7 @@ public class ThreeDisplays_Buy_9 implements BlocksGroupJava {
 
             add(new Long_ScreenOne_SoftTrendCheckJava());
 
-            add(new Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed());
+            add(new Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossedJava());
             add(new Long_ScreenTwo_Bars_TwoGreenJava());
             add(new Long_ScreenTwo_EMA_TwoBarsBelowJava());
             add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversold());

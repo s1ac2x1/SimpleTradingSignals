@@ -14,7 +14,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_K_D_NOT_ASCENDING_
 /**
  * %D and %K of the last stochastic should be higher than that of the penultimate stochastic
  */
-public class Long_ScreenTwo_Stoch_D_K_LastAscending implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_Stoch_D_K_LastAscendingJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);
