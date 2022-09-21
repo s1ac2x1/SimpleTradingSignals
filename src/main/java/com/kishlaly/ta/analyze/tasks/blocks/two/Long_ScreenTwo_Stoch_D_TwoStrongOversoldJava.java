@@ -14,7 +14,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_D_WAS_NOT_STRONG_O
 /**
  * oversold below 20 at TWO values of the slow stochastic line and it goes up
  */
-public class Long_ScreenTwo_Stoch_D_TwoStrongOversold implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_Stoch_D_TwoStrongOversoldJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);
