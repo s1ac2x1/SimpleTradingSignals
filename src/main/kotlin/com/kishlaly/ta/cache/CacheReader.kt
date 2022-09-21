@@ -142,7 +142,7 @@ class CacheReader {
                 Indicator.MACD -> IndicatorUtils.buildMACDHistogram(symbol, quotes)
                 Indicator.EMA13 -> IndicatorUtils.buildEMA(symbol, quotes, 13)
                 Indicator.EMA26 -> IndicatorUtils.buildEMA(symbol, quotes, 26)
-                Indicator.STOCH -> IndicatorUtils.buildStochastic(symbol, quotes)
+                Indicator.STOCHASTIC -> IndicatorUtils.buildStochastic(symbol, quotes)
                 Indicator.KELTNER -> IndicatorUtils.buildKeltnerChannels(symbol, quotes)
                 Indicator.BOLLINGER -> IndicatorUtils.buildBollingerBands(symbol, quotes)
                 Indicator.EFI -> IndicatorUtils.buildEFI(symbol, quotes)

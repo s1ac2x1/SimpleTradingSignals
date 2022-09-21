@@ -22,17 +22,17 @@ enum class TaskType(
     ),
     THREE_DISPLAYS_BUY(
         mutableMapOf(1 to WEEK, 2 to DAY),
-        mutableMapOf(1 to arrayOf(EMA26, MACD), 2 to arrayOf(EMA13, MACD, STOCH, KELTNER, BOLLINGER, EFI)),
+        mutableMapOf(1 to arrayOf(EMA26, MACD), 2 to arrayOf(EMA13, MACD, STOCHASTIC, KELTNER, BOLLINGER, EFI)),
         AbstractTask::check
     ),
     THREE_DISPLAYS_SELL(
         mutableMapOf(1 to WEEK, 2 to DAY),
-        mutableMapOf(1 to arrayOf(EMA26, MACD), 2 to arrayOf(EMA13, MACD, STOCH, KELTNER, BOLLINGER, EFI)),
+        mutableMapOf(1 to arrayOf(EMA26, MACD), 2 to arrayOf(EMA13, MACD, STOCHASTIC, KELTNER, BOLLINGER, EFI)),
         AbstractTask::check
     ),
     FIRST_TRUST_MODEL(
         mutableMapOf(1 to WEEK, 2 to DAY),
-        mutableMapOf(1 to arrayOf(EMA26, MACD), 2 to arrayOf(EMA13, MACD, STOCH, KELTNER)),
+        mutableMapOf(1 to arrayOf(EMA26, MACD), 2 to arrayOf(EMA13, MACD, STOCHASTIC, KELTNER)),
         AbstractTask::check
     );
 
