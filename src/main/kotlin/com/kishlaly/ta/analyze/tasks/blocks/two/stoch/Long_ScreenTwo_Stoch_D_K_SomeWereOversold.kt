@@ -20,7 +20,7 @@ class Long_ScreenTwo_Stoch_D_K_SomeWereOversold : ScreenTwoBlock {
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
         var wasOversoldRecently = false
         for (i in stoch.size() - STOCH_VALUES_TO_CHECK until stoch.size()) {
-            if (stoch.get(i).slowD <= STOCH_OVERSOLD || stoch.get(i).slowK <= STOCH_OVERSOLD) {
+            if (stoch[i].slowD <= STOCH_OVERSOLD || stoch[i].slowK <= STOCH_OVERSOLD) {
                 wasOversoldRecently = true
                 break
             }
