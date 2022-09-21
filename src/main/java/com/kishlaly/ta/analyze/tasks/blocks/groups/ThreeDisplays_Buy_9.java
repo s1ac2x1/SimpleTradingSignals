@@ -5,7 +5,6 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidationJava;
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheckJava;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
-import com.kishlaly.ta.analyze.tasks.blocks.two.bollinger.Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class ThreeDisplays_Buy_9 implements BlocksGroupJava {
             add(new Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossedJava());
             add(new Long_ScreenTwo_Bars_TwoGreenJava());
             add(new Long_ScreenTwo_EMA_TwoBarsBelowJava());
-            add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversold());
+            add(new Long_ScreenTwo_Stoch_D_K_SomeWereOversoldJava());
             add(new Long_ScreenTwo_MACD_LastAscendingJava());
         }};
 

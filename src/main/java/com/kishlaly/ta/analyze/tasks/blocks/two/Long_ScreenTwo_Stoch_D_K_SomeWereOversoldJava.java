@@ -17,7 +17,7 @@ import static com.kishlaly.ta.analyze.tasks.ThreeDisplaysJava.Config.STOCH_VALUE
  * to check several stochastics to the left of the last value
  * e.g. the last STOCH_VALUES_TO_CHECK: if among them there are values below STOCH_OVERSOLD
  */
-public class Long_ScreenTwo_Stoch_D_K_SomeWereOversold implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_Stoch_D_K_SomeWereOversoldJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);
