@@ -14,7 +14,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_D_NOT_U_SCREEN_2;
 /**
  * slow stochastic draws the figure U on the last three values
  */
-public class Long_ScreenTwo_Stoch_D_ThreeFigureU implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_Stoch_D_ThreeFigureUJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);
