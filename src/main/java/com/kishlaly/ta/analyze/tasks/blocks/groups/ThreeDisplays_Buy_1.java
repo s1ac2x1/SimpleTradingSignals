@@ -17,7 +17,7 @@ public class ThreeDisplays_Buy_1 implements BlocksGroupJava {
             add(new Long_ScreenOne_SoftTrendCheckJava());
 
             add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscendingJava());
-            add(new Long_ScreenTwo_Stoch_D_ThreeAscending());
+            add(new Long_ScreenTwo_Stoch_D_ThreeAscendingJava());
             add(new Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromOversoldJava());
             add(new Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossingJava());
             add(new Long_ScreenTwo_EMA_LastBarTooHighJava());
