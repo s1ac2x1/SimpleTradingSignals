@@ -33,7 +33,7 @@ public class ThreeDisplays_Buy_Bollinger_3 implements BlocksGroupJava {
             add(new Long_ScreenTwo_Bollinger_Top_ThreeDescendingJava());
             add(new Long_ScreenTwo_Bollinger_Bottom_ThreeAscendingJava());
             add(new Long_ScreenTwo_MACD_ThreeAscendingJava());
-            add(new Long_ScreenTwo_Stoch_D_TwoAscending());
+            add(new Long_ScreenTwo_Stoch_D_TwoAscendingJava());
             add(new Long_ScreenTwo_Stoch_D_TwoOrOneBelow_X());
         }};
 
