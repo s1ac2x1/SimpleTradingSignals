@@ -15,7 +15,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.STOCH_D_NOT_EXTRA_OVERSO
 /**
  * one of the two stochastic %D values is less than ThreeDisplays.Config.STOCH_CUSTOM
  */
-public class Long_ScreenTwo_Stoch_D_TwoOrOneBelow_X implements ScreenTwoBlockJava {
+public class Long_ScreenTwo_Stoch_D_TwoOrOneBelow_XJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<StochJava> screen_2_Stochastic = (List<StochJava>) screen.indicators.get(IndicatorJava.STOCH);
