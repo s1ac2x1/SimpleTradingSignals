@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BullishDivergence_Buy_1Java;
-import com.kishlaly.ta.analyze.tasks.blocks.groups.FirstTrustModel_Buy_1;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.FirstTrustModel_Buy_1Java;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Sell_1;
 
@@ -25,7 +25,7 @@ public class TaskTypeDefaults {
             case MACD_BULLISH_DIVERGENCE:
                 return new BullishDivergence_Buy_1Java().blocks();
             case FIRST_TRUST_MODEL:
-                return new FirstTrustModel_Buy_1().blocks();
+                return new FirstTrustModel_Buy_1Java().blocks();
             default:
                 return Collections.emptyList();
         }
