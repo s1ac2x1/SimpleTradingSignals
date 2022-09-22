@@ -76,7 +76,7 @@ public class RunUtilsJava {
     public static void runAllWeekly(TimeframeJava[][] timeframes) {
         ContextJava.runGroups = TimeframeJava.WEEK;
         run(ContextJava.basicTimeframes, THREE_DISPLAYS_BUY, false,
-                new FirstScreen_Buy_1()
+                new FirstScreen_Buy_1Java()
                 //new FirstScreen_Buy_2()
         );
     }

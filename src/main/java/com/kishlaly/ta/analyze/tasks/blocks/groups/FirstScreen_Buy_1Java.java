@@ -21,7 +21,7 @@ import java.util.List;
  * <p>
  * SL: try StopLossVolatileLocalMin
  */
-public class FirstScreen_Buy_1 implements BlocksGroupJava {
+public class FirstScreen_Buy_1Java implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         ThreeDisplaysJava.Config.EMA26_TOTAL_BARS_CHECK = 7;
