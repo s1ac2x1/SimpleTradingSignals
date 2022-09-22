@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.TaskTypeJava;
 
-public class BlockGroupsUtils {
+public class BlockGroupsUtilsJava {
 
     public static BlocksGroupJava[] getAllGroups(TaskTypeJava taskType) {
         switch (taskType) {

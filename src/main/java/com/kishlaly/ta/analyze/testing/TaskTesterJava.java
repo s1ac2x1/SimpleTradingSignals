@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.testing;
 
 import com.kishlaly.ta.analyze.TaskTypeJava;
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtils;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtilsJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroupJava;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPriceJava;
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategyJava;
@@ -288,7 +288,7 @@ public class TaskTesterJava {
         // SL/TP are not important here, it is important what signal or error code in a particular date
         ContextJava.stopLossStrategy = new StopLossFixedPriceJava(0.27);
         ContextJava.takeProfitStrategy = new TakeProfitFixedKeltnerTopJava(30);
-        BlocksGroupJava[] blocksGroups = BlockGroupsUtils.getAllGroups(task);
+        BlocksGroupJava[] blocksGroups = BlockGroupsUtilsJava.getAllGroups(task);
         List<HistoricalTestingJava> testings = Arrays.stream(blocksGroups).flatMap(blocksGroup -> test(timeframes, task, blocksGroup).stream()).collect(Collectors.toList());
         ZonedDateTime parsed = shortDateToZoned(datePart);
         testings.forEach(testing -> {
