@@ -16,7 +16,7 @@ import static com.kishlaly.ta.model.BlockResultCodeJava.OK;
 /**
  * to filter the situation when the third and second cross EMA13, and the last one is entirely lower (that is, the moment is already lost)
  */
-public class Short_ScreenTwo_EMA_LastBarTooLow implements ScreenTwoBlockJava {
+public class Short_ScreenTwo_EMA_LastBarTooLowJava implements ScreenTwoBlockJava {
     @Override
     public BlockResultJava check(SymbolDataJava screen) {
         List<EMAJava> screen_2_EMA13 = (List<EMAJava>) screen.indicators.get(IndicatorJava.EMA13);

@@ -19,7 +19,7 @@ public class ThreeDisplays_Sell_1 implements BlocksGroupJava {
             add(new Short_ScreenTwo_Stoch_D_ThreeDescending());
             add(new Short_ScreenTwo_Stoch_D_K_ThreeDescendingFromOverbought());
             add(new Short_ScreenTwo_EMA_ThreeBarsDescendingAndCrossing());
-            add(new Short_ScreenTwo_EMA_LastBarTooLow());
+            add(new Short_ScreenTwo_EMA_LastBarTooLowJava());
         }};
     }
 

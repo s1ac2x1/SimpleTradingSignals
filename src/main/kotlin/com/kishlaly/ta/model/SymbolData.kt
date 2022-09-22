@@ -26,4 +26,6 @@ data class SymbolData(
     fun indicator(indicator: Indicator) = indicators[indicator]
 
     infix fun quote(index: Int) = quotes[index]
+
+    infix fun lastQuote(index: Int) = quotes[quotesCount - index]
 }
