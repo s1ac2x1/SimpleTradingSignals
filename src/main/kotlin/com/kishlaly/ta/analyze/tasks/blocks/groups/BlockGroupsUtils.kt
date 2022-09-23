@@ -23,7 +23,7 @@ class BlockGroupsUtils {
                     ThreeDisplays_Buy_Bollinger_2Java(),
                     ThreeDisplays_Buy_Bollinger_3Java(),
                     ThreeDisplays_Buy_Bollinger_4Java(),
-                    ThreeDisplays_Buy_Experiments(),
+                    ThreeDisplays_Buy_ExperimentsJava(),
                     ThreeDisplays_Buy_EFI_1Java(),
                     ThreeDisplays_Buy_EFI_2Java(),
                     ThreeDisplays_Buy_EFI_3Java()
