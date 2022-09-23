@@ -20,7 +20,7 @@ import java.util.List;
  * <p>
  * TP not higher than 50% of the channel
  */
-public class ThreeDisplays_Buy_9 implements BlocksGroupJava {
+public class ThreeDisplays_Buy_9Java implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         ThreeDisplaysJava.Config.BOLLINGER_TOTAL_BARS_CHECK = 3;
