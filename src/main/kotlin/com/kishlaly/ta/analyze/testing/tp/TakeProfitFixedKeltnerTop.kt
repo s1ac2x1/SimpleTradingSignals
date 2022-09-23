@@ -18,6 +18,6 @@ class TakeProfitFixedKeltnerTop(config: Any?) : TakeProfitStrategy(config) {
         return middle + ratio
     }
 
-    override fun toString() = "TP [Fixed] Keltner ${config as Double}% top"
+    override fun toString() = "TP [Fixed] Keltner ${config as Int}% top"
 
 }
