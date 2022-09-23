@@ -21,7 +21,7 @@ public class RunUtilsJava {
                 THREE_DISPLAYS_BUY,
                 new ArrayList<BlocksGroupJava>() {{
                     add(new ThreeDisplays_Buy_1Java());
-                    add(new ThreeDisplays_Buy_2());
+                    add(new ThreeDisplays_Buy_2Java());
                     add(new ThreeDisplays_Buy_3());
                     add(new ThreeDisplays_Buy_4());
                     add(new ThreeDisplays_Buy_5());
@@ -61,7 +61,7 @@ public class RunUtilsJava {
         ContextJava.runGroups = TimeframeJava.DAY;
         run(ContextJava.basicTimeframes, THREE_DISPLAYS_BUY, false,
                 new ThreeDisplays_Buy_1Java(),
-                new ThreeDisplays_Buy_2(),
+                new ThreeDisplays_Buy_2Java(),
                 new ThreeDisplays_Buy_3(),
                 new ThreeDisplays_Buy_4(),
                 new ThreeDisplays_Buy_5(),

@@ -8,7 +8,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThreeDisplays_Buy_2 implements BlocksGroupJava {
+public class ThreeDisplays_Buy_2Java implements BlocksGroupJava {
 
     public List<TaskBlockJava> blocks() {
         return new ArrayList<TaskBlockJava>() {{

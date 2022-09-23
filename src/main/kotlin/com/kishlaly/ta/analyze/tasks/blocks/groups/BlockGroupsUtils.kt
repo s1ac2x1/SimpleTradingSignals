@@ -9,7 +9,7 @@ class BlockGroupsUtils {
             TaskType.THREE_DISPLAYS_BUY ->
                 arrayOf(
                     ThreeDisplays_Buy_1Java(),
-                    ThreeDisplays_Buy_2(),
+                    ThreeDisplays_Buy_2Java(),
                     ThreeDisplays_Buy_3(),
                     ThreeDisplays_Buy_4(),
                     ThreeDisplays_Buy_5(),
