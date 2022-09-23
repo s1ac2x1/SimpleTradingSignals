@@ -1,7 +1,12 @@
 package com.kishlaly.ta.analyze.testing
 
 import com.kishlaly.ta.analyze.TaskType
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtils
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
+import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
 import com.kishlaly.ta.cache.CacheReader
 import com.kishlaly.ta.cache.IndicatorsInMemoryCache
 import com.kishlaly.ta.cache.QuotesInMemoryCache
@@ -349,6 +354,53 @@ class TaskTester {
                 }
         }
 
+        fun testOneStrategy(
+            timeframes: Array<Array<Timeframe>>,
+            task: TaskType,
+            blocksGroup: BlocksGroup,
+            stopLossStrategy: StopLossStrategy,
+            takeProfitStrategy: TakeProfitStrategy
+        ) {
+            Context.stopLossStrategy = stopLossStrategy
+            Context.takeProfitStrategy = takeProfitStrategy
+            println("$stopLossStrategy / $takeProfitStrategy")
+            test(timeframes, task, blocksGroup)
+        }
+
+        // format: dd.mm.yyyy
+        fun testAllStrategiesOnSpecificDate(
+            datePart: String,
+            task: TaskType,
+            timeframes: Array<Array<Timeframe>>
+        ) {
+            if (Context.symbols.size > 1) {
+                throw RuntimeException("Only one symbol allowed here")
+            }
+            // SL/TP are not important here, it is important what signal or error code in a particular date
+            Context.stopLossStrategy = StopLossFixedPrice(0.27)
+            Context.takeProfitStrategy = TakeProfitFixedKeltnerTop(30)
+            val testings = BlockGroupsUtils.getAllGroups(task).flatMap { test(timeframes, task, it) }.toList()
+            val parsed = Dates.shortDateToZoned(datePart)
+            testings.forEach { testing ->
+                val groupName = testing.blocksGroup.javaClass.getSimpleName()
+                val blockResult =
+                    testing.blocksResults.filter { it.lastChartQuote.timestamp == parsed.toEpochSecond() }.first()
+                println("${datePart} ${groupName} = ${blockResult.code}")
+            }
+        }
+
+        fun testMass(timeframes: Array<Array<Timeframe>>, task: TaskType, blocksGroup: BlocksGroup) {
+            Context.massTesting = true
+            val stopLossStrategy = StopLossFixedPrice(0.27)
+            Context.stopLossStrategy = stopLossStrategy
+            Context.takeProfitStrategies.clear()
+            for (i in 80..100) {
+                val tp = TakeProfitFixedKeltnerTop(i)
+                Context.takeProfitStrategies.add(tp)
+            }
+            TaskTester.test(timeframes, task, blocksGroup)
+        }
+
         private fun formatByTPSL(
             testing: HistoricalTesting,
             positionTestResult: PositionTestResult?,
@@ -531,7 +583,7 @@ class TaskTester {
                 positionTestResult.loss = loss
                 positionTestResult.gapUp = caughtGapUp
                 positionTestResult.gapDown = caughtGapDown
-                positionTestResult.roi = NumbersJava.round(roi)
+                positionTestResult.roi = roi.round()
                 positionTestResult.openPositionPrice = openingPrice
                 positionTestResult.openPositionCost = openPositionSize
                 positionTestResult.closePositionPrice = closePositionPrice
