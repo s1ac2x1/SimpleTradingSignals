@@ -1,6 +1,6 @@
 package com.kishlaly.ta
 
-import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4Java
 import com.kishlaly.ta.cache.CacheReaderJava
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.SymbolsSource
@@ -16,6 +16,6 @@ fun main() {
     ContextJava.symbols = CacheReaderJava.getSymbols()
     //buildCache(Context.basicTimeframes, false);
     //buildCache(Context.basicTimeframes, false);
-    RunUtilsJava.testOneStrategy_(ThreeDisplays_Buy_4())
+    RunUtilsJava.testOneStrategy_(ThreeDisplays_Buy_4Java())
 
 }

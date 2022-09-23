@@ -23,7 +23,7 @@ public class RunUtilsJava {
                     add(new ThreeDisplays_Buy_1Java());
                     add(new ThreeDisplays_Buy_2Java());
                     add(new ThreeDisplays_Buy_3Java());
-                    add(new ThreeDisplays_Buy_4());
+                    add(new ThreeDisplays_Buy_4Java());
                     add(new ThreeDisplays_Buy_5());
                     add(new ThreeDisplays_Buy_6());
                     add(new ThreeDisplays_Buy_7());
@@ -63,7 +63,7 @@ public class RunUtilsJava {
                 new ThreeDisplays_Buy_1Java(),
                 new ThreeDisplays_Buy_2Java(),
                 new ThreeDisplays_Buy_3Java(),
-                new ThreeDisplays_Buy_4(),
+                new ThreeDisplays_Buy_4Java(),
                 new ThreeDisplays_Buy_5(),
                 new ThreeDisplays_Buy_6(),
                 new ThreeDisplays_Buy_7(),

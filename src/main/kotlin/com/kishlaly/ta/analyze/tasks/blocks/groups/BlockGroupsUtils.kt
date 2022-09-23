@@ -11,7 +11,7 @@ class BlockGroupsUtils {
                     ThreeDisplays_Buy_1Java(),
                     ThreeDisplays_Buy_2Java(),
                     ThreeDisplays_Buy_3Java(),
-                    ThreeDisplays_Buy_4(),
+                    ThreeDisplays_Buy_4Java(),
                     ThreeDisplays_Buy_5(),
                     ThreeDisplays_Buy_6(),
                     ThreeDisplays_Buy_7(),
