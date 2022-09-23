@@ -1,4 +1,4 @@
-package com.kishlaly.ta.analyze.tasks.blocks.groups.bollinger
+package com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
@@ -23,9 +23,9 @@ import com.kishlaly.ta.analyze.tasks.blocks.two.stoch.Long_ScreenTwo_Stoch_D_Two
  * + the last bar is green and higher than the previous one
  * + filter late entry
  * <p>
- * SL can be sliding along the Bollinger average
+ * SL can be sliding on the average Bollinger band
  */
-class ThreeDisplays_Buy_Bollinger_1_2 : BlocksGroup {
+class ThreeDisplays_Buy_Bollinger_1 : BlocksGroup {
 
     override fun blocks(): List<TaskBlock> {
         ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3
@@ -35,6 +35,7 @@ class ThreeDisplays_Buy_Bollinger_1_2 : BlocksGroup {
             init {
                 add(ScreenBasicValidation())
 
+                //add(new Long_ScreenOne_StrictTrendCheck());
                 add(Long_ScreenOne_SoftTrendCheck())
 
                 add(Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed())
@@ -48,6 +49,6 @@ class ThreeDisplays_Buy_Bollinger_1_2 : BlocksGroup {
         }
     }
 
-    override fun comments() = "The price recently touched the lower band. Good returns, average TP/SL ratio"
+    override fun comments() = "Price recently touched the bottom band, good TP/SL ratio"
 
 }

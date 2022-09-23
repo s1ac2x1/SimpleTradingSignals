@@ -1,4 +1,4 @@
-package com.kishlaly.ta.analyze.tasks.blocks.groups.bollinger
+package com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock

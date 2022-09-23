@@ -9,12 +9,22 @@ class BlockGroupsUtils {
     companion object {
         fun getAllGroups(taskType: TaskType): List<BlocksGroup> {
             return when (taskType) {
-                TaskType.THREE_DISPLAYS_BUY -> {
-                    return findClasses("com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays", "buy")
-                }
-                TaskType.THREE_DISPLAYS_SELL -> {
-                    return findClasses("com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays", "sell")
-                }
+                TaskType.THREE_DISPLAYS_BUY -> findClasses(
+                    "com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays",
+                    "buy"
+                )
+                TaskType.THREE_DISPLAYS_SELL -> findClasses(
+                    "com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays",
+                    "sell"
+                )
+                TaskType.MACD_BULLISH_DIVERGENCE -> findClasses(
+                    "com.kishlaly.ta.analyze.tasks.blocks.groups.divergencies",
+                    ""
+                )
+                TaskType.FIRST_TRUST_MODEL -> findClasses(
+                    "com.kishlaly.ta.analyze.tasks.blocks.groups.trustmodel",
+                    ""
+                )
                 else -> listOf()
             }
         }
