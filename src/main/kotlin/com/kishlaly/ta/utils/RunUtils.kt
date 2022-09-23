@@ -2,7 +2,6 @@ package com.kishlaly.ta.utils
 
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
-import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1
 import com.kishlaly.ta.analyze.testing.HistoricalTesting
 import com.kishlaly.ta.analyze.testing.TaskTester.Companion.test
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy
@@ -10,7 +9,6 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
 import com.kishlaly.ta.cache.CacheBuilder
 import com.kishlaly.ta.cache.CacheBuilder.Companion.getSLStrategies
 import com.kishlaly.ta.cache.CacheBuilder.Companion.getTPStrategies
-import com.kishlaly.ta.cache.CacheBuilderJava
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.Timeframe
 import java.util.concurrent.atomic.AtomicInteger

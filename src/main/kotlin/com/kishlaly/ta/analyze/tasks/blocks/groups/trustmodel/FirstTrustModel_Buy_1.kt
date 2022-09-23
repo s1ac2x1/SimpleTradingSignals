@@ -1,7 +1,8 @@
-package com.kishlaly.ta.analyze.tasks.blocks.groups
+package com.kishlaly.ta.analyze.tasks.blocks.groups.trustmodel
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenSoftValidation
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.tasks.blocks.two.complex.Long_ScreenTwo_FirstTrustModelMainLogic
 import com.kishlaly.ta.config.Context
 

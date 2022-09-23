@@ -1,8 +1,9 @@
-package com.kishlaly.ta.analyze.tasks.blocks.groups
+package com.kishlaly.ta.analyze.tasks.blocks.groups.divergencies
 
 import com.kishlaly.ta.analyze.tasks.Divergencies
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
+import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.complex.Long_ScreenTwo_BullishDivergenceMainLogic
 

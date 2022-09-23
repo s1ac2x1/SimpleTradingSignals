@@ -3,7 +3,7 @@ package com.kishlaly.ta.analyze;
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlockJava;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BullishDivergence_Buy_1Java;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.FirstTrustModel_Buy_1Java;
-import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1;
+import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1Java;
 import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Sell_1;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class TaskTypeDefaults {
     public static List<TaskBlockJava> get(TaskTypeJava taskType) {
         switch (taskType) {
             case THREE_DISPLAYS_BUY:
-                return new ThreeDisplays_Buy_1().blocks();
+                return new ThreeDisplays_Buy_1Java().blocks();
             case THREE_DISPLAYS_SELL:
                 return new ThreeDisplays_Sell_1().blocks();
             case MACD_BULLISH_DIVERGENCE:

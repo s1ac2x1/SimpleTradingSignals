@@ -9,7 +9,7 @@ public class BlockGroupsUtilsJava {
             case THREE_DISPLAYS_BUY:
                 // TODO use reflections
                 return new BlocksGroupJava[]{
-                        new ThreeDisplays_Buy_1(),
+                        new ThreeDisplays_Buy_1Java(),
                         new ThreeDisplays_Buy_2(),
                         new ThreeDisplays_Buy_3(),
                         new ThreeDisplays_Buy_4(),
