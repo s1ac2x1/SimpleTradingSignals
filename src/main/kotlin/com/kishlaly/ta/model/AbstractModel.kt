@@ -7,7 +7,7 @@ public const val exchangeTimezome = "US/Eastern"
 abstract class AbstractModel {
 
     // in epoch seconds
-    open public val timestamp: Long
+    public val timestamp: Long
     public val nativeDate: String
     public val myDate: String
 
