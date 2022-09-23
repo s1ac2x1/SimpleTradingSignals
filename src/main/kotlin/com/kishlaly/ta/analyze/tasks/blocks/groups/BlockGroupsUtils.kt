@@ -20,7 +20,7 @@ class BlockGroupsUtils {
                     FirstScreen_Buy_1Java(),
                     ThreeDisplays_Buy_Bollinger_1Java(),
                     ThreeDisplays_Buy_Bollinger_1_2Java(),
-                    ThreeDisplays_Buy_Bollinger_2(),
+                    ThreeDisplays_Buy_Bollinger_2Java(),
                     ThreeDisplays_Buy_Bollinger_3(),
                     ThreeDisplays_Buy_Bollinger_4(),
                     ThreeDisplays_Buy_Experiments(),

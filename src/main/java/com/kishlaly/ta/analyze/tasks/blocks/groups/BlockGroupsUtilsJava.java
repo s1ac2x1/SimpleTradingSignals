@@ -21,7 +21,7 @@ public class BlockGroupsUtilsJava {
                         new FirstScreen_Buy_1Java(),
                         new ThreeDisplays_Buy_Bollinger_1Java(),
                         new ThreeDisplays_Buy_Bollinger_1_2Java(),
-                        new ThreeDisplays_Buy_Bollinger_2(),
+                        new ThreeDisplays_Buy_Bollinger_2Java(),
                         new ThreeDisplays_Buy_Bollinger_3(),
                         new ThreeDisplays_Buy_Bollinger_4(),
                         new ThreeDisplays_Buy_Experiments(),
