@@ -14,7 +14,7 @@ import java.util.List;
  * or TP at the middle of the channel
  */
 //TODO finish
-public class ThreeDisplays_Buy_Bollinger_4 implements BlocksGroupJava {
+public class ThreeDisplays_Buy_Bollinger_4Java implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         return new ArrayList<TaskBlockJava>() {{
