@@ -5,6 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtils
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays.*
 import com.kishlaly.ta.analyze.testing.HistoricalTesting
+import com.kishlaly.ta.analyze.testing.TaskTester
 import com.kishlaly.ta.analyze.testing.TaskTester.Companion.test
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy
@@ -51,14 +52,6 @@ class RunUtils {
         }
 
         // format: dd.mm.yyyy
-        fun testStrategiesOnSpecificDate_(date: String) {
-            testAllStrategiesOnSpecificDate(
-                date,
-                TaskType.THREE_DISPLAYS_BUY,
-                Context.basicTimeframes
-            )
-        }
-
         fun testAllStrategiesOnSpecificDate(
             datePart: String,
             task: TaskType,
@@ -70,7 +63,26 @@ class RunUtils {
             // SL/TP are not important here, it is important what signal or error code in a particular date
             Context.stopLossStrategy = StopLossFixedPrice(0.27)
             Context.takeProfitStrategy = TakeProfitFixedKeltnerTop(30)
-            val blocksGroups = BlockGroupsUtils.getAllGroups(task)
+            val testings = BlockGroupsUtils.getAllGroups(task).flatMap { test(timeframes, task, it) }.toList()
+            val parsed = Dates.shortDateToZoned(datePart)
+            testings.forEach { testing ->
+                val groupName = testing.blocksGroup.javaClass.getSimpleName()
+                val blockResult =
+                    testing.blocksResults.filter { it.lastChartQuote.timestamp == parsed.toEpochSecond() }.first()
+                println("${datePart} ${groupName} = ${blockResult.code}")
+            }
+        }
+
+        fun testMass(timeframes: Array<Array<Timeframe>>, task: TaskType, blocksGroup: BlocksGroup) {
+            Context.massTesting = true
+            val stopLossStrategy = StopLossFixedPrice(0.27)
+            Context.stopLossStrategy = stopLossStrategy
+            Context.takeProfitStrategies.clear()
+            for (i in 80..100) {
+                val tp = TakeProfitFixedKeltnerTop(i)
+                Context.takeProfitStrategies.add(tp)
+            }
+            TaskTester.test(timeframes, task, blocksGroup)
         }
 
         fun buildTasksAndStrategiesSummary(
@@ -100,6 +112,10 @@ class RunUtils {
             }
             CacheBuilder.saveTable(result)
             CacheBuilder.saveSummaryPerGroup(result)
+        }
+
+        fun singleSymbol(symbol: String) {
+            Context.testOnly = mutableListOf(symbol)
         }
 
     }
