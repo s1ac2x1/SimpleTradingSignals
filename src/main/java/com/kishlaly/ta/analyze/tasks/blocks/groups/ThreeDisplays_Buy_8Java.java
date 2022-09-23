@@ -21,7 +21,7 @@ import java.util.List;
  * <p>
  * TP not higher than 50% of the channel
  */
-public class ThreeDisplays_Buy_8 implements BlocksGroupJava {
+public class ThreeDisplays_Buy_8Java implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         ThreeDisplaysJava.Config.STOCH_CUSTOM = 20;
