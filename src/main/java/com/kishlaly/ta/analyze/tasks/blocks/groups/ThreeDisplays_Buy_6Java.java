@@ -20,7 +20,7 @@ import java.util.List;
  * <p>
  * TP is not higher than 50% of the distance from the middle to the top of the Keltner channel
  */
-public class ThreeDisplays_Buy_6 implements BlocksGroupJava {
+public class ThreeDisplays_Buy_6Java implements BlocksGroupJava {
     @Override
     public List<TaskBlockJava> blocks() {
         ThreeDisplaysJava.Config.STOCH_CUSTOM = 20;
