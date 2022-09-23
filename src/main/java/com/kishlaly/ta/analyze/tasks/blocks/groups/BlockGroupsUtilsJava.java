@@ -13,7 +13,7 @@ public class BlockGroupsUtilsJava {
                         new ThreeDisplays_Buy_2Java(),
                         new ThreeDisplays_Buy_3Java(),
                         new ThreeDisplays_Buy_4Java(),
-                        new ThreeDisplays_Buy_5(),
+                        new ThreeDisplays_Buy_5Java(),
                         new ThreeDisplays_Buy_6(),
                         new ThreeDisplays_Buy_7(),
                         new ThreeDisplays_Buy_8(),
