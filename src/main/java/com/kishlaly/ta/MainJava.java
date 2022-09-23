@@ -13,7 +13,7 @@ import static com.kishlaly.ta.utils.RunUtilsJava.singleSymbol;
  * @author Vladimir Kishlaly
  * @since 15.11.2021
  */
-public class Main {
+public class MainJava {
 
     public static void main(String[] args) throws Exception {
         ContextJava.aggregationTimeframe = TimeframeJava.DAY;
