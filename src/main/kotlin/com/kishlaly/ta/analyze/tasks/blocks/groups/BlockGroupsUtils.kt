@@ -10,7 +10,7 @@ class BlockGroupsUtils {
                 arrayOf(
                     ThreeDisplays_Buy_1Java(),
                     ThreeDisplays_Buy_2Java(),
-                    ThreeDisplays_Buy_3(),
+                    ThreeDisplays_Buy_3Java(),
                     ThreeDisplays_Buy_4(),
                     ThreeDisplays_Buy_5(),
                     ThreeDisplays_Buy_6(),

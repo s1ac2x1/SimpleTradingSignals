@@ -21,7 +21,7 @@ import java.util.List;
 //
 // entry 7 cents above the close of the last bar
 // TP in the middle of the upper half of the Keltner channel
-public class ThreeDisplays_Buy_3 implements BlocksGroupJava {
+public class ThreeDisplays_Buy_3Java implements BlocksGroupJava {
 
     public List<TaskBlockJava> blocks() {
         return new ArrayList<TaskBlockJava>() {{

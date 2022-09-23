@@ -22,7 +22,7 @@ public class RunUtilsJava {
                 new ArrayList<BlocksGroupJava>() {{
                     add(new ThreeDisplays_Buy_1Java());
                     add(new ThreeDisplays_Buy_2Java());
-                    add(new ThreeDisplays_Buy_3());
+                    add(new ThreeDisplays_Buy_3Java());
                     add(new ThreeDisplays_Buy_4());
                     add(new ThreeDisplays_Buy_5());
                     add(new ThreeDisplays_Buy_6());
@@ -62,7 +62,7 @@ public class RunUtilsJava {
         run(ContextJava.basicTimeframes, THREE_DISPLAYS_BUY, false,
                 new ThreeDisplays_Buy_1Java(),
                 new ThreeDisplays_Buy_2Java(),
-                new ThreeDisplays_Buy_3(),
+                new ThreeDisplays_Buy_3Java(),
                 new ThreeDisplays_Buy_4(),
                 new ThreeDisplays_Buy_5(),
                 new ThreeDisplays_Buy_6(),

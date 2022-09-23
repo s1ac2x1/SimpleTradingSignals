@@ -11,7 +11,7 @@ public class BlockGroupsUtilsJava {
                 return new BlocksGroupJava[]{
                         new ThreeDisplays_Buy_1Java(),
                         new ThreeDisplays_Buy_2Java(),
-                        new ThreeDisplays_Buy_3(),
+                        new ThreeDisplays_Buy_3Java(),
                         new ThreeDisplays_Buy_4(),
                         new ThreeDisplays_Buy_5(),
                         new ThreeDisplays_Buy_6(),
