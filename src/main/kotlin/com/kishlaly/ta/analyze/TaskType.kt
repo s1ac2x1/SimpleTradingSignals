@@ -2,9 +2,12 @@ package com.kishlaly.ta.analyze
 
 import com.kishlaly.ta.analyze.tasks.AbstractTask
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
-import com.kishlaly.ta.model.*
+import com.kishlaly.ta.model.BlockResult
+import com.kishlaly.ta.model.Screens
+import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.model.Timeframe.DAY
 import com.kishlaly.ta.model.Timeframe.WEEK
+import com.kishlaly.ta.model.TimeframeIndicators
 import com.kishlaly.ta.model.indicators.Indicator
 import com.kishlaly.ta.model.indicators.Indicator.*
 import java.util.function.BiFunction

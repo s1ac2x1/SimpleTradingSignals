@@ -7,7 +7,6 @@ public class BlockGroupsUtilsJava {
     public static BlocksGroupJava[] getAllGroups(TaskTypeJava taskType) {
         switch (taskType) {
             case THREE_DISPLAYS_BUY:
-                // TODO use reflections
                 return new BlocksGroupJava[]{
                         new ThreeDisplays_Buy_1Java(),
                         new ThreeDisplays_Buy_2Java(),
