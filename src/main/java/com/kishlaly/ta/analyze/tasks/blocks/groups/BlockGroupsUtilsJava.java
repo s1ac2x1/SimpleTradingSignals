@@ -27,7 +27,7 @@ public class BlockGroupsUtilsJava {
                         new ThreeDisplays_Buy_Experiments(),
                         new ThreeDisplays_Buy_EFI_1Java(),
                         new ThreeDisplays_Buy_EFI_2Java(),
-                        new ThreeDisplays_Buy_EFI_3(),
+                        new ThreeDisplays_Buy_EFI_3Java(),
                 };
             default:
                 return new BlocksGroupJava[]{};

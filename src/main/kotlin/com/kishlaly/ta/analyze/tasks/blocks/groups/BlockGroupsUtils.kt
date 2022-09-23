@@ -26,7 +26,7 @@ class BlockGroupsUtils {
                     ThreeDisplays_Buy_Experiments(),
                     ThreeDisplays_Buy_EFI_1Java(),
                     ThreeDisplays_Buy_EFI_2Java(),
-                    ThreeDisplays_Buy_EFI_3()
+                    ThreeDisplays_Buy_EFI_3Java()
                 )
             else -> arrayOf()
         }
