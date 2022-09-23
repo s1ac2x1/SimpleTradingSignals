@@ -31,6 +31,3 @@ class ThreeDisplays_Buy_1 : BlocksGroup {
 
     override fun comments() = "Often good results, low SL ratio"
 }
-
-
-}
