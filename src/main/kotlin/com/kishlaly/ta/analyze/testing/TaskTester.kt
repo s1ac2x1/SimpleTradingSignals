@@ -154,9 +154,9 @@ class TaskTester {
         }
 
         private fun calculateStatistics(historicalTesting: HistoricalTesting) {
-            historicalTesting.blocksResults
-                .filter { it.isOk() }
-                .forEach { testPosition(it, historicalTesting) }
+            val filtered = historicalTesting.blocksResults
+                .filter { it.isOk() }.toList()
+            filtered.forEach { testPosition(it, historicalTesting) }
             testLog.append(historicalTesting.symbol + lineSeparator())
             FileUtils.writeToFile(
                 "${Context.outputFolder}${Context.fileSeparator}stats${Context.fileSeparator}${historicalTesting.symbol}_test_log.txt",

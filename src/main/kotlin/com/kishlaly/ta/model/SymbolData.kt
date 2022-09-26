@@ -17,7 +17,10 @@ data class SymbolData(
 
     val isEmptyQuotes = quotes.isEmpty()
 
-    val isEmptyIndicators = indicators.isEmpty()
+    val isEmptyIndicators: Boolean
+        get() {
+            return indicators.isEmpty()
+        }
 
     fun clear() {
         indicators.clear()
