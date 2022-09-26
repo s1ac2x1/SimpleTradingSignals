@@ -20,7 +20,7 @@ public class MainJava {
         ContextJava.source = new SymbolsSourceJava[]{
                 SymbolsSourceJava.SP500
         };
-        singleSymbol("AAPL"); // for single test
+        singleSymbol("TER"); // for single test
         ContextJava.symbols = getSymbols();
         //buildCache(Context.basicTimeframes, false);
         RunUtilsJava.testOneStrategy_(new ThreeDisplays_Buy_4Java());
