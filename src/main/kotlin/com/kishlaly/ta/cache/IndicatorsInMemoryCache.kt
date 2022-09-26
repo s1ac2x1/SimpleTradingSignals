@@ -2,6 +2,7 @@ package com.kishlaly.ta.cache
 
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
+import com.google.gson.internal.LinkedTreeMap
 import com.kishlaly.ta.cache.keys.*
 import com.kishlaly.ta.model.AbstractModel
 import com.kishlaly.ta.model.Timeframe
@@ -25,7 +26,9 @@ class IndicatorsInMemoryCache {
         }
 
         fun getEMA(symbol: String, timeframe: Timeframe, period: Int): List<EMA> {
-            return get(ema, EMAKey(symbol, timeframe, period))
+            val get = get(ema, EMAKey(symbol, timeframe, period)) as ArrayList<LinkedTreeMap<Any, Any>>
+            return get.map { EMA((it["timestamp"] as Double).toLong(), it["value"] as Double) }
+                .toList().sortedBy { it.timestamp }
         }
 
         fun putMACD(symbol: String, timeframe: Timeframe, data: List<MACD>) {
@@ -33,7 +36,13 @@ class IndicatorsInMemoryCache {
         }
 
         fun getMACD(symbol: String, timeframe: Timeframe): List<MACD> {
-            return get(macd, MACDKey(symbol, timeframe))
+            val get = get(macd, MACDKey(symbol, timeframe)) as ArrayList<LinkedTreeMap<Any, Any>>
+            return get.map {
+                MACD(
+                    (it["timestamp"] as Double).toLong(), it["macd"] as Double, it["signal"] as Double,
+                    it["histogram"] as Double
+                )
+            }.toList().sortedBy { it.timestamp }
         }
 
         fun putKeltner(symbol: String, timeframe: Timeframe, data: List<Keltner>) {
@@ -41,7 +50,16 @@ class IndicatorsInMemoryCache {
         }
 
         fun getKeltner(symbol: String, timeframe: Timeframe): List<Keltner> {
-            return get(keltner, KeltnerKey(symbol, timeframe))
+            val get = get(keltner, KeltnerKey(symbol, timeframe)) as ArrayList<LinkedTreeMap<Any, Any>>
+            val sortedBy = get.map {
+                Keltner(
+                    (it["timestamp"] as Double).toLong(),
+                    it["low"] as Double,
+                    it["middle"] as Double,
+                    it["top"] as Double
+                )
+            }.toList().sortedBy { it.timestamp }
+            return sortedBy
         }
 
         fun putATR(symbol: String, timeframe: Timeframe, period: Int, data: List<ATR>) {
@@ -49,7 +67,9 @@ class IndicatorsInMemoryCache {
         }
 
         fun getATR(symbol: String, timeframe: Timeframe, period: Int): List<ATR> {
-            return get(atr, ATRKey(symbol, timeframe, period))
+            val get = get(atr, ATRKey(symbol, timeframe, period)) as ArrayList<LinkedTreeMap<Any, Any>>
+            return get.map { ATR((it["timestamp"] as Double).toLong(), it["value"] as Double) }
+                .toList().sortedBy { it.timestamp }
         }
 
         fun putStoch(symbol: String, timeframe: Timeframe, data: List<Stochastic>) {
@@ -57,7 +77,14 @@ class IndicatorsInMemoryCache {
         }
 
         fun getStoch(symbol: String, timeframe: Timeframe): List<Stochastic> {
-            return get(stochastic, StochKey(symbol, timeframe))
+            val get = get(stochastic, StochKey(symbol, timeframe)) as ArrayList<LinkedTreeMap<Any, Any>>
+            return get.map {
+                Stochastic(
+                    (it["timestamp"] as Double).toLong(),
+                    it["slowD"] as Double,
+                    it["slowK"] as Double
+                )
+            }.toList().sortedBy { it.timestamp }
         }
 
         fun putEFI(symbol: String, timeframe: Timeframe, data: List<ElderForceIndex>) {
@@ -65,7 +92,13 @@ class IndicatorsInMemoryCache {
         }
 
         fun getEFI(symbol: String, timeframe: Timeframe): List<ElderForceIndex> {
-            return get(efi, EFIKey(symbol, timeframe))
+            val get = get(efi, EFIKey(symbol, timeframe)) as ArrayList<LinkedTreeMap<Any, Any>>
+            return get.map {
+                ElderForceIndex(
+                    (it["timestamp"] as Double).toLong(),
+                    it["value"] as Double
+                )
+            }.toList().sortedBy { it.timestamp }
         }
 
         fun putBollinger(symbol: String, timeframe: Timeframe, data: List<Bollinger>) {
@@ -73,7 +106,15 @@ class IndicatorsInMemoryCache {
         }
 
         fun getBollinger(symbol: String, timeframe: Timeframe): List<Bollinger> {
-            return get(bollinger, BollingerKey(symbol, timeframe))
+            val get = get(bollinger, BollingerKey(symbol, timeframe)) as ArrayList<LinkedTreeMap<Any, Any>>
+            return get.map {
+                Bollinger(
+                    (it["timestamp"] as Double).toLong(),
+                    it["bottom"] as Double,
+                    it["middle"] as Double,
+                    it["top"] as Double
+                )
+            }.toList().sortedBy { it.timestamp }
         }
 
         private fun <T : AbstractModel, K : BaseKey> get(map: ConcurrentHashMap<K, List<T>>, key: K): List<T> {
@@ -81,8 +122,7 @@ class IndicatorsInMemoryCache {
         }
 
         private fun <T : AbstractModel> copy(source: List<T>): List<T> {
-            val copy = gson.fromJson<List<T>>(gson.toJson(source), object : TypeToken<List<T>>() {}.type)
-            return copy.sortedBy { it.timestamp }
+            return gson.fromJson<List<T>>(gson.toJson(source), object : TypeToken<List<T>>() {}.type)
         }
 
         fun clear() {
