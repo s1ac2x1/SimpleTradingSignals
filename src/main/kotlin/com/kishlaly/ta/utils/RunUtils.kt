@@ -32,20 +32,20 @@ class RunUtils {
                     ThreeDisplays_Buy_5(),
                     ThreeDisplays_Buy_6(),
                     ThreeDisplays_Buy_7(),
-//                    ThreeDisplays_Buy_8(),
-//                    ThreeDisplays_Buy_9(),
-//                    ThreeDisplays_Buy_Bollinger_1(),
-//                    ThreeDisplays_Buy_Bollinger_1_2(),
-//                    ThreeDisplays_Buy_Bollinger_2(),
-//                    ThreeDisplays_Buy_Bollinger_3(),
-//                    ThreeDisplays_Buy_Bollinger_4(),
+                    ThreeDisplays_Buy_8(),
+                    ThreeDisplays_Buy_9(),
+                    ThreeDisplays_Buy_Bollinger_1(),
+                    ThreeDisplays_Buy_Bollinger_1_2(),
+                    ThreeDisplays_Buy_Bollinger_2(),
+                    ThreeDisplays_Buy_Bollinger_3(),
+                    ThreeDisplays_Buy_Bollinger_4(),
 //                    ThreeDisplays_Buy_EFI_1(),
 //                    ThreeDisplays_Buy_EFI_2(),
 //                    ThreeDisplays_Buy_EFI_3(),
 //                    Experiments()
                 ),
                 StopLossFixedPrice(0.27),
-                TakeProfitFixedKeltnerTop(70)
+                TakeProfitFixedKeltnerTop(80)
             )
         }
 
