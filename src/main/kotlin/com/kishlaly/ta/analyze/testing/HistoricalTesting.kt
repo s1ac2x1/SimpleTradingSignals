@@ -25,7 +25,10 @@ class HistoricalTesting(
     val symbol = data.symbol
 
     // loss is negative
-    val balance = (totalProfit + totalLoss).round()
+    val balance: Double
+        get() {
+            return (totalProfit + totalLoss).round()
+        }
 
     val successfulRatio: Double
         get() {
@@ -41,29 +44,66 @@ class HistoricalTesting(
             } else Numbers.percent(lossPositionsCount.toDouble(), allPositionsCount.toDouble())
         }
 
-    val allPositionsCount = signalTestingResults.entries.filter { it.value.closed }.count()
+    val allPositionsCount: Int
+        get() {
+            return signalTestingResults.entries.filter { it.value.closed }.count()
+        }
 
-    val profitablePositionsCount = signalTestingResults.entries.filter { it.value.profitable }.count()
 
-    val lossPositionsCount = signalTestingResults.entries.filter { !it.value.profitable }.count()
+    val profitablePositionsCount: Int
+        get() {
+            return signalTestingResults.entries.filter { it.value.profitable }.count()
+        }
 
-    val minPositionDurationSeconds = positionDurationCollection().min()
+    val lossPositionsCount: Int
+        get() {
+            return signalTestingResults.entries.filter { !it.value.profitable }.count()
+        }
 
-    val averagePositionDurationSeconds = positionDurationCollection().average().round()
+    val minPositionDurationSeconds: Long
+        get() {
+            return positionDurationCollection().min()
+        }
 
-    val maxPositionDurationSeconds = positionDurationCollection().max()
+    val averagePositionDurationSeconds: Double
+        get() {
+            return positionDurationCollection().average().round()
+        }
 
-    val minProfit = profitsCollection().min()
+    val maxPositionDurationSeconds: Long
+        get() {
+            return positionDurationCollection().max()
+        }
 
-    val avgProfit = profitsCollection().average().round()
+    val minProfit: Double
+        get() {
+            return profitsCollection().min()
+        }
 
-    val maxProfit = profitsCollection().max()
+    val avgProfit: Double
+        get() {
+            return profitsCollection().average().round()
+        }
 
-    val minLoss = lossesCollection().min()
+    val maxProfit: Double
+        get() {
+            return profitsCollection().max()
+        }
 
-    val avgLoss = lossesCollection().average().round()
+    val minLoss: Double
+        get() {
+            return lossesCollection().min()
+        }
 
-    val maxLoss = lossesCollection().max()
+    val avgLoss: Double
+        get() {
+            return lossesCollection().average().round()
+        }
+
+    val maxLoss: Double
+        get() {
+            return lossesCollection().max()
+        }
 
     val totalProfit: Double
         get() = signalTestingResults.entries
