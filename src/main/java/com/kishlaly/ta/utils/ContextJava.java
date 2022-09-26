@@ -63,7 +63,7 @@ public class ContextJava {
     public static String trimToDate;
     public static String fileSeparator = System.getProperty("file.separator");
     public static final String TESTS_FOLDER = "tests";
-    public static final String SINGLE_TXT = "single.txt";
+    public static final String SINGLE_TXT = "single_java.txt";
     public static final String MASS_TXT = "mass.txt";
     public static final int MIN_POSSIBLE_QUOTES = 11;
 

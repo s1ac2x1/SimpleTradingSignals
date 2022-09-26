@@ -109,7 +109,7 @@ class HistoricalTesting(
         get() = signalTestingResults.entries
             .filter { it.value.profitable }
             .map { it.value.profit!! - it.value.commissions!! }
-            .sum()
+            .sum().round()
 
     val averageRoi: Double
         get() = signalTestingResults.entries
@@ -121,7 +121,7 @@ class HistoricalTesting(
         get() = signalTestingResults.entries
             .filter { !it.value.profitable }
             .map { it.value.loss!! - it.value.commissions!! }
-            .sum()
+            .sum().round()
 
     fun addTestResult(signal: Quote, positionTestResult: PositionTestResult) {
         signalTestingResults.put(signal, positionTestResult)
