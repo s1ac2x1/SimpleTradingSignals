@@ -62,7 +62,7 @@ class HistoricalTesting(
 
     val minPositionDurationSeconds: Long
         get() {
-            return positionDurationCollection().min()
+            return positionDurationCollection().minOrNull() ?: 0
         }
 
     val averagePositionDurationSeconds: Double
@@ -72,12 +72,12 @@ class HistoricalTesting(
 
     val maxPositionDurationSeconds: Long
         get() {
-            return positionDurationCollection().max()
+            return positionDurationCollection().maxOrNull() ?: 0
         }
 
     val minProfit: Double
         get() {
-            return profitsCollection().min()
+            return profitsCollection().minOrNull() ?: 0.0
         }
 
     val avgProfit: Double
@@ -87,12 +87,12 @@ class HistoricalTesting(
 
     val maxProfit: Double
         get() {
-            return profitsCollection().max()
+            return profitsCollection().maxOrNull() ?: 0.0
         }
 
     val minLoss: Double
         get() {
-            return lossesCollection().min()
+            return lossesCollection().minOrNull() ?: 0.0
         }
 
     val avgLoss: Double
@@ -102,7 +102,7 @@ class HistoricalTesting(
 
     val maxLoss: Double
         get() {
-            return lossesCollection().max()
+            return lossesCollection().maxOrNull() ?: 0.0
         }
 
     val totalProfit: Double
@@ -136,20 +136,24 @@ class HistoricalTesting(
             .firstOrNull()
     }
 
-    fun searchSignalByLoss(loss: Double): PositionTestResult? {
-        return signalTestingResults.entries
-            .filter { !it.value.profitable && it.value.loss == loss }
-            .map { it.value }
-            .firstOrNull()
+    fun searchSignalByLoss(loss: Double?): PositionTestResult? {
+        return loss?.let {
+            signalTestingResults.entries
+                .filter { !it.value.profitable && it.value.loss == loss }
+                .map { it.value }
+                .firstOrNull()
+        }
     }
 
-    // TODO do not pass here value from the same object, but rather rename
+    // TODO do not pass here value from the same object, but rather rename <== wtf does that mean?
     // TODO the same for other similar methods
-    fun searchSignalByProfit(profit: Double): PositionTestResult? {
-        return signalTestingResults.entries
-            .filter { it.value.profitable && it.value.profit == profit }
-            .map { it.value }
-            .firstOrNull()
+    fun searchSignalByProfit(profit: Double?): PositionTestResult? {
+        return profit?.let {
+            signalTestingResults.entries
+                .filter { it.value.profitable && it.value.profit == profit }
+                .map { it.value }
+                .firstOrNull()
+        }
     }
 
     fun printSL() = stopLossStrategy.toString()

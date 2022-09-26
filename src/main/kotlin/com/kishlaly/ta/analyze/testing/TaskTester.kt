@@ -298,8 +298,8 @@ class TaskTester {
             }
             result.append(formatByTPSL(testing, testing.searchSignalByProfit(testing.minProfit), "\tmin profit = "))
             result.append(formatByTPSL(testing, testing.searchSignalByProfit(testing.maxProfit), "\tmax profit = "))
-            result.append(formatByTPSL(testing, testing.searchSignalByProfit(testing.minLoss), "\tmin loss = "))
-            result.append(formatByTPSL(testing, testing.searchSignalByProfit(testing.maxLoss), "\tmax loss = "))
+            result.append(formatByTPSL(testing, testing.searchSignalByLoss(testing.minLoss), "\tmin loss = "))
+            result.append(formatByTPSL(testing, testing.searchSignalByLoss(testing.maxLoss), "\tmax loss = "))
             result.append("\tavg profit / loss = ${testing.avgProfit} / ${testing.avgLoss}").append(lineSeparator())
 
             return result.toString()

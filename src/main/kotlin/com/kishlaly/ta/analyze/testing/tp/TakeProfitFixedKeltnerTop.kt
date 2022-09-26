@@ -10,7 +10,7 @@ class TakeProfitFixedKeltnerTop(config: Any?) : TakeProfitStrategy(config) {
 
     override fun calculate(data: SymbolData, signalIndex: Int): Double {
         val keltner = IndicatorUtils.buildKeltnerChannels(data.symbol, data.quotes)[signalIndex]
-        val keltnerTopRatio = config as Double
+        val keltnerTopRatio = config as Int
         val middle = keltner.middle
         val top = keltner.top
         val diff = top - middle
