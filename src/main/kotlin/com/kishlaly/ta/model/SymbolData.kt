@@ -9,13 +9,25 @@ data class SymbolData(
     var indicators: MutableMap<Indicator, List<AbstractModel>> = mutableMapOf()
 ) {
 
-    val lastQuote = quotes.last()
+    val lastQuote: Quote
+        get() {
+            return quotes.last()
+        }
 
-    val preLastQuote = quotes[quotes.size - 2]
+    val preLastQuote: Quote
+        get() {
+            return quotes[quotes.size - 2]
+        }
 
-    val quotesCount = quotes.size
+    val quotesCount: Int
+        get() {
+            return quotes.size
+        }
 
-    val isEmptyQuotes = quotes.isEmpty()
+    val isEmptyQuotes: Boolean
+        get() {
+            return quotes.isEmpty()
+        }
 
     val isEmptyIndicators: Boolean
         get() {
