@@ -420,7 +420,7 @@ class TaskTester {
 
         private fun formatRange(
             testing: HistoricalTesting,
-            positionTestResult: PositionTestResult
+            positionTestResult: PositionTestResult?
         ): String {
             val output = StringBuilder()
             positionTestResult?.let {
@@ -448,7 +448,7 @@ class TaskTester {
             testing: HistoricalTesting,
             function: (HistoricalTesting) -> PositionTestResult?
         ): String {
-            return formatRange(testing, function(testing)!!)
+            return formatRange(testing, function(testing))
         }
 
         private fun formatDate(timeframe: Timeframe, timestamp: Long): String {
