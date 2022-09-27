@@ -1,7 +1,7 @@
 package com.kishlaly.ta
 
 import com.kishlaly.ta.analyze.TaskType
-import com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays.ThreeDisplays_Buy_4
+import com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays.ThreeDisplays_Buy_3
 import com.kishlaly.ta.analyze.testing.TaskTester
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
@@ -19,14 +19,14 @@ fun main() {
     Context.symbols = CacheReader.getSymbols()
     //buildCache(Context.basicTimeframes, false);
 
-//    TaskTester.testOneStrategy(
-//        Context.basicTimeframes,
-//        TaskType.THREE_DISPLAYS_BUY,
-//        ThreeDisplays_Buy_4(),
-//        StopLossFixedPrice(0.27),
-//        TakeProfitFixedKeltnerTop(80)
-//    )
+    TaskTester.testOneStrategy(
+        Context.basicTimeframes,
+        TaskType.THREE_DISPLAYS_BUY,
+        ThreeDisplays_Buy_3(),
+        StopLossFixedPrice(0.27),
+        TakeProfitFixedKeltnerTop(80)
+    )
 
-    RunUtils.buildTasksAndStrategiesSummary_()
+//    RunUtils.buildTasksAndStrategiesSummary_()
 
 }

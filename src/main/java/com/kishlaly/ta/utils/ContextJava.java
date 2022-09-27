@@ -60,7 +60,7 @@ public class ContextJava {
     // misc
     public static boolean trendCheckIncludeHistogram = true;
     public static boolean TRIM_DATA = true;
-    public static String trimToDate;
+    public static String trimToDate = "15.03.2022";
     public static String fileSeparator = System.getProperty("file.separator");
     public static final String TESTS_FOLDER = "tests";
     public static final String SINGLE_TXT = "single_java.txt";
