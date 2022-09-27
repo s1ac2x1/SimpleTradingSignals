@@ -15,7 +15,8 @@ class Long_ScreenTwo_Stoch_D_ThreeFigureU : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
 
-        val u = stoch[3].slowD > stoch[2].slowD && stoch[2].slowD < stoch[1].slowD
+        val u = stoch.last(3).slowD > stoch.last(2).slowD
+                && stoch.last(2).slowD < stoch.last(1).slowD
         if (!u) {
             Log.recordCode(BlockResultCode.STOCH_D_NOT_U_SCREEN_2, screen)
             Log.addDebugLine("Stochastic %D does not form a U-shape on the second screen")

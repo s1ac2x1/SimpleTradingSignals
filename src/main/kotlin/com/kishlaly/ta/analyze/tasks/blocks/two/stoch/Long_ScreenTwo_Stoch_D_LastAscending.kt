@@ -14,7 +14,7 @@ import com.kishlaly.ta.utils.SymbolDataUtils
 class Long_ScreenTwo_Stoch_D_LastAscending : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
-        val lastStochIsBigger = stoch[1].slowD > stoch[2].slowD
+        val lastStochIsBigger = stoch.last(1).slowD > stoch.last(2).slowD
         if (!lastStochIsBigger) {
             Log.recordCode(BlockResultCode.STOCH_K_NOT_ASCENDING_SCREEN_2, screen)
             Log.addDebugLine("The last two %D stochastics do not go up")

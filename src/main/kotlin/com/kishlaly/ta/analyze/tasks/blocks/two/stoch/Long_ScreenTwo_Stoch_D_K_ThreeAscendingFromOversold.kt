@@ -15,12 +15,12 @@ class Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromOversold : ScreenTwoBlock {
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
 
         // the third or second from the end of %K below STOCH_OVERSOLD, and the very last above the first
-        val isOversoldK = (stoch[3].slowK <= STOCH_OVERSOLD || stoch[2].slowK <= STOCH_OVERSOLD)
-                && stoch[1].slowK > stoch[3].slowK
+        val isOversoldK = (stoch.last(3).slowK <= STOCH_OVERSOLD || stoch.last(2).slowK <= STOCH_OVERSOLD)
+                && stoch.last(1).slowK > stoch.last(3).slowK
 
         // the third or second from the end of %D below STOCH_OVERSOLD, and the very last above both
-        val isOversoldD = (stoch[3].slowD <= STOCH_OVERSOLD || stoch[2].slowD <= STOCH_OVERSOLD)
-                && stoch[1].slowD > stoch[2].slowD && stoch[1].slowD > stoch[3].slowD
+        val isOversoldD = (stoch.last(3).slowD <= STOCH_OVERSOLD || stoch.last(2).slowD <= STOCH_OVERSOLD)
+                && stoch.last(1).slowD > stoch.last(2).slowD && stoch.last(1).slowD > stoch.last(3).slowD
 
         if (!isOversoldK || !isOversoldD) {
             Log.recordCode(BlockResultCode.STOCH_D_K_NOT_ASCENDING_FROM_OVERSOLD_SCREEN_2, screen)
