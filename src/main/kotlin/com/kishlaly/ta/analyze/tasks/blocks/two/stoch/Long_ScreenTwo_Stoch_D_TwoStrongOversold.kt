@@ -14,7 +14,7 @@ import com.kishlaly.ta.utils.SymbolDataUtils
 class Long_ScreenTwo_Stoch_D_TwoStrongOversold : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
-        val oversold = stoch.last(2).slowD < 20 && stoch.last(1).slowD < 20
+        val oversold = stoch.last(2).slowD < 20 && stoch.last().slowD < 20
         if (!oversold) {
             Log.recordCode(BlockResultCode.STOCH_D_WAS_NOT_STRONG_OVERSOLD_RECENTLY_SCREEN_2, screen)
             Log.addDebugLine("The last two stochastic %D values are at least 20")

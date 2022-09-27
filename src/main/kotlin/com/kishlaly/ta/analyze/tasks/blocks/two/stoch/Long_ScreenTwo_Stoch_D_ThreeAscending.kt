@@ -16,8 +16,8 @@ class Long_ScreenTwo_Stoch_D_ThreeAscending : ScreenTwoBlock {
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
 
         // it is enough that the last one is larger than the last two
-        val ascendingStochastic = stoch.last(1).slowD > stoch.last(2).slowD
-                && stoch.last(1).slowD > stoch.last(3).slowD
+        val ascendingStochastic = stoch.last().slowD > stoch.last(2).slowD
+                && stoch.last().slowD > stoch.last(3).slowD
         if (!ascendingStochastic) {
             Log.recordCode(BlockResultCode.STOCH_K_NOT_ASCENDING_SCREEN_2, screen)
             Log.addDebugLine("Stochastic %D does not grow on the second screen")

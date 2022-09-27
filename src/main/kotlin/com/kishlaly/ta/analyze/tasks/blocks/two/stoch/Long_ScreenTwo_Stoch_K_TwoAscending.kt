@@ -15,7 +15,7 @@ class Long_ScreenTwo_Stoch_K_TwoAscending : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
 
-        val ascendingStochastic = stoch.last(2).slowK < stoch.last(1).slowK
+        val ascendingStochastic = stoch.last(2).slowK < stoch.last().slowK
         if (!ascendingStochastic) {
             Log.recordCode(BlockResultCode.STOCH_K_NOT_ASCENDING_SCREEN_2, screen)
             Log.addDebugLine("Stochastic %K does not grow on the second screen")

@@ -18,7 +18,7 @@ class Long_ScreenTwo_Stoch_K_TwoOrOneBelow_X : ScreenTwoBlock {
             throw RuntimeException("ThreeDisplays.Config.STOCH_CUSTOM not set")
         }
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
-        val oneBelowExtraLow = stoch.last(2).slowK < STOCH_CUSTOM || stoch.last(1).slowK < STOCH_CUSTOM
+        val oneBelowExtraLow = stoch.last(2).slowK < STOCH_CUSTOM || stoch.last().slowK < STOCH_CUSTOM
 
         if (!oneBelowExtraLow) {
             Log.recordCode(BlockResultCode.STOCH_K_NOT_EXTRA_OVERSOLD_SCREEN_2, screen)

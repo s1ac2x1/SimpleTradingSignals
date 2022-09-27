@@ -16,7 +16,7 @@ class Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending : ScreenTwoBlock {
         val macd = SymbolDataUtils(screen, MACD::class.java)
         val histogramBelowZero = macd.last(3).histogram < 0
                 && macd.last(2).histogram < 0
-                && macd.last(1).histogram < 0
+                && macd.last().histogram < 0
         if (!histogramBelowZero) {
             Log.recordCode(BlockResultCode.HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen)
             Log.addDebugLine("The bar graph on the second screen is at least zero")
@@ -24,7 +24,7 @@ class Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending : ScreenTwoBlock {
         }
 
         val ascendingHistogram = macd.last(3).histogram < macd.last(2).histogram
-                && macd.last(2).histogram < macd.last(1).histogram
+                && macd.last(2).histogram < macd.last().histogram
         if (!ascendingHistogram) {
             Log.recordCode(BlockResultCode.HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen)
             Log.addDebugLine("The histogram on the second screen does not increase")

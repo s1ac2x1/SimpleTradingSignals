@@ -14,8 +14,8 @@ import com.kishlaly.ta.utils.SymbolDataUtils
 class Long_ScreenTwo_Stoch_D_K_LastAscending : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
-        val ascending = stoch.last(1).slowK > stoch.last(2).slowK
-                && stoch.last(1).slowD > stoch.last(2).slowD
+        val ascending = stoch.last().slowK > stoch.last(2).slowK
+                && stoch.last().slowD > stoch.last(2).slowD
 
         if (!ascending) {
             Log.recordCode(BlockResultCode.STOCH_K_D_NOT_ASCENDING_SCREEN_2, screen)

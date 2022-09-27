@@ -20,7 +20,7 @@ class Long_ScreenTwo_Stoch_D_TwoOrOneBelow_X : ScreenTwoBlock {
         }
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
         val oneBelowExtraLow = stoch.last(2).slowD < STOCH_CUSTOM
-                || stoch.last(1).slowD < STOCH_CUSTOM
+                || stoch.last().slowD < STOCH_CUSTOM
 
         if (!oneBelowExtraLow) {
             Log.recordCode(BlockResultCode.STOCH_D_NOT_EXTRA_OVERSOLD_SCREEN_2, screen)

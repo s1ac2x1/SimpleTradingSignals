@@ -6,7 +6,7 @@ import com.kishlaly.ta.model.indicators.Indicator
 
 class SymbolDataUtils<T : AbstractModel>(val symbolData: SymbolData, val clazz: Class<T>) {
 
-    fun last(fromEnd: Int): T {
+    fun last(fromEnd: Int = 1): T {
         val values = fetchValues()
         return values[values.size - fromEnd]
     }

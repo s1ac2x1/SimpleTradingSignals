@@ -14,14 +14,14 @@ import com.kishlaly.ta.utils.SymbolDataUtils
 class Long_ScreenTwo_MACD_TwoBelowZeroAndAscending : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
         val macd = SymbolDataUtils(screen, MACD::class.java)
-        val histogramBelowZero = macd.last(2).histogram < 0 && macd.last(1).histogram < 0
+        val histogramBelowZero = macd.last(2).histogram < 0 && macd.last().histogram < 0
         if (!histogramBelowZero) {
             Log.recordCode(BlockResultCode.HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2, screen)
             Log.addDebugLine("The bar graph on the second screen is at least zero")
             return BlockResult(screen.lastQuote, BlockResultCode.HISTOGRAM_NOT_BELOW_ZERO_SCREEN_2)
         }
 
-        val ascendingHistogram = macd.last(2).histogram < macd.last(1).histogram
+        val ascendingHistogram = macd.last(2).histogram < macd.last().histogram
         if (!ascendingHistogram) {
             Log.recordCode(BlockResultCode.HISTOGRAM_NOT_ASCENDING_SCREEN_2, screen)
             Log.addDebugLine("The histogram on the second screen does not increase")
