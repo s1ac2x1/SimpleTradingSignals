@@ -2,6 +2,7 @@ package com.kishlaly.ta
 
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays.ThreeDisplays_Buy_3
+import com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays.ThreeDisplays_Buy_8
 import com.kishlaly.ta.analyze.testing.TaskTester
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
@@ -22,7 +23,7 @@ fun main() {
     TaskTester.testOneStrategy(
         Context.basicTimeframes,
         TaskType.THREE_DISPLAYS_BUY,
-        ThreeDisplays_Buy_3(),
+        ThreeDisplays_Buy_8(),
         StopLossFixedPrice(0.27),
         TakeProfitFixedKeltnerTop(80)
     )
