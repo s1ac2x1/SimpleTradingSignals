@@ -1,0 +1,30 @@
+//@version=5
+indicator("test")
+
+weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+dailyClose = request.security(syminfo.tickerid, 'D', close, lookahead=barmerge.lookahead_on)
+
+weeklyOpen = request.security(syminfo.tickerid, 'W', open, lookahead=barmerge.lookahead_on)
+weeklyClose = request.security(syminfo.tickerid, 'W', close, lookahead=barmerge.lookahead_on)
+
+screenOneLastQuoteGreen = weeklyOpen < weeklyClose
+
+weeklyLow = request.security(syminfo.tickerid, 'W', low, lookahead=barmerge.lookahead_on)
+weeklyHigh = request.security(syminfo.tickerid, 'W', high, lookahead=barmerge.lookahead_on)
+
+weeklyLastQuoteHigher = weeklyLow > weeklyLow[1] and weeklyHigh > weeklyHigh[1]
+weeklyLastQouteCrossesEMA26 = weeklyLow <= weeklyEMA26 and weeklyHigh >= weeklyEMA26
+
+[weeklyMACD, weeklySignal, weeklyHistogram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
+weeklyLastHistogramGrows = weeklyHistogram > weeklyHistogram[1]
+
+screenOneCheck = screenOneLastQuoteGreen and weeklyLastQuoteHigher and weeklyLastQouteCrossesEMA26 and weeklyLastHistogramGrows
+
+// ======== screen two ========
+
+//screen.lastQuote.high > screen.preLastQuote.high
+dailyHigh = request.security(syminfo.tickerid, 'D', high, lookahead=barmerge.lookahead_on)
+dailyLastHighGrowing = dailyHigh > dailyHigh[1]
+
+plot(dailyLastHighGrowing ? 1 : 0)
+//plot(histLine)
