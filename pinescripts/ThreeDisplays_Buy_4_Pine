@@ -33,4 +33,8 @@ dailyLastBarAboveEMA13 = dailyLow > dailyEMA13 and dailyHigh > dailyEMA13
 [dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
 dailyLastHistogramGrows = dailyHistogram > dailyHistogram[1]
 
-plot(dailyLastHistogramGrows ? 1 : 0)
+dailyStochK = ta.stoch(close, high, low, 14)
+dailyStochD = ta.sma(dailyStochK, 3)
+
+//plot(dailyLastHistogramGrows ? 1 : 0)
+plot(dailyStochK)
