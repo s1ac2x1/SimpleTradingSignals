@@ -26,5 +26,9 @@ screenOneCheck = screenOneLastQuoteGreen and weeklyLastQuoteHigher and weeklyLas
 dailyHigh = request.security(syminfo.tickerid, 'D', high, lookahead=barmerge.lookahead_on)
 dailyLastHighGrowing = dailyHigh > dailyHigh[1]
 
-plot(dailyLastHighGrowing ? 1 : 0)
-//plot(histLine)
+// low > ema.value && high > ema.value
+dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13), lookahead=barmerge.lookahead_on)
+dailyLow = request.security(syminfo.tickerid, 'D', low, lookahead=barmerge.lookahead_on)
+dailyLastBarAboveEMA13 = dailyLow > dailyEMA13 and dailyHigh > dailyEMA13
+
+plot(not dailyLastBarAboveEMA13 ? 1 : 0)
