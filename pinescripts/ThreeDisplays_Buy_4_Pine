@@ -36,5 +36,8 @@ dailyLastHistogramGrows = dailyHistogram > dailyHistogram[1]
 dailyStochK = ta.stoch(close, high, low, 14)
 dailyStochD = ta.sma(dailyStochK, 3)
 
-//plot(dailyLastHistogramGrows ? 1 : 0)
-plot(dailyStochK)
+// stoch.last().slowK > stoch.last(2).slowK && stoch.last().slowD > stoch.last(2).slowD
+dailyLastStochAscendingFastAndSlow = dailyStochK > dailyStochK[1] and dailyStochD > dailyStochD[1]
+
+plot(dailyLastStochAscendingFastAndSlow ? 1 : 0)
+//plot(dailyStochK)
