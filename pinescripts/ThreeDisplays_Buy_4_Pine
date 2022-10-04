@@ -39,5 +39,7 @@ dailyStochD = ta.sma(dailyStochK, 3)
 // stoch.last().slowK > stoch.last(2).slowK && stoch.last().slowD > stoch.last(2).slowD
 dailyLastStochAscendingFastAndSlow = dailyStochK > dailyStochK[1] and dailyStochD > dailyStochD[1]
 
-plot(dailyLastStochAscendingFastAndSlow ? 1 : 0)
+screenTwoCheck = dailyLastHighGrowing and (not dailyLastBarAboveEMA13) and dailyLastHistogramGrows and dailyLastStochAscendingFastAndSlow
+
+plot(screenOneCheck and screenTwoCheck ? 1 : 0)
 //plot(dailyStochK)
