@@ -1,0 +1,2 @@
+[weeklyMACD, weeklySignal, weeklyHistogram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
+weeklyLastHistogramGrows = weeklyHistogram > weeklyHistogram[1]
