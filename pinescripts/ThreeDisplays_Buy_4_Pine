@@ -1,5 +1,5 @@
 //@version=5
-indicator("test")
+indicator("Three Displays Type 4 Indicator")
 
 weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
 dailyClose = request.security(syminfo.tickerid, 'D', close, lookahead=barmerge.lookahead_on)
@@ -42,4 +42,29 @@ dailyLastStochAscendingFastAndSlow = dailyStochK > dailyStochK[1] and dailyStoch
 screenTwoCheck = dailyLastHighGrowing and (not dailyLastBarAboveEMA13) and dailyLastHistogramGrows and dailyLastStochAscendingFastAndSlow
 
 plot(screenOneCheck and screenTwoCheck ? 1 : 0)
-//plot(dailyStochK)
+
+
+
+
+=========== Strategy ===========
+
+strategy("Three Displays Type 4 Strategy", overlay = true, pyramiding = 1)
+
+>>> code of indicator <<<
+
+arrayToFindMin = array.new_float(size=10, initial_value=9999999)
+for offset = 0 to 10
+    array.insert(arrayToFindMin, offset, dailyLow[offset])
+fixedSL = array.min(id=arrayToFindMin)
+
+[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
+diff = upperKC - middleKC
+ratio = diff / 100 * 80
+fixedTP = middleKC + ratio
+
+//if (screenOneCheck and screenTwoCheck)
+//    strategy.entry("buy", strategy.long)
+
+plot(fixedTP)
+
+//plot(strategy.initial_capital + strategy.netprofit + strategy.openprofit)
