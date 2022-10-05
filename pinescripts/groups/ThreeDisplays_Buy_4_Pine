@@ -22,7 +22,6 @@ screenOneCheck = screenOneLastQuoteGreen and weeklyLastQuoteHigher and weeklyLas
 
 // ======== screen two ========
 
-//screen.lastQuote.high > screen.preLastQuote.high
 dailyHigh = request.security(syminfo.tickerid, 'D', high)
 dailyLastHighGrowing = dailyHigh > dailyHigh[1]
 

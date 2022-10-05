@@ -1,0 +1,3 @@
+dailyHigh = request.security(syminfo.tickerid, 'D', high)
+
+ScreenTwo_Bars_TwoHighAscending = dailyHigh > dailyHigh[1]
