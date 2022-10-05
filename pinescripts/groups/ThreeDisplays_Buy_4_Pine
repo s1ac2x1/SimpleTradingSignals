@@ -38,33 +38,3 @@ dailyStochD = ta.sma(dailyStochK, 3)
 dailyLastStochAscendingFastAndSlow = dailyStochK > dailyStochK[1] and dailyStochD > dailyStochD[1]
 
 screenTwoCheck = dailyLastHighGrowing and (not dailyLastBarAboveEMA13) and dailyLastHistogramGrows and dailyLastStochAscendingFastAndSlow
-
-
-
-
-=========== Strategy ===========
-
-strategy("Three Displays Type 4 Strategy", overlay = true, pyramiding = 1)
-
->>> code of indicator <<<
-
-arrayToFindMin = array.new_float(size=10, initial_value=9999999)
-for offset = 0 to 10
-    array.insert(arrayToFindMin, offset, dailyLow[offset])
-fixedSL = array.min(id=arrayToFindMin)
-
-[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2))
-diff = upperKC - middleKC
-ratio = diff / 100 * 95
-fixedTP = middleKC + ratio
-
-balance = strategy.initial_capital + strategy.netprofit
-balanceToUse = balance / 100 * 5
-lots = balanceToUse / close
-
-if (screenOneCheck and screenTwoCheck)
-    strategy.entry("buy", strategy.long, qty = lots)
-    strategy.exit("buy", stop = fixedSL, limit = fixedTP)
-
-plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
-plot(strategy.position_size <= 0 ? na : fixedTP, color=color.green, style=plot.style_linebr, linewidth=2)
