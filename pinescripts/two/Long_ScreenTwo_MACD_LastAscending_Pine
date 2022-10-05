@@ -1,0 +1,3 @@
+[dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
+
+ScreenTwo_MACD_LastAscending = dailyHistogram > dailyHistogram[1]
