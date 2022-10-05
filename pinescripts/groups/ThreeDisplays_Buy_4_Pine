@@ -2,7 +2,7 @@
 indicator("Three Displays Type 4 Indicator")
 
 weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
-dailyClose = request.security(syminfo.tickerid, 'D', close, lookahead=barmerge.lookahead_on)
+dailyClose = request.security(syminfo.tickerid, 'D', close)
 
 weeklyOpen = request.security(syminfo.tickerid, 'W', open, lookahead=barmerge.lookahead_on)
 weeklyClose = request.security(syminfo.tickerid, 'W', close, lookahead=barmerge.lookahead_on)
@@ -23,14 +23,14 @@ screenOneCheck = screenOneLastQuoteGreen and weeklyLastQuoteHigher and weeklyLas
 // ======== screen two ========
 
 //screen.lastQuote.high > screen.preLastQuote.high
-dailyHigh = request.security(syminfo.tickerid, 'D', high, lookahead=barmerge.lookahead_on)
+dailyHigh = request.security(syminfo.tickerid, 'D', high)
 dailyLastHighGrowing = dailyHigh > dailyHigh[1]
 
-dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13), lookahead=barmerge.lookahead_on)
-dailyLow = request.security(syminfo.tickerid, 'D', low, lookahead=barmerge.lookahead_on)
+dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
+dailyLow = request.security(syminfo.tickerid, 'D', low)
 dailyLastBarAboveEMA13 = dailyLow > dailyEMA13 and dailyHigh > dailyEMA13
 
-[dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
+[dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
 dailyLastHistogramGrows = dailyHistogram > dailyHistogram[1]
 
 dailyStochK = ta.stoch(close, high, low, 14)
@@ -40,8 +40,6 @@ dailyStochD = ta.sma(dailyStochK, 3)
 dailyLastStochAscendingFastAndSlow = dailyStochK > dailyStochK[1] and dailyStochD > dailyStochD[1]
 
 screenTwoCheck = dailyLastHighGrowing and (not dailyLastBarAboveEMA13) and dailyLastHistogramGrows and dailyLastStochAscendingFastAndSlow
-
-plot(screenOneCheck and screenTwoCheck ? 1 : 0)
 
 
 
@@ -57,7 +55,7 @@ for offset = 0 to 10
     array.insert(arrayToFindMin, offset, dailyLow[offset])
 fixedSL = array.min(id=arrayToFindMin)
 
-[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
+[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2))
 diff = upperKC - middleKC
 ratio = diff / 100 * 95
 fixedTP = middleKC + ratio

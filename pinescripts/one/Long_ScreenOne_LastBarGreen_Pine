@@ -1,0 +1,4 @@
+weeklyOpen = request.security(syminfo.tickerid, 'W', open, lookahead=barmerge.lookahead_on)
+weeklyClose = request.security(syminfo.tickerid, 'W', close, lookahead=barmerge.lookahead_on)
+
+screenOne_LastBarGreen = weeklyOpen < weeklyClose
