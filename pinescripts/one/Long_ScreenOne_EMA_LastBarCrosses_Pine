@@ -1,0 +1,4 @@
+weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+weeklyLow = request.security(syminfo.tickerid, 'W', low, lookahead=barmerge.lookahead_on)
+
+ScreenOne_EMA_LastBarCrosses_Pine = weeklyLow <= weeklyEMA26 and weeklyHigh >= weeklyEMA26
