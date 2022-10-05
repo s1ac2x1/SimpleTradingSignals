@@ -59,12 +59,14 @@ fixedSL = array.min(id=arrayToFindMin)
 
 [middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 diff = upperKC - middleKC
-ratio = diff / 100 * 80
+ratio = diff / 100 * 95
 fixedTP = middleKC + ratio
 
-//if (screenOneCheck and screenTwoCheck)
-//    strategy.entry("buy", strategy.long)
+if (screenOneCheck and screenTwoCheck)
+    strategy.entry("buy", strategy.long)
+    strategy.exit("buy", stop = fixedSL, limit = fixedTP)
 
-plot(fixedTP)
+plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
+plot(strategy.position_size <= 0 ? na : fixedTP, color=color.green, style=plot.style_linebr, linewidth=2)
 
 //plot(strategy.initial_capital + strategy.netprofit + strategy.openprofit)
