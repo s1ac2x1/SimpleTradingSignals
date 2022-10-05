@@ -1,0 +1,4 @@
+dailyStochK = ta.stoch(close, high, low, 14)
+dailyStochD = ta.sma(dailyStochK, 3)
+
+ScreenTwo_Stoch_D_K_LastAscending = dailyStochK > dailyStochK[1] and dailyStochD > dailyStochD[1]
