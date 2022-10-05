@@ -1,0 +1,3 @@
+balance = strategy.initial_capital + strategy.netprofit
+balanceToUse = balance / 100 * 5
+lots = balanceToUse / close
