@@ -16,7 +16,7 @@ import com.kishlaly.ta.utils.RunUtils
 fun main() {
     Context.aggregationTimeframe = Timeframe.DAY
     Context.source = arrayOf(SymbolsSource.SP500)
-    RunUtils.singleSymbol("XOM")
+    RunUtils.singleSymbol("MSFT")
 
     Context.symbols = CacheReader.getSymbols()
     //buildCache(Context.basicTimeframes, false);
@@ -26,7 +26,7 @@ fun main() {
         TaskType.THREE_DISPLAYS_BUY,
         ThreeDisplays_Buy_4(),
         StopLossFixedPrice(0.27),
-        TakeProfitFixedKeltnerTop(80)
+        TakeProfitFixedKeltnerTop(95)
     )
 
 //    RunUtils.buildTasksAndStrategiesSummary_()
