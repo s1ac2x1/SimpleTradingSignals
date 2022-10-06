@@ -13,7 +13,7 @@ import com.kishlaly.ta.config.Context
 
 fun main() {
 
-    // добавить в single.txt число TP/SL
+    // не нужно сохранять на лог на диск, вместо этого поднять локальный посгрес и писать туда (батчами)
 
     val screenOneGenerator = BlockGroupsUtils().generateBlocksCombinations(
         "com.kishlaly.ta.analyze.tasks.blocks.one",
