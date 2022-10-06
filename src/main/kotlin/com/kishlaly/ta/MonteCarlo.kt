@@ -1,6 +1,7 @@
 package com.kishlaly.ta
 
 import com.kishlaly.ta.analyze.TaskType
+import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock
 import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock
 import com.kishlaly.ta.analyze.tasks.groups.BlockGroupsUtils
@@ -11,6 +12,8 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.config.Context
 
 fun main() {
+
+    // добавить в single.txt число TP/SL
 
     val screenOneGenerator = BlockGroupsUtils().generateBlocksCombinations(
         "com.kishlaly.ta.analyze.tasks.blocks.one",
@@ -27,7 +30,11 @@ fun main() {
             TaskTester.testOneStrategy(
                 Context.basicTimeframes,
                 TaskType.THREE_DISPLAYS_BUY,
-                GeneratedBlocksGroup(screenOneCombination.vector, screenTwoCombination.vector),
+                GeneratedBlocksGroup(
+                    listOf(ScreenBasicValidation()),
+                    screenOneCombination.vector,
+                    screenTwoCombination.vector
+                ),
                 StopLossFixedPrice(0.27),
                 TakeProfitFixedKeltnerTop(95)
             )
