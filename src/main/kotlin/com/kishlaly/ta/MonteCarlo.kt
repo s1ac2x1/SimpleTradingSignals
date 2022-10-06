@@ -36,7 +36,7 @@ fun main() {
                     screenTwoCombination.vector
                 ),
                 StopLossFixedPrice(0.27),
-                TakeProfitFixedKeltnerTop(95)
+                TakeProfitFixedKeltnerTop(80)
             )
             i++
             if (i > 5) {
