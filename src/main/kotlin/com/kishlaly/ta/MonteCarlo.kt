@@ -11,6 +11,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.config.Context
 
 fun main() {
+
     val screenOneGenerator = BlockGroupsUtils().generateBlocksCombinations(
         "com.kishlaly.ta.analyze.tasks.blocks.one",
         clazz = ScreenOneBlock::class.java
@@ -31,7 +32,7 @@ fun main() {
                 TakeProfitFixedKeltnerTop(95)
             )
             i++
-            if (i > 10) {
+            if (i > 5) {
                 break@outer
             }
         }
