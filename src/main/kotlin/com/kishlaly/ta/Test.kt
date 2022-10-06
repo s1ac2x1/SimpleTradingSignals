@@ -1,18 +1,24 @@
 package com.kishlaly.ta
 
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock
+import org.paukov.combinatorics.CombinatoricsFactory
+import org.reflections.Reflections
 
 fun main() {
-    runBlocking {
-        repeat(100000) {
-            launch { some() }
-        }
-    }
-}
+    var screenOneBlocks = Reflections("com.kishlaly.ta.analyze.tasks.blocks.one")
+        .getSubTypesOf(ScreenOneBlock::class.java)
+        .filter { it.simpleName.contains("Long") }
+        .map { it.constructors.first().newInstance() as ScreenOneBlock }
+        .toList()
 
-suspend fun some() {
-    delay(300L)
-    print(".")
+    for (screenOneBlock in screenOneBlocks) {
+        println(screenOneBlock.javaClass.simpleName)
+    }
+
+    val vector = CombinatoricsFactory.createVector(screenOneBlocks)
+    val generator = CombinatoricsFactory.createSubSetGenerator(vector)
+    println(generator.numberOfGeneratedObjects)
+//    for (combination in generator) {
+//        println(combination)
+//    }
 }

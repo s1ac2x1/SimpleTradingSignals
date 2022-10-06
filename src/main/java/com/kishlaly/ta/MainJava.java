@@ -21,12 +21,12 @@ public class MainJava {
         ContextJava.source = new SymbolsSourceJava[]{
                 SymbolsSourceJava.SP500
         };
-        singleSymbol("AAPL"); // for single test
+        singleSymbol("LUMN"); // for single test
         ContextJava.symbols = getSymbols();
         //buildCache(Context.basicTimeframes, false);
 
-        RunUtilsJava.testOneStrategy_(new ThreeDisplays_Buy_8Java());
-        //RunUtilsJava.buildTasksAndStrategiesSummary_();
+        //RunUtilsJava.testOneStrategy_(new ThreeDisplays_Buy_8Java());
+        RunUtilsJava.buildTasksAndStrategiesSummary_();
         //RunUtilsJava.testStrategiesOnSpecificDate_("15.03.2022");
 
     }
