@@ -5,27 +5,20 @@ import org.paukov.combinatorics.CombinatoricsFactory
 import org.reflections.Reflections
 
 fun main() {
-    var screenOneBlocks = generateScreenOneBlocksSet("com.kishlaly.ta.analyze.tasks.blocks.one")
-    println(screenOneBlocks.size)
-
-}
-
-private fun generateScreenOneBlocksSet(pckg: String, direction: String = "Long"): List<List<ScreenOneBlock>> {
-    var blocks = Reflections(pckg)
+    var screenOneBlocks = Reflections("com.kishlaly.ta.analyze.tasks.blocks.one")
         .getSubTypesOf(ScreenOneBlock::class.java)
-        .filter { it.simpleName.contains(direction) }
+        .filter { it.simpleName.contains("Long") }
         .map { it.constructors.first().newInstance() as ScreenOneBlock }
         .toList()
 
-    for (block in blocks) {
-        println(block.javaClass.simpleName)
+    for (screenOneBlock in screenOneBlocks) {
+        println(screenOneBlock.javaClass.simpleName)
     }
 
-    val vector = CombinatoricsFactory.createVector(blocks)
+    val vector = CombinatoricsFactory.createVector(screenOneBlocks)
     val generator = CombinatoricsFactory.createSubSetGenerator(vector)
-    val result = mutableListOf<List<ScreenOneBlock>>()
-    for (combination in generator) {
-        result.add(combination.vector)
-    }
-    return result.toList()
+    println(generator.numberOfGeneratedObjects)
+//    for (combination in generator) {
+//        println(combination)
+//    }
 }

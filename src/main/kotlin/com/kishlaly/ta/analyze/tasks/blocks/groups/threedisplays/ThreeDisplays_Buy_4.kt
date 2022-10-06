@@ -7,11 +7,11 @@ import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosse
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarHigher
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_MACD_LastAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bars_TwoHighAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EMA_LastBarNotAbove
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FilterLateEntry
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_LastAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_K_LastAscending
+import com.kishlaly.ta.analyze.tasks.blocks.two.bars.Long_ScreenTwo_Bars_TwoHighAscending
+import com.kishlaly.ta.analyze.tasks.blocks.two.ema.Long_ScreenTwo_EMA_LastBarNotAbove
+import com.kishlaly.ta.analyze.tasks.blocks.two.keltner.Long_ScreenTwo_FilterLateEntry
+import com.kishlaly.ta.analyze.tasks.blocks.two.macd.Long_ScreenTwo_MACD_LastAscending
+import com.kishlaly.ta.analyze.tasks.blocks.two.stoch.Long_ScreenTwo_Stoch_D_K_LastAscending
 
 // modification of buySignalType2 with an attempt to track the beginning of a long-term trend
 //

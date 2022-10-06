@@ -5,12 +5,12 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bars_LastGreen
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bars_TwoAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EMA_TwoBarsBelow
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FilterLateEntry
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_LastAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_TwoStrongOversold
+import com.kishlaly.ta.analyze.tasks.blocks.two.bars.Long_ScreenTwo_Bars_LastGreen
+import com.kishlaly.ta.analyze.tasks.blocks.two.bars.Long_ScreenTwo_Bars_TwoAscending
+import com.kishlaly.ta.analyze.tasks.blocks.two.ema.Long_ScreenTwo_EMA_TwoBarsBelow
+import com.kishlaly.ta.analyze.tasks.blocks.two.keltner.Long_ScreenTwo_FilterLateEntry
+import com.kishlaly.ta.analyze.tasks.blocks.two.macd.Long_ScreenTwo_MACD_LastAscending
+import com.kishlaly.ta.analyze.tasks.blocks.two.stoch.Long_ScreenTwo_Stoch_D_TwoStrongOversold
 
 // inspired by [D] CFLT 20 Dec 2021
 //
