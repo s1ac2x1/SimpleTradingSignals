@@ -1,19 +1,33 @@
 package com.kishlaly.ta
 
-import com.kishlaly.ta.analyze.tasks.blocks.one.ScreenOneBlock
+import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock
 import org.paukov.combinatorics.CombinatoricsFactory
+import org.paukov.combinatorics.Generator
 import org.reflections.Reflections
 
 fun main() {
-    val screenOneBlocks =
-        generateBlocksCombinations<ScreenOneBlock>(
-            "com.kishlaly.ta.analyze.tasks.blocks.one",
-            clazz = ScreenOneBlock::class.java
-        )
-    println(screenOneBlocks.size)
+//    val screenOneBlocks =
+//        generateBlocksCombinations(
+//            "com.kishlaly.ta.analyze.tasks.blocks.one",
+//            clazz = ScreenOneBlock::class.java
+//        )
+//    println(screenOneBlocks.size)
+
+    val twoScreenBlocksGenerator = generateBlocksCombinations(
+        "com.kishlaly.ta.analyze.tasks.blocks.two",
+        clazz = ScreenTwoBlock::class.java
+    )
+    var i = 0;
+    for (combination in twoScreenBlocksGenerator) {
+        println(i++)
+    }
 }
 
-fun <T> generateBlocksCombinations(pckg: String, direction: String = "Long", clazz: Class<T>): List<List<T>> {
+fun <T> generateBlocksCombinations(
+    pckg: String,
+    direction: String = "Long",
+    clazz: Class<T>
+): Generator<T> {
     var blocks = Reflections(pckg)
         .getSubTypesOf(clazz)
         .filter { it.simpleName.contains(direction) }
@@ -21,10 +35,5 @@ fun <T> generateBlocksCombinations(pckg: String, direction: String = "Long", cla
         .toList()
 
     val vector = CombinatoricsFactory.createVector(blocks)
-    val generator = CombinatoricsFactory.createSubSetGenerator(vector)
-    val result = mutableListOf<List<T>>()
-    for (combination in generator) {
-        result.add(combination.vector)
-    }
-    return result
+    return CombinatoricsFactory.createSubSetGenerator(vector)
 }
