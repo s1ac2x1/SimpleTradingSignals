@@ -2,8 +2,8 @@ package com.kishlaly.ta.analyze.tasks.groups.trustmodel
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenSoftValidation
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.tasks.blocks.complex.Long_ScreenTwo_FirstTrustModelMainLogic
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 import com.kishlaly.ta.config.Context
 
 class FirstTrustModel_Buy_1 : BlocksGroup {

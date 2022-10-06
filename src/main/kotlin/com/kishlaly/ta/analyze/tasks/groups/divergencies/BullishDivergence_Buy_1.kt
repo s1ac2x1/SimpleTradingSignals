@@ -1,11 +1,10 @@
 package com.kishlaly.ta.analyze.tasks.groups.divergencies
 
-import com.kishlaly.ta.analyze.tasks.Divergencies
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.complex.Long_ScreenTwo_BullishDivergenceMainLogic
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_StrictTrendCheck
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 
 class BullishDivergence_Buy_1 : BlocksGroup {
 

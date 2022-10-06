@@ -2,8 +2,8 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.tasks.blocks.one.Short_ScreenOne_StrictTrendCheck
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 
 class ThreeDisplays_Sell_1 : BlocksGroup {
 

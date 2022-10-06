@@ -1,9 +1,8 @@
 package com.kishlaly.ta.utils
 
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 import com.kishlaly.ta.model.BlockResultCode
 import com.kishlaly.ta.model.SymbolData
-import com.kishlaly.ta.utils.LogJava.KeyJava
 import java.util.*
 
 class Log {
@@ -41,17 +40,17 @@ class Log {
             builder.append("<table style=\"border: 1px solid;\">")
 
             symbolToGroups
-                    .entries
-                    .sortedBy { it.value.size }.reversed()
-                    .forEach { entry ->
-                        builder.append("<tr style=\"border: 1px solid;\">")
-                        builder.append("<td style=\"border: 1px solid; vertical-align: top text-align: left;\">" + entry + "</td>")
-                        builder.append("<td style=\"border: 1px solid; vertical-align: top; text-align: left;\">")
-                        entry.value.forEach { group ->
-                            builder.append(group.javaClass.simpleName + "<br>")
-                            builder.append(group.comments() + "<br><br>")
-                        }
+                .entries
+                .sortedBy { it.value.size }.reversed()
+                .forEach { entry ->
+                    builder.append("<tr style=\"border: 1px solid;\">")
+                    builder.append("<td style=\"border: 1px solid; vertical-align: top text-align: left;\">" + entry + "</td>")
+                    builder.append("<td style=\"border: 1px solid; vertical-align: top; text-align: left;\">")
+                    entry.value.forEach { group ->
+                        builder.append(group.javaClass.simpleName + "<br>")
+                        builder.append(group.comments() + "<br><br>")
                     }
+                }
 
             builder.append("</table>")
             FileUtils.appendToFile(filename, builder.toString())
@@ -67,8 +66,8 @@ class Log {
         fun saveCodes(folder: String) {
             codes.forEach { code, symbols ->
                 val s = symbols
-                        .map { it.symbol }
-                        .joinToString { System.lineSeparator() }
+                    .map { it.symbol }
+                    .joinToString { System.lineSeparator() }
                 FileUtils.appendToFile(folder + "/" + code.name.lowercase(Locale.getDefault()) + ".txt", s)
             }
         }

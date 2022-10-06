@@ -1,7 +1,7 @@
 package com.kishlaly.ta.analyze.testing
 
 import com.kishlaly.ta.analyze.TaskType
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
 import com.kishlaly.ta.model.BlockResult

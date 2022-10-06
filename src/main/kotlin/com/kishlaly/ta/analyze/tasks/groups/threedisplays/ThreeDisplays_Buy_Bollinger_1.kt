@@ -3,15 +3,9 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bars_LastGreen
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bars_TwoAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Bottom_X_Of_Y_LastBarsCrossed
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FilterLateEntry
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_LastAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_TwoBelow_X
+import com.kishlaly.ta.analyze.tasks.blocks.two.*
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 
 /**
  * Touching the bottom Bollinger band and a hint of growth.

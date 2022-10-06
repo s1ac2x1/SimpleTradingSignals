@@ -1,8 +1,8 @@
 package com.kishlaly.ta.analyze.testing
 
 import com.kishlaly.ta.analyze.TaskType
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlockGroupsUtils
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.BlockGroupsUtils
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
@@ -281,6 +281,7 @@ class TaskTester {
                         .append(TimeUnit.SECONDS.toDays(testing.averagePositionDurationSeconds.toLong()))
                         .append(" days").append(lineSeparator())
                 }
+
                 Timeframe.HOUR -> {
                     result
                         .append("\tmin duration = ")
@@ -294,6 +295,7 @@ class TaskTester {
                         .append(" hours").append(lineSeparator())
 
                 }
+
                 else -> {}
             }
             result.append(formatByTPSL(testing, testing.searchSignalByProfit(testing.minProfit), "\tmin profit = "))

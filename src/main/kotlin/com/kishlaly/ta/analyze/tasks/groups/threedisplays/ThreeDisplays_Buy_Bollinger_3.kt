@@ -3,13 +3,8 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Bottom_ThreeAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Top_ThreeDescending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_ThreeAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_TwoAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_TwoOrOneBelow_X
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 
 /**
  * Search for narrowing bands with signs of bullish growth

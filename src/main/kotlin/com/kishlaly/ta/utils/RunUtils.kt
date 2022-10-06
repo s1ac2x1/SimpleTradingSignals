@@ -1,8 +1,8 @@
 package com.kishlaly.ta.utils
 
 import com.kishlaly.ta.analyze.TaskType
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
-import com.kishlaly.ta.analyze.tasks.blocks.groups.threedisplays.*
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.threedisplays.*
 import com.kishlaly.ta.analyze.testing.HistoricalTesting
 import com.kishlaly.ta.analyze.testing.TaskTester.Companion.test
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice

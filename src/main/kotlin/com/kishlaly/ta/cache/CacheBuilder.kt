@@ -2,7 +2,7 @@ package com.kishlaly.ta.cache
 
 import com.google.common.collect.Lists
 import com.kishlaly.ta.analyze.TaskType
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.testing.HistoricalTesting
 import com.kishlaly.ta.analyze.testing.TaskTester.Companion.test
 import com.kishlaly.ta.analyze.testing.sl.*

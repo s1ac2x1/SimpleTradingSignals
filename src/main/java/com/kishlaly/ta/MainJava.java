@@ -21,7 +21,7 @@ public class MainJava {
         ContextJava.source = new SymbolsSourceJava[]{
                 SymbolsSourceJava.SP500
         };
-        singleSymbol("LUMN"); // for single test
+        singleSymbol("AAPL"); // for single test
         ContextJava.symbols = getSymbols();
         //buildCache(Context.basicTimeframes, false);
 

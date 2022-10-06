@@ -1,6 +1,6 @@
 package com.kishlaly.ta.analyze.tasks.blocks.complex
 
-import com.kishlaly.ta.analyze.tasks.Divergencies
+import com.kishlaly.ta.analyze.tasks.groups.divergencies.Divergencies
 import com.kishlaly.ta.analyze.tasks.blocks.two.ScreenTwoBlock
 import com.kishlaly.ta.model.BlockResult
 import com.kishlaly.ta.model.BlockResultCode

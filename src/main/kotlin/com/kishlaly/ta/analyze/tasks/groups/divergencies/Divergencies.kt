@@ -1,4 +1,6 @@
-package com.kishlaly.ta.analyze.tasks
+package com.kishlaly.ta.analyze.tasks.groups.divergencies
+
+import com.kishlaly.ta.analyze.tasks.AbstractTask
 
 /**
  * For a bullish divergence, the stock price must be above $3; for a bearish divergence, it must be above $10. Trading volume on

@@ -2,7 +2,6 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EMA_LastBarTooHigh
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing
@@ -10,6 +9,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FilterLateEntry
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromOversold
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_ThreeAscending
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 
 class ThreeDisplays_Buy_1 : BlocksGroup {
 

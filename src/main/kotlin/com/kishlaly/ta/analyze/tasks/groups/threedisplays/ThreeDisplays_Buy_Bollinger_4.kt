@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
-import com.kishlaly.ta.analyze.tasks.blocks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 
 /**
  * Second screen:
