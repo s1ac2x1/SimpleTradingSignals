@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS testings (
     id VARCHAR NOT NULL PRIMARY KEY,
-    symbol VARCHAR(10),
+    symbol VARCHAR,
     task_blocks TEXT,
     sl_strategy TEXT,
     tp_strategy TEXT,

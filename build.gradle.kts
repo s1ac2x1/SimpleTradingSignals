@@ -24,6 +24,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.reflections:reflections:0.10.2")
     implementation("com.googlecode.combinatoricslib:combinatoricslib:2.3")
+    implementation("org.ktorm:ktorm-core:3.5.0")
+    implementation("org.ktorm:ktorm-support-postgresql:3.5.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
