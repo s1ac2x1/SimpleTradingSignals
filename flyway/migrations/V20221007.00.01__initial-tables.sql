@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS testings (
-    id VARCHAR NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     symbol VARCHAR,
     task_blocks TEXT,
     sl_strategy TEXT,
@@ -21,6 +21,11 @@ CREATE TABLE IF NOT EXISTS testings (
     max_loss FLOAT8,
     total_Loss FLOAT8,
     total_profit FLOAT8,
-    average_roi FLOAT8,
-    signal_stats TEXT
+    average_roi FLOAT8
+);
+
+CREATE TABLE IF NOT EXISTS signal_results (
+    id SERIAL PRIMARY KEY,
+    testings_id INT REFERENCES testings,
+    result TEXT
 );

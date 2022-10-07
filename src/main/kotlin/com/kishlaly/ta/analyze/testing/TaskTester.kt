@@ -294,8 +294,6 @@ class TaskTester {
             return result.toString()
         }
 
-        нужна вторая таблица для хранения blockResult
-
         fun printPositionsReport(timeframe: Timeframe, testing: HistoricalTesting, report: MutableSet<String>) {
             testing.blocksResults
                 .filter { it.lastChartQuote != null }
@@ -385,8 +383,8 @@ class TaskTester {
                         set(it.max_loss, testing.maxLoss)
                         set(it.total_profit, testing.totalProfit)
                         set(it.average_roi, testing.averageRoi)
-                        set(it.signal_stats, printSignalStats(timeframes[0][1], ))
                     }
+                    // printPositionsReport
                 }
             }
         }
