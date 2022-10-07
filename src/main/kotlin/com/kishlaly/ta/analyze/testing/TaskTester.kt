@@ -294,7 +294,11 @@ class TaskTester {
             return result.toString()
         }
 
-        fun printPositionsReport(timeframe: Timeframe, testing: HistoricalTesting, report: MutableSet<String>) {
+        fun printPositionsReport(
+            timeframe: Timeframe,
+            testing: HistoricalTesting,
+            report: MutableSet<SignalResultFields>
+        ) {
             testing.blocksResults
                 .filter { it.lastChartQuote != null }
                 .filter { it.isOk() }
@@ -304,20 +308,25 @@ class TaskTester {
                 }
         }
 
-        fun printSignalStats(timeframe: Timeframe, blockResult: BlockResult, testing: HistoricalTesting): String {
-            val line = StringBuilder()
+        // 20 JULY 2021 --- LOSS -3.36% 6 days [till 26 JULY 2021]
+        fun printSignalStats(
+            timeframe: Timeframe,
+            blockResult: BlockResult,
+            testing: HistoricalTesting
+        ): SignalResultFields {
+            val result = SignalResultFields()
             val quote = blockResult.lastChartQuote
             val quoteDateFormatted = formatDate(timeframe, quote.timestamp)
             // результаты тестирования сигналов
             val positionTestResult = testing.getResult(quote);
             if (!positionTestResult!!.closed) {
-                line.append(" NOT CLOSED")
+                result.type = " NOT CLOSED"
             } else {
-                line.append(if (positionTestResult.profitable) "PROFIT " else "LOSS ")
-                line.append(positionTestResult.roi).append("%")
-                line.append(if (positionTestResult.gapUp) " (gap up)" else "")
-                line.append(if (positionTestResult.gapDown) " (gap down)" else "")
-                line.append(" ${positionTestResult.getPositionDuration(timeframe)}")
+                result.type = if (positionTestResult.profitable) "PROFIT " else "LOSS "
+                result.percent += "${positionTestResult.roi}%"
+                result.type += if (positionTestResult.gapUp) " (gap up)" else ""
+                result.type += if (positionTestResult.gapDown) " (gap down)" else ""
+                result.duration = " ${positionTestResult.getPositionDuration(timeframe)}"
                 val endDate =
                     Dates.getBarTimeInMyZone(positionTestResult.closedTimestamp!!, exchangeTimezome).toString()
                 val parsed = ZonedDateTime.parse(endDate)
@@ -385,7 +394,7 @@ class TaskTester {
                         set(it.average_roi, testing.averageRoi)
                     }
 
-                    val lines = mutableSetOf<String>()
+                    val lines = mutableSetOf<SignalResultFields>()
                     printPositionsReport(timeframes[0][1], testing, lines)
                     lines.forEach { line ->
                         Context.database?.insert(SignalResults) {
@@ -630,4 +639,10 @@ class TaskTester {
 
     }
 
+}
+
+class SignalResultFields(var date: String?, var type: String?, var percent: String?, var duration: String?) {
+    constructor() {
+
+    }
 }
