@@ -27,3 +27,10 @@ object TestingsDBO : Table<Nothing>("testings") {
     val average_roi = double("average_roi")
     val signal_stats = text("signal_stats")
 }
+
+object SignalResultsDBO : Table<Nothing>("signal_results") {
+    val id = int("id").primaryKey()
+    val testings_id = int("department_id").references(TestingsDBO) { it }
+    val result = text("result")
+}
+
