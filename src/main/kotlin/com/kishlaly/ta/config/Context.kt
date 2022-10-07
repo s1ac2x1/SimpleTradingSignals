@@ -46,7 +46,7 @@ class Context {
         var logTimeframe1: Timeframe? = null
         var logTimeframe2: Timeframe? = null
         var runGroups: Timeframe? = null
-        var disabledLogs: Boolean = false
+        var useDBLogging: Boolean = false
 
         // for testing on historical data
         var testMode = false

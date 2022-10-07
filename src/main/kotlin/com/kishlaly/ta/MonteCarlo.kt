@@ -12,8 +12,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.config.Context
 
 fun main() {
-
-    // не нужно сохранять на лог на диск, вместо этого поднять локальный посгрес и писать туда (батчами)
+    Context.useDBLogging = true;
 
     val screenOneGenerator = BlockGroupsUtils().generateBlocksCombinations(
         "com.kishlaly.ta.analyze.tasks.blocks.one",

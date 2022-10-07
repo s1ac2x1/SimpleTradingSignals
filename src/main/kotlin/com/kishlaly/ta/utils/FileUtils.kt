@@ -13,7 +13,7 @@ class FileUtils {
     companion object {
 
         fun appendToFile(filename: String, content: String) {
-            if (Context.disabledLogs) {
+            if (Context.useDBLogging) {
                 return
             }
             val file = File(filename)
@@ -26,7 +26,7 @@ class FileUtils {
         }
 
         fun writeToFile(name: String, content: String) {
-            if (Context.disabledLogs) {
+            if (Context.useDBLogging) {
                 return
             }
             try {
