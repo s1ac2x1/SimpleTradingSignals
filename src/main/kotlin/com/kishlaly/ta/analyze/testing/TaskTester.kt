@@ -304,11 +304,16 @@ class TaskTester {
                 .filter { it.isOk() }
                 .forEach { taskResult ->
                     val quoteDateFormatted = formatDate(timeframe, taskResult.lastChartQuote.timestamp)
-                    report.add(quoteDateFormatted + " --- " + printSignalStats(timeframe, taskResult, testing))
+                    report.add(
+                        quoteDateFormatted + " --- " + printSignalStats(
+                            timeframe,
+                            taskResult,
+                            testing
+                        ).toString()
+                    )
                 }
         }
 
-        // 20 JULY 2021 --- LOSS -3.36% 6 days [till 26 JULY 2021]
         fun printSignalStats(
             timeframe: Timeframe,
             blockResult: BlockResult,
@@ -316,8 +321,6 @@ class TaskTester {
         ): SignalResultFields {
             val result = SignalResultFields()
             val quote = blockResult.lastChartQuote
-            val quoteDateFormatted = formatDate(timeframe, quote.timestamp)
-            // результаты тестирования сигналов
             val positionTestResult = testing.getResult(quote);
             if (!positionTestResult!!.closed) {
                 result.type = " NOT CLOSED"
@@ -334,9 +337,9 @@ class TaskTester {
                 if (timeframe == Timeframe.HOUR) {
                     parsedEndDate += " ${parsed.hour}:${parsed.minute}"
                 }
-                line.append(" [till ${parsedEndDate}]")
+                result.duration += " [till ${parsedEndDate}]"
             }
-            return line.toString()
+            return result
         }
 
         fun printNoSignalsReport(
@@ -641,8 +644,12 @@ class TaskTester {
 
 }
 
-class SignalResultFields(var date: String?, var type: String?, var percent: String?, var duration: String?) {
-    constructor() {
-
+class SignalResultFields(
+    var type: String = "",
+    var percent: String = "",
+    var duration: String = ""
+) {
+    override fun toString(): String {
+        return "${type} ${percent} ${duration}"
     }
 }
