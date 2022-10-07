@@ -299,29 +299,8 @@ class TaskTester {
                 .filter { it.lastChartQuote != null }
                 .filter { it.isOk() }
                 .forEach { taskResult ->
-                    val line = StringBuilder()
-                    val quote = taskResult.lastChartQuote
-                    val quoteDateFormatted = formatDate(timeframe, quote.timestamp)
-                    // результаты тестирования сигналов
-                    val positionTestResult = testing.getResult(quote);
-                    if (!positionTestResult!!.closed) {
-                        line.append(" NOT CLOSED")
-                    } else {
-                        line.append(if (positionTestResult.profitable) "PROFIT " else "LOSS ")
-                        line.append(positionTestResult.roi).append("%")
-                        line.append(if (positionTestResult.gapUp) " (gap up)" else "")
-                        line.append(if (positionTestResult.gapDown) " (gap down)" else "")
-                        line.append(" ${positionTestResult.getPositionDuration(timeframe)}")
-                        val endDate =
-                            Dates.getBarTimeInMyZone(positionTestResult.closedTimestamp!!, exchangeTimezome).toString()
-                        val parsed = ZonedDateTime.parse(endDate)
-                        var parsedEndDate = parsed.dayOfMonth.toString() + " " + parsed.month + " " + parsed.year
-                        if (timeframe == Timeframe.HOUR) {
-                            parsedEndDate += " ${parsed.hour}:${parsed.minute}"
-                        }
-                        line.append(" [till ${parsedEndDate}]")
-                    }
-                    report.add(quoteDateFormatted + " --- " + line)
+                    val quoteDateFormatted = formatDate(timeframe, taskResult.lastChartQuote.timestamp)
+                    report.add(quoteDateFormatted + " --- " + printSignalStats(timeframe, taskResult, testing))
                 }
         }
 
@@ -404,7 +383,7 @@ class TaskTester {
                         set(it.max_loss, testing.maxLoss)
                         set(it.total_profit, testing.totalProfit)
                         set(it.average_roi, testing.averageRoi)
-                        set(it.signal_stats, testing.)
+                        set(it.signal_stats, printSignalStats(timeframes[0][1], ))
                     }
                 }
             }
