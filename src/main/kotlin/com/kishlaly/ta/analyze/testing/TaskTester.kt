@@ -15,10 +15,7 @@ import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
 import com.kishlaly.ta.utils.*
 import java.io.File
-import java.io.IOException
 import java.lang.System.lineSeparator
-import java.nio.file.Files
-import java.nio.file.Paths
 import java.time.ZonedDateTime
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
@@ -124,14 +121,7 @@ class TaskTester {
                 directory.mkdir()
             }
             if (!Context.massTesting) {
-                try {
-                    Files.write(
-                        Paths.get(Context.TESTS_FOLDER + Context.fileSeparator + Context.SINGLE_TXT),
-                        log.toString().toByteArray()
-                    )
-                } catch (e: IOException) {
-                    println(e.message)
-                }
+                FileUtils.writeToFile(Context.TESTS_FOLDER + Context.fileSeparator + Context.SINGLE_TXT, log.toString())
             } else {
                 val builder = StringBuilder()
                 allTests.forEach { testing ->
@@ -140,14 +130,10 @@ class TaskTester {
                             .append("TP: ${testing.printTP()} => TP/SL = ${testing.printTPSLNumber()} (${testing.printTPSLPercent()}); balance = ${testing.balance}")
                             .append(lineSeparator())
                     }
-                    try {
-                        Files.write(
-                            Paths.get(Context.TESTS_FOLDER + Context.fileSeparator + Context.MASS_TXT),
-                            builder.toString().toByteArray()
-                        )
-                    } catch (e: IOException) {
-                        println(e.message)
-                    }
+                    FileUtils.writeToFile(
+                        Context.TESTS_FOLDER + Context.fileSeparator + Context.MASS_TXT,
+                        builder.toString()
+                    )
                 }
             }
             return allTests

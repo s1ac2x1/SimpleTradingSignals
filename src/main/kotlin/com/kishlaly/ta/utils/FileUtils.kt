@@ -1,5 +1,6 @@
 package com.kishlaly.ta.utils
 
+import com.kishlaly.ta.config.Context
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.io.IOException
@@ -12,6 +13,9 @@ class FileUtils {
     companion object {
 
         fun appendToFile(filename: String, content: String) {
+            if (Context.disabledLogs) {
+                return
+            }
             val file = File(filename)
             try {
                 FileUtils.writeStringToFile(file, content, StandardCharsets.UTF_8, true)
@@ -22,6 +26,9 @@ class FileUtils {
         }
 
         fun writeToFile(name: String, content: String) {
+            if (Context.disabledLogs) {
+                return
+            }
             try {
                 Files.write(Paths.get(name), content.toByteArray())
             } catch (e: IOException) {
