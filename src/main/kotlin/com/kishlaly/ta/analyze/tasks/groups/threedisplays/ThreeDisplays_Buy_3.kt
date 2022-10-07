@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 // inspired by [D] CFLT 20 Dec 2021
 //
@@ -19,7 +19,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 //
 // entry 7 cents above the close of the last bar
 // TP in the middle of the upper half of the Keltner channel
-class ThreeDisplays_Buy_3 : BlocksGroup {
+class ThreeDisplays_Buy_3 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
@@ -40,6 +40,6 @@ class ThreeDisplays_Buy_3 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Often good results, but the average SL is high"
+    override fun comments() = super.comments() + "Often good results, but the average SL is high"
 
 }

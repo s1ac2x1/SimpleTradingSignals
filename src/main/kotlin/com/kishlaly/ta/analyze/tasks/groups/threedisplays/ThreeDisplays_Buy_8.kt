@@ -5,6 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 
 /**
@@ -19,7 +20,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * <p>
  * TP not higher than 50% of the channel
  */
-class ThreeDisplays_Buy_8 : BlocksGroup {
+class ThreeDisplays_Buy_8 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         ThreeDisplays.Config.STOCH_CUSTOM = 20
@@ -42,6 +43,6 @@ class ThreeDisplays_Buy_8 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Finding a strong oversold"
+    override fun comments() = super.comments() + "Finding a strong oversold"
 
 }

@@ -4,9 +4,9 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
-class ThreeDisplays_Buy_2 : BlocksGroup {
+class ThreeDisplays_Buy_2 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
@@ -23,6 +23,6 @@ class ThreeDisplays_Buy_2 : BlocksGroup {
         }
     }
 
-    override fun comments() = "In second place in terms of efficiency"
+    override fun comments() = super.comments() + "In second place in terms of efficiency"
 
 }

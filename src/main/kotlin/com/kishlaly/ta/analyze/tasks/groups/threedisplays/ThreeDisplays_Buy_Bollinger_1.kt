@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
  * Touching the bottom Bollinger band and a hint of growth.
@@ -19,7 +19,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * <p>
  * SL can be sliding on the average Bollinger band
  */
-class ThreeDisplays_Buy_Bollinger_1 : BlocksGroup {
+class ThreeDisplays_Buy_Bollinger_1 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3
@@ -43,6 +43,6 @@ class ThreeDisplays_Buy_Bollinger_1 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Price recently touched the bottom band, good TP/SL ratio"
+    override fun comments() = super.comments() + "Price recently touched the bottom band, good TP/SL ratio"
 
 }

@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.tasks.ThreeDisplays
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
  * Search for narrowing bands with signs of bullish growth
@@ -20,7 +20,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * <p>
  * Example: [D] AAPL 15.11.2021, 7.06.2021
  */
-class ThreeDisplays_Buy_Bollinger_3 : BlocksGroup {
+class ThreeDisplays_Buy_Bollinger_3 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         ThreeDisplays.Config.STOCH_CUSTOM = 40
@@ -37,6 +37,6 @@ class ThreeDisplays_Buy_Bollinger_3 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Narrowing of the Bollinger Bands with signs of bullish growth"
+    override fun comments() = super.comments() + "Narrowing of the Bollinger Bands with signs of bullish growth"
 
 }

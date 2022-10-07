@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
  * Second screen:
@@ -12,7 +12,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * or TP at the middle of the channel
  */
 //TODO finish
-class ThreeDisplays_Buy_Bollinger_4 : BlocksGroup {
+class ThreeDisplays_Buy_Bollinger_4 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
@@ -22,6 +22,6 @@ class ThreeDisplays_Buy_Bollinger_4 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Observe: the price has crossed the bottom band"
+    override fun comments() = super.comments() + "Observe: the price has crossed the bottom band"
 
 }

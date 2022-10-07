@@ -7,7 +7,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosse
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_X_OutOf_Y_Above
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscending
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
  * Price returns to the EMA on an uptrend
@@ -19,7 +19,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * <p>
  * SL: try StopLossVolatileLocalMin
  */
-class FirstScreen_Buy_1 : BlocksGroup {
+class FirstScreen_Buy_1 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK = 7
@@ -36,5 +36,6 @@ class FirstScreen_Buy_1 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Looking for the return of the price to EMA26 on the uptrend of the first screen"
+    override fun comments() =
+        super.comments() + "Looking for the return of the price to EMA26 on the uptrend of the first screen"
 }

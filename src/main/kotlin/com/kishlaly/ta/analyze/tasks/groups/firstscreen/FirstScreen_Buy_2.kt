@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_MACD_Last_X_Ascending
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscending
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
  * Long smooth rise of the MACD histogram on the first screen
@@ -18,7 +18,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * + for reliability let the MACD histogram go up from the negative level (can still stay negative)
  */
 //TODO finish
-class FirstScreen_Buy_2 : BlocksGroup {
+class FirstScreen_Buy_2 : AbstractBlocksGroup() {
     override fun blocks(): List<TaskBlock> {
         ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK = 6
 
@@ -31,5 +31,6 @@ class FirstScreen_Buy_2 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Looking for the return of the price to EMA26 on the uptrend of the first screen"
+    override fun comments() =
+        super.comments() + "Looking for the return of the price to EMA26 on the uptrend of the first screen"
 }

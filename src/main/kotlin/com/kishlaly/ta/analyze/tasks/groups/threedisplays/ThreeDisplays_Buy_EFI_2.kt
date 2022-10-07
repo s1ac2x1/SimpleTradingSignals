@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
  * The first screen is not used.
@@ -15,7 +15,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * !!! Can't roll over for shorts !!!
  */
 //TODO finish
-class ThreeDisplays_Buy_EFI_2 : BlocksGroup {
+class ThreeDisplays_Buy_EFI_2 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
@@ -25,6 +25,6 @@ class ThreeDisplays_Buy_EFI_2 : BlocksGroup {
         }
     }
 
-    override fun comments() = "EFI rose smoothly and consolidated above zero"
+    override fun comments() = super.comments() + "EFI rose smoothly and consolidated above zero"
 
 }

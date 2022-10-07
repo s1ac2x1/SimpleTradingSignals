@@ -3,9 +3,9 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Short_ScreenOne_StrictTrendCheck
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
-class ThreeDisplays_Sell_1 : BlocksGroup {
+class ThreeDisplays_Sell_1 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
@@ -21,6 +21,6 @@ class ThreeDisplays_Sell_1 : BlocksGroup {
         }
     }
 
-    override fun comments() = "The first short strategy. Not stable"
+    override fun comments() = super.comments() + "The first short strategy. Not stable"
 
 }

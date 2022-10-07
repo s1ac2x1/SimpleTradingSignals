@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 
 /**
@@ -18,7 +18,7 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
  * <p>
  * TP is not higher than 50% of the distance from the middle to the top of the Keltner channel
  */
-class ThreeDisplays_Buy_6 : BlocksGroup {
+class ThreeDisplays_Buy_6 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         ThreeDisplays.Config.STOCH_CUSTOM = 20
@@ -39,6 +39,6 @@ class ThreeDisplays_Buy_6 : BlocksGroup {
     }
 
     override fun comments() =
-        "A variation on the search for a rise out of oversold. Good returns and number of positions"
+        super.comments() + "A variation on the search for a rise out of oversold. Good returns and number of positions"
 
 }

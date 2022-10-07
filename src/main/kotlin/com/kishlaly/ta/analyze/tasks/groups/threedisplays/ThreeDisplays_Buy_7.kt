@@ -5,7 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 // ThreeDisplays_Buy_4 modification to search for ultra-short positions
 // 1 screen: last EMA is higher and the last bar is green
@@ -14,7 +14,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 // TP 50-70% of the channel
 //
 // on historical tests shows a good balance, but the number of SL positions is much higher than the TP
-class ThreeDisplays_Buy_7 : BlocksGroup {
+class ThreeDisplays_Buy_7 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         ThreeDisplays.Config.FILTER_BY_KELTNER_ENABLED = true
@@ -34,6 +34,6 @@ class ThreeDisplays_Buy_7 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Good returns, but a lot of positions"
+    override fun comments() = super.comments() + "Good returns, but a lot of positions"
 
 }

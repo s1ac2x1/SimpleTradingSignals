@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
  * The first screen is not used.
@@ -16,7 +16,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * Note: Can't flip for shorts
  */
 //TODO implement
-class ThreeDisplays_Buy_EFI_3 : BlocksGroup {
+class ThreeDisplays_Buy_EFI_3 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
@@ -26,6 +26,6 @@ class ThreeDisplays_Buy_EFI_3 : BlocksGroup {
         }
     }
 
-    override fun comments() = "EFI draws U below zero"
+    override fun comments() = super.comments() + "EFI draws U below zero"
 
 }

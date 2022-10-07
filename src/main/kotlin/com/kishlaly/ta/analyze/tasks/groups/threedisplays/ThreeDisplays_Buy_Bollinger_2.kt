@@ -7,7 +7,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Bottom_
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bollinger_Bottom_PreLastBelow
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_TwoBelowZeroAndAscending
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_LastAscending
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
  * A rare occurrence when the price goes down beyond the Bollinger band
@@ -19,7 +19,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * + two last MACD histograms are negative and the last one is higher
  * + Last %D stochastic is rising
  */
-class ThreeDisplays_Buy_Bollinger_2 : BlocksGroup {
+class ThreeDisplays_Buy_Bollinger_2 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
@@ -36,6 +36,6 @@ class ThreeDisplays_Buy_Bollinger_2 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Finding the fallout behind the bottom band. Doesn't work well."
+    override fun comments() = super.comments() + "Finding the fallout behind the bottom band. Doesn't work well."
 
 }

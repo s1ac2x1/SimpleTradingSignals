@@ -5,6 +5,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 
 /**
@@ -19,7 +20,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * <p>
  * SL can be sliding along the Bollinger average
  */
-class ThreeDisplays_Buy_Bollinger_1_2 : BlocksGroup {
+class ThreeDisplays_Buy_Bollinger_1_2 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3
@@ -42,6 +43,7 @@ class ThreeDisplays_Buy_Bollinger_1_2 : BlocksGroup {
         }
     }
 
-    override fun comments() = "The price recently touched the lower band. Good returns, average TP/SL ratio"
+    override fun comments() =
+        super.comments() + "The price recently touched the lower band. Good returns, average TP/SL ratio"
 
 }

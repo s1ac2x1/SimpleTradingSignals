@@ -4,7 +4,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
  * a copy of ThreeDisplays_Buy_2
@@ -13,7 +13,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  * <p>
  * Works better with TP 70% of the channel
  */
-class ThreeDisplays_Buy_5 : BlocksGroup {
+class ThreeDisplays_Buy_5 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
@@ -32,6 +32,6 @@ class ThreeDisplays_Buy_5 : BlocksGroup {
         }
     }
 
-    override fun comments() = "Tracks U-turn of indicators. Good TP/SL ratio"
+    override fun comments() = super.comments() + "Tracks U-turn of indicators. Good TP/SL ratio"
 
 }

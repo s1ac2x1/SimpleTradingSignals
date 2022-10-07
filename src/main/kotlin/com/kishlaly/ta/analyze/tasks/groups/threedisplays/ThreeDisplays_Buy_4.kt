@@ -7,7 +7,7 @@ import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarHigher
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_MACD_LastAscending
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 // modification of buySignalType2 with an attempt to track the beginning of a long-term trend
 //
@@ -23,7 +23,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 // %D and %K of the last stochastic should be higher than the previous
 //
 // On historical data this strategy most often gives better returns and extremely low SL positions ratio
-class ThreeDisplays_Buy_4 : BlocksGroup {
+class ThreeDisplays_Buy_4 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
@@ -44,6 +44,6 @@ class ThreeDisplays_Buy_4 : BlocksGroup {
         }
     }
 
-    override fun comments() = "The best TP/SL and price"
+    override fun comments() = super.comments() + "The best TP/SL and price"
 
 }
