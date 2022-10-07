@@ -14,6 +14,8 @@ import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
 import com.kishlaly.ta.utils.*
+import org.ktorm.dsl.batchInsert
+import org.ktorm.dsl.insert
 import java.io.File
 import java.lang.System.lineSeparator
 import java.time.ZonedDateTime
@@ -352,7 +354,11 @@ class TaskTester {
             Context.stopLossStrategy = stopLossStrategy
             Context.takeProfitStrategy = takeProfitStrategy
             println("$stopLossStrategy / $takeProfitStrategy")
-            test(timeframes, task, blocksGroup)
+            test(timeframes, task, blocksGroup).forEach { historicalTesting ->
+                Context.database?.insert(TestingsDBO) {
+
+                }
+            }
         }
 
         // format: dd.mm.yyyy

@@ -7,6 +7,7 @@ import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
 import com.kishlaly.ta.model.ApiSource
 import com.kishlaly.ta.model.SymbolsSource
 import com.kishlaly.ta.model.Timeframe
+import org.ktorm.database.Database
 
 class Context {
 
@@ -47,6 +48,7 @@ class Context {
         var logTimeframe2: Timeframe? = null
         var runGroups: Timeframe? = null
         var useDBLogging: Boolean = false
+        var database: Database? = null
 
         // for testing on historical data
         var testMode = false
