@@ -294,6 +294,8 @@ class TaskTester {
             return result.toString()
         }
 
+        нужна вторая таблица для хранения blockResult
+
         fun printPositionsReport(timeframe: Timeframe, testing: HistoricalTesting, report: MutableSet<String>) {
             testing.blocksResults
                 .filter { it.lastChartQuote != null }
