@@ -361,7 +361,7 @@ class TaskTester {
             val historicalTestings = test(timeframes, task, blocksGroup)
             if (Context.useDBLogging) {
                 historicalTestings.forEach { testing ->
-                    val testingId = Context.database?.insert(TestingsDBO) {
+                    val testingId = Context.database?.insert(Testings) {
                         set(it.symbol, testing.symbol)
                         set(it.task_blocks, blocksGroup.comments())
                         set(it.sl_strategy, stopLossStrategy.toString())
@@ -388,7 +388,7 @@ class TaskTester {
                     val lines = mutableSetOf<String>()
                     printPositionsReport(timeframes[0][1], testing, lines)
                     lines.forEach { line ->
-                        Context.database?.insert(SignalResultsDBO) {
+                        Context.database?.insert(SignalResults) {
                             set(it.testings_id, testingId)
                             set(it.result, line)
                         }
