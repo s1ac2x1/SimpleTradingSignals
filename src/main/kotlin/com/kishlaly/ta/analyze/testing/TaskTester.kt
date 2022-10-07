@@ -59,7 +59,7 @@ class TaskTester {
                         println(e.message)
                     }
                     if (!blockResults.isEmpty()) {
-                        var testing: HistoricalTesting? = null
+                        var testing: HistoricalTesting?
                         if (Context.massTesting) {
                             if (Context.takeProfitStrategies != null) {
                                 Context.takeProfitStrategies.forEach { takeProfitStrategy ->
@@ -110,7 +110,7 @@ class TaskTester {
                     clean(screen1, screen2)
                 }
                 if (!Context.massTesting) {
-                    readableOutput.forEach { (key, data) ->
+                    readableOutput.forEach { (_, data) ->
                         data.forEach { log.append("    $it").append(lineSeparator()) }
                         log.append(lineSeparator())
                     }
@@ -192,7 +192,7 @@ class TaskTester {
                     return@forEach
                 }
             }
-            screen2.indicators.forEach { (indicator, data) ->
+            screen2.indicators.forEach { (_, data) ->
                 if (data.size < screenTwoMinBarCount) {
                     filledData.set(false)
                     return@forEach
