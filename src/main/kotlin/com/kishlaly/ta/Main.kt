@@ -9,6 +9,7 @@ import com.kishlaly.ta.cache.CacheReader
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.SymbolsSource
 import com.kishlaly.ta.model.Timeframe
+import com.kishlaly.ta.utils.DBUtils
 import com.kishlaly.ta.utils.RunUtils
 
 fun main() {
@@ -19,6 +20,7 @@ fun main() {
     Context.symbols = CacheReader.getSymbols()
     //buildCache(Context.basicTimeframes, false);
 
+    DBUtils.initDB()
     TaskTester.testOneStrategy(
         Context.basicTimeframes,
         TaskType.THREE_DISPLAYS_BUY,

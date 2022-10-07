@@ -10,11 +10,11 @@ import com.kishlaly.ta.analyze.testing.TaskTester
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.config.Context
+import com.kishlaly.ta.utils.DBUtils
 import org.ktorm.database.Database
 
 fun main() {
-    Context.useDBLogging = true;
-    Context.database = Database.connect("jdbc:postgresql://localhost:5432/test", user = "test", password = "test")
+    DBUtils.initDB()
 
     val screenOneGenerator = BlockGroupsUtils().generateBlocksCombinations(
         "com.kishlaly.ta.analyze.tasks.blocks.one",

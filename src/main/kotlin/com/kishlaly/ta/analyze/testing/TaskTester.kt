@@ -14,7 +14,6 @@ import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
 import com.kishlaly.ta.utils.*
-import org.ktorm.dsl.batchInsert
 import org.ktorm.dsl.insert
 import java.io.File
 import java.lang.System.lineSeparator
@@ -326,6 +325,32 @@ class TaskTester {
                 }
         }
 
+        fun printSignalStats(timeframe: Timeframe, blockResult: BlockResult, testing: HistoricalTesting): String {
+            val line = StringBuilder()
+            val quote = blockResult.lastChartQuote
+            val quoteDateFormatted = formatDate(timeframe, quote.timestamp)
+            // результаты тестирования сигналов
+            val positionTestResult = testing.getResult(quote);
+            if (!positionTestResult!!.closed) {
+                line.append(" NOT CLOSED")
+            } else {
+                line.append(if (positionTestResult.profitable) "PROFIT " else "LOSS ")
+                line.append(positionTestResult.roi).append("%")
+                line.append(if (positionTestResult.gapUp) " (gap up)" else "")
+                line.append(if (positionTestResult.gapDown) " (gap down)" else "")
+                line.append(" ${positionTestResult.getPositionDuration(timeframe)}")
+                val endDate =
+                    Dates.getBarTimeInMyZone(positionTestResult.closedTimestamp!!, exchangeTimezome).toString()
+                val parsed = ZonedDateTime.parse(endDate)
+                var parsedEndDate = parsed.dayOfMonth.toString() + " " + parsed.month + " " + parsed.year
+                if (timeframe == Timeframe.HOUR) {
+                    parsedEndDate += " ${parsed.hour}:${parsed.minute}"
+                }
+                line.append(" [till ${parsedEndDate}]")
+            }
+            return line.toString()
+        }
+
         fun printNoSignalsReport(
             timeframe: Timeframe,
             testing: HistoricalTesting,
@@ -354,9 +379,33 @@ class TaskTester {
             Context.stopLossStrategy = stopLossStrategy
             Context.takeProfitStrategy = takeProfitStrategy
             println("$stopLossStrategy / $takeProfitStrategy")
-            test(timeframes, task, blocksGroup).forEach { historicalTesting ->
-                Context.database?.insert(TestingsDBO) {
-
+            val historicalTestings = test(timeframes, task, blocksGroup)
+            if (Context.useDBLogging) {
+                historicalTestings.forEach { testing ->
+                    Context.database?.insert(TestingsDBO) {
+                        set(it.symbol, testing.symbol)
+                        set(it.task_blocks, blocksGroup.comments())
+                        set(it.sl_strategy, stopLossStrategy.toString())
+                        set(it.tp_strategy, takeProfitStrategy.toString())
+                        set(it.balance, testing.balance)
+                        set(it.successful_ratio, testing.successfulRatio)
+                        set(it.loss_ratio, testing.lossRatio)
+                        set(it.all_positions_count, testing.allPositionsCount)
+                        set(it.profitable_positions_count, testing.profitablePositionsCount)
+                        set(it.loss_positions_count, testing.lossPositionsCount)
+                        set(it.min_position_duration_seconds, testing.minPositionDurationSeconds)
+                        set(it.average_position_duration_seconds, testing.averagePositionDurationSeconds)
+                        set(it.max_position_duration_seconds, testing.maxPositionDurationSeconds)
+                        set(it.min_profit, testing.minProfit)
+                        set(it.avg_profit, testing.avgProfit)
+                        set(it.max_profit, testing.maxProfit)
+                        set(it.min_loss, testing.minLoss)
+                        set(it.avg_loss, testing.avgLoss)
+                        set(it.max_loss, testing.maxLoss)
+                        set(it.total_profit, testing.totalProfit)
+                        set(it.average_roi, testing.averageRoi)
+                        set(it.signal_stats, testing.)
+                    }
                 }
             }
         }
