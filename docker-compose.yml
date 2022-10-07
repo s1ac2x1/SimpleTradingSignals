@@ -1,5 +1,5 @@
 networks:
-  demo-app-network:
+  my-network:
     driver: bridge
 
 services:
@@ -9,7 +9,7 @@ services:
     hostname: db
     container_name: postgres
     networks:
-      - demo-app-network
+      - my-network
     ports:
       - "5432:5432"
     environment:
@@ -26,7 +26,7 @@ services:
     restart: 'no'
     container_name: flyway
     networks:
-      - demo-app-network
+      - my-network
     command: >-
       -configFiles=/flyway/conf/flyway.config
       -locations=filesystem:/flyway/migrations

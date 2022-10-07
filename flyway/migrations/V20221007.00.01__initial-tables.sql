@@ -1,24 +1,26 @@
-CREATE TABLE IF NOT EXISTS address (
+CREATE TABLE IF NOT EXISTS testings (
     id VARCHAR NOT NULL PRIMARY KEY,
-    address_type TEXT NOT NULL DEFAULT 'HOME',
-    street_name VARCHAR(255),
-    street_number VARCHAR(16),
-    second_address_line VARCHAR(255),
-    city VARCHAR(128) NOT NULL,
-    postal_code VARCHAR(16) NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    modified_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    version INT DEFAULT 0
+    symbol VARCHAR(10),
+    task_blocks TEXT,
+    sl_strategy TEXT,
+    tp_strategy TEXT,
+    balance FLOAT8,
+    successful_ratio FLOAT8,
+    loss_ratio FLOAT8,
+    all_positions_count FLOAT8,
+    profitable_positions_count FLOAT8,
+    loss_positions_count FLOAT8,
+    min_position_duration_seconds FLOAT8,
+    average_position_duration_seconds FLOAT8,
+    max_position_duration_seconds FLOAT8,
+    min_profit FLOAT8,
+    avg_profit FLOAT8,
+    max_profit FLOAT8,
+    min_loss FLOAT8,
+    avg_loss FLOAT8,
+    max_loss FLOAT8,
+    total_Loss FLOAT8,
+    total_profit FLOAT8,
+    average_roi FLOAT8,
+    signal_stats TEXT
 );
-
-CREATE TABLE IF NOT EXISTS person (
-    id VARCHAR NOT NULL PRIMARY KEY,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
-    address_id VARCHAR(36) REFERENCES address,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    modified_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    version INT DEFAULT 0
-);
-
-CREATE INDEX address_streenname_streetnumber_idx ON address(street_name, street_number);
