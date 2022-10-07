@@ -1,0 +1,39 @@
+networks:
+  demo-app-network:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:14.2-alpine
+    restart: 'no'
+    hostname: db
+    container_name: postgres
+    networks:
+      - demo-app-network
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  db-setup:
+    image: flyway/flyway:8.5.11-alpine
+    restart: 'no'
+    container_name: flyway
+    networks:
+      - demo-app-network
+    command: >-
+      -configFiles=/flyway/conf/flyway.config
+      -locations=filesystem:/flyway/migrations
+      -connectRetries=60 migrate
+    volumes:
+      - ${PWD}/flyway/migrations:/flyway/migrations
+      - ${PWD}/flyway/conf/flyway.config:/flyway/conf/flyway.config
+    depends_on:
+      postgres:
+        condition: service_healthy
