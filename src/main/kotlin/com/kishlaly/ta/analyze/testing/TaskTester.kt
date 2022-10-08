@@ -336,7 +336,6 @@ class TaskTester {
         ) {
             Context.stopLossStrategy = stopLossStrategy
             Context.takeProfitStrategy = takeProfitStrategy
-            println("$stopLossStrategy / $takeProfitStrategy")
             val historicalTestings = test(timeframes, task, blocksGroup)
             if (Context.useDBLogging) {
                 historicalTestings.forEach { testing ->

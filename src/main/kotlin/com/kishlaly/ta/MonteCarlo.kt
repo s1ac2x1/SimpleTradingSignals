@@ -11,7 +11,6 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.utils.DBUtils
-import org.ktorm.database.Database
 
 fun main() {
     DBUtils.initDB()
@@ -20,6 +19,9 @@ fun main() {
         "com.kishlaly.ta.analyze.tasks.blocks.one",
         clazz = ScreenOneBlock::class.java
     )
+    for (combination in screenOneGenerator) {
+        println(combination.vector)
+    }
     val screenTwoGenerator = BlockGroupsUtils().generateBlocksCombinations(
         "com.kishlaly.ta.analyze.tasks.blocks.two",
         clazz = ScreenTwoBlock::class.java
@@ -27,21 +29,25 @@ fun main() {
     var i = 0
     outer@ for (screenOneCombination in screenOneGenerator) {
         for (screenTwoCombination in screenTwoGenerator) {
-
-            TaskTester.testOneStrategy(
-                Context.basicTimeframes,
-                TaskType.THREE_DISPLAYS_BUY,
-                GeneratedBlocksGroup(
-                    listOf(ScreenBasicValidation()),
-                    screenOneCombination.vector,
-                    screenTwoCombination.vector
-                ),
-                StopLossFixedPrice(0.27),
-                TakeProfitFixedKeltnerTop(80)
-            )
-            i++
-            if (i > 5) {
-                break@outer
+            if (screenOneCombination.vector.size > 0 || screenTwoCombination.vector.size > 0) {
+                println("Testing blocks with [${screenOneCombination.size}][${screenTwoCombination.size}]...")
+                TaskTester.testOneStrategy(
+                    Context.basicTimeframes,
+                    TaskType.THREE_DISPLAYS_BUY,
+                    GeneratedBlocksGroup(
+                        listOf(ScreenBasicValidation()),
+                        screenOneCombination.vector,
+                        screenTwoCombination.vector
+                    ),
+                    StopLossFixedPrice(0.27),
+                    TakeProfitFixedKeltnerTop(80)
+                )
+                i++
+                if (i > 5) {
+                    break@outer
+                }
+            } else {
+                println("Skipped [${screenOneCombination.size}][${screenTwoCombination.size}]")
             }
         }
     }
