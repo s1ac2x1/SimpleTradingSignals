@@ -34,6 +34,7 @@ fun main() {
                 .filter { it.size > 0 }
                 .limit(limit)
                 .forEach { screenTwoCombination ->
+                    println()
                     TaskTester.testOneStrategy(
                         Context.basicTimeframes,
                         TaskType.THREE_DISPLAYS_BUY,
@@ -46,6 +47,5 @@ fun main() {
                         TakeProfitFixedKeltnerTop(80)
                     )
                 }
-
         }
 }
