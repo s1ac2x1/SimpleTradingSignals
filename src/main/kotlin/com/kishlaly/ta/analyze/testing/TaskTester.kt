@@ -627,7 +627,7 @@ class SignalResultFields(
             if (!positionTestResult.closed) {
                 return " NOT CLOSED"
             }
-            var result = if (positionTestResult.profitable) "PROFIT " else "LOSS "
+            var result = if (positionTestResult.profitable) "PROFIT " else "LOSS"
             result += if (positionTestResult.gapUp) " (gap up)" else ""
             result += if (positionTestResult.gapDown) " (gap down)" else ""
             return result

@@ -1,6 +1,5 @@
 package com.kishlaly.ta
 
-import com.kishlaly.ta.model.TestingsDBO
 import org.ktorm.database.Database
 import org.ktorm.dsl.from
 import org.ktorm.dsl.select
