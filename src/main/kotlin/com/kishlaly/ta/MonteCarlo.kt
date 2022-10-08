@@ -34,7 +34,7 @@ fun main() {
                 .filter { it.size > 0 }
                 .limit(limit)
                 .forEach { screenTwoCombination ->
-                    println()
+                    println("Testing [${screenOneCombination.vector.size}][${screenTwoCombination.vector.size}]...")
                     TaskTester.testOneStrategy(
                         Context.basicTimeframes,
                         TaskType.THREE_DISPLAYS_BUY,
