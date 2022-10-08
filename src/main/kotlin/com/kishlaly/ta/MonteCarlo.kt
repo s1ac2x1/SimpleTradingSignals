@@ -19,9 +19,6 @@ fun main() {
         "com.kishlaly.ta.analyze.tasks.blocks.one",
         clazz = ScreenOneBlock::class.java
     )
-    for (combination in screenOneGenerator) {
-        println(combination.vector)
-    }
     val screenTwoGenerator = BlockGroupsUtils().generateBlocksCombinations(
         "com.kishlaly.ta.analyze.tasks.blocks.two",
         clazz = ScreenTwoBlock::class.java
@@ -29,7 +26,7 @@ fun main() {
     var i = 0
     outer@ for (screenOneCombination in screenOneGenerator) {
         for (screenTwoCombination in screenTwoGenerator) {
-            if (screenOneCombination.vector.size > 0 || screenTwoCombination.vector.size > 0) {
+            if (screenOneCombination.vector.size > 0 && screenTwoCombination.vector.size > 0) {
                 println("Testing blocks with [${screenOneCombination.size}][${screenTwoCombination.size}]...")
                 TaskTester.testOneStrategy(
                     Context.basicTimeframes,
