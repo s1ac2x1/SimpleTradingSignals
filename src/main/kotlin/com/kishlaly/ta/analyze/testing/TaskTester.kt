@@ -3,6 +3,7 @@ package com.kishlaly.ta.analyze.testing
 import com.kishlaly.ta.analyze.TaskType
 import com.kishlaly.ta.analyze.tasks.groups.BlockGroupsUtils
 import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
+import com.kishlaly.ta.analyze.testing.TaskTester.Companion.formatDate
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
@@ -297,49 +298,14 @@ class TaskTester {
         fun printPositionsReport(
             timeframe: Timeframe,
             testing: HistoricalTesting,
-            report: MutableSet<SignalResultFields>
+            report: MutableSet<String>
         ) {
             testing.blocksResults
                 .filter { it.lastChartQuote != null }
                 .filter { it.isOk() }
                 .forEach { taskResult ->
-                    val quoteDateFormatted = formatDate(timeframe, taskResult.lastChartQuote.timestamp)
-                    report.add(
-                        quoteDateFormatted + " --- " + printSignalStats(
-                            timeframe,
-                            taskResult,
-                            testing
-                        ).toString()
-                    )
+                    report.add(SignalResultFields(timeframe, taskResult, testing, taskResult.lastChartQuote).toString())
                 }
-        }
-
-        fun printSignalStats(
-            timeframe: Timeframe,
-            blockResult: BlockResult,
-            testing: HistoricalTesting
-        ): SignalResultFields {
-            val result = SignalResultFields()
-            val quote = blockResult.lastChartQuote
-            val positionTestResult = testing.getResult(quote);
-            if (!positionTestResult!!.closed) {
-                result.type = " NOT CLOSED"
-            } else {
-                result.type = if (positionTestResult.profitable) "PROFIT " else "LOSS "
-                result.percent += "${positionTestResult.roi}%"
-                result.type += if (positionTestResult.gapUp) " (gap up)" else ""
-                result.type += if (positionTestResult.gapDown) " (gap down)" else ""
-                result.duration = " ${positionTestResult.getPositionDuration(timeframe)}"
-                val endDate =
-                    Dates.getBarTimeInMyZone(positionTestResult.closedTimestamp!!, exchangeTimezome).toString()
-                val parsed = ZonedDateTime.parse(endDate)
-                var parsedEndDate = parsed.dayOfMonth.toString() + " " + parsed.month + " " + parsed.year
-                if (timeframe == Timeframe.HOUR) {
-                    parsedEndDate += " ${parsed.hour}:${parsed.minute}"
-                }
-                result.duration += " [till ${parsedEndDate}]"
-            }
-            return result
         }
 
         fun printNoSignalsReport(
@@ -397,7 +363,7 @@ class TaskTester {
                         set(it.average_roi, testing.averageRoi)
                     }
 
-                    val lines = mutableSetOf<SignalResultFields>()
+                    val lines = mutableSetOf<String>()
                     printPositionsReport(timeframes[0][1], testing, lines)
                     lines.forEach { line ->
                         Context.database?.insert(SignalResults) {
@@ -493,7 +459,7 @@ class TaskTester {
             return formatRange(testing, function(testing))
         }
 
-        private fun formatDate(timeframe: Timeframe, timestamp: Long): String {
+        fun formatDate(timeframe: Timeframe, timestamp: Long): String {
             var date = Dates.getBarTimeInMyZone(timestamp, exchangeTimezome).toString()
             val parsedDate = ZonedDateTime.parse(date)
             date = "${parsedDate.dayOfMonth.toString()} ${parsedDate.month} ${parsedDate.year}"
@@ -645,11 +611,51 @@ class TaskTester {
 }
 
 class SignalResultFields(
-    var type: String = "",
-    var percent: String = "",
-    var duration: String = ""
+    val timeframe: Timeframe,
+    val blockResult: BlockResult,
+    val testing: HistoricalTesting,
+    val quote: Quote
 ) {
+
     override fun toString(): String {
-        return "${type} ${percent} ${duration}"
+        return "${quoteDateFormatted} --- ${type} ${percent} ${duration}"
     }
+
+    val type: String
+        get() {
+            val positionTestResult = testing.getResult(quote)!!
+            if (!positionTestResult.closed) {
+                return " NOT CLOSED"
+            }
+            var result = if (positionTestResult.profitable) "PROFIT " else "LOSS "
+            result += if (positionTestResult.gapUp) " (gap up)" else ""
+            result += if (positionTestResult.gapDown) " (gap down)" else ""
+            return result
+        }
+
+    val percent: String
+        get() {
+            val positionTestResult = testing.getResult(quote)!!
+            return "${positionTestResult.roi}%"
+        }
+
+    val duration: String
+        get() {
+            val positionTestResult = testing.getResult(quote)!!
+            var result = "${positionTestResult.getPositionDuration(timeframe)}"
+            val endDate =
+                Dates.getBarTimeInMyZone(positionTestResult.closedTimestamp!!, exchangeTimezome).toString()
+            val parsed = ZonedDateTime.parse(endDate)
+            var parsedEndDate = parsed.dayOfMonth.toString() + " " + parsed.month + " " + parsed.year
+            if (timeframe == Timeframe.HOUR) {
+                parsedEndDate += " ${parsed.hour}:${parsed.minute}"
+            }
+            result += " [till ${parsedEndDate}]"
+            return result
+        }
+
+    val quoteDateFormatted: String
+        get() {
+            return formatDate(timeframe, blockResult.lastChartQuote.timestamp)
+        }
 }
