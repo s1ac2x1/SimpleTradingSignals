@@ -16,6 +16,7 @@ import com.kishlaly.ta.model.*
 import com.kishlaly.ta.model.indicators.Indicator
 import com.kishlaly.ta.utils.*
 import org.ktorm.dsl.insert
+import org.ktorm.support.postgresql.insertReturning
 import java.io.File
 import java.lang.System.lineSeparator
 import java.time.ZonedDateTime
@@ -339,7 +340,7 @@ class TaskTester {
             val historicalTestings = test(timeframes, task, blocksGroup)
             if (Context.useDBLogging) {
                 historicalTestings.forEach { testing ->
-                    val testingId = Context.database?.insert(Testings) {
+                    val testingId = Context.database?.insertReturning(Testings, Testings.id) {
                         set(it.symbol, testing.symbol)
                         set(it.task_blocks, blocksGroup.comments())
                         set(it.sl_strategy, stopLossStrategy.toString())

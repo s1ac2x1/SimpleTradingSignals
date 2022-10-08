@@ -22,15 +22,15 @@ fun main() {
     Context.symbols = CacheReader.getSymbols()
     //buildCache(Context.basicTimeframes, false);
 
-    //DBUtils.initDB()
-//    TaskTester.testOneStrategy(
-//        Context.basicTimeframes,
-//        TaskType.THREE_DISPLAYS_BUY,
-//        ThreeDisplays_Buy_5(),
-//        StopLossFixedPrice(0.27),
-//        TakeProfitFixedKeltnerTop(95)
-//    )
+    DBUtils.initDB()
+    TaskTester.testOneStrategy(
+        Context.basicTimeframes,
+        TaskType.THREE_DISPLAYS_BUY,
+        ThreeDisplays_Buy_4(),
+        StopLossFixedPrice(0.27),
+        TakeProfitFixedKeltnerTop(95)
+    )
 
-    RunUtils.buildTasksAndStrategiesSummary_()
+//    RunUtils.buildTasksAndStrategiesSummary_()
 
 }
