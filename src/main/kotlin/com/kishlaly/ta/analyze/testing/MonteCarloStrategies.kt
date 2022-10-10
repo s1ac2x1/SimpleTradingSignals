@@ -9,6 +9,9 @@ import com.kishlaly.ta.analyze.tasks.groups.GeneratedBlocksGroup
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.config.Context
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+import org.paukov.combinatorics.ICombinatoricsVector
 import java.util.stream.StreamSupport
 
 class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(symbol) {
@@ -31,20 +34,31 @@ class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(sy
                     .filter { it.size > 0 }
                     .limit(limit)
                     .forEach { screenTwoCombination ->
-                        println("Testing [${screenOneCombination.vector.size}][${screenTwoCombination.vector.size}]...")
-                        TaskTester.testOneStrategy(
-                            Context.basicTimeframes,
-                            TaskType.THREE_DISPLAYS_BUY,
-                            GeneratedBlocksGroup(
-                                listOf(ScreenBasicValidation()),
-                                screenOneCombination.vector,
-                                screenTwoCombination.vector
-                            ),
-                            StopLossFixedPrice(0.27),
-                            TakeProfitFixedKeltnerTop(80)
-                        )
+                        runBlocking {
+                            async {
+                                doTest(screenOneCombination, screenTwoCombination)
+                            }
+                        }
                     }
             }
+    }
+
+    private suspend fun doTest(
+        screenOneCombination: ICombinatoricsVector<ScreenOneBlock>,
+        screenTwoCombination: ICombinatoricsVector<ScreenTwoBlock>
+    ) {
+        println("Testing [${screenOneCombination.vector.size}][${screenTwoCombination.vector.size}]...")
+        TaskTester.testOneStrategy(
+            Context.basicTimeframes,
+            TaskType.THREE_DISPLAYS_BUY,
+            GeneratedBlocksGroup(
+                listOf(ScreenBasicValidation()),
+                screenOneCombination.vector,
+                screenTwoCombination.vector
+            ),
+            StopLossFixedPrice(0.27),
+            TakeProfitFixedKeltnerTop(80)
+        )
     }
 
 }
