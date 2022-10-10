@@ -36,6 +36,6 @@ fun main() {
 
 // ====================
 
-    MonteCarloStrategies("LUMN", 100).run()
+    MonteCarloStrategies("LUMN", 50).run()
 
 }

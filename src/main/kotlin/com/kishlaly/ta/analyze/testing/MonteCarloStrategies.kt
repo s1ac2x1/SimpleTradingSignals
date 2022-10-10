@@ -9,11 +9,9 @@ import com.kishlaly.ta.analyze.tasks.groups.GeneratedBlocksGroup
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.config.Context
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.asCoroutineDispatcher
-import kotlinx.coroutines.launch
 import org.paukov.combinatorics.ICombinatoricsVector
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import java.util.stream.StreamSupport
 
 class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(symbol) {
@@ -28,7 +26,7 @@ class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(sy
             clazz = ScreenTwoBlock::class.java
         )
 
-        val context = Executors.newFixedThreadPool(10).asCoroutineDispatcher()
+        val executor = Executors.newFixedThreadPool(10)
 
         StreamSupport.stream(screenOneGenerator.spliterator(), false)
             .filter { it.size > 0 }
@@ -38,14 +36,15 @@ class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(sy
                     .filter { it.size > 0 }
                     .limit(limit)
                     .forEach { screenTwoCombination ->
-                        GlobalScope.launch(context) {
-                            doTest(screenOneCombination, screenTwoCombination)
-                        }
+                        executor.submit { doTest(screenOneCombination, screenTwoCombination) }
                     }
             }
+
+        executor.shutdown()
+        executor.awaitTermination(1, TimeUnit.DAYS)
     }
 
-    private suspend fun doTest(
+    private fun doTest(
         screenOneCombination: ICombinatoricsVector<ScreenOneBlock>,
         screenTwoCombination: ICombinatoricsVector<ScreenTwoBlock>
     ) {
