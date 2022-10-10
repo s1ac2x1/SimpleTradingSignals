@@ -40,8 +40,8 @@ class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(sy
                     }
             }
 
-        executor.shutdown()
-        executor.awaitTermination(1, TimeUnit.DAYS)
+//        executor.shutdown()
+//        executor.awaitTermination(1, TimeUnit.DAYS)
     }
 
     private fun doTest(
@@ -60,6 +60,7 @@ class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(sy
             StopLossFixedPrice(0.27),
             TakeProfitFixedKeltnerTop(80)
         )
+        println("Testing [${screenOneCombination.vector.size}][${screenTwoCombination.vector.size}]... done")
     }
 
 }
