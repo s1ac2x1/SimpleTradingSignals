@@ -6,7 +6,7 @@ class GeneratedBlocksGroup(
     val commonBlocks: List<TaskBlock>,
     val screenOneBlocks: List<TaskBlock>,
     val screenTwoBlocks: List<TaskBlock>
-) : BlocksGroup {
+) : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return commonBlocks + screenOneBlocks + screenTwoBlocks
