@@ -9,11 +9,20 @@ import com.kishlaly.ta.analyze.tasks.groups.GeneratedBlocksGroup
 import com.kishlaly.ta.analyze.testing.TaskTester
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
+import com.kishlaly.ta.cache.CacheReader
 import com.kishlaly.ta.config.Context
+import com.kishlaly.ta.model.SymbolsSource
+import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.utils.DBUtils
+import com.kishlaly.ta.utils.RunUtils
 import java.util.stream.StreamSupport
 
 fun main() {
+    Context.aggregationTimeframe = Timeframe.DAY
+    Context.source = arrayOf(SymbolsSource.SP500)
+    RunUtils.singleSymbol("LUMN")
+    Context.symbols = CacheReader.getSymbols()
+
     DBUtils.initDB()
 
     val screenOneGenerator = BlockGroupsUtils().generateBlocksCombinations(
