@@ -16,12 +16,12 @@ class Context {
 
         var tradeCommission = 1 // %
 
-        var basicTimeframes = arrayOf(arrayOf(Timeframe.WEEK, Timeframe.DAY))
+        var basicTimeframes = ThreadLocal.withInitial { arrayOf(arrayOf(Timeframe.WEEK, Timeframe.DAY)) }
         var outputFolder = "data"
         var api = ApiSource.ALPHAVANTAGE
         var parallelRequests = 10.0
         var limitPerMinute = 75.0
-        var timeframe = Timeframe.DAY
+        var timeframe = ThreadLocal.withInitial { Timeframe.DAY }
 
         // main aggregation timeframe. Weekly quotes will be calculated from it
         var aggregationTimeframe = Timeframe.DAY

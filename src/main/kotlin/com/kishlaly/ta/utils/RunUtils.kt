@@ -22,7 +22,7 @@ class RunUtils {
 
         fun buildTasksAndStrategiesSummary_() {
             buildTasksAndStrategiesSummary(
-                Context.basicTimeframes,
+                Context.basicTimeframes.get(),
                 TaskType.THREE_DISPLAYS_BUY,
                 listOf(
                     ThreeDisplays_Buy_1(),

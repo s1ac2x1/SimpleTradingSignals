@@ -23,7 +23,7 @@ class IndicatorUtils {
     companion object {
 
         fun buildEMA(symbol: String, quotes: List<Quote>, period: Int): List<EMA> {
-            val cached = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe, period)
+            val cached = IndicatorsInMemoryCache.getEMA(symbol, Context.timeframe.get(), period)
             return if (!cached.isEmpty()) {
                 cached
             } else {
@@ -37,13 +37,13 @@ class IndicatorUtils {
 
                 collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
                 var result = trimToDate<EMA>(collector)
-                IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe, period, result)
+                IndicatorsInMemoryCache.putEMA(symbol, Context.timeframe.get(), period, result)
                 result
             }
         }
 
         fun buildMACDHistogram(symbol: String, quotes: List<Quote>): List<MACD> {
-            val cached = IndicatorsInMemoryCache.getMACD(symbol, Context.timeframe)
+            val cached = IndicatorsInMemoryCache.getMACD(symbol, Context.timeframe.get())
             return if (!cached.isEmpty()) {
                 cached
             } else {
@@ -55,8 +55,10 @@ class IndicatorUtils {
 
                 val macdSeries = BaseBarSeries()
                 for (i in 0 until barSeries.barCount) {
-                    macdSeries.addBar(barSeries.getBar(i).endTime, 0.0, 0.0, 0.0,
-                            macd.getValue(i).doubleValue(), 0.0)
+                    macdSeries.addBar(
+                        barSeries.getBar(i).endTime, 0.0, 0.0, 0.0,
+                        macd.getValue(i).doubleValue(), 0.0
+                    )
                 }
                 val macdSignalIndicator = ClosePriceIndicator(macdSeries)
                 val macdSignal = EMAIndicator(macdSignalIndicator, 9)
@@ -67,13 +69,13 @@ class IndicatorUtils {
                 }
                 collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
                 val result = trimToDate(collector)
-                IndicatorsInMemoryCache.putMACD(symbol, Context.timeframe, result)
+                IndicatorsInMemoryCache.putMACD(symbol, Context.timeframe.get(), result)
                 result
             }
         }
 
         fun buildKeltnerChannels(symbol: String, quotes: List<Quote>): List<Keltner> {
-            val cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe)
+            val cached = IndicatorsInMemoryCache.getKeltner(symbol, Context.timeframe.get())
             return if (!cached.isEmpty()) {
                 cached
             } else {
@@ -84,17 +86,24 @@ class IndicatorUtils {
 
                 var collector = mutableListOf<Keltner>()
                 for (i in quotes.indices) {
-                    collector.add(Keltner(quotes[i].timestamp, low.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()))
+                    collector.add(
+                        Keltner(
+                            quotes[i].timestamp,
+                            low.getValue(i).doubleValue(),
+                            middle.getValue(i).doubleValue(),
+                            top.getValue(i).doubleValue()
+                        )
+                    )
                 }
                 collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
                 val result = trimToDate(collector)
-                IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe, result)
+                IndicatorsInMemoryCache.putKeltner(symbol, Context.timeframe.get(), result)
                 result
             }
         }
 
         fun buildATR(symbol: String, quotes: List<Quote>, barCount: Int): List<ATR> {
-            val cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe, barCount)
+            val cached = IndicatorsInMemoryCache.getATR(symbol, Context.timeframe.get(), barCount)
             return if (!cached.isEmpty()) {
                 cached
             } else {
@@ -106,13 +115,13 @@ class IndicatorUtils {
                 }
                 collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
                 val result = trimToDate(collector)
-                IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result)
+                IndicatorsInMemoryCache.putATR(symbol, Context.timeframe.get(), barCount, result)
                 emptyList()
             }
         }
 
         fun buildStochastic(symbol: String, quotes: List<Quote>): List<Stochastic> {
-            val cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe)
+            val cached = IndicatorsInMemoryCache.getStoch(symbol, Context.timeframe.get())
             return if (!cached.isEmpty()) {
                 cached
             } else {
@@ -122,20 +131,26 @@ class IndicatorUtils {
                 val stochD = StochasticOscillatorDIndicator(stochK)
                 for (i in quotes.indices) {
                     try {
-                        collector.add(Stochastic(quotes[i].timestamp, stochD.getValue(i).doubleValue(), stochK.getValue(i).doubleValue()))
+                        collector.add(
+                            Stochastic(
+                                quotes[i].timestamp,
+                                stochD.getValue(i).doubleValue(),
+                                stochK.getValue(i).doubleValue()
+                            )
+                        )
                     } catch (e: NumberFormatException) {
                     }
                 }
                 collector = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }.toMutableList()
                 var result = trimToDate(collector)
-                IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe, result)
+                IndicatorsInMemoryCache.putStoch(symbol, Context.timeframe.get(), result)
                 result
             }
 
         }
 
         fun buildBollingerBands(symbol: String, quotes: List<Quote>): List<Bollinger> {
-            val cached = IndicatorsInMemoryCache.getBollinger(symbol, Context.timeframe)
+            val cached = IndicatorsInMemoryCache.getBollinger(symbol, Context.timeframe.get())
             return if (!cached.isEmpty()) {
                 cached
             } else {
@@ -149,7 +164,14 @@ class IndicatorUtils {
                 val top = BollingerBandsUpperIndicator(middle, standartDeviation)
                 for (i in quotes.indices) {
                     try {
-                        collector.add(Bollinger(quotes[i].timestamp, bottom.getValue(i).doubleValue(), middle.getValue(i).doubleValue(), top.getValue(i).doubleValue()))
+                        collector.add(
+                            Bollinger(
+                                quotes[i].timestamp,
+                                bottom.getValue(i).doubleValue(),
+                                middle.getValue(i).doubleValue(),
+                                top.getValue(i).doubleValue()
+                            )
+                        )
                     } catch (e: NumberFormatException) {
                     }
                 }
@@ -161,7 +183,7 @@ class IndicatorUtils {
 
         //TODO something is wrong here...
         open fun buildEFI(symbol: String, quotes: List<Quote>): List<ElderForceIndex> {
-            val cached = IndicatorsInMemoryCache.getEFI(symbol, Context.timeframe)
+            val cached = IndicatorsInMemoryCache.getEFI(symbol, Context.timeframe.get())
             return if (!cached.isEmpty()) {
                 cached
             } else {
@@ -188,7 +210,7 @@ class IndicatorUtils {
 //                result.add(new ElderForceIndex(todayQuote.getTimestamp(), efiValue));
 //            }
                 val result = collector.filter { it.valuesPresent() }.sortedBy { it.timestamp }
-                IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe, result)
+                IndicatorsInMemoryCache.putEFI(symbol, Context.timeframe.get(), result)
                 result
             }
         }
@@ -214,7 +236,8 @@ class IndicatorUtils {
                 if (values.isNullOrEmpty()) {
                     trimmedIndicators.put(indicator, mutableListOf())
                 } else {
-                    trimmedIndicators[indicator] = values.subList(values.size - Quotes.resolveMinBarsCount(screen.timeframe), values.size)
+                    trimmedIndicators[indicator] =
+                        values.subList(values.size - Quotes.resolveMinBarsCount(screen.timeframe), values.size)
                 }
             }
         }

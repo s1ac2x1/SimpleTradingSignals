@@ -9,9 +9,11 @@ import com.kishlaly.ta.analyze.tasks.groups.GeneratedBlocksGroup
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.config.Context
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
 import org.paukov.combinatorics.ICombinatoricsVector
+import java.util.concurrent.Executors
 import java.util.stream.StreamSupport
 
 class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(symbol) {
@@ -26,6 +28,8 @@ class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(sy
             clazz = ScreenTwoBlock::class.java
         )
 
+        val context = Executors.newFixedThreadPool(10).asCoroutineDispatcher()
+
         StreamSupport.stream(screenOneGenerator.spliterator(), false)
             .filter { it.size > 0 }
             .limit(limit)
@@ -34,10 +38,8 @@ class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(sy
                     .filter { it.size > 0 }
                     .limit(limit)
                     .forEach { screenTwoCombination ->
-                        runBlocking {
-                            async {
-                                doTest(screenOneCombination, screenTwoCombination)
-                            }
+                        GlobalScope.launch(context) {
+                            doTest(screenOneCombination, screenTwoCombination)
                         }
                     }
             }
@@ -49,7 +51,7 @@ class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(sy
     ) {
         println("Testing [${screenOneCombination.vector.size}][${screenTwoCombination.vector.size}]...")
         TaskTester.testOneStrategy(
-            Context.basicTimeframes,
+            Context.basicTimeframes.get(),
             TaskType.THREE_DISPLAYS_BUY,
             GeneratedBlocksGroup(
                 listOf(ScreenBasicValidation()),

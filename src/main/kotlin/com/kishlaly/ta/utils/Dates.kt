@@ -17,7 +17,7 @@ class Dates {
         }
 
         fun getDateFormat(): String {
-            return when (Context.timeframe) {
+            return when (Context.timeframe.get()) {
                 Timeframe.HOUR -> "yyyy-MM-dd HH:mm:ss"
                 Timeframe.WEEK -> "yyyy-MM-dd"
                 else -> "yyyy-MM-dd"
@@ -27,7 +27,7 @@ class Dates {
         // on the input may be the date of the form yyyyy-MM-dd for the day timeframe, so I shift the clock to the beginning of the exchange
         fun getTimeInExchangeZone(date: String, exchangeTimezone: String): ZonedDateTime {
             val formatter = DateTimeFormatter.ofPattern(getDateFormat())
-            return when (Context.timeframe) {
+            return when (Context.timeframe.get()) {
                 Timeframe.HOUR -> {
                     val localDate = LocalDateTime.parse(date, formatter)
                     localDate
@@ -45,7 +45,7 @@ class Dates {
         // on the input may be the date of the form yyyyy-MM-dd for the day timeframe, so I shift the clock to the beginning of the exchange
         fun getBarTimeInMyZone(date: String, exchangeTimezone: String): ZonedDateTime {
             val formatter = DateTimeFormatter.ofPattern(getDateFormat())
-            return when (Context.timeframe) {
+            return when (Context.timeframe.get()) {
                 Timeframe.HOUR -> {
                     val localDate = LocalDateTime.parse(date, formatter)
                     localDate

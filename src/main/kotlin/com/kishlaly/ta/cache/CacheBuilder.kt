@@ -39,7 +39,7 @@ class CacheBuilder {
             val symbols = AtomicReference(Context.symbols)
             timeframes.forEach { _ ->
                 // only one timeframe is loaded Context.aggregationTimeframe
-                Context.timeframe = Context.aggregationTimeframe
+                Context.timeframe.set(Context.aggregationTimeframe)
                 if (reloadMissed) {
                     symbols.set(CacheReader.getMissedSymbols())
                 }
@@ -56,7 +56,7 @@ class CacheBuilder {
             if (reloadMissed) {
                 timeframes.forEach { screens ->
                     screens.forEach { screen ->
-                        Context.timeframe = screen
+                        Context.timeframe.set(screen)
                         val file = File(CacheReader.getFolder() + Context.fileSeparator + "missed.txt")
                         if (file.exists()) {
                             file.delete()
@@ -69,20 +69,20 @@ class CacheBuilder {
         private fun cacheQuotes(symbols: Set<String>) {
             val symbolsToCache = CacheReader.removeCachedQuotesSymbols(symbols)
             symbolsToCache.ifEmpty {
-                println("${Context.timeframe.name} quotes already cached")
+                println("${Context.timeframe.get().name} quotes already cached")
                 return
             }
             Lists.partition(symbolsToCache, Context.parallelRequests.toInt())
                 .forEach { chunk ->
                     val existingRequest = CacheReader.requests.filter { request ->
                         request.cacheType == CacheType.QUOTE
-                                && request.timeframe == Context.timeframe
+                                && request.timeframe == Context.timeframe.get()
                                 && request.symbols.containsAll(chunk)
                     }.firstOrNull()
                     existingRequest?.let {
-                        println("Already in the queue: ${chunk.size} ${Context.timeframe.name} QUOTE")
+                        println("Already in the queue: ${chunk.size} ${Context.timeframe.get().name} QUOTE")
                     } ?: run {
-                        CacheReader.requests.offer(LoadRequest(CacheType.QUOTE, Context.timeframe, chunk))
+                        CacheReader.requests.offer(LoadRequest(CacheType.QUOTE, Context.timeframe.get(), chunk))
                     }
                 }
         }
@@ -109,7 +109,7 @@ class CacheBuilder {
             CacheReader.requests.poll()?.let { request ->
                 val symbols = request.symbols
                 val timeframe = request.timeframe
-                Context.timeframe = timeframe
+                Context.timeframe.set(timeframe)
                 if (request.cacheType == CacheType.QUOTE) {
                     println("Loading ${timeframe.name} quotes...")
                     symbols.forEach { symbol ->
@@ -251,7 +251,7 @@ class CacheBuilder {
         )
 
         private fun saveQuote(symbol: String, quotes: List<Quote>) {
-            val folder = "${Context.outputFolder}/cache/{${Context.timeframe.name.lowercase()}}"
+            val folder = "${Context.outputFolder}/cache/{${Context.timeframe.get().name.lowercase()}}"
             val directory: File = File(folder)
             if (!directory.exists()) {
                 directory.mkdir()

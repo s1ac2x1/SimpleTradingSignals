@@ -41,7 +41,7 @@ class TaskRunner {
         }
 
         private fun twoTimeframeFunction(task: TaskType, vararg blocksGroups: BlocksGroup) {
-            Context.timeframe = task.getTimeframeIndicators(1).timeframe
+            Context.timeframe.set(task.getTimeframeIndicators(1).timeframe)
             val processingSymbol = AtomicInteger(1)
             val totalSymbols = Context.symbols.size
             Context.symbols.forEach { symbol ->

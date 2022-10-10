@@ -38,15 +38,15 @@ class CacheReader {
                 // only check the availability of quotes in the cache
                 // it is assumed that only one Context.aggregationTimeframe is loaded
                 screenNumber.getAndIncrement()
-                Context.timeframe = Context.aggregationTimeframe
+                Context.timeframe.set(Context.aggregationTimeframe)
                 val missingQuotes = removeCachedQuotesSymbols(Context.symbols)
                 val missingQuotesCollectedByScreen1 = missedData[screens[0]]
                 missedData.putIfAbsent(screens[0], mutableSetOf())
                 missingQuotesCollectedByScreen1?.addAll(missingQuotes)
-                missedData[Context.timeframe] = missingQuotesCollectedByScreen1!!
+                missedData[Context.timeframe.get()] = missingQuotesCollectedByScreen1!!
             }
             missedData.forEach { tf, quotes ->
-                Context.timeframe = tf
+                Context.timeframe.set(tf)
                 try {
                     Files.write(
                         Paths.get("${getFolder()}${Context.fileSeparator}missed.txt"),
@@ -94,7 +94,7 @@ class CacheReader {
         }
 
         fun loadQuotesFromDiskCache(symbol: String): List<Quote> {
-            val cachedQuotes = QuotesInMemoryCache[symbol, Context.timeframe]
+            val cachedQuotes = QuotesInMemoryCache[symbol, Context.timeframe.get()]
             return if (!cachedQuotes.isEmpty()) {
                 cachedQuotes
             } else {
@@ -105,22 +105,24 @@ class CacheReader {
                     )
                     when (Context.aggregationTimeframe) {
                         Timeframe.DAY -> {
-                            if (Context.timeframe == Timeframe.WEEK) {
+                            if (Context.timeframe.get() == Timeframe.WEEK) {
                                 quotes = Quotes.dayToWeek(quotes)
                             }
-                            if (Context.timeframe == Timeframe.HOUR) {
+                            if (Context.timeframe.get() == Timeframe.HOUR) {
                                 throw RuntimeException("Requested HOUR quotes, but aggregationTimeframe = DAY")
                             }
                         }
+
                         Timeframe.HOUR -> {
-                            if (Context.timeframe == Timeframe.WEEK) {
+                            if (Context.timeframe.get() == Timeframe.WEEK) {
                                 quotes = Quotes.hourToDay(quotes)
                                 quotes = Quotes.dayToWeek(quotes)
                             }
-                            if (Context.timeframe == Timeframe.DAY) {
+                            if (Context.timeframe.get() == Timeframe.DAY) {
                                 quotes = Quotes.hourToDay(quotes)
                             }
                         }
+
                         else -> {}
                     }
                     quotes = quotes.filter { it.valuesPresent() }.sortedBy { it.timestamp }
@@ -128,7 +130,7 @@ class CacheReader {
                         val filterAfter = Dates.shortDateToZoned(it)
                         quotes = quotes.filter { it.timestamp <= filterAfter.toEpochSecond() }
                     }
-                    QuotesInMemoryCache.put(symbol, Context.timeframe, quotes)
+                    QuotesInMemoryCache.put(symbol, Context.timeframe.get(), quotes)
                     quotes
                 } catch (e: Exception) {
                     emptyList<Quote>()
@@ -150,7 +152,7 @@ class CacheReader {
         }
 
         fun getSymbolData(timeframeIndicators: TimeframeIndicators, symbol: String): SymbolData {
-            Context.timeframe = timeframeIndicators.timeframe
+            Context.timeframe.set(timeframeIndicators.timeframe)
             val screen = SymbolData(symbol, timeframeIndicators.timeframe, loadQuotesFromDiskCache(symbol))
             timeframeIndicators.indicators.forEach { indicator ->
                 val data = calculateIndicatorFromCachedQuotes(symbol, indicator)
