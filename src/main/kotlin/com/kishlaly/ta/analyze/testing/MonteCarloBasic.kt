@@ -10,10 +10,10 @@ import com.kishlaly.ta.utils.RunUtils
 abstract class MonteCarloBasic {
 
     constructor(symbol: String) {
-        Context.aggregationTimeframe = Timeframe.DAY
+        Context.aggregationTimeframe.set(Timeframe.DAY)
         Context.source = arrayOf(SymbolsSource.SP500)
         RunUtils.singleSymbol(symbol)
-        Context.symbols = CacheReader.getSymbols()
+        Context.symbols.set(CacheReader.getSymbols())
         DBUtils.initDB()
     }
 

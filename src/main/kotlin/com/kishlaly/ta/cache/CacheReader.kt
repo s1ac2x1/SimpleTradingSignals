@@ -38,8 +38,8 @@ class CacheReader {
                 // only check the availability of quotes in the cache
                 // it is assumed that only one Context.aggregationTimeframe is loaded
                 screenNumber.getAndIncrement()
-                Context.timeframe.set(Context.aggregationTimeframe)
-                val missingQuotes = removeCachedQuotesSymbols(Context.symbols)
+                Context.timeframe.set(Context.aggregationTimeframe.get())
+                val missingQuotes = removeCachedQuotesSymbols(Context.symbols.get())
                 val missingQuotesCollectedByScreen1 = missedData[screens[0]]
                 missedData.putIfAbsent(screens[0], mutableSetOf())
                 missingQuotesCollectedByScreen1?.addAll(missingQuotes)
@@ -103,7 +103,7 @@ class CacheReader {
                         File("${getFolder()}${Context.fileSeparator}${symbol}_quotes.txt").readText(),
                         object : TypeToken<List<Quote>>() {}.type
                     )
-                    when (Context.aggregationTimeframe) {
+                    when (Context.aggregationTimeframe.get()) {
                         Timeframe.DAY -> {
                             if (Context.timeframe.get() == Timeframe.WEEK) {
                                 quotes = Quotes.dayToWeek(quotes)
@@ -163,7 +163,7 @@ class CacheReader {
 
         fun getFolder(): String {
             return "${Context.outputFolder}${Context.fileSeparator}cache${Context.fileSeparator}${
-                Context.aggregationTimeframe.name.lowercase(
+                Context.aggregationTimeframe.get().name.lowercase(
                     Locale.getDefault()
                 )
             }"

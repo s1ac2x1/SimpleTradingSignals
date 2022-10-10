@@ -43,8 +43,8 @@ class TaskTester {
                 task.updateTimeframeForScreen(2, screens[1])
                 val readableOutput = mutableMapOf<String, MutableSet<String>>()
                 val currSymbol = AtomicInteger(1)
-                val totalSymbols = Context.symbols.size
-                Context.symbols.forEach { symbol ->
+                val totalSymbols = Context.symbols.get().size
+                Context.symbols.get().forEach { symbol ->
                     println("[$currSymbol/$totalSymbols] Testing $symbol")
                     currSymbol.getAndIncrement()
                     val screen1 = CacheReader.getSymbolData(task.getTimeframeIndicators(1), symbol)
@@ -381,7 +381,7 @@ class TaskTester {
             task: TaskType,
             timeframes: Array<Array<Timeframe>>
         ) {
-            if (Context.symbols.size > 1) {
+            if (Context.symbols.get().size > 1) {
                 throw RuntimeException("Only one symbol allowed here")
             }
             // SL/TP are not important here, it is important what signal or error code in a particular date

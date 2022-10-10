@@ -36,10 +36,10 @@ class CacheBuilder {
             if (!directory.exists()) {
                 directory.mkdir()
             }
-            val symbols = AtomicReference(Context.symbols)
+            val symbols = AtomicReference(Context.symbols.get())
             timeframes.forEach { _ ->
                 // only one timeframe is loaded Context.aggregationTimeframe
-                Context.timeframe.set(Context.aggregationTimeframe)
+                Context.timeframe.set(Context.aggregationTimeframe.get())
                 if (reloadMissed) {
                     symbols.set(CacheReader.getMissedSymbols())
                 }

@@ -24,10 +24,10 @@ class Context {
         var timeframe = ThreadLocal.withInitial { Timeframe.DAY }
 
         // main aggregation timeframe. Weekly quotes will be calculated from it
-        var aggregationTimeframe = Timeframe.DAY
+        var aggregationTimeframe = ThreadLocal.withInitial { Timeframe.DAY }
         var source = arrayOf(SymbolsSource.SP500)
         var testOnly: List<String> = ArrayList()
-        var symbols = setOf<String>()
+        var symbols = ThreadLocal.withInitial { setOf<String>() }
         var yearsToAnalyze = 5
         var lowPricesOnly = false
         var lowPriceLimit = 20
