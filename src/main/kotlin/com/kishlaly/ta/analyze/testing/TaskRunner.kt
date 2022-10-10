@@ -32,8 +32,8 @@ class TaskRunner {
             timeframes.forEach { screens ->
                 task.updateTimeframeForScreen(1, screens[0])
                 task.updateTimeframeForScreen(2, screens[1])
-                Context.logTimeframe1 = screens[0]
-                Context.logTimeframe2 = screens[1]
+                Context.logTimeframe1.set(screens[0])
+                Context.logTimeframe2.set(screens[1])
                 twoTimeframeFunction(task, *blocksGroups)
                 println("\n")
                 saveLog(task)
@@ -113,7 +113,7 @@ class TaskRunner {
                 s.mkdir()
             }
             val prefix =
-                "[${Context.logTimeframe1?.name}][${Context.logTimeframe2?.name}][${Context.source[0].name}]"
+                "[${Context.logTimeframe1.get()?.name}][${Context.logTimeframe2.get()?.name}][${Context.source[0].name}]"
             val customDebugFolder =
                 Context.outputFolder + "/debug/" + prefix + task.name.lowercase(Locale.getDefault())
             val d2 = File(customDebugFolder)

@@ -71,7 +71,7 @@ class TaskTester {
                                         blocksGroup,
                                         symbolDataForTesting,
                                         blockResults,
-                                        Context.stopLossStrategy,
+                                        Context.stopLossStrategy.get(),
                                         takeProfitStrategy
                                     )
                                     calculateStatistics(massTesting)
@@ -84,8 +84,8 @@ class TaskTester {
                                 blocksGroup,
                                 symbolDataForTesting,
                                 blockResults,
-                                Context.stopLossStrategy,
-                                Context.takeProfitStrategy
+                                Context.stopLossStrategy.get(),
+                                Context.takeProfitStrategy.get()
                             )
                             calculateStatistics(testing)
                             allTests.add(testing)
@@ -334,8 +334,8 @@ class TaskTester {
             stopLossStrategy: StopLossStrategy,
             takeProfitStrategy: TakeProfitStrategy
         ) {
-            Context.stopLossStrategy = stopLossStrategy
-            Context.takeProfitStrategy = takeProfitStrategy
+            Context.stopLossStrategy.set(stopLossStrategy)
+            Context.takeProfitStrategy.set(takeProfitStrategy)
             val historicalTestings = test(timeframes, task, blocksGroup)
             if (Context.useDBLogging) {
                 historicalTestings.forEach { testing ->
@@ -385,8 +385,8 @@ class TaskTester {
                 throw RuntimeException("Only one symbol allowed here")
             }
             // SL/TP are not important here, it is important what signal or error code in a particular date
-            Context.stopLossStrategy = StopLossFixedPrice(0.27)
-            Context.takeProfitStrategy = TakeProfitFixedKeltnerTop(30)
+            Context.stopLossStrategy.set(StopLossFixedPrice(0.27))
+            Context.takeProfitStrategy.set(TakeProfitFixedKeltnerTop(30))
             val testings = BlockGroupsUtils.getAllGroups(task).flatMap { test(timeframes, task, it) }.toList()
             val parsed = Dates.shortDateToZoned(datePart)
             testings.forEach { testing ->
@@ -400,7 +400,7 @@ class TaskTester {
         fun testMass(timeframes: Array<Array<Timeframe>>, task: TaskType, blocksGroup: BlocksGroup) {
             Context.massTesting = true
             val stopLossStrategy = StopLossFixedPrice(0.27)
-            Context.stopLossStrategy = stopLossStrategy
+            Context.stopLossStrategy.set(stopLossStrategy)
             Context.takeProfitStrategies.clear()
             for (i in 80..100) {
                 val tp = TakeProfitFixedKeltnerTop(i)

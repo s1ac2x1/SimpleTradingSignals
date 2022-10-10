@@ -44,16 +44,16 @@ class Context {
         var minimumHourBarsCount = 300
 
         // for logs
-        var logTimeframe1: Timeframe? = null
-        var logTimeframe2: Timeframe? = null
+        var logTimeframe1: ThreadLocal<Timeframe> = ThreadLocal.withInitial { null }
+        var logTimeframe2: ThreadLocal<Timeframe> = ThreadLocal.withInitial { null }
         var runGroups: Timeframe? = null
         var useDBLogging: Boolean = false
         var database: Database? = null
 
         // for testing on historical data
         var testMode = false
-        var stopLossStrategy: StopLossStrategy = StopLossFixedPrice(0.27)
-        var takeProfitStrategy: TakeProfitStrategy = TakeProfitFixedKeltnerTop(80)
+        var stopLossStrategy: ThreadLocal<StopLossStrategy> = ThreadLocal.withInitial { StopLossFixedPrice(0.27) }
+        var takeProfitStrategy: ThreadLocal<TakeProfitStrategy> = ThreadLocal.withInitial { TakeProfitFixedKeltnerTop(80) }
         var massTesting = false
         var takeProfitStrategies: MutableList<TakeProfitStrategy> = mutableListOf()
 

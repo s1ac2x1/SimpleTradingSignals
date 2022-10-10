@@ -62,16 +62,16 @@ class RunUtils {
             if (stopLossStrategy == null || takeProfitStrategy == null) {
                 getSLStrategies().forEach { sl ->
                     getTPStrategies().forEach { tp ->
-                        Context.stopLossStrategy = sl
-                        Context.takeProfitStrategy = tp
+                        Context.stopLossStrategy.set(sl)
+                        Context.takeProfitStrategy.set(tp)
                         println("${current.get().toString()}/${total} ${sl} / ${tp}")
                         blocksGroups.forEach { result.addAll(test(timeframes, task, it)) }
                         current.getAndIncrement()
                     }
                 }
             } else {
-                Context.stopLossStrategy = stopLossStrategy
-                Context.takeProfitStrategy = takeProfitStrategy
+                Context.stopLossStrategy.set(stopLossStrategy)
+                Context.takeProfitStrategy.set(takeProfitStrategy)
                 blocksGroups.forEach { result.addAll(test(timeframes, task, it)) }
             }
             CacheBuilder.saveTable(result)
