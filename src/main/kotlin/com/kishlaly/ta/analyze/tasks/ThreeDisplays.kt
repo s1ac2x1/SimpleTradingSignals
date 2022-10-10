@@ -17,12 +17,12 @@ class ThreeDisplays : AbstractTask() {
         var FILTER_BY_KELTNER_ENABLED = true
 
         // configurable indicator values
-        var STOCH_CUSTOM = -1
-        var EMA26_TOTAL_BARS_CHECK = -1
-        var EMA26_ABOVE_BARS = -1
-        var BOLLINGER_TOTAL_BARS_CHECK = -1
-        var BOLLINGER_CROSSED_BOTTOM_BARS = -1
-        var QUOTE_FROM_END_TO_USE = -1
+        var STOCH_CUSTOM = 30
+        var EMA26_TOTAL_BARS_CHECK = 7
+        var EMA26_ABOVE_BARS = 4
+        var BOLLINGER_TOTAL_BARS_CHECK = 3
+        var BOLLINGER_CROSSED_BOTTOM_BARS = 1
+        var QUOTE_FROM_END_TO_USE = 2
     }
 
 }
