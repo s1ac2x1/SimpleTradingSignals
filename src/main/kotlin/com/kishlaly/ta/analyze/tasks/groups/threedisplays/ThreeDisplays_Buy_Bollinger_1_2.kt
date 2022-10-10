@@ -6,7 +6,6 @@ import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck
 import com.kishlaly.ta.analyze.tasks.blocks.two.*
 import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
-import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 
 /**
  * Touching the bottom Bollinger band and a hint of growth.
@@ -22,10 +21,13 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  */
 class ThreeDisplays_Buy_Bollinger_1_2 : AbstractBlocksGroup() {
 
-    override fun blocks(): List<TaskBlock> {
+    override fun init() {
         ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3
         ThreeDisplays.Config.BOLLINGER_CROSSED_BOTTOM_BARS = 1
         ThreeDisplays.Config.STOCH_CUSTOM = 30
+    }
+
+    override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
             init {
                 add(ScreenBasicValidation())

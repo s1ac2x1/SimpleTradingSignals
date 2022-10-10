@@ -8,4 +8,6 @@ interface BlocksGroup {
 
     fun comments(): String
 
+    abstract fun init()
+
 }

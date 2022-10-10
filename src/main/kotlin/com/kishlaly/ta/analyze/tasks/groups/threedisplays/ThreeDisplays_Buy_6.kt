@@ -20,9 +20,12 @@ import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
  */
 class ThreeDisplays_Buy_6 : AbstractBlocksGroup() {
 
-    override fun blocks(): List<TaskBlock> {
+    override fun init() {
         ThreeDisplays.Config.STOCH_CUSTOM = 20
         StopLossFixedPrice.LAST_QUOTES_TO_FIND_MIN = 40
+    }
+
+    override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
             init {
                 add(ScreenBasicValidation())

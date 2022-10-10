@@ -21,12 +21,14 @@ import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 // TP in the middle of the upper half of the Keltner channel
 class ThreeDisplays_Buy_3 : AbstractBlocksGroup() {
 
+    override fun init() {
+        ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3
+        ThreeDisplays.Config.BOLLINGER_CROSSED_BOTTOM_BARS = 1
+    }
+
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
             init {
-                ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3
-                ThreeDisplays.Config.BOLLINGER_CROSSED_BOTTOM_BARS = 1
-
                 add(ScreenBasicValidation())
                 add(Long_ScreenOne_SoftTrendCheck())
 

@@ -22,8 +22,11 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
  */
 class ThreeDisplays_Buy_8 : AbstractBlocksGroup() {
 
-    override fun blocks(): List<TaskBlock> {
+    override fun init() {
         ThreeDisplays.Config.STOCH_CUSTOM = 20
+    }
+
+    override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
             init {
                 add(ScreenBasicValidation())

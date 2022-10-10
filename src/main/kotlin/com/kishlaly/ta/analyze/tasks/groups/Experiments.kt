@@ -11,10 +11,13 @@ import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_LastAscen
 /**
  * an experimental strategy for trying out different ideas that come to mind
  */
-class Experiments : BlocksGroup {
+class Experiments : AbstractBlocksGroup() {
+
+    override fun init() {
+        ThreeDisplays.Config.STOCH_CUSTOM = 30
+    }
 
     override fun blocks(): List<TaskBlock> {
-        ThreeDisplays.Config.STOCH_CUSTOM = 30
         return object : ArrayList<TaskBlock>() {
             init {
                 add(ScreenBasicValidation())

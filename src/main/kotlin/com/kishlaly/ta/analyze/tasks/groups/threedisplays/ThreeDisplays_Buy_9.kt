@@ -20,11 +20,14 @@ import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
  */
 class ThreeDisplays_Buy_9 : AbstractBlocksGroup() {
 
-    override fun blocks(): List<TaskBlock> {
+    override fun init() {
         ThreeDisplays.Config.BOLLINGER_TOTAL_BARS_CHECK = 3
         ThreeDisplays.Config.BOLLINGER_CROSSED_BOTTOM_BARS = 1
         ThreeDisplays.Config.STOCH_VALUES_TO_CHECK = 3
         ThreeDisplays.Config.STOCH_OVERSOLD = 20
+    }
+
+    override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
             init {
                 add(ScreenBasicValidation())

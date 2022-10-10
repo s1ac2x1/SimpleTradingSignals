@@ -19,9 +19,12 @@ import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
  */
 //TODO finish
 class FirstScreen_Buy_2 : AbstractBlocksGroup() {
-    override fun blocks(): List<TaskBlock> {
-        ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK = 6
 
+    override fun init() {
+        ThreeDisplays.Config.EMA26_TOTAL_BARS_CHECK = 6
+    }
+
+    override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
             init {
                 add(ScreenBasicValidation())
