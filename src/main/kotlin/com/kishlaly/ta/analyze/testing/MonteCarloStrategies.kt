@@ -40,8 +40,8 @@ class MonteCarloStrategies(symbol: String, val limit: Long) : MonteCarloBasic(sy
                     }
             }
 
-//        executor.shutdown()
-//        executor.awaitTermination(1, TimeUnit.DAYS)
+        executor.shutdown()
+        executor.awaitTermination(1, TimeUnit.DAYS)
     }
 
     private fun doTest(
