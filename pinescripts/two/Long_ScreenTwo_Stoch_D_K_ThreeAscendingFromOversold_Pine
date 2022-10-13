@@ -1,0 +1,8 @@
+dailyStochK = ta.stoch(close, high, low, 14)
+dailyStochD = ta.sma(dailyStochK, 3)
+
+isOversoldK = (dailyStochK[2] <= 40 or dailyStochK[1] <= 40) and dailyStochK > dailyStochK[2]
+
+isOversoldD = (dailyStochD[2] <= 40 or dailyStochD[1] <= 40) and dailyStochD > dailyStochD[1] and dailyStochD > dailyStochD[2]
+
+Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromOversold = isOversoldK and isOversoldD

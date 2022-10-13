@@ -13,7 +13,7 @@ class Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromOversold : ScreenTwoBlock {
     override fun check(screen: SymbolData): BlockResult {
         val stoch = SymbolDataUtils(screen, Stochastic::class.java)
 
-        // the third or second from the end of %K below STOCH_OVERSOLD, and the very last above the first
+        // the third or second from the end of %K below STOCH_OVERSOLD, and the very last above the third
         val isOversoldK = (stoch.last(3).slowK <= STOCH_OVERSOLD || stoch.last(2).slowK <= STOCH_OVERSOLD)
                 && stoch.last().slowK > stoch.last(3).slowK
 
