@@ -1,0 +1,5 @@
+dailyStochK = ta.stoch(close, high, low, 14)
+dailyStochD = ta.sma(dailyStochK, 3)
+
+// it is enough that the last one is larger than the last two
+Long_ScreenTwo_Stoch_D_ThreeAscending = dailyStochD > dailyStochD[1] and dailyStochD > dailyStochD[2]
