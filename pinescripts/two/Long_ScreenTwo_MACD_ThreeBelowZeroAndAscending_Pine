@@ -1,0 +1,7 @@
+[dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
+
+histogramBelowZero = dailyHistogram[2] < 0 and dailyHistogram[1] < 0 and dailyHistogram < 0
+
+ascendingHistogram = dailyHistogram[2] < dailyHistogram[1] and dailyHistogram[1] < dailyHistogram
+
+Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending = histogramBelowZero and ascendingHistogram
