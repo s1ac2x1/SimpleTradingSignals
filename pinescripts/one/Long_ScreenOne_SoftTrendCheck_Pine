@@ -1,6 +1,20 @@
 weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
 
-ascendingEMA26 = weeklyEMA26[1] < weeklyEMA26
+ema26_last = weeklyEMA26
+currentEMA26 = ema26_last
+prevEMA26 = currentEMA26
+if weeklyEMA26[1] != ema26_last
+    prevEMA26 := weeklyEMA26[1]
+else if weeklyEMA26[2] != ema26_last
+    prevEMA26 := weeklyEMA26[2]
+else if weeklyEMA26[3] != ema26_last
+    prevEMA26 := weeklyEMA26[3]
+else if weeklyEMA26[4] != ema26_last
+    prevEMA26 := weeklyEMA26[4]
+else if weeklyEMA26[5] != ema26_last
+    prevEMA26 := weeklyEMA26[5]
+
+ascendingEMA26 = prevEMA26 < currentEMA26
 
 weeklyOpen = request.security(syminfo.tickerid, 'W', open, lookahead=barmerge.lookahead_on)
 weeklyClose = request.security(syminfo.tickerid, 'W', close, lookahead=barmerge.lookahead_on)
