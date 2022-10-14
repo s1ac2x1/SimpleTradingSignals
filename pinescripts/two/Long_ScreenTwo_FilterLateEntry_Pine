@@ -1,0 +1,7 @@
+// эту проверку лучше использовать только для фиксированного TP по высоте канала, для скользящих TP это не так важно
+
+diff = upperKC - middleKC
+ratio = diff / 100 * 20
+maxAllowedCloseValue = middleKC + ratio
+
+Long_ScreenTwo_FilterLateEntry = close < maxAllowedCloseValue
