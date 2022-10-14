@@ -1,0 +1,2 @@
+quoteBelowEMA(l, h, ema) => l < ema and h < ema
+quoteCrossesEMA(l, h, ema) => l <= ema and h >= ema

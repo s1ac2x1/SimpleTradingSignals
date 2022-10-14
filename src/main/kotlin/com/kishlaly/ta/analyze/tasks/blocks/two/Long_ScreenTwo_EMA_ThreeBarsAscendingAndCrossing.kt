@@ -32,7 +32,7 @@ class Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing : ScreenTwoBlock {
             if (!ascendingBarClose) {
                 Log.recordCode(BlockResultCode.QUOTE_CLOSE_NOT_GROWING_SCREEN_2, screen)
                 Log.addDebugLine("Quote.close does not grow consistently")
-                // the third from the end all below EMA13, and the second and last crossed
+                // the third from the end all below EMA13, and the second or last crossed
                 val crossingRule = quote3 below ema3 && (quote2.crosses(ema2) || quote1.crosses(ema1))
                 if (!crossingRule) {
                     Log.addDebugLine("Third from the end" + (if (quote3 below ema3) " " else " not ") + "below ЕМА13")

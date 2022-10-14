@@ -1,0 +1,1 @@
+dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))

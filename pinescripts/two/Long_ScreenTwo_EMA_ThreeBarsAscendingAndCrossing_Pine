@@ -1,0 +1,5 @@
+ascendingBarHigh = high[2] < high[1] and high[1] < high
+ascendingBarClose = close[2] < close[1] and close[1] < close
+crossingRule = quoteBelowEMA(low[2], high[2], dailyEMA13[2]) and (quoteCrossesEMA(low[1], high[1], dailyEMA13[1]) or quoteCrossesEMA(low, high, dailyEMA13))
+
+Long_ScreenTwo_EMA_ThreeBarsAscendingAndCrossing = (ascendingBarHigh or ascendingBarClose) and crossingRule
