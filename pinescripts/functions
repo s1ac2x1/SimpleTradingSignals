@@ -1,3 +1,4 @@
 quoteBelowEMA(l, h, ema) => l < ema and h < ema
 quoteCrossesEMA(l, h, ema) => l <= ema and h >= ema
 quoteAboveEMA(l, h, ema) => l > ema and h > ema
+quoteGreen(c, o) => c >= o
