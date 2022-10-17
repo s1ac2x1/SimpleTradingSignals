@@ -1,0 +1,83 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © s1ac2x1
+
+//@version=5
+strategy("Buy 4", overlay=true, pyramiding=1)
+
+quoteGreen(c, o) => c >= o
+
+[weeklyOpen, weeklyClose]  = request.security(syminfo.tickerid, 'W', [open, close], lookahead=barmerge.lookahead_on)
+
+Long_ScreenOne_LastBarGreen = weeklyOpen < weeklyClose
+
+[currentWeekOpen, currentWeekHigh, currentWeekLow, currentWeekClose] = request.security(syminfo.tickerid, 'W', [open, high, low, close], lookahead=barmerge.lookahead_on)
+[lastWeekOpen, lastWeekHigh, lastWeekLow, lastWeekClose] = request.security(syminfo.tickerid, 'W', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+
+Long_ScreenOne_LastBarHigher = lastWeekLow < currentWeekLow and lastWeekHigh < currentWeekHigh
+
+weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+[weeklyLow, weeklyHigh] = request.security(syminfo.tickerid, 'W', [low, high], lookahead=barmerge.lookahead_on)
+
+Long_ScreenOne_EMA_LastBarCrosses = weeklyLow <= weeklyEMA26 and weeklyHigh >= weeklyEMA26
+
+[weeklyMACD, weeklySignal, weeklyHistogram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
+
+currH = weeklyHistogram
+prevH = weeklyHistogram
+if (prevH == currH)
+    prevH := weeklyHistogram[1]
+if (prevH == currH)
+    prevH := weeklyHistogram[2]
+if (prevH == currH)
+    prevH := weeklyHistogram[2]
+if (prevH == currH)
+    prevH := weeklyHistogram[3]
+if (prevH == currH)
+    prevH := weeklyHistogram[4]
+
+Long_ScreenOne_MACD_LastAscending = weeklyHistogram > prevH
+
+dailyHigh = request.security(syminfo.tickerid, 'D', high)
+
+Long_ScreenTwo_Bars_TwoHighAscending = dailyHigh > dailyHigh[1]
+
+dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
+dailyLow = request.security(syminfo.tickerid, 'D', low)
+dailyLastBarAboveEMA13 = dailyLow > dailyEMA13 and dailyHigh > dailyEMA13
+
+Long_ScreenTwo_EMA_LastBarNotAbove = not dailyLastBarAboveEMA13
+
+[dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
+
+Long_ScreenTwo_MACD_LastAscending = dailyHistogram > dailyHistogram[1]
+
+dailyStochK = ta.stoch(close, high, low, 14)
+dailyStochD = ta.sma(dailyStochK, 3)
+
+Long_ScreenTwo_Stoch_D_K_LastAscending = dailyStochK > dailyStochK[1] and dailyStochD > dailyStochD[1]
+
+allPassed = Long_ScreenOne_LastBarGreen and Long_ScreenOne_LastBarHigher and Long_ScreenOne_EMA_LastBarCrosses and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_EMA_LastBarNotAbove and Long_ScreenTwo_MACD_LastAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
+
+balance = strategy.initial_capital + strategy.netprofit
+balanceToUse = balance / 100 * 5
+lots = balanceToUse / close
+
+arrayToFindMin = array.new_float(size=10, initial_value=9999999)
+for offset = 0 to 10
+    array.insert(arrayToFindMin, offset, dailyLow[offset])
+fixedSL = array.min(id=arrayToFindMin)
+
+[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
+diff = upperKC - middleKC
+ratio = diff / 100 * 95
+fixedTP = middleKC + ratio
+
+if (allPassed)
+    strategy.entry("buy", strategy.long, qty = lots)
+    strategy.exit("buy", stop = fixedSL)
+
+if (not quoteGreen(close[2], open[2]) and not quoteGreen(close[1], open[1]))
+    strategy.exit("buy", stop = fixedSL, limit = close[1])
+    
+plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
+plot(strategy.position_size <= 0 ? na : fixedTP, color=color.green, style=plot.style_linebr, linewidth=2)
