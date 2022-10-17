@@ -1,2 +1,6 @@
+if (allPassed)
+    strategy.entry("buy", strategy.long, qty = lots)
+    strategy.exit("buy", stop = fixedSL)
+
 if (not quoteGreen(close[2], open[2]) and not quoteGreen(close[1], open[1]))
     strategy.exit("buy", stop = fixedSL, limit = close[1])
