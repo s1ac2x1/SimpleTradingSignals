@@ -1,6 +1,8 @@
 // ThreeDisplays_Buy_4_Pine
 // + Long_ScreenOne_SoftTrendCheck
 // - Long_ScreenOne_EMA_LastBarCrosses
+// Long_ScreenTwo_Bars_TwoHighAscending заменен на lastTwoGreen (один из двух последних зеленый)
+
 
 //@version=5
 strategy("Buy 4", overlay=true, pyramiding=1)
@@ -40,7 +42,7 @@ Long_ScreenOne_MACD_LastAscending = weeklyHistogram > prevH
 
 dailyHigh = request.security(syminfo.tickerid, 'D', high)
 
-Long_ScreenTwo_Bars_TwoHighAscending = dailyHigh > dailyHigh[1]
+lastTwoGreen = quoteGreen(close, open) or quoteGreen(close[1], open[1])
 
 dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
 dailyLow = request.security(syminfo.tickerid, 'D', low)
@@ -55,7 +57,7 @@ Long_ScreenTwo_MACD_LastAscending = dailyHistogram > dailyHistogram[1]
 dailyStochK = ta.stoch(close, high, low, 14)
 dailyStochD = ta.sma(dailyStochK, 3)
 
-Long_ScreenTwo_Stoch_D_K_LastAscending = dailyStochK > dailyStochK[1] and dailyStochD > dailyStochD[1]
+Long_ScreenTwo_Stoch_D_K_LastAscending = dailyStochK >= dailyStochK[1] and dailyStochD > dailyStochD[1]
 
 currentWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
 prevWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
@@ -66,16 +68,16 @@ lastWeeklyQuoteGreen = weeklyClose > weeklyOpen
 
 Long_ScreenOne_SoftTrendCheck = ascendingEMA26 and lastWeeklyQuoteGreen
 
-allPassed = Long_ScreenOne_SoftTrendCheck and Long_ScreenOne_LastBarGreen and Long_ScreenOne_LastBarHigher and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_EMA_LastBarNotAbove and Long_ScreenTwo_MACD_LastAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
+allPassed = lastTwoGreen and Long_ScreenOne_SoftTrendCheck and Long_ScreenOne_LastBarGreen and Long_ScreenOne_LastBarHigher and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_EMA_LastBarNotAbove and Long_ScreenTwo_MACD_LastAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
 
-// plotchar(series = Long_ScreenOne_LastBarGreen, title = 'Long_ScreenOne_LastBarGreen')
-// plotchar(series = Long_ScreenOne_LastBarHigher, title = 'Long_ScreenOne_LastBarHigher')
-// plotchar(series = Long_ScreenOne_EMA_LastBarCrosses, title = 'Long_ScreenOne_EMA_LastBarCrosses')
-// plotchar(series = Long_ScreenOne_MACD_LastAscending, title = 'Long_ScreenOne_MACD_LastAscending')
-// plotchar(series = Long_ScreenTwo_Bars_TwoHighAscending, title = 'Long_ScreenTwo_Bars_TwoHighAscending')
-// plotchar(series = Long_ScreenTwo_EMA_LastBarNotAbove, title = 'Long_ScreenTwo_EMA_LastBarNotAbove')
-// plotchar(series = Long_ScreenTwo_MACD_LastAscending, title = 'Long_ScreenTwo_MACD_LastAscending')
-// plotchar(series = Long_ScreenTwo_Stoch_D_K_LastAscending, title = 'Long_ScreenTwo_Stoch_D_K_LastAscending')
+plotchar(series = Long_ScreenOne_LastBarGreen, title = 'Long_ScreenOne_LastBarGreen')
+plotchar(series = Long_ScreenOne_LastBarHigher, title = 'Long_ScreenOne_LastBarHigher')
+plotchar(series = Long_ScreenOne_EMA_LastBarCrosses, title = 'Long_ScreenOne_EMA_LastBarCrosses')
+plotchar(series = Long_ScreenOne_MACD_LastAscending, title = 'Long_ScreenOne_MACD_LastAscending')
+plotchar(series = Long_ScreenTwo_EMA_LastBarNotAbove, title = 'Long_ScreenTwo_EMA_LastBarNotAbove')
+plotchar(series = Long_ScreenTwo_MACD_LastAscending, title = 'Long_ScreenTwo_MACD_LastAscending')
+plotchar(series = Long_ScreenTwo_Stoch_D_K_LastAscending, title = 'Long_ScreenTwo_Stoch_D_K_LastAscending')
+plotchar(series = lastTwoGreen, title = 'lastTwoGreen')
 
 balance = strategy.initial_capital + strategy.netprofit
 balanceToUse = balance / 100 * 5
