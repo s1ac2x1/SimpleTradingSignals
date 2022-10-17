@@ -83,10 +83,7 @@ fixedTP = middleKC + ratio
 
 if (allPassed)
     strategy.entry("buy", strategy.long, qty = lots)
-    strategy.exit("buy", stop = fixedSL)
-
-if (not quoteGreen(close[2], open[2]) and not quoteGreen(close[1], open[1]))
-    strategy.exit("buy", stop = fixedSL, limit = close[1])
+    strategy.exit("buy", stop = fixedSL, limit = fixedTP)
 
 plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
 plot(strategy.position_size <= 0 ? na : fixedTP, color=color.green, style=plot.style_linebr, linewidth=2)
