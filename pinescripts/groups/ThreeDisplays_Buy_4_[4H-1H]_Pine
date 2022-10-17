@@ -1,25 +1,26 @@
 // !!! Если убрать Long_ScreenOne_EMA_LastBarCrosses, то net profit и число сделок выше, без существенного снижения процента прибыльных сделок
 
+
 //@version=5
 strategy("Buy 4", overlay=true, pyramiding=1)
 
 quoteGreen(c, o) => c >= o
 
-[weeklyOpen, weeklyClose]  = request.security(syminfo.tickerid, 'W', [open, close], lookahead=barmerge.lookahead_on)
+[weeklyOpen, weeklyClose]  = request.security(syminfo.tickerid, '240', [open, close], lookahead=barmerge.lookahead_on)
 
 Long_ScreenOne_LastBarGreen = weeklyOpen < weeklyClose
 
-[currentWeekOpen, currentWeekHigh, currentWeekLow, currentWeekClose] = request.security(syminfo.tickerid, 'W', [open, high, low, close], lookahead=barmerge.lookahead_on)
-[lastWeekOpen, lastWeekHigh, lastWeekLow, lastWeekClose] = request.security(syminfo.tickerid, 'W', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+[currentWeekOpen, currentWeekHigh, currentWeekLow, currentWeekClose] = request.security(syminfo.tickerid, '240', [open, high, low, close], lookahead=barmerge.lookahead_on)
+[lastWeekOpen, lastWeekHigh, lastWeekLow, lastWeekClose] = request.security(syminfo.tickerid, '240', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
 
 Long_ScreenOne_LastBarHigher = lastWeekLow < currentWeekLow and lastWeekHigh < currentWeekHigh
 
-weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
-[weeklyLow, weeklyHigh] = request.security(syminfo.tickerid, 'W', [low, high], lookahead=barmerge.lookahead_on)
+weeklyEMA26 = request.security(syminfo.tickerid, "240", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+[weeklyLow, weeklyHigh] = request.security(syminfo.tickerid, '240', [low, high], lookahead=barmerge.lookahead_on)
 
 Long_ScreenOne_EMA_LastBarCrosses = weeklyLow <= weeklyEMA26 and weeklyHigh >= weeklyEMA26
 
-[weeklyMACD, weeklySignal, weeklyHistogram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
+[weeklyMACD, weeklySignal, weeklyHistogram] = request.security(syminfo.tickerid, "240", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
 
 currH = weeklyHistogram
 prevH = weeklyHistogram
@@ -36,17 +37,17 @@ if (prevH == currH)
 
 Long_ScreenOne_MACD_LastAscending = weeklyHistogram > prevH
 
-dailyHigh = request.security(syminfo.tickerid, 'D', high)
+dailyHigh = request.security(syminfo.tickerid, '60', high)
 
 Long_ScreenTwo_Bars_TwoHighAscending = dailyHigh > dailyHigh[1]
 
-dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
-dailyLow = request.security(syminfo.tickerid, 'D', low)
+dailyEMA13 = request.security(syminfo.tickerid, "60", ta.ema(close, 13))
+dailyLow = request.security(syminfo.tickerid, '60', low)
 dailyLastBarAboveEMA13 = dailyLow > dailyEMA13 and dailyHigh > dailyEMA13
 
 Long_ScreenTwo_EMA_LastBarNotAbove = not dailyLastBarAboveEMA13
 
-[dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
+[dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "60", ta.macd(close, 12, 26, 9))
 
 Long_ScreenTwo_MACD_LastAscending = dailyHistogram > dailyHistogram[1]
 
@@ -75,7 +76,7 @@ for offset = 0 to 10
     array.insert(arrayToFindMin, offset, dailyLow[offset])
 fixedSL = array.min(id=arrayToFindMin)
 
-[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
+[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, '60', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 diff = upperKC - middleKC
 ratio = diff / 100 * 95
 fixedTP = middleKC + ratio
