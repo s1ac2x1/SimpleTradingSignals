@@ -1,2 +1,16 @@
 [weeklyMACD, weeklySignal, weeklyHistogram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
-weeklyLastHistogramGrows = weeklyHistogram > weeklyHistogram[1]
+
+currH = weeklyHistogram
+prevH = weeklyHistogram
+if (prevH == currH)
+    prevH := weeklyHistogram[1]
+if (prevH == currH)
+    prevH := weeklyHistogram[2]
+if (prevH == currH)
+    prevH := weeklyHistogram[2]
+if (prevH == currH)
+    prevH := weeklyHistogram[3]
+if (prevH == currH)
+    prevH := weeklyHistogram[4]
+
+Long_ScreenOne_MACD_LastAscending = weeklyHistogram > prevH
