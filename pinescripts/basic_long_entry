@@ -1,4 +1,4 @@
-if (screenOneCheck and screenTwoCheck)
+if (allPassed)
     strategy.entry("buy", strategy.long, qty = lots)
     strategy.exit("buy", stop = fixedSL, limit = fixedTP)
 
