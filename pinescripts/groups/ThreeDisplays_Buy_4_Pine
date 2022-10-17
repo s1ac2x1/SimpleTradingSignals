@@ -1,5 +1,5 @@
-// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
-// © s1ac2x1
+// !!! Если убрать Long_ScreenOne_EMA_LastBarCrosses, то net profit и число сделок выше, без существенного снижения процента прибыльных сделок
+
 
 //@version=5
 strategy("Buy 4", overlay=true, pyramiding=1)
