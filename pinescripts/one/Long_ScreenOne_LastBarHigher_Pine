@@ -1,4 +1,4 @@
 [currentWeekOpen, currentWeekHigh, currentWeekLow, currentWeekClose] = request.security(syminfo.tickerid, 'W', [open, high, low, close], lookahead=barmerge.lookahead_on)
 [lastWeekOpen, lastWeekHigh, lastWeekLow, lastWeekClose] = request.security(syminfo.tickerid, 'W', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
 
-ScreenOne_LastBarHigher = lastWeekLow < currentWeekLow and lastWeekHigh < currentWeekHigh
+Long_ScreenOne_LastBarHigher = lastWeekLow < currentWeekLow and lastWeekHigh < currentWeekHigh
