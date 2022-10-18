@@ -1,7 +1,11 @@
+f_round(_val, _decimals) =>
+    _p = math.pow(10, _decimals)
+    math.round(math.abs(_val) * _p)/ _p * math.sign(_val)
+
 currentWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
 prevWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
 
-ascendingEMA26 = prevWeeklyEMA26 < currentWeeklyEMA26
+ascendingEMA26 = f_round(prevWeeklyEMA26, 2) < f_round(currentWeeklyEMA26, 2)
 
 weeklyOpen = request.security(syminfo.tickerid, 'W', open, lookahead=barmerge.lookahead_on)
 weeklyClose = request.security(syminfo.tickerid, 'W', close, lookahead=barmerge.lookahead_on)
