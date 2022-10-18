@@ -1,4 +1,4 @@
 [middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 diff = upperKC - middleKC
 ratio = diff / 100 * 95
-fixedTP = middleKC + ratio
+fixedTP = ta.valuewhen(allPassed, middleKC + ratio, 0)
