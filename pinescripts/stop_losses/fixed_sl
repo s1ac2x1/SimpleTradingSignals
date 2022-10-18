@@ -1,4 +1,4 @@
 arrayToFindMin = array.new_float(size=10, initial_value=9999999)
 for offset = 0 to 20
-    array.insert(arrayToFindMin, offset, dailyLow[offset])
+    array.insert(arrayToFindMin, offset, low[offset])
 fixedSL = ta.valuewhen(allPassed, array.min(id=arrayToFindMin) - 0.27, 0)
