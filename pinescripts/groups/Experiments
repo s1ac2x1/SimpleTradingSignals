@@ -1,5 +1,5 @@
 // ThreeDisplays_Buy_4_Pine
-// + Long_ScreenOne_SoftTrendCheck без проверки на рост EMA26
+// + Long_ScreenOne_SoftTrendCheck
 // - Long_ScreenOne_EMA_LastBarCrosses
 // Long_ScreenTwo_Bars_TwoHighAscending заменен на lastTwoGreen (один из двух последних зеленый)
 // fixed SL на уровне минимума из последних 20 столбиков минус $0.27
@@ -71,7 +71,7 @@ ascendingEMA26 = prevWeeklyEMA26 < currentWeeklyEMA26
 
 lastWeeklyQuoteGreen = weeklyClose > weeklyOpen
 
-Long_ScreenOne_SoftTrendCheck = lastWeeklyQuoteGreen
+Long_ScreenOne_SoftTrendCheck = lastWeeklyQuoteGreen and ascendingEMA26
 
 allPassed = lastBarBelowMiddleTopKC and lastTwoGreen and Long_ScreenOne_SoftTrendCheck and Long_ScreenOne_LastBarGreen and Long_ScreenOne_LastBarHigher and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_MACD_LastAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
 
