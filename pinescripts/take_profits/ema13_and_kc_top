@@ -6,6 +6,6 @@ if (allPassed)
 // если нет выскочит за KC top, то хотя бы закрытие выше половины расстояния от середины до вершины
 
 if (close > upperKC)
-    strategy.exit("Long", stop = fixedSL, limit = fixedTP)
-else if (dailyEMA13 > dailyEMA13[1] and close > middleKC + (upperKC - middleKC) / 100 * 50)
-    strategy.exit("Long", stop = fixedSL, limit = fixedTP)
+    strategy.exit("Long", stop = fixedSL, limit = close)
+else if (dailyEMA13 > dailyEMA13[1] and close > middleKC + (upperKC - middleKC) / 100 * 80)
+    strategy.exit("Long", stop = fixedSL, limit = close)
