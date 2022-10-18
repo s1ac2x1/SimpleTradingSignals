@@ -3,12 +3,15 @@
 // - Long_ScreenOne_EMA_LastBarCrosses
 // Long_ScreenTwo_Bars_TwoHighAscending заменен на lastTwoGreen (один из двух последних зеленый)
 // fixed SL на уровне минимума из последних 20 столбиков минус $0.27
+// Long_ScreenTwo_EMA_LastBarNotAbove заменен на проверку, чтобы close был не выше середины расстояния между KC middle и KC top
 
 
 //@version=5
 strategy("Buy 4", overlay=true, pyramiding=1)
 
 quoteGreen(c, o) => c >= o
+
+[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 
 [weeklyOpen, weeklyClose]  = request.security(syminfo.tickerid, 'W', [open, close], lookahead=barmerge.lookahead_on)
 
@@ -47,9 +50,10 @@ lastTwoGreen = quoteGreen(close, open) or quoteGreen(close[1], open[1])
 
 dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
 dailyLow = request.security(syminfo.tickerid, 'D', low)
-dailyLastBarAboveEMA13 = dailyLow > dailyEMA13 and dailyHigh > dailyEMA13
 
-Long_ScreenTwo_EMA_LastBarNotAbove = not dailyLastBarAboveEMA13
+middleAfterKCMiddle = middleKC + (upperKC - middleKC) / 100 * 50
+
+lastBarBelowMiddleTopKC = close <= middleAfterKCMiddle
 
 [dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
 
@@ -67,18 +71,20 @@ ascendingEMA26 = prevWeeklyEMA26 < currentWeeklyEMA26
 
 lastWeeklyQuoteGreen = weeklyClose > weeklyOpen
 
-Long_ScreenOne_SoftTrendCheck = ascendingEMA26 and lastWeeklyQuoteGreen
+Long_ScreenOne_SoftTrendCheck = lastWeeklyQuoteGreen
 
-allPassed = lastTwoGreen and Long_ScreenOne_SoftTrendCheck and Long_ScreenOne_LastBarGreen and Long_ScreenOne_LastBarHigher and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_EMA_LastBarNotAbove and Long_ScreenTwo_MACD_LastAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
+allPassed = lastBarBelowMiddleTopKC and lastTwoGreen and Long_ScreenOne_SoftTrendCheck and Long_ScreenOne_LastBarGreen and Long_ScreenOne_LastBarHigher and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_MACD_LastAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
 
 plotchar(series = Long_ScreenOne_LastBarGreen, title = 'Long_ScreenOne_LastBarGreen')
 plotchar(series = Long_ScreenOne_LastBarHigher, title = 'Long_ScreenOne_LastBarHigher')
 plotchar(series = Long_ScreenOne_EMA_LastBarCrosses, title = 'Long_ScreenOne_EMA_LastBarCrosses')
 plotchar(series = Long_ScreenOne_MACD_LastAscending, title = 'Long_ScreenOne_MACD_LastAscending')
-plotchar(series = Long_ScreenTwo_EMA_LastBarNotAbove, title = 'Long_ScreenTwo_EMA_LastBarNotAbove')
+plotchar(series = lastBarBelowMiddleTopKC, title = 'lastBarBelowMiddleTopKC')
 plotchar(series = Long_ScreenTwo_MACD_LastAscending, title = 'Long_ScreenTwo_MACD_LastAscending')
 plotchar(series = Long_ScreenTwo_Stoch_D_K_LastAscending, title = 'Long_ScreenTwo_Stoch_D_K_LastAscending')
 plotchar(series = lastTwoGreen, title = 'lastTwoGreen')
+plotchar(series = Long_ScreenOne_SoftTrendCheck, title = 'Long_ScreenOne_SoftTrendCheck')
+plotchar(series = allPassed, title = 'allPassed')
 
 balance = strategy.initial_capital + strategy.netprofit
 balanceToUse = balance / 100 * 5
@@ -89,14 +95,13 @@ for offset = 0 to 20
     array.insert(arrayToFindMin, offset, dailyLow[offset])
 fixedSL = array.min(id=arrayToFindMin) - 0.27
 
-[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 diff = upperKC - middleKC
 ratio = diff / 100 * 95
 fixedTP = middleKC + ratio
 
 if (allPassed)
     strategy.entry("buy", strategy.long, qty = lots)
-    strategy.exit("buy", stop = fixedSL, limit = fixedTP)
+    strategy.exit("sell", stop = fixedSL, limit = fixedTP)
 
 plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
 plot(strategy.position_size <= 0 ? na : fixedTP, color=color.green, style=plot.style_linebr, linewidth=2)
