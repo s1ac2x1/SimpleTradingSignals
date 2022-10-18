@@ -1,0 +1,8 @@
+entryPrice = ta.valuewhen(allPassed, close, 0)
+
+if (allPassed)
+    strategy.entry("buy", strategy.long, qty = lots)
+    strategy.exit("buy", stop = fixedSL, limit = fixedTP)
+
+if (close >= entryPrice + entryPrice / 100 * 3)
+    strategy.exit("buy", stop = fixedSL, limit = close)
