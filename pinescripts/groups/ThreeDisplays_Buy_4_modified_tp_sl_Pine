@@ -99,7 +99,7 @@ entered = ta.valuewhen(allPassed, true, 0)
 if (allPassed)
     strategy.entry("long", strategy.long)
 
-if (bar_index - barIndexEntry > 4 and strategy.position_size > 0)
+if (bar_index - barIndexEntry > 1 and strategy.position_size > 0)
     strategy.exit(id = "exit", from_entry = "long", stop = fixedSL, limit = fixedTP)
 
 plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
