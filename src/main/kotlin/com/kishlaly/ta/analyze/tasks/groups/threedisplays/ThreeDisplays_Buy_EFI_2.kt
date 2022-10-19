@@ -2,6 +2,7 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EFI_ThirdSecondNegativeAscending
 import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
@@ -21,6 +22,8 @@ class ThreeDisplays_Buy_EFI_2 : AbstractBlocksGroup() {
         return object : ArrayList<TaskBlock>() {
             init {
                 add(ScreenBasicValidation())
+
+                add(Long_ScreenTwo_EFI_ThirdSecondNegativeAscending())
             }
         }
     }
