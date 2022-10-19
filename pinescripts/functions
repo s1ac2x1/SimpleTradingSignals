@@ -2,3 +2,7 @@ quoteBelowEMA(l, h, ema) => l < ema and h < ema
 quoteCrossesEMA(l, h, ema) => l <= ema and h >= ema
 quoteAboveEMA(l, h, ema) => l > ema and h > ema
 quoteGreen(c, o) => c >= o
+
+efi(c1, c2, v) =>
+    src = ((c1 - c2) * v)
+    efi = ta.ema(src, 13)
