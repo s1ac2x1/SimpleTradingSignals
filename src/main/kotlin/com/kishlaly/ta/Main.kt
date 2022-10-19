@@ -1,8 +1,7 @@
 package com.kishlaly.ta
 
 import com.kishlaly.ta.analyze.TaskType
-import com.kishlaly.ta.analyze.tasks.groups.threedisplays.*
-import com.kishlaly.ta.analyze.testing.MonteCarloStrategies
+import com.kishlaly.ta.analyze.tasks.groups.threedisplays.ThreeDisplays_Buy_EFI_2
 import com.kishlaly.ta.analyze.testing.TaskTester
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
@@ -10,7 +9,6 @@ import com.kishlaly.ta.cache.CacheReader
 import com.kishlaly.ta.config.Context
 import com.kishlaly.ta.model.SymbolsSource
 import com.kishlaly.ta.model.Timeframe
-import com.kishlaly.ta.utils.DBUtils
 import com.kishlaly.ta.utils.RunUtils
 
 fun main() {
@@ -25,7 +23,7 @@ fun main() {
     TaskTester.testOneStrategy(
         Context.basicTimeframes.get(),
         TaskType.THREE_DISPLAYS_BUY,
-        ThreeDisplays_Buy_EFI_1(),
+        ThreeDisplays_Buy_EFI_2(),
         StopLossFixedPrice(0.27),
         TakeProfitFixedKeltnerTop(70)
     )
