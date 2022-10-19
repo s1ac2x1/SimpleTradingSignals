@@ -2,6 +2,8 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EFI_LastAscending
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EFI_LastPositive
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EFI_ThirdSecondNegativeAscending
 import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
@@ -15,7 +17,6 @@ import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
  * <p>
  * !!! Can't roll over for shorts !!!
  */
-//TODO finish
 class ThreeDisplays_Buy_EFI_2 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
@@ -24,6 +25,8 @@ class ThreeDisplays_Buy_EFI_2 : AbstractBlocksGroup() {
                 add(ScreenBasicValidation())
 
                 add(Long_ScreenTwo_EFI_ThirdSecondNegativeAscending())
+                add(Long_ScreenTwo_EFI_LastAscending())
+                add(Long_ScreenTwo_EFI_LastPositive())
             }
         }
     }
