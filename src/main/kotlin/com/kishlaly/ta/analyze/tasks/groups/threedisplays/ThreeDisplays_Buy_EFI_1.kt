@@ -2,6 +2,8 @@ package com.kishlaly.ta.analyze.tasks.groups.threedisplays
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EFI_ThirdNegative
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_EFI_TwoPositive
 import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
 
 /**
@@ -14,13 +16,15 @@ import com.kishlaly.ta.analyze.tasks.groups.AbstractBlocksGroup
  * <p>
  * !!! Can't flip for shorts !!!
  */
-//TODO finish
 class ThreeDisplays_Buy_EFI_1 : AbstractBlocksGroup() {
 
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
             init {
                 add(ScreenBasicValidation())
+
+                add(Long_ScreenTwo_EFI_ThirdNegative())
+                add(Long_ScreenTwo_EFI_TwoPositive())
             }
         }
     }
