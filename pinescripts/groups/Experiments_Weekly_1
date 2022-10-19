@@ -1,0 +1,18 @@
+//@version=5
+strategy("Weekly", overlay=true, pyramiding=1)
+
+[screen_1_open, screen_1_high, screen_1_low, screen_1_close, screen_1_volume] = request.security(syminfo.tickerid, "W", [open, high, low, close, volume])
+[screen_2_open, screen_2_high, screen_2_low, screen_2_close, screen_2_volume] = request.security(syminfo.tickerid, "D", [open, high, low, close, volume])
+
+screen_1_EMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26))
+
+quoteGreen(c, o) => c >= o
+quoteBelowEMA(l, h, ema) => l < ema and h < ema
+
+screen_1_check1 = quoteGreen(screen_1_close, screen_1_open) and quoteGreen(screen_1_close[1], screen_1_open[1])
+screen_1_check2 = screen_1_close > screen_1_close[1]
+screen_1_check3 = quoteBelowEMA(screen_1_low[1], screen_1_high[1], screen_1_EMA26[1]) and quoteBelowEMA(screen_1_low, screen_1_high, screen_1_EMA26)
+
+result = screen_1_check1 and screen_1_check2 and screen_1_check3
+
+plotchar(result, title = 'Weekly-1 Entry')
