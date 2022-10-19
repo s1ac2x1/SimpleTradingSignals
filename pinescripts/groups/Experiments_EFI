@@ -37,3 +37,64 @@ if (allPassed)
 
 plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
 plot(strategy.position_size <= 0 ? na : fixedTP, color=color.green, style=plot.style_linebr, linewidth=2)
+
+
+===
+//@version=5
+strategy("EFI", overlay=true, pyramiding=1)
+
+[screen_1_open, screen_1_high, screen_1_low, screen_1_close, screen_1_volume] = request.security(syminfo.tickerid, "W", [open, high, low, close, volume], lookahead=barmerge.lookahead_on)
+[screen_2_open, screen_2_high, screen_2_low, screen_2_close, screen_2_volume] = request.security(syminfo.tickerid, "D", [open, high, low, close, volume])
+[screen_2_middleKC, screen_2_upperKC, screen_2_lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
+
+quoteGreen(c, o) => c >= o
+
+screen_2_EMA13 = request.security(syminfo.tickerid, "D", ta.ema(screen_2_close, 13))
+
+f_round(_val, _decimals) =>
+    _p = math.pow(10, _decimals)
+    math.round(math.abs(_val) * _p)/ _p * math.sign(_val)
+
+efi(c1, c2, v) =>
+    src = ((c1 - c2) * v)
+    efi = ta.ema(src, 13)
+
+screen_2_efi = efi(screen_2_close, screen_2_close[1], screen_2_volume)
+
+thirdSecondNegativeAndAscending = screen_2_efi[2] < 0 and screen_2_efi[1] < 0 and screen_2_efi[1] > screen_2_efi[2]
+lastPositiveAndAscending = screen_2_efi > 0 and screen_2_efi > screen_2_efi[1]
+
+screen_1_EMA26_last = request.security(syminfo.tickerid, "W", ta.ema(screen_2_close, 26), lookahead=barmerge.lookahead_on)
+screen_1_EMA26_prelast = request.security(syminfo.tickerid, "W", ta.ema(screen_2_close, 26)[1], lookahead=barmerge.lookahead_on)
+
+ascendingEMA26 = f_round(screen_1_EMA26_prelast, 2) < f_round(screen_1_EMA26_last, 2)
+
+lastWeeklyQuoteGreen = screen_1_close > screen_1_open
+
+Long_ScreenOne_SoftTrendCheck = ascendingEMA26 and lastWeeklyQuoteGreen
+
+allPassed = Long_ScreenOne_SoftTrendCheck and thirdSecondNegativeAndAscending and lastPositiveAndAscending
+
+balance = strategy.initial_capital + strategy.netprofit
+balanceToUse = balance / 100 * 5
+lots = balanceToUse / screen_2_close
+
+arrayToFindMin = array.new_float(size=10, initial_value=9999999)
+for offset = 0 to 20
+    array.insert(arrayToFindMin, offset, low[offset])
+fixedSL = ta.valuewhen(allPassed, array.min(id=arrayToFindMin) - 0.27, 0)
+
+diff = screen_2_upperKC - screen_2_middleKC
+ratio = diff / 100 * 80
+fixedTP = ta.valuewhen(allPassed, screen_2_middleKC + ratio, 0)
+
+entryPrice = ta.valuewhen(allPassed, screen_2_close, 0)
+
+plotchar(series = allPassed, title = 'Long entry')
+
+if (allPassed)
+    strategy.entry("buy", strategy.long, qty = lots)
+    strategy.exit("buy", stop = fixedSL, limit = fixedTP)
+
+// plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
+// plot(strategy.position_size <= 0 ? na : fixedTP, color=color.green, style=plot.style_linebr, linewidth=2)
