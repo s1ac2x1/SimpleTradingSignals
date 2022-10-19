@@ -91,7 +91,7 @@ fixedSL = ta.valuewhen(allPassed, min, 0)
 
 diff = upperKC - middleKC
 ratio = diff / 100 * 90
-fixedTP = ta.valuewhen(allPassed, middleKC + ratio, 0)
+fixedTP = ta.valuewhen(allPassed, low <= middleKC - (middleKC - lowerKC) / 100 * 50 ? middleKC + (upperKC - middleKC) / 100 * 30: middleKC + ratio, 0)
 
 barIndexEntry = ta.valuewhen(allPassed, bar_index, 0)
 entered = ta.valuewhen(allPassed, true, 0)
