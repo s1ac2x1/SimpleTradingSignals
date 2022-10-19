@@ -1,2 +1,4 @@
-dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
-[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2))
+[screen_1_open, screen_1_high, screen_1_low, screen_1_close] = request.security(syminfo.tickerid, "W", [open, high, low, close])
+[screen_2_open, screen_2_high, screen_2_low, screen_2_close] = request.security(syminfo.tickerid, "D", [open, high, low, close])
+screen_2_EMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
+[screen_2_middleKC, screen_2_upperKC, screen_2_lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2))
