@@ -72,17 +72,22 @@ balanceToUse = balance / 100 * 5
 lots = balanceToUse / close
 
 arrayToFindMin = array.new_float(size=10, initial_value=9999999)
-for offset = 0 to 10
+for offset = 0 to 65
     array.insert(arrayToFindMin, offset, dailyLow[offset])
-fixedSL = ta.valuewhen(allPassed, array.min(id=arrayToFindMin) - 0.27, 0)
+min = array.min(id=arrayToFindMin)
+fixedSL = ta.valuewhen(allPassed, min, 0)
 
 [middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 diff = upperKC - middleKC
 ratio = diff / 100 * 95
 fixedTP = ta.valuewhen(allPassed, middleKC + ratio, 0)
 
+barIndexEntry = ta.valuewhen(allPassed, bar_index, 0)
+
 if (allPassed)
     strategy.entry("buy", strategy.long, qty = lots)
+
+if (bar_index - barIndexEntry > 1)
     strategy.exit("buy", stop = fixedSL, limit = fixedTP)
 
 plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
