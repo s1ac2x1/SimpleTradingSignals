@@ -1,0 +1,7 @@
+barIndexEntry = ta.valuewhen(allPassed, bar_index, 0)
+
+if (allPassed)
+    strategy.entry("buy", strategy.long, qty = lots)
+
+if (bar_index - barIndexEntry > 1)
+    strategy.exit("buy", stop = fixedSL, limit = fixedTP)
