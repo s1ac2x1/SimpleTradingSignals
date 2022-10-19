@@ -2,7 +2,7 @@
 
 
 //@version=5
-strategy("Buy 4", overlay=true, pyramiding=1)
+strategy("Buy 4", overlay=true, pyramiding=1, initial_capital = 10000, default_qty_type = strategy.percent_of_equity, default_qty_value = 10, commission_type = strategy.commission.cash_per_contract, commission_value = 0.005)
 
 quoteGreen(c, o) => c >= o
 
@@ -83,10 +83,6 @@ allPassed = not lateEntry and Long_ScreenOne_LastBarGreen and Long_ScreenOne_MAC
 // plotchar(series = Long_ScreenTwo_MACD_LastAscending, title = 'Long_ScreenTwo_MACD_LastAscending')
 // plotchar(series = Long_ScreenTwo_Stoch_D_K_LastAscending, title = 'Long_ScreenTwo_Stoch_D_K_LastAscending')
 
-balance = strategy.initial_capital + strategy.netprofit
-balanceToUse = balance / 100 * 5
-lots = balanceToUse / close
-
 arrayToFindMin = array.new_float(size=10, initial_value=9999999)
 for offset = 0 to 65
     array.insert(arrayToFindMin, offset, dailyLow[offset])
@@ -101,7 +97,7 @@ barIndexEntry = ta.valuewhen(allPassed, bar_index, 0)
 entered = ta.valuewhen(allPassed, true, 0)
 
 if (allPassed)
-    strategy.entry("long", strategy.long, qty = lots)
+    strategy.entry("long", strategy.long)
 
 if (bar_index - barIndexEntry > 4)
     strategy.exit(id = "exit", from_entry = "long", stop = fixedSL, limit = fixedTP)
