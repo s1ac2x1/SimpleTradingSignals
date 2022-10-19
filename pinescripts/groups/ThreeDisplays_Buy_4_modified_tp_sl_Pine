@@ -59,6 +59,19 @@ Long_ScreenTwo_Stoch_D_K_LastAscending = dailyStochK > dailyStochK[1] and dailyS
 
 lateEntry = close >= middleKC + (upperKC - middleKC) / 100 * 80
 
+f_round(_val, _decimals) =>
+    _p = math.pow(10, _decimals)
+    math.round(math.abs(_val) * _p)/ _p * math.sign(_val)
+
+currentWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+prevWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
+
+ascendingEMA26 = f_round(prevWeeklyEMA26, 2) < f_round(currentWeeklyEMA26, 2)
+
+lastWeeklyQuoteGreen = weeklyClose > weeklyOpen
+
+Long_ScreenOne_SoftTrendCheck = ascendingEMA26 and lastWeeklyQuoteGreen
+
 allPassed = not lateEntry and Long_ScreenOne_LastBarGreen and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
 
 // plotchar(series = Long_ScreenOne_LastBarGreen, title = 'Long_ScreenOne_LastBarGreen')
@@ -81,7 +94,7 @@ min = array.min(id=arrayToFindMin)
 fixedSL = ta.valuewhen(allPassed, min, 0)
 
 diff = upperKC - middleKC
-ratio = diff / 100 * 95
+ratio = diff / 100 * 90
 fixedTP = ta.valuewhen(allPassed, middleKC + ratio, 0)
 
 barIndexEntry = ta.valuewhen(allPassed, bar_index, 0)
