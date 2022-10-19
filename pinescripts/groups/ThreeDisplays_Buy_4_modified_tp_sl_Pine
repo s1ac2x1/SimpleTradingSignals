@@ -72,7 +72,7 @@ lastWeeklyQuoteGreen = weeklyClose > weeklyOpen
 
 Long_ScreenOne_SoftTrendCheck = ascendingEMA26 and lastWeeklyQuoteGreen
 
-allPassed = not lateEntry and Long_ScreenOne_LastBarGreen and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
+allPassed = strategy.position_size == 0 and not lateEntry and Long_ScreenOne_LastBarGreen and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
 
 // plotchar(series = Long_ScreenOne_LastBarGreen, title = 'Long_ScreenOne_LastBarGreen')
 // plotchar(series = Long_ScreenOne_LastBarHigher, title = 'Long_ScreenOne_LastBarHigher')
