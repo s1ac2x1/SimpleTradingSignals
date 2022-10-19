@@ -55,8 +55,11 @@ dailyStochK = ta.stoch(close, high, low, 14)
 dailyStochD = ta.sma(dailyStochK, 3)
 
 Long_ScreenTwo_Stoch_D_K_LastAscending = dailyStochK > dailyStochK[1] and dailyStochD > dailyStochD[1]
+[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 
-allPassed = Long_ScreenOne_LastBarGreen and Long_ScreenOne_LastBarHigher and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_EMA_LastBarNotAbove and Long_ScreenTwo_MACD_LastAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
+lateEntry = close >= middleKC + (upperKC - middleKC) / 100 * 80
+
+allPassed = not lateEntry and Long_ScreenOne_LastBarGreen and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
 
 // plotchar(series = Long_ScreenOne_LastBarGreen, title = 'Long_ScreenOne_LastBarGreen')
 // plotchar(series = Long_ScreenOne_LastBarHigher, title = 'Long_ScreenOne_LastBarHigher')
@@ -77,18 +80,18 @@ for offset = 0 to 65
 min = array.min(id=arrayToFindMin)
 fixedSL = ta.valuewhen(allPassed, min, 0)
 
-[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 diff = upperKC - middleKC
 ratio = diff / 100 * 95
 fixedTP = ta.valuewhen(allPassed, middleKC + ratio, 0)
 
 barIndexEntry = ta.valuewhen(allPassed, bar_index, 0)
+entered = ta.valuewhen(allPassed, true, 0)
 
 if (allPassed)
-    strategy.entry("buy", strategy.long, qty = lots)
+    strategy.entry("long", strategy.long, qty = lots)
 
-if (bar_index - barIndexEntry > 1)
-    strategy.exit("buy", stop = fixedSL, limit = fixedTP)
+if (bar_index - barIndexEntry > 4)
+    strategy.exit(id = "exit", from_entry = "long", stop = fixedSL, limit = fixedTP)
 
 plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
 plot(strategy.position_size <= 0 ? na : fixedTP, color=color.green, style=plot.style_linebr, linewidth=2)
