@@ -2,7 +2,7 @@
 
 
 //@version=5
-strategy("Buy 4", overlay=true, pyramiding=1, initial_capital = 10000, default_qty_type = strategy.percent_of_equity, default_qty_value = 10, commission_type = strategy.commission.cash_per_contract, commission_value = 0.005)
+strategy("Buy 4", overlay=true, initial_capital = 10000, default_qty_type = strategy.percent_of_equity, default_qty_value = 10, commission_type = strategy.commission.cash_per_contract, commission_value = 0.005)
 
 quoteGreen(c, o) => c >= o
 
@@ -72,18 +72,19 @@ lastWeeklyQuoteRed = not quoteGreen(weeklyClose, weeklyOpen)
 
 Short_ScreenOne_SoftTrendCheck = descendingEMA26 and lastWeeklyQuoteRed
 
-allPassed = strategy.position_size == 0 and not lateEntry and Short_ScreenOne_LastBarRed and Short_ScreenOne_MACD_LastDescending and Short_ScreenTwo_Bars_TwoHighDescending and Short_ScreenTwo_Stoch_D_K_LastDescending
+allPassed = Short_ScreenOne_SoftTrendCheck and not lateEntry and Short_ScreenOne_LastBarRed and Short_ScreenOne_MACD_LastDescending and Short_ScreenTwo_Stoch_D_K_LastDescending
 
-plotchar(series = not lateEntry, title = 'not lateEntry')
-plotchar(series = Short_ScreenOne_LastBarRed, title = 'Short_ScreenOne_LastBarRed')
-plotchar(series = Short_ScreenOne_MACD_LastDescending, title = 'Short_ScreenOne_MACD_LastDescending')
-plotchar(series = Short_ScreenTwo_Bars_TwoHighDescending, title = 'Short_ScreenTwo_Bars_TwoHighDescending')
-plotchar(series = Short_ScreenTwo_Stoch_D_K_LastDescending, title = 'Short_ScreenTwo_Stoch_D_K_LastDescending')
-plotchar(series = allPassed, title = 'allPassed')
-plotchar(series = strategy.position_size == 0, title = 'strategy.position_size == 0')
+// plotchar(series = not lateEntry, title = 'not lateEntry')
+// plotchar(series = Short_ScreenOne_LastBarRed, title = 'Short_ScreenOne_LastBarRed')
+// plotchar(series = Short_ScreenOne_MACD_LastDescending, title = 'Short_ScreenOne_MACD_LastDescending')
+// plotchar(series = Short_ScreenTwo_Bars_TwoHighDescending, title = 'Short_ScreenTwo_Bars_TwoHighDescending')
+// plotchar(series = Short_ScreenTwo_Stoch_D_K_LastDescending, title = 'Short_ScreenTwo_Stoch_D_K_LastDescending')
+// plotchar(series = Short_ScreenOne_SoftTrendCheck, title = 'Short_ScreenOne_SoftTrendCheck')
+// plotchar(series = allPassed, title = 'allPassed')
+// plotchar(series = strategy.position_size == 0, title = 'strategy.position_size == 0')
 
 arrayToFindMax = array.new_float(size=10, initial_value=9999999)
-for offset = 0 to 65
+for offset = 0 to 20
     array.insert(arrayToFindMax, offset, dailyLow[offset])
 max = array.max(id=arrayToFindMax)
 fixedSL = ta.valuewhen(allPassed, max, 0)
@@ -95,12 +96,8 @@ fixedTP = ta.valuewhen(allPassed, low >= middleKC + (upperKC - middleKC) / 100 *
 barIndexEntry = ta.valuewhen(allPassed, bar_index, 0)
 entered = ta.valuewhen(allPassed, true, 0)
 
-
 if (allPassed)
     strategy.entry("short", strategy.short)
 
-if (bar_index - barIndexEntry > 1 and strategy.position_size > 0)
+if (bar_index - barIndexEntry > 1)
     strategy.exit(id = "exit", from_entry = "short", stop = fixedSL, limit = fixedTP)
-
-plot(strategy.position_size <= 0 ? na : fixedSL, color=color.red, style=plot.style_linebr, linewidth=2)
-plot(strategy.position_size <= 0 ? na : fixedTP, color=color.green, style=plot.style_linebr, linewidth=2)
