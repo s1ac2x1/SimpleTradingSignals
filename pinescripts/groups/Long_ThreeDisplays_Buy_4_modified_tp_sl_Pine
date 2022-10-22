@@ -13,6 +13,8 @@ screen_1_EMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), look
 [screen_1_MACD, screen_1_MACDSignal, screen_1_MACDHistorgram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
 screen_2_EMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
 [screen_2_MACD, screen_2_MACDSignal, screen_2_MACDHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
+screen_2_stoch_k = ta.stoch(close, high, low, 14)
+screen_2_stoch_d = ta.sma(screen_2_stoch_k, 3)
 
 currH = screen_1_MACDHistorgram
 prevH = screen_1_MACDHistorgram
@@ -35,13 +37,9 @@ Long_ScreenOne_MACD_LastAscending = screen_1_MACDHistorgram > prevH
 Long_ScreenTwo_Bars_TwoHighAscending = screen_2_high > screen_2_high[1]
 screen_2_last_bar_above_EMA13 = screen_2_low > screen_2_EMA13 and screen_2_high > screen_2_EMA13
 Long_ScreenTwo_EMA_LastBarNotAbove = not screen_2_last_bar_above_EMA13
-
 Long_ScreenTwo_MACD_LastAscending = screen_2_MACDHistogram > screen_2_MACDHistogram[1]
 
-dailyStochK = ta.stoch(close, high, low, 14)
-dailyStochD = ta.sma(dailyStochK, 3)
-
-Long_ScreenTwo_Stoch_D_K_LastAscending = dailyStochK > dailyStochK[1] and dailyStochD > dailyStochD[1]
+Long_ScreenTwo_Stoch_D_K_LastAscending = screen_2_stoch_k > screen_2_stoch_k[1] and screen_2_stoch_d > screen_2_stoch_d[1]
 [middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 
 lateEntry = close >= middleKC + (upperKC - middleKC) / 100 * 80
@@ -65,15 +63,6 @@ middleAfterKCMiddle = middleKC + (upperKC - middleKC) / 100 * 50
 lastBarBelowMiddleTopKC = close <= middleAfterKCMiddle
 
 longCondition = Long_ScreenOne_SoftTrendCheck and strategy.position_size == 0 and not lateEntry and Long_ScreenOne_LastBarGreen and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
-
-// plotchar(series = Long_ScreenOne_LastBarGreen, title = 'Long_ScreenOne_LastBarGreen')
-// plotchar(series = Long_ScreenOne_LastBarHigher, title = 'Long_ScreenOne_LastBarHigher')
-// plotchar(series = Long_ScreenOne_EMA_LastBarCrosses, title = 'Long_ScreenOne_EMA_LastBarCrosses')
-// plotchar(series = Long_ScreenOne_MACD_LastAscending, title = 'Long_ScreenOne_MACD_LastAscending')
-// plotchar(series = Long_ScreenTwo_Bars_TwoHighAscending, title = 'Long_ScreenTwo_Bars_TwoHighAscending')
-// plotchar(series = Long_ScreenTwo_EMA_LastBarNotAbove, title = 'Long_ScreenTwo_EMA_LastBarNotAbove')
-// plotchar(series = Long_ScreenTwo_MACD_LastAscending, title = 'Long_ScreenTwo_MACD_LastAscending')
-// plotchar(series = Long_ScreenTwo_Stoch_D_K_LastAscending, title = 'Long_ScreenTwo_Stoch_D_K_LastAscending')
 
 // arrayToFindMin = array.new_float(size=10, initial_value=9999999)
 // for offset = 0 to 65
