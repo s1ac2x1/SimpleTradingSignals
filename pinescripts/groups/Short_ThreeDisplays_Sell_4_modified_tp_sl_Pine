@@ -86,7 +86,7 @@ arrayToFindMax = array.new_float(size=10, initial_value=0)
 for offset = 0 to 10
     array.insert(arrayToFindMax, offset, dailyLow[offset])
 max = array.max(id=arrayToFindMax)
-fixedSL_short = ta.valuewhen(shortCondition, max, 0)
+fixedSL_short = ta.valuewhen(shortCondition, max, 0) + close[1] / 100 * 3
 
 diff = middleKC - lowerKC
 ratio = diff / 100 * 80
@@ -95,11 +95,12 @@ fixedTP_short = ta.valuewhen(shortCondition, low >= middleKC + (upperKC - middle
 barIndexEntry = ta.valuewhen(shortCondition, bar_index, 0)
 
 if (shortCondition)
-    strategy.entry("short", strategy.short)
+    strategy.entry("Short", strategy.short)
 
-plotchar(strategy.position_size, title = 'strategy.position_size')
-plotchar(fixedSL_short, title = 'fixedSL')
-plotchar(fixedTP_short, title = 'fixedTP')
+//plotchar(strategy.position_size, title = 'strategy.position_size')
+// plotchar(fixedSL_short, title = 'fixedSL')
+// plotchar(fixedTP_short, title = 'fixedTP')
+//plotchar(series = strategy.equity, title = 'Equity')
 
 if (bar_index - barIndexEntry > 1)
-    strategy.exit(id = "exit", from_entry = "short", stop = fixedSL_short, limit = fixedTP_short)
+    strategy.exit(id = "exit", from_entry = "Short", stop = fixedSL_short, limit = fixedTP_short, comment = close >= fixedSL_short ? " loss" : "")
