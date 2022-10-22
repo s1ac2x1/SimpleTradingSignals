@@ -104,7 +104,4 @@ if (longCondition)
     strategy.entry("long", strategy.long)
 
 if (bar_index - barIndexEntry > 1 and strategy.position_size > 0)
-    strategy.exit(id = "exit", from_entry = "long", stop = fixedSL_long, limit = fixedTP_long)
-
-plot(strategy.position_size <= 0 ? na : fixedSL_long, color=color.red, style=plot.style_linebr, linewidth=2)
-plot(strategy.position_size <= 0 ? na : fixedTP_long, color=color.green, style=plot.style_linebr, linewidth=2)
+    strategy.exit(id = "exit", from_entry = "long", stop = fixedSL_long, limit = fixedTP_long, comment_profit = "Profit", comment_loss = "Loss")
