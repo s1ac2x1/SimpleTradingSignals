@@ -13,7 +13,7 @@ screen_1_EMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), look
 [screen_1_MACD, screen_1_MACDSignal, screen_1_MACDHistorgram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
 screen_2_EMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
 [screen_2_MACD, screen_2_MACDSignal, screen_2_MACDHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
-screen_2_stoch_k = ta.stoch(close, high, low, 14)
+screen_2_stoch_k = ta.stoch(screen_2_close, screen_2_high, screen_2_low, 14)
 screen_2_stoch_d = ta.sma(screen_2_stoch_k, 3)
 
 currH = screen_1_MACDHistorgram
