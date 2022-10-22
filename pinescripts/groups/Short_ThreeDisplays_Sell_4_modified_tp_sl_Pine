@@ -72,32 +72,34 @@ lastWeeklyQuoteRed = not quoteGreen(weeklyClose, weeklyOpen)
 
 Short_ScreenOne_SoftTrendCheck = descendingEMA26 and lastWeeklyQuoteRed
 
-allPassed = Short_ScreenOne_SoftTrendCheck and not lateEntry and Short_ScreenOne_LastBarRed and Short_ScreenOne_MACD_LastDescending and Short_ScreenTwo_Stoch_D_K_LastDescending
+shortCondition = not lateEntry and Short_ScreenOne_LastBarRed and Short_ScreenOne_MACD_LastDescending and Short_ScreenTwo_Bars_TwoHighDescending and Short_ScreenTwo_Stoch_D_K_LastDescending
 
 // plotchar(series = not lateEntry, title = 'not lateEntry')
 // plotchar(series = Short_ScreenOne_LastBarRed, title = 'Short_ScreenOne_LastBarRed')
 // plotchar(series = Short_ScreenOne_MACD_LastDescending, title = 'Short_ScreenOne_MACD_LastDescending')
 // plotchar(series = Short_ScreenTwo_Bars_TwoHighDescending, title = 'Short_ScreenTwo_Bars_TwoHighDescending')
 // plotchar(series = Short_ScreenTwo_Stoch_D_K_LastDescending, title = 'Short_ScreenTwo_Stoch_D_K_LastDescending')
-// plotchar(series = Short_ScreenOne_SoftTrendCheck, title = 'Short_ScreenOne_SoftTrendCheck')
 // plotchar(series = allPassed, title = 'allPassed')
 // plotchar(series = strategy.position_size == 0, title = 'strategy.position_size == 0')
 
-arrayToFindMax = array.new_float(size=10, initial_value=9999999)
-for offset = 0 to 20
+arrayToFindMax = array.new_float(size=10, initial_value=0)
+for offset = 0 to 10
     array.insert(arrayToFindMax, offset, dailyLow[offset])
 max = array.max(id=arrayToFindMax)
-fixedSL = ta.valuewhen(allPassed, max, 0)
+fixedSL_short = ta.valuewhen(shortCondition, max, 0)
 
 diff = middleKC - lowerKC
-ratio = diff / 100 * 90
-fixedTP = ta.valuewhen(allPassed, low >= middleKC + (upperKC - middleKC) / 100 * 50 ? middleKC - (middleKC - lowerKC) / 100 * 30: middleKC - ratio, 0)
+ratio = diff / 100 * 80
+fixedTP_short = ta.valuewhen(shortCondition, low >= middleKC + (upperKC - middleKC) / 100 * 50 ? middleKC - (middleKC - lowerKC) / 100 * 30: middleKC - ratio, 0)
 
-barIndexEntry = ta.valuewhen(allPassed, bar_index, 0)
-entered = ta.valuewhen(allPassed, true, 0)
+barIndexEntry = ta.valuewhen(shortCondition, bar_index, 0)
 
-if (allPassed)
+if (shortCondition)
     strategy.entry("short", strategy.short)
 
+plotchar(strategy.position_size, title = 'strategy.position_size')
+plotchar(fixedSL_short, title = 'fixedSL')
+plotchar(fixedTP_short, title = 'fixedTP')
+
 if (bar_index - barIndexEntry > 1)
-    strategy.exit(id = "exit", from_entry = "short", stop = fixedSL, limit = fixedTP)
+    strategy.exit(id = "exit", from_entry = "short", stop = fixedSL_short, limit = fixedTP_short)
