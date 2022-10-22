@@ -6,14 +6,12 @@ strategy("Buy 4", overlay=true, pyramiding=1, initial_capital = 10000, default_q
 
 quoteGreen(c, o) => c >= o
 
-[weeklyOpen, weeklyClose]  = request.security(syminfo.tickerid, 'W', [open, close], lookahead=barmerge.lookahead_on)
+[screen_1_open, screen_1_high, screen_1_low, screen_1_close]  = request.security(syminfo.tickerid, 'W', [open, high, low, close], lookahead=barmerge.lookahead_on)
+[screen_1_open_last, screen_1_high_last, screen_1_low_last, screen_1_close_last] = request.security(syminfo.tickerid, 'W', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
 
-Long_ScreenOne_LastBarGreen = weeklyOpen < weeklyClose
+Long_ScreenOne_LastBarGreen = screen_1_open < screen_1_close
 
-[currentWeekOpen, currentWeekHigh, currentWeekLow, currentWeekClose] = request.security(syminfo.tickerid, 'W', [open, high, low, close], lookahead=barmerge.lookahead_on)
-[lastWeekOpen, lastWeekHigh, lastWeekLow, lastWeekClose] = request.security(syminfo.tickerid, 'W', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
-
-Long_ScreenOne_LastBarHigher = lastWeekLow < currentWeekLow and lastWeekHigh < currentWeekHigh
+Long_ScreenOne_LastBarHigher = screen_1_low_last < screen_1_low and screen_1_high_last < screen_1_high
 
 weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
 [weeklyLow, weeklyHigh] = request.security(syminfo.tickerid, 'W', [low, high], lookahead=barmerge.lookahead_on)
@@ -69,7 +67,7 @@ prevWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], 
 ascendingEMA26 = f_round(prevWeeklyEMA26, 2) < f_round(currentWeeklyEMA26, 2)
 flatMovement = math.abs(f_round(prevWeeklyEMA26, 2) - f_round(currentWeeklyEMA26, 2)) <= 0.03
 
-lastWeeklyQuoteGreen = weeklyClose > weeklyOpen
+lastWeeklyQuoteGreen = screen_1_close > screen_1_open
 
 Long_ScreenOne_SoftTrendCheck = ascendingEMA26 and lastWeeklyQuoteGreen
 
