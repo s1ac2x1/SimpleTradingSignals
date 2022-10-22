@@ -46,16 +46,11 @@ Long_ScreenTwo_EMA_LastBarNotAbove = not screen_2_last_bar_above_EMA13
 Long_ScreenTwo_MACD_LastAscending = screen_2_MACDHistogram > screen_2_MACDHistogram[1]
 Long_ScreenTwo_Stoch_D_K_LastAscending = screen_2_stoch_k > screen_2_stoch_k[1] and screen_2_stoch_d > screen_2_stoch_d[1]
 lateEntry = close >= screen_2_KC_middle + (screen_2_KC_top - screen_2_KC_middle) / 100 * 80
-
 ascendingEMA26 = f_round(screen_1_EMA26_last, 2) < f_round(screen_1_EMA26, 2)
 flatMovement = math.abs(f_round(screen_1_EMA26_last, 2) - f_round(screen_1_EMA26, 2)) <= 0.03
-
 lastWeeklyQuoteGreen = screen_1_close > screen_1_open
-
 Long_ScreenOne_SoftTrendCheck = ascendingEMA26 and lastWeeklyQuoteGreen
-
 middleAfterKCMiddle = screen_2_KC_middle + (screen_2_KC_top - screen_2_KC_middle) / 100 * 50
-
 lastBarBelowMiddleTopKC = close <= middleAfterKCMiddle
 
 longCondition = Long_ScreenOne_SoftTrendCheck and strategy.position_size == 0 and not lateEntry and Long_ScreenOne_LastBarGreen and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
@@ -66,12 +61,10 @@ longCondition = Long_ScreenOne_SoftTrendCheck and strategy.position_size == 0 an
 // min = array.min(id=arrayToFindMin)
 fixedSL_long = ta.valuewhen(longCondition, screen_2_KC_bottom, 0)
 
-diff = screen_2_KC_top - screen_2_KC_middle
-ratio = diff / 100 * 90
-fixedTP_long = ta.valuewhen(longCondition, low <= screen_2_KC_middle - (screen_2_KC_middle - screen_2_KC_bottom) / 100 * 50 ? screen_2_KC_middle + (screen_2_KC_top - screen_2_KC_middle) / 100 * 30: screen_2_KC_middle + ratio, 0)
+long_TP_ratio = (screen_2_KC_top - screen_2_KC_middle) / 100 * 90
+fixedTP_long = ta.valuewhen(longCondition, low <= screen_2_KC_middle - (screen_2_KC_middle - screen_2_KC_bottom) / 100 * 50 ? screen_2_KC_middle + (screen_2_KC_top - screen_2_KC_middle) / 100 * 30: screen_2_KC_middle + long_TP_ratio, 0)
 
 barIndexEntry = ta.valuewhen(longCondition, bar_index, 0)
-entered = ta.valuewhen(longCondition, true, 0)
 
 if (longCondition)
     strategy.entry("long", strategy.long)
