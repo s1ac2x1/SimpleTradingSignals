@@ -82,11 +82,10 @@ shortCondition = not lateEntry and Short_ScreenOne_LastBarRed and Short_ScreenOn
 // plotchar(series = allPassed, title = 'allPassed')
 // plotchar(series = strategy.position_size == 0, title = 'strategy.position_size == 0')
 
-arrayToFindMax = array.new_float(size=10, initial_value=0)
-for offset = 0 to 10
-    array.insert(arrayToFindMax, offset, dailyLow[offset])
-max = array.max(id=arrayToFindMax)
-//fixedSL_short = ta.valuewhen(shortCondition, max, 0) + close[1] / 100 * 3
+// arrayToFindMax = array.new_float(size=10, initial_value=0)
+// for offset = 0 to 10
+//     array.insert(arrayToFindMax, offset, dailyLow[offset])
+// max = array.max(id=arrayToFindMax)
 fixedSL_short = ta.valuewhen(shortCondition, upperKC, 0)
 
 diff = middleKC - lowerKC
