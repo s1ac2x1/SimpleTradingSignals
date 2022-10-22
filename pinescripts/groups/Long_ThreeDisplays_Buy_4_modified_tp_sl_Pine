@@ -6,41 +6,37 @@ strategy("Buy 4", overlay=true, pyramiding=1, initial_capital = 10000, default_q
 
 quoteGreen(c, o) => c >= o
 
+// quotes
 [screen_1_open, screen_1_high, screen_1_low, screen_1_close]  = request.security(syminfo.tickerid, 'W', [open, high, low, close], lookahead=barmerge.lookahead_on)
 [screen_1_open_last, screen_1_high_last, screen_1_low_last, screen_1_close_last] = request.security(syminfo.tickerid, 'W', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+[screen_2_open, screen_2_high, screen_2_low, screen_2_close] = request.security(syminfo.tickerid, 'D', [open, high, low, close])
+
+// indicators
+screen_1_EMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+[screen_1_MACD, screen_1_MACDSignal, screen_1_MACDHistorgram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
+screen_2_EMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
+
+currH = screen_1_MACDHistorgram
+prevH = screen_1_MACDHistorgram
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[1]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[2]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[2]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[3]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[4]
 
 Long_ScreenOne_LastBarGreen = screen_1_open < screen_1_close
-
 Long_ScreenOne_LastBarHigher = screen_1_low_last < screen_1_low and screen_1_high_last < screen_1_high
+Long_ScreenOne_EMA_LastBarCrosses = screen_1_low <= screen_1_EMA26 and screen_1_high >= screen_1_EMA26
+Long_ScreenOne_MACD_LastAscending = screen_1_MACDHistorgram > prevH
 
-weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+Long_ScreenTwo_Bars_TwoHighAscending = screen_2_high > screen_2_high[1]
 
-Long_ScreenOne_EMA_LastBarCrosses = screen_1_low <= weeklyEMA26 and screen_1_high >= weeklyEMA26
-
-[weeklyMACD, weeklySignal, weeklyHistogram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
-
-currH = weeklyHistogram
-prevH = weeklyHistogram
-if (prevH == currH)
-    prevH := weeklyHistogram[1]
-if (prevH == currH)
-    prevH := weeklyHistogram[2]
-if (prevH == currH)
-    prevH := weeklyHistogram[2]
-if (prevH == currH)
-    prevH := weeklyHistogram[3]
-if (prevH == currH)
-    prevH := weeklyHistogram[4]
-
-Long_ScreenOne_MACD_LastAscending = weeklyHistogram > prevH
-
-dailyHigh = request.security(syminfo.tickerid, 'D', high)
-
-Long_ScreenTwo_Bars_TwoHighAscending = dailyHigh > dailyHigh[1]
-
-dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
-dailyLow = request.security(syminfo.tickerid, 'D', low)
-dailyLastBarAboveEMA13 = dailyLow > dailyEMA13 and dailyHigh > dailyEMA13
+dailyLastBarAboveEMA13 = screen_2_low > screen_2_EMA13 and screen_2_high > screen_2_EMA13
 
 Long_ScreenTwo_EMA_LastBarNotAbove = not dailyLastBarAboveEMA13
 
@@ -60,11 +56,11 @@ f_round(_val, _decimals) =>
     _p = math.pow(10, _decimals)
     math.round(math.abs(_val) * _p)/ _p * math.sign(_val)
 
-currentWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
-prevWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
+currentscreen_1_EMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+prevscreen_1_EMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
 
-ascendingEMA26 = f_round(prevWeeklyEMA26, 2) < f_round(currentWeeklyEMA26, 2)
-flatMovement = math.abs(f_round(prevWeeklyEMA26, 2) - f_round(currentWeeklyEMA26, 2)) <= 0.03
+ascendingEMA26 = f_round(prevscreen_1_EMA26, 2) < f_round(currentscreen_1_EMA26, 2)
+flatMovement = math.abs(f_round(prevscreen_1_EMA26, 2) - f_round(currentscreen_1_EMA26, 2)) <= 0.03
 
 lastWeeklyQuoteGreen = screen_1_close > screen_1_open
 
@@ -87,7 +83,7 @@ longCondition = Long_ScreenOne_SoftTrendCheck and strategy.position_size == 0 an
 
 // arrayToFindMin = array.new_float(size=10, initial_value=9999999)
 // for offset = 0 to 65
-//     array.insert(arrayToFindMin, offset, dailyLow[offset])
+//     array.insert(arrayToFindMin, offset, screen_2_low[offset])
 // min = array.min(id=arrayToFindMin)
 fixedSL_long = ta.valuewhen(longCondition, lowerKC, 0)
 
