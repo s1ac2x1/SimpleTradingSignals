@@ -4,93 +4,64 @@
 //@version=5
 strategy("Buy 4", overlay = true, initial_capital = 10000, default_qty_type = strategy.percent_of_equity, default_qty_value = 10, commission_type = strategy.commission.cash_per_contract, commission_value = 0.005)
 
+// functions
 quoteGreen(c, o) => c >= o
-
-[weeklyOpen, weeklyClose]  = request.security(syminfo.tickerid, 'W', [open, close], lookahead=barmerge.lookahead_on)
-
-Short_ScreenOne_LastBarRed = not quoteGreen(weeklyClose, weeklyOpen)
-
-[currentWeekOpen, currentWeekHigh, currentWeekLow, currentWeekClose] = request.security(syminfo.tickerid, 'W', [open, high, low, close], lookahead=barmerge.lookahead_on)
-[lastWeekOpen, lastWeekHigh, lastWeekLow, lastWeekClose] = request.security(syminfo.tickerid, 'W', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
-
-Short_ScreenOne_LastBarLower = lastWeekLow > currentWeekLow and lastWeekHigh > currentWeekHigh
-
-weeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
-[weeklyLow, weeklyHigh] = request.security(syminfo.tickerid, 'W', [low, high], lookahead=barmerge.lookahead_on)
-
-Short_ScreenOne_EMA_LastBarCrosses = weeklyLow <= weeklyEMA26 and weeklyHigh >= weeklyEMA26
-
-[weeklyMACD, weeklySignal, weeklyHistogram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
-
-currH = weeklyHistogram
-prevH = weeklyHistogram
-if (prevH == currH)
-    prevH := weeklyHistogram[1]
-if (prevH == currH)
-    prevH := weeklyHistogram[2]
-if (prevH == currH)
-    prevH := weeklyHistogram[2]
-if (prevH == currH)
-    prevH := weeklyHistogram[3]
-if (prevH == currH)
-    prevH := weeklyHistogram[4]
-
-Short_ScreenOne_MACD_LastDescending = weeklyHistogram < prevH
-
-dailyHigh = request.security(syminfo.tickerid, 'D', high)
-
-Short_ScreenTwo_Bars_TwoHighDescending = dailyHigh < dailyHigh[1]
-
-dailyEMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
-dailyLow = request.security(syminfo.tickerid, 'D', low)
-dailyLastBarBelowEMA13 = dailyLow < dailyEMA13 and dailyHigh < dailyEMA13
-
-Short_ScreenTwo_EMA_LastBarNotBelow = not dailyLastBarBelowEMA13
-
-[dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
-
-Short_ScreenTwo_MACD_LastDescending = dailyHistogram < dailyHistogram[1]
-
-dailyStochK = ta.stoch(close, high, low, 14)
-dailyStochD = ta.sma(dailyStochK, 3)
-
-Short_ScreenTwo_Stoch_D_K_LastDescending = dailyStochK < dailyStochK[1] and dailyStochD < dailyStochD[1]
-[middleKC, upperKC, lowerKC] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
-
-lateEntry = close <= middleKC - (middleKC- lowerKC) / 100 * 80
-
 f_round(_val, _decimals) =>
     _p = math.pow(10, _decimals)
     math.round(math.abs(_val) * _p)/ _p * math.sign(_val)
 
-currentWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
-prevWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
+// quotes
+[screen_1_open, screen_1_high, screen_1_low, screen_1_close]  = request.security(syminfo.tickerid, 'W', [open, high, low, close], lookahead=barmerge.lookahead_on)
+[screen_1_open_prev, screen_1_high_prev, screen_1_low_prev, screen_1_close_prev] = request.security(syminfo.tickerid, 'W', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+[screen_2_open, screen_2_high, screen_2_low, screen_2_close] = request.security(syminfo.tickerid, 'D', [open, high, low, close])
 
-descendingEMA26 = f_round(prevWeeklyEMA26, 2) > f_round(currentWeeklyEMA26, 2)
+// indicators
+screen_1_EMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+screen_1_EMA26_prev = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
+screen_2_EMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
+[screen_1_MACD, screen_1_MACDSignal, screen_1_MACDHistorgram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
+[screen_2_MACD, screen_2_MACDSignal, screen_2_MACDHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
+screen_2_stoch_k = ta.stoch(screen_2_close, screen_2_high, screen_2_low, 14)
+screen_2_stoch_d = ta.sma(screen_2_stoch_k, 3)
+[screen_2_KC_middle, screen_2_KC_top, screen_2_KC_bottom] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 
-lastWeeklyQuoteRed = not quoteGreen(weeklyClose, weeklyOpen)
+currH = screen_1_MACDHistorgram
+prevH = screen_1_MACDHistorgram
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[1]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[2]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[2]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[3]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[4]
 
+Short_ScreenOne_LastBarRed = not quoteGreen(screen_1_close, screen_1_open)
+Short_ScreenOne_LastBarLower = screen_1_low_prev > screen_1_low and screen_1_high_prev > screen_1_high
+Short_ScreenOne_EMA_LastBarCrosses = screen_1_low <= screen_1_EMA26 and screen_1_high >= screen_1_EMA26
+Short_ScreenOne_MACD_LastDescending = screen_1_MACDHistorgram < prevH
+Short_ScreenTwo_Bars_TwoHighDescending = screen_2_high < screen_2_high[1]
+Short_screen_2_last_bar_below_EMA13 = screen_2_low < screen_2_EMA13 and screen_2_high < screen_2_EMA13
+Short_ScreenTwo_EMA_LastBarNotBelow = not Short_screen_2_last_bar_below_EMA13
+Short_ScreenTwo_MACD_LastDescending = screen_2_MACDHistogram < screen_2_MACDHistogram[1]
+Short_ScreenTwo_Stoch_D_K_LastDescending = screen_2_stoch_k < screen_2_stoch_k[1] and screen_2_stoch_d < screen_2_stoch_d[1]
+lateEntry = close <= screen_2_KC_middle - (screen_2_KC_middle- screen_2_KC_bottom) / 100 * 80
+descendingEMA26 = f_round(screen_1_EMA26_prev, 2) > f_round(screen_1_EMA26, 2)
+lastWeeklyQuoteRed = not quoteGreen(screen_1_close, screen_1_open)
 Short_ScreenOne_SoftTrendCheck = descendingEMA26 and lastWeeklyQuoteRed
 
 shortCondition = Short_ScreenOne_SoftTrendCheck and not lateEntry and Short_ScreenOne_LastBarRed and Short_ScreenOne_MACD_LastDescending and Short_ScreenTwo_Bars_TwoHighDescending and Short_ScreenTwo_Stoch_D_K_LastDescending
 
-// plotchar(series = not lateEntry, title = 'not lateEntry')
-// plotchar(series = Short_ScreenOne_LastBarRed, title = 'Short_ScreenOne_LastBarRed')
-// plotchar(series = Short_ScreenOne_MACD_LastDescending, title = 'Short_ScreenOne_MACD_LastDescending')
-// plotchar(series = Short_ScreenTwo_Bars_TwoHighDescending, title = 'Short_ScreenTwo_Bars_TwoHighDescending')
-// plotchar(series = Short_ScreenTwo_Stoch_D_K_LastDescending, title = 'Short_ScreenTwo_Stoch_D_K_LastDescending')
-// plotchar(series = allPassed, title = 'allPassed')
-// plotchar(series = strategy.position_size == 0, title = 'strategy.position_size == 0')
-
 // arrayToFindMax = array.new_float(size=10, initial_value=0)
 // for offset = 0 to 10
-//     array.insert(arrayToFindMax, offset, dailyLow[offset])
+//     array.insert(arrayToFindMax, offset, screen_2_low[offset])
 // max = array.max(id=arrayToFindMax)
-fixedSL_short = ta.valuewhen(shortCondition, upperKC, 0)
+fixedSL_short = ta.valuewhen(shortCondition, screen_2_KC_top, 0)
 
-diff = middleKC - lowerKC
-ratio = diff / 100 * 80
-fixedTP_short = ta.valuewhen(shortCondition, low >= middleKC + (upperKC - middleKC) / 100 * 50 ? middleKC - (middleKC - lowerKC) / 100 * 30: middleKC - ratio, 0)
+short_TL_ratio = (screen_2_KC_middle - screen_2_KC_bottom) / 100 * 80
+fixedTP_short = ta.valuewhen(shortCondition, low >= screen_2_KC_middle + (screen_2_KC_top - screen_2_KC_middle) / 100 * 50 ? screen_2_KC_middle - (screen_2_KC_middle - screen_2_KC_bottom) / 100 * 30: screen_2_KC_middle - short_TL_ratio, 0)
 
 barIndexEntry = ta.valuewhen(shortCondition, bar_index, 0)
 
@@ -100,7 +71,6 @@ if (shortCondition)
 //plotchar(strategy.position_size, title = 'strategy.position_size')
 // plotchar(fixedSL_short, title = 'fixedSL')
 // plotchar(fixedTP_short, title = 'fixedTP')
-
 
 if (bar_index - barIndexEntry > 1)
     strategy.exit(id = "exit", from_entry = "Short", stop = fixedSL_short, limit = fixedTP_short, comment_profit = "Profit", comment_loss = "Loss")
