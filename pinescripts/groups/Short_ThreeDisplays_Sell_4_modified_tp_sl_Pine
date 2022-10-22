@@ -2,7 +2,7 @@
 
 
 //@version=5
-strategy("Buy 4", overlay=true, initial_capital = 10000, default_qty_type = strategy.percent_of_equity, default_qty_value = 10, commission_type = strategy.commission.cash_per_contract, commission_value = 0.005)
+strategy("Buy 4", overlay = true, initial_capital = 10000, default_qty_type = strategy.percent_of_equity, default_qty_value = 10, commission_type = strategy.commission.cash_per_contract, commission_value = 0.005)
 
 quoteGreen(c, o) => c >= o
 
@@ -86,7 +86,8 @@ arrayToFindMax = array.new_float(size=10, initial_value=0)
 for offset = 0 to 10
     array.insert(arrayToFindMax, offset, dailyLow[offset])
 max = array.max(id=arrayToFindMax)
-fixedSL_short = ta.valuewhen(shortCondition, max, 0) + close[1] / 100 * 3
+//fixedSL_short = ta.valuewhen(shortCondition, max, 0) + close[1] / 100 * 3
+fixedSL_short = ta.valuewhen(shortCondition, upperKC, 0)
 
 diff = middleKC - lowerKC
 ratio = diff / 100 * 80
@@ -101,11 +102,11 @@ if (shortCondition)
 // plotchar(fixedSL_short, title = 'fixedSL')
 // plotchar(fixedTP_short, title = 'fixedTP')
 
-float lastTradeProfit = na
-if strategy.position_size != strategy.position_size[1]
-    lastTradeProfit := strategy.netprofit - strategy.netprofit[1]
 
 if (bar_index - barIndexEntry > 1)
     strategy.exit(id = "exit", from_entry = "Short", stop = fixedSL_short, limit = fixedTP_short, comment_profit = "Profit", comment_loss = "Loss")
 
-// plot(lastTradeProfit, style = plot.style_columns, color = lastTradeProfit > 0 ? color.green : lastTradeProfit == 0 ? color.gray : color.red, title = "Trade profit/loss")
+float lastTradeProfit = na
+if strategy.position_size != strategy.position_size[1]
+    lastTradeProfit := strategy.netprofit - strategy.netprofit[1]
+//plot(lastTradeProfit, style = plot.style_columns, color = lastTradeProfit > 0 ? color.green : lastTradeProfit == 0 ? color.gray : color.red, title = "Trade profit/loss")
