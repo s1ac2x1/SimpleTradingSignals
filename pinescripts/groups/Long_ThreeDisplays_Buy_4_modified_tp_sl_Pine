@@ -1,6 +1,9 @@
 //@version=5
 strategy("Buy 4", overlay=true, pyramiding=1, initial_capital = 10000, default_qty_type = strategy.percent_of_equity, default_qty_value = 10, commission_type = strategy.commission.cash_per_contract, commission_value = 0.005)
 
+screen_1 = "W"
+screen_2 = "D"
+
 // functions
 quoteGreen(c, o) => c >= o
 f_round(_val, _decimals) =>
@@ -8,19 +11,19 @@ f_round(_val, _decimals) =>
     math.round(math.abs(_val) * _p)/ _p * math.sign(_val)
 
 // quotes
-[screen_1_open, screen_1_high, screen_1_low, screen_1_close]  = request.security(syminfo.tickerid, 'W', [open, high, low, close], lookahead=barmerge.lookahead_on)
-[screen_1_open_prev, screen_1_high_prev, screen_1_low_prev, screen_1_close_prev] = request.security(syminfo.tickerid, 'W', [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
-[screen_2_open, screen_2_high, screen_2_low, screen_2_close] = request.security(syminfo.tickerid, 'D', [open, high, low, close])
+[screen_1_open, screen_1_high, screen_1_low, screen_1_close]  = request.security(syminfo.tickerid, screen_1, [open, high, low, close], lookahead=barmerge.lookahead_on)
+[screen_1_open_prev, screen_1_high_prev, screen_1_low_prev, screen_1_close_prev] = request.security(syminfo.tickerid, screen_1, [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+[screen_2_open, screen_2_high, screen_2_low, screen_2_close] = request.security(syminfo.tickerid, screen_2, [open, high, low, close])
 
 // indicators
-screen_1_EMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
-screen_1_EMA26_prev = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
-screen_2_EMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
-[screen_1_MACD, screen_1_MACDSignal, screen_1_MACDHistorgram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
-[screen_2_MACD, screen_2_MACDSignal, screen_2_MACDHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
+screen_1_EMA26 = request.security(syminfo.tickerid, screen_1, ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+screen_1_EMA26_prev = request.security(syminfo.tickerid, screen_1, ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
+screen_2_EMA13 = request.security(syminfo.tickerid, screen_2, ta.ema(close, 13))
+[screen_1_MACD, screen_1_MACDSignal, screen_1_MACDHistorgram] = request.security(syminfo.tickerid, screen_1, ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
+[screen_2_MACD, screen_2_MACDSignal, screen_2_MACDHistogram] = request.security(syminfo.tickerid, screen_2, ta.macd(close, 12, 26, 9))
 screen_2_stoch_k = ta.stoch(screen_2_close, screen_2_high, screen_2_low, 14)
 screen_2_stoch_d = ta.sma(screen_2_stoch_k, 3)
-[screen_2_KC_middle, screen_2_KC_top, screen_2_KC_bottom] = request.security(syminfo.tickerid, 'D', ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
+[screen_2_KC_middle, screen_2_KC_top, screen_2_KC_bottom] = request.security(syminfo.tickerid, screen_2, ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
 
 currH = screen_1_MACDHistorgram
 prevH = screen_1_MACDHistorgram
