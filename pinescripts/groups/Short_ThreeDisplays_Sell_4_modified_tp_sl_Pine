@@ -75,6 +75,9 @@ if (shortCondition)
 if (bar_index - barIndexEntry > 1)
     strategy.exit(id = "exit", from_entry = "Short", stop = fixedSL_short, limit = fixedTP_short, comment_profit = "Profit", comment_loss = "Loss")
 
+// if (screen_2_stoch_d >= screen_2_stoch_d[1])
+//     strategy.exit(id = "exit", from_entry = "Short", stop = fixedSL_short, limit = close, comment_profit = "Profit", comment_loss = "Loss")
+
 float lastTradeProfit = na
 if strategy.position_size != strategy.position_size[1]
     lastTradeProfit := strategy.netprofit - strategy.netprofit[1]
