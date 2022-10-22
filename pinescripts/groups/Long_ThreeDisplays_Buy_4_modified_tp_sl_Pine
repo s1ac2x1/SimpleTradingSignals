@@ -1,6 +1,3 @@
-// !!! Если убрать Long_ScreenOne_EMA_LastBarCrosses, то net profit и число сделок выше, без существенного снижения процента прибыльных сделок
-
-
 //@version=5
 strategy("Buy 4", overlay=true, pyramiding=1, initial_capital = 10000, default_qty_type = strategy.percent_of_equity, default_qty_value = 10, commission_type = strategy.commission.cash_per_contract, commission_value = 0.005)
 
@@ -15,6 +12,7 @@ quoteGreen(c, o) => c >= o
 screen_1_EMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), lookahead=barmerge.lookahead_on)
 [screen_1_MACD, screen_1_MACDSignal, screen_1_MACDHistorgram] = request.security(syminfo.tickerid, "1W", ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
 screen_2_EMA13 = request.security(syminfo.tickerid, "D", ta.ema(close, 13))
+[screen_2_MACD, screen_2_MACDSignal, screen_2_MACDHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
 
 currH = screen_1_MACDHistorgram
 prevH = screen_1_MACDHistorgram
@@ -35,14 +33,10 @@ Long_ScreenOne_EMA_LastBarCrosses = screen_1_low <= screen_1_EMA26 and screen_1_
 Long_ScreenOne_MACD_LastAscending = screen_1_MACDHistorgram > prevH
 
 Long_ScreenTwo_Bars_TwoHighAscending = screen_2_high > screen_2_high[1]
+screen_2_last_bar_above_EMA13 = screen_2_low > screen_2_EMA13 and screen_2_high > screen_2_EMA13
+Long_ScreenTwo_EMA_LastBarNotAbove = not screen_2_last_bar_above_EMA13
 
-dailyLastBarAboveEMA13 = screen_2_low > screen_2_EMA13 and screen_2_high > screen_2_EMA13
-
-Long_ScreenTwo_EMA_LastBarNotAbove = not dailyLastBarAboveEMA13
-
-[dailyMACD, dailySignal, dailyHistogram] = request.security(syminfo.tickerid, "D", ta.macd(close, 12, 26, 9))
-
-Long_ScreenTwo_MACD_LastAscending = dailyHistogram > dailyHistogram[1]
+Long_ScreenTwo_MACD_LastAscending = screen_2_MACDHistogram > screen_2_MACDHistogram[1]
 
 dailyStochK = ta.stoch(close, high, low, 14)
 dailyStochD = ta.sma(dailyStochK, 3)
