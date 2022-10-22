@@ -67,6 +67,7 @@ currentWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26), 
 prevWeeklyEMA26 = request.security(syminfo.tickerid, "W", ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
 
 ascendingEMA26 = f_round(prevWeeklyEMA26, 2) < f_round(currentWeeklyEMA26, 2)
+flatMovement = math.abs(f_round(prevWeeklyEMA26, 2) - f_round(currentWeeklyEMA26, 2)) <= 0.03
 
 lastWeeklyQuoteGreen = weeklyClose > weeklyOpen
 
@@ -110,3 +111,5 @@ if (bar_index - barIndexEntry > 1 and strategy.position_size > 0)
 // if strategy.position_size != strategy.position_size[1]
 //     lastTradeProfit := strategy.netprofit - strategy.netprofit[1]
 // plot(lastTradeProfit, style = plot.style_columns, color = lastTradeProfit > 0 ? color.green : lastTradeProfit == 0 ? color.gray : color.red, title = "Trade profit/loss")
+
+//plot(strategy.netprofit)
