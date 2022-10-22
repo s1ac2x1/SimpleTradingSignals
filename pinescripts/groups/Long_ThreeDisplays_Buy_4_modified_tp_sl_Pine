@@ -105,3 +105,8 @@ if (longCondition)
 
 if (bar_index - barIndexEntry > 1 and strategy.position_size > 0)
     strategy.exit(id = "exit", from_entry = "long", stop = fixedSL_long, limit = fixedTP_long, comment_profit = "Profit", comment_loss = "Loss")
+
+// float lastTradeProfit = na
+// if strategy.position_size != strategy.position_size[1]
+//     lastTradeProfit := strategy.netprofit - strategy.netprofit[1]
+// plot(lastTradeProfit, style = plot.style_columns, color = lastTradeProfit > 0 ? color.green : lastTradeProfit == 0 ? color.gray : color.red, title = "Trade profit/loss")
