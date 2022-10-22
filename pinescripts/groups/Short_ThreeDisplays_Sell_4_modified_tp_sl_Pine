@@ -72,7 +72,7 @@ lastWeeklyQuoteRed = not quoteGreen(weeklyClose, weeklyOpen)
 
 Short_ScreenOne_SoftTrendCheck = descendingEMA26 and lastWeeklyQuoteRed
 
-shortCondition = not lateEntry and Short_ScreenOne_LastBarRed and Short_ScreenOne_MACD_LastDescending and Short_ScreenTwo_Bars_TwoHighDescending and Short_ScreenTwo_Stoch_D_K_LastDescending
+shortCondition = Short_ScreenOne_SoftTrendCheck and not lateEntry and Short_ScreenOne_LastBarRed and Short_ScreenOne_MACD_LastDescending and Short_ScreenTwo_Bars_TwoHighDescending and Short_ScreenTwo_Stoch_D_K_LastDescending
 
 // plotchar(series = not lateEntry, title = 'not lateEntry')
 // plotchar(series = Short_ScreenOne_LastBarRed, title = 'Short_ScreenOne_LastBarRed')
