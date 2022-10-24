@@ -1,0 +1,110 @@
+//@version=5
+strategy("Buy 4", overlay=true, pyramiding=1, initial_capital = 10000, default_qty_type = strategy.percent_of_equity, default_qty_value = 10, commission_type = strategy.commission.cash_per_contract, commission_value = 0.005)
+
+screen_1 = "W"
+screen_2 = "D"
+
+// functions
+quoteGreen(c, o) => c >= o
+f_round(_val, _decimals) =>
+    _p = math.pow(10, _decimals)
+    math.round(math.abs(_val) * _p)/ _p * math.sign(_val)
+
+// quotes
+[screen_1_open, screen_1_high, screen_1_low, screen_1_close]  = request.security(syminfo.tickerid, screen_1, [open, high, low, close], lookahead=barmerge.lookahead_on)
+[screen_1_open_prev, screen_1_high_prev, screen_1_low_prev, screen_1_close_prev] = request.security(syminfo.tickerid, screen_1, [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+[screen_2_open, screen_2_high, screen_2_low, screen_2_close] = request.security(syminfo.tickerid, screen_2, [open, high, low, close])
+
+// indicators
+screen_1_EMA26 = request.security(syminfo.tickerid, screen_1, ta.ema(close, 26), lookahead=barmerge.lookahead_on)
+screen_1_EMA26_prev = request.security(syminfo.tickerid, screen_1, ta.ema(close, 26)[1], lookahead=barmerge.lookahead_on)
+screen_2_EMA13 = request.security(syminfo.tickerid, screen_2, ta.ema(close, 13))
+[screen_1_MACD, screen_1_MACDSignal, screen_1_MACDHistorgram] = request.security(syminfo.tickerid, screen_1, ta.macd(close, 12, 26, 9), lookahead=barmerge.lookahead_on)
+[screen_2_MACD, screen_2_MACDSignal, screen_2_MACDHistogram] = request.security(syminfo.tickerid, screen_2, ta.macd(close, 12, 26, 9))
+screen_2_stoch_k = ta.stoch(screen_2_close, screen_2_high, screen_2_low, 14)
+screen_2_stoch_d = ta.sma(screen_2_stoch_k, 3)
+[screen_2_KC_middle, screen_2_KC_top, screen_2_KC_bottom] = request.security(syminfo.tickerid, screen_2, ta.kc(close, 20, 2), lookahead=barmerge.lookahead_on)
+
+currH = screen_1_MACDHistorgram
+prevH = screen_1_MACDHistorgram
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[1]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[2]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[2]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[3]
+if (prevH == currH)
+    prevH := screen_1_MACDHistorgram[4]
+
+Long_ScreenOne_LastBarGreen = screen_1_open < screen_1_close
+Long_ScreenOne_LastBarHigher = screen_1_low_prev < screen_1_low and screen_1_high_prev < screen_1_high
+Long_ScreenOne_EMA_LastBarCrosses = screen_1_low <= screen_1_EMA26 and screen_1_high >= screen_1_EMA26
+Long_ScreenOne_MACD_LastAscending = screen_1_MACDHistorgram > prevH
+
+Long_ScreenTwo_Bars_TwoHighAscending = screen_2_high > screen_2_high[1]
+screen_2_last_bar_above_EMA13 = screen_2_low > screen_2_EMA13 and screen_2_high > screen_2_EMA13
+Long_ScreenTwo_EMA_LastBarNotAbove = not screen_2_last_bar_above_EMA13
+Long_ScreenTwo_MACD_LastAscending = screen_2_MACDHistogram > screen_2_MACDHistogram[1]
+Long_ScreenTwo_Stoch_D_K_LastAscending = screen_2_stoch_k > screen_2_stoch_k[1] and screen_2_stoch_d > screen_2_stoch_d[1]
+Long_late_entry = close >= screen_2_KC_middle + (screen_2_KC_top - screen_2_KC_middle) / 100 * 80
+ascendingEMA26 = f_round(screen_1_EMA26_prev, 2) < f_round(screen_1_EMA26, 2)
+flatMovement = math.abs(f_round(screen_1_EMA26_prev, 2) - f_round(screen_1_EMA26, 2)) <= 0.03
+lastWeeklyQuoteGreen = screen_1_close > screen_1_open
+Long_ScreenOne_SoftTrendCheck = ascendingEMA26 and lastWeeklyQuoteGreen // and not flatMovement
+middleAfterKCMiddle = screen_2_KC_middle + (screen_2_KC_top - screen_2_KC_middle) / 100 * 50
+lastBarBelowMiddleTopKC = close <= middleAfterKCMiddle
+
+longCondition = Long_ScreenOne_SoftTrendCheck and strategy.position_size == 0 and not Long_late_entry and Long_ScreenOne_LastBarGreen and Long_ScreenOne_MACD_LastAscending and Long_ScreenTwo_Bars_TwoHighAscending and Long_ScreenTwo_Stoch_D_K_LastAscending
+
+// arrayToFindMin = array.new_float(size=10, initial_value=9999999)
+// for offset = 0 to 65
+//     array.insert(arrayToFindMin, offset, screen_2_low[offset])
+// min = array.min(id=arrayToFindMin)
+fixedSL_long = ta.valuewhen(longCondition, screen_2_KC_bottom, 0)
+
+long_TP_ratio = (screen_2_KC_top - screen_2_KC_middle) / 100 * 90
+fixedTP_long = ta.valuewhen(longCondition, low <= screen_2_KC_middle - (screen_2_KC_middle - screen_2_KC_bottom) / 100 * 50 ? screen_2_KC_middle + (screen_2_KC_top - screen_2_KC_middle) / 100 * 30: screen_2_KC_middle + long_TP_ratio, 0)
+
+barIndexEntry = ta.valuewhen(longCondition, bar_index, 0)
+
+Short_ScreenOne_LastBarRed = not quoteGreen(screen_1_close, screen_1_open)
+Short_ScreenOne_LastBarLower = screen_1_low_prev > screen_1_low and screen_1_high_prev > screen_1_high
+Short_ScreenOne_EMA_LastBarCrosses = screen_1_low <= screen_1_EMA26 and screen_1_high >= screen_1_EMA26
+Short_ScreenOne_MACD_LastDescending = screen_1_MACDHistorgram < prevH
+Short_ScreenTwo_Bars_TwoHighDescending = screen_2_high < screen_2_high[1]
+Short_screen_2_last_bar_below_EMA13 = screen_2_low < screen_2_EMA13 and screen_2_high < screen_2_EMA13
+Short_ScreenTwo_EMA_LastBarNotBelow = not Short_screen_2_last_bar_below_EMA13
+Short_ScreenTwo_MACD_LastDescending = screen_2_MACDHistogram < screen_2_MACDHistogram[1]
+Short_ScreenTwo_Stoch_D_K_LastDescending = screen_2_stoch_k < screen_2_stoch_k[1] and screen_2_stoch_d < screen_2_stoch_d[1]
+lateEntry = close <= screen_2_KC_middle - (screen_2_KC_middle- screen_2_KC_bottom) / 100 * 80
+descendingEMA26 = f_round(screen_1_EMA26_prev, 2) > f_round(screen_1_EMA26, 2)
+lastWeeklyQuoteRed = not quoteGreen(screen_1_close, screen_1_open)
+Short_ScreenOne_SoftTrendCheck = descendingEMA26 and lastWeeklyQuoteRed
+
+shortCondition = Short_ScreenOne_SoftTrendCheck and not lateEntry and Short_ScreenOne_LastBarRed and Short_ScreenOne_MACD_LastDescending and Short_ScreenTwo_Bars_TwoHighDescending and Short_ScreenTwo_Stoch_D_K_LastDescending
+
+// arrayToFindMax = array.new_float(size=10, initial_value=0)
+// for offset = 0 to 10
+//     array.insert(arrayToFindMax, offset, screen_2_low[offset])
+// max = array.max(id=arrayToFindMax)
+fixedSL_short = ta.valuewhen(shortCondition, screen_2_KC_top, 0)
+
+short_TL_ratio = (screen_2_KC_middle - screen_2_KC_bottom) / 100 * 80
+fixedTP_short = ta.valuewhen(shortCondition, low >= screen_2_KC_middle + (screen_2_KC_top - screen_2_KC_middle) / 100 * 50 ? screen_2_KC_middle - (screen_2_KC_middle - screen_2_KC_bottom) / 100 * 30: screen_2_KC_middle - short_TL_ratio, 0)
+
+// if (longCondition)
+//     strategy.entry("long", strategy.long)
+
+// if (bar_index - barIndexEntry > 1 and strategy.position_size > 0)
+//     strategy.exit(id = "exit", from_entry = "long", stop = fixedSL_long, limit = fixedTP_long, comment_profit = "Profit", comment_loss = "Loss")
+
+// if (shortCondition)
+//     strategy.entry("Short", strategy.short)
+
+// if (bar_index - barIndexEntry > 1)
+//     strategy.exit(id = "exit", from_entry = "Short", stop = fixedSL_short, limit = fixedTP_short, comment_profit = "Profit", comment_loss = "Loss")
+
+plotshape(shortCondition, style=shape.arrowdown, color = color.red)
+plotshape(longCondition, style=shape.arrowup, color = color.green)
