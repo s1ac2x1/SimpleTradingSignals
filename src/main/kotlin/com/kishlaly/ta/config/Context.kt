@@ -60,7 +60,7 @@ class Context {
         // misc
         var trendCheckIncludeHistogram = true
         var TRIM_DATA = true
-        var trimToDate: String? = "15.03.2022" // format: dd.mm.yyyy
+        var trimToDate: String? = null // format: dd.mm.yyyy
         var fileSeparator = System.getProperty("file.separator")
 
         const val TESTS_FOLDER = "tests"
