@@ -2,14 +2,36 @@ package com.kishlaly.ta.costsparser
 
 import com.kishlaly.ta.utils.roundDown
 import java.io.File
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
+
 
 fun main() {
-    val lines = File("20221020-1237417785-umsatz.CSV").readLines()
+    val lines = File("20221031-1237417785-umsatz.CSV").readLines()
     val grouped = lines.groupBy { line ->
         line.split(";")[5]
     }
     var html = "<style>table, th, td { border: 1px solid; }</style><table>"
+    html += """
+        <script>
+        function selectText(containerid) {
+            if (document.selection) { // IE
+                var range = document.body.createTextRange();
+                range.moveToElementText(document.getElementById(containerid));
+                range.select();
+            } else if (window.getSelection) {
+                var range = document.createRange();
+                range.selectNode(document.getElementById(containerid));
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+            }
+        }
+        </script>
+    """.trimIndent()
+    val df = DecimalFormat("#.#", DecimalFormatSymbols(Locale.GERMANY))
     grouped.forEach { name, lines ->
+        val id = "id-${System.nanoTime()}"
         html += "<tr>"
         html += "<td>${name}</td>"
         val sum = lines.map { it.split(";")[8] }
@@ -21,7 +43,7 @@ fun main() {
                     0
                 }
             }.sumOf { it.toDouble() }
-        html += "<td>${sum.roundDown()}</td></tr>"
+        html += "<td><div id=\"${id}\" onclick=\"selectText('${id}')\">${df.format(sum.roundDown())}</div></td></tr>"
     }
     html += "</table>"
     File("costs.html").writeText(html)
