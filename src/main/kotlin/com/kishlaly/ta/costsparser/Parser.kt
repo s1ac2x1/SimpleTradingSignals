@@ -43,7 +43,8 @@ fun main() {
                     0
                 }
             }.sumOf { it.toDouble() }
-        html += "<td><div id=\"${id}\" onclick=\"selectText('${id}')\">${df.format(sum.roundDown())}</div></td></tr>"
+        val color = if (sum.roundDown() >= 0) "color:#006400" else "color:B22202"
+        html += "<td><div style='${color}' id=\"${id}\" onclick=\"selectText('${id}')\">${df.format(Math.abs(sum.roundDown()))}</div></td></tr>"
     }
     html += "</table>"
     File("costs.html").writeText(html)
