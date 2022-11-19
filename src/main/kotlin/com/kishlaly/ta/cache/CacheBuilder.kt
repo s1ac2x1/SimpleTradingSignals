@@ -251,7 +251,7 @@ class CacheBuilder {
         )
 
         private fun saveQuote(symbol: String, quotes: List<Quote>) {
-            val folder = "${Context.outputFolder}/cache/{${Context.timeframe.get().name.lowercase()}}"
+            val folder = "${Context.outputFolder}/cache/${Context.timeframe.get().name.lowercase()}"
             val directory: File = File(folder)
             if (!directory.exists()) {
                 directory.mkdir()
