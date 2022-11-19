@@ -331,8 +331,8 @@ class TaskTester {
             timeframes: Array<Array<Timeframe>>,
             task: TaskType,
             blocksGroup: BlocksGroup,
-            stopLossStrategy: StopLossStrategy,
-            takeProfitStrategy: TakeProfitStrategy
+            stopLossStrategy: StopLossStrategy = StopLossFixedPrice(0.27),
+            takeProfitStrategy: TakeProfitStrategy = TakeProfitFixedKeltnerTop(90)
         ) {
             Context.stopLossStrategy.set(stopLossStrategy)
             Context.takeProfitStrategy.set(takeProfitStrategy)

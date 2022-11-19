@@ -25,9 +25,7 @@ fun main() {
     TaskTester.testOneStrategy(
         Context.basicTimeframes.get(),
         TaskType.THREE_DISPLAYS_BUY,
-        Experiments(),
-        StopLossFixedPrice(0.27),
-        TakeProfitFixedKeltnerTop(90)
+        Experiments()
     )
 
 //    RunUtils.buildTasksAndStrategiesSummary_()
