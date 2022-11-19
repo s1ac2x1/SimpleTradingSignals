@@ -24,9 +24,9 @@ class TaskRunner {
         val signals = mutableListOf<Signal>()
 
         fun run(
-            timeframes: Array<Array<Timeframe>>,
-            task: TaskType,
-            findOptimal: Boolean,
+            timeframes: Array<Array<Timeframe>> = Context.basicTimeframes.get(),
+            task: TaskType = TaskType.THREE_DISPLAYS_BUY,
+            findOptimal: Boolean = false,
             vararg blocksGroups: BlocksGroup
         ) {
             timeframes.forEach { screens ->
