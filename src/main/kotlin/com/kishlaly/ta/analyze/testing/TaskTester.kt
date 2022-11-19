@@ -6,6 +6,7 @@ import com.kishlaly.ta.analyze.tasks.groups.BlocksGroup
 import com.kishlaly.ta.analyze.testing.TaskTester.Companion.formatDate
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice
 import com.kishlaly.ta.analyze.testing.sl.StopLossStrategy
+import com.kishlaly.ta.analyze.testing.sl.StopLossVolatileKeltnerBottom
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitStrategy
 import com.kishlaly.ta.cache.CacheReader
@@ -331,7 +332,7 @@ class TaskTester {
             timeframes: Array<Array<Timeframe>>,
             task: TaskType,
             blocksGroup: BlocksGroup,
-            stopLossStrategy: StopLossStrategy = StopLossFixedPrice(0.27),
+            stopLossStrategy: StopLossStrategy = StopLossVolatileKeltnerBottom(10),
             takeProfitStrategy: TakeProfitStrategy = TakeProfitFixedKeltnerTop(90)
         ) {
             Context.stopLossStrategy.set(stopLossStrategy)

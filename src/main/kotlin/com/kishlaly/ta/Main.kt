@@ -26,11 +26,9 @@ fun main() {
     TaskTester.testOneStrategy(
         Context.basicTimeframes.get(),
         TaskType.THREE_DISPLAYS_BUY,
-        Experiments(),
-        stopLossStrategy = StopLossVolatileKeltnerBottom(10)
+        Experiments()
     )
 
-//    RunUtils.buildTasksAndStrategiesSummary_()
 //    RunUtils.buildTasksAndStrategiesSummary_()
 
 // ====================
