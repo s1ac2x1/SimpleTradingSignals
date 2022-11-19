@@ -12,8 +12,6 @@ import org.ktorm.database.Database
 class Context {
 
     companion object {
-        var signalsOnly = true
-
         var accountBalance = 10000.0 // maximum position size
 
         var tradeCommission = 1 // %
