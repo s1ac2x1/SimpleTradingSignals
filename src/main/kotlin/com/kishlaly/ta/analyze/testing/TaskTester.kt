@@ -623,34 +623,40 @@ class SignalResultFields(
 
     val type: String
         get() {
-            val positionTestResult = testing.getResult(quote)!!
-            if (!positionTestResult.closed) {
-                return " NOT CLOSED"
+            val positionTestResult = testing.getResult(quote)
+            var result = ""
+            positionTestResult?.let {
+                if (!positionTestResult.closed) {
+                    return " NOT CLOSED"
+                }
+                result = if (positionTestResult.profitable) "PROFIT " else "LOSS"
+                result += if (positionTestResult.gapUp) " (gap up)" else ""
+                result += if (positionTestResult.gapDown) " (gap down)" else ""
             }
-            var result = if (positionTestResult.profitable) "PROFIT " else "LOSS"
-            result += if (positionTestResult.gapUp) " (gap up)" else ""
-            result += if (positionTestResult.gapDown) " (gap down)" else ""
             return result
         }
 
     val percent: String
         get() {
-            val positionTestResult = testing.getResult(quote)!!
-            return "${positionTestResult.roi}%"
+            val positionTestResult = testing.getResult(quote)
+            return "${positionTestResult?.roi}%"
         }
 
     val duration: String
         get() {
-            val positionTestResult = testing.getResult(quote)!!
-            var result = "${positionTestResult.getPositionDuration(timeframe)}"
-            val endDate =
-                Dates.getBarTimeInMyZone(positionTestResult.closedTimestamp!!, exchangeTimezome).toString()
-            val parsed = ZonedDateTime.parse(endDate)
-            var parsedEndDate = parsed.dayOfMonth.toString() + " " + parsed.month + " " + parsed.year
-            if (timeframe == Timeframe.HOUR) {
-                parsedEndDate += " ${parsed.hour}:${parsed.minute}"
+            val positionTestResult = testing.getResult(quote)
+            var result = ""
+            positionTestResult?.let {
+                result = "${positionTestResult.getPositionDuration(timeframe)}"
+                val endDate =
+                    Dates.getBarTimeInMyZone(positionTestResult.closedTimestamp!!, exchangeTimezome).toString()
+                val parsed = ZonedDateTime.parse(endDate)
+                var parsedEndDate = parsed.dayOfMonth.toString() + " " + parsed.month + " " + parsed.year
+                if (timeframe == Timeframe.HOUR) {
+                    parsedEndDate += " ${parsed.hour}:${parsed.minute}"
+                }
+                result += " [till ${parsedEndDate}]"
             }
-            result += " [till ${parsedEndDate}]"
             return result
         }
 

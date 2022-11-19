@@ -9,6 +9,9 @@ class StopLossFixedPrice(config: Any?) : StopLossStrategy(config = config) {
     }
 
     override fun calculate(data: SymbolData, signalIndex: Int): Double {
+        if (data.quotes.size <= LAST_QUOTES_TO_FIND_MIN) {
+            return data.quotes[signalIndex].low
+        }
         val quoteWithMinimalLow = data.quotes
             .subList(signalIndex - LAST_QUOTES_TO_FIND_MIN, signalIndex)
             .minByOrNull { it.low }

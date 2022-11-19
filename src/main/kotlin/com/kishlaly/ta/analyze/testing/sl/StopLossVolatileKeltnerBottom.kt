@@ -15,6 +15,6 @@ class StopLossVolatileKeltnerBottom(config: Any?) : StopLossStrategy(config, tru
         return middle - ratio
     }
 
-    override fun toString() = "SL volatile Keltner ${config as Double}% bottom"
+    override fun toString() = "SL volatile Keltner ${config as Int}% bottom"
 
 }
