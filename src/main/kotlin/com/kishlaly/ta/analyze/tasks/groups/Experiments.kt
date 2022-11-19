@@ -3,6 +3,8 @@ package com.kishlaly.ta.analyze.tasks.groups
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastAscending
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosses
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_ThreeAscending
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FilterLateEntry
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending
@@ -20,11 +22,14 @@ class Experiments : AbstractBlocksGroup() {
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
             init {
-                add(ScreenBasicValidation())
-                add(Long_ScreenOne_EMA_ThreeAscending())
-                add(Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending())
-                add(Long_ScreenTwo_Stoch_D_LastAscending())
-                add(Long_ScreenTwo_FilterLateEntry())
+                // Long_ScreenOne_SoftTrendCheck
+                // not Long_late_entry
+                // Long_ScreenOne_LastBarGreen
+                // Long_ScreenOne_MACD_LastAscending
+                // Long_ScreenTwo_Bars_TwoHighAscending
+                // Long_ScreenTwo_Stoch_D_K_LastAscending
+                add(Long_ScreenOne_EMA_LastAscending())
+                add(Long_ScreenOne_EMA_LastAscending)
             }
         }
     }

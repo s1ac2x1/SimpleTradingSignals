@@ -15,7 +15,7 @@ import com.kishlaly.ta.utils.RunUtils
 fun main() {
     Context.aggregationTimeframe.set(Timeframe.DAY)
     Context.source = arrayOf(SymbolsSource.SP500)
-    RunUtils.singleSymbol("LUMN")
+    RunUtils.singleSymbol("INTC")
 
     Context.symbols.set(CacheReader.getSymbols())
 //    //buildCache(Context.basicTimeframes, false);
