@@ -2,13 +2,12 @@ package com.kishlaly.ta.analyze.tasks.groups
 
 import com.kishlaly.ta.analyze.tasks.ThreeDisplays
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock
-import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation
 import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastAscending
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_LastBarCrosses
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_EMA_ThreeAscending
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_LastBarGreen
+import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_MACD_LastAscending
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Bars_TwoHighAscending
 import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_FilterLateEntry
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending
-import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_LastAscending
+import com.kishlaly.ta.analyze.tasks.blocks.two.Long_ScreenTwo_Stoch_D_K_LastAscending
 
 /**
  * an experimental strategy for trying out different ideas that come to mind
@@ -22,14 +21,13 @@ class Experiments : AbstractBlocksGroup() {
     override fun blocks(): List<TaskBlock> {
         return object : ArrayList<TaskBlock>() {
             init {
-                // Long_ScreenOne_SoftTrendCheck
-                // not Long_late_entry
-                // Long_ScreenOne_LastBarGreen
-                // Long_ScreenOne_MACD_LastAscending
-                // Long_ScreenTwo_Bars_TwoHighAscending
                 // Long_ScreenTwo_Stoch_D_K_LastAscending
                 add(Long_ScreenOne_EMA_LastAscending())
-                add(Long_ScreenOne_EMA_LastAscending)
+                add(Long_ScreenOne_LastBarGreen())
+                add(Long_ScreenTwo_FilterLateEntry())
+                add(Long_ScreenOne_MACD_LastAscending())
+                add(Long_ScreenTwo_Bars_TwoHighAscending())
+                add(Long_ScreenTwo_Stoch_D_K_LastAscending())
             }
         }
     }

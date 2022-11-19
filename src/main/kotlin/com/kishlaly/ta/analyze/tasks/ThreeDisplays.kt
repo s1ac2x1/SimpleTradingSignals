@@ -10,7 +10,7 @@ class ThreeDisplays : AbstractTask() {
         var STOCH_VALUES_TO_CHECK = 5
 
         // in percent from the middle to the top of the channel
-        var FILTER_BY_KELTNER = 20
+        var FILTER_BY_KELTNER = 50
 
         // filtering signals if a quote closed above FILTER_BY_KELTNER
         // tests show better results when this check is turned off
