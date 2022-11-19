@@ -12,6 +12,8 @@ import org.ktorm.database.Database
 class Context {
 
     companion object {
+        var signalsOnly = true
+
         var accountBalance = 10000.0 // maximum position size
 
         var tradeCommission = 1 // %
@@ -37,7 +39,6 @@ class Context {
 
         var workingTime = 1440 // 1440 minutes in a day
 
-
         // If less, then skip this stock
         var minimumWeekBarsCount = 50
         var minimumDayBarsCount = 100
@@ -53,7 +54,8 @@ class Context {
         // for testing on historical data
         var testMode = false
         var stopLossStrategy: ThreadLocal<StopLossStrategy> = ThreadLocal.withInitial { StopLossFixedPrice(0.27) }
-        var takeProfitStrategy: ThreadLocal<TakeProfitStrategy> = ThreadLocal.withInitial { TakeProfitFixedKeltnerTop(80) }
+        var takeProfitStrategy: ThreadLocal<TakeProfitStrategy> =
+            ThreadLocal.withInitial { TakeProfitFixedKeltnerTop(80) }
         var massTesting = false
         var takeProfitStrategies: MutableList<TakeProfitStrategy> = mutableListOf()
 
