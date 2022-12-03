@@ -21,6 +21,8 @@ if (not quoteGreen(open, close))
 // plotchar(title = "shadowUp", series = shadowUp)
 // plotchar(title = "shadowDown", series = shadowDown)
 
+// === Hanging / Hammer ===
+
 hh_ShadowIsLong = shadowDown >= body * 2
 hh_BodyIsBiggerThanShadowUp = body - shadowUp > 0
 hh_ShadowsUpIsAbsentOrShort = shadowUp == 0 or shadowUp < body
@@ -30,3 +32,6 @@ plotchar(title = "H/H", series = hh_Condition, text = "H/H", location = location
 // plotchar(title = "hh_ShadowIsLong", series = hh_ShadowIsLong)
 // plotchar(title = "hh_BodyIsBiggerThanShadowUp", series = hh_BodyIsBiggerThanShadowUp)
 // plotchar(title = "hh_ShadowsUpIsAbsentOrShort", series = hh_ShadowsUpIsAbsentOrShort)
+
+// === Engulfing Pattern ===
+
