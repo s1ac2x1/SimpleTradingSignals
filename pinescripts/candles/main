@@ -17,8 +17,11 @@ shadowDown = open - low
 if (not quoteGreen(open, close))
     shadowDown := close - low
 
+// plotchar(title = "body", series = body)
+// plotchar(title = "shadowUp", series = shadowUp)
+// plotchar(title = "shadowDown", series = shadowDown)
 
-hh_ShadowIsLong = shadowDown >= body * 2.5
+hh_ShadowIsLong = shadowDown >= body * 2
 hh_BodyIsBiggerThanShadowUp = body - shadowUp > 0
 hh_ShadowsUpIsAbsentOrShort = shadowUp == 0 or shadowUp < body
 hh_Condition = hh_ShadowIsLong and hh_BodyIsBiggerThanShadowUp and hh_ShadowsUpIsAbsentOrShort
