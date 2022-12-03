@@ -1,0 +1,29 @@
+//@version=5
+strategy(title = "Candles")
+
+// functions
+
+quoteGreen(o, c) => c >= o
+
+// basic
+
+body = math.abs(open - close)
+
+shadowUp = high - close // for green candle
+if (not quoteGreen(open, close))
+    shadowUp := high - open
+
+shadowDown = open - low
+if (not quoteGreen(open, close))
+    shadowDown := close - low
+
+
+hh_ShadowIsLong = shadowDown >= body * 2.5
+hh_BodyIsBiggerThanShadowUp = body - shadowUp > 0
+hh_ShadowsUpIsAbsentOrShort = shadowUp == 0 or shadowUp < body
+hh_Condition = hh_ShadowIsLong and hh_BodyIsBiggerThanShadowUp and hh_ShadowsUpIsAbsentOrShort
+
+plotchar(title = "H/H", series = hh_Condition, text = "H/H", location = location.abovebar)
+// plotchar(title = "hh_ShadowIsLong", series = hh_ShadowIsLong)
+// plotchar(title = "hh_BodyIsBiggerThanShadowUp", series = hh_BodyIsBiggerThanShadowUp)
+// plotchar(title = "hh_ShadowsUpIsAbsentOrShort", series = hh_ShadowsUpIsAbsentOrShort)
