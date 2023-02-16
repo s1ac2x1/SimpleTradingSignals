@@ -1,0 +1,19 @@
+{
+  "id": "cmpl-6ke89qtxvTuFCEfvougToebIah87w",
+  "object": "text_completion",
+  "created": 1676575369,
+  "model": "text-davinci-003",
+  "choices": [
+    {
+      "text": "\n\nYerba mate is a traditional South American beverage made from the leaves of the Ilex paraguariensis plant. In the U.S., it is widely available in health food stores and online. People who recommend yerba mate say that it can relieve fatigue, aid in weight loss, ease depression, and help treat headaches and various other conditions. However, there is limited evidence that yerba mate may help with some of these conditions.\n\nDespite its potential benefits, yerba mate also has some potential negative effects. For example, it contains caffeine, which can cause insomnia, nervousness, restlessness, irritability, stomach upset, and rapid heartbeat. It also contains the stimulant theobromine, which can cause headaches, increased urination, and increased heart rate. In addition, yerba mate can interact with certain medications, such as anticoagulants, antiplatelet drugs, and monoamine oxidase inhibitors (MAOIs).\n\nYerba mate can also cause dehydration, as it has a diuretic effect. This can lead to electrolyte imbalances, which can cause muscle cramps, fatigue, and headaches. Additionally, it can cause gastrointestinal distress, such as nausea, vomiting, and diarrhea.\n\nFinally, yerba mate can contain high levels of lead, which can be toxic if consumed in large amounts. This is especially true for yerba mate that is not organic.\n\nIn conclusion, while yerba mate may have some potential benefits, it also has some potential negative effects. It contains caffeine and theobromine, which can cause insomnia, nervousness, restlessness, irritability, stomach upset, and rapid heartbeat. It can also interact with certain medications and cause dehydration, electrolyte imbalances, gastrointestinal distress, and lead toxicity. Therefore, it is important to consult with a healthcare professional before consuming yerba mate.",
+      "index": 0,
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 93,
+    "completion_tokens": 395,
+    "total_tokens": 488
+  }
+}

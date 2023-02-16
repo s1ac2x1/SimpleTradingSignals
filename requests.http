@@ -1,0 +1,11 @@
+POST https://api.openai.com/v1/completions
+Authorization: Bearer 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
+Content-Type: application/json
+
+{
+  "model": "text-davinci-003",
+  "prompt": "Please write a detailed article about what are the negative effects of yerba mate. Use this information to write the article: In the U.S., yerba mate is widely available in health food stores and online. People who recommend yerba mate say that it can relieve fatigue, aid in weight loss, ease depression, and help treat headaches and various other conditions. There's limited evidence that yerba mate may help with some of these conditions.",
+  "max_tokens": 2048,
+  "temperature": 0.7,
+  "top_p": 0.5
+}

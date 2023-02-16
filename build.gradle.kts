@@ -26,6 +26,10 @@ dependencies {
     implementation("com.googlecode.combinatoricslib:combinatoricslib:2.3")
     implementation("org.ktorm:ktorm-core:3.5.0")
     implementation("org.ktorm:ktorm-support-postgresql:3.5.0")
+    implementation("io.ktor:ktor-client-core:2.2.3")
+    implementation("io.ktor:ktor-server-core:2.2.3")
+    implementation("io.ktor:ktor-client-okhttp:2.2.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.4.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")
