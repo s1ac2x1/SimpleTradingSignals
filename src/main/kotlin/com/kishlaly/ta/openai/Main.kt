@@ -45,13 +45,17 @@ data class PAA(
 }
 
 fun main() {
-    readCsv(File("paa.csv").inputStream())
-        .distinctBy { it.title }
-        .forEach { paaData ->
-            val request = CompletionRequest(prompt = paaData.text)
-            val completion = getCompletion(request)
-            Files.write(Paths.get("paa/${symbol}_quotes.txt"), json.toByteArray())
-        }
+    val paas = readCsv(File("paa.csv").inputStream())
+        .distinctBy { it.title }.toList()
+
+    paas.forEachIndexed { index, paaData ->
+        print("[${index}/${paas.size}] Writing about: ${paaData.title} ...")
+        val request = CompletionRequest(prompt = paaData.text)
+        val completion = getCompletion(request)
+        val fileName = paaData.title.replace(" ", "_")
+        Files.write(Paths.get("paa/${fileName}.txt"), completion!!.toByteArray())
+        println(" done")
+    }
 }
 
 data class CompletionRequest(
