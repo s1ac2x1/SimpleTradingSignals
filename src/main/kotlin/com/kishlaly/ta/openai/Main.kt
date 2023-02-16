@@ -45,6 +45,7 @@ data class PAA(
 }
 
 fun main() {
+    // TODO добавить title первой строчкой в файл
     val paas = readCsv(File("paa.csv").inputStream())
         .distinctBy { it.title }.toList()
 
