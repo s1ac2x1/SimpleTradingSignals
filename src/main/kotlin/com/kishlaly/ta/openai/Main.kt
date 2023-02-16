@@ -49,7 +49,7 @@ fun main() {
         .distinctBy { it.title }.toList()
 
     paas.forEachIndexed { index, paaData ->
-        print("[${index}/${paas.size}] Writing about: ${paaData.title} ...")
+        print("[${index + 1}/${paas.size}] Writing about: ${paaData.title} ...")
         val request = CompletionRequest(
             prompt = "Please write a detailed article about ${paaData.title}. Use this information to write the article: ${paaData.text}"
         )
