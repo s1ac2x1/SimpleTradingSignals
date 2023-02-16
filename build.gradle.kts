@@ -30,6 +30,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core:2.2.3")
     implementation("io.ktor:ktor-client-okhttp:2.2.3")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.4.1")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.2")
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
     testImplementation("org.junit.platform:junit-platform-launcher:1.8.2")

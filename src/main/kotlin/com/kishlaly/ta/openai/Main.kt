@@ -1,5 +1,9 @@
 package com.kishlaly.ta.openai
 
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.dataformat.csv.CsvMapper
+import com.fasterxml.jackson.dataformat.csv.CsvParser
+import com.fasterxml.jackson.dataformat.csv.CsvSchema
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
@@ -7,18 +11,47 @@ import com.squareup.okhttp.MediaType
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
+import java.io.File
+import java.io.InputStream
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
 
 val apiKey = "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"
 val gson = Gson()
 val JSON = MediaType.parse("application/json; charset=utf-8")
 
+val csvMapper = CsvMapper().apply {
+    enable(CsvParser.Feature.TRIM_SPACES)
+    enable(CsvParser.Feature.SKIP_EMPTY_LINES)
+}
+
+val schema = CsvSchema.builder()
+    .addColumn("PAA Title")
+    .addColumn("Parent")
+    .addColumn("Text")
+    .addColumn("URL")
+    .addColumn("URL Title")
+    .build()
+
+data class PAA(
+    @field:JsonProperty("PAA Title") val title: String,
+    @field:JsonProperty("Parent") val parent: String,
+    @field:JsonProperty("Text") val text: String,
+    @field:JsonProperty("URL") val url: String,
+    @field:JsonProperty("URL Title") val urlTitle: String,
+) {
+    constructor() : this("", "", "", "", "")
+}
+
 fun main() {
-    val request = CompletionRequest(
-        prompt = "Please write a detailed article about what are the negative effects of yerba mate. Use this information to write the article: In the U.S., yerba mate is widely available in health food stores and online. People who recommend yerba mate say that it can relieve fatigue, aid in weight loss, ease depression, and help treat headaches and various other conditions. There's limited evidence that yerba mate may help with some of these conditions."
-    )
-    val completion = getCompletion(request)
-    println(completion)
+    readCsv(File("paa.csv").inputStream())
+        .distinctBy { it.title }
+        .forEach { paaData ->
+            val request = CompletionRequest(prompt = paaData.text)
+            val completion = getCompletion(request)
+            Files.write(Paths.get("paa/${symbol}_quotes.txt"), json.toByteArray())
+        }
 }
 
 data class CompletionRequest(
@@ -29,6 +62,12 @@ data class CompletionRequest(
     @SerializedName("top_p")
     val topP: Double = 0.5
 )
+
+fun readCsv(inputStream: InputStream): List<PAA> =
+    csvMapper.readerFor(PAA::class.java)
+        .with(schema.withSkipFirstDataRow(true))
+        .readValues<PAA>(inputStream)
+        .readAll()
 
 fun getCompletion(completionRequest: CompletionRequest): String? {
     return try {
