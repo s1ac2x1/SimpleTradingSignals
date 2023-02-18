@@ -44,19 +44,22 @@ data class PAA(
     constructor() : this("", "", "", "", "")
 }
 
+// Bitte schreiben Sie einen ausführlichen Artikel darüber {} Verwenden Sie diese Informationen, um den Artikel zu schreiben: {}
+
 fun main() {
-    // TODO добавить title первой строчкой в файл
+    // TODO в финальном тексте удалить двойные переносы строк
     val paas = readCsv(File("paa.csv").inputStream())
         .distinctBy { it.title }.toList()
 
     paas.forEachIndexed { index, paaData ->
         print("[${index + 1}/${paas.size}] Writing about: ${paaData.title} ...")
         val request = CompletionRequest(
-            prompt = "Please write a detailed article about ${paaData.title}. Use this information to write the article: ${paaData.text}"
+            prompt = "Bitte schreiben Sie einen ausführlichen Artikel darüber ${paaData.title}. Verwenden Sie diese Informationen, um den Artikel zu schreiben: ${paaData.text}"
         )
         val completion = getCompletion(request)
         val fileName = paaData.title.replace(" ", "_")
-        Files.write(Paths.get("paa/${fileName}.txt"), completion!!.toByteArray())
+        val output = "${paaData.title}\n\n${completion}"
+        Files.write(Paths.get("paa/${fileName}.txt"), output.toByteArray())
         println(" done")
     }
 }
