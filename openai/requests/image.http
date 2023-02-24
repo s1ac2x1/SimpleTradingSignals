@@ -1,0 +1,12 @@
+POST https://api.openai.com/v1/images/generations
+Authorization: Bearer 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
+Content-Type: application/json
+
+{
+  "prompt": "a white siamese cat",
+  "n": 1,
+  "size": "1024x1024"
+}
+
+###
+

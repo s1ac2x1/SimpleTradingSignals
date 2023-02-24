@@ -1,5 +1,7 @@
 Write a detailed blog article about %initial_phrase%. Use this information for context: %initial_context%
 
+what should be paid special attention to when studying the issue "%initial_phrase%"
+
 Introduce a relatable scenario in the 2nd person introducing some reasons why someone might want to know about %initial_phrase%. Use this information for a context: %initial_context%
 write about the common challenges people have because they don't know about "%initial_phrase%". Use this information for the context: %step_1_outcome%
 rewrite given text by adding pros and cons of the solution described here: %step_2_outcome%
