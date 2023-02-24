@@ -3,10 +3,8 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "a white siamese cat",
+  "prompt": "Maine Coon cat on the table retro painting",
   "n": 1,
   "size": "1024x1024"
 }
-
-###
 
