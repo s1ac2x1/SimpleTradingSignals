@@ -59,7 +59,7 @@ fun main() {
         val completion = getCompletion(request)
         val fileName = paaData.title.replace(" ", "_")
         val output = "${paaData.title}\n\n${completion}"
-        Files.write(Paths.get("paa/${fileName}.txt"), output.toByteArray())
+        Files.write(Paths.get("openai/output/${fileName}.txt"), output.toByteArray())
         println(" done")
     }
 }
