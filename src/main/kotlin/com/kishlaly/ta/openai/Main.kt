@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit
 val apiKey = "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"
 val gson = Gson()
 val JSON = MediaType.parse("application/json; charset=utf-8")
+val regex = Regex("[^A-Za-z0-9 ]")
 
 val csvMapper = CsvMapper().apply {
     enable(CsvParser.Feature.TRIM_SPACES)
@@ -47,8 +48,7 @@ data class PAA(
 // Bitte schreiben Sie einen ausführlichen Artikel darüber {} Verwenden Sie diese Informationen, um den Artikel zu schreiben: {}
 
 fun main() {
-    // TODO в финальном тексте удалить двойные переносы строк
-    val paas = readCsv(File("paa.csv").inputStream())
+    val paas = readCsv(File("openai/input.csv").inputStream())
         .distinctBy { it.title }.toList()
 
     paas.forEachIndexed { index, paaData ->
@@ -58,8 +58,9 @@ fun main() {
         )
         val completion = getCompletion(request)
         val fileName = paaData.title.replace(" ", "_")
-        val output = "${paaData.title}\n\n${completion}"
-        Files.write(Paths.get("openai/output/${fileName}.txt"), output.toByteArray())
+        val output = "${paaData.title}\n${completion}"
+        val safeFileName = regex.replace(fileName, "_")
+        Files.write(Paths.get("openai/output/${safeFileName}.txt"), output.toByteArray())
         println(" done")
     }
 }

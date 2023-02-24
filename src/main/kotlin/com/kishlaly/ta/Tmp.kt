@@ -10,13 +10,8 @@ fun main() {
 //    println(screen2.lastQuote.nativeDate)
 //    val efi: List<ElderForceIndex> = screen2.indicators.get(Indicator.EFI) as List<ElderForceIndex>
 //    println(efi)
-    println(fibonacci(10))
-}
-
-fun fibonacci(n: Int): Int {
-    return when (n) {
-        0 -> 0
-        1 -> 1
-        else -> fibonacci(n - 1) + fibonacci(n - 2)
-    }
+    val s = "asdf&34?()3422"
+    val re = Regex("[^A-Za-z0-9 ]")
+    val s2 = re.replace(s, "_")
+    println(s2)
 }
