@@ -20,7 +20,8 @@ import java.util.concurrent.TimeUnit
 val apiKey = "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"
 val gson = Gson()
 val JSON = MediaType.parse("application/json; charset=utf-8")
-val regex = Regex("[^A-Za-z0-9 ]")
+val filenameRegex = Regex("[^A-Za-z0-9 ]")
+val contentRegex = Regex("\n\n\n")
 
 val csvMapper = CsvMapper().apply {
     enable(CsvParser.Feature.TRIM_SPACES)
@@ -59,8 +60,11 @@ fun main() {
         val completion = getCompletion(request)
         val fileName = paaData.title.replace(" ", "_")
         val output = "${paaData.title}\n${completion}"
-        val safeFileName = regex.replace(fileName, "_")
-        Files.write(Paths.get("openai/output/${safeFileName}.txt"), output.toByteArray())
+
+        val safeFileName = filenameRegex.replace(fileName, "_")
+        val safeContent = contentRegex.replace(output, "\n\n")
+
+        Files.write(Paths.get("openai/output/${safeFileName}.txt"), safeContent.toByteArray())
         println(" done")
     }
 }
