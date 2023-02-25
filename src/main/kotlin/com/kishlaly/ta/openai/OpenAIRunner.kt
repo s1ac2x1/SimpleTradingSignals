@@ -48,71 +48,71 @@ data class PAA(
 
 // Bitte schreiben Sie einen ausführlichen Artikel darüber {} Verwenden Sie diese Informationen, um den Artikel zu schreiben: {}
 
-fun main() {
-    val paas = readCsv(File("openai/input.csv").inputStream())
-        .distinctBy { it.title }.toList()
-
-
-    paas.forEachIndexed { index, paaData ->
-        val xml = StringBuilder("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>")
-        xml.append("<output>")
-
-        println("[${index + 1}/${paas.size}] Writing about: ${paaData.title} ...")
-        val request = CompletionRequest(
-            prompt = "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ${paaData.title}. Verwenden Sie diese Informationen für den Kontext: ${paaData.text}"
-        )
-        val completion = getCompletion(request)
-        val fileName = paaData.title.replace(" ", "_")
-        val output = "${paaData.title}\n${completion}"
-
-        val safeFileName = filenameRegex.replace(fileName, "_")
-        val safeContent = contentRegex.replace(output, "\n\n")
-
-        xml.append("<post>")
-
-        xml.append("<title>")
-        xml.append(paaData.title)
-        xml.append("</title>")
-
-        xml.append("<content>")
-        xml.append(safeContent)
-        xml.append("</content>")
-
-        xml.append("<picture>")
-        var imagePrompt = Combiner.combine(
-            listOf(
-                "openai/katze101/breeds",
-                "openai/katze101/actions",
-                "openai/katze101/places"
-            )
-        ) + "pencil painting"
-        print("Generating image [$imagePrompt]...")
-        xml.append(getImageURL(ImageRequest(imagePrompt)))
-        xml.append("</picture>")
-        println("done")
-
-        xml.append("<post>")
-
-        xml.append("<output>")
-
-        Files.write(Paths.get("openai/output/${safeFileName}.xml"), xml.toString().toByteArray())
-
-    }
-    println("Done\n")
-}
-
 //fun main() {
-//    val imagePrompt = Combiner.combine(
-//        listOf(
-//            "openai/katze101/breeds",
-//            "openai/katze101/actions",
-//            "openai/katze101/places"
+//    val paas = readCsv(File("openai/input.csv").inputStream())
+//        .distinctBy { it.title }.toList()
+//
+//
+//    paas.forEachIndexed { index, paaData ->
+//        val xml = StringBuilder("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>")
+//        xml.append("<output>")
+//
+//        println("[${index + 1}/${paas.size}] Writing about: ${paaData.title} ...")
+//        val request = CompletionRequest(
+//            prompt = "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ${paaData.title}. Verwenden Sie diese Informationen für den Kontext: ${paaData.text}"
 //        )
-//    )
-//    print("Generating image [$imagePrompt]...")
-//    val imageURL = getImageURL(ImageRequest(imagePrompt + " pencil painting"))
-//    println(imageURL)
+//        val completion = getCompletion(request)
+//        val fileName = paaData.title.replace(" ", "_")
+//        val output = "${paaData.title}\n${completion}"
+//
+//        val safeFileName = filenameRegex.replace(fileName, "_")
+//        val safeContent = contentRegex.replace(output, "\n\n")
+//
+//        xml.append("<post>")
+//
+//        xml.append("<title>")
+//        xml.append(paaData.title)
+//        xml.append("</title>")
+//
+//        xml.append("<content>")
+//        xml.append(safeContent)
+//        xml.append("</content>")
+//
+//        xml.append("<picture>")
+//        var imagePrompt = Combiner.combine(
+//            listOf(
+//                "openai/katze101/breeds",
+//                "openai/katze101/actions",
+//                "openai/katze101/places"
+//            )
+//        ) + "pencil style"
+//        print("Generating image [$imagePrompt]...")
+//        xml.append(getImageURL(ImageRequest(imagePrompt)))
+//        xml.append("</picture>")
+//        println("done")
+//
+//        xml.append("<post>")
+//
+//        xml.append("<output>")
+//
+//        Files.write(Paths.get("openai/output/${safeFileName}.xml"), xml.toString().toByteArray())
+//
+//    }
+//    println("Done\n")
 //}
+
+fun main() {
+    val imagePrompt = Combiner.combine(
+        listOf(
+            "openai/katze101/breeds",
+            //"openai/katze101/actions",
+            "openai/katze101/places"
+        )
+    )
+    println("Generating image [$imagePrompt]...")
+    val imageURL = getImageURL(ImageRequest(imagePrompt + "pencil style"))
+    println(imageURL)
+}
 
 data class CompletionRequest(
     val model: String = "text-davinci-003",
