@@ -27,3 +27,16 @@ data class Usage(
     @SerializedName("total_tokens") var totalTokens: Int? = null
 
 )
+
+data class ImageResponse(
+
+    @SerializedName("created") var created: Int? = null,
+    @SerializedName("data") var data: ArrayList<ImageData> = arrayListOf()
+
+)
+
+data class ImageData(
+
+    @SerializedName("url") var url: String? = null
+
+)

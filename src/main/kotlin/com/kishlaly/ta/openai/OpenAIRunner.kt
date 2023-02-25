@@ -52,8 +52,12 @@ fun main() {
     val paas = readCsv(File("openai/input.csv").inputStream())
         .distinctBy { it.title }.toList()
 
+
     paas.forEachIndexed { index, paaData ->
-        print("[${index + 1}/${paas.size}] Writing about: ${paaData.title} ...")
+        val xml = StringBuilder("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>")
+        xml.append("<output>")
+
+        println("[${index + 1}/${paas.size}] Writing about: ${paaData.title} ...")
         val request = CompletionRequest(
             prompt = "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ${paaData.title}. Verwenden Sie diese Informationen für den Kontext: ${paaData.text}"
         )
@@ -64,9 +68,40 @@ fun main() {
         val safeFileName = filenameRegex.replace(fileName, "_")
         val safeContent = contentRegex.replace(output, "\n\n")
 
-        Files.write(Paths.get("openai/output/${safeFileName}.txt"), safeContent.toByteArray())
-        println(" done")
+        xml.append("<post>")
+
+        xml.append("<title>")
+        xml.append(paaData.title)
+        xml.append("</title>")
+
+        xml.append("<content>")
+        xml.append(safeContent)
+        xml.append("</content>")
+
+        xml.append("<picture>")
+        val imagePrompt = Combiner.combine(
+            listOf(
+                "openai/katze101/breeds",
+                "openai/katze101/actions",
+                "openai/katze101/places"
+            )
+        )
+        print("Generating image [$imagePrompt]...")
+        xml.append(getImageURL(ImageRequest(imagePrompt)))
+        xml.append(" pencil painting")
+        xml.append("</picture>")
+        println("done")
+
+        xml.append("<post>")
+
+        xml.append("<output>")
+
+        Files.write(Paths.get("openai/output/${safeFileName}.xml"), xml.toString().toByteArray())
+
+        println("Done\n")
     }
+
+
 }
 
 data class CompletionRequest(
@@ -76,6 +111,12 @@ data class CompletionRequest(
     val maxTokens: Int = 2048,
     @SerializedName("top_p")
     val topP: Double = 0.5
+)
+
+data class ImageRequest(
+    val prompt: String,
+    val n: Int = 1,
+    val topP: String = "512x512"
 )
 
 fun readCsv(inputStream: InputStream): List<PAA> =
@@ -99,6 +140,26 @@ fun getCompletion(completionRequest: CompletionRequest): String? {
         val body = httpClient.newCall(request).execute().body().string()
         val completionRespone = gson.fromJson<CompletionRespone>(body, object : TypeToken<CompletionRespone>() {}.type)
         return completionRespone.choices.firstOrNull()?.text
+    } catch (e: Exception) {
+        ""
+    }
+}
+
+fun getImageURL(imageRequest: ImageRequest): String? {
+    return try {
+        val httpClient = OkHttpClient()
+        httpClient.setConnectTimeout(5, TimeUnit.MINUTES)
+        httpClient.setReadTimeout(5, TimeUnit.MINUTES)
+        httpClient.setWriteTimeout(5, TimeUnit.MINUTES)
+
+        val request = Request.Builder()
+            .url("https://api.openai.com/v1/images/generations")
+            .post(RequestBody.create(JSON, gson.toJson(imageRequest)))
+            .header("Authorization", "Bearer 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")
+            .build()
+        val body = httpClient.newCall(request).execute().body().string()
+        val completionRespone = gson.fromJson<ImageResponse>(body, object : TypeToken<ImageResponse>() {}.type)
+        return completionRespone.data.firstOrNull()?.url
     } catch (e: Exception) {
         ""
     }
