@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "model": "text-davinci-003",
-  "prompt": "Write a detailed blog article about how to adopt kitten. Use this information for context: I love kittens",
+  "prompt": "überlisten alle wichtigsten Inhalte einer Mangelrüge",
   "max_tokens": 2048,
   "temperature": 0.7,
   "top_p": 0.5

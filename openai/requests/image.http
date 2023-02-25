@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "British Shorthair cat on the chair pencil painting",
+  "prompt": "Birman Cat Exploring On a bookshelf pencil painting",
   "n": 1,
   "size": "512x512"
 }
