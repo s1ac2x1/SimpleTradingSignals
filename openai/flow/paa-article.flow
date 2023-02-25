@@ -1,5 +1,8 @@
 Write a detailed blog article about %initial_phrase%. Use this information for context: %initial_context%
 
+Write a detailed expert answer to the question %initial_phrase%. Use this information for context: %initial_context%
+Schreiben Sie eine ausführliche Expertenantwort auf die Frage %initial_phrase%. Verwenden Sie diese Informationen für den Kontext: %initial_context%
+
 what should be paid special attention to when studying the issue "%initial_phrase%"
 
 Introduce a relatable scenario in the 2nd person introducing some reasons why someone might want to know about %initial_phrase%. Use this information for a context: %initial_context%

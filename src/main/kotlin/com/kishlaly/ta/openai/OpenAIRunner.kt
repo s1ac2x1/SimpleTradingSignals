@@ -55,7 +55,7 @@ fun main() {
     paas.forEachIndexed { index, paaData ->
         print("[${index + 1}/${paas.size}] Writing about: ${paaData.title} ...")
         val request = CompletionRequest(
-            prompt = "Bitte schreiben Sie einen ausführlichen Artikel darüber ${paaData.title}. Verwenden Sie diese Informationen, um den Artikel zu schreiben: ${paaData.text}"
+            prompt = "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ${paaData.title}. Verwenden Sie diese Informationen für den Kontext: ${paaData.text}"
         )
         val completion = getCompletion(request)
         val fileName = paaData.title.replace(" ", "_")
