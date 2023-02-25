@@ -79,16 +79,15 @@ fun main() {
         xml.append("</content>")
 
         xml.append("<picture>")
-        val imagePrompt = Combiner.combine(
+        var imagePrompt = Combiner.combine(
             listOf(
                 "openai/katze101/breeds",
                 "openai/katze101/actions",
                 "openai/katze101/places"
             )
-        )
+        ) + "pencil painting"
         print("Generating image [$imagePrompt]...")
         xml.append(getImageURL(ImageRequest(imagePrompt)))
-        xml.append(" pencil painting")
         xml.append("</picture>")
         println("done")
 
@@ -98,11 +97,22 @@ fun main() {
 
         Files.write(Paths.get("openai/output/${safeFileName}.xml"), xml.toString().toByteArray())
 
-        println("Done\n")
     }
-
-
+    println("Done\n")
 }
+
+//fun main() {
+//    val imagePrompt = Combiner.combine(
+//        listOf(
+//            "openai/katze101/breeds",
+//            "openai/katze101/actions",
+//            "openai/katze101/places"
+//        )
+//    )
+//    print("Generating image [$imagePrompt]...")
+//    val imageURL = getImageURL(ImageRequest(imagePrompt + " pencil painting"))
+//    println(imageURL)
+//}
 
 data class CompletionRequest(
     val model: String = "text-davinci-003",
@@ -116,7 +126,7 @@ data class CompletionRequest(
 data class ImageRequest(
     val prompt: String,
     val n: Int = 1,
-    val topP: String = "512x512"
+    val size: String = "512x512"
 )
 
 fun readCsv(inputStream: InputStream): List<PAA> =
