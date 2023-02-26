@@ -17,7 +17,7 @@ fun main() {
             listOf(
                 "openai/katze101/mood",
                 "openai/katze101/breeds",
-                "openai/katze101/type",
+                "openai/katze101/age",
 //                "openai/katze101/actions",
 //                "openai/katze101/places"
             )
@@ -63,9 +63,10 @@ class ImageGenerator {
             }
             executor.shutdown()
             executor.awaitTermination(1, TimeUnit.HOURS)
+            val output = urls.joinToString(separator = "\n") + "\n"
             Files.write(
                 Paths.get("openai/output/images/$outputFileName"),
-                urls.joinToString(separator = "\n").toByteArray(),
+                output.toByteArray(),
                 StandardOpenOption.APPEND
             )
         }
