@@ -1,9 +1,10 @@
 package com.kishlaly.ta.openai
 
 import java.io.File
-import kotlin.random.Random
 
 class Combiner {
+
+    // TODO нужно загрузить содержимое файлов один раз, а не открывать на каждый запрос
 
     companion object {
         fun combine(fileNames: List<String>): String {

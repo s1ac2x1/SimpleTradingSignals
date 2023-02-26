@@ -1,9 +1,5 @@
 package com.kishlaly.ta
 
-import com.kishlaly.ta.analyze.TaskType
-import com.kishlaly.ta.cache.CacheReader
-import com.kishlaly.ta.model.indicators.ElderForceIndex
-import com.kishlaly.ta.model.indicators.Indicator
 import java.io.File
 
 fun main() {

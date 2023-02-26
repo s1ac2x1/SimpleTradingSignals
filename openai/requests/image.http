@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "Selkirk Rex Cat Climbing Under a blanket pencil painting",
+  "prompt": "thunderstorm over the ocean",
   "n": 1,
   "size": "512x512"
 }
