@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "Russian Blue cat on the table in the style of pencil artwork",
+  "prompt": "happy British Shorthair kitten in the style of pencil artwork",
   "n": 1,
   "size": "512x512"
 }

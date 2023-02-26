@@ -12,12 +12,14 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 fun main() {
-    val tasks = (1..10).map {
+    val tasks = (1..4).map {
         var prompt = Combiner.combine(
             listOf(
+                "openai/katze101/mood",
                 "openai/katze101/breeds",
-                "openai/katze101/actions",
-                "openai/katze101/places"
+                "openai/katze101/type",
+//                "openai/katze101/actions",
+//                "openai/katze101/places"
             )
         ) + "in the style of pencil artwork"
         ImageTask(prompt)
