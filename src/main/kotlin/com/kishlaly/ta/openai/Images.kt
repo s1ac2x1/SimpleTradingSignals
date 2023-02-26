@@ -5,13 +5,9 @@ import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
 import io.ktor.util.collections.*
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.joinAll
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.util.concurrent.Semaphore
+import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 fun main() {
@@ -35,7 +31,7 @@ fun getImageURL(imageRequest: ImageRequest): String {
         httpClient.setConnectTimeout(5, TimeUnit.MINUTES)
         httpClient.setReadTimeout(5, TimeUnit.MINUTES)
         httpClient.setWriteTimeout(5, TimeUnit.MINUTES)
-        print("Generating image: $${imageRequest.prompt} ... ")
+        println("Generating image: ${imageRequest.prompt}")
         val request = Request.Builder()
             .url("https://api.openai.com/v1/images/generations")
             .post(RequestBody.create(JSON, gson.toJson(imageRequest)))
@@ -44,9 +40,8 @@ fun getImageURL(imageRequest: ImageRequest): String {
         val body = httpClient.newCall(request).execute().body().string()
         val completionRespone = gson.fromJson<ImageResponse>(body, object : TypeToken<ImageResponse>() {}.type)
         result = completionRespone.data.firstOrNull()?.url ?: ""
-        println("done")
     } catch (e: Exception) {
-        println("error: ${e.message}")
+        println("Image generation error: ${e.message}")
     } finally {
         return result
     }
@@ -57,23 +52,18 @@ class ImageGenerator {
     companion object {
         fun generate(tasks: List<ImageTask>, outputFileName: String) {
             val urls = ConcurrentSet<String>()
-            // TODO переделать на executor pool
-            runBlocking {
-                val jobs = ArrayList<Job>()
-                val semaphore = Semaphore(10)
-                for (task in tasks) {
-                    jobs += launch {
-                        semaphore.acquire()
-                        try {
-                            urls.add(getImageURL(ImageRequest(task.prompt)))
-                        } finally {
-                            semaphore.release()
-                        }
-                    }
+            val executor = Executors.newFixedThreadPool(5)
+            for (task in tasks) {
+                executor.submit {
+                    urls.add(getImageURL(ImageRequest(task.prompt)))
                 }
-                jobs.joinAll()
             }
-            Files.write(Paths.get("openai/output/images/$outputFileName"), urls.joinToString(separator = "\n").toByteArray())
+            executor.shutdown()
+            executor.awaitTermination(1, TimeUnit.HOURS)
+            Files.write(
+                Paths.get("openai/output/images/$outputFileName"),
+                urls.joinToString(separator = "\n").toByteArray()
+            )
         }
     }
 
