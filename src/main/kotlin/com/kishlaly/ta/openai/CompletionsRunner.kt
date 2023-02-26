@@ -80,7 +80,6 @@ fun main() {
                 "openai/katze101/places"
             )
         ) + "pencil style"
-        print("Generating image [$imagePrompt]...")
         xml.append(getImageURL(ImageRequest(imagePrompt)))
         xml.append("</picture>")
         println("done")
@@ -89,7 +88,7 @@ fun main() {
 
         xml.append("<output>")
 
-        Files.write(Paths.get("openai/output/${safeFileName}.xml"), xml.toString().toByteArray())
+        Files.write(Paths.get("openai/output/text/${safeFileName}.xml"), xml.toString().toByteArray())
 
     }
     println("Done\n")
