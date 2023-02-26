@@ -7,18 +7,19 @@ import com.squareup.okhttp.RequestBody
 import io.ktor.util.collections.*
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.nio.file.StandardOpenOption
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 fun main() {
-    val tasks = (1..3).map {
+    val tasks = (1..5).map {
         var prompt = Combiner.combine(
             listOf(
                 "openai/katze101/breeds",
                 "openai/katze101/actions",
                 "openai/katze101/places"
             )
-        ) + "pencil style"
+        ) + "in the style of pencil artwork"
         ImageTask(prompt)
     }
     ImageGenerator.generate(tasks, "cats.txt")
@@ -62,7 +63,8 @@ class ImageGenerator {
             executor.awaitTermination(1, TimeUnit.HOURS)
             Files.write(
                 Paths.get("openai/output/images/$outputFileName"),
-                urls.joinToString(separator = "\n").toByteArray()
+                urls.joinToString(separator = "\n").toByteArray(),
+                StandardOpenOption.APPEND
             )
         }
     }
