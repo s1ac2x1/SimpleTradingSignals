@@ -4,15 +4,14 @@ import com.google.common.reflect.TypeToken
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
-import io.ktor.util.collections.*
-import java.nio.file.Files
-import java.nio.file.Paths
-import java.nio.file.StandardOpenOption
+import java.io.FileOutputStream
+import java.net.URL
+import java.nio.channels.Channels
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 fun main() {
-    val tasks = (1..1).map {
+    val tasks = (1..150).map {
         var prompt = Combiner.combine(
             listOf(
                 "openai/katze101/mood",
@@ -21,10 +20,20 @@ fun main() {
 //                "openai/katze101/actions",
 //                "openai/katze101/places"
             )
-        ) + "in the style retro artwork"
-        ImageTask(prompt)
+        )
+        ImageTask(prompt, "in the style pencil artwork")
     }
-    ImageGenerator.generate(tasks, "cats.txt")
+    ImageGenerator.generate(tasks, "openai/output/images")
+}
+
+fun downloadFile(url: URL, outputFileName: String) {
+    url.openStream().use {
+        Channels.newChannel(it).use { rbc ->
+            FileOutputStream(outputFileName).use { fos ->
+                fos.channel.transferFrom(rbc, 0, Long.MAX_VALUE)
+            }
+        }
+    }
 }
 
 fun getImageURL(imageRequest: ImageRequest): String {
@@ -53,28 +62,23 @@ fun getImageURL(imageRequest: ImageRequest): String {
 class ImageGenerator {
 
     companion object {
-        fun generate(tasks: List<ImageTask>, outputFileName: String) {
-            val urls = ConcurrentSet<String>()
+        fun generate(tasks: List<ImageTask>, outputFolder: String) {
             val executor = Executors.newFixedThreadPool(5)
             for (task in tasks) {
                 executor.submit {
-                    urls.add(getImageURL(ImageRequest(task.prompt)))
+                    val imageURL = getImageURL(ImageRequest(task.keyword + " " + task.style))
+                    val outputFileName = filenameRegex.replace(task.keyword, "_") + "_" + System.currentTimeMillis()
+                    downloadFile(URL(imageURL), "$outputFolder/$outputFileName.png")
                 }
             }
             executor.shutdown()
             executor.awaitTermination(1, TimeUnit.HOURS)
-            val output = urls.joinToString(separator = "\n") + "\n"
-            Files.write(
-                Paths.get("openai/output/images/$outputFileName"),
-                output.toByteArray(),
-                StandardOpenOption.APPEND
-            )
         }
     }
 
 }
 
-data class ImageTask(val prompt: String)
+data class ImageTask(val keyword: String, val style: String)
 
 data class ImageRequest(
     val prompt: String,
