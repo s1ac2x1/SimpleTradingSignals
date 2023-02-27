@@ -4,26 +4,32 @@ import com.google.common.reflect.TypeToken
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
+import io.ktor.server.http.content.*
+import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
 import java.nio.channels.Channels
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
+//fun main() {
+//    val tasks = (1..10).map {
+//        var prompt = Combiner.combine(
+//            listOf(
+//                "openai/katze101/mood",
+//                "openai/katze101/breeds",
+//                "openai/katze101/age",
+////                "openai/katze101/actions",
+////                "openai/katze101/places"
+//            )
+//        )
+//        ImageTask(prompt, "in the style pencil artwork")
+//    }
+//    ImageGenerator.generate(tasks, "openai/output/images")
+//}
+
 fun main() {
-    val tasks = (1..10).map {
-        var prompt = Combiner.combine(
-            listOf(
-                "openai/katze101/mood",
-                "openai/katze101/breeds",
-                "openai/katze101/age",
-//                "openai/katze101/actions",
-//                "openai/katze101/places"
-            )
-        )
-        ImageTask(prompt, "in the style pencil artwork")
-    }
-    ImageGenerator.generate(tasks, "openai/output/images")
+    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
 }
 
 fun downloadFile(url: URL, outputFileName: String) {
@@ -35,6 +41,15 @@ fun downloadFile(url: URL, outputFileName: String) {
         }
     }
 }
+
+fun getRandomWPURL(imagesFolder: String, domain: String, date: String): String {
+    val randomFile = File(imagesFolder).listFiles().random().name
+    return createWPURL(domain, date, randomFile)
+}
+
+// https://katze101.com/wp-content/uploads/2023/02/enthusiastic_bengal_cat__1677512158682.png
+private fun createWPURL(domain: String, date: String, imageFileName: String) =
+    "https://${domain}/wp-content/uploads/${date}/$imageFileName"
 
 fun getImageURL(imageRequest: ImageRequest): String {
     var result = ""
