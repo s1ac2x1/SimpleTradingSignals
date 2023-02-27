@@ -10,6 +10,8 @@ import java.io.File
 import java.io.InputStream
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 val apiKey = "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"
 val gson = Gson()
@@ -56,36 +58,41 @@ fun generateBlogArticles(inputFileName: String, prompt: String) {
     val xml = StringBuffer("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>")
     xml.append("<output>")
 
-    paas.forEach { paaData ->
-        println("Writing about: ${paaData.title}")
+    val executor = Executors.newFixedThreadPool(5)
+    paas.forEach { executor.submit { createPostTag(it, prompt, xml) } }
+    executor.shutdown()
+    executor.awaitTermination(2, TimeUnit.HOURS)
 
-        var promptReplaced = prompt
-            .replace("###title###", paaData.title)
-            .replace("###context###", paaData.text)
-
-        val request = CompletionRequest(prompt = promptReplaced)
-        val completion = getCompletion(request)
-        val output = "${paaData.title}\n${completion}"
-        val safeContent = contentRegex.replace(output, "\n\n")
-
-        xml.append("<post>")
-
-        xml.append("<title>")
-        xml.append(paaData.title)
-        xml.append("</title>")
-
-        xml.append("<content>")
-        xml.append(safeContent)
-        xml.append("</content>")
-
-        xml.append("<picture>")
-        xml.append(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
-        xml.append("</picture>")
-
-        xml.append("<post>")
-    }
     xml.append("<output>")
     Files.write(Paths.get("openai/output/text/$inputFileName.xml"), xml.toString().toByteArray())
+}
+
+private fun createPostTag(paaData: PAA, prompt: String, xml: StringBuffer) {
+    println("Writing about: ${paaData.title}")
+
+    var promptReplaced = prompt
+        .replace("###title###", paaData.title)
+        .replace("###context###", paaData.text)
+
+    val completion = getCompletion(CompletionRequest(prompt = promptReplaced))
+    val output = "${paaData.title}\n${completion}"
+    val safeContent = contentRegex.replace(output, "\n\n")
+
+    xml.append("<post>")
+
+    xml.append("<title>")
+    xml.append(paaData.title)
+    xml.append("</title>")
+
+    xml.append("<content>")
+    xml.append(safeContent)
+    xml.append("</content>")
+
+    xml.append("<picture>")
+    xml.append(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
+    xml.append("</picture>")
+
+    xml.append("<post>")
 }
 
 //fun main() {
