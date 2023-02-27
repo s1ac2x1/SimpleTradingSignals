@@ -12,7 +12,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 fun main() {
-    val tasks = (1..1).map {
+    val tasks = (1..7).map {
         var prompt = Combiner.combine(
             listOf(
                 "openai/katze101/mood",
@@ -21,7 +21,7 @@ fun main() {
 //                "openai/katze101/actions",
 //                "openai/katze101/places"
             )
-        ) + "in the style of pencil artwork"
+        ) + "in the style retro artwork"
         ImageTask(prompt)
     }
     ImageGenerator.generate(tasks, "cats.txt")
