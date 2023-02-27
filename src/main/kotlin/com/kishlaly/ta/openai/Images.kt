@@ -12,7 +12,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 fun main() {
-    val tasks = (1..7).map {
+    val tasks = (1..1).map {
         var prompt = Combiner.combine(
             listOf(
                 "openai/katze101/mood",
