@@ -40,59 +40,53 @@ data class PAA(
     constructor() : this("", "", "", "", "")
 }
 
-// Bitte schreiben Sie einen ausführlichen Artikel darüber {} Verwenden Sie diese Informationen, um den Artikel zu schreiben: {}
-
-//fun main() {
-//    val paas = readCsv(File("openai/input.csv").inputStream())
-//        .distinctBy { it.title }.toList()
-//
-//
-//    paas.forEachIndexed { index, paaData ->
-//        val xml = StringBuilder("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>")
-//        xml.append("<output>")
-//
-//        println("[${index + 1}/${paas.size}] Writing about: ${paaData.title} ...")
-//        val request = CompletionRequest(
-//            prompt = "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ${paaData.title}. Verwenden Sie diese Informationen für den Kontext: ${paaData.text}"
-//        )
-//        val completion = getCompletion(request)
-//        val fileName = paaData.title.replace(" ", "_")
-//        val output = "${paaData.title}\n${completion}"
-//
-//        val safeFileName = filenameRegex.replace(fileName, "_")
-//        val safeContent = contentRegex.replace(output, "\n\n")
-//
-//        xml.append("<post>")
-//
-//        xml.append("<title>")
-//        xml.append(paaData.title)
-//        xml.append("</title>")
-//
-//        xml.append("<content>")
-//        xml.append(safeContent)
-//        xml.append("</content>")
-//
-//        xml.append("<picture>")
-//        xml.append(fetchRandomImageURL("openai/output/images/cats.txt"))
-//        xml.append("</picture>")
-//        println("done")
-//
-//        xml.append("<post>")
-//
-//        xml.append("<output>")
-//
-//        Files.write(Paths.get("openai/output/text/${safeFileName}.xml"), xml.toString().toByteArray())
-//
-//    }
-//    println("Done\n")
-//}
-
 fun main() {
-    val url = fetchRandomImageURL("openai/output/images/cats.txt")
-    println(url)
+    val inputFile = "katzenrassen"
+    val prompt =
+        "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ###title###. Verwenden Sie diese Informationen für den Kontext: ###context###"
+
+    generateBlogArticles(inputFile, prompt)
+
 }
 
-fun fetchRandomImageURL(filename: String) = File(filename).readLines().random()
+fun generateBlogArticles(inputFileName: String, prompt: String) {
+    val paas = readCsv(File("openai/$inputFileName.csv").inputStream())
+        .distinctBy { it.title }.toList()
+
+    val xml = StringBuffer("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>")
+    xml.append("<output>")
+
+    paas.forEach { paaData ->
+        println("Writing about: ${paaData.title}")
+
+        var promptReplaced = prompt
+            .replace("###title###", paaData.title)
+            .replace("###context###", paaData.text)
+
+        val request = CompletionRequest(prompt = promptReplaced)
+        val completion = getCompletion(request)
+        val output = "${paaData.title}\n${completion}"
+        val safeContent = contentRegex.replace(output, "\n\n")
+
+        xml.append("<post>")
+
+        xml.append("<title>")
+        xml.append(paaData.title)
+        xml.append("</title>")
+
+        xml.append("<content>")
+        xml.append(safeContent)
+        xml.append("</content>")
+
+        xml.append("<picture>")
+        xml.append(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
+        xml.append("</picture>")
+
+        xml.append("<post>")
+    }
+    xml.append("<output>")
+    Files.write(Paths.get("openai/output/text/$inputFileName.xml"), xml.toString().toByteArray())
+}
 
 //fun main() {
 //    val imagePrompt = Combiner.combine(
