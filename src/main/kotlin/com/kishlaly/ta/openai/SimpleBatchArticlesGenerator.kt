@@ -67,7 +67,15 @@ fun generateBlogArticles(inputFileName: String, prompt: String) {
         .distinctBy { it.title }.toList()
 
     val executor = Executors.newFixedThreadPool(50)
-    paas.forEach { executor.submit { createPostTag(it, prompt) } }
+    paas.forEach {
+        executor.submit {
+            try {
+                createPostTag(it, prompt)
+            } catch (e: Exception) {
+                println(e.message)
+            }
+        }
+    }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
