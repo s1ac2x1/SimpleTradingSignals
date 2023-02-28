@@ -22,24 +22,19 @@ val contentRegex = Regex("\n\n\n")
 val csvMapper = CsvMapper().apply {
     enable(CsvParser.Feature.TRIM_SPACES)
     enable(CsvParser.Feature.SKIP_EMPTY_LINES)
+    enable(CsvParser.Feature.IGNORE_TRAILING_UNMAPPABLE)
 }
 
 val schema = CsvSchema.builder()
     .addColumn("PAA Title")
-    .addColumn("Parent")
     .addColumn("Text")
-    .addColumn("URL")
-    .addColumn("URL Title")
     .build()
 
 data class PAA(
     @field:JsonProperty("PAA Title") val title: String,
-    @field:JsonProperty("Parent") val parent: String,
-    @field:JsonProperty("Text") val text: String,
-    @field:JsonProperty("URL") val url: String,
-    @field:JsonProperty("URL Title") val urlTitle: String,
+    @field:JsonProperty("Text") val text: String
 ) {
-    constructor() : this("", "", "", "", "")
+    constructor() : this("", "")
 }
 
 
@@ -63,8 +58,14 @@ fun createSingleImportFile(fileName: String) {
 }
 
 fun generateBlogArticles(inputFileName: String, prompt: String) {
-    val paas = readCsv(File("openai/$inputFileName.csv").inputStream())
-        .distinctBy { it.title }.toList()
+    val paas = try {
+        readCsv(File("openai/$inputFileName.csv").inputStream())
+            .distinctBy { it.title }
+            .distinctBy { it.text }
+            .toList()
+    } catch (e: Exception) {
+        throw e
+    }
 
     val executor = Executors.newFixedThreadPool(50)
     paas.forEach {
