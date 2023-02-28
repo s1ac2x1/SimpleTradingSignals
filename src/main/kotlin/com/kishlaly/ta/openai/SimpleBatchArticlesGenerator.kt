@@ -42,14 +42,14 @@ data class PAA(
     constructor() : this("", "", "", "", "")
 }
 
-// TODO что там кодировкой после импорта?
+
 fun main() {
     val inputFile = "katzenrassen"
     val prompt =
         "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ###title###. Verwenden Sie diese Informationen für den Kontext: ###context###"
 
     //generateBlogArticles(inputFile, prompt)
-    createSingleImportFile(inputFile)
+    //createSingleImportFile(inputFile)
 }
 
 fun createSingleImportFile(fileName: String) {
