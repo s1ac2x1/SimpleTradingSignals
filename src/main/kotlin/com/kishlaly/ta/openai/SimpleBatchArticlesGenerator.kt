@@ -48,7 +48,7 @@ fun main() {
     val prompt =
         "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ###title###. Verwenden Sie diese Informationen für den Kontext: ###context###"
 
-    //generateBlogArticles(inputFile, prompt)
+    generateBlogArticles(inputFile, prompt)
     //createSingleImportFile(inputFile)
 }
 
@@ -66,7 +66,7 @@ fun generateBlogArticles(inputFileName: String, prompt: String) {
     val paas = readCsv(File("openai/$inputFileName.csv").inputStream())
         .distinctBy { it.title }.toList()
 
-    val executor = Executors.newFixedThreadPool(5)
+    val executor = Executors.newFixedThreadPool(50)
     paas.forEach { executor.submit { createPostTag(it, prompt) } }
 
     executor.shutdown()
