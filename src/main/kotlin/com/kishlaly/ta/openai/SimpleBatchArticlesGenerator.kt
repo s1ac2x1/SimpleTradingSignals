@@ -42,33 +42,39 @@ data class PAA(
     constructor() : this("", "", "", "", "")
 }
 
+// TODO что там кодировкой после импорта?
 fun main() {
     val inputFile = "katzenrassen"
     val prompt =
         "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ###title###. Verwenden Sie diese Informationen für den Kontext: ###context###"
 
-    generateBlogArticles(inputFile, prompt)
+    //generateBlogArticles(inputFile, prompt)
+    createSingleImportFile(inputFile)
+}
 
+fun createSingleImportFile(fileName: String) {
+    val xml = StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    xml.append("<output>")
+    File("openai/output/text").listFiles().forEach {
+        xml.append(it.readText())
+    }
+    xml.append("</output>")
+    Files.write(Paths.get("openai/$fileName.xml"), xml.toString().toByteArray())
 }
 
 fun generateBlogArticles(inputFileName: String, prompt: String) {
     val paas = readCsv(File("openai/$inputFileName.csv").inputStream())
         .distinctBy { it.title }.toList()
 
-    val xml = StringBuffer("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>")
-    xml.append("<output>")
-
     val executor = Executors.newFixedThreadPool(5)
-    paas.forEach { executor.submit { createPostTag(it, prompt, xml) } }
+    paas.forEach { executor.submit { createPostTag(it, prompt) } }
+
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
-
-    xml.append("<output>")
-    Files.write(Paths.get("openai/output/text/$inputFileName.xml"), xml.toString().toByteArray())
 }
 
-private fun createPostTag(paaData: PAA, prompt: String, xml: StringBuffer) {
-    println("Writing about: ${paaData.title}")
+private fun createPostTag(paaData: PAA, prompt: String) {
+    val xml = StringBuilder()
 
     var promptReplaced = prompt
         .replace("###title###", paaData.title)
@@ -92,7 +98,11 @@ private fun createPostTag(paaData: PAA, prompt: String, xml: StringBuffer) {
     xml.append(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
     xml.append("</picture>")
 
-    xml.append("<post>")
+    xml.append("</post>")
+
+    val safeTitle = filenameRegex.replace(paaData.title, "_")
+    Files.write(Paths.get("openai/output/text/$safeTitle-post.xml"), xml.toString().toByteArray())
+    println("Ready: ${paaData.title}")
 }
 
 //fun main() {
