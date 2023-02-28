@@ -1,13 +1,9 @@
 package com.kishlaly.ta.openai
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.dataformat.csv.CsvMapper
-import com.fasterxml.jackson.dataformat.csv.CsvParser
-import com.fasterxml.jackson.dataformat.csv.CsvSchema
 import com.google.gson.Gson
 import com.squareup.okhttp.MediaType
 import java.io.File
-import java.io.InputStream
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.concurrent.Executors
@@ -18,17 +14,6 @@ val gson = Gson()
 val JSON = MediaType.parse("application/json; charset=utf-8")
 val filenameRegex = Regex("[^A-Za-z0-9]")
 val contentRegex = Regex("\n\n\n")
-
-val csvMapper = CsvMapper().apply {
-    enable(CsvParser.Feature.TRIM_SPACES)
-    enable(CsvParser.Feature.SKIP_EMPTY_LINES)
-    enable(CsvParser.Feature.IGNORE_TRAILING_UNMAPPABLE)
-}
-
-val schema = CsvSchema.builder()
-    .addColumn("PAA Title")
-    .addColumn("Text")
-    .build()
 
 data class PAA(
     @field:JsonProperty("PAA Title") val title: String,
@@ -41,7 +26,7 @@ data class PAA(
 fun main() {
     val inputFile = "katzenrassen"
     val prompt =
-        "Schreiben Sie eine ausführliche Expertenantwort auf die Frage ###title###. Verwenden Sie diese Informationen für den Kontext: ###context###"
+        "Verhalten Sie sich wie ein Tierarzt mit langjähriger Erfahrung mit Katzen. Schreiben Sie eine ausführliche Expertenantwort auf die Frage: ###title###"
 
     generateBlogArticles(inputFile, prompt)
     //createSingleImportFile(inputFile)
@@ -59,9 +44,9 @@ fun createSingleImportFile(fileName: String) {
 
 fun generateBlogArticles(inputFileName: String, prompt: String) {
     val paas = try {
-        readCsv(File("openai/$inputFileName.csv").inputStream())
+        readCsv("openai/$inputFileName.csv")
             .distinctBy { it.title }
-            .distinctBy { it.text }
+            //.distinctBy { it.text }
             .toList()
     } catch (e: Exception) {
         throw e
@@ -127,9 +112,8 @@ private fun createPostTag(paaData: PAA, prompt: String) {
 //    println(imageURL)
 //}
 
-fun readCsv(inputStream: InputStream): List<PAA> =
-    csvMapper.readerFor(PAA::class.java)
-        .with(schema.withSkipFirstDataRow(true))
-        .readValues<PAA>(inputStream)
-        .readAll()
-
+fun readCsv(fileName: String): List<PAA> =
+    File(fileName).readLines().map { line ->
+        val split = line.split(";")
+        PAA(split[0], split[1])
+    }
