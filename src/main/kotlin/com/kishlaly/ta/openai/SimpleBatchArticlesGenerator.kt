@@ -14,6 +14,7 @@ val gson = Gson()
 val JSON = MediaType.parse("application/json; charset=utf-8")
 val filenameRegex = Regex("[^A-Za-z0-9]")
 val contentRegex = Regex("\n\n\n")
+var threads = 5
 
 data class PAA(
     @field:JsonProperty("PAA Title") val title: String,
@@ -24,10 +25,11 @@ data class PAA(
 
 
 fun main() {
-    val inputFile = "katzenrassen"
+    val inputFile = "katzenverhalten"
     val prompt =
         "Schreiben Sie eine ausführliche Expertenantwort auf die Frage: ###title### Begründen Sie Ihre Antwort gegebenenfalls mit einigen Beispielen"
 
+    threads = 5
     generateBlogArticles(inputFile, prompt)
     //createSingleImportFile(inputFile)
 }
@@ -52,7 +54,7 @@ fun generateBlogArticles(inputFileName: String, prompt: String) {
         throw e
     }
 
-    val executor = Executors.newFixedThreadPool(10)
+    val executor = Executors.newFixedThreadPool(threads)
     paas.forEach {
         executor.submit {
             try {
