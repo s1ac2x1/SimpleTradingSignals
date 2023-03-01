@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.Gson
 import com.squareup.okhttp.MediaType
 import java.io.File
+import java.lang.RuntimeException
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.concurrent.Executors
@@ -117,5 +118,8 @@ private fun createPostTag(paaData: PAA, prompt: String) {
 fun readCsv(fileName: String): List<PAA> =
     File(fileName).readLines().map { line ->
         val split = line.split(";")
+        if (split[0].contains("PAA Title")) {
+            throw RuntimeException("Remote first line from CSV file!")
+        }
         PAA(split[0], split[1])
     }
