@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "model": "text-davinci-003",
-  "prompt": "Verhalten Sie sich wie ein Tierarzt mit langjähriger Erfahrung mit Katzen. Schreiben Sie eine ausführliche Expertenantwort auf die Frage: Was passiert wenn man mit Katzen nicht spielt?",
+  "prompt": "Verhalten Sie sich wie ein Tierarzt mit langjähriger Erfahrung mit Katzen. Schreiben Sie eine ausführliche Expertenantwort auf die Frage: Wo soll Katze in der ersten Nacht schlafen?",
   "max_tokens": 2048,
   "temperature": 0.7,
   "top_p": 0.5

@@ -28,8 +28,8 @@ fun main() {
     val prompt =
         "Verhalten Sie sich wie ein Tierarzt mit langjähriger Erfahrung mit Katzen. Schreiben Sie eine ausführliche Expertenantwort auf die Frage: ###title###"
 
-    generateBlogArticles(inputFile, prompt)
-    //createSingleImportFile(inputFile)
+    //generateBlogArticles(inputFile, prompt)
+    createSingleImportFile(inputFile)
 }
 
 fun createSingleImportFile(fileName: String) {
@@ -52,7 +52,7 @@ fun generateBlogArticles(inputFileName: String, prompt: String) {
         throw e
     }
 
-    val executor = Executors.newFixedThreadPool(50)
+    val executor = Executors.newFixedThreadPool(2)
     paas.forEach {
         executor.submit {
             try {
@@ -75,7 +75,7 @@ private fun createPostTag(paaData: PAA, prompt: String) {
         .replace("###context###", paaData.text)
 
     val completion = getCompletion(CompletionRequest(prompt = promptReplaced))
-    val output = "${paaData.title}\n${completion}"
+    val output = "${completion}"
     val safeContent = contentRegex.replace(output, "\n\n")
 
     xml.append("<post>")
