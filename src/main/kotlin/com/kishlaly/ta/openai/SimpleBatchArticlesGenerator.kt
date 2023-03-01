@@ -26,10 +26,10 @@ data class PAA(
 fun main() {
     val inputFile = "katzenrassen"
     val prompt =
-        "Verhalten Sie sich wie ein Tierarzt mit langjähriger Erfahrung mit Katzen. Schreiben Sie eine ausführliche Expertenantwort auf die Frage: ###title###"
+        "Schreiben Sie eine ausführliche Expertenantwort auf die Frage: ###title### Begründen Sie Ihre Antwort gegebenenfalls mit einigen Beispielen"
 
-    //generateBlogArticles(inputFile, prompt)
-    createSingleImportFile(inputFile)
+    generateBlogArticles(inputFile, prompt)
+    //createSingleImportFile(inputFile)
 }
 
 fun createSingleImportFile(fileName: String) {
@@ -52,7 +52,7 @@ fun generateBlogArticles(inputFileName: String, prompt: String) {
         throw e
     }
 
-    val executor = Executors.newFixedThreadPool(2)
+    val executor = Executors.newFixedThreadPool(10)
     paas.forEach {
         executor.submit {
             try {
@@ -89,7 +89,7 @@ private fun createPostTag(paaData: PAA, prompt: String) {
     xml.append("</content>")
 
     xml.append("<picture>")
-    xml.append(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
+    xml.append(getRandomWPURL("openai/output/images", "katze101.com", "2023/03"))
     xml.append("</picture>")
 
     xml.append("</post>")

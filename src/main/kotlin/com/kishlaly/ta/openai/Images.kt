@@ -12,25 +12,23 @@ import java.nio.channels.Channels
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-//fun main() {
-//    val tasks = (1..10).map {
-//        var prompt = Combiner.combine(
-//            listOf(
-//                "openai/katze101/mood",
-//                "openai/katze101/breeds",
-//                "openai/katze101/age",
-////                "openai/katze101/actions",
-////                "openai/katze101/places"
-//            )
-//        )
-//        ImageTask(prompt, "in the style pencil artwork")
-//    }
-//    ImageGenerator.generate(tasks, "openai/output/images")
-//}
-
 fun main() {
-    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
+    val tasks = (1..1).map {
+        var prompt = Combiner.combine(
+            listOf(
+                "openai/katze101/breeds",
+                "openai/katze101/age",
+                "openai/katze101/behaviour",
+            )
+        )
+        ImageTask(prompt, "in the style pencil artwork")
+    }
+    ImageGenerator.generate(tasks, "openai/output/images")
 }
+
+//fun main() {
+//    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
+//}
 
 fun downloadFile(url: URL, outputFileName: String) {
     url.openStream().use {
