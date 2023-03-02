@@ -16,6 +16,8 @@ val JSON = MediaType.parse("application/json; charset=utf-8")
 val filenameRegex = Regex("[^A-Za-z0-9]")
 val contentRegex = Regex("\n\n\n")
 var threads = 5
+var domain = ""
+var date = ""
 
 data class PAA(
     @field:JsonProperty("PAA Title") val title: String,
@@ -24,15 +26,31 @@ data class PAA(
     constructor() : this("", "")
 }
 
+// попробовать заменять элементы списка на подзаголовки
+// например: "1. Veränderungen im Verhalten: " на "<h3>Veränderungen im Verhalten<h3>"
+// or "– Farbkontrast: "
+// etc
 
 fun main() {
-    val inputFile = "katzenverhalten"
+    val inputFile = "katzenpflege"
     val prompt =
         "Schreiben Sie eine ausführliche Expertenantwort auf die Frage: ###title### Begründen Sie Ihre Antwort gegebenenfalls mit einigen Beispielen"
 
     threads = 5
-    generateBlogArticles(inputFile, prompt)
-    //createSingleImportFile(inputFile)
+    domain = "katze101.com"
+    date = "2023/03"
+
+    //generateBlogArticles(inputFile, prompt)
+    //checkNull()
+    createSingleImportFile(inputFile)
+}
+
+fun checkNull() {
+    File("openai/output/text").listFiles().forEach {
+        if (it.readText().contains(">null")) {
+            println("Error file: ${it.name}")
+        }
+    }
 }
 
 fun createSingleImportFile(fileName: String) {
@@ -92,7 +110,7 @@ private fun createPostTag(paaData: PAA, prompt: String) {
     xml.append("</content>")
 
     xml.append("<picture>")
-    xml.append(getRandomWPURL("openai/output/images", "katze101.com", "2023/03"))
+    xml.append(getRandomWPURL("openai/output/images", domain, date))
     xml.append("</picture>")
 
     xml.append("</post>")
