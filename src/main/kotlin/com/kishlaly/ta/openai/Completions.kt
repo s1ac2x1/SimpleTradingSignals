@@ -33,5 +33,7 @@ data class CompletionRequest(
     @SerializedName("max_tokens")
     val maxTokens: Int = 2048,
     @SerializedName("top_p")
-    val topP: Double = 0.5
+    val topP: Double = 0.5,
+    @SerializedName("frequency_penalty")
+    val frequencyPenalty: Double = 0.8
 )
