@@ -40,15 +40,37 @@ fun main() {
 //        listOf(removeExtraLineBreaks, removeNumericList, trimmed)
 //    )
 
-    // пишем контент по пунктам оглавления
+//    // пишем контент по пунктам оглавления
+//    val prompts =
+//        File("$outputFolder/step_2_1")
+//            .readLines()
+//            .map { "Die Antwort auf die Frage, \"$initialKeyword\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort gegebenenfalls mit einigen Beispielen" }
+//    Step(
+//        "3",
+//        prompts,
+//        listOf(createParagraphs, removeFirstSentence, trimmed)
+//    )
+
+//    // пишем контент по пунктам оглавления, часть вторая
+//    val prompts =
+//        File("$outputFolder/step_2_1")
+//            .readLines()
+//            .map { "Schreiben Sie eine kurze historische Anmerkung zu diesem Thema: $it" }
+//    Step(
+//        "4",
+//        prompts,
+//        listOf(createParagraphs, trimmed)
+//    )
+
+    // пишем контент по пунктам оглавления, часть третья. Опционально, скажем, каждый четный пункт оглавления
     val prompts =
         File("$outputFolder/step_2_1")
             .readLines()
-            .map { "Die Antwort auf die Frage, \"$initialKeyword\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort gegebenenfalls mit einigen Beispielen" }
+            .map { "Schreiben Sie einige interessante Fakten über $it. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
     Step(
-        "3",
+        "5",
         prompts,
-        listOf(createParagraphs, removeFirstSentence, trimmed)
+        listOf(createParagraphs, trimmed)
     )
 
     // картинка (вероятно, лучше по step_2 elements)
