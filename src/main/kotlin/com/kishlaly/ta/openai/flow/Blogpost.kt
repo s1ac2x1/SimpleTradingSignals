@@ -1,6 +1,5 @@
 package com.kishlaly.ta.openai.flow
 
-import java.io.File
 import kotlin.random.Random
 
 val outputFolder = "openai/flow/output"
@@ -10,6 +9,8 @@ val numericListRegex = Regex("\\d+\\. ")
 
 val trimmed: (String) -> String = { it.trim() }
 val removeExtraLineBreaks: (String) -> String = { contentRegex.replace(it, "") }
+val removeQuotes: (String) -> String = { it.replace("\"", "") }
+val removeDots: (String) -> String = { it.replace(".", "") }
 val removeNumericList: (String) -> String = { numericListRegex.replace(it, "") }
 val createParagraphs: (String) -> String = {
     val output = StringBuilder()
@@ -63,15 +64,22 @@ fun main() {
 //    )
 
     // пишем контент по пунктам оглавления, часть третья. Опционально, скажем, каждый четный пункт оглавления
-    val prompts =
-        File("$outputFolder/step_2_1")
-            .readLines()
-            .map { "Schreiben Sie einige interessante Fakten über $it. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
-    Step(
-        "5",
-        prompts,
-        listOf(createParagraphs, trimmed)
-    )
+//    val prompts =
+//        File("$outputFolder/step_2_1")
+//            .readLines()
+//            .map { "Schreiben Sie einige interessante Fakten über $it. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
+//    Step(
+//        "5",
+//        prompts,
+//        listOf(createParagraphs, trimmed)
+//    )
+
+    // ищем противоположное мнение
+//    Step(
+//        "6",
+//        listOf("Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"$initialKeyword\""),
+//        listOf(removeQuotes, removeDots, trimmed)
+//    )
 
     // картинка (вероятно, лучше по step_2 elements)
 
