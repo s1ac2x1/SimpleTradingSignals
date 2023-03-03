@@ -7,8 +7,9 @@ import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
 import java.util.concurrent.TimeUnit
 
-fun getCompletion(completionRequest: CompletionRequest): String? {
-    return try {
+fun getCompletion(completionRequest: CompletionRequest): String {
+    var result = ""
+    try {
         val httpClient = OkHttpClient()
         httpClient.setConnectTimeout(5, TimeUnit.MINUTES)
         httpClient.setReadTimeout(5, TimeUnit.MINUTES)
@@ -19,11 +20,14 @@ fun getCompletion(completionRequest: CompletionRequest): String? {
             .post(RequestBody.create(JSON, gson.toJson(completionRequest)))
             .header("Authorization", "Bearer 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")
             .build()
+        println(completionRequest.prompt)
         val body = httpClient.newCall(request).execute().body().string()
         val completionRespone = gson.fromJson<CompletionRespone>(body, object : TypeToken<CompletionRespone>() {}.type)
-        return completionRespone.choices.firstOrNull()?.text
+        result = completionRespone.choices.firstOrNull()?.text!!
     } catch (e: Exception) {
-        ""
+        println(e.message)
+    } finally {
+        return result
     }
 }
 

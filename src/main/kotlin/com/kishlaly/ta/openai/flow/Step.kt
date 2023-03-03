@@ -6,6 +6,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 val outputFolder = "openai/flow/output"
+val contentRegex = Regex("\n\n\n")
 
 class Step(
     val name: String,
@@ -13,6 +14,8 @@ class Step(
 ) {
     fun run() {
         val completion = getCompletion(CompletionRequest(prompt = input))
-        Files.write(Paths.get("$outputFolder/${name}_output"), completion!!.toByteArray())
+        val postProcessed = contentRegex.replace(completion, "")
+        Files.write(Paths.get("$outputFolder/${name}_output"), postProcessed.toByteArray())
+        println("Step $name finished")
     }
 }
