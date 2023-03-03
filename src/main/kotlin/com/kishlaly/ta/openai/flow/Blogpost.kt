@@ -10,14 +10,13 @@ fun main() {
     val initialKeyword = "Welche Katzen Haaren am wenigsten?"
 
 //    // введение
-//    Step("step_1", listOf("eine Einleitung für einen Artikel zu einem Thema schreiben: $initialKeyword"))
+//    Step("1", listOf("eine Einleitung für einen Artikel zu einem Thema schreiben: $initialKeyword"))
 //
 //    // оглавление
-//    Step("step_2", listOf("Schreiben Sie eine nummerierte Liste mit Schlüsselwörtern zum Thema \"$initialKeyword\""))
+//    Step("2", listOf("Schreiben Sie eine nummerierte Liste mit Schlüsselwörtern zum Thema \"$initialKeyword\""))
 
 //    // пишем контент по пунктам оглавления
-//    val tocItems: List<String> = parseTOC("step_2")
-//    println(tocItems)
+//    Step("3", parseTOC("step_2"))
 }
 
 fun parseTOC(step: String): List<String> {
