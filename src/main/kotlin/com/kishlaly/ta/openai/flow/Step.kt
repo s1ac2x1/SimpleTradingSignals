@@ -7,16 +7,17 @@ import java.nio.file.Paths
 
 class Step(
     val name: String,
-    val input: List<String>
+    val input: List<String>,
+    val postProcessing: String.() -> String
 ) {
     init {
         input.forEachIndexed { index, prompt ->
             val outputFileName = "step_${name}_${index + 1}"
 
-            val completion = getCompletion(CompletionRequest(prompt = prompt))
-            val postProcessed = contentRegex.replace(completion, "")
+            val rawResponse = getCompletion(CompletionRequest(prompt = prompt))
+            val result = postProcessing(rawResponse)
 
-            Files.write(Paths.get("$outputFolder/$outputFileName"), postProcessed.toByteArray())
+            Files.write(Paths.get("$outputFolder/$outputFileName"), result.toByteArray())
             println("$outputFileName finished")
         }
     }
