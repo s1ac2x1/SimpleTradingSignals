@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.Gson
 import com.squareup.okhttp.MediaType
 import java.io.File
-import java.lang.RuntimeException
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.concurrent.Executors
@@ -18,6 +17,7 @@ val contentRegex = Regex("\n\n\n")
 var threads = 5
 var domain = ""
 var date = ""
+var DELIMITER = ";"
 
 data class PAA(
     @field:JsonProperty("PAA Title") val title: String,
@@ -25,11 +25,6 @@ data class PAA(
 ) {
     constructor() : this("", "")
 }
-
-// попробовать заменять элементы списка на подзаголовки
-// например: "1. Veränderungen im Verhalten: " на "<h3>Veränderungen im Verhalten<h3>"
-// or "– Farbkontrast: "
-// etc
 
 fun main() {
     val inputFile = "katzenpflege"
@@ -40,9 +35,9 @@ fun main() {
     domain = "katze101.com"
     date = "2023/03"
 
-    //generateBlogArticles(inputFile, prompt)
+    generateBlogArticles(inputFile, prompt)
     //checkNull()
-    createSingleImportFile(inputFile)
+    //createSingleImportFile(inputFile)
 }
 
 fun checkNull() {
@@ -135,7 +130,7 @@ private fun createPostTag(paaData: PAA, prompt: String) {
 
 fun readCsv(fileName: String): List<PAA> =
     File(fileName).readLines().map { line ->
-        val split = line.split(";")
+        val split = line.split(DELIMITER)
         if (split[0].contains("PAA Title")) {
             throw RuntimeException("Remote first line from CSV file!")
         }

@@ -2,6 +2,20 @@ package com.kishlaly.ta
 
 import java.io.File
 
+val text = """
+    Es gibt keine einzelne Farbe, die Katzen aggressiv macht. Tatsächlich können verschiedene Faktoren, einschließlich Farbe, die Aggressivität einer Katze beeinflussen. Einige Beispiele sind:
+
+    – Umgebung: Eine Katze kann aggressiv werden, wenn sie sich in einer ungewohnten Umgebung befindet, in der sie sich unsicher fühlt. Dies kann durch eine neue Farbe oder ein neues Muster in der Umgebung verursacht werden.
+
+    – Farbkontrast: Katzen reagieren auf Farbkontraste. Wenn eine Katze eine helle Farbe auf einem dunklen Hintergrund sieht, kann sie sich bedroht fühlen und aggressiv werden.
+
+    – Farbkombinationen: Katzen reagieren auch auf Farbkombinationen. Einige Farbkombinationen, wie Rot und Schwarz, können Aggressionen auslösen.
+
+    – Farbintensität: Eine Katze kann auch aggressiv werden, wenn sie eine sehr intensive Farbe sieht. Dies kann durch ein helles Rot oder Gelb verursacht werden.
+
+    Insgesamt kann man also sagen, dass es keine einzelne Farbe gibt, die Katzen aggressiv macht. Es können viele verschiedene Faktoren, einschließlich Farbe, die Aggressivität einer Katze beeinflussen.
+""".trimIndent()
+
 fun main() {
 //    val screen2 = CacheReader.getSymbolData(TaskType.THREE_DISPLAYS_BUY.getTimeframeIndicators(2), "LUMN")
 //    println(screen2.lastQuote.nativeDate)
@@ -16,7 +30,8 @@ fun main() {
 //        it.writeText(corrected)
 //    }
 
-    val content = File("openai/katzenverhalten.xml").readText()
-    val newContent = content.replace("<content>.\n\n", "<content>")
-    File("openai/katzenverhalten2.xml").writeText(newContent)
+//    val content = File("openai/katzenverhalten.xml").readText()
+//    val newContent = content.replace("<content>.\n\n", "<content>")
+//    File("openai/katzenverhalten2.xml").writeText(newContent)
+
 }

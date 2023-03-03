@@ -12,18 +12,34 @@ import java.nio.channels.Channels
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
+//fun main() {
+//    val tasks = (1..50).map {
+//        var prompt = Combiner.combine(
+//            listOf(
+//                "openai/katze101/breeds",
+//                "openai/katze101/age",
+//                "openai/katze101/care",
+//            )
+//        )
+//        ImageTask(prompt, "in the style pencil artwork")
+//    }
+//    ImageGenerator.generate(tasks, "openai/output/images")
+//}
+
 fun main() {
-    val tasks = (1..1).map {
-        var prompt = Combiner.combine(
-            listOf(
-                "openai/katze101/breeds",
-                "openai/katze101/age",
-                "openai/katze101/behaviour",
-            )
-        )
-        ImageTask(prompt, "in the style pencil artwork")
+    val inputFileName = "katzenpflege"
+    val paas = try {
+        readCsv("openai/$inputFileName.csv")
+            .distinctBy { it.title }
+            //.distinctBy { it.text }
+            .toList()
+    } catch (e: Exception) {
+        throw e
     }
-    ImageGenerator.generate(tasks, "openai/output/images")
+
+    val tasks = paas.map { ImageTask(it.title, "Schwarz-Weiß-Bleistiftbild") }.shuffled().take(5)
+
+    ImageGenerator.generate(tasks, "openai/output/images2")
 }
 
 //fun main() {

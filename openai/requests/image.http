@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "happy British Shorthair kitten in the style of pencil artwork",
+  "prompt": "Wie viel Nassfutter darf eine Katze am Tag fressen? Schwarz-Weiß-Bleistiftbild",
   "n": 1,
   "size": "512x512"
 }
