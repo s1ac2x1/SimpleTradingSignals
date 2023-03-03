@@ -1,5 +1,6 @@
 package com.kishlaly.ta.openai.flow
 
+import java.io.File
 import kotlin.random.Random
 
 val outputFolder = "openai/flow/output"
@@ -80,6 +81,14 @@ fun main() {
 //        listOf("Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"$initialKeyword\""),
 //        listOf(removeQuotes, removeDots, trimmed)
 //    )
+
+    // пишет текс об этом противоположном мнении
+    val step_7_prompt = File("$outputFolder/step_6_1").readText()
+    Step(
+        "7",
+        listOf("$step_7_prompt Schreiben Sie zwei Absätze zu diesem Thema"),
+        listOf(createParagraphs, trimmed)
+    )
 
     // картинка (вероятно, лучше по step_2 elements)
 
