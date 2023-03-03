@@ -8,7 +8,7 @@ import java.nio.file.Paths
 class Step(
     val name: String,
     val input: List<String>,
-    val postProcessings: List<String.() -> String>
+    val postProcessings: List<(String) -> String>
 ) {
     init {
         input.forEachIndexed { index, prompt ->

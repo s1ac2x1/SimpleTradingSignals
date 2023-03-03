@@ -1,7 +1,5 @@
 package com.kishlaly.ta
 
-import java.io.File
-
 val text = """
     Es gibt keine einzelne Farbe, die Katzen aggressiv macht. Tatsächlich können verschiedene Faktoren, einschließlich Farbe, die Aggressivität einer Katze beeinflussen. Einige Beispiele sind:
 
