@@ -19,6 +19,9 @@ val createParagraphs: (String) -> String = {
     }
     output.toString()
 }
+val removeFirstSentence: (String) -> String = { str ->
+    str.substring(str.indexOfFirst { it == '.' } + 1, str.length)
+}
 
 fun main() {
     val initialKeyword = "Welche Katzen Haaren am wenigsten?"
@@ -45,10 +48,10 @@ fun main() {
     Step(
         "3",
         prompts,
-        listOf(createParagraphs, trimmed)
+        listOf(createParagraphs, removeFirstSentence, trimmed)
     )
 
-    // картинка
+    // картинка (вероятно, лучше по step_2 elements)
 
     // можно добавить исторической справки по рандомны пунктам контента оглавления
 
