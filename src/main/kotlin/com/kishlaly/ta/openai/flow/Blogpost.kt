@@ -1,9 +1,6 @@
 package com.kishlaly.ta.openai.flow
 
-import com.kishlaly.ta.openai.date
-import com.kishlaly.ta.openai.domain
 import com.kishlaly.ta.openai.filenameRegex
-import com.kishlaly.ta.openai.getRandomWPURL
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -206,9 +203,10 @@ private fun oppositeOpinionText(outputFolderPerStep: String) {
 
 private fun oppositeOpinionQuestion(initialKeyword: String, outputFolderPerStep: String) {
     Step(
-        "6",
-        listOf("Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"$initialKeyword\""),
-        listOf(removeQuotes, removeDots, trimmed)
+        name = "6",
+        outputFolder = outputFolderPerStep,
+        input = listOf("Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"$initialKeyword\""),
+        postProcessings = listOf(removeQuotes, removeDots, trimmed)
     )
 }
 
@@ -218,9 +216,10 @@ private fun tableOfContentsTexts_part3(outputFolderPerStep: String) {
             .readLines()
             .map { "Schreiben Sie einige interessante Fakten über $it. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
     Step(
-        "5",
-        prompt,
-        listOf(createParagraphs, removeFirstSentence, trimmed)
+        name = "5",
+        outputFolder = outputFolderPerStep,
+        input = prompt,
+        postProcessings = listOf(createParagraphs, removeFirstSentence, trimmed)
     )
 }
 
@@ -230,9 +229,10 @@ private fun tableOfContentsTexts_part2(outputFolderPerStep: String) {
             .readLines()
             .map { "Schreiben Sie eine kurze historische Anmerkung zu diesem Thema: $it" }
     Step(
-        "4",
-        prompt,
-        listOf(createParagraphs, trimmed)
+        name = "4",
+        outputFolder = outputFolderPerStep,
+        input = prompt,
+        postProcessings = listOf(createParagraphs, trimmed)
     )
 }
 
@@ -242,24 +242,27 @@ private fun tableOfContentsTexts_part1(initialKeyword: String, outputFolderPerSt
             .readLines()
             .map { "Die Antwort auf die Frage, \"$initialKeyword\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort gegebenenfalls mit einigen Beispielen" }
     Step(
-        "3",
-        prompt,
-        listOf(createParagraphs, removeFirstSentence, trimmed)
+        name = "3",
+        outputFolder = outputFolderPerStep,
+        input = prompt,
+        postProcessings = listOf(createParagraphs, removeFirstSentence, trimmed)
     )
 }
 
 private fun tableOfContentsPlan(initialKeyword: String, outputFolderPerStep: String) {
     Step(
-        "2",
-        listOf("Schreiben Sie eine nummerierte Liste mit Schlüsselwörtern zum Thema \"$initialKeyword\""),
-        listOf(removeExtraLineBreaks, removeNumericList, trimmed)
+        name = "2",
+        outputFolder = outputFolderPerStep,
+        input = listOf("Schreiben Sie eine nummerierte Liste mit Schlüsselwörtern zum Thema \"$initialKeyword\""),
+        postProcessings = listOf(removeExtraLineBreaks, removeNumericList, trimmed)
     )
 }
 
 private fun introduction(initialKeyword: String, outputFolderPerStep: String) {
     Step(
-        "1",
-        listOf("eine Einleitung für einen Artikel zu einem Thema schreiben: $initialKeyword"),
-        listOf(removeExtraLineBreaks, trimmed)
+        name = "1",
+        outputFolder = outputFolderPerStep,
+        input = listOf("eine Einleitung für einen Artikel zu einem Thema schreiben: $initialKeyword"),
+        postProcessings = listOf(removeExtraLineBreaks, trimmed)
     )
 }
