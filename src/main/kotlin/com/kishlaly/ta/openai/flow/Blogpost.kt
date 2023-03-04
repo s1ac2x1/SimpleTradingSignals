@@ -6,7 +6,8 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.random.Random
 
-val outputFolder = "openai/flow/output"
+val mainOutputFolder = "openai/flow/output"
+
 val lineBreaksRegex = Regex("\n")
 val contentRegex = Regex("\n\n")
 val finalRegex = Regex("\n\n\n")
@@ -31,60 +32,81 @@ val removeFirstSentence: (String) -> String = { str ->
 
 fun main() {
     val initialKeyword = "Welche Katzen Haaren am wenigsten?"
+    prepare(initialKeyword)
 
-//    introduction(initialKeyword)
-//
-//    tableOfContentsPlan(initialKeyword)
-//    tableOfContentsTexts_part1(initialKeyword)
-//    tableOfContentsTexts_part2()
-//    tableOfContentsTexts_part3()
+    val xml = StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    xml.append("<output>")
 
-//    oppositeOpinionQuestion(initialKeyword)
-//    oppositeOpinionText()
-//
-//    keywords()
-//
-//    imagesForToC()
-//
-//    featuresImages(initialKeyword)
+    // inside start
+    xml.append("<post>")
+    xml.append("<title>")
+    xml.append(initialKeyword)
+    xml.append("</title>")
 
-//    conclusion()
+    xml.append("<post>${buildContent(initialKeyword)}</post>")
 
-//    randomAddition()
+    xml.append("</post>")
+    // loop end
+    xml.append("</output>")
 
-    buildContent(initialKeyword)
+    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.toString().toByteArray())
 }
 
-fun buildContent(title: String) {
-    val introduction = File("$outputFolder/step_1_1").readText()
-    val tocPlan = File("$outputFolder/step_2_1").readLines()
+fun prepare(keyword: String) {
+    val outputFolderPerStep = filenameRegex.replace(keyword, "_")
+    introduction(keyword, outputFolderPerStep)
+
+    tableOfContentsPlan(keyword, outputFolderPerStep)
+    tableOfContentsTexts_part1(keyword, outputFolderPerStep)
+    tableOfContentsTexts_part2(outputFolderPerStep)
+    tableOfContentsTexts_part3(outputFolderPerStep)
+
+    oppositeOpinionQuestion(keyword, outputFolderPerStep)
+    oppositeOpinionText(outputFolderPerStep)
+
+    keywords(outputFolderPerStep)
+
+    imagesForToC(outputFolderPerStep)
+
+    featuresImages(keyword, outputFolderPerStep)
+
+    conclusion(outputFolderPerStep)
+
+    randomAddition(outputFolderPerStep)
+}
+
+fun buildContent(title: String): String {
+
+    val introduction = File("$mainOutputFolder/step_1_1").readText()
+    val tocPlan = File("$mainOutputFolder/step_2_1").readLines()
 
     val tocContent = StringBuilder()
     tocPlan.forEachIndexed { index, item ->
         tocContent.append("<h2>$item</h2>")
 
         val imageName =
-            File("$outputFolder/").listFiles().find { it.name.contains(filenameRegex.replace(item, "_")) }?.name ?: ""
+            File("$mainOutputFolder/").listFiles().find { it.name.contains(filenameRegex.replace(item, "_")) }?.name
+                ?: ""
         var imageURL = "https://katze101.com/wp-content/uploads/2023/03/$imageName"
         tocContent.append("<img src='$imageURL'></img>")
 
         val content_step_3 =
-            File(outputFolder).listFiles().find { it.name.contains("step_3_${index + 1}") }?.readText() ?: ""
+            File(mainOutputFolder).listFiles().find { it.name.contains("step_3_${index + 1}") }?.readText() ?: ""
         val content_step_4 =
-            File(outputFolder).listFiles().find { it.name.contains("step_4_${index + 1}") }?.readText() ?: ""
+            File(mainOutputFolder).listFiles().find { it.name.contains("step_4_${index + 1}") }?.readText() ?: ""
         val content_step_5 =
-            File(outputFolder).listFiles().find { it.name.contains("step_5_${index + 1}") }?.readText() ?: ""
+            File(mainOutputFolder).listFiles().find { it.name.contains("step_5_${index + 1}") }?.readText() ?: ""
 
         tocContent.append("<p>$content_step_3</p>")
         tocContent.append("<p>$content_step_4</p>")
         tocContent.append("<p>$content_step_5</p>")
     }
 
-    val oppositeOpitionSubtitle = File("$outputFolder/step_6_1").readText()
-    val oppositeOpinionText = File("$outputFolder/step_7_1").readText()
+    val oppositeOpitionSubtitle = File("$mainOutputFolder/step_6_1").readText()
+    val oppositeOpinionText = File("$mainOutputFolder/step_7_1").readText()
 
-    val conclusion = File("$outputFolder/step_10_1").readText()
-    val randomAddition = File("$outputFolder/step_11_1").readText()
+    val conclusion = File("$mainOutputFolder/step_10_1").readText()
+    val randomAddition = File("$mainOutputFolder/step_11_1").readText()
 
     var content = """
         <p>$introduction</p>
@@ -99,73 +121,79 @@ fun buildContent(title: String) {
     content = content.replace("!.", ".")
     content = content.replace("!", ".")
 
-    Files.write(Paths.get("$outputFolder/post.txt"), content.toByteArray())
+    return content
 }
 
-fun randomAddition() {
-    val conclusion = lineBreaksRegex.replace(File("$outputFolder/step_10_1").readText(), "")
+fun randomAddition(outputFolderPerStep: String) {
+    val conclusion = lineBreaksRegex.replace(File("$mainOutputFolder/step_10_1").readText(), "")
     var prompt = if (Random.nextBoolean()) {
         "Beschreiben Sie Ihre persönliche Erfahrung zu diesem Thema: $conclusion"
     } else {
         "Schreiben Sie im Auftrag der Redaktion unseres Blogs eine Stellungnahme zu diesem Thema: $conclusion"
     }
     Step(
-        "11",
-        listOf(prompt),
-        listOf(createParagraphs, trimmed)
+        name = "11",
+        input = listOf(prompt),
+        outputFolder = outputFolderPerStep,
+        postProcessings = listOf(createParagraphs, trimmed)
     )
 }
 
-fun conclusion() {
-    val introduction = File("$outputFolder/step_1_1").readText()
-    val oppositeOpinion = File("$outputFolder/step_7_1").readText()
+fun conclusion(outputFolderPerStep: String) {
+    val introduction = File("$mainOutputFolder/step_1_1").readText()
+    val oppositeOpinion = File("$mainOutputFolder/step_7_1").readText()
     val prompt = lineBreaksRegex.replace(introduction, "") + " " + lineBreaksRegex.replace(oppositeOpinion, "")
     Step(
-        "10",
-        listOf("Schreiben Sie ein Fazit zu diesem Artikel: $prompt"),
-        listOf(createParagraphs, trimmed)
+        name = "10",
+        outputFolder = outputFolderPerStep,
+        input = listOf("Schreiben Sie ein Fazit zu diesem Artikel: $prompt"),
+        postProcessings = listOf(createParagraphs, trimmed)
     )
 }
 
-private fun featuresImages(initialKeyword: String) {
+private fun featuresImages(initialKeyword: String, outputFolderPerStep: String) {
     val prompt = initialKeyword
     Step(
-        "9",
+        name = "9",
+        outputFolder = outputFolderPerStep,
         type = Type.IMAGE,
         input = listOf(prompt)
     )
 }
 
-private fun imagesForToC() {
+private fun imagesForToC(outputFolderPerStep: String) {
     val prompt =
-        File("$outputFolder/step_2_1")
+        File("$mainOutputFolder/step_2_1")
             .readLines()
     Step(
-        "9",
+        name = "9",
+        outputFolder = outputFolderPerStep,
         type = Type.IMAGE,
         input = prompt
     )
 }
 
-private fun keywords() {
-    val prompt = File("$outputFolder/step_1_1").readText()
+private fun keywords(outputFolderPerStep: String) {
+    val prompt = File("$mainOutputFolder/step_1_1").readText()
     Step(
-        "8",
-        listOf("Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 4 Schlüsselwörtern: $prompt"),
-        listOf(trimmed)
+        name = "8",
+        outputFolder = outputFolderPerStep,
+        input = listOf("Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 4 Schlüsselwörtern: $prompt"),
+        postProcessings = listOf(trimmed)
     )
 }
 
-private fun oppositeOpinionText() {
-    val prompt = File("$outputFolder/step_6_1").readText()
+private fun oppositeOpinionText(outputFolderPerStep: String) {
+    val prompt = File("$mainOutputFolder/step_6_1").readText()
     Step(
-        "7",
-        listOf("$prompt Schreiben Sie zwei Absätze zu diesem Thema"),
-        listOf(createParagraphs, trimmed)
+        name = "7",
+        outputFolder = outputFolderPerStep,
+        input = listOf("$prompt Schreiben Sie zwei Absätze zu diesem Thema"),
+        postProcessings = listOf(createParagraphs, trimmed)
     )
 }
 
-private fun oppositeOpinionQuestion(initialKeyword: String) {
+private fun oppositeOpinionQuestion(initialKeyword: String, outputFolderPerStep: String) {
     Step(
         "6",
         listOf("Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"$initialKeyword\""),
@@ -173,9 +201,9 @@ private fun oppositeOpinionQuestion(initialKeyword: String) {
     )
 }
 
-private fun tableOfContentsTexts_part3() {
+private fun tableOfContentsTexts_part3(outputFolderPerStep: String) {
     val prompt =
-        File("$outputFolder/step_2_1")
+        File("$mainOutputFolder/step_2_1")
             .readLines()
             .map { "Schreiben Sie einige interessante Fakten über $it. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
     Step(
@@ -185,9 +213,9 @@ private fun tableOfContentsTexts_part3() {
     )
 }
 
-private fun tableOfContentsTexts_part2() {
+private fun tableOfContentsTexts_part2(outputFolderPerStep: String) {
     val prompt =
-        File("$outputFolder/step_2_1")
+        File("$mainOutputFolder/step_2_1")
             .readLines()
             .map { "Schreiben Sie eine kurze historische Anmerkung zu diesem Thema: $it" }
     Step(
@@ -197,9 +225,9 @@ private fun tableOfContentsTexts_part2() {
     )
 }
 
-private fun tableOfContentsTexts_part1(initialKeyword: String) {
+private fun tableOfContentsTexts_part1(initialKeyword: String, outputFolderPerStep: String) {
     val prompt =
-        File("$outputFolder/step_2_1")
+        File("$mainOutputFolder/step_2_1")
             .readLines()
             .map { "Die Antwort auf die Frage, \"$initialKeyword\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort gegebenenfalls mit einigen Beispielen" }
     Step(
@@ -209,7 +237,7 @@ private fun tableOfContentsTexts_part1(initialKeyword: String) {
     )
 }
 
-private fun tableOfContentsPlan(initialKeyword: String) {
+private fun tableOfContentsPlan(initialKeyword: String, outputFolderPerStep: String) {
     Step(
         "2",
         listOf("Schreiben Sie eine nummerierte Liste mit Schlüsselwörtern zum Thema \"$initialKeyword\""),
@@ -217,7 +245,7 @@ private fun tableOfContentsPlan(initialKeyword: String) {
     )
 }
 
-private fun introduction(initialKeyword: String) {
+private fun introduction(initialKeyword: String, outputFolderPerStep: String) {
     Step(
         "1",
         listOf("eine Einleitung für einen Artikel zu einem Thema schreiben: $initialKeyword"),

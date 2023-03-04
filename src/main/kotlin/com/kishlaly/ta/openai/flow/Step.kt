@@ -6,7 +6,6 @@ import com.kishlaly.ta.openai.ImageTask
 import com.kishlaly.ta.openai.getCompletion
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.util.concurrent.atomic.AtomicInteger
 
 enum class Type {
     TEXT,
@@ -16,6 +15,7 @@ enum class Type {
 class Step(
     val name: String,
     val input: List<String> = emptyList(),
+    val outputFolder: String,
     val postProcessings: List<(String) -> String> = emptyList(),
     val type: Type = Type.TEXT
 ) {
@@ -29,12 +29,15 @@ class Step(
                         finalResult = it(finalResult)
                     }
                     val outputFileName = "step_${name}_${index + 1}"
-                    Files.write(Paths.get("$outputFolder/$outputFileName"), finalResult.toByteArray())
+                    Files.write(
+                        Paths.get("$mainOutputFolder/$outputFolder/$outputFileName"),
+                        finalResult.toByteArray()
+                    )
                 }
 
                 Type.IMAGE -> {
                     val imageTask = ImageTask(prompt, "Schwarz-Weiß-Bleistiftbild")
-                    ImageGenerator.generate(listOf(imageTask), "$outputFolder")
+                    ImageGenerator.generate(listOf(imageTask), "$mainOutputFolder/$outputFolder")
                 }
             }
             println("")
