@@ -5,18 +5,15 @@ import java.math.RoundingMode
 import java.util.concurrent.atomic.AtomicInteger
 
 val textTokensUsed = AtomicInteger(0)
-val pricePerThousandTextTokens = 0.02
+val centsPerThousandTextTokens = 2
 
 val imagesGenerated = AtomicInteger(0)
-val pricePerImage = 0.018
+val centsPerImage = 1.8
 
-fun getCost(): Double {
-    val text =
-        BigDecimal(textTokensUsed.get() / 1000 * pricePerThousandTextTokens)
-            .setScale(2, RoundingMode.HALF_EVEN)
-            .toDouble()
-    val images = BigDecimal(imagesGenerated.get() * pricePerImage)
-        .setScale(2, RoundingMode.HALF_EVEN)
-        .toDouble()
-    return text + images
+fun printCosts() {
+    val centsForTexts = BigDecimal(textTokensUsed.get() / 1000 * centsPerThousandTextTokens)
+    val centsForImages = BigDecimal(imagesGenerated.get() * centsPerImage)
+    val usd =
+        (centsForTexts + centsForImages).divide(BigDecimal(100)).setScale(2, RoundingMode.HALF_EVEN).toPlainString()
+    println(">>> Costs so far: $$usd")
 }

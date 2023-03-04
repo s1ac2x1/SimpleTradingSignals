@@ -27,8 +27,6 @@ val removeFirstSentence: (String) -> String = { str ->
 fun main() {
     val initialKeyword = "Welche Katzen Haaren am wenigsten?"
 
-    // TODO считать токены и цену
-
     // введение
     Step(
         "1",

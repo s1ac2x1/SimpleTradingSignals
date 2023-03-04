@@ -98,7 +98,7 @@ class ImageGenerator {
                     val outputFileName = filenameRegex.replace(task.keyword, "_") + "_" + System.currentTimeMillis()
                     downloadFile(URL(imageURL), "$outputFolder/$outputFileName.png")
                     imagesGenerated.incrementAndGet()
-                    println(">>> Cost so far: $${getCost()}")
+                    printCosts()
                 }
             }
             executor.shutdown()

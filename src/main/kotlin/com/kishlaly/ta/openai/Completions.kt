@@ -24,7 +24,7 @@ fun getCompletion(completionRequest: CompletionRequest): String {
         val body = httpClient.newCall(request).execute().body().string()
         val completionRespone = gson.fromJson<CompletionRespone>(body, object : TypeToken<CompletionRespone>() {}.type)
         textTokensUsed.addAndGet(completionRespone.usage?.totalTokens ?: 0)
-        println(">>> Cost so far: $${getCost()}")
+        printCosts()
         result = completionRespone.choices.firstOrNull()?.text!!
     } catch (e: Exception) {
         println(e.message)
