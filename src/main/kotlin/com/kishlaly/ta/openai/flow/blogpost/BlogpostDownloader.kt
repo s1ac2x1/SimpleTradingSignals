@@ -37,15 +37,15 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         tableOfContentsPlan()
         tableOfContentsTexts_part1()
-        tableOfContentsTexts_part2()
-        tableOfContentsTexts_part3()
+        tableOfContentsTexts_part2() /// сюда нужен контекст, просто список подзаголовков недостаточно
+        tableOfContentsTexts_part3() // сюда нужен контекст, просто список подзаголовков недостаточно
 
         oppositeOpinionQuestion()
         oppositeOpinionText()
 
         keywords()
 
-        imagesForToC()
+        imagesForToC() // сюда тоже нужен контекст, просто список подзаголовков недостаточно
 
         featuresImages()
 
@@ -136,7 +136,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt =
             File("$mainOutputFolder/$outputFolder/step_2_1")
                 .readLines()
-                .map { "Schreiben Sie einige interessante Fakten über $it. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
+                .map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie interessante Fakten über dieses Thema. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
         Step(
             name = "5",
             outputFolder = outputFolder,
@@ -149,7 +149,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt =
             File("$mainOutputFolder/$outputFolder/step_2_1")
                 .readLines()
-                .map { "Schreiben Sie eine kurze historische Anmerkung zu diesem Thema: $it" }
+                .map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort mit einigen Beispielen" }
         Step(
             name = "4",
             outputFolder = outputFolder,
@@ -162,7 +162,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt =
             File("$mainOutputFolder/$outputFolder/step_2_1")
                 .readLines()
-                .map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort gegebenenfalls mit einigen Beispielen" }
+                .map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine historische Anmerkung zu diesem Thema." }
         Step(
             name = "3",
             outputFolder = outputFolder,
