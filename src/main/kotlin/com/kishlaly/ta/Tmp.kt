@@ -1,5 +1,8 @@
 package com.kishlaly.ta
 
+import com.kishlaly.ta.openai.mainOutputFolder
+import java.io.File
+
 val text = """
     Es gibt keine einzelne Farbe, die Katzen aggressiv macht. Tatsächlich können verschiedene Faktoren, einschließlich Farbe, die Aggressivität einer Katze beeinflussen. Einige Beispiele sind:
 
@@ -32,4 +35,6 @@ fun main() {
 //    val newContent = content.replace("<content>.\n\n", "<content>")
 //    File("openai/katzenverhalten2.xml").writeText(newContent)
 
+    val name = "Welche Gesundheitsprobleme sind bei bestimmten Katzenrassen häufiger?"
+    File("$mainOutputFolder/$name").mkdir()
 }
