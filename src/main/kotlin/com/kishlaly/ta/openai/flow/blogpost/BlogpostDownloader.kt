@@ -195,6 +195,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf("Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
             postProcessings = listOf(removeNumericList, removeQuestionMarks, trimmed)
         )
+        println()
+        File("$mainOutputFolder/$outputFolder/step_2_1")
+            .readLines().forEach { println(it) }
+        println()
     }
 
     private fun introduction() {
