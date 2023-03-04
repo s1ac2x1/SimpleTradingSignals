@@ -21,12 +21,12 @@ class XMLBuilder() {
         xml.append(BlogpostContentBuilder(meta).build())
         xml.append("</content>")
 
-        xml.append("<picture>")
+        xml.append("<featuredImage>")
         val postFolder = filenameRegex.replace(meta.keyword, "_")
         val featuredImageURL =
             File("$mainOutputFolder/$postFolder").listFiles().find { it.name.contains(postFolder) }?.name ?: ""
         xml.append(featuredImageURL)
-        xml.append("</picture>")
+        xml.append("</featuredImage>")
 
         xml.append("<tags>")
         val tags = File("$mainOutputFolder/$postFolder/step_8_1").readText()
