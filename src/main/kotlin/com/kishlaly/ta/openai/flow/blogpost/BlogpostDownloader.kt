@@ -59,7 +59,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             .filter { it.trim()[0].isLetter() }
             .filter { it.trim()[0].isUpperCase() }
             .joinToString("\n")
+        println()
         println(correctedToc)
+        println()
         Files.write(Paths.get("$mainOutputFolder/$outputFolder/step_2_1"), correctedToc.toString().toByteArray())
 
         tableOfContentsTexts_part1()
