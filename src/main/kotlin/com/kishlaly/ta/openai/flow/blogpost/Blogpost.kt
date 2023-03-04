@@ -1,14 +1,13 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.PAA
-import com.kishlaly.ta.openai.flow.XMLBuilder
 import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.readCsv
 import java.nio.file.Files
 import java.nio.file.Paths
 
 fun main() {
-    val xml = XMLBuilder()
+    val xml = BlogpostXMLBuilder()
     readCSV("katzenrassen").shuffled().take(1).forEach { paa ->
         val meta = BlogpostContentMeta(
             keyword = paa.title,

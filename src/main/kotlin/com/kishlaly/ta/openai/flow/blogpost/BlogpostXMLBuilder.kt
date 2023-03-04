@@ -1,16 +1,14 @@
-package com.kishlaly.ta.openai.flow
+package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.filenameRegex
-import com.kishlaly.ta.openai.flow.blogpost.BlogpostContentBuilder
-import com.kishlaly.ta.openai.flow.blogpost.BlogpostContentMeta
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 
-class XMLBuilder() {
+class BlogpostXMLBuilder() {
 
     private val xml = StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?><output>")
 
-    fun append(meta: BlogpostContentMeta): XMLBuilder {
+    fun append(meta: BlogpostContentMeta): BlogpostXMLBuilder {
         xml.append("<post>")
 
         xml.append("<title>")

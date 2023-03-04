@@ -6,7 +6,10 @@ import com.kishlaly.ta.openai.flow.Type
 import com.kishlaly.ta.openai.lineBreaksRegex
 import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.numericListRegex
+import com.kishlaly.ta.text
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Paths
 import kotlin.random.Random
 
 class BlogpostDownloader(val meta: BlogpostContentMeta) {
@@ -49,7 +52,16 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
 
-        tableOfContentsPlan() // TODO как-то нужно фильтровать пустые/короткие/очень длинные строки и убирать все непечатные символы
+        tableOfContentsPlan()
+        val correctedToc = text.lines()
+            .filter { it.trim().length >= 10 }
+            .filter { it.length <= 100 }
+            .filter { it.trim()[0].isLetter() }
+            .filter { it.trim()[0].isUpperCase() }
+            .joinToString("\n")
+        println(correctedToc)
+        Files.write(Paths.get("$mainOutputFolder/$outputFolder/step_2_1"), correctedToc.toString().toByteArray())
+
         tableOfContentsTexts_part1()
         tableOfContentsTexts_part2()
         tableOfContentsTexts_part3()
@@ -195,10 +207,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf("Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
             postProcessings = listOf(removeNumericList, removeQuestionMarks, trimmed)
         )
-        println()
-        File("$mainOutputFolder/$outputFolder/step_2_1")
-            .readLines().forEach { println(it) }
-        println()
     }
 
     private fun introduction() {
