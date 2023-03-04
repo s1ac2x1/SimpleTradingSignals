@@ -19,7 +19,7 @@ val removeDots: (String) -> String = { it.replace(".", "") }
 val removeNumericList: (String) -> String = { numericListRegex.replace(it, "") }
 val createParagraphs: (String) -> String = {
     val output = StringBuilder()
-    it.split(".").filter { !it.isNullOrBlank() }.map { it.trim() }.chunked(Random.nextInt(3, 5)).forEach { chunk ->
+    it.split(".").filter { !it.isNullOrBlank() }.map { it.trim() }.chunked(Random.nextInt(2, 4)).forEach { chunk ->
         chunk.forEach { output.append(it).append(". ") }
         output.append("\n\n")
     }
@@ -52,21 +52,21 @@ fun main() {
 
 //    randomAddition()
 
-    buildContent()
+    buildContent(initialKeyword)
 }
 
-fun buildContent() {
+fun buildContent(title: String) {
     val introduction = File("$outputFolder/step_1_1").readText()
     val tocPlan = File("$outputFolder/step_2_1").readLines()
 
     val tocContent = StringBuilder()
     tocPlan.forEachIndexed { index, item ->
-        tocContent.append(item).append("\n\n")
+        tocContent.append("<h2>$item</h2>")
 
         val imageName =
             File("$outputFolder/").listFiles().find { it.name.contains(filenameRegex.replace(item, "_")) }?.name ?: ""
         var imageURL = "https://katze101.com/wp-content/uploads/2023/03/$imageName"
-        tocContent.append(imageURL).append("\n\n")
+        tocContent.append("<img src='$imageURL'></img>")
 
         val content_step_3 =
             File(outputFolder).listFiles().find { it.name.contains("step_3_${index + 1}") }?.readText() ?: ""
@@ -75,9 +75,9 @@ fun buildContent() {
         val content_step_5 =
             File(outputFolder).listFiles().find { it.name.contains("step_5_${index + 1}") }?.readText() ?: ""
 
-        tocContent.append(content_step_3).append("\n\n")
-        tocContent.append(content_step_4).append("\n\n")
-        tocContent.append(content_step_5).append("\n\n")
+        tocContent.append("<p>$content_step_3</p>")
+        tocContent.append("<p>$content_step_4</p>")
+        tocContent.append("<p>$content_step_5</p>")
     }
 
     val oppositeOpitionSubtitle = File("$outputFolder/step_6_1").readText()
@@ -87,16 +87,17 @@ fun buildContent() {
     val randomAddition = File("$outputFolder/step_11_1").readText()
 
     var content = """
-        $introduction \n\n
-        $tocPlan \n\n
-        $tocContent \n\n
-        $oppositeOpitionSubtitle \n\n
-        $oppositeOpinionText \n\n
-        $conclusion \n\n
-        $randomAddition \n\n
+        <p>$introduction</p>
+        $tocContent
+        <h2>$oppositeOpitionSubtitle</h2>
+        <p>$oppositeOpinionText</p>
+        <p>$conclusion</p>
+        <p>$randomAddition</p>
     """.trimIndent()
 
     content = finalRegex.replace(content, "")
+    content = content.replace("!.", ".")
+    content = content.replace("!", ".")
 
     Files.write(Paths.get("$outputFolder/post.txt"), content.toByteArray())
 }
