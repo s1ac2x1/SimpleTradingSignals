@@ -4,7 +4,6 @@ import com.google.common.reflect.TypeToken
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
-import io.ktor.server.http.content.*
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
@@ -98,6 +97,8 @@ class ImageGenerator {
                     val imageURL = getImageURL(ImageRequest(task.keyword + " " + task.style))
                     val outputFileName = filenameRegex.replace(task.keyword, "_") + "_" + System.currentTimeMillis()
                     downloadFile(URL(imageURL), "$outputFolder/$outputFileName.png")
+                    imagesGenerated.incrementAndGet()
+                    println(">>> Cost so far: $${getCost()}")
                 }
             }
             executor.shutdown()
