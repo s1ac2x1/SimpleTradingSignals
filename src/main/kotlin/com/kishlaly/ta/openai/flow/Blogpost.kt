@@ -61,12 +61,12 @@ fun buildContent() {
 
     val tocContent = StringBuilder()
     tocPlan.forEachIndexed { index, item ->
-        tocContent.append(item).append("\n")
+        tocContent.append(item).append("\n\n")
 
         val imageName =
             File("$outputFolder/").listFiles().find { it.name.contains(filenameRegex.replace(item, "_")) }?.name ?: ""
         var imageURL = "https://katze101.com/wp-content/uploads/2023/03/$imageName"
-        tocContent.append(imageURL).append("\n")
+        tocContent.append(imageURL).append("\n\n")
 
         val content_step_3 =
             File(outputFolder).listFiles().find { it.name.contains("step_3_${index + 1}") }?.readText() ?: ""
@@ -75,9 +75,9 @@ fun buildContent() {
         val content_step_5 =
             File(outputFolder).listFiles().find { it.name.contains("step_5_${index + 1}") }?.readText() ?: ""
 
-        tocContent.append(content_step_3).append("\n")
-        tocContent.append(content_step_4).append("\n")
-        tocContent.append(content_step_5).append("\n")
+        tocContent.append(content_step_3).append("\n\n")
+        tocContent.append(content_step_4).append("\n\n")
+        tocContent.append(content_step_5).append("\n\n")
     }
 
     val oppositeOpitionSubtitle = File("$outputFolder/step_6_1")
