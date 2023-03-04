@@ -35,6 +35,16 @@ fun main() {
 //    val newContent = content.replace("<content>.\n\n", "<content>")
 //    File("openai/katzenverhalten2.xml").writeText(newContent)
 
-    val name = "Welche Gesundheitsprobleme sind bei bestimmten Katzenrassen häufiger?"
-    File("$mainOutputFolder/$name").mkdir()
+    val text = "- Unterhaltung: Beschäftigen Sie Ihre Katze mit Spielzeug oder anderen Beschäftigungsmöglichkeiten"
+    var shorter = text
+    if (text.indexOf(':') > 0) {
+        shorter = text.substring(0, text.indexOf(':'))
+    }
+    if (text.indexOf(';') > 0) {
+        shorter = shorter.substring(0, shorter.indexOf(':'))
+    }
+    if (text.indexOf('-') in 0..3 ) {
+        shorter = shorter.substring(shorter.indexOf('-') + 1, shorter.length)
+    }
+    println(shorter)
 }

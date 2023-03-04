@@ -3,8 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "Wie viel Nassfutter darf eine Katze am Tag fressen? Schwarz-Weiß-Bleistiftbild",
-  "n": 1,
+  "prompt": "Atemwegserkrankungen. Schwarz-Weiß-Bleistiftbild",
+  "n": 3,
   "size": "512x512"
 }
-

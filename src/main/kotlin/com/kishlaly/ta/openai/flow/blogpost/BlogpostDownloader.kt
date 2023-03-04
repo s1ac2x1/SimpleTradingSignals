@@ -16,6 +16,19 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private val removeQuotes: (String) -> String = { it.replace("\"", "") }
     private val removeDots: (String) -> String = { it.replace(".", "") }
     private val removeNumericList: (String) -> String = { numericListRegex.replace(it, "") }
+    private val resolveShortKeyword: (String) -> String = {
+        var shorter = it
+        if (it.indexOf(':') > 0) {
+            shorter = it.substring(0, it.indexOf(':'))
+        }
+        if (shorter.indexOf(';') > 0) {
+            shorter = shorter.substring(0, shorter.indexOf(':'))
+        }
+        if (shorter.indexOf('-') in 0..3) {
+            shorter = shorter.substring(shorter.indexOf('-') + 1, shorter.length)
+        }
+        shorter
+    }
     private val createParagraphs: (String) -> String = {
         val output = StringBuilder()
         it.split(".").filter { !it.isNullOrBlank() }.map { it.trim() }.chunked(Random.nextInt(2, 4)).forEach { chunk ->
@@ -35,17 +48,17 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
 
-        tableOfContentsPlan()
+        tableOfContentsPlan() // TODO может выдавать длинные фразы
         tableOfContentsTexts_part1()
-        tableOfContentsTexts_part2() /// сюда нужен контекст, просто список подзаголовков недостаточно
-        tableOfContentsTexts_part3() // сюда нужен контекст, просто список подзаголовков недостаточно
+        tableOfContentsTexts_part2()
+        tableOfContentsTexts_part3()
 
         oppositeOpinionQuestion()
         oppositeOpinionText()
 
         keywords()
 
-        imagesForToC() // сюда тоже нужен контекст, просто список подзаголовков недостаточно
+        imagesForToC() // картинки могут быть плохими TODO
 
         featuresImages()
 
@@ -175,8 +188,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             name = "2",
             outputFolder = outputFolder,
-            input = listOf("Schreiben Sie eine nummerierte Liste mit Schlüsselwörtern zum Thema \"${meta.keyword}\""),
-            postProcessings = listOf(removeNumericList, trimmed)
+            input = listOf("Schreiben Sie eine nummerierte Liste mit kurzen Stichwörtern zum Thema: \"${meta.keyword}\""),
+            postProcessings = listOf(removeNumericList, resolveShortKeyword, trimmed)
         )
     }
 
