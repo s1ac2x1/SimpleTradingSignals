@@ -80,11 +80,11 @@ fun buildContent() {
         tocContent.append(content_step_5).append("\n\n")
     }
 
-    val oppositeOpitionSubtitle = File("$outputFolder/step_6_1")
-    val oppositeOpinionText = File("$outputFolder/step_7_1")
+    val oppositeOpitionSubtitle = File("$outputFolder/step_6_1").readText()
+    val oppositeOpinionText = File("$outputFolder/step_7_1").readText()
 
-    val conclusion = File("$outputFolder/step_10_1")
-    val randomAddition = File("$outputFolder/step_11_1")
+    val conclusion = File("$outputFolder/step_10_1").readText()
+    val randomAddition = File("$outputFolder/step_11_1").readText()
 
     var content = """
         $introduction \n\n
