@@ -12,7 +12,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 //fun main() {
-//    val tasks = (1..50).map {
+//    val tasks = (1..3).map {
 //        var prompt = Combiner.combine(
 //            listOf(
 //                "openai/katze101/breeds",
@@ -25,21 +25,21 @@ import java.util.concurrent.TimeUnit
 //    ImageGenerator.generate(tasks, "openai/output/images")
 //}
 
-fun main() {
-    val inputFileName = "katzenpflege"
-    val paas = try {
-        readCsv("openai/$inputFileName.csv")
-            .distinctBy { it.title }
-            //.distinctBy { it.text }
-            .toList()
-    } catch (e: Exception) {
-        throw e
-    }
-
-    val tasks = paas.map { ImageTask(it.title, "Schwarz-Weiß-Bleistiftbild") }.shuffled().take(5)
-
-    ImageGenerator.generate(tasks, "openai/output/images2")
-}
+//fun main() {
+//    val inputFileName = "katzenpflege"
+//    val paas = try {
+//        readCsv("openai/$inputFileName.csv")
+//            .distinctBy { it.title }
+//            //.distinctBy { it.text }
+//            .toList()
+//    } catch (e: Exception) {
+//        throw e
+//    }
+//
+//    val tasks = paas.map { ImageTask(it.title, "Schwarz-Weiß-Bleistiftbild") }.shuffled().take(5)
+//
+//    ImageGenerator.generate(tasks, "openai/output/images2")
+//}
 
 //fun main() {
 //    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
