@@ -1,6 +1,7 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.filenameRegex
+import com.kishlaly.ta.openai.finalRegex
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 
