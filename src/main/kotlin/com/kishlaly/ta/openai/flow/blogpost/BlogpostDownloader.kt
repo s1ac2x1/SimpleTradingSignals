@@ -49,7 +49,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
 
-        tableOfContentsPlan()
+        tableOfContentsPlan() // TODO как-то нужно фильтровать пустые/короткие/очень длинные строки и убирать все непечатные символы
         tableOfContentsTexts_part1()
         tableOfContentsTexts_part2()
         tableOfContentsTexts_part3()
