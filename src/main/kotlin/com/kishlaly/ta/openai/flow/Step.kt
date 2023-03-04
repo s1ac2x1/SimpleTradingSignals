@@ -15,7 +15,7 @@ enum class Type {
 
 class Step(
     val name: String,
-    val input: List<String>,
+    val input: List<String> = emptyList(),
     val postProcessings: List<(String) -> String> = emptyList(),
     val type: Type = Type.TEXT
 ) {
@@ -37,7 +37,7 @@ class Step(
                     ImageGenerator.generate(listOf(imageTask), "$outputFolder")
                 }
             }
-            println("Finished")
+            println("")
         }
     }
 }
