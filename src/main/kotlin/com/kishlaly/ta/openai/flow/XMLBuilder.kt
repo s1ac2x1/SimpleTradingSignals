@@ -22,11 +22,16 @@ class XMLBuilder() {
         xml.append("</content>")
 
         xml.append("<picture>")
-        val pattern = filenameRegex.replace(meta.keyword, "_")
+        val postFolder = filenameRegex.replace(meta.keyword, "_")
         val featuredImageURL =
-            File("$mainOutputFolder/$pattern").listFiles().find { it.name.contains(pattern) }?.name ?: ""
+            File("$mainOutputFolder/$postFolder").listFiles().find { it.name.contains(postFolder) }?.name ?: ""
         xml.append(featuredImageURL)
         xml.append("</picture>")
+
+        xml.append("<tags>")
+        val tags = File("$mainOutputFolder/$postFolder/step_8_1").readText()
+        xml.append(tags)
+        xml.append("</tags>")
 
         xml.append("</post>")
 
