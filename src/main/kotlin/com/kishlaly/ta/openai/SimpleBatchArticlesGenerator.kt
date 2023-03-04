@@ -13,7 +13,6 @@ val apiKey = "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"
 val gson = Gson()
 val JSON = MediaType.parse("application/json; charset=utf-8")
 val filenameRegex = Regex("[^A-Za-z0-9]")
-val contentRegex = Regex("\n\n\n")
 var threads = 5
 var domain = ""
 var date = ""

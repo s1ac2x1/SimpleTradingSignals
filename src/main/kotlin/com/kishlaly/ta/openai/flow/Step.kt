@@ -1,9 +1,6 @@
 package com.kishlaly.ta.openai.flow
 
-import com.kishlaly.ta.openai.CompletionRequest
-import com.kishlaly.ta.openai.ImageGenerator
-import com.kishlaly.ta.openai.ImageTask
-import com.kishlaly.ta.openai.getCompletion
+import com.kishlaly.ta.openai.*
 import java.nio.file.Files
 import java.nio.file.Paths
 
