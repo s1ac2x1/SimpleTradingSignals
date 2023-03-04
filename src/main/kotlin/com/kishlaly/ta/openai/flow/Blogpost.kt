@@ -1,6 +1,9 @@
 package com.kishlaly.ta.openai.flow
 
+import com.kishlaly.ta.openai.date
+import com.kishlaly.ta.openai.domain
 import com.kishlaly.ta.openai.filenameRegex
+import com.kishlaly.ta.openai.getRandomWPURL
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -31,24 +34,32 @@ val removeFirstSentence: (String) -> String = { str ->
 }
 
 fun main() {
-    val initialKeyword = "Welche Katzen Haaren am wenigsten?"
-    prepare(initialKeyword)
-
     val xml = StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
     xml.append("<output>")
 
-    // inside start
+    // loop start
+    val initialKeyword = "Welche Katzen Haaren am wenigsten?"
+    prepare(initialKeyword)
     xml.append("<post>")
+
     xml.append("<title>")
     xml.append(initialKeyword)
     xml.append("</title>")
 
-    xml.append("<post>${buildContent(initialKeyword)}</post>")
+    xml.append("<content>")
+    xml.append(buildContent(initialKeyword))
+    xml.append("</content>")
+
+    xml.append("<picture>")
+    val pattern = filenameRegex.replace(initialKeyword, "_")
+    val featuredImageURL = File("$mainOutputFolder/$pattern").listFiles().find { it.name.contains(pattern) }?.name ?: ""
+    xml.append(featuredImageURL)
+    xml.append("</picture>")
 
     xml.append("</post>")
     // loop end
-    xml.append("</output>")
 
+    xml.append("</output>")
     Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.toString().toByteArray())
 }
 
