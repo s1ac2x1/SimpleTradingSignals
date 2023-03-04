@@ -83,38 +83,43 @@ fun prepare(keyword: String) {
     randomAddition(outputFolderPerStep)
 }
 
-fun buildContent(title: String): String {
+fun buildContent(initialKeyword: String): String {
+    val postFolder = filenameRegex.replace(initialKeyword, "_")
 
-    val introduction = File("$mainOutputFolder/step_1_1").readText()
-    val tocPlan = File("$mainOutputFolder/step_2_1").readLines()
+    val introduction = File("$mainOutputFolder/$postFolder/step_1_1").readText()
+    val tocPlan = File("$mainOutputFolder/$postFolder/step_2_1").readLines()
 
     val tocContent = StringBuilder()
     tocPlan.forEachIndexed { index, item ->
         tocContent.append("<h2>$item</h2>")
 
         val imageName =
-            File("$mainOutputFolder/").listFiles().find { it.name.contains(filenameRegex.replace(item, "_")) }?.name
+            File("$mainOutputFolder/$postFolder").listFiles()
+                .find { it.name.contains(filenameRegex.replace(item, "_")) }?.name
                 ?: ""
         var imageURL = "https://katze101.com/wp-content/uploads/2023/03/$imageName"
         tocContent.append("<img src='$imageURL'></img>")
 
         val content_step_3 =
-            File(mainOutputFolder).listFiles().find { it.name.contains("step_3_${index + 1}") }?.readText() ?: ""
+            File("$mainOutputFolder/$postFolder").listFiles().find { it.name.contains("step_3_${index + 1}") }
+                ?.readText() ?: ""
         val content_step_4 =
-            File(mainOutputFolder).listFiles().find { it.name.contains("step_4_${index + 1}") }?.readText() ?: ""
+            File("$mainOutputFolder/$postFolder").listFiles().find { it.name.contains("step_4_${index + 1}") }
+                ?.readText() ?: ""
         val content_step_5 =
-            File(mainOutputFolder).listFiles().find { it.name.contains("step_5_${index + 1}") }?.readText() ?: ""
+            File("$mainOutputFolder/$postFolder").listFiles().find { it.name.contains("step_5_${index + 1}") }
+                ?.readText() ?: ""
 
         tocContent.append("<p>$content_step_3</p>")
         tocContent.append("<p>$content_step_4</p>")
         tocContent.append("<p>$content_step_5</p>")
     }
 
-    val oppositeOpitionSubtitle = File("$mainOutputFolder/step_6_1").readText()
-    val oppositeOpinionText = File("$mainOutputFolder/step_7_1").readText()
+    val oppositeOpitionSubtitle = File("$mainOutputFolder/$postFolder/step_6_1").readText()
+    val oppositeOpinionText = File("$mainOutputFolder/$postFolder/step_7_1").readText()
 
-    val conclusion = File("$mainOutputFolder/step_10_1").readText()
-    val randomAddition = File("$mainOutputFolder/step_11_1").readText()
+    val conclusion = File("$mainOutputFolder/$postFolder/step_10_1").readText()
+    val randomAddition = File("$mainOutputFolder/$postFolder/step_11_1").readText()
 
     var content = """
         <p>$introduction</p>
