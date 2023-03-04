@@ -192,7 +192,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             name = "2",
             outputFolder = outputFolder,
-            input = listOf("Schreiben Sie eine nummerierte Liste mit kurzen Stichwörtern zum Thema: \"${meta.keyword}\""),
+            input = listOf("Ich schreibe einen Artikel zu diesem Thema: \"${meta.keyword}\". Machen Sie eine Liste mit 10 bis 15 Unterüberschriften. Unterüberschriften sollten sich nicht wiederholen und sollten den Titel des Hauptthemas nicht wiederholen"),
             postProcessings = listOf(removeNumericList, removeQuestionMarks, trimmed)
         )
     }
