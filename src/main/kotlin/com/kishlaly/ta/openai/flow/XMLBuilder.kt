@@ -3,6 +3,7 @@ package com.kishlaly.ta.openai.flow
 import com.kishlaly.ta.openai.filenameRegex
 import com.kishlaly.ta.openai.flow.blogpost.BlogpostContentBuilder
 import com.kishlaly.ta.openai.flow.blogpost.BlogpostContentMeta
+import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 
 class XMLBuilder() {

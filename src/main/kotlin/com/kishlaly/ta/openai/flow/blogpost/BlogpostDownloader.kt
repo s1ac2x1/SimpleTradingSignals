@@ -31,6 +31,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private val outputFolder = filenameRegex.replace(meta.keyword, "_")
 
     fun download() {
+        File("$mainOutputFolder/$outputFolder").mkdir()
+
         introduction()
 
         tableOfContentsPlan()
