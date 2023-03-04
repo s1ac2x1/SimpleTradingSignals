@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "model": "text-davinci-003",
-  "prompt": "Die Antwort auf die Frage, \"Welche Gesundheitsprobleme sind bei bestimmten Katzenrassen häufiger?\", ist die Antwort: \"Hautprobleme\". Schreiben Sie interessante Fakten über dieses Thema. Formatieren Sie den Text in Form von Absätzen ohne Zahlen",
+  "prompt": "Ich schreibe einen Artikel zu diesem Thema: \"Welche Gesundheitsprobleme sind bei bestimmten Katzenrassen häufiger?\". Machen Sie eine Liste mit 7 bis 10 Unterüberschriften. Unterüberschriften sollten sich nicht wiederholen und sollten den Titel des Hauptthemas nicht wiederholen. Formulieren Sie die resultierenden Unterüberschriften in Aussagesätze um",
   "max_tokens": 2048,
   "temperature": 0.7,
   "top_p": 0.5,

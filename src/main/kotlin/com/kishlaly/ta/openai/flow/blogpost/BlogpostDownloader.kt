@@ -16,6 +16,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private val removeQuotes: (String) -> String = { it.replace("\"", "") }
     private val removeDots: (String) -> String = { it.replace(".", "") }
     private val removeNumericList: (String) -> String = { numericListRegex.replace(it, "") }
+    private val removeQuestionMarks: (String) -> String = { it.replace("?", "") }
     private val resolveShortKeyword: (String) -> String = {
         var shorter = it
         if (it.indexOf(':') > 0) {
@@ -149,7 +150,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt =
             File("$mainOutputFolder/$outputFolder/step_2_1")
                 .readLines()
-                .map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie interessante Fakten über dieses Thema. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
+                //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie interessante Fakten über dieses Thema. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
+                .map { "Schreiben Sie interessante Fakten über dieses Thema: \"$it\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
         Step(
             name = "5",
             outputFolder = outputFolder,
@@ -162,7 +164,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt =
             File("$mainOutputFolder/$outputFolder/step_2_1")
                 .readLines()
-                .map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort mit einigen Beispielen" }
+                //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort mit einigen Beispielen" }
+                .map { "Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"$it\". Begründen Sie Ihre Antwort mit einigen Beispielen" }
         Step(
             name = "4",
             outputFolder = outputFolder,
@@ -175,7 +178,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt =
             File("$mainOutputFolder/$outputFolder/step_2_1")
                 .readLines()
-                .map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine historische Anmerkung zu diesem Thema." }
+                //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine historische Anmerkung zu diesem Thema." }
+                .map { "Schreiben Sie eine historische Anmerkung zu diesem Thema. \"$it\"" }
         Step(
             name = "3",
             outputFolder = outputFolder,
@@ -189,7 +193,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             name = "2",
             outputFolder = outputFolder,
             input = listOf("Schreiben Sie eine nummerierte Liste mit kurzen Stichwörtern zum Thema: \"${meta.keyword}\""),
-            postProcessings = listOf(removeNumericList, resolveShortKeyword, trimmed)
+            postProcessings = listOf(removeNumericList, removeQuestionMarks, trimmed)
         )
     }
 
