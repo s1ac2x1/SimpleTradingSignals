@@ -45,10 +45,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         str.substring(str.indexOfFirst { it == '.' } + 1, str.length)
     }
 
-    private val outputFolder = filenameRegex.replace(meta.keyword, "_")
+    private val stepFolder = "$mainOutputFolder/${filenameRegex.replace(meta.keyword, "_")}"
 
     fun download() {
-        File("$mainOutputFolder/$outputFolder").mkdir()
+        File(stepFolder).mkdir()
 
         introduction()
 
@@ -62,7 +62,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         println()
         println(correctedToc)
         println()
-        Files.write(Paths.get("$mainOutputFolder/$outputFolder/step_2_1"), correctedToc.toString().toByteArray())
+        Files.write(Paths.get("$stepFolder/step_2_1"), correctedToc.toString().toByteArray())
 
         tableOfContentsTexts_part1()
         tableOfContentsTexts_part2()
@@ -73,7 +73,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         keywords()
 
-        imagesForToC() // картинки могут быть плохими? TODO
+        imagesForToC() // картинки могут быть плохими? добавить контекст: Katzen TODO
 
         featuresImages()
 
@@ -84,7 +84,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     fun randomAddition() {
         val conclusion =
-            lineBreaksRegex.replace(File("$mainOutputFolder/$outputFolder/step_10_1").readText(), "")
+            lineBreaksRegex.replace(File("$stepFolder/step_10_1").readText(), "")
         var prompt = if (Random.nextBoolean()) {
             "Beschreiben Sie Ihre persönliche Erfahrung zu diesem Thema: $conclusion"
         } else {
@@ -93,18 +93,18 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             name = "11",
             input = listOf(prompt),
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             postProcessings = listOf(createParagraphs, trimmed)
         )
     }
 
     fun conclusion() {
-        val introduction = File("$mainOutputFolder/step_1_1").readText()
-        val oppositeOpinion = File("$mainOutputFolder/step_7_1").readText()
+        val introduction = File("$stepFolder/step_1_1").readText()
+        val oppositeOpinion = File("$stepFolder/step_7_1").readText()
         val prompt = lineBreaksRegex.replace(introduction, "") + " " + lineBreaksRegex.replace(oppositeOpinion, "")
         Step(
             name = "10",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             input = listOf("Schreiben Sie ein Fazit zu diesem Artikel: $prompt"),
             postProcessings = listOf(createParagraphs, trimmed)
         )
@@ -113,7 +113,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun featuresImages() {
         Step(
             name = "9",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             type = Type.IMAGE,
             input = listOf(meta.keyword)
         )
@@ -121,31 +121,31 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private fun imagesForToC() {
         val prompt =
-            File("$mainOutputFolder/$outputFolder/step_2_1")
+            File("$stepFolder/step_2_1")
                 .readLines()
         Step(
             name = "9",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             type = Type.IMAGE,
             input = prompt
         )
     }
 
     private fun keywords() {
-        val prompt = File("$mainOutputFolder/step_1_1").readText()
+        val prompt = File("$stepFolder/step_1_1").readText()
         Step(
             name = "8",
-            outputFolder = outputFolder,
-            input = listOf("Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 4 Schlüsselwörtern: $prompt"),
+            outputFolder = stepFolder,
+            input = listOf("Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: $prompt"),
             postProcessings = listOf(trimmed)
         )
     }
 
     private fun oppositeOpinionText() {
-        val prompt = File("$mainOutputFolder/step_6_1").readText()
+        val prompt = File("$stepFolder/step_6_1").readText()
         Step(
             name = "7",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             input = listOf("$prompt Schreiben Sie zwei Absätze zu diesem Thema"),
             postProcessings = listOf(createParagraphs, trimmed)
         )
@@ -154,7 +154,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun oppositeOpinionQuestion() {
         Step(
             name = "6",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             input = listOf("Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"${meta.keyword}\""),
             postProcessings = listOf(removeQuotes, removeDots, trimmed)
         )
@@ -162,27 +162,27 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private fun tableOfContentsTexts_part3() {
         val prompt =
-            File("$mainOutputFolder/$outputFolder/step_2_1")
+            File("$stepFolder/step_2_1")
                 .readLines()
                 //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie interessante Fakten über dieses Thema. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
                 .map { "Schreiben Sie interessante Fakten über dieses Thema: \"$it\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
         Step(
             name = "5",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, removeFirstSentence, trimmed)
+            postProcessings = listOf(createParagraphs, trimmed)
         )
     }
 
     private fun tableOfContentsTexts_part2() {
         val prompt =
-            File("$mainOutputFolder/$outputFolder/step_2_1")
+            File("$stepFolder/step_2_1")
                 .readLines()
                 //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort mit einigen Beispielen" }
                 .map { "Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"$it\". Begründen Sie Ihre Antwort mit einigen Beispielen" }
         Step(
             name = "4",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             input = prompt,
             postProcessings = listOf(createParagraphs, trimmed)
         )
@@ -190,22 +190,22 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private fun tableOfContentsTexts_part1() {
         val prompt =
-            File("$mainOutputFolder/$outputFolder/step_2_1")
+            File("$stepFolder/step_2_1")
                 .readLines()
                 //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine historische Anmerkung zu diesem Thema." }
                 .map { "Schreiben Sie eine historische Anmerkung zu diesem Thema. \"$it\"" }
         Step(
             name = "3",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, removeFirstSentence, trimmed)
+            postProcessings = listOf(createParagraphs, trimmed)
         )
     }
 
     private fun tableOfContentsPlan() {
         Step(
             name = "2",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             input = listOf("Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
             postProcessings = listOf(removeNumericList, removeQuestionMarks, trimmed)
         )
@@ -214,7 +214,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun introduction() {
         Step(
             name = "1",
-            outputFolder = outputFolder,
+            outputFolder = stepFolder,
             input = listOf("eine Einleitung für einen Artikel zu einem Thema schreiben: ${meta.keyword}"),
             postProcessings = listOf(removeExtraLineBreaks, trimmed)
         )
