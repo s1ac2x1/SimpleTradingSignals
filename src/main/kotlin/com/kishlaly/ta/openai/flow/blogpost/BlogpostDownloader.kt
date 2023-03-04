@@ -176,7 +176,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             name = "2",
             outputFolder = outputFolder,
             input = listOf("Schreiben Sie eine nummerierte Liste mit Schlüsselwörtern zum Thema \"${meta.keyword}\""),
-            postProcessings = listOf(removeExtraLineBreaks, removeNumericList, trimmed)
+            postProcessings = listOf(removeNumericList, trimmed)
         )
     }
 
