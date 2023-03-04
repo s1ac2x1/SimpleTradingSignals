@@ -5,7 +5,7 @@ import com.kishlaly.ta.openai.finalRegex
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 
-class ContentBuilder(val meta: BlogpostContentMeta) {
+class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
     fun build(): String {
         val srcFolder = "$mainOutputFolder/${filenameRegex.replace(meta.keyword, "_")}"

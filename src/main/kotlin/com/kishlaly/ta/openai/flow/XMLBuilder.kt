@@ -1,7 +1,7 @@
 package com.kishlaly.ta.openai.flow
 
 import com.kishlaly.ta.openai.filenameRegex
-import com.kishlaly.ta.openai.flow.blogpost.ContentBuilder
+import com.kishlaly.ta.openai.flow.blogpost.BlogpostContentBuilder
 import com.kishlaly.ta.openai.flow.blogpost.BlogpostContentMeta
 import java.io.File
 
@@ -17,7 +17,7 @@ class XMLBuilder() {
         xml.append("</title>")
 
         xml.append("<content>")
-        xml.append(ContentBuilder(meta).build())
+        xml.append(BlogpostContentBuilder(meta).build())
         xml.append("</content>")
 
         xml.append("<picture>")
