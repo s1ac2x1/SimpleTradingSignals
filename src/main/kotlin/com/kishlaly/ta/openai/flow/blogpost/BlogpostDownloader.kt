@@ -49,7 +49,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
 
-        tableOfContentsPlan() // TODO может выдавать длинные фразы
+        tableOfContentsPlan()
         tableOfContentsTexts_part1()
         tableOfContentsTexts_part2()
         tableOfContentsTexts_part3()
@@ -59,7 +59,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         keywords()
 
-        imagesForToC() // картинки могут быть плохими TODO
+        imagesForToC() // картинки могут быть плохими? TODO
 
         featuresImages()
 
