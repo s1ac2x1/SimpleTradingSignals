@@ -1,9 +1,6 @@
 package com.kishlaly.ta.openai.flow
 
-import com.kishlaly.ta.openai.CompletionRequest
-import com.kishlaly.ta.openai.ImageGenerateTask
-import com.kishlaly.ta.openai.ImagesProcessor
-import com.kishlaly.ta.openai.getCompletion
+import com.kishlaly.ta.openai.*
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -56,7 +53,7 @@ class Step(
                         ImageGenerateTask(
                             keyword = "Katze im Thema: \"$prompt\". Schwarz-Weiß-Zeichnung in Schraffurtechnik",
                             outputFolderName = "$folder",
-                            outputFileName = "${intent}_${index + 1}"
+                            outputFileName = filenameRegex.replace(prompt, "_")
                         )
                     ImagesProcessor.generate(listOf(imageGenerateTask))
                 }
