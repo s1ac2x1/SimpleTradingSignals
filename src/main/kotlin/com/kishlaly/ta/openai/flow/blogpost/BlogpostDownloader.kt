@@ -75,6 +75,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 //        tags()
 
         imagesForToC()
+        // redraw
 //
 //        featuredImage()
 //

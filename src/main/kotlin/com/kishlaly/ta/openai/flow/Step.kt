@@ -49,7 +49,7 @@ class Step(
                 }
 
                 Type.IMAGE -> {
-                    val imageGenerateTask = ImageGenerateTask(prompt, ". Schwarz-Weiß-Bleistiftbild")
+                    val imageGenerateTask = ImageGenerateTask(prompt, "")
                     ImagesProcessor.generate(listOf(imageGenerateTask), "$mainOutputFolder/$folder")
                 }
             }
