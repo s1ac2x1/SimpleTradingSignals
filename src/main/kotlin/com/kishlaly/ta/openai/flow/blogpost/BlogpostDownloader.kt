@@ -7,10 +7,7 @@ import com.kishlaly.ta.openai.flow.Type
 import com.kishlaly.ta.openai.lineBreaksRegex
 import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.numericListRegex
-import com.kishlaly.ta.text
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.Paths
 import kotlin.random.Random
 
 class BlogpostDownloader(val meta: BlogpostContentMeta) {
@@ -75,7 +72,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 //        tags()
 
         imagesForToC()
-        // redraw
 //
 //        featuredImage()
 //
