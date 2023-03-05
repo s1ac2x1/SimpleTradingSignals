@@ -51,7 +51,7 @@ import javax.imageio.ImageIO
 //}
 
 fun main() {
-    (1..1).forEach {
+    (1..3).forEach {
         val imageURL =
             getImageURL(ImageRequest("Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\". Schwarz-Weiß-Zeichnung in Schraffurtechnik"))
         println(imageURL)
