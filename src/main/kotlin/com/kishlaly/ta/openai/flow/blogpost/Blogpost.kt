@@ -17,7 +17,7 @@ fun main() {
         BlogpostDownloader(meta).download()
         xml.append(meta)
     }
-    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
+    //Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
     // теперь можно залить на хостинг картинки
     // TODO собрать все картинки из папок в одну

@@ -5,7 +5,6 @@ import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Step
 import com.kishlaly.ta.openai.flow.Type
 import com.kishlaly.ta.openai.lineBreaksRegex
-import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.numericListRegex
 import com.kishlaly.ta.text
 import java.io.File
@@ -46,7 +45,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         str.substring(str.indexOfFirst { it == '.' } + 1, str.length)
     }
 
-    private val stepFolder = "$mainOutputFolder/${filenameRegex.replace(meta.keyword, "_")}"
+    private val stepFolder = "${filenameRegex.replace(meta.keyword, "_")}"
 
     fun download() {
         File(stepFolder).mkdir()
@@ -65,30 +64,35 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         println()
         Files.write(Paths.get(resolveStepFileName(Intent.TOC_PLAN)), correctedToc.toString().toByteArray())
 
-        tableOfContentsTexts_part1()
-        tableOfContentsTexts_part2()
-        tableOfContentsTexts_part3()
-
-        oppositeOpinionQuestion()
-        oppositeOpinionText()
-
-        tags()
+//        tableOfContentsTexts_part1()
+//        tableOfContentsTexts_part2()
+//        tableOfContentsTexts_part3()
+//
+//        oppositeOpinionQuestion()
+//        oppositeOpinionText()
+//
+//        tags()
 
         imagesQuestions()
 
-        imagesForToC() // Das Bild sollte eine Katze zeigen, deren Verhalten mit dem Satz beschrieben werden kann: \"Vermeiden von Unruhe in der Umgebung der Katze\". Schwarz-Weiß-Bleistiftbild
-
-        featuredImage()
-
-        conclusion()
-
-        randomAddition()
+//        imagesForToC() // Das Bild sollte eine Katze zeigen, deren Verhalten mit dem Satz beschrieben werden kann: \"Vermeiden von Unruhe in der Umgebung der Katze\". Schwarz-Weiß-Bleistiftbild
+//
+//        featuredImage()
+//
+//        conclusion()
+//
+//        randomAddition()
     }
 
     private fun imagesQuestions() {
-        readLines(Intent.TOC_PLAN).map {
-            ""
+        val prompts = readLines(Intent.TOC_PLAN).map {
+            "Verfassen Sie die Aufgabenstellung für den Illustrator so, dass er den Satz in Form eines Bildes darstellt: \"$it\". Schwarz-Weiß-Bleistiftzeichenstil"
         }
+        Step(
+            intent = Intent.IMAGE_QUESTION,
+            input = prompts,
+            folder = stepFolder
+        )
     }
 
     fun randomAddition() {
@@ -102,7 +106,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = Intent.RANDOM_ADDITION,
             input = listOf(prompt),
-            outputFolder = stepFolder,
+            folder = stepFolder,
             postProcessings = listOf(createParagraphs, trimmed)
         )
     }
@@ -113,7 +117,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt = lineBreaksRegex.replace(introduction, "") + " " + lineBreaksRegex.replace(oppositeOpinion, "")
         Step(
             intent = Intent.CONCLUSION,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             input = listOf("Schreiben Sie ein Fazit zu diesem Artikel: $prompt"),
             postProcessings = listOf(createParagraphs, trimmed)
         )
@@ -122,7 +126,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun featuredImage() {
         Step(
             intent = Intent.FEATURED_IMAGE,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             type = Type.IMAGE,
             input = listOf(meta.keyword)
         )
@@ -132,7 +136,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt = readLines(Intent.TOC_PLAN)
         Step(
             intent = Intent.TOC_IMAGES,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             type = Type.IMAGE,
             input = prompt
         )
@@ -142,7 +146,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt = readText(Intent.INTRODUCTION)
         Step(
             intent = Intent.TAGS,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             input = listOf("Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: $prompt"),
             postProcessings = listOf(trimmed)
         )
@@ -152,7 +156,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val prompt = readText(Intent.OPPOSITE_OPINION_QUESTION)
         Step(
             intent = Intent.OPPOSITE_OPINION_TEXT,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             input = listOf("$prompt Schreiben Sie zwei Absätze zu diesem Thema"),
             postProcessings = listOf(createParagraphs, trimmed)
         )
@@ -161,7 +165,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun oppositeOpinionQuestion() {
         Step(
             intent = Intent.OPPOSITE_OPINION_QUESTION,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             input = listOf("Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"${meta.keyword}\""),
             postProcessings = listOf(removeQuotes, removeDots, trimmed)
         )
@@ -173,7 +177,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             .map { "Schreiben Sie interessante Fakten über dieses Thema: \"$it\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
         Step(
             intent = Intent.CONTENT_PART3,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             input = prompt,
             postProcessings = listOf(createParagraphs, trimmed)
         )
@@ -185,7 +189,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             .map { "Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"$it\". Begründen Sie Ihre Antwort mit einigen Beispielen" }
         Step(
             intent = Intent.CONTENT_PART2,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             input = prompt,
             postProcessings = listOf(createParagraphs, trimmed)
         )
@@ -197,7 +201,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             .map { "Schreiben Sie eine historische Anmerkung zu diesem Thema. \"$it\"" }
         Step(
             intent = Intent.CONTENT_PART1,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             input = prompt,
             postProcessings = listOf(createParagraphs, trimmed)
         )
@@ -206,7 +210,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun tableOfContentsPlan() {
         Step(
             intent = Intent.TOC_PLAN,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             input = listOf("Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
             postProcessings = listOf(removeNumericList, removeQuestionMarks, trimmed)
         )
@@ -215,7 +219,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun introduction() {
         Step(
             intent = Intent.INTRODUCTION,
-            outputFolder = stepFolder,
+            folder = stepFolder,
             input = listOf("eine Einleitung für einen Artikel zu einem Thema schreiben: ${meta.keyword}"),
             postProcessings = listOf(removeExtraLineBreaks, trimmed)
         )

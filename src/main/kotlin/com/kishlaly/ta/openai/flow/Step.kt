@@ -30,7 +30,7 @@ enum class Intent {
 class Step(
     val intent: Intent,
     val input: List<String> = emptyList(),
-    val outputFolder: String,
+    val folder: String,
     val postProcessings: List<(String) -> String> = emptyList(),
     val type: Type = Type.TEXT
 ) {
@@ -45,14 +45,14 @@ class Step(
                     }
                     val outputFileName = "${intent}_${index + 1}"
                     Files.write(
-                        Paths.get("$mainOutputFolder/$outputFolder/$outputFileName"),
+                        Paths.get("$mainOutputFolder/$folder/$outputFileName"),
                         finalResult.toByteArray()
                     )
                 }
 
                 Type.IMAGE -> {
                     val imageTask = ImageTask(prompt, "Schwarz-Weiß-Bleistiftbild")
-                    ImageGenerator.generate(listOf(imageTask), "$mainOutputFolder/$outputFolder")
+                    ImageGenerator.generate(listOf(imageTask), "$mainOutputFolder/$folder")
                 }
             }
             println("")
