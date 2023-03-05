@@ -198,7 +198,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.TOC_PLAN,
             folder = stepFolder,
             input = listOf("Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
-            postProcessings = listOf(removeNumericList, removeQuestionMarks, filterBadTOC, trimmed)
+            postProcessings = listOf(filterBadTOC, removeNumericList, removeQuestionMarks, trimmed)
         )
     }
 
