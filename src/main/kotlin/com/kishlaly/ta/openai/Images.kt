@@ -1,11 +1,11 @@
 package com.kishlaly.ta.openai
 
 import com.google.common.reflect.TypeToken
-import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileOutputStream
@@ -103,10 +103,12 @@ fun getImageURL(imageRequest: ImageRequest): String {
 fun updateImage(file: File, prompt: String): String {
     var result = ""
     try {
-        val httpClient = OkHttpClient()
-        httpClient.setConnectTimeout(5, TimeUnit.MINUTES)
-        httpClient.setReadTimeout(5, TimeUnit.MINUTES)
-        httpClient.setWriteTimeout(5, TimeUnit.MINUTES)
+        val httpClient = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.MINUTES)
+            .writeTimeout(5, TimeUnit.MINUTES)
+            .readTimeout(5, TimeUnit.MINUTES)
+            .build();
+
         println("Editing image: $${file.name}")
 
         val requestBody = MultipartBody.Builder()
