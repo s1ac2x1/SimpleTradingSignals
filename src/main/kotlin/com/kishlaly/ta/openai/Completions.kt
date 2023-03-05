@@ -12,9 +12,9 @@ fun getCompletion(completionRequest: CompletionRequest): String {
     var result = ""
     try {
         val httpClient = OkHttpClient.Builder()
-            .connectTimeout(1, TimeUnit.MINUTES)
-            .writeTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(1, TimeUnit.MINUTES)
+            .connectTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
             .build()
 
         val request = Request.Builder()
@@ -25,6 +25,9 @@ fun getCompletion(completionRequest: CompletionRequest): String {
 
         println(completionRequest.prompt)
         val body = postWithRetry(httpClient, request)
+        if (body == null) {
+            throw RuntimeException("Didn't make it after 3 retries :(")
+        }
         val completionRespone = gson.fromJson<CompletionRespone>(body, object : TypeToken<CompletionRespone>() {}.type)
         textTokensUsed.addAndGet(completionRespone.usage?.totalTokens ?: 0)
         printCosts()
