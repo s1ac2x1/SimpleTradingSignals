@@ -1,6 +1,7 @@
 package com.kishlaly.ta.openai
 
 import com.google.common.reflect.TypeToken
+import com.kishlaly.ta.openai.flow.postWithRetry
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -108,18 +109,20 @@ fun getImageURL(imageRequest: ImageRequest): String {
     var result = ""
     try {
         val httpClient = OkHttpClient.Builder()
-            .connectTimeout(5, TimeUnit.MINUTES)
-            .writeTimeout(5, TimeUnit.MINUTES)
-            .readTimeout(5, TimeUnit.MINUTES)
+            .connectTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
             .build();
-
         println("Generating image: ${imageRequest.prompt}")
         val request = Request.Builder()
             .url("https://api.openai.com/v1/images/generations")
             .post(RequestBody.create(JSON, gson.toJson(imageRequest)))
             .header("Authorization", "Bearer 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")
             .build()
-        val body = httpClient.newCall(request).execute().body?.string()
+        val body = postWithRetry(httpClient, request)
+        if (body == null) {
+            throw RuntimeException("Didn't make it after 3 retries :(")
+        }
         val completionRespone = gson.fromJson<ImageResponse>(body, object : TypeToken<ImageResponse>() {}.type)
         result = completionRespone.data.firstOrNull()?.url ?: ""
     } catch (e: Exception) {
