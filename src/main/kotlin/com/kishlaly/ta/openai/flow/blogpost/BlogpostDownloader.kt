@@ -74,7 +74,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 //
 //        tags()
 
-//        imagesForToC() // Das Bild sollte eine Katze zeigen, deren Verhalten mit dem Satz beschrieben werden kann: \"Vermeiden von Unruhe in der Umgebung der Katze\". Schwarz-Weiß-Bleistiftbild
+        imagesForToC()
 //
 //        featuredImage()
 //

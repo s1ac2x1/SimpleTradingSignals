@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "Der Illustrator soll ein professionelles Bild mit schwarzem Bleistift zeichnen, das das Thema \"Vermeiden von Unruhe in der Umgebung der Katze\" veranschaulicht. Das Bild soll eine Katze und möglicherweise andere Elemente wie Menschen oder Gegenstände enthalten, die darstellen, wie man Unruhe vermeidet. Es kann auch subtilere Hinweise geben, z.B. eine ruhige Umgebung oder sanfte Musik im Hintergrund. Der Illustrator muss sicherstellen, dass alle Details des Bildes professionell gezeichnet sind und die Botschaft des Themas deutlich zum Ausdruck bringen.",
+  "prompt": "Was sind die Folgen des Nichteinhaltens von Anti-Krallen-Regeln in der Familie oder im Haushalt. ",
   "n": 2,
   "size": "512x512"
 }
