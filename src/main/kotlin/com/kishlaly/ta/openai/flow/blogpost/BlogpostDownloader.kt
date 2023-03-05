@@ -20,6 +20,15 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private val removeDots: (String) -> String = { it.replace(".", "") }
     private val removeNumericList: (String) -> String = { numericListRegex.replace(it, "") }
     private val removeQuestionMarks: (String) -> String = { it.replace("?", "") }
+    private val filterBadTOC: (String) -> String = {
+        val correctedToc = it.lines()
+            .filter { it.trim().length >= 10 }
+            .filter { it.length <= 100 }
+            .filter { it.trim()[0].isLetter() }
+            .filter { it.trim()[0].isUpperCase() }
+            .joinToString("\n")
+        correctedToc
+    }
     private val resolveShortKeyword: (String) -> String = {
         var shorter = it
         if (it.indexOf(':') > 0) {
@@ -53,16 +62,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 //        introduction()
 
         tableOfContentsPlan()
-        val correctedToc = text.lines()
-            .filter { it.trim().length >= 10 }
-            .filter { it.length <= 100 }
-            .filter { it.trim()[0].isLetter() }
-            .filter { it.trim()[0].isUpperCase() }
-            .joinToString("\n")
-        println()
-        println(correctedToc)
-        println()
-        Files.write(Paths.get(resolveStepFileName(Intent.TOC_PLAN)), correctedToc.toString().toByteArray())
 
 //        tableOfContentsTexts_part1()
 //        tableOfContentsTexts_part2()
@@ -73,8 +72,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 //
 //        tags()
 
-        imagesQuestions()
-
 //        imagesForToC() // Das Bild sollte eine Katze zeigen, deren Verhalten mit dem Satz beschrieben werden kann: \"Vermeiden von Unruhe in der Umgebung der Katze\". Schwarz-Weiß-Bleistiftbild
 //
 //        featuredImage()
@@ -82,17 +79,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 //        conclusion()
 //
 //        randomAddition()
-    }
-
-    private fun imagesQuestions() {
-        val prompts = readLines(Intent.TOC_PLAN).map {
-            "Verfassen Sie die Aufgabenstellung für den Illustrator so, dass er den Satz in Form eines Bildes darstellt: \"$it\". Schwarz-Weiß-Bleistiftzeichenstil"
-        }
-        Step(
-            intent = Intent.IMAGE_QUESTION,
-            input = prompts,
-            folder = stepFolder
-        )
     }
 
     fun randomAddition() {
@@ -212,7 +198,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.TOC_PLAN,
             folder = stepFolder,
             input = listOf("Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
-            postProcessings = listOf(removeNumericList, removeQuestionMarks, trimmed)
+            postProcessings = listOf(removeNumericList, removeQuestionMarks, filterBadTOC, trimmed)
         )
     }
 

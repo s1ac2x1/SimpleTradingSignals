@@ -15,7 +15,7 @@ fun main() {
             imgURI = "2023/03"
         )
         BlogpostDownloader(meta).download()
-        xml.append(meta)
+        //xml.append(meta)
     }
     //Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 

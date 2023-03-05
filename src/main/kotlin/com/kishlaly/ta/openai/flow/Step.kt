@@ -22,9 +22,7 @@ enum class Intent {
     FUTURED_IMAGE,
     FEATURED_IMAGE,
     CONCLUSION,
-    RANDOM_ADDITION,
-    IMAGE_QUESTION,
-    IMAGE_ANSWER
+    RANDOM_ADDITION
 }
 
 class Step(
