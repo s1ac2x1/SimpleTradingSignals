@@ -142,7 +142,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = Intent.OPPOSITE_OPINION_TEXT,
             folder = stepFolder,
-            input = listOf("$prompt Schreiben Sie zwei Absätze zu diesem Thema"),
+            input = listOf("Ich schreibe einen Blog über Katzen. Schreiben Sie drei Absätze zu diesem Thema: \"$prompt\""),
             postProcessings = listOf(createParagraphs, trimmed)
         )
     }
@@ -159,7 +159,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun tableOfContentsTexts_part3() {
         val prompt = readLines(Intent.TOC_PLAN)
             //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie interessante Fakten über dieses Thema. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
-            .map { "Schreiben Sie interessante Fakten über dieses Thema: \"$it\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
+            .map { "Ich schreibe einen Blog über Katzen. Schreiben Sie interessante Fakten über dieses Thema: \"$it\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
         Step(
             intent = Intent.CONTENT_PART3,
             folder = stepFolder,
@@ -171,7 +171,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun tableOfContentsTexts_part2() {
         val prompt = readLines(Intent.TOC_PLAN)
             //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort mit einigen Beispielen" }
-            .map { "Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"$it\". Begründen Sie Ihre Antwort mit einigen Beispielen" }
+            .map { "Ich schreibe einen Blog über Katzen. Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"$it\". Begründen Sie Ihre Antwort mit einigen Beispielen" }
         Step(
             intent = Intent.CONTENT_PART2,
             folder = stepFolder,
@@ -183,7 +183,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private fun tableOfContentsTexts_part1() {
         val prompt = readLines(Intent.TOC_PLAN)
             //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine historische Anmerkung zu diesem Thema." }
-            .map { "Schreiben Sie eine historische Anmerkung zu diesem Thema. \"$it\"" }
+            .map { "Ich schreibe einen Blog über Katzen. Schreiben Sie eine lange historische Notiz zu diesem Thema: \"$it\"" }
         Step(
             intent = Intent.CONTENT_PART1,
             folder = stepFolder,
@@ -196,7 +196,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = Intent.TOC_PLAN,
             folder = stepFolder,
-            input = listOf("Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
+            input = listOf("Ich schreibe einen Artikel über Katzen. Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
             postProcessings = listOf(removeNumericList, filterBadTOC, removeQuestionMarks, trimmed)
         )
     }
@@ -205,7 +205,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = Intent.INTRODUCTION,
             folder = stepFolder,
-            input = listOf("eine Einleitung für einen Artikel zu einem Thema schreiben: ${meta.keyword}"),
+            input = listOf("Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"${meta.keyword}\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel"),
             postProcessings = listOf(removeExtraLineBreaks, trimmed)
         )
     }
