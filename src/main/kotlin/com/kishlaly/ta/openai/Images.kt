@@ -7,11 +7,14 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import java.awt.Color
+import java.awt.image.BufferedImage
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
 import java.nio.channels.Channels
 import java.util.concurrent.TimeUnit
+import javax.imageio.ImageIO
 
 //fun main() {
 //    val tasks = (1..3).map {
@@ -54,8 +57,13 @@ import java.util.concurrent.TimeUnit
 //}
 
 fun main() {
-    val task = ImageEditTask(File("openai/cat.png"), "Schwarz-Weiß-Bleistiftbild")
-    ImagesProcessor.edit(listOf(task), "openai")
+    val task = ImageGenerateTask(
+        "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren",
+        "Schwarz-Weiß-Bleistiftbild"
+    )
+    ImagesProcessor.generate(listOf(task), "openai/experiments")
+//    val task = ImageEditTask(File("openai/cat.png"), "Schwarz-Weiß-Bleistiftbild")
+//    ImagesProcessor.edit(listOf(task), "openai")
 }
 
 fun downloadFile(url: URL, outputFileName: String) {
@@ -135,6 +143,34 @@ fun updateImage(file: File, prompt: String): String {
     } finally {
         return result
     }
+}
+
+fun convertToRGBA(pngFileName: String): BufferedImage? {
+    val pngFile = File(pngFileName)
+    if (!pngFile.exists()) {
+        println("File $pngFileName does not exist")
+        return null
+    }
+
+    val image = ImageIO.read(pngFile)
+    val rgbaImage = BufferedImage(image.width, image.height, BufferedImage.TYPE_INT_ARGB)
+
+    for (y in 0 until image.height) {
+        for (x in 0 until image.width) {
+            val pixel = image.getRGB(x, y)
+            val alpha = (pixel shr 24) and 0xFF
+            val red = (pixel shr 16) and 0xFF
+            val green = (pixel shr 8) and 0xFF
+            val blue = pixel and 0xFF
+            val rgbaPixel = Color(red, green, blue, alpha).rgb
+            rgbaImage.setRGB(x, y, rgbaPixel)
+        }
+    }
+    return rgbaImage
+}
+
+fun saveImageToFile(image: BufferedImage, file: File, format: String = "png") {
+    ImageIO.write(image, format, file)
 }
 
 class ImagesProcessor {
