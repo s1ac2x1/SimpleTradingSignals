@@ -2,7 +2,7 @@ package com.kishlaly.ta.openai
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.Gson
-import com.squareup.okhttp.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit
 
 val apiKey = "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"
 val gson = Gson()
-val JSON = MediaType.parse("application/json; charset=utf-8")
-val MULTIPART = MediaType.parse("multipart/form-data")
+val JSON = "application/json; charset=utf-8".toMediaTypeOrNull()
+val MULTIPART = "multipart/form-data".toMediaTypeOrNull()
 val filenameRegex = Regex("[^A-Za-z0-9]")
 var threads = 5
 var domain = ""

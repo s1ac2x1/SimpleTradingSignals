@@ -11,9 +11,9 @@ import com.kishlaly.ta.model.indicators.StochJava;
 import com.kishlaly.ta.utils.ContextJava;
 import com.kishlaly.ta.utils.DatesJava;
 import com.kishlaly.ta.utils.QuotesJava;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.ResponseBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.ResponseBody;
 
 import java.lang.reflect.Type;
 import java.util.*;

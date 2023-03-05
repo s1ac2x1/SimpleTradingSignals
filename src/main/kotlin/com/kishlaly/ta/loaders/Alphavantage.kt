@@ -8,8 +8,8 @@ import com.kishlaly.ta.model.Timeframe
 import com.kishlaly.ta.model.exchangeTimezome
 import com.kishlaly.ta.utils.Dates
 import com.kishlaly.ta.utils.Quotes
-import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 /**
  * For stocks, the last price is always the end of the previous day, regardless of the timeframe
@@ -52,13 +52,16 @@ class Alphavantage {
                         val low = v.get("3. low")
                         val close = v.get("4. close")
                         val volume = v.get("5. volume")
-                        quotes.add(Quote(
+                        quotes.add(
+                            Quote(
                                 Dates.getTimeInExchangeZone(day, exchangeTimezome).toEpochSecond(),
                                 high!!.toDouble(),
                                 open!!.toDouble(),
                                 close!!.toDouble(),
                                 low!!.toDouble(),
-                                volume!!.toDouble()))
+                                volume!!.toDouble()
+                            )
+                        )
 
                     }
                 } ?: return emptyList()
@@ -77,9 +80,11 @@ class Alphavantage {
             return try {
                 val httpClient = OkHttpClient()
                 val request = Request.Builder().url(url).get().build()
-                val body = httpClient.newCall(request).execute().body()
-                gson.fromJson<Map<String, Object>>(body.string(),
-                        object : TypeToken<Map<String, Object>>() {}.type)
+                val body = httpClient.newCall(request).execute().body
+                gson.fromJson<Map<String, Object>>(
+                    body?.string(),
+                    object : TypeToken<Map<String, Object>>() {}.type
+                )
             } catch (e: Exception) {
                 null
             }

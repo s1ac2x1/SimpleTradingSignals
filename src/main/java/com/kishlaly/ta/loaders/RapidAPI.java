@@ -3,11 +3,11 @@ package com.kishlaly.ta.loaders;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.ResponseBody;
 import com.kishlaly.ta.model.QuoteJava;
 import com.kishlaly.ta.utils.ContextJava;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.ResponseBody;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

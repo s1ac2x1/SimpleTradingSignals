@@ -2,18 +2,19 @@ package com.kishlaly.ta.openai
 
 import com.google.common.reflect.TypeToken
 import com.google.gson.annotations.SerializedName
-import com.squareup.okhttp.OkHttpClient
-import com.squareup.okhttp.Request
-import com.squareup.okhttp.RequestBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 import java.util.concurrent.TimeUnit
 
 fun getCompletion(completionRequest: CompletionRequest): String {
     var result = ""
     try {
-        val httpClient = OkHttpClient()
-        httpClient.setConnectTimeout(5, TimeUnit.MINUTES)
-        httpClient.setReadTimeout(5, TimeUnit.MINUTES)
-        httpClient.setWriteTimeout(5, TimeUnit.MINUTES)
+        val httpClient = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.MINUTES)
+            .writeTimeout(5, TimeUnit.MINUTES)
+            .readTimeout(5, TimeUnit.MINUTES)
+            .build()
 
         val request = Request.Builder()
             .url("https://api.openai.com/v1/completions")
@@ -21,7 +22,7 @@ fun getCompletion(completionRequest: CompletionRequest): String {
             .header("Authorization", "Bearer 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")
             .build()
         println(completionRequest.prompt)
-        val body = httpClient.newCall(request).execute().body().string()
+        val body = httpClient.newCall(request).execute().body?.string()
         val completionRespone = gson.fromJson<CompletionRespone>(body, object : TypeToken<CompletionRespone>() {}.type)
         textTokensUsed.addAndGet(completionRespone.usage?.totalTokens ?: 0)
         printCosts()

@@ -15,7 +15,7 @@ repositories {
 dependencies {
     implementation("org.ta4j:ta4j-parent:0.14")
     implementation("org.ta4j:ta4j-core:0.14")
-    implementation("com.squareup.okhttp:okhttp:4.10.0")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.google.guava:guava:31.0.1-jre")
     implementation("commons-io:commons-io:2.11.0")
