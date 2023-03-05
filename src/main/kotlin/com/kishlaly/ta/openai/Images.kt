@@ -115,7 +115,7 @@ fun updateImage(file: File, prompt: String): String {
 
         val requestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
-            .addFormDataPart("image", file.name, file.asRequestBody("multipart/form-data".toMediaTypeOrNull()))
+            .addFormDataPart("image", file.name, file.asRequestBody("image/png".toMediaTypeOrNull()))
             .addFormDataPart("prompt", prompt)
             .addFormDataPart("n", "1")
             .addFormDataPart("size", "512x512")
