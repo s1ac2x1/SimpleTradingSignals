@@ -39,18 +39,8 @@ fun main() {
 //    val content = File("openai/katzenverhalten.xml").readText()
 //    val newContent = content.replace("<content>.\n\n", "<content>")
 //    File("openai/katzenverhalten2.xml").writeText(newContent)
-    text.lines()
-        .filter { it.trim().length >= 10 }
-        .filter { it.length <= 100 }
-        .filter { it.trim()[0].isLetter() }
-        .filter { it.trim()[0].isUpperCase() }
-        .forEach { println(it) }
-}
 
-// фильтровать:
-//начинается не с большой буквы
-//trimm и меньше 5 символов
-//более 100 символов
-//
-// убрать
-//убрать все непечатные символы
+    val text = "Katzen, Beliebte Haustiere, Schönheit, Sanftes Wesen, Kratzen, Verhindern, Gesundheit, Verständnis."
+    val res = text.replace(".", "")
+    println(res)
+}

@@ -160,7 +160,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.TAGS,
             folder = stepFolder,
             input = listOf("Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: $prompt"),
-            postProcessings = listOf(trimmed)
+            postProcessings = listOf(trimmed, removeDots)
         )
     }
 
