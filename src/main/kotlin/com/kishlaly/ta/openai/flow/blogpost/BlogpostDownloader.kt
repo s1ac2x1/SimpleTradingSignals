@@ -5,6 +5,7 @@ import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Step
 import com.kishlaly.ta.openai.flow.Type
 import com.kishlaly.ta.openai.lineBreaksRegex
+import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.numericListRegex
 import com.kishlaly.ta.text
 import java.io.File
@@ -22,10 +23,11 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private val removeQuestionMarks: (String) -> String = { it.replace("?", "") }
     private val filterBadTOC: (String) -> String = {
         val correctedToc = it.lines()
-            .filter { it.trim().length >= 10 }
+            .map(trimmed)
+            .filter { it.length >= 10 }
             .filter { it.length <= 100 }
-            .filter { it.trim()[0].isLetter() }
-            .filter { it.trim()[0].isUpperCase() }
+            .filter { it[0].isLetter() }
+            .filter { it[0].isUpperCase() }
             .joinToString("\n")
         correctedToc
     }
@@ -57,7 +59,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     private val stepFolder = "${filenameRegex.replace(meta.keyword, "_")}"
 
     fun download() {
-        File(stepFolder).mkdir()
+        File("$mainOutputFolder/$stepFolder").mkdir()
 
 //        introduction()
 
@@ -198,7 +200,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.TOC_PLAN,
             folder = stepFolder,
             input = listOf("Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
-            postProcessings = listOf(filterBadTOC, removeNumericList, removeQuestionMarks, trimmed)
+            postProcessings = listOf(removeNumericList, filterBadTOC, removeQuestionMarks, trimmed)
         )
     }
 
