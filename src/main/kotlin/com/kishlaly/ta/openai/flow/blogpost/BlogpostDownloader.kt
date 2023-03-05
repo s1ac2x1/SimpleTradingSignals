@@ -10,6 +10,24 @@ import com.kishlaly.ta.openai.numericListRegex
 import java.io.File
 import kotlin.random.Random
 
+fun main() {
+    val text = """
+        Um Ihrer Katze ein sicheres und stressfreies Zuhause zu bieten, ist es wichtig, dass Sie einige grundlegende Dinge beachten. Erstens sollten Sie sicherstellen, dass Ihre Katze ausreichend Platz hat, um sich zu bewegen und zu spielen. 
+
+        Stellen Sie also sicher, dass Ihr Zuhause groß genug ist und mehrere Räume oder Bereiche hat, in denen Ihre Katze herumlaufen kann. Zweitens sollten Sie eine ruhige Umgebung schaffen. 
+
+        Lautstärke kann für Katzen sehr stressig sein, daher sollten Sie versuchen, die Lautstärke in Ihrem Haus auf einem angenehmeren Niveau zu halten. Dazu gehört auch das Vermeiden von plötzlichen Geräuschen oder laute Musik. 
+
+        Drittens müssen Sie auch an die Sicherheit denken: Stellen Sie sicher, dass alle Fenster geschlossen und alle Türen verschlossen sind - besonders wenn die Katze draußen ist - damit niemand unerwünscht in Ihr Haus gelangt oder die Katze entkommt. Viertens sollte man der Katze genug Zeit geben um zur Ruhe zu kommen und Stress abzubauen: Eine ruhige Ecke mit bequemen Kissen oder Deckchen für deine Katze kann hier helfen; aber es gibt noch viele andere Möglichkeiten wie Spiel- und Kratzmöbel sowie interaktive Spielgeräte für deine Samtpfote! 
+
+        Schließlich muss man immer noch an den Komfort denken: Stellen Sie sicher, dass alle Betten sauber und weich sind; stellen Sie frisches Wasser bereit; halten Sie Futter-und Wasserschalen sauber; bietet ihn als regelmäßiges Fellpflegeprogramm an; bietet ihm Spielgeräte an (wie Bälle oder Seile) usw. 
+
+        , damit er nicht langweilig wird!  All diese Dinge helfen ihm sein Zuhause als stressfreien Ort zu betrachten!.
+    """.trimIndent()
+    val result = BlogpostDownloader(BlogpostContentMeta("", "", "")).createParagraphs(text)
+    println(result)
+}
+
 class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private val trimmed: (String) -> String = { it.trim() }
@@ -41,13 +59,22 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         }
         shorter
     }
-    private val createParagraphs: (String) -> String = {
+    val createParagraphs: (String) -> String = {
         val output = StringBuilder()
-        it.split(".").filter { !it.isNullOrBlank() }.map { it.trim() }.chunked(Random.nextInt(2, 4)).forEach { chunk ->
-            chunk.forEach { output.append(it).append(". ") }
-            output.append("\n\n")
-        }
+        it.split(".")
+            .filter { !it.isNullOrBlank() }
+            .map { it.trim() }
+            .filter { it.length > 10 }
+            .chunked(Random.nextInt(2, 4))
+            .forEach { chunk ->
+                chunk.forEach { output.append(it).append(". ") }
+                output.append("\n\n")
+            }
+
         output.toString()
+            .split("\n\n")
+            .filter { it.trim().length > 10 }
+            .joinToString("\n\n")
     }
     private val removeFirstSentence: (String) -> String = { str ->
         str.substring(str.indexOfFirst { it == '.' } + 1, str.length)

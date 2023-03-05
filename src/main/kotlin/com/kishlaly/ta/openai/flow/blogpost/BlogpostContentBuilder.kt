@@ -61,6 +61,8 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content = finalRegex.replace(content, "")
         content = content.replace("!.", ".")
         content = content.replace("!", ".")
+        content = content.replace(". ,", ".,")
+        content = content.replace("  ", " ")
 
         return content
     }
