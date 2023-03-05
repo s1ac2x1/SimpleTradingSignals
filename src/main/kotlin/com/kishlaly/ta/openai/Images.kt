@@ -4,11 +4,13 @@ import com.google.common.reflect.TypeToken
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.okhttp.Request
 import com.squareup.okhttp.RequestBody
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
 import java.nio.channels.Channels
-import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 //fun main() {
@@ -44,6 +46,17 @@ import java.util.concurrent.TimeUnit
 //fun main() {
 //    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
 //}
+
+//fun main() {
+//    val imageURL =
+//        getImageURL(ImageRequest("Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\""))
+//    println(imageURL)
+//}
+
+fun main() {
+    val task = ImageEditTask(File("openai/cat.png"), "")
+    ImagesProcessor.edit(listOf(task), "openai")
+}
 
 fun downloadFile(url: URL, outputFileName: String) {
     url.openStream().use {
@@ -87,28 +100,67 @@ fun getImageURL(imageRequest: ImageRequest): String {
     }
 }
 
-class ImageGenerator {
+fun updateImage(file: File, prompt: String): String {
+    var result = ""
+    try {
+        val httpClient = OkHttpClient()
+        httpClient.setConnectTimeout(5, TimeUnit.MINUTES)
+        httpClient.setReadTimeout(5, TimeUnit.MINUTES)
+        httpClient.setWriteTimeout(5, TimeUnit.MINUTES)
+        println("Editing image: $${file.name}")
+
+        val requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("image", file.name, file.asRequestBody("multipart/form-data".toMediaTypeOrNull()))
+            .addFormDataPart("prompt", prompt)
+            .addFormDataPart("n", "1")
+            .addFormDataPart("size", "512x512")
+            .build()
+
+        val request = Request.Builder()
+            .url("https://api.openai.com/v1/images/edits")
+            .post(requestBody)
+            .header("Authorization", "Bearer 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")
+            .build()
+
+        val body = httpClient.newCall(request).execute().body().string()
+        val completionRespone = gson.fromJson<ImageResponse>(body, object : TypeToken<ImageResponse>() {}.type)
+        result = completionRespone.data.firstOrNull()?.url ?: ""
+    } catch (e: Exception) {
+        println("Image generation error: ${e.message}")
+    } finally {
+        return result
+    }
+}
+
+class ImagesProcessor {
 
     companion object {
-        fun generate(tasks: List<ImageTask>, outputFolder: String) {
-            val executor = Executors.newFixedThreadPool(5)
+        fun generate(tasks: List<ImageGenerateTask>, outputFolder: String) {
             for (task in tasks) {
-                executor.submit {
-                    val imageURL = getImageURL(ImageRequest(task.keyword + " " + task.style))
-                    val outputFileName = filenameRegex.replace(task.keyword, "_") + "_" + System.currentTimeMillis()
-                    downloadFile(URL(imageURL), "$outputFolder/$outputFileName.png")
-                    imagesGenerated.incrementAndGet()
-                    printCosts()
-                }
+                val imageURL = getImageURL(ImageRequest(task.keyword + " " + task.style))
+                val outputFileName = filenameRegex.replace(task.keyword, "_") + "_" + System.currentTimeMillis()
+                downloadFile(URL(imageURL), "$outputFolder/$outputFileName.png")
+                imagesGenerated.incrementAndGet()
+                printCosts()
             }
-            executor.shutdown()
-            executor.awaitTermination(1, TimeUnit.HOURS)
+        }
+
+        fun edit(tasks: List<ImageEditTask>, outputFolder: String) {
+            for (task in tasks) {
+                val imageURL = updateImage(task.file, task.prompt)
+                downloadFile(URL(imageURL), "$outputFolder/${task.file}_u.png")
+                imagesGenerated.incrementAndGet()
+                printCosts()
+            }
         }
     }
 
 }
 
-data class ImageTask(val keyword: String, val style: String)
+data class ImageGenerateTask(val keyword: String, val style: String)
+
+data class ImageEditTask(val file: File, val prompt: String)
 
 data class ImageRequest(
     val prompt: String,
