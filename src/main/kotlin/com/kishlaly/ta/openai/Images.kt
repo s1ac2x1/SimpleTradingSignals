@@ -50,38 +50,40 @@ import javax.imageio.ImageIO
 //    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
 //}
 
-//fun main() {
-//    val imageURL =
-//        getImageURL(ImageRequest("Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\""))
-//    println(imageURL)
-//}
-
 fun main() {
-    val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
-    val keywordFileName = filenameRegex.replace(keyword, "_")
-    val outputFolder = "openai/experiments"
-
-    val generateTask = ImageGenerateTask(
-        "Katze im Thema: \"$keyword\"",
-        "$keyword"
-    )
-
-    ImagesProcessor.generate(listOf(generateTask), outputFolder)
-
-    val pngFileName =
-        File(outputFolder).listFiles().find { it.name.contains(keywordFileName) }?.absolutePath
-    saveImageToFile(
-        convertToRGBA(pngFileName!!)!!,
-        File("$outputFolder/${keywordFileName}_rgba")
-    )
-
-    val editTask = ImageEditTask(
-        folder = outputFolder,
-        file = "${keywordFileName}_rgba",
-        prompt = "Schwarz-Weiß-Bleistiftbild"
-    )
-    ImagesProcessor.edit(listOf(editTask))
+    (1..1).forEach {
+        val imageURL =
+            getImageURL(ImageRequest("Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\". Schwarz-Weiß-Zeichnung in Schraffurtechnik"))
+        println(imageURL)
+    }
 }
+
+//fun main() {
+//    val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
+//    val keywordFileName = filenameRegex.replace(keyword, "_")
+//    val outputFolder = "openai/experiments"
+//
+//    val generateTask = ImageGenerateTask(
+//        "Katze im Thema: \"$keyword\"",
+//        "$keyword"
+//    )
+//
+//    ImagesProcessor.generate(listOf(generateTask), outputFolder)
+//
+//    val pngFileName =
+//        File(outputFolder).listFiles().find { it.name.contains(keywordFileName) }?.absolutePath
+//    saveImageToFile(
+//        convertToRGBA(pngFileName!!)!!,
+//        File("$outputFolder/${keywordFileName}_rgba")
+//    )
+//
+//    val editTask = ImageEditTask(
+//        folder = outputFolder,
+//        file = "${keywordFileName}_rgba",
+//        prompt = "Schwarz-Weiß-Bleistiftbild"
+//    )
+//    ImagesProcessor.edit(listOf(editTask))
+//}
 
 fun downloadFile(url: URL, outputFileName: String) {
     url.openStream().use {

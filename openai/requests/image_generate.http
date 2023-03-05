@@ -4,6 +4,6 @@ Content-Type: application/json
 
 {
   "prompt": "Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\"",
-  "n": 3,
+  "n": 1,
   "size": "512x512"
 }
