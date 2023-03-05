@@ -9,8 +9,26 @@ enum class Type {
     IMAGE
 }
 
+enum class Intent {
+    INTRODUCTION,
+    TOC_PLAN,
+    CONTENT_PART1,
+    CONTENT_PART2,
+    CONTENT_PART3,
+    OPPOSITE_OPINION_QUESTION,
+    OPPOSITE_OPINION_TEXT,
+    TAGS,
+    TOC_IMAGES,
+    FUTURED_IMAGE,
+    FEATURED_IMAGE,
+    CONCLUSION,
+    RANDOM_ADDITION,
+    IMAGE_QUESTION,
+    IMAGE_ANSWER
+}
+
 class Step(
-    val name: String,
+    val intent: Intent,
     val input: List<String> = emptyList(),
     val outputFolder: String,
     val postProcessings: List<(String) -> String> = emptyList(),
@@ -25,7 +43,7 @@ class Step(
                     postProcessings.forEach {
                         finalResult = it(finalResult)
                     }
-                    val outputFileName = "step_${name}_${index + 1}"
+                    val outputFileName = "${intent}_${index + 1}"
                     Files.write(
                         Paths.get("$mainOutputFolder/$outputFolder/$outputFileName"),
                         finalResult.toByteArray()

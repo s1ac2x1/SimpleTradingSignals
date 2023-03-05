@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "Atemwegserkrankungen. Schwarz-Weiß-Bleistiftbild",
-  "n": 3,
+  "prompt": "Bitte erstellen Sie ein Illustration im Schwarz-Weiß-Bleistiftzeichenstil, die das Thema \"Vermeiden von Unruhe in der Umgebung der Katze\" veranschaulicht. Bitte achten Sie darauf, dass die Illustration eine ruhige Atmosphäre wiedergibt und alle Elemente des Bildes harmonisch miteinander verbunden sind.",
+  "n": 2,
   "size": "512x512"
 }
