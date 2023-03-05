@@ -18,7 +18,7 @@ fun postWithRetry(
             response = client.newCall(request).execute()
         } catch (e: IOException) {
             attempts++
-            println("Request failed. Retrying in 10 seconds")
+            println("Attempt $attempts failed. Retrying in 10 seconds")
             Thread.sleep(10 * 1000)
         }
     }
