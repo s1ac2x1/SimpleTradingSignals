@@ -54,7 +54,7 @@ import java.util.concurrent.TimeUnit
 //}
 
 fun main() {
-    val task = ImageEditTask(File("openai/cat.png"), "")
+    val task = ImageEditTask(File("openai/cat.png"), "Schwarz-Weiß-Bleistiftbild")
     ImagesProcessor.edit(listOf(task), "openai")
 }
 
