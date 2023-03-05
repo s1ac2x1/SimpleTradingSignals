@@ -58,8 +58,8 @@ import javax.imageio.ImageIO
 
 fun main() {
     val task = ImageGenerateTask(
-        "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren",
-        "Schwarz-Weiß-Bleistiftbild"
+        "Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\"",
+        "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
     )
     ImagesProcessor.generate(listOf(task), "openai/experiments")
 //    val task = ImageEditTask(File("openai/cat.png"), "Schwarz-Weiß-Bleistiftbild")
@@ -178,8 +178,8 @@ class ImagesProcessor {
     companion object {
         fun generate(tasks: List<ImageGenerateTask>, outputFolder: String) {
             for (task in tasks) {
-                val imageURL = getImageURL(ImageRequest(task.keyword + " " + task.style))
-                val outputFileName = filenameRegex.replace(task.keyword, "_") + "_" + System.currentTimeMillis()
+                val imageURL = getImageURL(ImageRequest(task.keyword))
+                val outputFileName = filenameRegex.replace(task.outputFileName, "_") + "_" + System.currentTimeMillis()
                 downloadFile(URL(imageURL), "$outputFolder/$outputFileName.png")
                 imagesGenerated.incrementAndGet()
                 printCosts()
@@ -198,7 +198,7 @@ class ImagesProcessor {
 
 }
 
-data class ImageGenerateTask(val keyword: String, val style: String)
+data class ImageGenerateTask(val keyword: String, val outputFileName: String)
 
 data class ImageEditTask(val file: File, val prompt: String)
 
