@@ -118,12 +118,12 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun imagesForToC() {
-        val prompt = readLines(Intent.TOC_PLAN)
+        val prompts = readLines(Intent.TOC_PLAN)
         Step(
             intent = Intent.TOC_IMAGES,
             folder = stepFolder,
             type = Type.IMAGE,
-            input = prompt
+            input = prompts
         )
     }
 
@@ -210,7 +210,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    private fun resolveStepFileName(intent: Intent) = "$stepFolder/${intent}_1"
+    private fun resolveStepFileName(intent: Intent) = "$mainOutputFolder/$stepFolder/${intent}_1"
 
     private fun readText(intent: Intent) = File(resolveStepFileName(intent)).readText()
 
