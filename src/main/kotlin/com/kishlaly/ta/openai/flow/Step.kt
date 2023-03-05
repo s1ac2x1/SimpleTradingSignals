@@ -49,8 +49,13 @@ class Step(
                 }
 
                 Type.IMAGE -> {
-                    val imageGenerateTask = ImageGenerateTask(prompt, "")
-                    ImagesProcessor.generate(listOf(imageGenerateTask), "$mainOutputFolder/$folder")
+                    val imageGenerateTask =
+                        ImageGenerateTask(
+                            keyword = "Katze im Thema: \"$prompt\". Schwarz-Weiß-Zeichnung in Schraffurtechnik",
+                            outputFolderName = "$mainOutputFolder/$folder",
+                            outputFileName = "${intent}_${index + 1}"
+                        )
+                    ImagesProcessor.generate(listOf(imageGenerateTask))
                 }
             }
             println("")

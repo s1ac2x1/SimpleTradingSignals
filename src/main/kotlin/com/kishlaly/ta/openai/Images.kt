@@ -195,11 +195,10 @@ fun saveImageToFile(image: BufferedImage, file: File, format: String = "png") {
 class ImagesProcessor {
 
     companion object {
-        fun generate(tasks: List<ImageGenerateTask>, outputFolder: String) {
+        fun generate(tasks: List<ImageGenerateTask>) {
             for (task in tasks) {
                 val imageURL = getImageURL(ImageRequest(task.keyword))
-                val outputFileName = filenameRegex.replace(task.outputFileName, "_") + "_" + System.currentTimeMillis()
-                downloadFile(URL(imageURL), "$outputFolder/$outputFileName.png")
+                downloadFile(URL(imageURL), "${task.outputFolderName}/${task.outputFileName}.png")
                 imagesGenerated.incrementAndGet()
                 printCosts()
             }
@@ -217,7 +216,11 @@ class ImagesProcessor {
 
 }
 
-data class ImageGenerateTask(val keyword: String, val outputFileName: String)
+data class ImageGenerateTask(
+    val keyword: String,
+    val outputFolderName: String,
+    val outputFileName: String
+)
 
 data class ImageEditTask(
     val folder: String,
