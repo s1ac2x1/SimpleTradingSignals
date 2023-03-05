@@ -57,13 +57,27 @@ import javax.imageio.ImageIO
 //}
 
 fun main() {
-    val task = ImageGenerateTask(
-        "Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\"",
-        "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
+    val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
+    val keywordFileName = filenameRegex.replace(keyword, "_")
+
+    val generateTask = ImageGenerateTask(
+        "Katze im Thema: \"$keyword\"",
+        "$keyword"
     )
-    ImagesProcessor.generate(listOf(task), "openai/experiments")
-//    val task = ImageEditTask(File("openai/cat.png"), "Schwarz-Weiß-Bleistiftbild")
-//    ImagesProcessor.edit(listOf(task), "openai")
+    ImagesProcessor.generate(listOf(generateTask), "openai/experiments")
+
+    val pngFileName =
+        File("openai/experiments").listFiles().find { it.name.contains(keywordFileName) }?.absolutePath
+    saveImageToFile(
+        convertToRGBA(pngFileName!!)!!,
+        File("openai/experiments/${keywordFileName}_rgba")
+    )
+
+    val editTask = ImageEditTask(
+        File("openai/experiments/${keywordFileName}_rgba"),
+        "Schwarz-Weiß-Bleistiftbild"
+    )
+    ImagesProcessor.edit(listOf(editTask), "openai/experiments")
 }
 
 fun downloadFile(url: URL, outputFileName: String) {
