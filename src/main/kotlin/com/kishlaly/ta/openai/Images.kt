@@ -59,25 +59,28 @@ import javax.imageio.ImageIO
 fun main() {
     val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
     val keywordFileName = filenameRegex.replace(keyword, "_")
+    val outputFolder = "openai/experiments"
 
     val generateTask = ImageGenerateTask(
         "Katze im Thema: \"$keyword\"",
         "$keyword"
     )
-    ImagesProcessor.generate(listOf(generateTask), "openai/experiments")
+
+    ImagesProcessor.generate(listOf(generateTask), outputFolder)
 
     val pngFileName =
-        File("openai/experiments").listFiles().find { it.name.contains(keywordFileName) }?.absolutePath
+        File(outputFolder).listFiles().find { it.name.contains(keywordFileName) }?.absolutePath
     saveImageToFile(
         convertToRGBA(pngFileName!!)!!,
-        File("openai/experiments/${keywordFileName}_rgba")
+        File("$outputFolder/${keywordFileName}_rgba")
     )
 
     val editTask = ImageEditTask(
-        File("openai/experiments/${keywordFileName}_rgba"),
-        "Schwarz-Weiß-Bleistiftbild"
+        folder = outputFolder,
+        file = "${keywordFileName}_rgba",
+        prompt = "Schwarz-Weiß-Bleistiftbild"
     )
-    ImagesProcessor.edit(listOf(editTask), "openai/experiments")
+    ImagesProcessor.edit(listOf(editTask))
 }
 
 fun downloadFile(url: URL, outputFileName: String) {
@@ -133,7 +136,7 @@ fun updateImage(file: File, prompt: String): String {
             .readTimeout(5, TimeUnit.MINUTES)
             .build()
 
-        println("Editing image: $${file.name}")
+        println("Editing image: ${file.name}")
 
         val requestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
@@ -200,10 +203,10 @@ class ImagesProcessor {
             }
         }
 
-        fun edit(tasks: List<ImageEditTask>, outputFolder: String) {
+        fun edit(tasks: List<ImageEditTask>) {
             for (task in tasks) {
-                val imageURL = updateImage(task.file, task.prompt)
-                downloadFile(URL(imageURL), "$outputFolder/${task.file}_u.png")
+                val imageURL = updateImage(File("${task.folder}/${task.file}"), task.prompt)
+                downloadFile(URL(imageURL), "${task.folder}/${task.file}_u.png")
                 imagesGenerated.incrementAndGet()
                 printCosts()
             }
@@ -214,7 +217,11 @@ class ImagesProcessor {
 
 data class ImageGenerateTask(val keyword: String, val outputFileName: String)
 
-data class ImageEditTask(val file: File, val prompt: String)
+data class ImageEditTask(
+    val folder: String,
+    val file: String,
+    val prompt: String
+)
 
 data class ImageRequest(
     val prompt: String,
