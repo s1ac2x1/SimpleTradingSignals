@@ -53,10 +53,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         str.substring(str.indexOfFirst { it == '.' } + 1, str.length)
     }
 
-    private val stepFolder = "${filenameRegex.replace(meta.keyword, "_")}"
+    private val stepFolder = "$mainOutputFolder/${filenameRegex.replace(meta.keyword, "_")}"
 
     fun download() {
-        File("$mainOutputFolder/$stepFolder").mkdir()
+        File(stepFolder).mkdir()
 
 //        introduction()
 
@@ -210,7 +210,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    private fun resolveStepFileName(intent: Intent) = "$mainOutputFolder/$stepFolder/${intent}_1"
+    private fun resolveStepFileName(intent: Intent) = "$stepFolder/${intent}_1"
 
     private fun readText(intent: Intent) = File(resolveStepFileName(intent)).readText()
 
