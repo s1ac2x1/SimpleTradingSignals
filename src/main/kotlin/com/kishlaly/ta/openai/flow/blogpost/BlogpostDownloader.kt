@@ -2,6 +2,10 @@ package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.*
 import com.kishlaly.ta.openai.mainOutputFolder
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.io.File
 import kotlin.random.Random
 
@@ -30,26 +34,28 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun download() {
         File(stepFolder).mkdir()
 
-        introduction()
-
-        tableOfContentsPlan()
-
-        tableOfContentsTexts_part1()
-        tableOfContentsTexts_part2()
-        tableOfContentsTexts_part3()
-
-        oppositeOpinionQuestion()
-        oppositeOpinionText()
-
-        tags()
-
-        imagesForToC()
-
-        featuredImage()
-
-        conclusion()
-
-        randomAddition()
+        runBlocking {
+            val jobs = mutableListOf<Job>()
+            jobs += launch {
+                introduction()
+                oppositeOpinionQuestion()
+                oppositeOpinionText()
+                conclusion()
+                randomAddition()
+                tags()
+            }
+            jobs += launch {
+                tableOfContentsPlan()
+                tableOfContentsTexts_part1()
+                tableOfContentsTexts_part2()
+                tableOfContentsTexts_part3()
+                imagesForToC()
+            }
+            jobs += launch {
+                featuredImage()
+            }
+            joinAll(*jobs.toTypedArray())
+        }
     }
 
     fun randomAddition() {
