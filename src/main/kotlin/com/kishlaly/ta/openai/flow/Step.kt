@@ -59,7 +59,8 @@ class Step(
                         ImageGenerateTask(
                             keyword = "Katze im Thema: \"$prompt\". Schwarz-Weiß-Zeichnung in Schraffurtechnik",
                             outputFolderName = "$folder",
-                            outputFileName = "IMG_${prompt.toFileName()}"
+                            outputFileName = "IMG_${prompt.toFileName()}",
+                            n = 2
                         )
                     ImagesProcessor.generate(listOf(imageGenerateTask))
                 }

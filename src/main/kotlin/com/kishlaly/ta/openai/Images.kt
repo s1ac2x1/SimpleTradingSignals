@@ -229,7 +229,7 @@ data class ImageGenerateTask(
     val keyword: String,
     val outputFolderName: String,
     val outputFileName: String,
-    val n: Int = 2
+    val n: Int
 )
 
 data class ImageEditTask(
