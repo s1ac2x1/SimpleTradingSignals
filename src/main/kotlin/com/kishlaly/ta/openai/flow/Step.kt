@@ -34,7 +34,7 @@ class Step(
     val folder: String,
     val postProcessings: List<(String) -> String> = emptyList(),
     val type: Type = Type.TEXT,
-    val fixText: Boolean = true
+    val fixGrammar: Boolean = true
 ) {
     val fixPrompt = "Korrigieren Sie Grammatikfehler in diesem Text:"
 
@@ -43,8 +43,8 @@ class Step(
             when (type) {
                 Type.TEXT -> {
                     var completion = getCompletion(prompt)
-                    if (fixText) {
-                        completion = getCompletion("${fixPrompt} $completion")
+                    if (fixGrammar) {
+                        completion = getCompletion("$fixPrompt $completion")
                     }
                     val outputFileName = "${intent}_${index + 1}"
                     Files.write(
