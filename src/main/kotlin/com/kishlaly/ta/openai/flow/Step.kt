@@ -40,6 +40,7 @@ class Step(
 
     init {
         input.forEachIndexed { index, prompt ->
+            println("[$type][$intent]")
             when (type) {
                 Type.TEXT -> {
                     var completion = getCompletion(prompt)
