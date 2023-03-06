@@ -52,11 +52,15 @@ import javax.imageio.ImageIO
 //}
 
 fun main() {
-    (1..3).forEach {
-        val imageURL =
-            getImageURL(ImageRequest("Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\". Schwarz-Weiß-Zeichnung in Schraffurtechnik"))
-        println(imageURL)
-    }
+    getImageURLs(
+        ImageRequest(
+            prompt = "Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\". Schwarz-Weiß-Zeichnung in Schraffurtechnik",
+            n = 3
+        )
+    )
+        .forEach {
+            println(it)
+        }
 }
 
 //fun main() {
@@ -86,11 +90,13 @@ fun main() {
 //    ImagesProcessor.edit(listOf(editTask))
 //}
 
-fun downloadFile(url: URL, outputFileName: String) {
-    url.openStream().use {
-        Channels.newChannel(it).use { rbc ->
-            FileOutputStream(outputFileName).use { fos ->
-                fos.channel.transferFrom(rbc, 0, Long.MAX_VALUE)
+fun downloadFile(urls: List<String?>, outputFileName: String) {
+    urls.filterNotNull().map { URL(it) }.forEachIndexed { index, url ->
+        url.openStream().use {
+            Channels.newChannel(it).use { rbc ->
+                FileOutputStream("${outputFileName}_${index}").use { fos ->
+                    fos.channel.transferFrom(rbc, 0, Long.MAX_VALUE)
+                }
             }
         }
     }
@@ -105,8 +111,8 @@ fun getRandomWPURL(imagesFolder: String, domain: String, date: String): String {
 private fun createWPURL(domain: String, date: String, imageFileName: String) =
     "https://${domain}/wp-content/uploads/${date}/$imageFileName"
 
-fun getImageURL(imageRequest: ImageRequest): String {
-    var result = ""
+fun getImageURLs(imageRequest: ImageRequest): List<String?> {
+    var result = listOf<String?>()
     try {
         val httpClient = OkHttpClient.Builder()
             .connectTimeout(2, TimeUnit.MINUTES)
@@ -124,7 +130,7 @@ fun getImageURL(imageRequest: ImageRequest): String {
             throw RuntimeException("Didn't make it after 3 retries :(")
         }
         val completionRespone = gson.fromJson<ImageResponse>(body, object : TypeToken<ImageResponse>() {}.type)
-        result = completionRespone.data.firstOrNull()?.url ?: ""
+        result = completionRespone.data.map { it.url }.toList()
     } catch (e: Exception) {
         println("Image generation error: ${e.message}")
     } finally {
@@ -200,9 +206,9 @@ class ImagesProcessor {
     companion object {
         fun generate(tasks: List<ImageGenerateTask>) {
             for (task in tasks) {
-                val imageURL = getImageURL(ImageRequest(task.keyword))
-                downloadFile(URL(imageURL), "${task.outputFolderName}/${task.outputFileName}.png")
-                imagesGenerated.incrementAndGet()
+                val imageURLs = getImageURLs(ImageRequest(task.keyword))
+                downloadFile(imageURLs, "${task.outputFolderName}/${task.outputFileName}.png")
+                imagesGenerated.addAndGet(imageURLs.size)
                 printCosts()
             }
         }
@@ -210,7 +216,7 @@ class ImagesProcessor {
         fun edit(tasks: List<ImageEditTask>) {
             for (task in tasks) {
                 val imageURL = updateImage(File("${task.folder}/${task.file}"), task.prompt)
-                downloadFile(URL(imageURL), "${task.folder}/${task.file}_u.png")
+                downloadFile(listOf(imageURL), "${task.folder}/${task.file}_u.png")
                 imagesGenerated.incrementAndGet()
                 printCosts()
             }
