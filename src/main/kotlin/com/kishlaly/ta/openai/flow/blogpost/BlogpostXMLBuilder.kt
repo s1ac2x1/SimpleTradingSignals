@@ -1,6 +1,7 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.filenameRegex
+import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 
@@ -20,7 +21,7 @@ class BlogpostXMLBuilder() {
         xml.append("</content>")
 
         xml.append("<featuredImage>")
-        val postFolder = filenameRegex.replace(meta.keyword, "_")
+        val postFolder = meta.keyword.toFileName()
         val featuredImageURL =
             File("$mainOutputFolder/$postFolder").listFiles().find { it.name.contains(postFolder) }?.name ?: ""
         xml.append(featuredImageURL)

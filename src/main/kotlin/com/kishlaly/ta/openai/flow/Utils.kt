@@ -1,5 +1,6 @@
 package com.kishlaly.ta.openai.flow
 
+import com.kishlaly.ta.openai.filenameRegex
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -25,3 +26,5 @@ fun postWithRetry(
 
     return response?.body?.string()
 }
+
+fun String.toFileName() = filenameRegex.replace(this, "_")

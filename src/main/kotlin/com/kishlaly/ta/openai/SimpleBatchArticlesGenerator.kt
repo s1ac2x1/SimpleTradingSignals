@@ -2,6 +2,7 @@ package com.kishlaly.ta.openai
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.Gson
+import com.kishlaly.ta.openai.flow.toFileName
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.File
 import java.nio.file.Files
@@ -110,7 +111,7 @@ private fun createPostTag(paaData: PAA, prompt: String) {
 
     xml.append("</post>")
 
-    val safeTitle = filenameRegex.replace(paaData.title, "_")
+    val safeTitle = paaData.title.toFileName()
     Files.write(Paths.get("openai/output/text/$safeTitle-post.xml"), xml.toString().toByteArray())
     println("Ready: ${paaData.title}")
 }

@@ -4,6 +4,7 @@ import com.kishlaly.ta.openai.filenameRegex
 import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Step
 import com.kishlaly.ta.openai.flow.Type
+import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.lineBreaksRegex
 import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.numericListRegex
@@ -80,7 +81,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         str.substring(str.indexOfFirst { it == '.' } + 1, str.length)
     }
 
-    private val stepFolder = "$mainOutputFolder/${filenameRegex.replace(meta.keyword, "_")}"
+    private val stepFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
 
     fun download() {
         File(stepFolder).mkdir()

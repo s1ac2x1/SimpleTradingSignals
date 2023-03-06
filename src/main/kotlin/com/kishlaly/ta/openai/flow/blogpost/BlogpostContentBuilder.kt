@@ -2,13 +2,14 @@ package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.filenameRegex
 import com.kishlaly.ta.openai.finalRegex
+import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
     fun build(): String {
-        val srcFolder = "$mainOutputFolder/${filenameRegex.replace(meta.keyword, "_")}"
+        val srcFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
 
         if (!File("$srcFolder").exists()) {
             throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
@@ -23,7 +24,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
             val imageName =
                 File("$srcFolder").listFiles()
-                    .find { it.name.contains(filenameRegex.replace(item, "_")) }?.name
+                    .find { it.name.contains(item.toFileName()) }?.name
                     ?: ""
             var imageURL = "https://$${meta.domain}/wp-content/uploads/${meta.imgURI}/$imageName"
             tocContent.append("<img src='$imageURL'></img>")
