@@ -206,7 +206,7 @@ class ImagesProcessor {
     companion object {
         fun generate(tasks: List<ImageGenerateTask>) {
             for (task in tasks) {
-                val imageURLs = getImageURLs(ImageRequest(task.keyword))
+                val imageURLs = getImageURLs(ImageRequest(task.keyword, task.n))
                 downloadFile(imageURLs, "${task.outputFolderName}/${task.outputFileName}.png")
                 imagesGenerated.addAndGet(imageURLs.size)
                 printCosts()
@@ -228,7 +228,8 @@ class ImagesProcessor {
 data class ImageGenerateTask(
     val keyword: String,
     val outputFolderName: String,
-    val outputFileName: String
+    val outputFileName: String,
+    val n: Int = 2
 )
 
 data class ImageEditTask(
