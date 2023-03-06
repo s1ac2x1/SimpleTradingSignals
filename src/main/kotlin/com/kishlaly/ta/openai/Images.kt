@@ -94,7 +94,7 @@ fun downloadFile(urls: List<String?>, outputFileName: String) {
     urls.filterNotNull().map { URL(it) }.forEachIndexed { index, url ->
         url.openStream().use {
             Channels.newChannel(it).use { rbc ->
-                FileOutputStream("${outputFileName}_${index}").use { fos ->
+                FileOutputStream("${outputFileName}_${index}.png").use { fos ->
                     fos.channel.transferFrom(rbc, 0, Long.MAX_VALUE)
                 }
             }
@@ -207,7 +207,7 @@ class ImagesProcessor {
         fun generate(tasks: List<ImageGenerateTask>) {
             for (task in tasks) {
                 val imageURLs = getImageURLs(ImageRequest(task.keyword, task.n))
-                downloadFile(imageURLs, "${task.outputFolderName}/${task.outputFileName}.png")
+                downloadFile(imageURLs, "${task.outputFolderName}/${task.outputFileName}")
                 imagesGenerated.addAndGet(imageURLs.size)
                 printCosts()
             }
