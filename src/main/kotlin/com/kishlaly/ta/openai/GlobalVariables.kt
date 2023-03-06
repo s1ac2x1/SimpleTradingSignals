@@ -12,11 +12,6 @@ val perImage = 0.018
 
 val mainOutputFolder = "openai/flow/output"
 
-val lineBreaksRegex = Regex("\n")
-val contentRegex = Regex("\n\n")
-val finalRegex = Regex("\n\n\n")
-val numericListRegex = Regex("\\d+\\. ")
-
 fun printCosts() {
     val centsForTexts = BigDecimal(pricePerThousandTextTokens * textTokensUsed.get() / 1000)
     val centsForImages = BigDecimal(imagesGenerated.get() * perImage)

@@ -44,7 +44,7 @@ class Step(
                 Type.TEXT -> {
                     var completion = getCompletion(prompt)
                     if (fixGrammar) {
-                        completion = getCompletion("$fixPrompt \"$completion\"")
+                        completion = getCompletion("$fixPrompt \"${removeAllLineBreaks(completion)}\"")
                     }
                     val outputFileName = "${intent}_${index + 1}"
                     Files.write(

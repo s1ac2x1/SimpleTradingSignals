@@ -1,12 +1,8 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
-import com.kishlaly.ta.openai.flow.Intent
-import com.kishlaly.ta.openai.flow.Step
-import com.kishlaly.ta.openai.flow.Type
-import com.kishlaly.ta.openai.flow.toFileName
+import com.kishlaly.ta.openai.flow.*
 import com.kishlaly.ta.openai.lineBreaksRegex
 import com.kishlaly.ta.openai.mainOutputFolder
-import com.kishlaly.ta.openai.numericListRegex
 import java.io.File
 import kotlin.random.Random
 
@@ -24,61 +20,11 @@ fun main() {
 
         , damit er nicht langweilig wird!  All diese Dinge helfen ihm sein Zuhause als stressfreien Ort zu betrachten!.
     """.trimIndent()
-    val result = BlogpostDownloader(BlogpostContentMeta("", "", "")).removeAllLineBreaks(text)
+    val result = removeAllLineBreaks(text)
     println(result)
 }
 
 class BlogpostDownloader(val meta: BlogpostContentMeta) {
-
-    private val trimmed: (String) -> String = { it.trim() }
-    val removeAllLineBreaks: (String) -> String = { lineBreaksRegex.replace(it, "") }
-    private val removeQuotes: (String) -> String = { it.replace("\"", "") }
-    private val removeDots: (String) -> String = { it.replace(".", "") }
-    private val removeNumericList: (String) -> String = { numericListRegex.replace(it, "") }
-    private val removeQuestionMarks: (String) -> String = { it.replace("?", "") }
-    private val filterBadTOC: (String) -> String = {
-        val correctedToc = it.lines()
-            .map(trimmed)
-            .filter { it.length >= 10 }
-            .filter { it.length <= 100 }
-            .filter { it[0].isLetter() }
-            .filter { it[0].isUpperCase() }
-            .joinToString("\n")
-        correctedToc
-    }
-    private val resolveShortKeyword: (String) -> String = {
-        var shorter = it
-        if (it.indexOf(':') > 0) {
-            shorter = it.substring(0, it.indexOf(':'))
-        }
-        if (shorter.indexOf(';') > 0) {
-            shorter = shorter.substring(0, shorter.indexOf(':'))
-        }
-        if (shorter.indexOf('-') in 0..3) {
-            shorter = shorter.substring(shorter.indexOf('-') + 1, shorter.length)
-        }
-        shorter
-    }
-    val createParagraphs: (String) -> String = {
-        val output = StringBuilder()
-        it.split(".")
-            .filter { !it.isNullOrBlank() }
-            .map { it.trim() }
-            .filter { it.length > 10 }
-            .chunked(Random.nextInt(2, 4))
-            .forEach { chunk ->
-                chunk.forEach { output.append(it).append(". ") }
-                output.append("\n\n")
-            }
-
-        output.toString()
-            .split("\n\n")
-            .filter { it.trim().length > 10 }
-            .joinToString("\n\n")
-    }
-    private val removeFirstSentence: (String) -> String = { str ->
-        str.substring(str.indexOfFirst { it == '.' } + 1, str.length)
-    }
 
     private val stepFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
 
