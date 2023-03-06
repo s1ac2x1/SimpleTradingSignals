@@ -1,6 +1,5 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
-import com.kishlaly.ta.openai.filenameRegex
 import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Step
 import com.kishlaly.ta.openai.flow.Type
@@ -25,14 +24,14 @@ fun main() {
 
         , damit er nicht langweilig wird!  All diese Dinge helfen ihm sein Zuhause als stressfreien Ort zu betrachten!.
     """.trimIndent()
-    val result = BlogpostDownloader(BlogpostContentMeta("", "", "")).createParagraphs(text)
+    val result = BlogpostDownloader(BlogpostContentMeta("", "", "")).removeAllLineBreaks(text)
     println(result)
 }
 
 class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private val trimmed: (String) -> String = { it.trim() }
-    private val removeExtraLineBreaks: (String) -> String = { lineBreaksRegex.replace(it, "") }
+    val removeAllLineBreaks: (String) -> String = { lineBreaksRegex.replace(it, "") }
     private val removeQuotes: (String) -> String = { it.replace("\"", "") }
     private val removeDots: (String) -> String = { it.replace(".", "") }
     private val removeNumericList: (String) -> String = { numericListRegex.replace(it, "") }
@@ -88,24 +87,24 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
 
-        tableOfContentsPlan()
-
-        tableOfContentsTexts_part1()
-        tableOfContentsTexts_part2()
-        tableOfContentsTexts_part3()
-
-        oppositeOpinionQuestion()
-        oppositeOpinionText()
-
-        tags()
-
-        imagesForToC()
-
-        featuredImage()
-
-        conclusion()
-
-        randomAddition()
+//        tableOfContentsPlan()
+//
+//        tableOfContentsTexts_part1()
+//        tableOfContentsTexts_part2()
+//        tableOfContentsTexts_part3()
+//
+//        oppositeOpinionQuestion()
+//        oppositeOpinionText()
+//
+//        tags()
+//
+//        imagesForToC()
+//
+//        featuredImage()
+//
+//        conclusion()
+//
+//        randomAddition()
     }
 
     fun randomAddition() {

@@ -1,6 +1,9 @@
 package com.kishlaly.ta.openai.flow
 
-import com.kishlaly.ta.openai.*
+import com.kishlaly.ta.openai.CompletionRequest
+import com.kishlaly.ta.openai.ImageGenerateTask
+import com.kishlaly.ta.openai.ImagesProcessor
+import com.kishlaly.ta.openai.getCompletion
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -30,21 +33,23 @@ class Step(
     val input: List<String> = emptyList(),
     val folder: String,
     val postProcessings: List<(String) -> String> = emptyList(),
-    val type: Type = Type.TEXT
+    val type: Type = Type.TEXT,
+    val fixText: Boolean = true
 ) {
+    val fixPrompt = "Korrigieren Sie Grammatikfehler in diesem Text:"
+
     init {
         input.forEachIndexed { index, prompt ->
             when (type) {
                 Type.TEXT -> {
-                    val rawResponse = getCompletion(CompletionRequest(prompt = prompt))
-                    var finalResult = rawResponse
-                    postProcessings.forEach {
-                        finalResult = it(finalResult)
+                    var completion = getCompletion(prompt)
+                    if (fixText) {
+                        completion = getCompletion("${fixPrompt} $completion")
                     }
                     val outputFileName = "${intent}_${index + 1}"
                     Files.write(
                         Paths.get("$folder/$outputFileName"),
-                        finalResult.toByteArray()
+                        completion.toByteArray()
                     )
                 }
 
@@ -60,5 +65,14 @@ class Step(
             }
             println("")
         }
+    }
+
+    private fun getCompletion(prompt: String): String {
+        val rawResponse = getCompletion(CompletionRequest(prompt = prompt))
+        var finalResult = rawResponse
+        postProcessings.forEach {
+            finalResult = it(finalResult)
+        }
+        return finalResult
     }
 }
