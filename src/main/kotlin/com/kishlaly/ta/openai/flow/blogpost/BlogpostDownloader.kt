@@ -1,7 +1,6 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.*
-import com.kishlaly.ta.openai.lineBreaksRegex
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 import kotlin.random.Random
@@ -31,9 +30,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun download() {
         File(stepFolder).mkdir()
 
-        introduction()
+//        introduction()
 
-//        tableOfContentsPlan()
+        tableOfContentsPlan()
 //
 //        tableOfContentsTexts_part1()
 //        tableOfContentsTexts_part2()
@@ -106,7 +105,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.TAGS,
             folder = stepFolder,
             input = listOf("Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: $prompt"),
-            postProcessings = listOf(trimmed, removeDots)
+            postProcessings = listOf(trimmed, removeDots),
+            fixGrammar = false
         )
     }
 
@@ -125,7 +125,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.OPPOSITE_OPINION_QUESTION,
             folder = stepFolder,
             input = listOf("Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"${meta.keyword}\""),
-            postProcessings = listOf(removeQuotes, removeDots, trimmed)
+            postProcessings = listOf(removeQuotes, removeDots, trimmed),
+            fixGrammar = false
         )
     }
 
@@ -170,7 +171,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.TOC_PLAN,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Artikel über Katzen. Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften"),
-            postProcessings = listOf(removeNumericList, filterBadTOC, removeQuestionMarks, trimmed)
+            postProcessings = listOf(removeNumericList, filterBadTOC, removeQuestionMarks, trimmed),
+            fixGrammar = false
         )
     }
 
