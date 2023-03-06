@@ -32,7 +32,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
 //        introduction()
 
-//        tableOfContentsPlan()
+        tableOfContentsPlan()
 
 //        tableOfContentsTexts_part1()
 //        tableOfContentsTexts_part2()
