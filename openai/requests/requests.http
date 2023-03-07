@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "model": "text-davinci-003",
-  "prompt": "Korrigieren Sie Grammatikfehler in diesem Text: \"Insgesamtkannmanfeststellen daessichalternativesVerhalentantastbarfoerdereundbelohneindemsmanpositivesVerstaerkersowiediverseEnrichmentAktivitaeteaneinsetztemdamitesdieKatzesichverhaeltwiemansiesichwuenschtundgleichzesitzihremWohlbefindenfoerdert.\"",
+  "prompt": "Wählen Sie drei Schlüsselwörter aus diesem Text aus und Erstellen Sie eine kommagetrennte Liste: \"Warum kratzen Katzen und wie kann man dies verhindern?\"",
   "max_tokens": 2048,
   "temperature": 0.7,
   "top_p": 0.5,

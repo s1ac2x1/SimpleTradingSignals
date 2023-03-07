@@ -15,8 +15,8 @@ fun main() {
             domain = "katze101.com",
             imgURI = "2023/03"
         )
-        BlogpostDownloader(meta).download()
-        //xml.append(meta)
+        //BlogpostDownloader(meta).download()
+        xml.append(meta)
     }
     Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 

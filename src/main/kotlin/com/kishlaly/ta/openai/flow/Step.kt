@@ -39,7 +39,6 @@ class Step(
 
     init {
         input.forEachIndexed { index, prompt ->
-            FileUtils.appendToFile("${logFolder}/info.txt", "[$type][$intent]")
             println("[$type][$intent]")
             when (type) {
                 Type.TEXT -> {
@@ -49,7 +48,6 @@ class Step(
                         completion = getCompletion(prompt)
                     } catch (e: OpenAIException) {
                         println("!!! Got empty response. Retrying...")
-                        FileUtils.appendToFile("${logFolder}/error.txt", "!!! Got empty response. Retrying...")
                         completion = getCompletion(prompt)
                     }
 
@@ -58,7 +56,6 @@ class Step(
                             completion = getCompletion("$fixPrompt \"${removeAllLineBreaks(completion)}\"")
                         } catch (e: OpenAIException) {
                             println("!!! Got empty response. Trying...")
-                            FileUtils.appendToFile("${logFolder}/error.txt", "Got empty response for grammar fix. Retrying...")
                             completion = getCompletion("$fixPrompt \"${removeAllLineBreaks(completion)}\"")
                         }
                     }

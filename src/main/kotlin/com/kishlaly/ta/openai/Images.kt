@@ -18,19 +18,20 @@ import java.nio.channels.Channels
 import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
 
-//fun main() {
-//    val tasks = (1..3).map {
-//        var prompt = Combiner.combine(
-//            listOf(
-//                "openai/katze101/breeds",
-//                "openai/katze101/age",
-//                "openai/katze101/care",
-//            )
-//        )
-//        ImageTask(prompt, "in the style pencil artwork")
-//    }
-//    ImageGenerator.generate(tasks, "openai/output/images")
-//}
+fun main() {
+    val tasks = (1..5).map {
+        var prompt = Combiner.combine(
+            listOf(
+                "openai/katze101/breeds",
+                "openai/katze101/age",
+                "openai/katze101/behaviour",
+                "openai/katze101/places",
+            )
+        )
+        ImageGenerateTask("${prompt}in the style pencil artwork", "openai/output/images", "${prompt}.png", 1)
+    }
+    ImagesProcessor.generate(tasks)
+}
 
 //fun main() {
 //    val inputFileName = "katzenpflege"
@@ -52,17 +53,17 @@ import javax.imageio.ImageIO
 //    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
 //}
 
-fun main() {
-    getImageURLs(
-        ImageRequest(
-            prompt = "Katze im Thema: \"Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren\". Schwarz-Weiß-Zeichnung in Schraffurtechnik",
-            n = 3
-        )
-    )
-        .forEach {
-            println(it)
-        }
-}
+//fun main() {
+//    getImageURLs(
+//        ImageRequest(
+//            prompt = "katze kratzt möbel. Schwarz-Weiß-Zeichnung in Schraffurtechnik",
+//            n = 3
+//        )
+//    )
+//        .forEach {
+//            println(it)
+//        }
+//}
 
 //fun main() {
 //    val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
@@ -120,7 +121,6 @@ fun getImageURLs(imageRequest: ImageRequest): List<String?> {
             .writeTimeout(2, TimeUnit.MINUTES)
             .readTimeout(2, TimeUnit.MINUTES)
             .build();
-        FileUtils.appendToFile("${logFolder}/info.txt", "Generating image: ${imageRequest.prompt}")
         println("Generating image: ${imageRequest.prompt}")
         val request = Request.Builder()
             .url("https://api.openai.com/v1/images/generations")
@@ -134,7 +134,6 @@ fun getImageURLs(imageRequest: ImageRequest): List<String?> {
         val completionRespone = gson.fromJson<ImageResponse>(body, object : TypeToken<ImageResponse>() {}.type)
         result = completionRespone.data.map { it.url }.toList()
     } catch (e: Exception) {
-        FileUtils.appendToFile("${logFolder}/error.txt", "Image generation error: ${e.message}")
         println("Image generation error: ${e.message}")
     } finally {
         return result
