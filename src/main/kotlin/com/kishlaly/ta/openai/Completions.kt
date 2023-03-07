@@ -33,7 +33,7 @@ fun getCompletion(completionRequest: CompletionRequest): String {
         printCosts()
         result = completionRespone.choices.firstOrNull()?.text!!
     } catch (e: Exception) {
-        println(e.message)
+        println("!!! Exception while getting completion: [${completionRequest.prompt}] : ${e.message}")
     } finally {
         return result
     }
