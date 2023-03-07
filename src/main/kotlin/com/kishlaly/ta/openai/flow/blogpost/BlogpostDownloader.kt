@@ -45,6 +45,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         oppositeOpinionQuestion()
         oppositeOpinionText()
 
+        imagesForToC()
+
         tags()
 
         featuredImage()
