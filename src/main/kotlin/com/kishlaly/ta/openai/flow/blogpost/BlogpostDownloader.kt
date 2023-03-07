@@ -2,9 +2,7 @@ package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.*
 import com.kishlaly.ta.openai.mainOutputFolder
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.joinAll
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import java.io.File
 import kotlin.random.Random
@@ -35,30 +33,58 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         File(stepFolder).mkdir()
 
         runBlocking {
-            val jobs = mutableListOf<Job>()
-            jobs += launch {
+            val introductionJob = async {
                 introduction()
-                oppositeOpinionQuestion()
-                oppositeOpinionText()
-                conclusion()
-                randomAddition()
-                tags()
             }
-            jobs += launch {
+            val tableOfContentsPlanJob = async {
                 tableOfContentsPlan()
-                tableOfContentsTexts_part1()
-                tableOfContentsTexts_part2()
-                tableOfContentsTexts_part3()
-                imagesForToC()
             }
-            jobs += launch {
+            val featuredImageJob = async {
                 featuredImage()
             }
-            joinAll(*jobs.toTypedArray())
+            val tableOfContentsTexts_part1Job = async {
+                tableOfContentsPlanJob.await()
+                tableOfContentsTexts_part1()
+            }
+            val tableOfContentsTexts_part2Job = async {
+                tableOfContentsPlanJob.await()
+                tableOfContentsTexts_part2()
+            }
+            val tableOfContentsTexts_part3Job = async {
+                tableOfContentsPlanJob.await()
+                tableOfContentsTexts_part3()
+            }
+            val tagsJob = async {
+                introductionJob.await()
+                tags()
+            }
+            val oppositeOpinionQuestionJob = async {
+                oppositeOpinionQuestion()
+            }
+            val oppositeOpinionTextJob = async {
+                oppositeOpinionQuestionJob.await()
+                oppositeOpinionText()
+            }
+            val conclusionJob = async {
+                introductionJob.await()
+                oppositeOpinionTextJob.await()
+                conclusion()
+            }
+            val randomAdditionJob = async {
+                conclusionJob.await()
+                randomAddition()
+            }
+
+            featuredImageJob.await()
+            tableOfContentsTexts_part1Job.await()
+            tableOfContentsTexts_part2Job.await()
+            tableOfContentsTexts_part3Job.await()
+            tagsJob.await()
+            randomAdditionJob.await()
         }
     }
 
-    fun randomAddition() {
+    private fun randomAddition() {
         val conclusion =
             lineBreaksRegex.replace(readText(Intent.CONCLUSION), "")
         var prompt = if (Random.nextBoolean()) {
@@ -74,7 +100,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun conclusion() {
+    private fun conclusion() {
         val introduction = readText(Intent.INTRODUCTION)
         val oppositeOpinion = readText(Intent.OPPOSITE_OPINION_TEXT)
         val prompt = lineBreaksRegex.replace(introduction, "") + " " + lineBreaksRegex.replace(oppositeOpinion, "")
