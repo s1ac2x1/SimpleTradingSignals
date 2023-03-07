@@ -1,9 +1,7 @@
 package com.kishlaly.ta.openai.flow
 
-import com.kishlaly.ta.openai.CompletionRequest
-import com.kishlaly.ta.openai.ImageGenerateTask
-import com.kishlaly.ta.openai.ImagesProcessor
-import com.kishlaly.ta.openai.getCompletion
+import com.kishlaly.ta.openai.*
+import com.kishlaly.ta.utils.FileUtils
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -40,6 +38,7 @@ class Step(
 
     init {
         input.forEachIndexed { index, prompt ->
+            FileUtils.appendToFile("${logFolder}/info.txt", "[$type][$intent]")
             println("[$type][$intent]")
             when (type) {
                 Type.TEXT -> {

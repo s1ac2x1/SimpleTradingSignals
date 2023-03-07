@@ -2,6 +2,7 @@ package com.kishlaly.ta.openai
 
 import com.google.common.reflect.TypeToken
 import com.kishlaly.ta.openai.flow.postWithRetry
+import com.kishlaly.ta.utils.FileUtils
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -119,6 +120,7 @@ fun getImageURLs(imageRequest: ImageRequest): List<String?> {
             .writeTimeout(2, TimeUnit.MINUTES)
             .readTimeout(2, TimeUnit.MINUTES)
             .build();
+        FileUtils.appendToFile("${logFolder}/info.txt", "Generating image: ${imageRequest.prompt}")
         println("Generating image: ${imageRequest.prompt}")
         val request = Request.Builder()
             .url("https://api.openai.com/v1/images/generations")
@@ -132,6 +134,7 @@ fun getImageURLs(imageRequest: ImageRequest): List<String?> {
         val completionRespone = gson.fromJson<ImageResponse>(body, object : TypeToken<ImageResponse>() {}.type)
         result = completionRespone.data.map { it.url }.toList()
     } catch (e: Exception) {
+        FileUtils.appendToFile("${logFolder}/error.txt", "Image generation error: ${e.message}")
         println("Image generation error: ${e.message}")
     } finally {
         return result

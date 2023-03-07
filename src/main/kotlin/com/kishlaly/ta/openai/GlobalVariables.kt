@@ -12,6 +12,8 @@ val perImage = 0.018
 
 val mainOutputFolder = "openai/flow/output"
 
+val logFolder = ThreadLocal<String>()
+
 fun printCosts() {
     val centsForTexts = BigDecimal(pricePerThousandTextTokens * textTokensUsed.get() / 1000)
     val centsForImages = BigDecimal(imagesGenerated.get() * perImage)
