@@ -1,6 +1,7 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.filenameRegex
+import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
@@ -28,7 +29,7 @@ class BlogpostXMLBuilder() {
         xml.append("</featuredImage>")
 
         xml.append("<tags>")
-        val tags = File("$mainOutputFolder/$postFolder/step_8_1").readText()
+        val tags = File("$mainOutputFolder/$postFolder/${Intent.TAGS}_1").readText()
         xml.append(tags)
         xml.append("</tags>")
 

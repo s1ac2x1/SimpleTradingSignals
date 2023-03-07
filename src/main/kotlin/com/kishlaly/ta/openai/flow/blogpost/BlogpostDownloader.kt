@@ -3,7 +3,6 @@ package com.kishlaly.ta.openai.flow.blogpost
 import com.kishlaly.ta.openai.flow.*
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
-import java.util.concurrent.Executors
 import kotlin.random.Random
 
 fun main() {
@@ -30,46 +29,25 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     fun download() {
         File(stepFolder).mkdir()
-        val executor = Executors.newCachedThreadPool()
 
-        val introduction = executor.submit { introduction() }
-        val tableOfContentsPlan = executor.submit { tableOfContentsPlan() }
-        val featuredImage = executor.submit { featuredImage() }
+        introduction()
 
-        val tableOfContentsTexts_part1 = executor.submit {
-            tableOfContentsPlan.get()
-            tableOfContentsTexts_part1()
-        }
-        val tableOfContentsTexts_part2 = executor.submit {
-            tableOfContentsPlan.get()
-            tableOfContentsTexts_part2()
-        }
-        val tableOfContentsTexts_part3 = executor.submit {
-            tableOfContentsPlan.get()
-            tableOfContentsTexts_part3()
-        }
-        val tags = executor.submit { tags() }
-        val oppositeOpinionQuestion = executor.submit { oppositeOpinionQuestion() }
-        val oppositeOpinionText = executor.submit {
-            oppositeOpinionQuestion.get()
-            oppositeOpinionText()
-        }
-        val conclusion = executor.submit {
-            introduction.get()
-            oppositeOpinionText.get()
-            conclusion()
-        }
-        val randomAddition = executor.submit {
-            conclusion.get()
-            randomAddition()
-        }
+        tableOfContentsPlan()
 
-        featuredImage.get()
-        tableOfContentsTexts_part1.get()
-        tableOfContentsTexts_part2.get()
-        tableOfContentsTexts_part3.get()
-        tags.get()
-        randomAddition.get()
+        tableOfContentsTexts_part1()
+        tableOfContentsTexts_part2()
+        tableOfContentsTexts_part3()
+
+        oppositeOpinionQuestion()
+        oppositeOpinionText()
+
+        tags()
+
+        featuredImage()
+
+        conclusion()
+
+        randomAddition()
     }
 
     private fun randomAddition() {

@@ -1,10 +1,8 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.PAA
-import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.readCsv
-import java.nio.file.Files
-import java.nio.file.Paths
+import java.io.File
 
 fun main() {
     val xml = BlogpostXMLBuilder()
@@ -19,8 +17,27 @@ fun main() {
     }
     //Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
-    // теперь можно залить на хостинг картинки
-    // TODO собрать все картинки из папок в одну
+//    val images = findAllImages(File("openai/flow/output"))
+//    copyFilesToDirectory(images, File("openai/img"))
+}
+
+fun findAllImages(rootDirectory: File): List<File> {
+    val fileList = mutableListOf<File>()
+    rootDirectory.walkTopDown().forEach { file ->
+        if (file.isFile) {
+            fileList.add(file)
+        }
+    }
+    return fileList
+}
+
+fun copyFilesToDirectory(files: List<File>, destinationDirectory: File) {
+    files.forEach { file ->
+        val fileName = file.name
+        val destinationFile = File(destinationDirectory, fileName)
+
+        file.copyTo(destinationFile)
+    }
 }
 
 fun readCSV(inputFileName: String): List<PAA> {
