@@ -1,8 +1,11 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.PAA
+import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.readCsv
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Paths
 
 fun main() {
     val xml = BlogpostXMLBuilder()
@@ -12,10 +15,10 @@ fun main() {
             domain = "katze101.com",
             imgURI = "2023/03"
         )
-        BlogpostDownloader(meta).download()
-        //xml.append(meta)
+        //BlogpostDownloader(meta).download()
+        xml.append(meta)
     }
-    //Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
+    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
 //    val images = findAllImages(File("openai/flow/output"))
 //    copyFilesToDirectory(images, File("openai/img"))
