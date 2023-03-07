@@ -35,16 +35,17 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val introduction = executor.submit { introduction() }
         val tableOfContentsPlan = executor.submit { tableOfContentsPlan() }
         val featuredImage = executor.submit { featuredImage() }
+
         val tableOfContentsTexts_part1 = executor.submit {
-            introduction.get()
+            tableOfContentsPlan.get()
             tableOfContentsTexts_part1()
         }
         val tableOfContentsTexts_part2 = executor.submit {
-            introduction.get()
+            tableOfContentsPlan.get()
             tableOfContentsTexts_part2()
         }
         val tableOfContentsTexts_part3 = executor.submit {
-            introduction.get()
+            tableOfContentsPlan.get()
             tableOfContentsTexts_part3()
         }
         val tags = executor.submit { tags() }
