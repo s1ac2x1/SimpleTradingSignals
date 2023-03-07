@@ -2,9 +2,8 @@ package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.*
 import com.kishlaly.ta.openai.mainOutputFolder
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
 import java.io.File
+import java.util.concurrent.Executors
 import kotlin.random.Random
 
 fun main() {
@@ -31,57 +30,45 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     fun download() {
         File(stepFolder).mkdir()
+        val executor = Executors.newCachedThreadPool()
 
-        runBlocking {
-            val introductionJob = async {
-                introduction()
-            }
-            val tableOfContentsPlanJob = async {
-                tableOfContentsPlan()
-            }
-            val featuredImageJob = async {
-                featuredImage()
-            }
-            val tableOfContentsTexts_part1Job = async {
-                tableOfContentsPlanJob.await()
-                tableOfContentsTexts_part1()
-            }
-            val tableOfContentsTexts_part2Job = async {
-                tableOfContentsPlanJob.await()
-                tableOfContentsTexts_part2()
-            }
-            val tableOfContentsTexts_part3Job = async {
-                tableOfContentsPlanJob.await()
-                tableOfContentsTexts_part3()
-            }
-            val tagsJob = async {
-                introductionJob.await()
-                tags()
-            }
-            val oppositeOpinionQuestionJob = async {
-                oppositeOpinionQuestion()
-            }
-            val oppositeOpinionTextJob = async {
-                oppositeOpinionQuestionJob.await()
-                oppositeOpinionText()
-            }
-            val conclusionJob = async {
-                introductionJob.await()
-                oppositeOpinionTextJob.await()
-                conclusion()
-            }
-            val randomAdditionJob = async {
-                conclusionJob.await()
-                randomAddition()
-            }
-
-            featuredImageJob.await()
-            tableOfContentsTexts_part1Job.await()
-            tableOfContentsTexts_part2Job.await()
-            tableOfContentsTexts_part3Job.await()
-            tagsJob.await()
-            randomAdditionJob.await()
+        val introduction = executor.submit { introduction() }
+        val tableOfContentsPlan = executor.submit { tableOfContentsPlan() }
+        val featuredImage = executor.submit { featuredImage() }
+        val tableOfContentsTexts_part1 = executor.submit {
+            introduction.get()
+            tableOfContentsTexts_part1()
         }
+        val tableOfContentsTexts_part2 = executor.submit {
+            introduction.get()
+            tableOfContentsTexts_part2()
+        }
+        val tableOfContentsTexts_part3 = executor.submit {
+            introduction.get()
+            tableOfContentsTexts_part3()
+        }
+        val tags = executor.submit { tags() }
+        val oppositeOpinionQuestion = executor.submit { oppositeOpinionQuestion() }
+        val oppositeOpinionText = executor.submit {
+            oppositeOpinionQuestion.get()
+            oppositeOpinionText()
+        }
+        val conclusion = executor.submit {
+            introduction.get()
+            oppositeOpinionText.get()
+            conclusion()
+        }
+        val randomAddition = executor.submit {
+            conclusion.get()
+            randomAddition()
+        }
+
+        featuredImage.get()
+        tableOfContentsTexts_part1.get()
+        tableOfContentsTexts_part2.get()
+        tableOfContentsTexts_part3.get()
+        tags.get()
+        randomAddition.get()
     }
 
     private fun randomAddition() {
