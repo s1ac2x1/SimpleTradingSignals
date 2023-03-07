@@ -32,7 +32,8 @@ class Step(
     val folder: String,
     val postProcessings: List<(String) -> String> = emptyList(),
     val type: Type = Type.TEXT,
-    val fixGrammar: Boolean = true
+    val fixGrammar: Boolean = true,
+    val imagesCount: Int = 1
 ) {
     val fixPrompt = "Korrigieren Sie Grammatikfehler in diesem Text:"
 
@@ -59,7 +60,7 @@ class Step(
                             keyword = "Katze im Thema: \"$prompt\". Schwarz-Weiß-Zeichnung in Schraffurtechnik",
                             outputFolderName = "$folder",
                             outputFileName = "${prompt.toFileName()}",
-                            n = 2
+                            n = imagesCount
                         )
                     ImagesProcessor.generate(listOf(imageGenerateTask))
                 }

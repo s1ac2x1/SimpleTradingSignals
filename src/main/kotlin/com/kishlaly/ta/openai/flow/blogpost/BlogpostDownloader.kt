@@ -89,7 +89,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.FEATURED_IMAGE,
             folder = stepFolder,
             type = Type.IMAGE,
-            input = listOf(meta.keyword)
+            input = listOf(meta.keyword),
+            imagesCount = 5
         )
     }
 
