@@ -43,9 +43,24 @@ class Step(
             println("[$type][$intent]")
             when (type) {
                 Type.TEXT -> {
-                    var completion = getCompletion(prompt)
+                    var completion = ""
+
+                    try {
+                        completion = getCompletion(prompt)
+                    } catch (e: OpenAIException) {
+                        println("!!! Got empty response. Retrying...")
+                        FileUtils.appendToFile("${logFolder}/error.txt", "!!! Got empty response. Retrying...")
+                        completion = getCompletion(prompt)
+                    }
+
                     if (fixGrammar) {
-                        completion = getCompletion("$fixPrompt \"${removeAllLineBreaks(completion)}\"")
+                        try {
+                            completion = getCompletion("$fixPrompt \"${removeAllLineBreaks(completion)}\"")
+                        } catch (e: OpenAIException) {
+                            println("!!! Got empty response. Trying...")
+                            FileUtils.appendToFile("${logFolder}/error.txt", "Got empty response for grammar fix. Retrying...")
+                            completion = getCompletion("$fixPrompt \"${removeAllLineBreaks(completion)}\"")
+                        }
                     }
                     val outputFileName = "${intent}_${index + 1}"
                     Files.write(

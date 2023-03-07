@@ -2,7 +2,7 @@ package com.kishlaly.ta.openai
 
 import com.google.common.reflect.TypeToken
 import com.google.gson.annotations.SerializedName
-import com.kishlaly.ta.openai.flow.postWithRetry
+import com.kishlaly.ta.openai.flow.timeoutRetry
 import com.kishlaly.ta.utils.FileUtils
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -26,7 +26,7 @@ fun getCompletion(completionRequest: CompletionRequest): String {
 
         FileUtils.appendToFile("${logFolder}/info.txt", completionRequest.prompt)
         println(completionRequest.prompt)
-        val body = postWithRetry(httpClient, request)
+        val body = timeoutRetry(httpClient, request)
         if (body == null) {
             throw RuntimeException("Didn't make it after 3 retries :(")
         }
@@ -37,6 +37,7 @@ fun getCompletion(completionRequest: CompletionRequest): String {
     } catch (e: Exception) {
         FileUtils.appendToFile("${logFolder}/error.txt", "!!! Exception while getting completion: [${completionRequest.prompt}] : ${e.message}")
         println("!!! Exception while getting completion: [${completionRequest.prompt}] : ${e.message}")
+        throw OpenAIException("!!! Exception while getting completion: [${completionRequest.prompt}] : ${e.message}")
     } finally {
         return result
     }

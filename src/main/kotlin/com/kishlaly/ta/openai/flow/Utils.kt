@@ -7,7 +7,7 @@ import okhttp3.Response
 import java.io.IOException
 import kotlin.random.Random
 
-fun postWithRetry(
+fun timeoutRetry(
     client: OkHttpClient,
     request: Request,
     retries: Int = 3

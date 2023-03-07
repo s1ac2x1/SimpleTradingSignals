@@ -1,7 +1,7 @@
 package com.kishlaly.ta.openai
 
 import com.google.common.reflect.TypeToken
-import com.kishlaly.ta.openai.flow.postWithRetry
+import com.kishlaly.ta.openai.flow.timeoutRetry
 import com.kishlaly.ta.utils.FileUtils
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -127,7 +127,7 @@ fun getImageURLs(imageRequest: ImageRequest): List<String?> {
             .post(RequestBody.create(JSON, gson.toJson(imageRequest)))
             .header("Authorization", "Bearer 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")
             .build()
-        val body = postWithRetry(httpClient, request)
+        val body = timeoutRetry(httpClient, request)
         if (body == null) {
             throw RuntimeException("Didn't make it after 3 retries :(")
         }
