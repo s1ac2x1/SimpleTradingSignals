@@ -19,5 +19,5 @@ fun printCosts() {
     val centsForImages = BigDecimal(imagesGenerated.get() * perImage)
     val usd =
         (centsForTexts + centsForImages).setScale(4, RoundingMode.HALF_EVEN).toPlainString()
-    println(">>> Costs so far: $$usd [text tokens: ${textTokensUsed.get()}, images: ${imagesGenerated}]")
+    println("Costs so far: $$usd [text tokens: ${textTokensUsed.get()}, images: ${imagesGenerated}]")
 }
