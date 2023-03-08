@@ -4,6 +4,7 @@ import com.kishlaly.ta.openai.*
 import com.kishlaly.ta.utils.FileUtils
 import java.nio.file.Files
 import java.nio.file.Paths
+import kotlin.random.Random
 
 enum class Type {
     TEXT,
@@ -33,22 +34,28 @@ class Step(
     val postProcessings: List<(String) -> String> = emptyList(),
     val type: Type = Type.TEXT,
     val fixGrammar: Boolean = true,
-    val imagesCount: Int = 1
+    val imagesCount: Int = 1,
+    val useTone: Boolean = false
 ) {
     val fixPrompt = "Korrigieren Sie Grammatikfehler in diesem Text:"
 
     init {
         input.forEachIndexed { index, prompt ->
+            var finalPrompt = prompt
+            if (useTone) {
+                val tone = listOf("Objektiv", "Subjektiv", "Beschreibend", "Informativ", "Unterhaltsam", "Lyrisch", "Humorvoll", "Persönlich", "Dramatisch", "Kritisch")
+                finalPrompt = "$prompt Antwortton - ${tone[Random.nextInt(tone.size)]}"
+            }
             println("[$type][$intent]")
             when (type) {
                 Type.TEXT -> {
                     var completion = ""
 
                     try {
-                        completion = getCompletion(prompt)
+                        completion = getCompletion(finalPrompt)
                     } catch (e: OpenAIException) {
                         println("!!! Got empty response. Retrying...")
-                        completion = getCompletion(prompt)
+                        completion = getCompletion(finalPrompt)
                     }
 
                     if (fixGrammar) {
