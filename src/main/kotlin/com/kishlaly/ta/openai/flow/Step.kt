@@ -1,7 +1,6 @@
 package com.kishlaly.ta.openai.flow
 
 import com.kishlaly.ta.openai.*
-import com.kishlaly.ta.utils.FileUtils
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.random.Random
@@ -33,7 +32,7 @@ class Step(
     val folder: String,
     val postProcessings: List<(String) -> String> = emptyList(),
     val type: Type = Type.TEXT,
-    val fixGrammar: Boolean = true,
+    val fixGrammar: Boolean = false,
     val imagesCount: Int = 1,
     val useTone: Boolean = false
 ) {
@@ -43,7 +42,18 @@ class Step(
         input.forEachIndexed { index, prompt ->
             var finalPrompt = prompt
             if (useTone) {
-                val tone = listOf("Objektiv", "Subjektiv", "Beschreibend", "Informativ", "Unterhaltsam", "Lyrisch", "Humorvoll", "Persönlich", "Dramatisch", "Kritisch")
+                val tone = listOf(
+                    "Objektiv",
+                    "Subjektiv",
+                    "Beschreibend",
+                    "Informativ",
+                    "Unterhaltsam",
+                    "Lyrisch",
+                    "Humorvoll",
+                    "Persönlich",
+                    "Dramatisch",
+                    "Kritisch"
+                )
                 finalPrompt = "$prompt Antwortton - ${tone[Random.nextInt(tone.size)]}"
             }
             println("[$type][$intent]")

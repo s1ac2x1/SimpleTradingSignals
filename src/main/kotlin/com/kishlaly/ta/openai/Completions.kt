@@ -24,7 +24,6 @@ fun getCompletion(completionRequest: CompletionRequest): String {
             .header("Authorization", "Bearer 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")
             .build()
 
-        FileUtils.appendToFile("${logFolder}/info.txt", completionRequest.prompt)
         println(completionRequest.prompt)
         val body = timeoutRetry(httpClient, request)
         if (body == null) {
@@ -35,7 +34,6 @@ fun getCompletion(completionRequest: CompletionRequest): String {
         printCosts()
         result = completionRespone.choices.firstOrNull()?.text!!
     } catch (e: Exception) {
-        FileUtils.appendToFile("${logFolder}/error.txt", "!!! Exception while getting completion: [${completionRequest.prompt}] : ${e.message}")
         println("!!! Exception while getting completion: [${completionRequest.prompt}] : ${e.message}")
         throw OpenAIException("!!! Exception while getting completion: [${completionRequest.prompt}] : ${e.message}")
     } finally {

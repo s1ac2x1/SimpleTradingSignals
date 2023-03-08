@@ -34,22 +34,22 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
 
-        tableOfContentsPlan()
-
-        tableOfContentsTexts_part1()
-        tableOfContentsTexts_part2()
-        tableOfContentsTexts_part3()
-
-        oppositeOpinionQuestion()
-        oppositeOpinionText()
-
-        tags()
-
-        featuredImage()
-
-        conclusion()
-
-        randomAddition()
+//        tableOfContentsPlan()
+//
+//        tableOfContentsTexts_part1()
+//        tableOfContentsTexts_part2()
+//        tableOfContentsTexts_part3()
+//
+//        oppositeOpinionQuestion()
+//        oppositeOpinionText()
+//
+//        tags()
+//
+//        featuredImage()
+//
+//        conclusion()
+//
+//        randomAddition()
     }
 
     private fun randomAddition() {
@@ -64,7 +64,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.RANDOM_ADDITION,
             input = listOf(prompt),
             folder = stepFolder,
-            postProcessings = listOf(createParagraphs, trimmed)
+            postProcessings = listOf(createParagraphs, trimmed),
+            useTone = true
         )
     }
 
@@ -76,7 +77,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONCLUSION,
             folder = stepFolder,
             input = listOf("Schreiben Sie ein Fazit zu diesem Artikel: $prompt"),
-            postProcessings = listOf(createParagraphs, trimmed)
+            postProcessings = listOf(createParagraphs, trimmed),
+            useTone = true
         )
     }
 
@@ -106,8 +108,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.TAGS,
             folder = stepFolder,
             input = listOf("Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: $prompt"),
-            postProcessings = listOf(trimmed, removeDots),
-            fixGrammar = false
+            postProcessings = listOf(trimmed, removeDots)
         )
     }
 
@@ -117,7 +118,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.OPPOSITE_OPINION_TEXT,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Blog über Katzen. Schreiben Sie drei Absätze zu diesem Thema: \"$prompt\"."),
-            postProcessings = listOf(createParagraphs, trimmed)
+            postProcessings = listOf(createParagraphs, trimmed),
+            useTone = true
         )
     }
 
@@ -126,8 +128,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.OPPOSITE_OPINION_QUESTION,
             folder = stepFolder,
             input = listOf("Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"${meta.keyword}\""),
-            postProcessings = listOf(removeQuotes, removeDots, trimmed),
-            fixGrammar = false
+            postProcessings = listOf(removeQuotes, removeDots, trimmed)
         )
     }
 
@@ -139,7 +140,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONTENT_PART3,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, trimmed)
+            postProcessings = listOf(createParagraphs, trimmed),
+            useTone = true
         )
     }
 
@@ -151,7 +153,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONTENT_PART2,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, trimmed)
+            postProcessings = listOf(createParagraphs, trimmed),
+            useTone = true
         )
     }
 
@@ -163,7 +166,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONTENT_PART1,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, trimmed)
+            postProcessings = listOf(createParagraphs, trimmed),
+            useTone = true
         )
     }
 
@@ -172,8 +176,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.TOC_PLAN,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Artikel über Katzen. Das Thema ist: \"${meta.keyword}\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften."),
-            postProcessings = listOf(removeNumericList, filterBadTOC, removeQuestionMarks, trimmed),
-            fixGrammar = false
+            postProcessings = listOf(removeNumericList, filterBadTOC, removeQuestionMarks, trimmed)
         )
     }
 
@@ -182,7 +185,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.INTRODUCTION,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"${meta.keyword}\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."),
-            postProcessings = listOf(createParagraphs, trimmed)
+            postProcessings = listOf(createParagraphs, trimmed),
+            useTone = true
         )
     }
 
