@@ -1,7 +1,6 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.*
-import com.kishlaly.ta.openai.logFolder
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 import kotlin.random.Random
@@ -31,7 +30,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     fun download() {
         File(stepFolder).mkdir()
-        logFolder.set("$mainOutputFolder/${meta.keyword.toFileName()}/logs")
         File("$mainOutputFolder/${meta.keyword.toFileName()}/logs").mkdir()
 
         introduction()
