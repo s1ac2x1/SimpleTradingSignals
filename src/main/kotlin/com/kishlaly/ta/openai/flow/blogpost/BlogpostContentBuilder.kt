@@ -34,10 +34,10 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                 File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART1}_${index + 1}") }
                     ?.readText() ?: ""
             val content_part_2 =
-                File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART1}_${index + 1}") }
+                File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART2}_${index + 1}") }
                     ?.readText() ?: ""
             val content_part_3 =
-                File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART1}_${index + 1}") }
+                File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART3}_${index + 1}") }
                     ?.readText() ?: ""
 
             tocContent.append("<p>$content_part_1</p>")

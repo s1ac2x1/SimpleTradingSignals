@@ -18,20 +18,20 @@ import java.nio.channels.Channels
 import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
 
-fun main() {
-    val tasks = (1..5).map {
-        var prompt = Combiner.combine(
-            listOf(
-                "openai/katze101/breeds",
-                "openai/katze101/age",
-                "openai/katze101/behaviour",
-                "openai/katze101/places",
-            )
-        )
-        ImageGenerateTask("${prompt}in the style pencil artwork", "openai/output/images", "${prompt}.png", 1)
-    }
-    ImagesProcessor.generate(tasks)
-}
+//fun main() {
+//    val tasks = (1..5).map {
+//        var prompt = Combiner.combine(
+//            listOf(
+//                "openai/katze101/breeds",
+//                "openai/katze101/age",
+//                "openai/katze101/behaviour",
+//                "openai/katze101/places",
+//            )
+//        )
+//        ImageGenerateTask("${prompt}in the style pencil artwork", "openai/output/images", "${prompt}.png", 1)
+//    }
+//    ImagesProcessor.generate(tasks)
+//}
 
 //fun main() {
 //    val inputFileName = "katzenpflege"
@@ -53,17 +53,17 @@ fun main() {
 //    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
 //}
 
-//fun main() {
-//    getImageURLs(
-//        ImageRequest(
-//            prompt = "katze kratzt möbel. Schwarz-Weiß-Zeichnung in Schraffurtechnik",
-//            n = 3
-//        )
-//    )
-//        .forEach {
-//            println(it)
-//        }
-//}
+fun main() {
+    getImageURLs(
+        ImageRequest(
+            prompt = "Ich schreibe einen Artikel über Katzen. Zeichnen Sie ein Bild mit einem Schwarz-Weiß-Stift für den Artikel: \"Kratzbaum als Alternative\"",
+            n = 3
+        )
+    )
+        .forEach {
+            println(it)
+        }
+}
 
 //fun main() {
 //    val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"

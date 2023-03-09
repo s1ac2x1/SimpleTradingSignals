@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "Kratzen, Katzen, Verhindern.",
+  "prompt": "Kratzbaum als Alternative. Schwarz-Weiß-Bleistiftzeichnung",
   "n": 3,
   "size": "512x512"
 }
