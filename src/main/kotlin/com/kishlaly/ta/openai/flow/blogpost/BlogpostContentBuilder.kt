@@ -35,7 +35,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled()
                 .forEach { intent ->
                     val part =
-                        File("openai/flow/output/1").listFiles().find { file -> file.name.contains("${intent.name}_1") }
+                        File("$srcFolder").listFiles().find { file -> file.name.contains("${intent.name}_1") }
                             ?.readText() ?: ""
                     headingContent.append(part)
                 }

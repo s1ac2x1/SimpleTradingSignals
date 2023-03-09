@@ -28,24 +28,24 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun download() {
         File(stepFolder).mkdir()
 
-//        introduction()
+        introduction()
 
-//        tableOfContentsPlan()
+        tableOfContentsPlan()
 
         tableOfContentsTexts_part1()
         tableOfContentsTexts_part2()
         tableOfContentsTexts_part3()
-//
-//        oppositeOpinionQuestion()
-//        oppositeOpinionText()
-//
-//        tags()
-//
-//        featuredImage()
-//
-//        conclusion()
-//
-//        randomAddition()
+
+        oppositeOpinionQuestion()
+        oppositeOpinionText()
+
+        tags()
+
+        featuredImage()
+
+        conclusion()
+
+        randomAddition()
     }
 
     private fun randomAddition() {
