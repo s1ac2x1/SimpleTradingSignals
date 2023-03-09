@@ -7,19 +7,15 @@ import kotlin.random.Random
 
 fun main() {
     val text = """
-        Um Ihrer Katze ein sicheres und stressfreies Zuhause zu bieten, ist es wichtig, dass Sie einige grundlegende Dinge beachten. Erstens sollten Sie sicherstellen, dass Ihre Katze ausreichend Platz hat, um sich zu bewegen und zu spielen. 
+Die Geschichte des Kratzens ist eine der ältesten menschlichen Beziehungen zu Katzen. Seit Jahrhunderten haben Menschen versucht, die natürliche Anziehungskraft zwischen Katzen und Menschen zu erforschen. Kratzen ist ein natürliches Verhalten bei Katzen, das sie als Mittel verwenden, um ihre Umgebung zu markieren und ihr Territorium abzustecken. 
 
-        Stellen Sie also sicher, dass Ihr Zuhause groß genug ist und mehrere Räume oder Bereiche hat, in denen Ihre Katze herumlaufen kann. Zweitens sollten Sie eine ruhige Umgebung schaffen. 
+Es wird angenommen, dass es für sie auch eine Art von Entspannung und Stressabbau sein kann. Einige Forscher glauben sogar, dass Kratzen Teil der natürlichen sozialen Interaktion zwischen Mensch und Tier sein könnte. In den frühesten Aufzeichnungen über Katzen wurde berichtet, dass Kratzer als Geschenke an die Götter geschickt wurden - als Zeichen des Respekts vor dem mystischen Wesen der Katze. 
 
-        Lautstärke kann für Katzen sehr stressig sein, daher sollten Sie versuchen, die Lautstärke in Ihrem Haus auf einem angenehmeren Niveau zu halten. Dazu gehört auch das Vermeiden von plötzlichen Geräuschen oder laute Musik. 
+Dieser Brauch existiert noch heute in vielerlei Form in vielerlei Ländern auf der ganzen Welt. Kratzer haben auch eine lange Geschichte im Umgang mit Haustieren: Sie wurden verwendet, um den Tieren beizubringen, wo sie schlafen oder essen sollten; um ihnen beizubringen, wo sie ihr Geschäft machen sollten; oder man benutzte sie als Mittel der Bestrafung für unerwünschtes Verhalten. Heutzutage versteht man jedoch besser die Bedeutung von Kratzern für die psychische und emotionale Gesundheit von Haustieren - sowohl beim Menschen als auch beim Tier - und es gibt spezielle Produkte auf dem Markt (Kratzbäume usw. 
 
-        Drittens müssen Sie auch an die Sicherheit denken: Stellen Sie sicher, dass alle Fenster geschlossen und alle Türen verschlossen sind - besonders wenn die Katze draußen ist - damit niemand unerwünscht in Ihr Haus gelangt oder die Katze entkommt. Viertens sollte man der Katze genug Zeit geben um zur Ruhe zu kommen und Stress abzubauen: Eine ruhige Ecke mit bequemen Kissen oder Deckchen für deine Katze kann hier helfen; aber es gibt noch viele andere Möglichkeiten wie Spiel- und Kratzmöbel sowie interaktive Spielgeräte für deine Samtpfote! 
-
-        Schließlich muss man immer noch an den Komfort denken: Stellen Sie sicher, dass alle Betten sauber und weich sind; stellen Sie frisches Wasser bereit; halten Sie Futter-und Wasserschalen sauber; bietet ihn als regelmäßiges Fellpflegeprogramm an; bietet ihm Spielgeräte an (wie Bälle oder Seile) usw. 
-
-        , damit er nicht langweilig wird!  All diese Dinge helfen ihm sein Zuhause als stressfreien Ort zu betrachten!.
-    """.trimIndent()
-    val result = removeAllLineBreaks(text)
+), die diesem Zweck dienlich sein könnnen. Obwohl es schwer ist zu bestimmen, warum Katzen kratzen oder warum Menschen angezogen werden von diesem Verhalten – was immer der Grund sein mag – bleibt Kratzen eines der älteststen Beispiele für den tiefgreifendsten Teil unserer Beziehung mit unseren geliebten Fellfreundinnnen: Das Verständnis und Respekt voreinander!.
+""".trimIndent()
+    val result = createParagraphs(text)
     println(result)
 }
 
@@ -64,7 +60,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.RANDOM_ADDITION,
             input = listOf(prompt),
             folder = stepFolder,
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -77,7 +73,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONCLUSION,
             folder = stepFolder,
             input = listOf("Schreiben Sie ein Fazit zu diesem Artikel: $prompt"),
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -118,7 +114,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.OPPOSITE_OPINION_TEXT,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Blog über Katzen. Schreiben Sie drei Absätze zu diesem Thema: \"$prompt\"."),
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -140,7 +136,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONTENT_PART3,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -153,7 +149,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONTENT_PART2,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -166,7 +162,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONTENT_PART1,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -185,7 +181,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.INTRODUCTION,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"${meta.keyword}\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."),
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }

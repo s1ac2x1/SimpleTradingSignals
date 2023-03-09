@@ -66,7 +66,7 @@ val resolveShortKeyword: (String) -> String = {
 }
 val createParagraphs: (String) -> String = {
     val output = StringBuilder()
-    it.split(".")
+    it.split(". ")
         .filter { !it.isNullOrBlank() }
         .map { it.trim() }
         .filter { it.length > 10 }
