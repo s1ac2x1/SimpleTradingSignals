@@ -30,19 +30,12 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                 tocContent.append("<img src='$imageURL'></img>")
             }
 
-            val content_part_1 =
-                File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART1}_${index + 1}") }
-                    ?.readText() ?: ""
-            val content_part_2 =
-                File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART2}_${index + 1}") }
-                    ?.readText() ?: ""
-            val content_part_3 =
-                File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART3}_${index + 1}") }
-                    ?.readText() ?: ""
-
-            tocContent.append("<p>$content_part_1</p>")
-            tocContent.append("<p>$content_part_2</p>")
-            tocContent.append("<p>$content_part_3</p>")
+            listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled().forEach {
+                val content =
+                    File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART_1_HISTORY}_${index + 1}") }
+                        ?.readText() ?: ""
+                tocContent.append("<p>$content</p>")
+            }
         }
 
         val oppositeOpitionSubtitle = File("$srcFolder/${Intent.OPPOSITE_OPINION_QUESTION}_1").readText()

@@ -1,7 +1,6 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.Combiner
-import com.kishlaly.ta.openai.ImageGenerateTask
 import com.kishlaly.ta.openai.flow.*
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
@@ -29,24 +28,24 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun download() {
         File(stepFolder).mkdir()
 
-        introduction()
+//        introduction()
 
-        tableOfContentsPlan()
+//        tableOfContentsPlan()
 
         tableOfContentsTexts_part1()
         tableOfContentsTexts_part2()
         tableOfContentsTexts_part3()
-
-        oppositeOpinionQuestion()
-        oppositeOpinionText()
-
-        tags()
-
-        featuredImage()
-
-        conclusion()
-
-        randomAddition()
+//
+//        oppositeOpinionQuestion()
+//        oppositeOpinionText()
+//
+//        tags()
+//
+//        featuredImage()
+//
+//        conclusion()
+//
+//        randomAddition()
     }
 
     private fun randomAddition() {
@@ -61,7 +60,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.RANDOM_ADDITION,
             input = listOf(prompt),
             folder = stepFolder,
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -74,7 +73,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONCLUSION,
             folder = stepFolder,
             input = listOf("Schreiben Sie ein Fazit zu diesem Artikel: $prompt"),
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -124,7 +123,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.OPPOSITE_OPINION_TEXT,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Blog über Katzen. Schreiben Sie drei Absätze zu diesem Thema: \"$prompt\"."),
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -143,10 +142,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie interessante Fakten über dieses Thema. Formatieren Sie den Text in Form von Absätzen ohne Zahlen" }
             .map { "Ich schreibe einen Blog über Katzen. Schreiben Sie interessante Fakten über dieses Thema: \"$it\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen." }
         Step(
-            intent = Intent.CONTENT_PART3,
+            intent = Intent.CONTENT_PART_3_FACTS,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -156,10 +155,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema. Begründen Sie Ihre Antwort mit einigen Beispielen" }
             .map { "Ich schreibe einen Blog über Katzen. Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"$it\". Begründen Sie Ihre Antwort mit einigen Beispielen." }
         Step(
-            intent = Intent.CONTENT_PART2,
+            intent = Intent.CONTENT_PART_2_MAIN,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -169,10 +168,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             //.map { "Die Antwort auf die Frage, \"${meta.keyword}\", ist die Antwort: \"$it\". Schreiben Sie eine historische Anmerkung zu diesem Thema." }
             .map { "Ich schreibe einen Blog über Katzen. Schreiben Sie eine lange historische Notiz zu diesem Thema: \"$it\"." }
         Step(
-            intent = Intent.CONTENT_PART1,
+            intent = Intent.CONTENT_PART_1_HISTORY,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
@@ -191,7 +190,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.INTRODUCTION,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"${meta.keyword}\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."),
-            postProcessings = listOf(createParagraphs, trimmed),
+            postProcessings = listOf(trimmed),
             useTone = true
         )
     }
