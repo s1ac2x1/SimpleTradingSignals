@@ -94,6 +94,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             type = Type.IMAGE,
             input = listOf("${prompt} in the style pencil artwork"),
+            customImageName = "${meta.keyword.toFileName()}_${System.currentTimeMillis()}",
             imagesCount = 3
         )
     }
