@@ -14,7 +14,7 @@ class BlogpostXMLBuilder() {
         xml.append("<post>")
 
         xml.append("<title>")
-        xml.append(meta.keyword)
+        xml.append(meta.keyword.replace("?", ""))
         xml.append("</title>")
 
         xml.append("<content>")
@@ -23,9 +23,12 @@ class BlogpostXMLBuilder() {
 
         xml.append("<featuredImage>")
         val postFolder = meta.keyword.toFileName()
-        val featuredImageURL =
+        var featuredImageURL =
             File("$mainOutputFolder/$postFolder").listFiles().find { it.name.contains(postFolder) }?.name ?: ""
-        xml.append(featuredImageURL)
+        if (featuredImageURL.isNotEmpty() && featuredImageURL[0] == '_') {
+            featuredImageURL = featuredImageURL.substring(1, featuredImageURL.length)
+        }
+        xml.append("https://${meta.domain}/wp-content/uploads/${meta.imgURI}/$featuredImageURL")
         xml.append("</featuredImage>")
 
         xml.append("<tags>")

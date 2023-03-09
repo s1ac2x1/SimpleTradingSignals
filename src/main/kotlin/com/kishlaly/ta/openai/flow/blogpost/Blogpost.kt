@@ -9,6 +9,12 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 fun main() {
+
+    // 1. Загрузить контент
+    // 2. Удалить плохие featured image
+    // 3. Создать XML
+    // 4. Собрать все картинки в одну папку и загрузить в блог
+
     val xml = BlogpostXMLBuilder()
     readCSV("katzenrassen").forEach { paa ->
         val meta = BlogpostContentMeta(
@@ -18,8 +24,8 @@ fun main() {
         )
 //        BlogpostDownloader(meta).download()
         xml.append(meta)
-        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
-            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
+//        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
+//            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
     }
     Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
@@ -30,7 +36,7 @@ fun main() {
 fun findAllImages(rootDirectory: File): List<File> {
     val fileList = mutableListOf<File>()
     rootDirectory.walkTopDown().forEach { file ->
-        if (file.isFile) {
+        if (file.isFile && file.name.contains(".png")) {
             fileList.add(file)
         }
     }
