@@ -28,13 +28,13 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun download() {
         File(stepFolder).mkdir()
 
-        introduction()
+//        introduction()
 
 //        tableOfContentsPlan()
 
-//        tableOfContentsTexts_part1()
-//        tableOfContentsTexts_part2()
-//        tableOfContentsTexts_part3()
+        tableOfContentsTexts_part1()
+        tableOfContentsTexts_part2()
+        tableOfContentsTexts_part3()
 //
 //        oppositeOpinionQuestion()
 //        oppositeOpinionText()
@@ -61,7 +61,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf(prompt),
             folder = stepFolder,
             postProcessings = listOf(trimmed),
-            useTone = true
+            useTone = true,
+            fixTypos = true
         )
     }
 
@@ -74,7 +75,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf("Schreiben Sie ein Fazit zu diesem Artikel: $prompt"),
             postProcessings = listOf(trimmed),
-            useTone = true
+            useTone = true,
+            fixTypos = true
         )
     }
 
@@ -124,7 +126,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf("Ich schreibe einen Blog über Katzen. Schreiben Sie drei Absätze zu diesem Thema: \"$prompt\"."),
             postProcessings = listOf(trimmed),
-            useTone = true
+            useTone = true,
+            fixTypos = true
         )
     }
 
@@ -146,7 +149,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = prompt,
             postProcessings = listOf(trimmed),
-            useTone = true
+            useTone = true,
+            fixTypos = true
         )
     }
 
@@ -159,7 +163,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = prompt,
             postProcessings = listOf(trimmed),
-            useTone = true
+            useTone = true,
+            fixTypos = true
         )
     }
 
@@ -172,7 +177,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = prompt,
             postProcessings = listOf(trimmed),
-            useTone = true
+            useTone = true,
+            fixTypos = true
         )
     }
 
@@ -192,7 +198,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf("Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"${meta.keyword}\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."),
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixGrammar = true
+            fixTypos = true
         )
     }
 

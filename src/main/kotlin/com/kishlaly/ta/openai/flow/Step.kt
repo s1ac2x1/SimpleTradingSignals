@@ -32,7 +32,7 @@ class Step(
     val folder: String,
     val postProcessings: List<(String) -> String> = emptyList(),
     val type: Type = Type.TEXT,
-    val fixGrammar: Boolean = false,
+    val fixTypos: Boolean = false,
     val imagesCount: Int = 1,
     val useTone: Boolean = false,
     val customImageName: String = "image_${System.currentTimeMillis()}"
@@ -69,7 +69,7 @@ class Step(
                         completion = getCompletion(finalPrompt)
                     }
 
-                    if (fixGrammar) {
+                    if (fixTypos) {
                         try {
                             completion = getCompletion("$fixPrompt \"${removeAllLineBreaks(completion)}\"")
                         } catch (e: OpenAIException) {
