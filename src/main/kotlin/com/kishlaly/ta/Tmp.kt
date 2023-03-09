@@ -1,8 +1,9 @@
 package com.kishlaly.ta
 
+import com.kishlaly.ta.openai.flow.Intent
+import com.kishlaly.ta.openai.flow.createParagraphs
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
-import kotlin.random.Random
 
 val text = """
     Die Geschichte des Kratzens ist eine der ältesten menschlichen Beziehungen zu Katzen. Seit Jahrhunderten haben Menschen versucht, die natürliche Anziehungskraft zwischen Katzen und Menschen zu erforschen. Kratzen ist ein natürliches Verhalten bei Katzen, das sie als Mittel verwenden, um ihre Umgebung zu markieren und ihr Territorium abzustecken. 
@@ -35,4 +36,14 @@ fun main() {
     val withoutLineBreaks = text.replace("\n", "")
     println(withoutLineBreaks)
 
+    val headingContent = StringBuilder()
+    listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled()
+        .forEach { intent ->
+            val part =
+                File("openai/flow/output/1").listFiles().find { file -> file.name.contains("${intent.name}_1") }
+                    ?.readText() ?: ""
+            headingContent.append(part)
+        }
+    val res = createParagraphs(headingContent.toString())
+    println(res)
 }

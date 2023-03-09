@@ -31,11 +31,13 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             }
 
             // TODO тут нужно склеить все три части, разбить на параграфы по 1-3 предложения и обернуть <p></p>
+            val content = StringBuilder()
             listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled().forEach {
-                val content =
+                val part =
                     File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART_1_HISTORY}_${index + 1}") }
                         ?.readText() ?: ""
-                tocContent.append("<p>$content</p>")
+                content.append(part)
+                //tocContent.append("<p>$part</p>")
             }
         }
 

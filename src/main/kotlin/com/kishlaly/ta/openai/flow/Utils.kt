@@ -66,20 +66,19 @@ val resolveShortKeyword: (String) -> String = {
 }
 val createParagraphs: (String) -> String = {
     val output = StringBuilder()
+
     it.split(". ")
         .filter { !it.isNullOrBlank() }
         .map { it.trim() }
         .filter { it.length > 10 }
         .chunked(Random.nextInt(2, 4))
         .forEach { chunk ->
+            output.append("<p>")
             chunk.forEach { output.append(it).append(". ") }
-            output.append("\n\n")
+            output.append("</p>")
         }
 
     output.toString()
-        .split("\n\n")
-        .filter { it.trim().length > 10 }
-        .joinToString("\n\n")
 }
 val removeFirstSentence: (String) -> String = { str ->
     str.substring(str.indexOfFirst { it == '.' } + 1, str.length)
