@@ -51,3 +51,12 @@ data class CompletionRequest(
     @SerializedName("frequency_penalty")
     val frequencyPenalty: Double = 0.8
 )
+
+data class EditRequest(
+    val model: String = "text-davinci-edit-001",
+    val input: String,
+    val instruction: String,
+    val n: Int = 1,
+    @SerializedName("top_p")
+    val topP: Double = 0.5,
+)
