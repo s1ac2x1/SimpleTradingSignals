@@ -34,7 +34,8 @@ class Step(
     val type: Type = Type.TEXT,
     val fixGrammar: Boolean = false,
     val imagesCount: Int = 1,
-    val useTone: Boolean = false
+    val useTone: Boolean = false,
+    val customImageName: String = "image_${System.currentTimeMillis()}"
 ) {
     val fixPrompt = "Korrigieren Sie Grammatikfehler in diesem Text:"
 
@@ -88,7 +89,7 @@ class Step(
                         ImageGenerateTask(
                             keyword = prompt,
                             outputFolderName = "$folder",
-                            outputFileName = "${prompt.toFileName()}_${System.currentTimeMillis()}",
+                            outputFileName = customImageName,
                             n = imagesCount
                         )
                     ImagesProcessor.generate(listOf(imageGenerateTask))
