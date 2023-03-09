@@ -86,9 +86,9 @@ class Step(
                 Type.IMAGE -> {
                     val imageGenerateTask =
                         ImageGenerateTask(
-                            keyword = "Katze im Thema: \"$prompt\". Schwarz-Weiß-Zeichnung in Schraffurtechnik",
+                            keyword = prompt,
                             outputFolderName = "$folder",
-                            outputFileName = "${prompt.toFileName()}",
+                            outputFileName = "${prompt.toFileName()}_${System.currentTimeMillis()}",
                             n = imagesCount
                         )
                     ImagesProcessor.generate(listOf(imageGenerateTask))

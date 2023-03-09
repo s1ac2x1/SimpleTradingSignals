@@ -1,5 +1,7 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
+import com.kishlaly.ta.openai.Combiner
+import com.kishlaly.ta.openai.ImageGenerateTask
 import com.kishlaly.ta.openai.flow.*
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
@@ -28,8 +30,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         File(stepFolder).mkdir()
         File("$mainOutputFolder/${meta.keyword.toFileName()}/logs").mkdir()
 
-        introduction()
-
+//        introduction()
+//
 //        tableOfContentsPlan()
 //
 //        tableOfContentsTexts_part1()
@@ -40,9 +42,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 //        oppositeOpinionText()
 //
 //        tags()
-//
-//        featuredImage()
-//
+
+        featuredImage()
+
 //        conclusion()
 //
 //        randomAddition()
@@ -60,7 +62,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.RANDOM_ADDITION,
             input = listOf(prompt),
             folder = stepFolder,
-            postProcessings = listOf(trimmed),
+            postProcessings = listOf(createParagraphs, trimmed),
             useTone = true
         )
     }
@@ -73,18 +75,26 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONCLUSION,
             folder = stepFolder,
             input = listOf("Schreiben Sie ein Fazit zu diesem Artikel: $prompt"),
-            postProcessings = listOf(trimmed),
+            postProcessings = listOf(createParagraphs, trimmed),
             useTone = true
         )
     }
 
     private fun featuredImage() {
+        var prompt = Combiner.combine(
+            listOf(
+                "openai/katze101/breeds",
+                "openai/katze101/age",
+                "openai/katze101/behaviour",
+                "openai/katze101/places",
+            )
+        )
         Step(
             intent = Intent.FEATURED_IMAGE,
             folder = stepFolder,
             type = Type.IMAGE,
-            input = listOf(meta.keyword),
-            imagesCount = 5
+            input = listOf("${prompt} in the style pencil artwork"),
+            imagesCount = 3
         )
     }
 
@@ -114,7 +124,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.OPPOSITE_OPINION_TEXT,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Blog über Katzen. Schreiben Sie drei Absätze zu diesem Thema: \"$prompt\"."),
-            postProcessings = listOf(trimmed),
+            postProcessings = listOf(createParagraphs, trimmed),
             useTone = true
         )
     }
@@ -136,7 +146,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONTENT_PART3,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(trimmed),
+            postProcessings = listOf(createParagraphs, trimmed),
             useTone = true
         )
     }
@@ -149,7 +159,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONTENT_PART2,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(trimmed),
+            postProcessings = listOf(createParagraphs, trimmed),
             useTone = true
         )
     }
@@ -162,7 +172,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.CONTENT_PART1,
             folder = stepFolder,
             input = prompt,
-            postProcessings = listOf(trimmed),
+            postProcessings = listOf(createParagraphs, trimmed),
             useTone = true
         )
     }
@@ -181,7 +191,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.INTRODUCTION,
             folder = stepFolder,
             input = listOf("Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"${meta.keyword}\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."),
-            postProcessings = listOf(trimmed),
+            postProcessings = listOf(createParagraphs, trimmed),
             useTone = true
         )
     }
