@@ -82,27 +82,19 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun featuredImage() {
-//        var prompt = Combiner.combine(
-//            listOf(
-//                "openai/katze101/breeds",
-//                "openai/katze101/age",
-//                "openai/katze101/behaviour",
-//                "openai/katze101/places",
-//            )
-//        )
-//        Step(
-//            intent = Intent.FEATURED_IMAGE,
-//            folder = stepFolder,
-//            type = Type.IMAGE,
-//            input = listOf("${prompt} in the style pencil artwork"),
-//            customImageName = "${meta.keyword.toFileName()}_${System.currentTimeMillis()}",
-//            imagesCount = 3
-//        )
+        var prompt = Combiner.combine(
+            listOf(
+                "openai/katze101/breeds",
+                "openai/katze101/age",
+                "openai/katze101/behaviour",
+                "openai/katze101/places",
+            )
+        )
         Step(
             intent = Intent.FEATURED_IMAGE,
             folder = stepFolder,
             type = Type.IMAGE,
-            input = listOf(meta.keyword),
+            input = listOf("${prompt} in the style pencil artwork"),
             customImageName = "${meta.keyword.toFileName()}_${System.currentTimeMillis()}",
             imagesCount = 5
         )
