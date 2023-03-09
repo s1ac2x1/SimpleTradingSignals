@@ -35,9 +35,9 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled()
                 .forEach { intent ->
                     val part =
-                        File("$srcFolder").listFiles().find { file -> file.name.contains("${intent.name}_1") }
+                        File("$srcFolder").listFiles().find { file -> file.name.contains("${intent.name}_${index + 1}") }
                             ?.readText() ?: ""
-                    headingContent.append(part)
+                    headingContent.append(part).append(" ")
                 }
             tocContent.append(createParagraphs(headingContent.toString()))
         }
