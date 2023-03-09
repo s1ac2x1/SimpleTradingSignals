@@ -1,6 +1,7 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.Intent
+import com.kishlaly.ta.openai.flow.createParagraphs
 import com.kishlaly.ta.openai.flow.finalRegex
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.mainOutputFolder
@@ -31,14 +32,15 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             }
 
             // TODO тут нужно склеить все три части, разбить на параграфы по 1-3 предложения и обернуть <p></p>
-            val content = StringBuilder()
-            listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled().forEach {
-                val part =
-                    File("$srcFolder").listFiles().find { it.name.contains("${Intent.CONTENT_PART_1_HISTORY}_${index + 1}") }
-                        ?.readText() ?: ""
-                content.append(part)
-                //tocContent.append("<p>$part</p>")
-            }
+            val headingContent = StringBuilder()
+            listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled()
+                .forEach { intent ->
+                    val part =
+                        File("openai/flow/output/1").listFiles().find { file -> file.name.contains("${intent.name}_1") }
+                            ?.readText() ?: ""
+                    headingContent.append(part)
+                }
+            tocContent.append(createParagraphs(headingContent.toString()))
         }
 
         val oppositeOpitionSubtitle = File("$srcFolder/${Intent.OPPOSITE_OPINION_QUESTION}_1").readText()
