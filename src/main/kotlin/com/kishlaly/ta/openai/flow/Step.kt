@@ -37,7 +37,7 @@ class Step(
     val useTone: Boolean = false,
     val customImageName: String = "image_${System.currentTimeMillis()}"
 ) {
-    val fixPrompt = "Korrigieren Sie Grammatikfehler in diesem Text:"
+    val fixPrompt = "Korrigieren Sie die Rechtschreibfehler in diesem Text:"
 
     init {
         input.forEachIndexed { index, prompt ->

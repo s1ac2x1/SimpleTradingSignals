@@ -16,10 +16,10 @@ fun main() {
             domain = "katze101.com",
             imgURI = "2023/03"
         )
-//        BlogpostDownloader(meta).download()
-        xml.append(meta)
-        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
-            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
+        BlogpostDownloader(meta).download()
+//        xml.append(meta)
+//        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
+//            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
     }
 //    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 

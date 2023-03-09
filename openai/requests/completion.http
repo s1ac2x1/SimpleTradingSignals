@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "model": "text-davinci-003",
-  "prompt": "Korrigieren Sie die Rechtschreibfehler in diesem Text: \"\"",
+  "prompt": "Korrigieren Sie die Rechtschreibfehler in diesem Text: \"Alles in allem gib es also verschiedene Fakotren die die HÄufigkeit des Kratzens bei einerKatze beeinflussen könne: Alter; Stress; Langewei;le und medizinsiche Probleme! Achten Sie daher auf Analogn dieser Fakotren im Verhalten Iherr Lieblingkatse - sollte Sie plötzlich vermehrtes Kraztvrhalten zeigen ohne erkentlichen Grund sollten Sie lieber mit dem Tierarztin sprechen!\"",
   "max_tokens": 2048,
   "temperature": 0.7,
   "top_p": 0.5,

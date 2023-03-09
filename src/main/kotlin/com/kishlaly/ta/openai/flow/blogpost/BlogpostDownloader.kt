@@ -28,13 +28,13 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun download() {
         File(stepFolder).mkdir()
 
-//        introduction()
+        introduction()
 
 //        tableOfContentsPlan()
 
-        tableOfContentsTexts_part1()
-        tableOfContentsTexts_part2()
-        tableOfContentsTexts_part3()
+//        tableOfContentsTexts_part1()
+//        tableOfContentsTexts_part2()
+//        tableOfContentsTexts_part3()
 //
 //        oppositeOpinionQuestion()
 //        oppositeOpinionText()
@@ -191,7 +191,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf("Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"${meta.keyword}\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."),
             postProcessings = listOf(trimmed),
-            useTone = true
+            useTone = true,
+            fixGrammar = true
         )
     }
 
