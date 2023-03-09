@@ -56,7 +56,7 @@ import javax.imageio.ImageIO
 fun main() {
     getImageURLs(
         ImageRequest(
-            prompt = "Ich schreibe einen Artikel über Katzen. Zeichnen Sie ein Bild mit einem Schwarz-Weiß-Stift für den Artikel: \"Kratzbaum als Alternative\"",
+            prompt = "Warum kratzen Katzen und wie kann man dies verhindern?",
             n = 3
         )
     )

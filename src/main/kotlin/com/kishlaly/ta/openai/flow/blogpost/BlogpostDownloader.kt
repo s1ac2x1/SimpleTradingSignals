@@ -28,24 +28,25 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun download() {
         File(stepFolder).mkdir()
 
-        introduction()
+//        introduction()
+//
+//        tableOfContentsPlan()
 
-        tableOfContentsPlan()
-
-        tableOfContentsTexts_part1()
-        tableOfContentsTexts_part2()
-        tableOfContentsTexts_part3()
-
-        oppositeOpinionQuestion()
-        oppositeOpinionText()
-
-        tags()
-
+//
+//        tableOfContentsTexts_part1()
+//        tableOfContentsTexts_part2()
+//        tableOfContentsTexts_part3()
+//
+//        oppositeOpinionQuestion()
+//        oppositeOpinionText()
+//
+//        tags()
+//
         featuredImage()
-
-        conclusion()
-
-        randomAddition()
+//
+//        conclusion()
+//
+//        randomAddition()
     }
 
     private fun randomAddition() {
@@ -81,21 +82,29 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun featuredImage() {
-        var prompt = Combiner.combine(
-            listOf(
-                "openai/katze101/breeds",
-                "openai/katze101/age",
-                "openai/katze101/behaviour",
-                "openai/katze101/places",
-            )
-        )
+//        var prompt = Combiner.combine(
+//            listOf(
+//                "openai/katze101/breeds",
+//                "openai/katze101/age",
+//                "openai/katze101/behaviour",
+//                "openai/katze101/places",
+//            )
+//        )
+//        Step(
+//            intent = Intent.FEATURED_IMAGE,
+//            folder = stepFolder,
+//            type = Type.IMAGE,
+//            input = listOf("${prompt} in the style pencil artwork"),
+//            customImageName = "${meta.keyword.toFileName()}_${System.currentTimeMillis()}",
+//            imagesCount = 3
+//        )
         Step(
             intent = Intent.FEATURED_IMAGE,
             folder = stepFolder,
             type = Type.IMAGE,
-            input = listOf("${prompt} in the style pencil artwork"),
+            input = listOf(meta.keyword),
             customImageName = "${meta.keyword.toFileName()}_${System.currentTimeMillis()}",
-            imagesCount = 3
+            imagesCount = 5
         )
     }
 
@@ -105,7 +114,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = Intent.TOC_IMAGES,
             folder = stepFolder,
             type = Type.IMAGE,
-            input = prompts
+            input = prompts,
+            imagesCount = 3
         )
     }
 
