@@ -31,7 +31,6 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                 tocContent.append("<img src='$imageURL'></img>")
             }
 
-            // TODO тут нужно склеить все три части, разбить на параграфы по 1-3 предложения и обернуть <p></p>
             val headingContent = StringBuilder()
             listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled()
                 .forEach { intent ->

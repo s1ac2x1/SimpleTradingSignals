@@ -4,6 +4,7 @@ import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.createParagraphs
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
+import java.util.*
 
 val text = """
     Die Geschichte des Kratzens ist eine der ältesten menschlichen Beziehungen zu Katzen. Seit Jahrhunderten haben Menschen versucht, die natürliche Anziehungskraft zwischen Katzen und Menschen zu erforschen. Kratzen ist ein natürliches Verhalten bei Katzen, das sie als Mittel verwenden, um ihre Umgebung zu markieren und ihr Territorium abzustecken. 
@@ -44,6 +45,26 @@ fun main() {
                     ?.readText() ?: ""
             headingContent.append(part)
         }
-    val res = createParagraphs(headingContent.toString())
-    println(res)
+    findKeyPhrases(headingContent.toString(), 5).forEach {
+        println(it)
+    }
+}
+
+fun findKeyPhrases(text: String, numPhrases: Int): List<String> {
+    val st = StringTokenizer(text, " ,.;:!?") // split the text into tokens
+    val tokens = mutableListOf<String>()
+    while (st.hasMoreTokens()) {
+        tokens.add(st.nextToken())
+    }
+    val phrases = mutableMapOf<String, Int>()
+    for (i in 0 until tokens.size - 1) {
+        val phrase = "${tokens[i]} ${tokens[i+1]}"
+        if (!phrases.containsKey(phrase)) {
+            phrases[phrase] = 1
+        } else {
+            phrases[phrase] = phrases[phrase]!! + 1
+        }
+    }
+    val sortedPhrases = phrases.entries.sortedByDescending { it.value }.map { it.key } // sort the phrases by frequency
+    return sortedPhrases.take(numPhrases) // return the top n phrases
 }
