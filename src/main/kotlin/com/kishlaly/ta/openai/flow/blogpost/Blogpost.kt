@@ -18,7 +18,7 @@ fun main() {
         BlogpostDownloader(meta).download()
         //xml.append(meta)
     }
-    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
+    //Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
 //    val images = findAllImages(File("openai/flow/output"))
 //    copyFilesToDirectory(images, File("openai/img"))

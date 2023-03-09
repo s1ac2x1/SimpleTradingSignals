@@ -28,26 +28,25 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     fun download() {
         File(stepFolder).mkdir()
-        File("$mainOutputFolder/${meta.keyword.toFileName()}/logs").mkdir()
 
-//        introduction()
-//
-//        tableOfContentsPlan()
-//
-//        tableOfContentsTexts_part1()
-//        tableOfContentsTexts_part2()
-//        tableOfContentsTexts_part3()
-//
-//        oppositeOpinionQuestion()
-//        oppositeOpinionText()
-//
-//        tags()
+        introduction()
+
+        tableOfContentsPlan()
+
+        tableOfContentsTexts_part1()
+        tableOfContentsTexts_part2()
+        tableOfContentsTexts_part3()
+
+        oppositeOpinionQuestion()
+        oppositeOpinionText()
+
+        tags()
 
         featuredImage()
 
-//        conclusion()
-//
-//        randomAddition()
+        conclusion()
+
+        randomAddition()
     }
 
     private fun randomAddition() {
