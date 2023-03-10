@@ -41,14 +41,14 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                             ?.readText() ?: ""
                     if (intent == Intent.CONTENT_PART_1_HISTORY) {
                         val historicalContent = processHistoricalContent(part)
-                        headingContent.append("Hisotry:<br><br>").append(historicalContent)
+                        headingContent.append(historicalContent)
                     }
                     if (intent == Intent.CONTENT_PART_2_MAIN) {
-                        headingContent.append("Main:<br><br>").append(createParagraphs(part))
+                        headingContent.append(createParagraphs(part))
                     }
                     if (intent == Intent.CONTENT_PART_3_FACTS) {
                         val factsContent = processFactsContent(part)
-                        headingContent.append("Facts:<br><br>").append(factsContent)
+                        headingContent.append(factsContent)
                     }
                 }
             tocContent.append(headingContent.toString())
