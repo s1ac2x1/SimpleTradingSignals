@@ -6,6 +6,7 @@ import com.kishlaly.ta.openai.flow.finalRegex
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
+import kotlin.random.Random
 
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
@@ -35,11 +36,22 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled()
                 .forEach { intent ->
                     val part =
-                        File("$srcFolder").listFiles().find { file -> file.name.contains("${intent.name}_${index + 1}") }
+                        File("$srcFolder").listFiles()
+                            .find { file -> file.name.contains("${intent.name}_${index + 1}") }
                             ?.readText() ?: ""
-                    headingContent.append(part).append(" ")
+                    if (intent == Intent.CONTENT_PART_1_HISTORY) {
+                        val historicalContent = processHistoricalContent(part)
+                        headingContent.append("Hisotry:<br><br>").append(historicalContent)
+                    }
+                    if (intent == Intent.CONTENT_PART_2_MAIN) {
+                        headingContent.append("Main:<br><br>").append(createParagraphs(part))
+                    }
+                    if (intent == Intent.CONTENT_PART_3_FACTS) {
+                        val factsContent = processFactsContent(part)
+                        headingContent.append("Facts:<br><br>").append(factsContent)
+                    }
                 }
-            tocContent.append(createParagraphs(headingContent.toString()))
+            tocContent.append(headingContent.toString())
         }
 
         val oppositeOpitionSubtitle = File("$srcFolder/${Intent.OPPOSITE_OPINION_QUESTION}_1").readText()
@@ -62,8 +74,73 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content = content.replace("!", ".")
         content = content.replace(". ,", ".,")
         content = content.replace("  ", " ")
+        content = content.replace("..", ".")
+        content = content.replace(" .", ".")
 
         return content
+    }
+
+    private fun processFactsContent(part: String): String {
+        val result = StringBuilder()
+        var markedList = 0
+        val markedListMax = Random.nextInt(2)
+        chunked(part).forEachIndexed { index, chunk ->
+            if (Random.nextBoolean() && markedList < markedListMax) {
+                result.append("<p>${makeList(chunk)}</p>")
+                markedList++
+            } else {
+                result.append("<p>${chunk.joinToString(". ")}.</p>")
+            }
+        }
+        return result.toString()
+    }
+
+    private fun processHistoricalContent(part: String): String {
+        val result = StringBuilder()
+        var markedB = 0
+        val markedBMax = Random.nextInt(2)
+        var markedU = 0
+        val markedUMax = Random.nextInt(2)
+        var markedI = 0
+        val markedIMax = Random.nextInt(2)
+        chunked(part).forEachIndexed { index, chunk ->
+            if (Random.nextBoolean() && markedB < markedBMax) {
+                result.append("<p>${wrapOneSenenceInTag(chunk, "b")}</p>")
+                markedB++
+            } else if (Random.nextBoolean() && markedUMax < 2) {
+                result.append("<p>${wrapOneSenenceInTag(chunk, "u")}</p>")
+                markedU++
+            } else if (Random.nextBoolean() && markedIMax < 2) {
+                result.append("<p>${wrapOneSenenceInTag(chunk, "i")}</p>")
+                markedI++
+            } else {
+                result.append("<p>${chunk.joinToString(". ")}.</p>")
+            }
+        }
+        return result.toString()
+    }
+
+    private fun chunked(part: String) = part.split(". ")
+        .map { it.trim() }
+        .filter { !it.isNullOrBlank() }
+        .filter { it.length > 10 }
+        .chunked(Random.nextInt(2, 4))
+
+    fun wrapOneSenenceInTag(sentences: List<String>, tag: String): String {
+        var result = ""
+        val number = Random.nextInt(sentences.size)
+        sentences.forEachIndexed { index, s ->
+            if (index == number) {
+                result += "<$tag>$s</$tag>. "
+            } else {
+                result += "$s. "
+            }
+        }
+        return result
+    }
+
+    fun makeList(sentences: List<String>): String {
+        return "<ul>" + sentences.map { "<li>$it</li>" }.joinToString("") + "</ul>"
     }
 
 }
