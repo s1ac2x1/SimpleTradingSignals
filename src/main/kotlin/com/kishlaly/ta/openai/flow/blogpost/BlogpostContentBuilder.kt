@@ -82,15 +82,12 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
     private fun processFactsContent(part: String): String {
         val result = StringBuilder()
-        var markedList = 0
-        val markedListMax = Random.nextInt(2)
         val oneVariant = listOf(1, 3)
         val twoVariant = listOf(2, 4)
         val finalVariant = if (Random.nextBoolean()) oneVariant else twoVariant
         chunked(part).forEachIndexed { index, chunk ->
-            if (index in finalVariant && markedList < markedListMax) {
+            if (index in finalVariant) {
                 result.append("<p>${makeList(chunk)}</p>")
-                markedList++
             } else {
                 result.append("<p>${chunk.joinToString(". ")}.</p>")
             }
