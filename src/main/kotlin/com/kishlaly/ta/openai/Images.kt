@@ -175,6 +175,39 @@ fun updateImage(file: File, prompt: String): String {
     }
 }
 
+fun variationImage(file: File): String {
+    var result = ""
+    try {
+        val httpClient = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.MINUTES)
+            .writeTimeout(5, TimeUnit.MINUTES)
+            .readTimeout(5, TimeUnit.MINUTES)
+            .build()
+
+        println("Editing image: ${file.name}")
+
+        val requestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("image", file.name, file.asRequestBody("image/png".toMediaTypeOrNull()))
+            .addFormDataPart("size", "512x512")
+            .build()
+
+        val request = Request.Builder()
+            .url("https://api.openai.com/v1/images/variations")
+            .post(requestBody)
+            .header("Authorization", "Bearer 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")
+            .build()
+
+        val body = httpClient.newCall(request).execute().body?.string()
+        val completionRespone = gson.fromJson<ImageResponse>(body, object : TypeToken<ImageResponse>() {}.type)
+        result = completionRespone.data.firstOrNull()?.url ?: ""
+    } catch (e: Exception) {
+        println("Image generation error: ${e.message}")
+    } finally {
+        return result
+    }
+}
+
 fun convertToRGBA(pngFileName: String): BufferedImage? {
     val pngFile = File(pngFileName)
     if (!pngFile.exists()) {
@@ -238,6 +271,11 @@ data class ImageEditTask(
     val folder: String,
     val file: String,
     val prompt: String
+)
+
+data class ImageVariationTask(
+    val folder: String,
+    val file: String
 )
 
 data class ImageRequest(
