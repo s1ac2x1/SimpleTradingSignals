@@ -84,8 +84,9 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val result = StringBuilder()
         var markedList = 0
         val markedListMax = Random.nextInt(2)
+        чанк 1 и 3 или 2 и 4
         chunked(part).forEachIndexed { index, chunk ->
-            if (Random.nextBoolean() && markedList < markedListMax) {
+            if (markedList < markedListMax) {
                 result.append("<p>${makeList(chunk)}</p>")
                 markedList++
             } else {
