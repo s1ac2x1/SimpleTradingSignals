@@ -5,13 +5,21 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.random.Random
 
+enum class Language {
+    DE
+}
+
 enum class Type {
     TEXT,
     IMAGE
 }
 
-enum class Intent {
-    INTRODUCTION,
+enum class Intent(val map: Map<Language, String>) {
+    INTRODUCTION(
+        mapOf(
+            Language.DE to "Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"###param###\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."
+        )
+    ),
     TOC_PLAN,
     CONTENT_PART_1_HISTORY,
     CONTENT_PART_2_MAIN,
@@ -24,6 +32,8 @@ enum class Intent {
     FEATURED_IMAGE,
     CONCLUSION,
     RANDOM_ADDITION
+
+    fun get(language: Language, paramValue: String) = map[language]!!.replace("###param###", paramValue)
 }
 
 class Step(

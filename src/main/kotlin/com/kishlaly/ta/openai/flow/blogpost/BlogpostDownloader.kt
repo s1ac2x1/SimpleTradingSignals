@@ -181,7 +181,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = Intent.INTRODUCTION,
             folder = stepFolder,
-            input = listOf("Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"${meta.keyword}\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."),
+            input = listOf(Intent.INTRODUCTION.get(globalLanguage, meta.keyword)),
             postProcessings = listOf(trimmed),
             useTone = true,
             fixTypos = true

@@ -1,12 +1,15 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.PAA
+import com.kishlaly.ta.openai.flow.Language
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.readCsv
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
+
+val globalLanguage: Language = Language.DE
 
 fun main() {
 
