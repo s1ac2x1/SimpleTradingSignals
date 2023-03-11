@@ -25,11 +25,8 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         tocPlan.forEachIndexed { index, item ->
             tocContent.append("<h2>$item</h2>")
 
-            val imageName = if ((index + 1) % 2 != 0 && index < images.size) images[index].name else ""
-            if (imageName.isNotEmpty()) {
-                var imageURL = "https://${meta.domain}/wp-content/uploads/${meta.imgURI}/$imageName"
-                tocContent.append("<img src='$imageURL'></img>")
-            }
+            var imageURL = "https://${meta.domain}/wp-content/uploads/${meta.imgURI}/$${images[index].name}"
+            tocContent.append("<img src='$imageURL'></img>")
 
             val headingContent = StringBuilder()
             listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled()
