@@ -27,7 +27,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
             val imageName = if ((index + 1) % 2 != 0 && index < images.size) images[index].name else ""
             if (imageName.isNotEmpty()) {
-                var imageURL = "https://$${meta.domain}/wp-content/uploads/${meta.imgURI}/$imageName"
+                var imageURL = "https://${meta.domain}/wp-content/uploads/${meta.imgURI}/$imageName"
                 tocContent.append("<img src='$imageURL'></img>")
             }
 
