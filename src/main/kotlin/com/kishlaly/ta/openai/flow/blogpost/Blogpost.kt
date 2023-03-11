@@ -22,7 +22,7 @@ fun main() {
             keyword = paa.title,
             domain = "katze101.com",
             imgURI = "2023/03",
-            imgSrcFolder = "openai/katze101/images"
+            imgSrcFolder = "openai/katze101/images_webp"
         )
 //        BlogpostDownloader(meta).download()
         xml.append(meta)
