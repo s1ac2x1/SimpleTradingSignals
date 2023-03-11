@@ -17,6 +17,7 @@ import java.nio.channels.Channels
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
+import kotlin.random.Random
 
 //fun main() {
 //    val tasks = (1..5).map {
@@ -57,19 +58,30 @@ fun main() {
     val breeds = File("openai/katze101/breeds").readLines()
     val ages = File("openai/katze101/age").readLines()
     val moods = File("openai/katze101/mood").readLines()
+    val actions = File("openai/katze101/actions").readLines()
 
-    val tasks = mutableListOf<ImageGenerateTask>()
-    (1..1).forEach {
+        val tasks = mutableListOf<ImageGenerateTask>()
+    (1..10).forEach {
         val breed = breeds.random()
         val age = ages.random()
         val mood = moods.random()
+        val action = actions.random()
+        val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
         tasks.add(ImageGenerateTask(
-            keyword = "a close up, studio photographic portrait in a frame of a ${breed} ${age} that looks ${mood}. White background",
+            keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}. White or black background",
             outputFolderName = "openai/output/images",
             outputFileName = "katze101.com-${System.nanoTime()}",
             n = 1
         ))
     }
+//    moods.forEach {
+//        tasks.add(ImageGenerateTask(
+//            keyword = "a close up, studio photographic portrait of a abyssinian cat that looks ${it}. White background",
+//            outputFolderName = "openai/output/images",
+//            outputFileName = "katze101.com-${System.nanoTime()}",
+//            n = 1
+//        ))
+//    }
     ImagesProcessor.generateMultithreaded(tasks, 5)
 }
 
