@@ -20,13 +20,12 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
         val tocPlan = File("$srcFolder/${Intent.TOC_PLAN}_1").readLines()
 
+        val images = File(meta.imgSrcFolder).listFiles().toList().shuffled().take(7)
         val tocContent = StringBuilder()
         tocPlan.forEachIndexed { index, item ->
             tocContent.append("<h2>$item</h2>")
 
-            val imageName =
-                File("$srcFolder").listFiles()
-                    .filter { it.name.contains("${Intent.TOC_IMAGES}") }.firstOrNull()?.name ?: ""
+            val imageName = if ((index + 1) % 2 != 0 && index < images.size) images[index].name else ""
             if (imageName.isNotEmpty()) {
                 var imageURL = "https://$${meta.domain}/wp-content/uploads/${meta.imgURI}/$imageName"
                 tocContent.append("<img src='$imageURL'></img>")

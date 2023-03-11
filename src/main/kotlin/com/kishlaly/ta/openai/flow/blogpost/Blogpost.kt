@@ -11,16 +11,17 @@ import java.nio.file.Paths
 fun main() {
 
     // 1. Загрузить контент
-    // 2. Удалить плохие featured image
-    // 3. Создать XML
-    // 4. Собрать все картинки в одну папку и загрузить в блог
+    // 2. Сгенерить картинки
+    // 3. Загрузить все картинки в блог
+    // 4. Создать XML
 
     val xml = BlogpostXMLBuilder()
     readCSV("katzenrassen").forEach { paa ->
         val meta = BlogpostContentMeta(
             keyword = paa.title,
             domain = "katze101.com",
-            imgURI = "2023/03"
+            imgURI = "2023/03",
+            imgSrcFolder = "openai/katze101/images"
         )
 //        BlogpostDownloader(meta).download()
         xml.append(meta)

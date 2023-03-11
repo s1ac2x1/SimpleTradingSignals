@@ -23,11 +23,7 @@ class BlogpostXMLBuilder() {
 
         xml.append("<featuredImage>")
         val postFolder = meta.keyword.toFileName()
-        var featuredImageURL =
-            File("$mainOutputFolder/$postFolder").listFiles().find { it.name.contains(postFolder) }?.name ?: ""
-        if (featuredImageURL.isNotEmpty() && featuredImageURL[0] == '_') {
-            featuredImageURL = featuredImageURL.substring(1, featuredImageURL.length)
-        }
+        var featuredImageURL = File(meta.imgSrcFolder).listFiles().random().name
         xml.append("https://${meta.domain}/wp-content/uploads/${meta.imgURI}/$featuredImageURL")
         xml.append("</featuredImage>")
 
