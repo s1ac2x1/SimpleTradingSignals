@@ -273,9 +273,7 @@ class ImagesProcessor {
         fun generateMultithreaded(tasks: List<ImageGenerateTask>, threads: Int = 5) {
             val executor = Executors.newFixedThreadPool(threads)
             for (task in tasks) {
-                executor.submit {
-                    generateOneImage(task)
-                }
+                executor.submit { generateOneImage(task) }
             }
             executor.shutdown()
             executor.awaitTermination(1, TimeUnit.HOURS)
