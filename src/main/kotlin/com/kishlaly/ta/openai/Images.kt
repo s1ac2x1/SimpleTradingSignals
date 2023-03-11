@@ -57,20 +57,19 @@ fun main() {
     val ages = File("openai/katze101/age").readLines()
     val moods = File("openai/katze101/mood").readLines()
 
+    val tasks = mutableListOf<ImageGenerateTask>()
     (1..3).forEach {
         val breed = breeds.random()
         val age = ages.random()
         val mood = moods.random()
-        getImageURLs(
-            ImageRequest(
-                prompt = "a close up, studio photographic portrait of a ${breed} ${age} that looks ${mood}",
-                n = 1
-            )
-        )
-            .forEach {
-                println(it)
-            }
+        tasks.add(ImageGenerateTask(
+            keyword = "a close up, studio photographic portrait of a ${breed} ${age} that looks ${mood}. White background",
+            outputFolderName = "openai/output/images",
+            outputFileName = "${System.currentTimeMillis()}",
+            n = 1
+        ))
     }
+    ImagesProcessor.generate(tasks)
 }
 
 //fun main() {
