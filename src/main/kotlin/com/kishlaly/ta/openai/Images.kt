@@ -52,17 +52,26 @@ import javax.imageio.ImageIO
 //    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
 //}
 
-//fun main() {
-//    getImageURLs(
-//        ImageRequest(
-//            prompt = "Was sind die Gründe, warum Katzen kratzen",
-//            n = 3
-//        )
-//    )
-//        .forEach {
-//            println(it)
-//        }
-//}
+fun main() {
+    val breeds = File("openai/katze101/breeds").readLines()
+    val ages = File("openai/katze101/age").readLines()
+    val moods = File("openai/katze101/mood").readLines()
+
+    (1..3).forEach {
+        val breed = breeds.random()
+        val age = ages.random()
+        val mood = moods.random()
+        getImageURLs(
+            ImageRequest(
+                prompt = "a close up, studio photographic portrait of a ${breed} ${age} that looks ${mood}",
+                n = 1
+            )
+        )
+            .forEach {
+                println(it)
+            }
+    }
+}
 
 //fun main() {
 //    val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
@@ -91,11 +100,11 @@ import javax.imageio.ImageIO
 //    ImagesProcessor.edit(listOf(editTask))
 //}
 
-fun main() {
-    val variationTask = ImageVariationTask("openai", "cat.png")
-
-    ImagesProcessor.variation(listOf(variationTask))
-}
+//fun main() {
+//    val variationTask = ImageVariationTask("openai", "cat.png")
+//
+//    ImagesProcessor.variation(listOf(variationTask))
+//}
 
 
 fun downloadFile(urls: List<String?>, outputFileName: String) {

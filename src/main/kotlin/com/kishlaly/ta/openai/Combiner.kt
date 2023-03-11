@@ -4,8 +4,6 @@ import java.io.File
 
 class Combiner {
 
-    // TODO нужно загрузить содержимое файлов один раз, а не открывать на каждый запрос
-
     companion object {
         fun combine(fileNames: List<String>): String {
             val contents = fileNames.map { fileName ->
