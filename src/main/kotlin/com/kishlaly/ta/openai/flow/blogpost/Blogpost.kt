@@ -9,7 +9,7 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 
-val globalLanguage: Language = Language.DE
+val globalLanguage: Language = Language.EN
 val globalBlogTopic = "Katzen"
 
 fun main() {
@@ -21,21 +21,21 @@ fun main() {
     // Создать XML
 
     val xml = BlogpostXMLBuilder()
-    readCSV("katzenrassen").forEach { paa ->
+    readCSV("source").forEach { paa ->
         val meta = BlogpostContentMeta(
             keyword = paa.title,
             domain = "katze101.com",
             imgURI = "2023/03",
             imgSrcFolder = "openai/katze101/images_webp"
         )
-//        BlogpostDownloader(meta).download()
-        xml.append(meta)
-        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
-            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
-        Files.write(Paths.get("$mainOutputFolder/html/raw"),
-            BlogpostContentBuilder(meta).build().toByteArray())
+        BlogpostDownloader(meta).download()
+//        xml.append(meta)
+//        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
+//            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
+//        Files.write(Paths.get("$mainOutputFolder/html/raw"),
+//            BlogpostContentBuilder(meta).build().toByteArray())
     }
-    Files.write(Paths.get("$mainOutputFolder/posts_${System.currentTimeMillis()}.xml"), xml.build().toString().toByteArray())
+//    Files.write(Paths.get("$mainOutputFolder/posts_${System.currentTimeMillis()}.xml"), xml.build().toString().toByteArray())
 
 //    val images = findAllImages(File("openai/flow/output"))
 //    copyFilesToDirectory(images, File("openai/img"))
