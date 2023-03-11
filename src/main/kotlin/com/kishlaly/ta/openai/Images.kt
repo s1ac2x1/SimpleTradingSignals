@@ -2,7 +2,6 @@ package com.kishlaly.ta.openai
 
 import com.google.common.reflect.TypeToken
 import com.kishlaly.ta.openai.flow.timeoutRetry
-import com.kishlaly.ta.utils.FileUtils
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -53,17 +52,17 @@ import javax.imageio.ImageIO
 //    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
 //}
 
-fun main() {
-    getImageURLs(
-        ImageRequest(
-            prompt = "Warum kratzen Katzen und wie kann man dies verhindern?",
-            n = 3
-        )
-    )
-        .forEach {
-            println(it)
-        }
-}
+//fun main() {
+//    getImageURLs(
+//        ImageRequest(
+//            prompt = "Was sind die Gründe, warum Katzen kratzen",
+//            n = 3
+//        )
+//    )
+//        .forEach {
+//            println(it)
+//        }
+//}
 
 //fun main() {
 //    val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
@@ -92,6 +91,13 @@ fun main() {
 //    ImagesProcessor.edit(listOf(editTask))
 //}
 
+fun main() {
+    val variationTask = ImageVariationTask("openai", "cat.png")
+
+    ImagesProcessor.variation(listOf(variationTask))
+}
+
+
 fun downloadFile(urls: List<String?>, outputFileName: String) {
     urls.filterNotNull().map { URL(it) }.forEachIndexed { index, url ->
         url.openStream().use {
@@ -109,7 +115,6 @@ fun getRandomWPURL(imagesFolder: String, domain: String, date: String): String {
     return createWPURL(domain, date, randomFile)
 }
 
-// https://katze101.com/wp-content/uploads/2023/02/enthusiastic_bengal_cat__1677512158682.png
 private fun createWPURL(domain: String, date: String, imageFileName: String) =
     "https://${domain}/wp-content/uploads/${date}/$imageFileName"
 
@@ -190,6 +195,7 @@ fun variationImage(file: File): String {
             .setType(MultipartBody.FORM)
             .addFormDataPart("image", file.name, file.asRequestBody("image/png".toMediaTypeOrNull()))
             .addFormDataPart("size", "512x512")
+            .addFormDataPart("user", "vladimir@kishlaly.com")
             .build()
 
         val request = Request.Builder()
@@ -206,6 +212,15 @@ fun variationImage(file: File): String {
     } finally {
         return result
     }
+}
+
+fun convertJpgToPng(jpgFile: File, pngFile: File) {
+    val jpegImage: BufferedImage = ImageIO.read(jpgFile)
+    val pngImage: BufferedImage = BufferedImage(jpegImage.width, jpegImage.height, BufferedImage.TYPE_INT_ARGB)
+    val graphics = pngImage.createGraphics()
+    graphics.drawImage(jpegImage, 0, 0, null)
+    graphics.dispose()
+    ImageIO.write(pngImage, "png", pngFile)
 }
 
 fun convertToRGBA(pngFileName: String): BufferedImage? {
@@ -256,6 +271,15 @@ class ImagesProcessor {
                 printCosts()
             }
         }
+
+        fun variation(tasks: List<ImageVariationTask>) {
+            for (task in tasks) {
+                val imageURL = variationImage(File("${task.folder}/${task.file}"))
+                downloadFile(listOf(imageURL), "${task.folder}/${task.file}_v.png")
+                imagesGenerated.incrementAndGet()
+                printCosts()
+            }
+        }
     }
 
 }
@@ -281,5 +305,6 @@ data class ImageVariationTask(
 data class ImageRequest(
     val prompt: String,
     val n: Int = 1,
-    val size: String = "512x512"
+    val size: String = "512x512",
+    val user: String = "vladimir@kishlaly.com"
 )

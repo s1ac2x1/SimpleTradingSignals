@@ -49,7 +49,8 @@ data class CompletionRequest(
     @SerializedName("top_p")
     val topP: Double = 0.5,
     @SerializedName("frequency_penalty")
-    val frequencyPenalty: Double = 0.8
+    val frequencyPenalty: Double = 0.8,
+    val user: String = "vladimir@kishlaly.com"
 )
 
 data class EditRequest(
@@ -59,4 +60,5 @@ data class EditRequest(
     val n: Int = 1,
     @SerializedName("top_p")
     val topP: Double = 0.5,
+    val user: String = "vladimir@kishlaly.com"
 )
