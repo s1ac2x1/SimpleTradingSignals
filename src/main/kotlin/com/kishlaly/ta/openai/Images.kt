@@ -29,7 +29,7 @@ import kotlin.random.Random
 //                "openai/katze101/places",
 //            )
 //        )
-//        ImageGenerateTask("${prompt}in the style pencil artwork", "openai/output/images", "${prompt}.png", 1)
+//        ImageGenerateTask("${prompt}in the style pencil artwork", "openai/output/images", "featured_${System.nanoTime()}.png", 1)
 //    }
 //    ImagesProcessor.generate(tasks)
 //}
@@ -61,28 +61,20 @@ fun main() {
     val actions = File("openai/katze101/actions").readLines()
 
         val tasks = mutableListOf<ImageGenerateTask>()
-    (1..1).forEach {
+    (1..50).forEach {
         val breed = breeds.random()
         val age = ages.random()
         val mood = moods.random()
         val action = actions.random()
         val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
         tasks.add(ImageGenerateTask(
-            keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}. White background",
+            keyword = "a close up, studio photographic black-and-white portrait of a ${breed} ${age} that ${actionOrMood}",
             outputFolderName = "openai/output/images",
             outputFileName = "katze101.com-${System.nanoTime()}",
             n = 1
         ))
     }
-//    moods.forEach {
-//        tasks.add(ImageGenerateTask(
-//            keyword = "a close up, studio photographic portrait of a abyssinian cat that looks ${it}. White background",
-//            outputFolderName = "openai/output/images",
-//            outputFileName = "katze101.com-${System.nanoTime()}",
-//            n = 1
-//        ))
-//    }
-    ImagesProcessor.generateMultithreaded(tasks, 10)
+    ImagesProcessor.generateMultithreaded(tasks, 5)
 }
 
 //fun main() {
