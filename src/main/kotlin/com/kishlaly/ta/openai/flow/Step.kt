@@ -20,18 +20,61 @@ enum class Intent(val map: Map<Language, String>) {
             Language.DE to "Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"###param###\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."
         )
     ),
-    TOC_PLAN,
-    CONTENT_PART_1_HISTORY,
-    CONTENT_PART_2_MAIN,
-    CONTENT_PART_3_FACTS,
-    OPPOSITE_OPINION_QUESTION,
-    OPPOSITE_OPINION_TEXT,
-    TAGS,
-    TOC_IMAGES,
-    FUTURED_IMAGE,
-    FEATURED_IMAGE,
-    CONCLUSION,
-    RANDOM_ADDITION
+    TOC_PLAN(
+        mapOf(
+            Language.DE to "Ich schreibe einen Artikel über Katzen. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften."
+        )
+    ),
+    CONTENT_PART_1_HISTORY(
+        mapOf(
+            Language.DE to "Ich schreibe einen Blog über Katzen. Schreiben Sie eine lange historische Notiz zu diesem Thema: \"###param###\"."
+        )
+    ),
+    CONTENT_PART_2_MAIN(
+        mapOf(
+            Language.DE to "Ich schreibe einen Blog über Katzen. Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"###param###\". Begründen Sie Ihre Antwort mit einigen Beispielen."
+        )
+    ),
+    CONTENT_PART_3_FACTS(
+        mapOf(
+            Language.DE to "Ich schreibe einen Blog über Katzen. Schreiben Sie interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen."
+        )
+    ),
+    OPPOSITE_OPINION_QUESTION(
+        mapOf(
+            Language.DE to "Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"###param###\""
+        )
+    ),
+    OPPOSITE_OPINION_TEXT(
+        mapOf(
+            Language.DE to "Ich schreibe einen Blog über Katzen. Schreiben Sie drei Absätze zu diesem Thema: \"###param###\"."
+        )
+    ),
+    TAGS(
+        mapOf(
+            Language.DE to "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: \"###param###\""
+        )
+    ),
+    TOC_IMAGES(
+        mapOf(
+            Language.DE to ""
+        )
+    ),
+    FEATURED_IMAGE(
+        mapOf(
+            Language.DE to ""
+        )
+    ),
+    CONCLUSION(
+        mapOf(
+            Language.DE to "Schreiben Sie ein Fazit zu diesem Artikel: \"###param###\""
+        )
+    ),
+    RANDOM_ADDITION(
+        mapOf(
+            Language.DE to "Beschreiben Sie Ihre persönliche Erfahrung zu diesem Thema: \"###param###\"|||Schreiben Sie im Auftrag der Redaktion unseres Blogs eine Stellungnahme zu diesem Thema: \"###param###\""
+        )
+    );
 
     fun get(language: Language, paramValue: String) = map[language]!!.replace("###param###", paramValue)
 }
