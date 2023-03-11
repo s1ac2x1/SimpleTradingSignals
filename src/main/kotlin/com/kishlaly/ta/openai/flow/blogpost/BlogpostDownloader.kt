@@ -18,15 +18,14 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         tableOfContentsPlan()
 
-
         tableOfContentsTexts_history()
-        tableOfContentsTexts_main()
+//        tableOfContentsTexts_main()
         tableOfContentsTexts_facts()
 
         oppositeOpinionQuestion()
         oppositeOpinionText()
 
-        tags()
+//        tags()
 
         conclusion()
 

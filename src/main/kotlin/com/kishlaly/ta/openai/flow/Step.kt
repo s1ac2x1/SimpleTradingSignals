@@ -1,12 +1,14 @@
 package com.kishlaly.ta.openai.flow
 
 import com.kishlaly.ta.openai.*
+import com.kishlaly.ta.openai.flow.blogpost.globalBlogTopic
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.random.Random
 
 enum class Language {
-    DE
+    DE,
+    EN
 }
 
 enum class Type {
@@ -17,62 +19,74 @@ enum class Type {
 enum class Intent(val map: Map<Language, String>) {
     INTRODUCTION(
         mapOf(
-            Language.DE to "Ich schreibe einen Artikel über Katzen. Der Titel des Artikels lautet: \"###param###\" Schreiben Sie eine ausführliche Einführung zu diesem Artikel."
+            Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Der Titel des Artikels lautet: \"###param###\". Schreiben Sie eine ausführliche Einführung zu diesem Artikel.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a detailed introduction to this article."
         )
     ),
     TOC_PLAN(
         mapOf(
-            Language.DE to "Ich schreibe einen Artikel über Katzen. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften."
+            Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 10 to 15 short subheadings."
         )
     ),
     CONTENT_PART_1_HISTORY(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über Katzen. Schreiben Sie eine lange historische Notiz zu diesem Thema: \"###param###\"."
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine lange historische Notiz zu diesem Thema: \"###param###\".",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write a long historical note on this topic: \"###param###\"."
         )
     ),
     CONTENT_PART_2_MAIN(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über Katzen. Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"###param###\". Begründen Sie Ihre Antwort mit einigen Beispielen."
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"###param###\". Begründen Sie Ihre Antwort mit einigen Beispielen.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write a detailed expert answer on this topic: \"###param###\". Justify your answer with some examples."
         )
     ),
     CONTENT_PART_3_FACTS(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über Katzen. Schreiben Sie interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen."
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write interesting facts about this topic: \"###param###\". Format the text in the form of paragraphs without numbers."
         )
     ),
     OPPOSITE_OPINION_QUESTION(
         mapOf(
-            Language.DE to "Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"###param###\""
+            Language.DE to "Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist: \"###param###\"",
+            Language.EN to "Find a key phrase that is the opposite of this: \"###param###\""
         )
     ),
     OPPOSITE_OPINION_TEXT(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über Katzen. Schreiben Sie drei Absätze zu diesem Thema: \"###param###\"."
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie drei Absätze zu diesem Thema: \"###param###\".",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write three paragraphs on this topic: \"###param###\"."
         )
     ),
     TAGS(
         mapOf(
-            Language.DE to "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: \"###param###\""
+            Language.DE to "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: \"###param###\"",
+            Language.EN to "From this text, create a comma-separated list of 5 keywords: \"###param###\""
         )
     ),
     TOC_IMAGES(
         mapOf(
-            Language.DE to ""
+            Language.DE to "",
+            Language.EN to "",
         )
     ),
     FEATURED_IMAGE(
         mapOf(
-            Language.DE to ""
+            Language.DE to "",
+            Language.EN to "",
         )
     ),
     CONCLUSION(
         mapOf(
-            Language.DE to "Schreiben Sie ein Fazit zu diesem Artikel: \"###param###\""
+            Language.DE to "Schreiben Sie ein Fazit zu diesem Artikel: \"###param###\"",
+            Language.EN to "Write a conclusion to this article: \"###param###\""
         )
     ),
     RANDOM_ADDITION(
         mapOf(
-            Language.DE to "Beschreiben Sie Ihre persönliche Erfahrung zu diesem Thema: \"###param###\"|||Schreiben Sie im Auftrag der Redaktion unseres Blogs eine Stellungnahme zu diesem Thema: \"###param###\""
+            Language.DE to "Beschreiben Sie Ihre persönliche Erfahrung zu diesem Thema: \"###param###\"|||Schreiben Sie im Auftrag der Redaktion unseres Blogs eine Stellungnahme zu diesem Thema: \"###param###\"",
+            Language.EN to "Describe your personal experience on this topic: \"###param###\"|||On behalf of the editors of our blog, write a statement on this topic: \"###param###\""
         )
     );
 
