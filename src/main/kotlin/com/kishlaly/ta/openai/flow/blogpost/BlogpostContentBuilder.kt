@@ -25,7 +25,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         tocPlan.forEachIndexed { index, item ->
             tocContent.append("<h2>$item</h2>")
 
-            var imageURL = "https://${meta.domain}/wp-content/uploads/${meta.imgURI}/$${images[index].name}"
+            var imageURL = "https://${meta.domain}/wp-content/uploads/${meta.imgURI}/${images[index].name}"
             tocContent.append("<img src='$imageURL'></img>")
 
             val headingContent = StringBuilder()
