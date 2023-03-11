@@ -65,7 +65,7 @@ fun main() {
         tasks.add(ImageGenerateTask(
             keyword = "a close up, studio photographic portrait of a ${breed} ${age} that looks ${mood}. White background",
             outputFolderName = "openai/output/images",
-            outputFileName = "${System.currentTimeMillis()}",
+            outputFileName = "katze101.com-${System.nanoTime()}",
             n = 1
         ))
     }
@@ -264,7 +264,7 @@ class ImagesProcessor {
     companion object {
         fun generate(tasks: List<ImageGenerateTask>) {
             for (task in tasks) {
-                val imageURLs = getImageURLs(ImageRequest(task.keyword, task.n))
+                val imageURLs = getImageURLs(ImageRequest(task.keyword, task.n, task.size))
                 downloadFile(imageURLs, "${task.outputFolderName}/${task.outputFileName}")
                 imagesGenerated.addAndGet(imageURLs.size)
                 printCosts()
@@ -296,7 +296,8 @@ data class ImageGenerateTask(
     val keyword: String,
     val outputFolderName: String,
     val outputFileName: String,
-    val n: Int
+    val n: Int,
+    val size: String = "512x512"
 )
 
 data class ImageEditTask(
