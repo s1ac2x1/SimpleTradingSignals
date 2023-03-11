@@ -61,14 +61,14 @@ fun main() {
     val actions = File("openai/katze101/actions").readLines()
 
         val tasks = mutableListOf<ImageGenerateTask>()
-    (1..50).forEach {
+    (1..1).forEach {
         val breed = breeds.random()
         val age = ages.random()
         val mood = moods.random()
         val action = actions.random()
         val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
         tasks.add(ImageGenerateTask(
-            keyword = "a close up, studio photographic black-and-white portrait of a ${breed} ${age} that ${actionOrMood}",
+            keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
             outputFolderName = "openai/output/images",
             outputFileName = "katze101.com-${System.nanoTime()}",
             n = 1
