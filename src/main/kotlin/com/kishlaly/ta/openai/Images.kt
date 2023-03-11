@@ -14,6 +14,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.net.URL
 import java.nio.channels.Channels
+import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
 
@@ -262,13 +263,29 @@ fun saveImageToFile(image: BufferedImage, file: File, format: String = "png") {
 class ImagesProcessor {
 
     companion object {
+
         fun generate(tasks: List<ImageGenerateTask>) {
             for (task in tasks) {
-                val imageURLs = getImageURLs(ImageRequest(task.keyword, task.n, task.size))
-                downloadFile(imageURLs, "${task.outputFolderName}/${task.outputFileName}")
-                imagesGenerated.addAndGet(imageURLs.size)
-                printCosts()
+                generateOneImage(task)
             }
+        }
+
+        fun generateMultithreaded(tasks: List<ImageGenerateTask>, threads: Int = 5) {
+            val executor = Executors.newFixedThreadPool(threads)
+            for (task in tasks) {
+                executor.submit {
+                    generateOneImage(task)
+                }
+            }
+            executor.shutdown()
+            executor.awaitTermination(1, TimeUnit.HOURS)
+        }
+
+        private fun generateOneImage(task: ImageGenerateTask) {
+            val imageURLs = getImageURLs(ImageRequest(task.keyword, task.n, task.size))
+            downloadFile(imageURLs, "${task.outputFolderName}/${task.outputFileName}")
+            imagesGenerated.addAndGet(imageURLs.size)
+            printCosts()
         }
 
         fun edit(tasks: List<ImageEditTask>) {
