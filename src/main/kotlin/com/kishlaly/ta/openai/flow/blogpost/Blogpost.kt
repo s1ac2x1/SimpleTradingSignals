@@ -27,7 +27,7 @@ fun main() {
         xml.append(meta)
         Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
             htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
-        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.raw"),
+        Files.write(Paths.get("$mainOutputFolder/html/raw"),
             BlogpostContentBuilder(meta).build().toByteArray())
     }
     Files.write(Paths.get("$mainOutputFolder/posts_${System.currentTimeMillis()}.xml"), xml.build().toString().toByteArray())
