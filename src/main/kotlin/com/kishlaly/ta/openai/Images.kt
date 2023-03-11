@@ -2,6 +2,7 @@ package com.kishlaly.ta.openai
 
 import com.google.common.reflect.TypeToken
 import com.kishlaly.ta.openai.flow.timeoutRetry
+import com.luciad.imageio.webp.WebPWriteParam
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
@@ -17,7 +18,8 @@ import java.nio.channels.Channels
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
-import kotlin.random.Random
+import javax.imageio.ImageWriteParam.MODE_EXPLICIT
+
 
 //fun main() {
 //    val tasks = (1..5).map {
@@ -54,28 +56,28 @@ import kotlin.random.Random
 //    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
 //}
 
-fun main() {
-    val breeds = File("openai/katze101/breeds").readLines()
-    val ages = File("openai/katze101/age").readLines()
-    val moods = File("openai/katze101/mood").readLines()
-    val actions = File("openai/katze101/actions").readLines()
-
-        val tasks = mutableListOf<ImageGenerateTask>()
-    (1..1).forEach {
-        val breed = breeds.random()
-        val age = ages.random()
-        val mood = moods.random()
-        val action = actions.random()
-        val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
-        tasks.add(ImageGenerateTask(
-            keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
-            outputFolderName = "openai/output/images",
-            outputFileName = "katze101.com-${System.nanoTime()}",
-            n = 1
-        ))
-    }
-    ImagesProcessor.generateMultithreaded(tasks, 5)
-}
+//fun main() {
+//    val breeds = File("openai/katze101/breeds").readLines()
+//    val ages = File("openai/katze101/age").readLines()
+//    val moods = File("openai/katze101/mood").readLines()
+//    val actions = File("openai/katze101/actions").readLines()
+//
+//        val tasks = mutableListOf<ImageGenerateTask>()
+//    (1..1).forEach {
+//        val breed = breeds.random()
+//        val age = ages.random()
+//        val mood = moods.random()
+//        val action = actions.random()
+//        val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
+//        tasks.add(ImageGenerateTask(
+//            keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
+//            outputFolderName = "openai/output/images",
+//            outputFileName = "katze101.com-${System.nanoTime()}",
+//            n = 1
+//        ))
+//    }
+//    ImagesProcessor.generateMultithreaded(tasks, 5)
+//}
 
 //fun main() {
 //    val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
@@ -109,6 +111,20 @@ fun main() {
 //
 //    ImagesProcessor.variation(listOf(variationTask))
 //}
+
+fun main() {
+    File("openai/katze101/images").listFiles().forEach { file ->
+        convertPngToWebp(file.absolutePath, "openai/katze101/images_webp/${file.nameWithoutExtension}.webp")
+    }
+}
+
+fun convertPngToWebp(pngPath: String, webpPath: String) {
+    val command = arrayOf("cwebp", "-q", "80", pngPath, "-o", webpPath)
+    val builder = ProcessBuilder(*command)
+    builder.redirectOutput(ProcessBuilder.Redirect.INHERIT)
+    builder.redirectError(ProcessBuilder.Redirect.INHERIT)
+    builder.start().waitFor()
+}
 
 
 fun downloadFile(urls: List<String?>, outputFileName: String) {
@@ -309,6 +325,26 @@ class ImagesProcessor {
         }
     }
 
+}
+
+fun convertPngToWebp(png: String) {
+    // Load the PNG image
+    val bufferedImage = ImageIO.read(File(png))
+
+    // Create a new WebP file with the same name and a .webp extension
+    val webpPath = png.replace(".png", ".webp")
+    val webpFile = File(webpPath)
+
+    // Set up the WebP write parameters
+    val writer = ImageIO.getImageWritersByMIMEType("image/webp").next()
+    val param = writer.defaultWriteParam as WebPWriteParam
+    param.compressionMode = MODE_EXPLICIT
+
+    // Write the PNG image to the WebP file using the WebPImageWriter
+    val webpImageWriter = ImageIO.getImageWritersByFormatName("webp").next()
+    webpImageWriter.output = ImageIO.createImageOutputStream(webpFile)
+    webpImageWriter.write(null, javax.imageio.IIOImage(bufferedImage, null, null), param)
+    webpImageWriter.dispose()
 }
 
 data class ImageGenerateTask(

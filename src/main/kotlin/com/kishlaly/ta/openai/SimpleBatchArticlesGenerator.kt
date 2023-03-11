@@ -2,6 +2,7 @@ package com.kishlaly.ta.openai
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.Gson
+import com.kishlaly.ta.openai.flow.contentRegex
 import com.kishlaly.ta.openai.flow.toFileName
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.File

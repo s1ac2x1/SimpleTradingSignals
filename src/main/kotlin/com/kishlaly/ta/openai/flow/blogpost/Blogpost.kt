@@ -10,10 +10,11 @@ import java.nio.file.Paths
 
 fun main() {
 
-    // 1. Загрузить контент
-    // 2. Сгенерить картинки
-    // 3. Загрузить все картинки в блог
-    // 4. Создать XML
+    // Загрузить контент
+    // Сгенерить картинки
+    // Преобразовать в WebP
+    // Загрузить все картинки в блог
+    // Создать XML
 
     val xml = BlogpostXMLBuilder()
     readCSV("katzenrassen").forEach { paa ->
