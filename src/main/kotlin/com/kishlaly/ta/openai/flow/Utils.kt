@@ -85,9 +85,13 @@ val removeFirstSentence: (String) -> String = { str ->
 }
 
 fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
+    .map { removeNonPrintableSymbols(it) }
     .map { it.trim() }
+    .filter { it.length > 10 }
+    .filter { if (it[0].isLetter()) it[0].isUpperCase() else true }
     .filter { !containsLongWords(it, 100)  }
-    .map { removeSpecialCharacters(it) }
+    .map { it.trimStart() }
+    .map { it.trimEnd() }
     .map { it.replace("!.", "!") }
     .map { it.replace(". ,", ".,") }
     .map { it.replace(". ,", ".,") }
@@ -99,8 +103,12 @@ fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
     .map { addSpaceAfterSymbol(it, ':') }
     .map { addSpaceAfterSymbol(it, '-') }
     .filter { !it.isNullOrBlank() }
-    .filter { it.length > 10 }
     .chunked(Random.nextInt(2, 4))
+
+fun removeNonPrintableSymbols(text: String): String {
+    val pattern = Regex("[^\\x20-\\x7E]+")
+    return pattern.replace(text, "")
+}
 
 fun addSpaceAfterSymbol(text: String, symbol: Char): String {
     var result = ""
@@ -112,10 +120,6 @@ fun addSpaceAfterSymbol(text: String, symbol: Char): String {
         }
     }
     return result
-}
-
-fun removeSpecialCharacters(text: String): String {
-    return text.replace(Regex("[^A-Za-z0-9 ]"), "")
 }
 
 fun containsLongWords(text: String, limit: Int): Boolean {

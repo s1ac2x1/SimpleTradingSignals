@@ -115,14 +115,18 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 }
 
 fun main() {
-    val text = """und freundlich
+    val text = """
+Kratzen ist ein typisches Verhalten bei Katzen. Es ist eine natürliche und wichtige Art für sie, ihre Umgebung zu erkunden und zu markieren. Es gibt verschiedene Arten von Kratzverhalten, die Katzen zeigen können. Einige der häufigsten sind:
 
-Spielzeug und Beschäftigung sind für Katzen unerlässlich, um ein glückliches, gesundes Leben zu führen. Spielzeug hilft Katzen dabei, ihre natürlichen Instinkte auszuleben und bietet ihnen die Möglichkeit, sich zu beschäftigen und zu lernen. Es kann auch helfen, Stress abzubauen und Ängste zu lindern. Gleichzeitig kann es die Bindung zwischen Ihnen als Besitzer und Ihrer Katze stärken. 
+• Markierungskratzen: Dies ist, wenn eine Katze an Gegenständen in ihrer Umgebung kratzt, um ihr Territorium zu markieren. Sie können auch an Wände oder Möbelstücke kratzen, um anderen Katzen mitzuteilen, dass das Gebiet bereits besetzt ist. 
 
-Es gibt viele verschiedene Arten von Spielzeug für Katzen - von kleinen Bällchen bis hin zu interaktiven Spielgeräten wie dem Kratzbaum oder dem Kletterbaum. Wenn Sie eine neue Art von Spielzeug ausprobieren möchten, ist es am besten, wenn Sie mehrere Optionen anbieten. Dadurch erhalten Sie eine Vorstellung davon, was Ihrer Katze am besten gefallt. Es ist auch wichtig sicherzustellen, dass alle Teile des Spielzeugs in gutem Zustand sind - überprüfen Sie regelmäßig nach Verschleiß oder Schaden an den Teilen des Spiels. 
+• Pfotenpflege: Wenn Katzen an Gegenstände in ihrer Umgebung kratzen, helfen sie auch dabei, die Pfoten zu reinigen und abgestorbene Haut abzustreifen. 
 
-Neben dem Kauf neuer Spielsachen sollten Sie auch andere Wege finden, um Ihrer Katze Beschäftigungsmöglichkeiten anzubieten. Einige Beispiele hierfür sind: Versteck-Spiele spielen (versteckte Leckerlis oder Toys), tägliche Trainingssitzung (Kommando-Übung), interaktive Spiele (Laserpointer) oder Zeit mit der Familie verbringen (streicheln/kuscheln). All diese Aktivitäten helfen nicht nur dabei die mentale Stimulation Ihrer Katze zu verbessern; sondern stellen gleichsam eine starke Bindung her! 
+• Spielkratzen: Manchmal nutzten Katzen auch Kratzbewegungen als Teil des Spiels mit anderen Tieren oder Menschen. Dieses Verhalten hilft den Tieren dabei, Fertigkeiten wie Jagdtechniken zu entwickeln und auszuüben. 
 
-In Kurzform: Spielzeug und Beschäftigung sind essentielle Bestandteile im Leben jeder Katze! Mit verschiedene Arten von Toys könnne Sie herausfinde welche Art am bestens gefallt; aber vergessen Sie nicht andere Wege der Stimulation wie Versteckspiele oder interaktive Spiele mit der Familienmitglieder!"""
+Kratzbewegungen sind für die meisten Katzen normal und sollten nicht unterdrückt werden – es sei denn es richtet Schaden an Möbeln oder anderen Gegestände an. Stattdessen sollte man dem Tier helfen besser verstehen lernem warum es dieses Verhalten zeigt und welche Alternativen es hat – zum Beispiel speziell entworfene Kletter- oder Kratzbretter statt der Möbel im Haus nutzbar machen.        
+    """.trimIndent()
 
+    val chunks =  chunked(text)
+    println(chunks)
 }
