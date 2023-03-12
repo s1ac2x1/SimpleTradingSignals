@@ -70,6 +70,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content = content.replace("..", ".")
         content = content.replace(" .", ".")
         content = removeNumberedLists2(content)
+        content = content.replace("•", "<br>•")
 
         getPromptsMarkers(globalLanguage).forEach {
             if (content.contains(it)) {
