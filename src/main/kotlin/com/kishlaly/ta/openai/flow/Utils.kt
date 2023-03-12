@@ -83,3 +83,64 @@ val createParagraphs: (String) -> String = {
 val removeFirstSentence: (String) -> String = { str ->
     str.substring(str.indexOfFirst { it == '.' } + 1, str.length)
 }
+
+fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
+    .map { it.trim() }
+    .filter { !containsLongWords(it, 100)  }
+    .map { removeSpecialCharacters(it) }
+    .map { it.replace("!.", "!") }
+    .map { it.replace(". ,", ".,") }
+    .map { it.replace(". ,", ".,") }
+    .map { it.replace("  ", " ") }
+    .map { it.replace("..", ".") }
+    .map { it.replace(" .", ".") }
+    .map { addSpaceAfterSymbol(it, '.') }
+    .map { addSpaceAfterSymbol(it, ',') }
+    .map { addSpaceAfterSymbol(it, ':') }
+    .map { addSpaceAfterSymbol(it, '-') }
+    .filter { !it.isNullOrBlank() }
+    .filter { it.length > 10 }
+    .chunked(Random.nextInt(2, 4))
+
+fun addSpaceAfterSymbol(text: String, symbol: Char): String {
+    var result = ""
+    for (i in text.indices) {
+        if (text[i] == symbol && i < text.length - 1 && text[i + 1] != ' ') {
+            result += "${symbol} "
+        } else {
+            result += text[i]
+        }
+    }
+    return result
+}
+
+fun removeSpecialCharacters(text: String): String {
+    return text.replace(Regex("[^A-Za-z0-9 ]"), "")
+}
+
+fun containsLongWords(text: String, limit: Int): Boolean {
+    val words = text.split("\\s+".toRegex())
+    for (word in words) {
+        if (word.length >= limit) {
+            return true
+        }
+    }
+    return false
+}
+
+fun wrapOneSenenceInTag(sentences: List<String>, tag: String): String {
+    var result = ""
+    val number = Random.nextInt(sentences.size)
+    sentences.forEachIndexed { index, s ->
+        if (index == number) {
+            result += "<$tag>$s</$tag>. "
+        } else {
+            result += "$s. "
+        }
+    }
+    return result
+}
+
+fun makeList(sentences: List<String>): String {
+    return "<ul>" + sentences.map { "<li>$it</li>" }.joinToString("") + "</ul>"
+}

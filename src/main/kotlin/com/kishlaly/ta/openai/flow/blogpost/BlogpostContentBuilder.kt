@@ -2,7 +2,6 @@ package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.*
 import com.kishlaly.ta.openai.mainOutputFolder
-import org.ktorm.dsl.max
 import java.io.File
 import kotlin.random.Random
 
@@ -113,66 +112,17 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         }
         return result.toString()
     }
+}
 
-    fun addSpaceAfterSymbol(text: String, symbol: Char): String {
-        var result = ""
-        for (i in text.indices) {
-            if (text[i] == symbol && i < text.length - 1 && text[i + 1] != ' ') {
-                result += "${symbol} "
-            } else {
-                result += text[i]
-            }
-        }
-        return result
-    }
+fun main() {
+    val text = """und freundlich
 
-    private fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
-        .map { it.trim() }
-        .filter { !containsLongWords(it, 100)  }
-        .map { removeSpecialCharacters(it) }
-        .map { it.replace("!.", "!") }
-        .map { it.replace(". ,", ".,") }
-        .map { it.replace(". ,", ".,") }
-        .map { it.replace("  ", " ") }
-        .map { it.replace("..", ".") }
-        .map { it.replace(" .", ".") }
-        .map { addSpaceAfterSymbol(it, '.') }
-        .map { addSpaceAfterSymbol(it, ',') }
-        .map { addSpaceAfterSymbol(it, ':') }
-        .map { addSpaceAfterSymbol(it, '-') }
-        .filter { !it.isNullOrBlank() }
-        .filter { it.length > 10 }
-        .chunked(Random.nextInt(2, 4))
+Spielzeug und Beschäftigung sind für Katzen unerlässlich, um ein glückliches, gesundes Leben zu führen. Spielzeug hilft Katzen dabei, ihre natürlichen Instinkte auszuleben und bietet ihnen die Möglichkeit, sich zu beschäftigen und zu lernen. Es kann auch helfen, Stress abzubauen und Ängste zu lindern. Gleichzeitig kann es die Bindung zwischen Ihnen als Besitzer und Ihrer Katze stärken. 
 
-    fun removeSpecialCharacters(text: String): String {
-        return text.replace(Regex("[^A-Za-z0-9 ]"), "")
-    }
+Es gibt viele verschiedene Arten von Spielzeug für Katzen - von kleinen Bällchen bis hin zu interaktiven Spielgeräten wie dem Kratzbaum oder dem Kletterbaum. Wenn Sie eine neue Art von Spielzeug ausprobieren möchten, ist es am besten, wenn Sie mehrere Optionen anbieten. Dadurch erhalten Sie eine Vorstellung davon, was Ihrer Katze am besten gefallt. Es ist auch wichtig sicherzustellen, dass alle Teile des Spielzeugs in gutem Zustand sind - überprüfen Sie regelmäßig nach Verschleiß oder Schaden an den Teilen des Spiels. 
 
-    fun containsLongWords(text: String, limit: Int): Boolean {
-        val words = text.split("\\s+".toRegex())
-        for (word in words) {
-            if (word.length >= limit) {
-                return true
-            }
-        }
-        return false
-    }
+Neben dem Kauf neuer Spielsachen sollten Sie auch andere Wege finden, um Ihrer Katze Beschäftigungsmöglichkeiten anzubieten. Einige Beispiele hierfür sind: Versteck-Spiele spielen (versteckte Leckerlis oder Toys), tägliche Trainingssitzung (Kommando-Übung), interaktive Spiele (Laserpointer) oder Zeit mit der Familie verbringen (streicheln/kuscheln). All diese Aktivitäten helfen nicht nur dabei die mentale Stimulation Ihrer Katze zu verbessern; sondern stellen gleichsam eine starke Bindung her! 
 
-    fun wrapOneSenenceInTag(sentences: List<String>, tag: String): String {
-        var result = ""
-        val number = Random.nextInt(sentences.size)
-        sentences.forEachIndexed { index, s ->
-            if (index == number) {
-                result += "<$tag>$s</$tag>. "
-            } else {
-                result += "$s. "
-            }
-        }
-        return result
-    }
-
-    fun makeList(sentences: List<String>): String {
-        return "<ul>" + sentences.map { "<li>$it</li>" }.joinToString("") + "</ul>"
-    }
+In Kurzform: Spielzeug und Beschäftigung sind essentielle Bestandteile im Leben jeder Katze! Mit verschiedene Arten von Toys könnne Sie herausfinde welche Art am bestens gefallt; aber vergessen Sie nicht andere Wege der Stimulation wie Versteckspiele oder interaktive Spiele mit der Familienmitglieder!"""
 
 }
