@@ -126,6 +126,11 @@ enum class Intent(val map: Map<Language, String>) {
     fun get(language: Language, paramValue: String) = map[language]!!.replace("###param###", paramValue)
 }
 
+fun getFixingPrompt() = when (globalLanguage) {
+    Language.DE -> "korrigieren Sie die Tippfehler in diesem Text:"
+    Language.EN -> "correct the typos in this text:"
+}
+
 fun getWritingTone() = when (globalLanguage) {
         Language.DE -> {
             val tone = listOf(
@@ -167,7 +172,8 @@ class Step(
     val type: Type = Type.TEXT,
     val imagesCount: Int = 1,
     val useTone: Boolean = false,
-    val customImageName: String = "image_${System.currentTimeMillis()}"
+    val customImageName: String = "image_${System.currentTimeMillis()}",
+    val fixTypos: Boolean = false
 ) {
     init {
         input.forEachIndexed { index, prompt ->
@@ -185,6 +191,15 @@ class Step(
                     } catch (e: OpenAIException) {
                         println("!!! Got empty response. Retrying...")
                         completion = getCompletion(finalPrompt)
+                    }
+
+                    if (fixTypos) {
+                        try {
+                            completion = getCompletion("${getFixingPrompt()} \"$completion\"")
+                        } catch (e: OpenAIException) {
+                            println("!!! Got empty response. Retrying...")
+                            completion = getCompletion("${getFixingPrompt()} \"$completion\"")
+                        }
                     }
 
                     val outputFileName = "${intent}_${index + 1}"
