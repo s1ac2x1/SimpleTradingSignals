@@ -31,18 +31,32 @@ fun main() {
 
         BlogpostDownloader(meta).downloadPAA()
 
-        xml.append(meta) {
+        buildContent(xml, meta, paa) {
             BlogpostContentBuilder(it).buildPAA()
         }
-//        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
-//            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
-//        Files.write(Paths.get("$mainOutputFolder/html/raw"),
-//            BlogpostContentBuilder(meta).build().toByteArray())
     }
+
 //    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
 //    val images = findAllImages(File("openai/flow/output"))
 //    copyFilesToDirectory(images, File("openai/img"))
+}
+
+private fun buildContent(
+    xml: BlogpostXMLBuilder,
+    meta: BlogpostContentMeta,
+    paa: PAA,
+    builder: (meta: BlogpostContentMeta) -> String
+) {
+    xml.append(meta, builder)
+    Files.write(
+        Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
+        htmlStub.replace("###content###", builder(meta)).toByteArray()
+    )
+    Files.write(
+        Paths.get("$mainOutputFolder/html/_${paa.title.toFileName()}.raw"),
+        builder(meta).toByteArray()
+    )
 }
 
 fun findAllImages(rootDirectory: File): List<File> {

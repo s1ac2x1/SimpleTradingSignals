@@ -17,7 +17,7 @@ class BlogpostXMLBuilder() {
         xml.append("</title>")
 
         xml.append("<content>")
-        xml.append(content)
+        xml.append(content(meta))
         xml.append("</content>")
 
         xml.append("<featuredImage>")
