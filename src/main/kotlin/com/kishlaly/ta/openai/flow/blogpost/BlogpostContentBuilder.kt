@@ -127,7 +127,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
     private fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
         .map { it.trim() }
-        .map { it.replace("!.", ".") }
+        .map { it.replace("!.", "!") }
         .map { it.replace(". ,", ".,") }
         .map { it.replace(". ,", ".,") }
         .map { it.replace("  ", " ") }
