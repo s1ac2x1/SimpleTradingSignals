@@ -9,8 +9,8 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 
-val globalLanguage: Language = Language.EN
-val globalBlogTopic = "cats"
+val globalLanguage: Language = Language.DE
+val globalBlogTopic = "Katzen"
 
 fun main() {
 

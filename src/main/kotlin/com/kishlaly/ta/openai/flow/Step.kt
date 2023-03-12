@@ -133,13 +133,10 @@ class Step(
     val folder: String,
     val postProcessings: List<(String) -> String> = emptyList(),
     val type: Type = Type.TEXT,
-    val fixTypos: Boolean = false,
     val imagesCount: Int = 1,
     val useTone: Boolean = false,
     val customImageName: String = "image_${System.currentTimeMillis()}"
 ) {
-    val fixPrompt = "Korrigieren Sie die Rechtschreibfehler in diesem Text:"
-
     init {
         input.forEachIndexed { index, prompt ->
             var finalPrompt = prompt
@@ -158,14 +155,6 @@ class Step(
                         completion = getCompletion(finalPrompt)
                     }
 
-                    if (fixTypos) {
-                        try {
-                            completion = getCompletion("$fixPrompt \"${removeAllLineBreaks(completion)}\"")
-                        } catch (e: OpenAIException) {
-                            println("!!! Got empty response. Trying...")
-                            completion = getCompletion("$fixPrompt \"${removeAllLineBreaks(completion)}\"")
-                        }
-                    }
                     val outputFileName = "${intent}_${index + 1}"
                     Files.write(
                         Paths.get("$folder/$outputFileName"),

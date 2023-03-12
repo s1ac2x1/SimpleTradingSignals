@@ -16,10 +16,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
 
-        tableOfContentsPlan()
+//        tableOfContentsPlan()
 
         tableOfContentsTexts_history()
-//        tableOfContentsTexts_main()
+        tableOfContentsTexts_main()
         tableOfContentsTexts_facts()
 
         oppositeOpinionQuestion()
@@ -44,7 +44,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -59,7 +58,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf(intent.get(globalLanguage, prompt)),
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -113,7 +111,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf(intent.get(globalLanguage, prompt)),
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -136,7 +133,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = prompt,
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -149,7 +145,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = prompt,
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -162,7 +157,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = prompt,
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -184,7 +178,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf(intent.get(globalLanguage, meta.keyword)),
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
