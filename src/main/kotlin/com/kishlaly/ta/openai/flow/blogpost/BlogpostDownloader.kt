@@ -38,7 +38,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -53,7 +52,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf(intent.get(globalLanguage, prompt)),
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -95,7 +93,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf(intent.get(globalLanguage, prompt)),
             postProcessings = listOf(trimmed, removeDots),
-            fixTypos = true
         )
     }
 
@@ -108,7 +105,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf(intent.get(globalLanguage, prompt)),
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -119,7 +115,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf(intent.get(globalLanguage, meta.keyword)),
             postProcessings = listOf(removeQuotes, removeDots, trimmed),
-            fixTypos = true
         )
     }
 
@@ -132,7 +127,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = prompt,
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -145,7 +139,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = prompt,
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -158,7 +151,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = prompt,
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
@@ -180,7 +172,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf(intent.get(globalLanguage, meta.keyword)),
             postProcessings = listOf(trimmed),
             useTone = true,
-            fixTypos = true
         )
     }
 
