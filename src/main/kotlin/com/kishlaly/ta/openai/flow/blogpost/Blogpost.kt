@@ -35,7 +35,7 @@ fun main() {
         Files.write(Paths.get("$mainOutputFolder/html/raw"),
             BlogpostContentBuilder(meta).build().toByteArray())
     }
-//    Files.write(Paths.get("$mainOutputFolder/posts_${System.currentTimeMillis()}.xml"), xml.build().toString().toByteArray())
+    Files.write(Paths.get("$mainOutputFolder/posts_${System.currentTimeMillis()}.xml"), xml.build().toString().toByteArray())
 
 //    val images = findAllImages(File("openai/flow/output"))
 //    copyFilesToDirectory(images, File("openai/img"))
