@@ -70,6 +70,13 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content = content.replace("..", ".")
         content = content.replace(" .", ".")
 
+        getPromptsMarkers(globalLanguage).forEach {
+            if (content.contains(it)) {
+                println("!!!!!!!!! Found prompt marker: $it")
+                return ""
+            }
+        }
+
         return content
     }
 
