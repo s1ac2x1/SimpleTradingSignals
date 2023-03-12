@@ -38,8 +38,6 @@ fun main() {
 
 //    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
-//    val images = findAllImages(File("openai/flow/output"))
-//    copyFilesToDirectory(images, File("openai/img"))
 }
 
 private fun buildContent(
