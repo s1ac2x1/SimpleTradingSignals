@@ -32,7 +32,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         mainSection()
         historySection()
         factsSection()
-        tags()
+        tagsShort()
     }
 
     private fun factsSection() {
@@ -129,6 +129,17 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private fun tags() {
         val prompt = readText(Intent.INTRODUCTION)
+        val intent = Intent.TAGS
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = listOf(intent.get(globalLanguage, prompt)),
+            postProcessings = listOf(trimmed, removeDots),
+        )
+    }
+
+    private fun tagsShort() {
+        val prompt = readText(Intent.MAIN)
         val intent = Intent.TAGS
         Step(
             intent = intent,

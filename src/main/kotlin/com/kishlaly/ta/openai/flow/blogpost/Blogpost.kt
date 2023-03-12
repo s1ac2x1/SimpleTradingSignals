@@ -21,7 +21,7 @@ fun main() {
     // Создать XML
 
     val xml = BlogpostXMLBuilder()
-    readCSV("katzenrassen").take(1).forEach { paa ->
+    readCSV("katzenrassen").shuffled().take(1).forEach { paa ->
         val meta = BlogpostContentMeta(
             keyword = paa.title,
             domain = "katze101.com",
@@ -31,9 +31,9 @@ fun main() {
 
         BlogpostDownloader(meta).downloadPAA()
 
-        buildContent(xml, meta, paa) {
-            BlogpostContentBuilder(it).buildPAA()
-        }
+//        buildContent(xml, meta, paa) {
+//            BlogpostContentBuilder(it).buildPAA()
+//        }
     }
 
 //    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
