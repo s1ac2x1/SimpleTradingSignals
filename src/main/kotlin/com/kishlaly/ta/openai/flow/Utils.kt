@@ -87,12 +87,14 @@ val removeFirstSentence: (String) -> String = { str ->
 fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
     .map { removeNonPrintableSymbols(it) }
     .map { it.trim() }
-    .filter { it.length > 10 }
-    .map { removeNumberedItems(it) }
-    .filter { if (it[0].isLetter()) it[0].isUpperCase() else true }
-    .filter { !containsLongWords(it, 100)  }
     .map { it.trimStart() }
     .map { it.trimEnd() }
+    .filter { it.length > 10 }
+    .map { removeNumberedItems(it) }
+    .map { removeTrailingNumbers(it) }
+    .map { removeNumberedLists(it) }
+    .filter { if (it[0].isLetter()) it[0].isUpperCase() else true }
+    .filter { !containsLongWords(it, 100)  }
     .map { it.replace("!.", "!") }
     .map { it.replace(". ,", ".,") }
     .map { it.replace(". ,", ".,") }
@@ -105,6 +107,21 @@ fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
     .map { addSpaceAfterSymbol(it, '-') }
     .filter { !it.isNullOrBlank() }
     .chunked(Random.nextInt(2, 4))
+
+fun removeNumberedLists2(text: String): String {
+    val pattern = Regex("\\b\\d+\\)")
+    return pattern.replace(text, "")
+}
+
+fun removeNumberedLists(text: String): String {
+    val pattern = Regex("^[0-9]+[.].*[\r\n]+", RegexOption.MULTILINE)
+    return pattern.replace(text, "")
+}
+
+fun removeTrailingNumbers(text: String): String {
+    val pattern = Regex("\\s*:\\s*\\d+$")
+    return pattern.replace(text, "")
+}
 
 fun removeNumberedItems(text: String): String {
     val pattern = Regex("\\b\\d+[.:]\\s+")

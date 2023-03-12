@@ -69,6 +69,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content = content.replace("  ", " ")
         content = content.replace("..", ".")
         content = content.replace(" .", ".")
+        content = removeNumberedLists2(content)
 
         getPromptsMarkers(globalLanguage).forEach {
             if (content.contains(it)) {
@@ -123,14 +124,10 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
 fun main() {
     val text = """
-Hier sind einige Tipps und Beispiele, um Ihnen bei der Einrichtung eines Outdoor-Kletterbereichs für Katzen zu helfen: 1. Stellen Sie sicher, dass der Kletterbereich in einem abgeschirmten Bereich des Gartens oder auf dem Balkon angebracht wird.
+        Das bedeutet aber nicht, dass Sie keine regelmäßigen Sitzungen zum Krallenschneiden brauchen - im Gegenteil. Eine regelmäßige Pflege der Krallen hilft dabei, Schmerzen und Verletzungsrisiken zu vermeiden und stellt sicher, dass Ihr Haustier gesund bleibt. Um dies richtig zu machen, müssen Sie jedoch die richtige Technik anwenden: 1) Wenn möglich nehmen Sie einen professionellen Tierarztdienst in Anspruch: Ein professioneller Tierarztdienst kann Ihnen helfen beim Entfernung übermäßiger Nagelplatten sowie beim Trimmen der Endkralle (dem Bereich am Ende des Nagels).
 
-Dies schützt Ihre Katze vor Gefahren von außerhalb des Bereichs und hilft ihr auch dabei, warm zu bleiben. Verwenden Sie robuste Materialien wie Holz oder Metall für den Kletterbereich.
-
-Diese Materialien können die Elemente besser standhalten als andere Materialien und halten länger als Plastik oder Textilien. Bauen Sie mehrere Etagen in den Kletterbereich ein, damit Ihre Katze verschiedene Höhen erklimmen kann und nicht nur am Boden bleibt.
-
-Dies gibt ihr mehr Abwechslung und macht es interessanter für sie. 4. Installieren Sie Sitzplätze im oberen Teil des Kletterturms oder bauen Sie Nester in den Wänden des Turms – dies gibt ihr mehr Möglichkeiten, um sicher überdacht zu sein. 5.    """.trimIndent()
-
+        Dieser Service kann besonders hilfreich sein für Menschen mit Angst vor dem Schneiden von Tieren oder Menschen mit schlechteren Augenerkrankung (die den Zustand der Kralle nicht gut beurteilbar machen). 2) Wenn Sie lieber selbst Hand anlegend möchten: Verwendet speziell entwickelte Instrumente wie Scheren oder Kauterisatoren um den Nagel sauber abzuschneiden; stellen Sie sicher das man den Nagel bis auf den letzten Millimeter abschnitt; halten Sie den Zeigefinger über dem Schnitt um Blutungsrisiken zu minimieren; trimmen sie nur die Spitze des Nageldornes ohne weiter ins Fleisch einzudringnen; lass vor allem jeden Schritt immer langsam angehen und mach Pausenhalt falls deine Katze unruhig oder gestresst reagiert; belohnt deine Katze danach mit Streicheleinheitene um ihr Vertrauenz aufzu bauenne usw.
+    """.trimIndent()
     val chunks =  chunked(text)
     println(chunks)
 }
