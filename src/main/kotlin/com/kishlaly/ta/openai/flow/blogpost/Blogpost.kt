@@ -1,6 +1,7 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.PAA
+import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Language
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.mainOutputFolder
@@ -31,9 +32,9 @@ fun main() {
 
         BlogpostDownloader(meta).downloadPAA()
 
-//        buildContent(xml, meta, paa) {
-//            BlogpostContentBuilder(it).buildPAA()
-//        }
+        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
+            BlogpostContentBuilder(it).buildPAA()
+        }
     }
 
 //    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
@@ -44,9 +45,10 @@ private fun buildContent(
     xml: BlogpostXMLBuilder,
     meta: BlogpostContentMeta,
     paa: PAA,
+    tagsIntent: Intent = Intent.TAGS,
     builder: (meta: BlogpostContentMeta) -> String
 ) {
-    xml.append(meta, builder)
+    xml.append(meta, tagsIntent, builder)
     Files.write(
         Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
         htmlStub.replace("###content###", builder(meta)).toByteArray()

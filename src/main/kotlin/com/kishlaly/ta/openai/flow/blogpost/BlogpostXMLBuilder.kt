@@ -9,7 +9,11 @@ class BlogpostXMLBuilder() {
 
     private val xml = StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?><output>")
 
-    fun append(meta: BlogpostContentMeta, content: (meta: BlogpostContentMeta) -> String): BlogpostXMLBuilder {
+    fun append(
+        meta: BlogpostContentMeta,
+        tagsIntent: Intent = Intent.TAGS,
+        content: (meta: BlogpostContentMeta) -> String
+    ): BlogpostXMLBuilder {
         xml.append("<post>")
 
         xml.append("<title>")
@@ -27,7 +31,7 @@ class BlogpostXMLBuilder() {
         xml.append("</featuredImage>")
 
         xml.append("<tags>")
-        val tags = File("$mainOutputFolder/$postFolder/${Intent.TAGS}_1").readText()
+        val tags = File("$mainOutputFolder/$postFolder/${tagsIntent}_1").readText()
         xml.append(tags)
         xml.append("</tags>")
 

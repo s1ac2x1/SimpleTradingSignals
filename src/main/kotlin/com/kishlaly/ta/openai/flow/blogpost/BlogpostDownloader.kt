@@ -140,7 +140,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private fun tagsShort() {
         val prompt = readText(Intent.MAIN)
-        val intent = Intent.TAGS
+        val intent = Intent.TAGS_PAA
         Step(
             intent = intent,
             folder = stepFolder,
