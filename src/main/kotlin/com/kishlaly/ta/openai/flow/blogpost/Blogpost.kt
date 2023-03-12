@@ -30,7 +30,7 @@ fun main() {
             imgSrcFolder = "openai/katze101/images_webp"
         )
 
-        BlogpostDownloader(meta).downloadPAA()
+//        BlogpostDownloader(meta).downloadPAA()
 
         buildContent(xml, meta, paa, Intent.TAGS_PAA) {
             BlogpostContentBuilder(it).buildPAA()
