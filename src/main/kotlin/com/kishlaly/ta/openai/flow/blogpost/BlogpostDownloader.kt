@@ -10,12 +10,66 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private val stepFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
 
-    fun download(instructions: () -> Void) {
+
+    fun downloadBigPost() {
         File(stepFolder).mkdir()
-        instructions()
+
+        introduction()
+        tableOfContentsPlan()
+        tableOfContentsTexts_history()
+        tableOfContentsTexts_main()
+        tableOfContentsTexts_facts()
+        oppositeOpinionQuestion()
+        oppositeOpinionText()
+        tags()
+        conclusion()
+        randomAddition()
     }
 
-    fun randomAddition() {
+    fun downloadPAA() {
+        File(stepFolder).mkdir()
+
+        introduction()
+        historySection()
+        mainSection()
+        factsSection()
+        tags()
+    }
+
+    private fun factsSection() {
+        val intent = Intent.FACTS
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            postProcessings = listOf(trimmed),
+            useTone = true,
+        )
+    }
+
+    private fun mainSection() {
+        val intent = Intent.MAIN
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            postProcessings = listOf(trimmed),
+            useTone = true,
+        )
+    }
+
+    private fun historySection() {
+        val intent = Intent.HISTORY
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            postProcessings = listOf(trimmed),
+            useTone = true,
+        )
+    }
+
+    private fun randomAddition() {
         val conclusion =
             lineBreaksRegex.replace(readText(Intent.CONCLUSION), "")
         val intent = Intent.RANDOM_ADDITION
@@ -30,7 +84,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun conclusion() {
+    private fun conclusion() {
         val introduction = readText(Intent.INTRODUCTION)
         val oppositeOpinion = readText(Intent.OPPOSITE_OPINION_TEXT)
         val prompt = lineBreaksRegex.replace(introduction, "") + " " + lineBreaksRegex.replace(oppositeOpinion, "")
@@ -44,7 +98,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun featuredImage() {
+    private fun featuredImage() {
         var prompt = Combiner.combine(
             listOf(
                 "openai/katze101/breeds",
@@ -63,7 +117,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun imagesForToC() {
+    private fun imagesForToC() {
         val prompts = readLines(Intent.TOC_PLAN)
         Step(
             intent = Intent.TOC_IMAGES,
@@ -74,7 +128,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun tags() {
+    private fun tags() {
         val prompt = readText(Intent.INTRODUCTION)
         val intent = Intent.TAGS
         Step(
@@ -85,7 +139,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun oppositeOpinionText() {
+    private fun oppositeOpinionText() {
         val prompt = readText(Intent.OPPOSITE_OPINION_QUESTION)
         val intent = Intent.OPPOSITE_OPINION_TEXT
         Step(
@@ -97,7 +151,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun oppositeOpinionQuestion() {
+    private fun oppositeOpinionQuestion() {
         val intent = Intent.OPPOSITE_OPINION_QUESTION
         Step(
             intent = intent,
@@ -107,7 +161,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun tableOfContentsTexts_facts() {
+    private fun tableOfContentsTexts_facts() {
         val intent = Intent.CONTENT_PART_3_FACTS
         val prompt = readLines(Intent.TOC_PLAN).map { intent.get(globalLanguage, it) }
         Step(
@@ -119,7 +173,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun tableOfContentsTexts_main() {
+    private fun tableOfContentsTexts_main() {
         val intent = Intent.CONTENT_PART_2_MAIN
         val prompt = readLines(Intent.TOC_PLAN).map { intent.get(globalLanguage, it) }
         Step(
@@ -131,7 +185,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun tableOfContentsTexts_history() {
+    private fun tableOfContentsTexts_history() {
         val intent = Intent.CONTENT_PART_1_HISTORY
         val prompt = readLines(Intent.TOC_PLAN).map { intent.get(globalLanguage, it) }
         Step(
@@ -143,7 +197,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun tableOfContentsPlan() {
+    private fun tableOfContentsPlan() {
         val intent = Intent.TOC_PLAN
         Step(
             intent = intent,
@@ -153,7 +207,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun introduction() {
+    private fun introduction() {
         val intent = Intent.INTRODUCTION
         Step(
             intent = intent,
@@ -164,9 +218,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    fun resolveStepFileName(intent: Intent) = "$stepFolder/${intent}_1"
+    private fun resolveStepFileName(intent: Intent) = "$stepFolder/${intent}_1"
 
-    fun readText(intent: Intent) = File(resolveStepFileName(intent)).readText()
+    private fun readText(intent: Intent) = File(resolveStepFileName(intent)).readText()
 
-    fun readLines(intent: Intent) = File(resolveStepFileName(intent)).readLines()
+    private fun readLines(intent: Intent) = File(resolveStepFileName(intent)).readLines()
 }

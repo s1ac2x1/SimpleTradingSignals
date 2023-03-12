@@ -68,13 +68,31 @@ enum class Intent(val map: Map<Language, String>) {
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write a long historical note on this topic: \"###param###\"."
         )
     ),
+    HISTORY(
+        mapOf(
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine historische Notiz zu diesem Thema: \"###param###\".",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write a historical note on this topic: \"###param###\"."
+        )
+    ),
     CONTENT_PART_2_MAIN(
         mapOf(
             Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"###param###\". Begründen Sie Ihre Antwort mit einigen Beispielen.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write a detailed expert answer on this topic: \"###param###\". Justify your answer with some examples."
         )
     ),
+    MAIN(
+        mapOf(
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"###param###\". Begründen Sie Ihre Antwort mit einigen Beispielen.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write a detailed expert answer on this topic: \"###param###\". Justify your answer with some examples."
+        )
+    ),
     CONTENT_PART_3_FACTS(
+        mapOf(
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write interesting facts about this topic: \"###param###\". Format the text in the form of paragraphs without numbers."
+        )
+    ),
+    FACTS(
         mapOf(
             Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write interesting facts about this topic: \"###param###\". Format the text in the form of paragraphs without numbers."
