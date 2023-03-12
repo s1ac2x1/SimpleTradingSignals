@@ -28,12 +28,12 @@ fun main() {
             imgURI = "2023/03",
             imgSrcFolder = "openai/katze101/images_webp"
         )
-        BlogpostDownloader(meta).download()
-//        xml.append(meta)
-//        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
-//            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
-//        Files.write(Paths.get("$mainOutputFolder/html/raw"),
-//            BlogpostContentBuilder(meta).build().toByteArray())
+//        BlogpostDownloader(meta).download()
+        xml.append(meta)
+        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
+            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
+        Files.write(Paths.get("$mainOutputFolder/html/raw"),
+            BlogpostContentBuilder(meta).build().toByteArray())
     }
 //    Files.write(Paths.get("$mainOutputFolder/posts_${System.currentTimeMillis()}.xml"), xml.build().toString().toByteArray())
 

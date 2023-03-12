@@ -1,9 +1,6 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
-import com.kishlaly.ta.openai.flow.Intent
-import com.kishlaly.ta.openai.flow.createParagraphs
-import com.kishlaly.ta.openai.flow.finalRegex
-import com.kishlaly.ta.openai.flow.toFileName
+import com.kishlaly.ta.openai.flow.*
 import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 import kotlin.random.Random
@@ -116,8 +113,30 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         return result.toString()
     }
 
-    private fun chunked(part: String) = part.split(". ")
+    fun addSpaceAfterSymbol(text: String, symbol: Char): String {
+        var result = ""
+        for (i in text.indices) {
+            if (text[i] == symbol && i < text.length - 1 && text[i + 1] != ' ') {
+                result += "${symbol} "
+            } else {
+                result += text[i]
+            }
+        }
+        return result
+    }
+
+    private fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
         .map { it.trim() }
+        .map { it.replace("!.", ".") }
+        .map { it.replace(". ,", ".,") }
+        .map { it.replace(". ,", ".,") }
+        .map { it.replace("  ", " ") }
+        .map { it.replace("..", ".") }
+        .map { it.replace(" .", ".") }
+        .map { addSpaceAfterSymbol(it, '.') }
+        .map { addSpaceAfterSymbol(it, ',') }
+        .map { addSpaceAfterSymbol(it, ':') }
+        .map { addSpaceAfterSymbol(it, '-') }
         .filter { !it.isNullOrBlank() }
         .filter { it.length > 10 }
         .chunked(Random.nextInt(2, 4))
