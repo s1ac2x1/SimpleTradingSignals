@@ -19,6 +19,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import javax.imageio.ImageIO
 import javax.imageio.ImageWriteParam.MODE_EXPLICIT
+import kotlin.random.Random
 
 
 //fun main() {
@@ -71,12 +72,18 @@ import javax.imageio.ImageWriteParam.MODE_EXPLICIT
 //        val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
 //        tasks.add(ImageGenerateTask(
 //            keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
-//            outputFolderName = "openai/output/images",
+//            outputFolderName = "openai/katze101/images",
 //            outputFileName = "katze101.com-${System.nanoTime()}",
 //            n = 1
 //        ))
 //    }
 //    ImagesProcessor.generateMultithreaded(tasks, 5)
+//}
+
+//fun main() {
+//    File("openai/katze101/images").listFiles().forEach { file ->
+//        convertPngToWebp(file.absolutePath, "openai/katze101/images_webp/${file.nameWithoutExtension}.webp")
+//    }
 //}
 
 //fun main() {
@@ -112,11 +119,6 @@ import javax.imageio.ImageWriteParam.MODE_EXPLICIT
 //    ImagesProcessor.variation(listOf(variationTask))
 //}
 
-fun main() {
-    File("openai/katze101/images").listFiles().forEach { file ->
-        convertPngToWebp(file.absolutePath, "openai/katze101/images_webp/${file.nameWithoutExtension}.webp")
-    }
-}
 
 fun convertPngToWebp(pngPath: String, webpPath: String) {
     val command = arrayOf("cwebp", "-q", "80", pngPath, "-o", webpPath)

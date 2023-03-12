@@ -12,6 +12,19 @@ import java.nio.file.Paths
 val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
 
+val bigBlogpost = {
+    introduction()
+    tableOfContentsPlan()
+    tableOfContentsTexts_history()
+    tableOfContentsTexts_main()
+    tableOfContentsTexts_facts()
+    oppositeOpinionQuestion()
+    oppositeOpinionText()
+    tags()
+    conclusion()
+    randomAddition()
+}
+
 fun main() {
 
     // Загрузить контент
