@@ -17,6 +17,38 @@ enum class Type {
     IMAGE
 }
 
+fun getPromptsMarkers(language: Language): List<String> {
+    return when (language) {
+        Language.DE -> listOf(
+            "Ich schreibe einen Artikel über",
+            "Schreiben Sie eine ausführliche Einführung zu diesem Artikel",
+            "Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften",
+            "Schreiben Sie eine lange historische Notiz zu diesem Thema",
+            "Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema",
+            "Begründen Sie Ihre Antwort mit einigen Beispielen",
+            "Schreiben Sie interessante Fakten über dieses Thema",
+            "Formatieren Sie den Text in Form von Absätzen ohne Zahlen",
+            "Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist",
+            "Schreiben Sie drei Absätze zu diesem Thema",
+            "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste"
+        )
+        Language.EN -> listOf(
+            "I am writing an article about",
+            "The title of the article is:",
+            "Write a detailed introduction to this article",
+            "Write a list of 10 to 15 short subheadings",
+            "Write a long historical note on this topic",
+            "Write a detailed expert answer on this topic",
+            "Justify your answer with some examples",
+            "Write interesting facts about this topic",
+            "Format the text in the form of paragraphs without numbers",
+            "Find a key phrase that is the opposite of this",
+            "Write three paragraphs on this topic",
+            "From this text, create a comma-separated list of 5 keywords"
+        )
+    }
+}
+
 enum class Intent(val map: Map<Language, String>) {
     INTRODUCTION(
         mapOf(
