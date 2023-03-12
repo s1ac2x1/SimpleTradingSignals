@@ -144,7 +144,7 @@ class Step(
         input.forEachIndexed { index, prompt ->
             var finalPrompt = prompt
             if (useTone) {
-                finalPrompt = "$prompt Antwortton - ${tone[Random.nextInt(tone.size)]}"
+                finalPrompt = "$prompt ${getWritingTone()}"
             }
             println("[$type][$intent]")
             when (type) {
