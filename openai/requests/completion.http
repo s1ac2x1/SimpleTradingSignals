@@ -4,12 +4,10 @@ Content-Type: application/json
 
 {
   "model": "text-davinci-003",
-  "prompt": "Es gibt einen Text: \"Katzen sind bekannt dafür, dass sie sehr anspruchsvoll in Bezug auf Materialien sind. Wenn Sie Ihrer Katze ein angenehmes und sicheres Zuhause bieten möchten, ist es wichtig, die besten Materialien zu verwenden. Hier sind einige der am besten geeigneten Materialien für Katzen: 1. Holz: Holz ist ein sehr robustes und langlebiges Material, das ideal für Kratzbäume und andere Spielzeuge geeignet ist. Es kann leicht mit Seife und Wasser gereinigt werden, was es zu einer hygienischen Option macht. 2. Baumwolle: Baumwolle ist weich und atmungsaktiv, was es zu einer idealen Option für Bettwäsche macht. Es kann auch leicht mit Seife und Wasser gewaschen werden, um Bakterien abzutöten. 3. Kunststoffe: Kunststoffe wie Polyester oder Nylon machen ausgezeichnete Spielzeuge für Katzen da sie leicht zu reinigen sind und nicht so leicht beschädigt werden können wie andere Materialien. 4. Metall: Metall ist langlebig und unempfindlich gegenüber Schmutz oder Bakterien - ideal für Kratzbäume oder Futter-/Wasserbehälter! Es gibt viele verschiedene Arten von Materialien die Sie Ihrer Katze anbieten können - aber diese vier haben alle ihre Vorteile in Bezug auf Qualität, Haltbarkeit und Hygiene! Vergewissern Sie sich immer, dass Sie hochwertige Produkte von vertrauenswürdigen Herstellern verwenden, um Ihrer Katze die bestmögliche Erfahrung zu bieten!\". Finden Sie darin zwei Schlüsselwörter, die die Bedeutung dieses Textes betonen. Schlüsselwörter müssen in diesem Text vorhanden sein",
+  "prompt": "I am writing an article about cats. The title of the article is: \"Wet vs. Dry Food: Which is Better for Your Cat?\". Write a detailed introduction to this article. Answer tone - dramatic",
   "max_tokens": 2048,
   "temperature": 0.7,
   "top_p": 0.5,
   "frequency_penalty": 0.8,
   "user": "vladimir@kishlaly.com"
 }
-
-

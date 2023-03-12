@@ -10,7 +10,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 val globalLanguage: Language = Language.EN
-val globalBlogTopic = "Katzen"
+val globalBlogTopic = "cats"
 
 fun main() {
 

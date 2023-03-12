@@ -2,6 +2,7 @@ package com.kishlaly.ta.openai.flow
 
 import com.kishlaly.ta.openai.*
 import com.kishlaly.ta.openai.flow.blogpost.globalBlogTopic
+import com.kishlaly.ta.openai.flow.blogpost.globalLanguage
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.random.Random
@@ -93,6 +94,39 @@ enum class Intent(val map: Map<Language, String>) {
     fun get(language: Language, paramValue: String) = map[language]!!.replace("###param###", paramValue)
 }
 
+fun getWritingTone() = when (globalLanguage) {
+        Language.DE -> {
+            val tone = listOf(
+                "Objektiv",
+                "Subjektiv",
+                "Beschreibend",
+                "Informativ",
+                "Unterhaltsam",
+                "Lyrisch",
+                "Humorvoll",
+                "Persönlich",
+                "Dramatisch",
+                "Kritisch"
+            )
+            "Antwortton - ${tone[Random.nextInt(tone.size)]}"
+        }
+        Language.EN -> {
+            val tone = listOf(
+                "objective",
+                "subjective",
+                "descriptive",
+                "informative",
+                "entertaining",
+                "lyrical",
+                "humorous",
+                "personal",
+                "dramatic",
+                "critical"
+            )
+            "Answer tone - ${tone[Random.nextInt(tone.size)]}"
+        }
+    }
+
 class Step(
     val intent: Intent,
     val input: List<String> = emptyList(),
@@ -110,18 +144,6 @@ class Step(
         input.forEachIndexed { index, prompt ->
             var finalPrompt = prompt
             if (useTone) {
-                val tone = listOf(
-                    "Objektiv",
-                    "Subjektiv",
-                    "Beschreibend",
-                    "Informativ",
-                    "Unterhaltsam",
-                    "Lyrisch",
-                    "Humorvoll",
-                    "Persönlich",
-                    "Dramatisch",
-                    "Kritisch"
-                )
                 finalPrompt = "$prompt Antwortton - ${tone[Random.nextInt(tone.size)]}"
             }
             println("[$type][$intent]")
