@@ -7,7 +7,11 @@ import kotlin.random.Random
 
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
-    fun build(): String {
+    fun buildPAA(): String {
+        return ""
+    }
+
+    fun buildLongPost(): String {
         val srcFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
 
         if (!File("$srcFolder").exists()) {

@@ -1,6 +1,5 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
-import com.kishlaly.ta.openai.filenameRegex
 import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.mainOutputFolder
@@ -10,7 +9,7 @@ class BlogpostXMLBuilder() {
 
     private val xml = StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?><output>")
 
-    fun append(meta: BlogpostContentMeta): BlogpostXMLBuilder {
+    fun append(meta: BlogpostContentMeta, content: (meta: BlogpostContentMeta) -> String): BlogpostXMLBuilder {
         xml.append("<post>")
 
         xml.append("<title>")
@@ -18,7 +17,7 @@ class BlogpostXMLBuilder() {
         xml.append("</title>")
 
         xml.append("<content>")
-        xml.append(BlogpostContentBuilder(meta).build())
+        xml.append(content)
         xml.append("</content>")
 
         xml.append("<featuredImage>")

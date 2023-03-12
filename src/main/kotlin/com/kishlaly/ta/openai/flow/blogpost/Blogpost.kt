@@ -21,15 +21,19 @@ fun main() {
     // Создать XML
 
     val xml = BlogpostXMLBuilder()
-    readCSV("source").forEach { paa ->
+    readCSV("katzenrassen").take(1).forEach { paa ->
         val meta = BlogpostContentMeta(
             keyword = paa.title,
             domain = "katze101.com",
             imgURI = "2023/03",
             imgSrcFolder = "openai/katze101/images_webp"
         )
+
         BlogpostDownloader(meta).downloadPAA()
-//        xml.append(meta)
+
+        xml.append(meta) {
+            BlogpostContentBuilder(it).buildPAA()
+        }
 //        Files.write(Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
 //            htmlStub.replace("###content###", BlogpostContentBuilder(meta).build()).toByteArray())
 //        Files.write(Paths.get("$mainOutputFolder/html/raw"),

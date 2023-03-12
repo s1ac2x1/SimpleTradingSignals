@@ -29,8 +29,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun downloadPAA() {
         File(stepFolder).mkdir()
 
-        historySection()
         mainSection()
+        historySection()
         factsSection()
         tags()
     }
