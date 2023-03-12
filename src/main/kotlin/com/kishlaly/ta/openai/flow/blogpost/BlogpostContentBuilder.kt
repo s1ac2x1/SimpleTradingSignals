@@ -121,19 +121,16 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
     }
 }
 
-//fun main() {
-//    val text = """
-//Kratzen ist ein typisches Verhalten bei Katzen. Es ist eine natürliche und wichtige Art für sie, ihre Umgebung zu erkunden und zu markieren. Es gibt verschiedene Arten von Kratzverhalten, die Katzen zeigen können. Einige der häufigsten sind:
-//
-//• Markierungskratzen: Dies ist, wenn eine Katze an Gegenständen in ihrer Umgebung kratzt, um ihr Territorium zu markieren. Sie können auch an Wände oder Möbelstücke kratzen, um anderen Katzen mitzuteilen, dass das Gebiet bereits besetzt ist.
-//
-//• Pfotenpflege: Wenn Katzen an Gegenstände in ihrer Umgebung kratzen, helfen sie auch dabei, die Pfoten zu reinigen und abgestorbene Haut abzustreifen.
-//
-//• Spielkratzen: Manchmal nutzten Katzen auch Kratzbewegungen als Teil des Spiels mit anderen Tieren oder Menschen. Dieses Verhalten hilft den Tieren dabei, Fertigkeiten wie Jagdtechniken zu entwickeln und auszuüben.
-//
-//Kratzbewegungen sind für die meisten Katzen normal und sollten nicht unterdrückt werden – es sei denn es richtet Schaden an Möbeln oder anderen Gegestände an. Stattdessen sollte man dem Tier helfen besser verstehen lernem warum es dieses Verhalten zeigt und welche Alternativen es hat – zum Beispiel speziell entworfene Kletter- oder Kratzbretter statt der Möbel im Haus nutzbar machen.
-//    """.trimIndent()
-//
-//    val chunks =  chunked(text)
-//    println(chunks)
-//}
+fun main() {
+    val text = """
+Hier sind einige Tipps und Beispiele, um Ihnen bei der Einrichtung eines Outdoor-Kletterbereichs für Katzen zu helfen: 1. Stellen Sie sicher, dass der Kletterbereich in einem abgeschirmten Bereich des Gartens oder auf dem Balkon angebracht wird.
+
+Dies schützt Ihre Katze vor Gefahren von außerhalb des Bereichs und hilft ihr auch dabei, warm zu bleiben. Verwenden Sie robuste Materialien wie Holz oder Metall für den Kletterbereich.
+
+Diese Materialien können die Elemente besser standhalten als andere Materialien und halten länger als Plastik oder Textilien. Bauen Sie mehrere Etagen in den Kletterbereich ein, damit Ihre Katze verschiedene Höhen erklimmen kann und nicht nur am Boden bleibt.
+
+Dies gibt ihr mehr Abwechslung und macht es interessanter für sie. 4. Installieren Sie Sitzplätze im oberen Teil des Kletterturms oder bauen Sie Nester in den Wänden des Turms – dies gibt ihr mehr Möglichkeiten, um sicher überdacht zu sein. 5.    """.trimIndent()
+
+    val chunks =  chunked(text)
+    println(chunks)
+}

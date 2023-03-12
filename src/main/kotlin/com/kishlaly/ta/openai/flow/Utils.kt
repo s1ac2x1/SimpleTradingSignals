@@ -88,6 +88,7 @@ fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
     .map { removeNonPrintableSymbols(it) }
     .map { it.trim() }
     .filter { it.length > 10 }
+    .map { removeNumberedItems(it) }
     .filter { if (it[0].isLetter()) it[0].isUpperCase() else true }
     .filter { !containsLongWords(it, 100)  }
     .map { it.trimStart() }
@@ -104,6 +105,11 @@ fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
     .map { addSpaceAfterSymbol(it, '-') }
     .filter { !it.isNullOrBlank() }
     .chunked(Random.nextInt(2, 4))
+
+fun removeNumberedItems(text: String): String {
+    val pattern = Regex("\\b\\d+[.:]\\s+")
+    return pattern.replace(text, "")
+}
 
 fun removeNonPrintableSymbols(text: String): String {
     val pattern = Regex("[^\\x20-\\x7E]+")
