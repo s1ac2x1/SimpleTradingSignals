@@ -85,7 +85,6 @@ val removeFirstSentence: (String) -> String = { str ->
 }
 
 fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
-    .map { removeNonPrintableSymbols(it) }
     .map { it.trim() }
     .map { it.trimStart() }
     .map { it.trimEnd() }
@@ -125,11 +124,6 @@ fun removeTrailingNumbers(text: String): String {
 
 fun removeNumberedItems(text: String): String {
     val pattern = Regex("\\b\\d+[.:]\\s+")
-    return pattern.replace(text, "")
-}
-
-fun removeNonPrintableSymbols(text: String): String {
-    val pattern = Regex("[^\\x20-\\x7E]+")
     return pattern.replace(text, "")
 }
 

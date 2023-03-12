@@ -125,10 +125,13 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
 fun main() {
     val text = """
-        Das bedeutet aber nicht, dass Sie keine regelmäßigen Sitzungen zum Krallenschneiden brauchen - im Gegenteil. Eine regelmäßige Pflege der Krallen hilft dabei, Schmerzen und Verletzungsrisiken zu vermeiden und stellt sicher, dass Ihr Haustier gesund bleibt. Um dies richtig zu machen, müssen Sie jedoch die richtige Technik anwenden: 1) Wenn möglich nehmen Sie einen professionellen Tierarztdienst in Anspruch: Ein professioneller Tierarztdienst kann Ihnen helfen beim Entfernung übermäßiger Nagelplatten sowie beim Trimmen der Endkralle (dem Bereich am Ende des Nagels).
+Kratzen ist eine alte Tradition, die vor Tausenden von Jahren begann. Die Menschen haben Katzen schon immer als treue Begleiter angesehen und sie wurden als heilige Tiere verehrt. Kratzen war ein Zeichen der Zuneigung und Wertschätzung für Katzen, das sich auf die spirituelle Bindung zwischen Mensch und Tier bezog. 
 
-        Dieser Service kann besonders hilfreich sein für Menschen mit Angst vor dem Schneiden von Tieren oder Menschen mit schlechteren Augenerkrankung (die den Zustand der Kralle nicht gut beurteilbar machen). 2) Wenn Sie lieber selbst Hand anlegend möchten: Verwendet speziell entwickelte Instrumente wie Scheren oder Kauterisatoren um den Nagel sauber abzuschneiden; stellen Sie sicher das man den Nagel bis auf den letzten Millimeter abschnitt; halten Sie den Zeigefinger über dem Schnitt um Blutungsrisiken zu minimieren; trimmen sie nur die Spitze des Nageldornes ohne weiter ins Fleisch einzudringnen; lass vor allem jeden Schritt immer langsam angehen und mach Pausenhalt falls deine Katze unruhig oder gestresst reagiert; belohnt deine Katze danach mit Streicheleinheitene um ihr Vertrauenz aufzu bauenne usw.
-    """.trimIndent()
+In der Antike glaubten die Ägypter, dass Katzen eine Verbindung zu den Göttern hatten und dass Kratzen ihnen Glück bringen konnte. In dieser Zeit wurden Katzen auch oft in Grabstätten gefunden, was auf ihre besondere Rolle in der Gesellschaft hinweist. 
+
+Im Mittelalter begannen die Menschen, Kratzbäume zu bauen, um ihren Katzen mehr Freiheit zu geben und sie vor Gefahren zu schützen. Diese Bäume waren mit verschiedenen Materialien gebaut und konnten mit Schmuck verziert werden. 
+
+Heutzutage ist Kratzverhalten immer noch sehr beliebt bei den meisten Katzensorten. Es ist eine natürliche Art des Spielens für sie und es gibt viele verschiedene Arten von Kratzbäumen, die Ihnen helfen können, Ihrer Katze mehr Komfort zu bieten.    """.trimIndent()
     val chunks =  chunked(text)
     println(chunks)
 }
