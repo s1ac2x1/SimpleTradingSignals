@@ -3,9 +3,7 @@ package com.kishlaly.ta.openai.flow.blogpost
 import com.kishlaly.ta.openai.PAA
 import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Language
-import com.kishlaly.ta.openai.flow.filterCSV
 import com.kishlaly.ta.openai.flow.toFileName
-import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.readCsv
 import java.io.File
 import java.nio.file.Files
@@ -43,6 +41,7 @@ fun main() {
 
     keywords.take(1).forEach { paa ->
         val meta = BlogpostContentMeta(
+            type = ArticleType.PAA,
             keyword = paa.title,
             category = source,
             domain = domain,
@@ -77,14 +76,9 @@ private fun buildContent(
     builder: (meta: BlogpostContentMeta) -> String
 ) {
     xml.append(meta, tagsIntent, builder)
-    File("$mainOutputFolder/html/").mkdir()
     Files.write(
-        Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
+        Paths.get("openai/${meta.domain}/temp/${paa.title.toFileName()}.html"),
         htmlStub.replace("###content###", builder(meta)).toByteArray()
-    )
-    Files.write(
-        Paths.get("$mainOutputFolder/html/raw_${paa.title.toFileName()}.raw"),
-        builder(meta).toByteArray()
     )
 }
 
