@@ -7,7 +7,7 @@ import java.io.FileWriter
 
 fun filterCSV(name: String) {
     val rawContent = readCsv("openai/$name.csv")
-    val filteredContent = rawContent.distinctBy { it.title }
+    val filteredContent = rawContent.distinctBy { it.title }.shuffled().take(250)
     val lines = filteredContent.map { "${it.title};" }
     saveToFile("openai/$name.csv", lines)
     println("Filtered ${rawContent.size - filteredContent.size} duplicates")

@@ -27,7 +27,7 @@ fun main() {
     // Загрузить все картинки в блог
     // Создать XML
 
-    val source = "katzenrassen"
+    val source = "katzenverhalten"
     val domain = "katze101.com"
     val imageURI = "2023/03"
     filterCSV(source)
@@ -38,7 +38,7 @@ fun main() {
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(5)
 
-    keywords.forEach { paa ->
+    keywords.take(1).forEach { paa ->
         val meta = BlogpostContentMeta(
             keyword = paa.title,
             domain = domain,
@@ -49,7 +49,7 @@ fun main() {
         executor.submit {
             BlogpostDownloader(meta).downloadPAA()
             processed.incrementAndGet()
-            println("==== Done $processed/$total ====")
+            println("==== Done $processed/$total ====\n")
         }
 
         // нужна еще перелинковка для больших статей
@@ -61,7 +61,7 @@ fun main() {
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
+//    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
 }
 
