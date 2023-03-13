@@ -23,6 +23,8 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         <p>${processFactsContent(facts)}</p>
     """.trimIndent()
 
+        content = postProcessAndCheck(content)
+
         return content
     }
 
@@ -81,24 +83,30 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         <p>$randomAddition</p>
     """.trimIndent()
 
-        content = finalRegex.replace(content, "")
-        content = content.replace("!.", ".")
-        content = content.replace("!", ".")
-        content = content.replace(". ,", ".,")
-        content = content.replace("  ", " ")
-        content = content.replace("..", ".")
-        content = content.replace(" .", ".")
-        content = removeNumberedLists2(content)
-        content = content.replace("•", "<br>•")
+        content = postProcessAndCheck(content)
+
+        return content
+    }
+
+    private fun postProcessAndCheck(content: String): String {
+        var content1 = content
+        content1 = finalRegex.replace(content1, "")
+        content1 = content1.replace("!.", "!")
+        content1 = content1.replace("?", "? ")
+        content1 = content1.replace(". ,", ".,")
+        content1 = content1.replace("  ", " ")
+        content1 = content1.replace("..", ".")
+        content1 = content1.replace(" .", ".")
+        content1 = removeNumberedLists2(content1)
+        content1 = content1.replace("•", "<br>•")
 
         getPromptsMarkers(globalLanguage).forEach {
-            if (content.contains(it)) {
+            if (content1.contains(it)) {
                 println("!!!!!!!!! Found prompt marker: $it")
                 return ""
             }
         }
-
-        return content
+        return content1
     }
 
     private fun processFactsContent(part: String): String {

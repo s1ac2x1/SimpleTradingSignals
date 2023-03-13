@@ -22,7 +22,7 @@ fun main() {
     // Создать XML
 
     val xml = BlogpostXMLBuilder()
-    readCSV("katzenrassen").shuffled().take(1).forEach { paa ->
+    readCSV("katzenrassen").take(1).forEach { paa ->
         val meta = BlogpostContentMeta(
             keyword = paa.title,
             domain = "katze101.com",
@@ -49,12 +49,13 @@ private fun buildContent(
     builder: (meta: BlogpostContentMeta) -> String
 ) {
     xml.append(meta, tagsIntent, builder)
+    File("$mainOutputFolder/html/").mkdir()
     Files.write(
         Paths.get("$mainOutputFolder/html/${paa.title.toFileName()}.html"),
         htmlStub.replace("###content###", builder(meta)).toByteArray()
     )
     Files.write(
-        Paths.get("$mainOutputFolder/html/_${paa.title.toFileName()}.raw"),
+        Paths.get("$mainOutputFolder/html/raw_${paa.title.toFileName()}.raw"),
         builder(meta).toByteArray()
     )
 }
