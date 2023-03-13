@@ -17,8 +17,13 @@ enum class Type {
     IMAGE
 }
 
-fun getPromptsMarkers(language: Language): List<String> {
-    return when (language) {
+fun getReadAlsoTitle() = when (globalLanguage) {
+        Language.DE -> "Lesen Sie auch:"
+        Language.EN -> "Read also:"
+    }
+
+fun getPromptsMarkers(): List<String> {
+    return when (globalLanguage) {
         Language.DE -> listOf(
             "Ich schreibe einen Artikel über",
             "Schreiben Sie eine ausführliche Einführung zu diesem Artikel",

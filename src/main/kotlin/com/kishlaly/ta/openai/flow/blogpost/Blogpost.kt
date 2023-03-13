@@ -60,7 +60,7 @@ fun main() {
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-//    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
+    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
 }
 

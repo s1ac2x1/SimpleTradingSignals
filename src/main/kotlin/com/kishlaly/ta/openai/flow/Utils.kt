@@ -84,6 +84,14 @@ val removeFirstSentence: (String) -> String = { str ->
     str.substring(str.indexOfFirst { it == '.' } + 1, str.length)
 }
 
+fun encodeURL(input: String): String {
+    var output = input.replace("ä", "ae")
+        .replace("ö", "oe")
+        .replace("ü", "ue")
+        .replace("ß", "ss")
+    return output.replace(" ", "-").lowercase()
+}
+
 fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
     .map { it.trim() }
     .map { it.trimStart() }

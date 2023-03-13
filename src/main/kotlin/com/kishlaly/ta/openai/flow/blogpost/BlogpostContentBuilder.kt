@@ -20,7 +20,9 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         var content = """
         <p>${createParagraphs(main)}</p>
         <p>${processHistoricalContent(history)}</p>
+        <p>${link1}</p>
         <p>${processFactsContent(facts)}</p>
+        <p>${link2}</p>
     """.trimIndent()
 
         content = postProcessAndCheck(content)
@@ -100,7 +102,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content1 = removeNumberedLists2(content1)
         content1 = content1.replace("•", "<br>•")
 
-        getPromptsMarkers(globalLanguage).forEach {
+        getPromptsMarkers().forEach {
             if (content1.contains(it)) {
                 println("!!!!!!!!! Found prompt marker: $it")
                 return ""
