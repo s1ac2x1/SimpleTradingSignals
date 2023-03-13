@@ -3,6 +3,7 @@ package com.kishlaly.ta.openai.flow.blogpost
 import com.kishlaly.ta.openai.PAA
 import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Language
+import com.kishlaly.ta.openai.flow.filterCSV
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.mainOutputFolder
 import com.kishlaly.ta.openai.readCsv
@@ -15,27 +16,32 @@ val globalBlogTopic = "Katzen"
 
 fun main() {
 
+    // Отфильтровать дубликаты в csv
     // Загрузить контент
     // Сгенерить картинки
     // Преобразовать в WebP
     // Загрузить все картинки в блог
     // Создать XML
 
-    val xml = BlogpostXMLBuilder()
-    readCSV("katzenrassen").take(1).forEach { paa ->
-        val meta = BlogpostContentMeta(
-            keyword = paa.title,
-            domain = "katze101.com",
-            imgURI = "2023/03",
-            imgSrcFolder = "openai/katze101/images_webp"
-        )
+    val source = "katzenrassen"
 
+    filterCSV(source)
+
+//    val xml = BlogpostXMLBuilder()
+//    readCSV(source).take(1).forEach { paa ->
+//        val meta = BlogpostContentMeta(
+//            keyword = paa.title,
+//            domain = "katze101.com",
+//            imgURI = "2023/03",
+//            imgSrcFolder = "openai/katze101/images_webp"
+//        )
+//
 //        BlogpostDownloader(meta).downloadPAA()
-
-        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
-            BlogpostContentBuilder(it).buildPAA()
-        }
-    }
+//
+//        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
+//            BlogpostContentBuilder(it).buildPAA()
+//        }
+//    }
 
 //    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
