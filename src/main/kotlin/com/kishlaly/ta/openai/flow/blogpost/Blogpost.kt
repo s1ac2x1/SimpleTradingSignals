@@ -10,6 +10,8 @@ import com.kishlaly.ta.openai.readCsv
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
@@ -24,24 +26,31 @@ fun main() {
     // Создать XML
 
     val source = "katzenrassen"
-
+    val domain = "katze101.com"
+    val imageURI = "2023/03"
     filterCSV(source)
 
-//    val xml = BlogpostXMLBuilder()
-//    readCSV(source).take(1).forEach { paa ->
-//        val meta = BlogpostContentMeta(
-//            keyword = paa.title,
-//            domain = "katze101.com",
-//            imgURI = "2023/03",
-//            imgSrcFolder = "openai/katze101/images_webp"
-//        )
-//
-//        BlogpostDownloader(meta).downloadPAA()
-//
+    val xml = BlogpostXMLBuilder()
+    val executor = Executors.newFixedThreadPool(5)
+
+    readCSV(source).take(5).forEach { paa ->
+        executor.submit {
+            val meta = BlogpostContentMeta(
+                keyword = paa.title,
+                domain = domain,
+                imgURI = imageURI,
+                imgSrcFolder = "openai/katze101/images_webp"
+            )
+            BlogpostDownloader(meta).downloadPAA()
+        }
+
 //        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
 //            BlogpostContentBuilder(it).buildPAA()
 //        }
-//    }
+    }
+
+    executor.shutdown()
+    executor.awaitTermination(2, TimeUnit.HOURS)
 
 //    Files.write(Paths.get("$mainOutputFolder/posts.xml"), xml.build().toString().toByteArray())
 
