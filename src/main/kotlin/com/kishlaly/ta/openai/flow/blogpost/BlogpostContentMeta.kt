@@ -1,5 +1,7 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
+import com.kishlaly.ta.openai.flow.toFileName
+
 enum class ArticleType {
     PAA,
     BIG
@@ -12,4 +14,7 @@ data class BlogpostContentMeta(
     val domain: String,
     val imgURI: String,
     val imgSrcFolder: String) {
+
+    fun resolveKeywordFolder() = "openai/$domain/content/$category/${type.name.lowercase()}/${keyword.toFileName()}"
+
 }

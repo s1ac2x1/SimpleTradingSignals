@@ -1,14 +1,13 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.*
-import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 import kotlin.random.Random
 
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
     fun buildPAA(): String {
-        val srcFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
+        val srcFolder = meta.resolveKeywordFolder()
         if (!File("$srcFolder").exists()) {
             throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
         }
@@ -36,7 +35,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
     }
 
     fun buildLongPost(): String {
-        val srcFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
+        val srcFolder = meta.resolveKeywordFolder()
 
         if (!File("$srcFolder").exists()) {
             throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
