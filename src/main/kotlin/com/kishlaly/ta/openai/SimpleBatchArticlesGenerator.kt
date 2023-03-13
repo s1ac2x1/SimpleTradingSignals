@@ -21,7 +21,7 @@ var domain = ""
 var date = ""
 var DELIMITER = ";"
 
-data class PAA(
+data class KeywordSource(
     @field:JsonProperty("PAA Title") val title: String,
     @field:JsonProperty("Text") val text: String
 ) {
@@ -85,12 +85,12 @@ fun generateBlogArticles(inputFileName: String, prompt: String) {
     executor.awaitTermination(2, TimeUnit.HOURS)
 }
 
-private fun createPostTag(paaData: PAA, prompt: String) {
+private fun createPostTag(keywordSourceData: KeywordSource, prompt: String) {
     val xml = StringBuilder()
 
     var promptReplaced = prompt
-        .replace("###title###", paaData.title)
-        .replace("###context###", paaData.text)
+        .replace("###title###", keywordSourceData.title)
+        .replace("###context###", keywordSourceData.text)
 
     val completion = getCompletion(CompletionRequest(prompt = promptReplaced))
     val output = "${completion}"
@@ -99,7 +99,7 @@ private fun createPostTag(paaData: PAA, prompt: String) {
     xml.append("<post>")
 
     xml.append("<title>")
-    xml.append(paaData.title)
+    xml.append(keywordSourceData.title)
     xml.append("</title>")
 
     xml.append("<content>")
@@ -112,9 +112,9 @@ private fun createPostTag(paaData: PAA, prompt: String) {
 
     xml.append("</post>")
 
-    val safeTitle = paaData.title.toFileName()
+    val safeTitle = keywordSourceData.title.toFileName()
     Files.write(Paths.get("openai/output/text/$safeTitle-post.xml"), xml.toString().toByteArray())
-    println("Ready: ${paaData.title}")
+    println("Ready: ${keywordSourceData.title}")
 }
 
 //fun main() {
@@ -130,11 +130,11 @@ private fun createPostTag(paaData: PAA, prompt: String) {
 //    println(imageURL)
 //}
 
-fun readCsv(fileName: String): List<PAA> =
+fun readCsv(fileName: String): List<KeywordSource> =
     File(fileName).readLines().map { line ->
         val split = line.split(DELIMITER)
         if (split[0].contains("PAA Title")) {
             throw RuntimeException("Remote first line from CSV file!")
         }
-        PAA(split[0], split[1])
+        KeywordSource(split[0], split[1])
     }

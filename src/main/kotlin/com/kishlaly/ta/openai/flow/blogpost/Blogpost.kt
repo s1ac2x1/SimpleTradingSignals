@@ -1,6 +1,6 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
-import com.kishlaly.ta.openai.PAA
+import com.kishlaly.ta.openai.KeywordSource
 import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Language
 import com.kishlaly.ta.openai.flow.toFileName
@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
-var keywords = listOf<PAA>()
+var keywords = listOf<KeywordSource>()
 
 fun main() {
 
@@ -25,40 +25,40 @@ fun main() {
     // Загрузить все картинки в блог
     // Создать XML
 
-    val source = "katzenverhalten"
     val domain = "katze101.com"
+    val category = "katzenverhalten"
     val imageURI = "2023/03"
 
     // run only once per new category
     //filterCSV(domain, source, 250)
 
-    keywords = readCSV(domain, source)
+    keywords = readCSV(domain, category)
 
     val total = keywords.size
     val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(5)
 
-    keywords.take(1).forEach { paa ->
+    keywords.take(1).forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = ArticleType.PAA,
-            keyword = paa.title,
-            category = source,
+            keyword = keywordSource.title,
+            category = category,
             domain = domain,
             imgURI = imageURI,
             imgSrcFolder = "openai/${domain}/images_webp"
         )
 
-        executor.submit {
-            BlogpostDownloader(meta).downloadPAA()
-            processed.incrementAndGet()
-            println("==== Done $processed/$total ====\n")
-        }
+//        executor.submit {
+//            BlogpostDownloader(meta).downloadPAA()
+//            processed.incrementAndGet()
+//            println("==== Done $processed/$total ====\n")
+//        }
 
         // нужна еще перелинковка для больших статей
-//        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
-//            BlogpostContentBuilder(it).buildPAA()
-//        }
+        buildContent(xml, meta, keywordSource, Intent.TAGS_PAA) {
+            BlogpostContentBuilder(it).buildPAA()
+        }
     }
 
     executor.shutdown()
@@ -71,13 +71,13 @@ fun main() {
 private fun buildContent(
     xml: BlogpostXMLBuilder,
     meta: BlogpostContentMeta,
-    paa: PAA,
+    keywordSource: KeywordSource,
     tagsIntent: Intent = Intent.TAGS,
     builder: (meta: BlogpostContentMeta) -> String
 ) {
     xml.append(meta, tagsIntent, builder)
     Files.write(
-        Paths.get("openai/${meta.domain}/temp/${paa.title.toFileName()}.html"),
+        Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
         htmlStub.replace("###content###", builder(meta)).toByteArray()
     )
 }
@@ -101,7 +101,7 @@ fun copyFilesToDirectory(files: List<File>, destinationDirectory: File) {
     }
 }
 
-fun readCSV(domain: String, category: String): List<PAA> {
+fun readCSV(domain: String, category: String): List<KeywordSource> {
     return try {
         readCsv("openai/$domain/content/$category/$category.csv")
             .distinctBy { it.title }
