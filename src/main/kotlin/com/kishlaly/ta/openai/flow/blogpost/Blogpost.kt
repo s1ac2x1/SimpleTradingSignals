@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 // TODO !!! удалить How to Choose the Right Food for Your Senior Cat из katzenverhalten.csv !!!
 
-// TODO всегда проверять эти две настройки ниже:
+// TODO всегда проверять эти три настройки ниже:
 val globalLanguage: Language = Language.EN
 val globalBlogTopic = "cats"
 val insertImages = false
