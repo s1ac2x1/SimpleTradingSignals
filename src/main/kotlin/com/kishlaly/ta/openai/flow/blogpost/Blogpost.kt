@@ -12,8 +12,13 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-val globalLanguage: Language = Language.DE
-val globalBlogTopic = "Katzen"
+// TODO !!! удалить How to Choose the Right Food for Your Senior Cat из katzenverhalten.csv !!!
+
+// TODO всегда проверять эти две настройки ниже:
+val globalLanguage: Language = Language.EN
+val globalBlogTopic = "cats"
+val insertImages = false
+
 var keywords = listOf<KeywordSource>()
 val interlinkage = true
 
@@ -58,13 +63,13 @@ fun main() {
 //        }
 
         // нужна еще перелинковка для больших статей
-        buildContent(xml, meta, keywordSource, Intent.TAGS_PAA)
+//        buildContent(xml, meta, keywordSource, Intent.TAGS_PAA)
     }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-    Files.write(Paths.get("openai/$domain/content/$category/${category}_posts.xml"), xml.build().toString().toByteArray())
+//    Files.write(Paths.get("openai/$domain/content/$category/${category}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
