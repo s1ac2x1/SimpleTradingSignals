@@ -37,7 +37,9 @@ fun main() {
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(5)
 
-    lines.take(5).forEach { paa ->
+    ПЕРЕЛИНКОВКА !
+
+    lines.take(3).forEach { paa ->
         executor.submit {
             val meta = BlogpostContentMeta(
                 keyword = paa.title,
