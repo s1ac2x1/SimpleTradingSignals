@@ -8,7 +8,22 @@ import kotlin.random.Random
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
     fun buildPAA(): String {
-        return ""
+        val srcFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
+        if (!File("$srcFolder").exists()) {
+            throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
+        }
+
+        val main = File("$srcFolder/${Intent.MAIN}_1").readText()
+        val history = File("$srcFolder/${Intent.HISTORY}_1").readText()
+        val facts = File("$srcFolder/${Intent.FACTS}_1").readText()
+
+        var content = """
+        <p>${createParagraphs(main)}</p>
+        <p>${processHistoricalContent(history)}</p>
+        <p>${processFactsContent(facts)}</p>
+    """.trimIndent()
+
+        return content
     }
 
     fun buildLongPost(): String {
