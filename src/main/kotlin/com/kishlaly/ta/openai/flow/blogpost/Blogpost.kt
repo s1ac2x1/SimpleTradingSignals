@@ -21,7 +21,7 @@ val insertImages = false
 val domain = "katze101.com"
 val category = "katzenverhalten"
 val imageURI = "2023/03"
-val type = ArticleType.PAA
+val type = ArticleType.BIG
 
 var keywords = listOf<KeywordSource>()
 val interlinkage = true
@@ -34,7 +34,6 @@ fun main() {
     // Преобразовать в WebP
     // Загрузить все картинки в блог
     // Создать XML
-
 
     // run only once per new category
     //filterCSV(domain, source, 250)
@@ -63,7 +62,7 @@ fun main() {
 //        }
 
         // нужна еще перелинковка для больших статей
-//        buildContent(xml, meta, keywordSource, Intent.TAGS_PAA)
+        buildContent(xml, meta, keywordSource)
     }
 
     executor.shutdown()
@@ -76,18 +75,22 @@ fun main() {
 private fun buildContent(
     xml: BlogpostXMLBuilder,
     meta: BlogpostContentMeta,
-    keywordSource: KeywordSource,
-    tagsIntent: Intent = Intent.TAGS
+    keywordSource: KeywordSource
 ) {
     val builder: (meta: BlogpostContentMeta) -> String = when (meta.type) {
         ArticleType.PAA -> { m -> BlogpostContentBuilder(m).buildPAA() }
         ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
     }
-    xml.append(meta, tagsIntent, builder)
+    xml.append(meta, resolveTagsIntent(meta.type), builder)
     Files.write(
         Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
         htmlStub.replace("###content###", builder(meta)).toByteArray()
     )
+}
+
+fun resolveTagsIntent(type: ArticleType) = when (type) {
+    ArticleType.PAA -> Intent.TAGS_PAA
+    ArticleType.BIG -> Intent.TAGS
 }
 
 fun resolveDownloader(type: ArticleType): (BlogpostContentMeta) -> Unit {
