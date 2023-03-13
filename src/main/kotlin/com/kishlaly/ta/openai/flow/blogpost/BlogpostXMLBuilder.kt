@@ -17,7 +17,7 @@ class BlogpostXMLBuilder() {
         xml.append("<post>")
 
         xml.append("<title>")
-        xml.append(meta.keyword.replace("?", ""))
+        xml.append(meta.keyword)
         xml.append("</title>")
 
         xml.append("<content>")

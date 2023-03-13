@@ -17,12 +17,17 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val history = File("$srcFolder/${Intent.HISTORY}_1").readText()
         val facts = File("$srcFolder/${Intent.FACTS}_1").readText()
 
+        var randomPAA = keywords.shuffled().random()
+        val link1 = "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${randomPAA.title.replace("?", "").encodeURL()}\">${randomPAA.title}</a>"
+        randomPAA = keywords.shuffled().random()
+        val link2 = "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${randomPAA.title.replace("?", "").encodeURL()}\">${randomPAA.title}</a>"
+
         var content = """
         <p>${createParagraphs(main)}</p>
         <p>${processHistoricalContent(history)}</p>
-        <p>${link1}</p>
+        <p><b>${link1}</b></p>
         <p>${processFactsContent(facts)}</p>
-        <p>${link2}</p>
+        <p><b>${link2}</b></p>
     """.trimIndent()
 
         content = postProcessAndCheck(content)

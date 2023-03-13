@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
+var keywords = listOf<PAA>()
 
 fun main() {
 
@@ -30,14 +31,14 @@ fun main() {
     val domain = "katze101.com"
     val imageURI = "2023/03"
     filterCSV(source)
-    val lines = readCSV(source)
+    keywords = readCSV(source)
 
-    val total = lines.size
+    val total = keywords.size
     val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(5)
 
-    lines.take(1).forEach { paa ->
+    keywords.take(1).forEach { paa ->
         val meta = BlogpostContentMeta(
             keyword = paa.title,
             domain = domain,
