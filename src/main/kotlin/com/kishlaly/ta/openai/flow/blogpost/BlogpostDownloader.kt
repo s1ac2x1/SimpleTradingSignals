@@ -2,13 +2,12 @@ package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.Combiner
 import com.kishlaly.ta.openai.flow.*
-import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 import kotlin.random.Random
 
 class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
-    private val stepFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
+    private val stepFolder = "openai/${meta.domain}/content/${meta.category}/${meta.type.name.lowercase()}/${meta.keyword.toFileName()}"
 
     fun downloadBigPost() {
         File(stepFolder).mkdir()
@@ -26,7 +25,12 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     fun downloadPAA() {
-        File(stepFolder).mkdir()
+        val folder = File(stepFolder)
+        if (folder.exists()) {
+            println("Content exists for \"${meta.keyword}\". Skipping...")
+            return
+        }
+        folder.mkdir()
 
         mainSection()
         historySection()

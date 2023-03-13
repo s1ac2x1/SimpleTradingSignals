@@ -50,16 +50,16 @@ fun main() {
             imgSrcFolder = "openai/${domain}/images_webp"
         )
 
-//        executor.submit {
-//            BlogpostDownloader(meta).downloadPAA()
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            BlogpostDownloader(meta).downloadPAA()
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
         // нужна еще перелинковка для больших статей
-        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
-            BlogpostContentBuilder(it).buildPAA()
-        }
+//        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
+//            BlogpostContentBuilder(it).buildPAA()
+//        }
     }
 
     executor.shutdown()
