@@ -22,9 +22,9 @@ val domain = "katze101.com"
 val category = "katzenverhalten"
 val imageURI = "2023/03"
 val type = ArticleType.BIG
+val interlinkage = true
 
 var keywords = listOf<KeywordSource>()
-val interlinkage = true
 
 fun main() {
 
