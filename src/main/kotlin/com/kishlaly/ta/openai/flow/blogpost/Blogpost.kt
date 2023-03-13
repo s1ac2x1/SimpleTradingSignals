@@ -51,16 +51,14 @@ fun main() {
             imgSrcFolder = "openai/${domain}/images_webp"
         )
 
-        executor.submit {
-            resolveDownloader(type)(meta)
-            processed.incrementAndGet()
-            println("==== Done $processed/$total ====\n")
-        }
+//        executor.submit {
+//            resolveDownloader(type)(meta)
+//            processed.incrementAndGet()
+//            println("==== Done $processed/$total ====\n")
+//        }
 
         // нужна еще перелинковка для больших статей
-//        buildContent(xml, meta, keywordSource, Intent.TAGS_PAA) {
-//            BlogpostContentBuilder(it).buildPAA()
-//        }
+        buildContent(xml, meta, keywordSource, Intent.TAGS_PAA)
     }
 
     executor.shutdown()
@@ -74,9 +72,12 @@ private fun buildContent(
     xml: BlogpostXMLBuilder,
     meta: BlogpostContentMeta,
     keywordSource: KeywordSource,
-    tagsIntent: Intent = Intent.TAGS,
-    builder: (meta: BlogpostContentMeta) -> String
+    tagsIntent: Intent = Intent.TAGS
 ) {
+    val builder: (meta: BlogpostContentMeta) -> String = when (meta.type) {
+        ArticleType.PAA -> { m -> BlogpostContentBuilder(m).buildPAA() }
+        ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
+    }
     xml.append(meta, tagsIntent, builder)
     Files.write(
         Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
