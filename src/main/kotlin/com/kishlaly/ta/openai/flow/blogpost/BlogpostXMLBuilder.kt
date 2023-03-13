@@ -1,8 +1,6 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.Intent
-import com.kishlaly.ta.openai.flow.toFileName
-import com.kishlaly.ta.openai.mainOutputFolder
 import java.io.File
 
 class BlogpostXMLBuilder() {
@@ -25,13 +23,13 @@ class BlogpostXMLBuilder() {
         xml.append("</content>")
 
         xml.append("<featuredImage>")
-        val postFolder = meta.keyword.toFileName()
+        val postFolder = meta.resolveKeywordFolder()
         var featuredImageURL = File(meta.imgSrcFolder).listFiles().random().name
         xml.append("https://${meta.domain}/wp-content/uploads/${meta.imgURI}/$featuredImageURL")
         xml.append("</featuredImage>")
 
         xml.append("<tags>")
-        val tags = File("$mainOutputFolder/$postFolder/${tagsIntent}_1").readText()
+        val tags = File("$postFolder/${tagsIntent}_1").readText()
         xml.append(tags)
         xml.append("</tags>")
 
