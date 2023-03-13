@@ -12,16 +12,14 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-// TODO !!! удалить How to Choose the Right Food for Your Senior Cat из katzenverhalten.csv !!!
-
 // TODO всегда проверять все эти настройки ниже:
-val globalLanguage: Language = Language.EN
-val globalBlogTopic = "cats"
-val insertImages = false
+val globalLanguage: Language = Language.DE
+val globalBlogTopic = "Katzen"
+val insertImages = true
 val domain = "katze101.com"
 val category = "katzenverhalten"
 val imageURI = "2023/03"
-val type = ArticleType.BIG
+val type = ArticleType.PAA
 val interlinkage = true
 
 var keywords = listOf<KeywordSource>()
