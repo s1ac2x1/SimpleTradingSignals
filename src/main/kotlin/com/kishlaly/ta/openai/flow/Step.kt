@@ -30,7 +30,9 @@ fun getPromptsMarkers(language: Language): List<String> {
             "Formatieren Sie den Text in Form von Absätzen ohne Zahlen",
             "Finden Sie einen Schlüsselsatz, der das Gegenteil davon ist",
             "Schreiben Sie drei Absätze zu diesem Thema",
-            "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste"
+            "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste",
+            "Schreiben Sie eine historische Notiz zu diesem Thema",
+            "Schreiben Sie eine ausführliche Expertenantwort"
         )
         Language.EN -> listOf(
             "I am writing an article about",
@@ -44,7 +46,8 @@ fun getPromptsMarkers(language: Language): List<String> {
             "Format the text in the form of paragraphs without numbers",
             "Find a key phrase that is the opposite of this",
             "Write three paragraphs on this topic",
-            "From this text, create a comma-separated list of 5 keywords"
+            "From this text, create a comma-separated list of 5 keywords",
+            "Write a historical note on this topic"
         )
     }
 }
