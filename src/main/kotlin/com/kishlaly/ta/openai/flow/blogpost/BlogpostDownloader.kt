@@ -10,7 +10,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private val stepFolder = "$mainOutputFolder/${meta.keyword.toFileName()}"
 
-
     fun downloadBigPost() {
         File(stepFolder).mkdir()
 
