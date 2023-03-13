@@ -12,6 +12,7 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 
 val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
@@ -29,11 +30,14 @@ fun main() {
     val domain = "katze101.com"
     val imageURI = "2023/03"
     filterCSV(source)
+    val lines = readCSV(source)
 
+    val total = lines.size
+    val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(5)
 
-    readCSV(source).take(5).forEach { paa ->
+    lines.take(5).forEach { paa ->
         executor.submit {
             val meta = BlogpostContentMeta(
                 keyword = paa.title,
@@ -42,6 +46,8 @@ fun main() {
                 imgSrcFolder = "openai/katze101/images_webp"
             )
             BlogpostDownloader(meta).downloadPAA()
+            processed.incrementAndGet()
+            println("\n ==== Done $processed/$total ====")
         }
 
 //        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
