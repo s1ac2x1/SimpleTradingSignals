@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "model": "text-davinci-003",
-  "prompt": "Ich schreibe einen Blog über Katzen. Schreiben Sie von 3 bis 7 interessante Fakten über dieses Thema: \"Wie erkennt man das eine Katze weint?\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen.",
+  "prompt": "From this text, create a comma-separated list of 5 long keywords: \"As cats age, their nutritional needs change. It can be difficult to know how to best provide for your senior cat, especially when it comes to choosing the right food. In this article, we will explore the special dietary needs of senior cats and discuss the various types of food available to meet those needs. We will also look at ways to ensure that your senior cat is getting all the nutrition they need in order to stay healthy and happy in their golden years. With a little knowledge and understanding, you can make sure that your beloved senior cat is getting all the nutrition they need for a long and healthy life.\"",
   "max_tokens": 2048,
   "temperature": 0.7,
   "top_p": 0.5,
