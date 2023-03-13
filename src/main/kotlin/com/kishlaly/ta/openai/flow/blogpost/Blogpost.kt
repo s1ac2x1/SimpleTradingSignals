@@ -29,6 +29,7 @@ fun main() {
     val domain = "katze101.com"
     val category = "katzenverhalten"
     val imageURI = "2023/03"
+    val type = ArticleType.PAA
 
     // run only once per new category
     //filterCSV(domain, source, 250)
@@ -42,7 +43,7 @@ fun main() {
 
     keywords.take(1).forEach { keywordSource ->
         val meta = BlogpostContentMeta(
-            type = ArticleType.PAA,
+            type = type,
             keyword = keywordSource.title,
             category = category,
             domain = domain,
@@ -50,16 +51,16 @@ fun main() {
             imgSrcFolder = "openai/${domain}/images_webp"
         )
 
-//        executor.submit {
-//            BlogpostDownloader(meta).downloadPAA()
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            resolveDownloader(type)(meta)
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
         // нужна еще перелинковка для больших статей
-        buildContent(xml, meta, keywordSource, Intent.TAGS_PAA) {
-            BlogpostContentBuilder(it).buildPAA()
-        }
+//        buildContent(xml, meta, keywordSource, Intent.TAGS_PAA) {
+//            BlogpostContentBuilder(it).buildPAA()
+//        }
     }
 
     executor.shutdown()
@@ -81,6 +82,13 @@ private fun buildContent(
         Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
         htmlStub.replace("###content###", builder(meta)).toByteArray()
     )
+}
+
+fun resolveDownloader(type: ArticleType): (BlogpostContentMeta) -> Unit {
+    return when (type) {
+        ArticleType.PAA -> { meta -> run { BlogpostDownloader(meta).downloadPAA() } }
+        ArticleType.BIG -> { meta -> run { BlogpostDownloader(meta).downloadBigPost() } }
+    }
 }
 
 fun findAllImages(rootDirectory: File): List<File> {
