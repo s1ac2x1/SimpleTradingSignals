@@ -37,24 +37,24 @@ fun main() {
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(5)
 
-    ПЕРЕЛИНКОВКА !
+    lines.take(1).forEach { paa ->
+        val meta = BlogpostContentMeta(
+            keyword = paa.title,
+            domain = domain,
+            imgURI = imageURI,
+            imgSrcFolder = "openai/katze101/images_webp"
+        )
 
-    lines.take(3).forEach { paa ->
-        executor.submit {
-            val meta = BlogpostContentMeta(
-                keyword = paa.title,
-                domain = domain,
-                imgURI = imageURI,
-                imgSrcFolder = "openai/katze101/images_webp"
-            )
-            BlogpostDownloader(meta).downloadPAA()
-            processed.incrementAndGet()
-            println("\n ==== Done $processed/$total ====")
-        }
-
-//        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
-//            BlogpostContentBuilder(it).buildPAA()
+//        executor.submit {
+//            BlogpostDownloader(meta).downloadPAA()
+//            processed.incrementAndGet()
+//            println("==== Done $processed/$total ====")
 //        }
+
+        // ПЕРЕЛИНКОВКА !!!
+        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
+            BlogpostContentBuilder(it).buildPAA()
+        }
     }
 
     executor.shutdown()
