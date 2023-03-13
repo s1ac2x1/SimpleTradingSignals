@@ -5,11 +5,15 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 
-fun filterCSV(name: String) {
-    val rawContent = readCsv("openai/$name.csv")
-    val filteredContent = rawContent.distinctBy { it.title }.shuffled().take(250)
+fun filterCSV(domain: String, category: String, limit: Int) {
+    val filePath = "openai/$domain/content/$category/$category.csv"
+    val rawContent = readCsv(filePath)
+    var filteredContent = rawContent.distinctBy { it.title }
+    if (filteredContent.size > limit) {
+        filteredContent = filteredContent.shuffled().take(limit)
+    }
     val lines = filteredContent.map { "${it.title};" }
-    saveToFile("openai/$name.csv", lines)
+    saveToFile(filePath, lines)
     println("Filtered ${rawContent.size - filteredContent.size} duplicates")
 }
 

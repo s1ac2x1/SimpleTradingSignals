@@ -30,8 +30,11 @@ fun main() {
     val source = "katzenverhalten"
     val domain = "katze101.com"
     val imageURI = "2023/03"
-    filterCSV(source)
-    keywords = readCSV(source)
+
+    // run only once per new category
+    //filterCSV(domain, source, 250)
+
+    keywords = readCSV(domain, source)
 
     val total = keywords.size
     val processed = AtomicInteger(0)
@@ -41,21 +44,22 @@ fun main() {
     keywords.take(1).forEach { paa ->
         val meta = BlogpostContentMeta(
             keyword = paa.title,
+            category = source,
             domain = domain,
             imgURI = imageURI,
-            imgSrcFolder = "openai/katze101/images_webp"
+            imgSrcFolder = "openai/${domain}/images_webp"
         )
 
-        executor.submit {
-            BlogpostDownloader(meta).downloadPAA()
-            processed.incrementAndGet()
-            println("==== Done $processed/$total ====\n")
-        }
+//        executor.submit {
+//            BlogpostDownloader(meta).downloadPAA()
+//            processed.incrementAndGet()
+//            println("==== Done $processed/$total ====\n")
+//        }
 
         // нужна еще перелинковка для больших статей
-//        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
-//            BlogpostContentBuilder(it).buildPAA()
-//        }
+        buildContent(xml, meta, paa, Intent.TAGS_PAA) {
+            BlogpostContentBuilder(it).buildPAA()
+        }
     }
 
     executor.shutdown()
@@ -103,9 +107,9 @@ fun copyFilesToDirectory(files: List<File>, destinationDirectory: File) {
     }
 }
 
-fun readCSV(inputFileName: String): List<PAA> {
+fun readCSV(domain: String, category: String): List<PAA> {
     return try {
-        readCsv("openai/$inputFileName.csv")
+        readCsv("openai/$domain/content/$category/$category.csv")
             .distinctBy { it.title }
             .toList()
     } catch (e: Exception) {
