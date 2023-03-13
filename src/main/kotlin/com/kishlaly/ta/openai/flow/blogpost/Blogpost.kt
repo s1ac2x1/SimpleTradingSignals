@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger
 val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
 var keywords = listOf<KeywordSource>()
+val interlinkage = true
 
 fun main() {
 

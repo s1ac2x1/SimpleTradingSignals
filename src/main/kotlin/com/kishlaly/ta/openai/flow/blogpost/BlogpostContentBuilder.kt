@@ -21,12 +21,15 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         randomPAA = keywords.shuffled().random()
         val link2 = "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${randomPAA.title.replace("?", "").encodeURL()}\">${randomPAA.title}</a>"
 
+        val link1HTML = if (interlinkage) "<p><b>${link1}</b></p>" else ""
+        val link2HTML = if (interlinkage) "<p><b>${link2}</b></p>" else ""
+
         var content = """
         <p>${createParagraphs(main)}</p>
         <p>${processHistoricalContent(history)}</p>
-        <p><b>${link1}</b></p>
+        $link1HTML
         <p>${processFactsContent(facts)}</p>
-        <p><b>${link2}</b></p>
+        $link2HTML
     """.trimIndent()
 
         content = postProcessAndCheck(content)
