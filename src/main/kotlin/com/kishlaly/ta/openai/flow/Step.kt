@@ -37,7 +37,8 @@ fun getPromptsMarkers(): List<String> {
             "Schreiben Sie drei Absätze zu diesem Thema",
             "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste",
             "Schreiben Sie eine historische Notiz zu diesem Thema",
-            "Schreiben Sie eine ausführliche Expertenantwort"
+            "Schreiben Sie eine ausführliche Expertenantwort",
+            "Schreiben Sie von 3 bis 7 interessante Fakten"
         )
         Language.EN -> listOf(
             "I am writing an article about",
@@ -52,7 +53,8 @@ fun getPromptsMarkers(): List<String> {
             "Find a key phrase that is the opposite of this",
             "Write three paragraphs on this topic",
             "From this text, create a comma-separated list of 5 keywords",
-            "Write a historical note on this topic"
+            "Write a historical note on this topic",
+            "Write from 3 to 7"
         )
     }
 }
@@ -78,8 +80,8 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     HISTORY(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine historische Notiz zu diesem Thema: \"###param###\".",
-            Language.EN to "I am writing an article about ${globalBlogTopic}. Write a historical note on this topic: \"###param###\"."
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine lange historische Notiz zu diesem Thema: \"###param###\".",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write a long historical note on this topic: \"###param###\"."
         )
     ),
     CONTENT_PART_2_MAIN(
@@ -102,8 +104,8 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     FACTS(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen.",
-            Language.EN to "I am writing an article about ${globalBlogTopic}. Write interesting facts about this topic: \"###param###\". Format the text in the form of paragraphs without numbers."
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie von 3 bis 7 interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write from 3 to 7 interesting facts about this topic: \"###param###\". Format the text in the form of paragraphs without numbers."
         )
     ),
     OPPOSITE_OPINION_QUESTION(
