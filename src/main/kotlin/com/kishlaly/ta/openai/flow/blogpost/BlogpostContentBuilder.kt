@@ -25,7 +25,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val link2HTML = if (interlinkage) "<p><b>${link2}</b></p>" else ""
 
         var content = """
-        <p>${createParagraphs(main)}</p>
+        <p>${processMainContent(main)}</p>
         <p>${processHistoricalContent(history)}</p>
         $link1HTML
         <p>${processFactsContent(facts)}</p>
@@ -69,7 +69,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                         headingContent.append(historicalContent)
                     }
                     if (intent == Intent.CONTENT_PART_2_MAIN) {
-                        headingContent.append(createParagraphs(part))
+                        headingContent.append(processMainContent(part))
                     }
                     if (intent == Intent.CONTENT_PART_3_FACTS) {
                         val factsContent = processFactsContent(part)
@@ -108,6 +108,8 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content1 = content1.replace("  ", " ")
         content1 = content1.replace("..", ".")
         content1 = content1.replace(" .", ".")
+        content1 = content1.replace(": - ", ": ")
+        content1 = content1.replace(". - ", ". ")
         content1 = removeNumberedLists2(content1)
         content1 = content1.replace("•", "<br>•")
 
@@ -153,6 +155,21 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             } else if (Random.nextBoolean() && markedIMax < 2) {
                 result.append("<p>${wrapOneSenenceInTag(chunk, "i")}</p>")
                 markedI++
+            } else {
+                result.append("<p>${chunk.joinToString(". ")}.</p>")
+            }
+        }
+        return result.toString()
+    }
+
+    private fun processMainContent(part: String): String {
+        val result = StringBuilder()
+        var markedB = 0
+        val markedBMax = Random.nextInt(2)
+        chunked(part).forEachIndexed { index, chunk ->
+            if (Random.nextBoolean() && markedB < markedBMax) {
+                result.append("<p>${wrapOneSenenceInTag(chunk, "b")}</p>")
+                markedB++
             } else {
                 result.append("<p>${chunk.joinToString(". ")}.</p>")
             }

@@ -70,7 +70,7 @@ val createParagraphs: (String) -> String = {
     it.split(". ")
         .filter { !it.isNullOrBlank() }
         .map { it.trim() }
-        .filter { it.length > 10 }
+        .filter { it.length > 30 }
         .chunked(Random.nextInt(2, 4))
         .forEach { chunk ->
             output.append("<p>")
@@ -96,7 +96,7 @@ fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
     .map { it.trim() }
     .map { it.trimStart() }
     .map { it.trimEnd() }
-    .filter { it.length > 10 }
+    .filter { it.length > 30 }
     .map { removeNumberedItems(it) }
     .map { removeTrailingNumbers(it) }
     .map { removeNumberedLists(it) }
