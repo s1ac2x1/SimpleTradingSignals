@@ -18,7 +18,7 @@ val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
 val insertImages = true
 val domain = "katze101.com"
-val category = "katzenpflege"
+val category = ""
 val imageURI = "2023/03"
 val type = ArticleType.PAA
 val interlinkage = true
@@ -35,7 +35,7 @@ fun main() {
     // Создать XML
 
     // run only once per new category
-    //filterCSV(domain, category, 300)
+    //filterCSV(domain, category, 200)
 
     keywords = readCSV(domain, category)
 
@@ -44,7 +44,9 @@ fun main() {
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(5)
 
-    keywords.take(1).forEach { keywordSource ->
+    keywords
+        //.take(1)
+        .forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = type,
             keyword = keywordSource.title,
@@ -61,13 +63,13 @@ fun main() {
 //        }
 
         // нужна еще перелинковка для больших статей
-       buildContent(xml, meta, keywordSource)
+       //buildContent(xml, meta, keywordSource)
     }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-//    Files.write(Paths.get("openai/$domain/content/$category/${category}_posts.xml"), xml.build().toString().toByteArray())
+//    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
@@ -82,10 +84,10 @@ private fun buildContent(
         ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
     }
     xml.append(meta, resolveTagsIntent(meta.type), builder)
-    Files.write(
-        Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
-        htmlStub.replace("###content###", builder(meta)).toByteArray()
-    )
+//    Files.write(
+//        Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
+//        htmlStub.replace("###content###", builder(meta)).toByteArray()
+//    )
 }
 
 fun resolveTagsIntent(type: ArticleType) = when (type) {

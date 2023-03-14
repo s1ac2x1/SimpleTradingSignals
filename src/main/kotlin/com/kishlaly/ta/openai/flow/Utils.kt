@@ -113,6 +113,7 @@ fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
     .map { addSpaceAfterSymbol(it, ':') }
     .map { addSpaceAfterSymbol(it, '-') }
     .filter { !it.isNullOrBlank() }
+    .filter { it[0].isLetterOrDigit() }
     .chunked(Random.nextInt(2, 4))
 
 fun removeNumberedLists2(text: String): String {
