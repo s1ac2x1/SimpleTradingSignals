@@ -18,9 +18,9 @@ class BlogpostXMLBuilder() {
         xml.append(meta.keyword)
         xml.append("</title>")
 
-        xml.append("<content>")
+        xml.append("<content><![CDATA[")
         xml.append(content(meta))
-        xml.append("</content>")
+        xml.append("]]></content>")
 
         xml.append("<featuredImage>")
         val postFolder = meta.resolveKeywordFolder()

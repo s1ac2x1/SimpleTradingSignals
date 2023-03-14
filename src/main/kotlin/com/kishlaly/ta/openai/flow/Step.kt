@@ -122,14 +122,14 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     TAGS(
         mapOf(
-            Language.DE to "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 langen Schlüsselwörtern: \"###param###\"",
-            Language.EN to "From this text, create a comma-separated list of 5 long keywords: \"###param###\""
+            Language.DE to "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: \"###param###\"",
+            Language.EN to "From this text, create a comma-separated list of 5 keywords: \"###param###\""
         )
     ),
     TAGS_PAA(
         mapOf(
-            Language.DE to "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 langen Schlüsselwörtern: \"###param###\"",
-            Language.EN to "From this text, create a comma-separated list of 5 long keywords: \"###param###\""
+            Language.DE to "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: \"###param###\"",
+            Language.EN to "From this text, create a comma-separated list of 5 keywords: \"###param###\""
         )
     ),
     TOC_IMAGES(
