@@ -14,14 +14,14 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
 // TODO всегда проверять все эти настройки ниже:
-val globalLanguage: Language = Language.DE
-val globalBlogTopic = "Katzen"
-val insertImages = true
-val domain = "katze101.com"
-val category = ""
+val globalLanguage: Language = Language.EN
+val globalBlogTopic = "cats"
+val insertImages = false
+val domain = "medium"
+val category = "main"
 val imageURI = "2023/03"
-val type = ArticleType.PAA
-val interlinkage = true
+val type = ArticleType.BIG
+val interlinkage = false
 
 var keywords = listOf<KeywordSource>()
 
@@ -63,7 +63,7 @@ fun main() {
 //        }
 
         // нужна еще перелинковка для больших статей
-       //buildContent(xml, meta, keywordSource)
+       buildContent(xml, meta, keywordSource)
     }
 
     executor.shutdown()
@@ -84,10 +84,10 @@ private fun buildContent(
         ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
     }
     xml.append(meta, resolveTagsIntent(meta.type), builder)
-//    Files.write(
-//        Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
-//        htmlStub.replace("###content###", builder(meta)).toByteArray()
-//    )
+    Files.write(
+        Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
+        htmlStub.replace("###content###", builder(meta)).toByteArray()
+    )
 }
 
 fun resolveTagsIntent(type: ArticleType) = when (type) {

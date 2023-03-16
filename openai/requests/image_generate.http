@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "ein fotografisches Studioporträt aus der Nähe einer Katze, die sich so verhält: \"Warum legen sich Katzen auf den Menschen?\"",
+  "prompt": "a close up, studio photographic portrait of a happy cat",
   "n": 3,
   "size": "512x512",
   "user": "vladimir@kishlaly.com"
