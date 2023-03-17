@@ -6,7 +6,7 @@ import kotlin.random.Random
 
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
-    fun getRandomInterlink(): String {
+    fun getRandomInterlink(type: ArticleType): String {
         var randomPAA = keywords.shuffled().random()
         return "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${randomPAA.title.replace("?", "").encodeURL()}\">${randomPAA.title}</a>"
     }
@@ -74,6 +74,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                     }
                 }
             tocContent.append(headingContent.toString())
+            tocContent.append("${if (interlinkage) "<p><b>${getRandomInterlink()}</b></p>" else ""}")
         }
 
         val oppositeOpitionSubtitle = File("$srcFolder/${Intent.OPPOSITE_OPINION_QUESTION}_1").readText()

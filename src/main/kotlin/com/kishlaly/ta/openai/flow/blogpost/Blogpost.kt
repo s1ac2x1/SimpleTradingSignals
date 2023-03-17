@@ -23,7 +23,7 @@ val imageURI = "2023/03"
 val type = ArticleType.BIG
 val interlinkage = true
 
-var keywords = listOf<KeywordSource>()
+var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
 
@@ -37,14 +37,14 @@ fun main() {
     // run only once per new category
     //filterCSV(domain, category, 200)
 
-    keywords = readCSV(domain, category, type)
+    keywords = readCSV(domain, category)
 
     val total = keywords.size
     val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(10)
 
-    keywords
+    keywords[type]
         //.take(1)
         .forEach { keywordSource ->
         val meta = BlogpostContentMeta(
@@ -121,14 +121,19 @@ fun copyFilesToDirectory(files: List<File>, destinationDirectory: File) {
     }
 }
 
-fun readCSV(domain: String, category: String, type: ArticleType): List<KeywordSource> {
-    return try {
-        readCsv("openai/$domain/content/$category/${category}_${type.name.lowercase()}.csv")
-            .distinctBy { it.title }
-            .toList()
+fun readCSV(domain: String, category: String): MutableMap<ArticleType, List<KeywordSource>> {
+    val result = mutableMapOf<ArticleType, List<KeywordSource>>()
+    try {
+        ArticleType.values().forEach { type ->
+            val keywords = readCsv("openai/$domain/content/$category/${category}_${type.name.lowercase()}.csv")
+                .distinctBy { it.title }
+                .toList()
+            result.put(type, keywords)
+        }
     } catch (e: Exception) {
-        throw e
+        // ignore
     }
+    return result
 }
 
 val htmlStub = """<!DOCTYPE html>
