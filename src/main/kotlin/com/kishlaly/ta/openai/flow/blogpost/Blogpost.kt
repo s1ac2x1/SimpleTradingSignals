@@ -14,14 +14,14 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
 // TODO всегда проверять все эти настройки ниже:
-val globalLanguage: Language = Language.EN
-val globalBlogTopic = "cats"
-val insertImages = false
-val domain = "medium"
-val category = "main"
+val globalLanguage: Language = Language.DE
+val globalBlogTopic = "Katzen"
+val insertImages = true
+val domain = "katze101.com"
+val category = "katzenverhalten"
 val imageURI = "2023/03"
 val type = ArticleType.BIG
-val interlinkage = false
+val interlinkage = true
 
 var keywords = listOf<KeywordSource>()
 
@@ -37,12 +37,12 @@ fun main() {
     // run only once per new category
     //filterCSV(domain, category, 200)
 
-    keywords = readCSV(domain, category)
+    keywords = readCSV(domain, category, type)
 
     val total = keywords.size
     val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
-    val executor = Executors.newFixedThreadPool(5)
+    val executor = Executors.newFixedThreadPool(10)
 
     keywords
         //.take(1)
@@ -56,14 +56,14 @@ fun main() {
             imgSrcFolder = "openai/${domain}/images_webp"
         )
 
-//        executor.submit {
-//            resolveDownloader(type)(meta)
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            resolveDownloader(type)(meta)
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
         // нужна еще перелинковка для больших статей
-       buildContent(xml, meta, keywordSource)
+//       buildContent(xml, meta, keywordSource)
     }
 
     executor.shutdown()
@@ -121,9 +121,9 @@ fun copyFilesToDirectory(files: List<File>, destinationDirectory: File) {
     }
 }
 
-fun readCSV(domain: String, category: String): List<KeywordSource> {
+fun readCSV(domain: String, category: String, type: ArticleType): List<KeywordSource> {
     return try {
-        readCsv("openai/$domain/content/$category/$category.csv")
+        readCsv("openai/$domain/content/$category/${category}_${type.name.lowercase()}.csv")
             .distinctBy { it.title }
             .toList()
     } catch (e: Exception) {

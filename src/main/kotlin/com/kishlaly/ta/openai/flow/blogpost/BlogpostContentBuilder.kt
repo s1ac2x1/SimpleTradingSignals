@@ -6,6 +6,11 @@ import kotlin.random.Random
 
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
+    fun getRandomInterlink(): String {
+        var randomPAA = keywords.shuffled().random()
+        return "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${randomPAA.title.replace("?", "").encodeURL()}\">${randomPAA.title}</a>"
+    }
+
     fun buildPAA(): String {
         val srcFolder = meta.resolveKeywordFolder()
         if (!File("$srcFolder").exists()) {
@@ -16,20 +21,12 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val history = File("$srcFolder/${Intent.HISTORY}_1").readText()
         val facts = File("$srcFolder/${Intent.FACTS}_1").readText()
 
-        var randomPAA = keywords.shuffled().random()
-        val link1 = "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${randomPAA.title.replace("?", "").encodeURL()}\">${randomPAA.title}</a>"
-        randomPAA = keywords.shuffled().random()
-        val link2 = "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${randomPAA.title.replace("?", "").encodeURL()}\">${randomPAA.title}</a>"
-
-        val link1HTML = if (interlinkage) "<p><b>${link1}</b></p>" else ""
-        val link2HTML = if (interlinkage) "<p><b>${link2}</b></p>" else ""
-
         var content = """
         <p>${processMainContent(main)}</p>
         <p>${processHistoricalContent(history)}</p>
-        $link1HTML
+        ${if (interlinkage) "<p><b>${getRandomInterlink()}</b></p>" else ""}
         <p>${processFactsContent(facts)}</p>
-        $link2HTML
+        ${if (interlinkage) "<p><b>${getRandomInterlink()}</b></p>" else ""}
     """.trimIndent()
 
         content = postProcessAndCheck(content)

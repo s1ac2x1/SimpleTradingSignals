@@ -58,22 +58,24 @@ import kotlin.random.Random
 //}
 
 //fun main() {
-//    val breeds = File("openai/katze101/breeds").readLines()
-//    val ages = File("openai/katze101/age").readLines()
-//    val moods = File("openai/katze101/mood").readLines()
-//    val actions = File("openai/katze101/actions").readLines()
+//    val domain = "katze101.com"
+//    val breeds = File("openai/$domain/breeds").readLines()
+//    val ages = File("openai/$domain/age").readLines()
+//    val moods = File("openai/$domain/mood").readLines()
+//    val actions = File("openai/$domain/actions").readLines()
 //
 //        val tasks = mutableListOf<ImageGenerateTask>()
-//    (1..1).forEach {
+//    (1..3).forEach {
 //        val breed = breeds.random()
 //        val age = ages.random()
 //        val mood = moods.random()
 //        val action = actions.random()
 //        val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
 //        tasks.add(ImageGenerateTask(
-//            keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
-//            outputFolderName = "openai/katze101/images",
-//            outputFileName = "katze101.com-${System.nanoTime()}",
+//            //keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
+//            keyword = "a close up, studio photographic portrait of a white woman 30 years old who wearing dress, taking a cat on the hands and smiling. In the style pencil artwork",
+//            outputFolderName = "openai/$domain/images",
+//            outputFileName = "$domain-${System.nanoTime()}",
 //            n = 1
 //        ))
 //    }
@@ -113,11 +115,11 @@ import kotlin.random.Random
 //    ImagesProcessor.edit(listOf(editTask))
 //}
 
-//fun main() {
-//    val variationTask = ImageVariationTask("openai", "cat.png")
-//
-//    ImagesProcessor.variation(listOf(variationTask))
-//}
+fun main() {
+    val variationTask = ImageVariationTask("openai", "cat.png")
+
+    ImagesProcessor.variation(listOf(variationTask))
+}
 
 
 fun convertPngToWebp(pngPath: String, webpPath: String) {
