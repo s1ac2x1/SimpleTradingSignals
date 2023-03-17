@@ -3,6 +3,7 @@ package com.kishlaly.ta.openai.flow.blogpost
 import com.kishlaly.ta.openai.flow.*
 import java.io.File
 import kotlin.random.Random
+import kotlin.random.nextInt
 
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
@@ -45,6 +46,8 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
         val tocPlan = File("$srcFolder/${Intent.TOC_PLAN}_1").readLines()
 
+        val interlinksLimit = Random.nextInt(5) + 2
+        var linksMade = 0
         val tocContent = StringBuilder()
         tocPlan.forEachIndexed { index, item ->
             tocContent.append("<h2>$item</h2>")
@@ -75,7 +78,10 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                     }
                 }
             tocContent.append(headingContent.toString())
-            tocContent.append("${if (interlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}")
+            if (interlinkage && Random.nextBoolean() && linksMade <= interlinksLimit) {
+                tocContent.append("<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>")
+                linksMade++
+            }
         }
 
         val oppositeOpitionSubtitle = File("$srcFolder/${Intent.OPPOSITE_OPINION_QUESTION}_1").readText()
