@@ -25,9 +25,9 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         var content = """
         <p>${processMainContent(main)}</p>
         <p>${processHistoricalContent(history)}</p>
-        ${if (interlinkage) "<p><b>${getRandomInterlink()}</b></p>" else ""}
+        ${if (interlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
         <p>${processFactsContent(facts)}</p>
-        ${if (interlinkage) "<p><b>${getRandomInterlink()}</b></p>" else ""}
+        ${if (interlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
     """.trimIndent()
 
         content = postProcessAndCheck(content)
@@ -75,7 +75,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                     }
                 }
             tocContent.append(headingContent.toString())
-            tocContent.append("${if (interlinkage) "<p><b>${getRandomInterlink()}</b></p>" else ""}")
+            tocContent.append("${if (interlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}")
         }
 
         val oppositeOpitionSubtitle = File("$srcFolder/${Intent.OPPOSITE_OPINION_QUESTION}_1").readText()
