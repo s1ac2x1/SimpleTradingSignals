@@ -69,7 +69,7 @@ fun main() {
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type}_posts.xml"), xml.build().toString().toByteArray())
+    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
