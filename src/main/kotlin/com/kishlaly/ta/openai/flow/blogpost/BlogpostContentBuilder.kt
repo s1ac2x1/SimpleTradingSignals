@@ -78,7 +78,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                     }
                 }
             tocContent.append(headingContent.toString())
-            if (interlinkage && Random.nextBoolean() && linksMade <= interlinksLimit) {
+            if (interlinkage && index % 3 == 0 && linksMade <= interlinksLimit) {
                 tocContent.append("<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>")
                 linksMade++
             }
