@@ -46,7 +46,7 @@ fun main() {
 
     keywords[type]
         //.take(1)
-        .forEach { keywordSource ->
+        ?.forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = type,
             keyword = keywordSource.title,

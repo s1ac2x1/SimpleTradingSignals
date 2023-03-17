@@ -7,8 +7,9 @@ import kotlin.random.Random
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
     fun getRandomInterlink(type: ArticleType): String {
-        var randomPAA = keywords.shuffled().random()
-        return "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${randomPAA.title.replace("?", "").encodeURL()}\">${randomPAA.title}</a>"
+        return keywords[type]?.shuffled()?.random()?.let {
+            "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${it.title.replace("?", "").encodeURL()}\">${it.title}</a>"
+        } ?: ""
     }
 
     fun buildPAA(): String {
