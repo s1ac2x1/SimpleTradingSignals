@@ -36,7 +36,7 @@ fun main() {
     // Создать XML
 
     // run only once per new category
-    filterCSV()
+    //filterCSV()
 
     keywords = readCSV()
 
