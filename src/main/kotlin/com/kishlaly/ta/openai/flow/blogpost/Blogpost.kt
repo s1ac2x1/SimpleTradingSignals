@@ -18,9 +18,9 @@ val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
 val insertImages = true
 val domain = "katze101.com"
-val category = "katzenpflege"
+val category = "gesundheit-von-katzen"
 val imageURI = "2023/03"
-val type = ArticleType.BIG
+val type = ArticleType.PAA
 val interlinkage = true
 
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
@@ -35,7 +35,7 @@ fun main() {
     // Создать XML
 
     // run only once per new category
-    //filterCSV(domain, category, 200)
+    filterCSV(domain, category, 300)
 
     keywords = readCSV(domain, category)
 
@@ -63,13 +63,13 @@ fun main() {
 //        }
 
         // нужна еще перелинковка для больших статей
-       buildContent(xml, meta, keywordSource)
+//       buildContent(xml, meta, keywordSource)
     }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+//    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
