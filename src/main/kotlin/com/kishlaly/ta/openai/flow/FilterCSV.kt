@@ -1,7 +1,7 @@
 package com.kishlaly.ta.openai.flow
 
-import com.kishlaly.ta.openai.domain
 import com.kishlaly.ta.openai.flow.blogpost.category
+import com.kishlaly.ta.openai.flow.blogpost.domain
 import com.kishlaly.ta.openai.flow.blogpost.limit
 import com.kishlaly.ta.openai.flow.blogpost.type
 import com.kishlaly.ta.openai.readCsv
