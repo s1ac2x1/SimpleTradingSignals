@@ -57,13 +57,12 @@ fun main() {
             imgSrcFolder = "openai/${domain}/images_webp"
         )
 
-//        executor.submit {
-//            resolveDownloader(type)(meta)
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            resolveDownloader(type)(meta)
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
-        // нужна еще перелинковка для больших статей
 //       buildContent(xml, meta, keywordSource)
     }
 
