@@ -19,6 +19,7 @@ val globalBlogTopic = "Katzen"
 val insertImages = true
 val domain = "katze101.com"
 val category = "gesundheit-von-katzen"
+val limit = 300
 val imageURI = "2023/03"
 val type = ArticleType.PAA
 val interlinkage = true
@@ -35,7 +36,7 @@ fun main() {
     // Создать XML
 
     // run only once per new category
-    filterCSV(domain, category, 300)
+    filterCSV()
 
     keywords = readCSV(domain, category)
 

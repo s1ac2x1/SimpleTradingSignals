@@ -1,12 +1,16 @@
 package com.kishlaly.ta.openai.flow
 
+import com.kishlaly.ta.openai.domain
+import com.kishlaly.ta.openai.flow.blogpost.category
+import com.kishlaly.ta.openai.flow.blogpost.limit
+import com.kishlaly.ta.openai.flow.blogpost.type
 import com.kishlaly.ta.openai.readCsv
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 
-fun filterCSV(domain: String, category: String, limit: Int) {
-    val filePath = "openai/$domain/content/$category/$category.csv"
+fun filterCSV() {
+    val filePath = "openai/$domain/content/$category/${category}_${type.name.lowercase()}.csv"
     val rawContent = readCsv(filePath)
     var filteredContent = rawContent.distinctBy { it.title }
     if (filteredContent.size > limit) {
