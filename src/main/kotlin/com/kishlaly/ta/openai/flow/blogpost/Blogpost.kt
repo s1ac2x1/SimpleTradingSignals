@@ -40,7 +40,7 @@ fun main() {
 
     keywords = readCSV()
 
-    val total = keywords.size
+    val total = keywords[type]?.size ?: 0
     val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(10)
