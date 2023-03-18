@@ -18,7 +18,7 @@ val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
 val insertImages = true
 val domain = "katze101.com"
-val category = "katzenspielzeug"
+val category = "gesundheit-von-katzen"
 val limit = 300
 val imageURI = "2023/03"
 val type = ArticleType.PAA
@@ -57,26 +57,27 @@ fun main() {
             imgSrcFolder = "openai/${domain}/images_webp"
         )
 
-        executor.submit {
-            resolveDownloader(type)(meta)
-            processed.incrementAndGet()
-            println("==== Done $processed/$total ====\n")
-        }
+//        executor.submit {
+//            resolveDownloader(type)(meta)
+//            processed.incrementAndGet()
+//            println("==== Done $processed/$total ====\n")
+//        }
 
-//       buildContent(xml, meta, keywordSource)
+       buildContent(xml, meta, keywordSource, false)
     }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-//    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
 private fun buildContent(
     xml: BlogpostXMLBuilder,
     meta: BlogpostContentMeta,
-    keywordSource: KeywordSource
+    keywordSource: KeywordSource,
+    saveTempHTML: Boolean
 ) {
     println("Building ${meta.type} for [${keywordSource.title}]")
     val builder: (meta: BlogpostContentMeta) -> String = when (meta.type) {
@@ -84,10 +85,12 @@ private fun buildContent(
         ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
     }
     xml.append(meta, resolveTagsIntent(meta.type), builder)
+    if (saveTempHTML) {
     Files.write(
         Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
         htmlStub.replace("###content###", builder(meta)).toByteArray()
     )
+    }
 }
 
 fun resolveTagsIntent(type: ArticleType) = when (type) {
