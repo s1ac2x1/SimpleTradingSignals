@@ -43,7 +43,7 @@ fun main() {
     val total = keywords[type]?.size ?: 0
     val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
-    val executor = Executors.newFixedThreadPool(10)
+    val executor = Executors.newFixedThreadPool(5)
 
     keywords[type]
         //.take(1)
