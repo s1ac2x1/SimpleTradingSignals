@@ -38,7 +38,7 @@ fun main() {
     // run only once per new category
     filterCSV()
 
-    keywords = readCSV(domain, category)
+    keywords = readCSV()
 
     val total = keywords.size
     val processed = AtomicInteger(0)
@@ -122,7 +122,7 @@ fun copyFilesToDirectory(files: List<File>, destinationDirectory: File) {
     }
 }
 
-fun readCSV(domain: String, category: String): MutableMap<ArticleType, List<KeywordSource>> {
+fun readCSV(): MutableMap<ArticleType, List<KeywordSource>> {
     val result = mutableMapOf<ArticleType, List<KeywordSource>>()
     try {
         ArticleType.values().forEach { type ->
