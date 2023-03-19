@@ -9,7 +9,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
     fun getRandomInterlink(type: ArticleType): String {
         return keywords[type]?.shuffled()?.random()?.let {
-            "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${it.title.replace("?", "").encodeURL()}\">${it.title}</a>"
+            "${getReadAlsoTitle()} <a href=\"https://${meta.domain}/${it.title.replace("?", "").encodeURL()}/\">${it.title}</a>"
         } ?: ""
     }
 
