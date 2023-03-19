@@ -9,7 +9,7 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 
-fun filterCSV() {
+fun firstFilterCSV() {
     val filePath = "openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}.csv"
     val rawContent = readCsv(filePath)
     var filteredContent = rawContent.distinctBy { it.title }

@@ -3,6 +3,7 @@ package com.kishlaly.ta.openai.flow.blogpost
 import com.kishlaly.ta.openai.KeywordSource
 import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Language
+import com.kishlaly.ta.openai.flow.firstFilterCSV
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.readCsv
 import java.io.File
@@ -15,22 +16,11 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-
-    // Отфильтровать дубликаты в csv
-    // Загрузить контент
-    // Сгенерить картинки
-    // Преобразовать в WebP
-    // Загрузить все картинки в блог
-    // Создать XML
-
-    // run only once per new category
-    //filterCSV()
-
-    keywords = readCSV()
-
     //setupGermanPAA("katze101.com", "category", "Katzen", "2023/03")
     setupMedium("cats")
 
+    firstFilterCSV()
+    keywords = readCSV()
     val total = keywords[globalType]?.size ?: 0
     val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
