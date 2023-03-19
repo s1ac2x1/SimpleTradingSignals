@@ -125,6 +125,7 @@ fun chunked(part: String) = removeAllLineBreaks(part).split(". ")
         }
         good
     }
+    .map { it.replace("- ", "-") }
     .chunked(Random.nextInt(2, 4))
 
 fun removeNumberedLists2(text: String): String {
