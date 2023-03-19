@@ -24,14 +24,14 @@ class BlogpostXMLBuilder() {
 
         val postFolder = meta.resolveKeywordFolder()
 
-        if (insertImages) {
+        if (globalInsertImages) {
             xml.append("<featuredImage>")
             var featuredImageURL = File(meta.imgSrcFolder).listFiles().random().name
             xml.append("https://${meta.domain}/wp-content/uploads/${meta.imgURI}/$featuredImageURL")
             xml.append("</featuredImage>")
         }
 
-        if (insertTags) {
+        if (globalInsertTags) {
             xml.append("<tags>")
             val tags = File("$postFolder/${tagsIntent}_1").readText()
             xml.append(tags)

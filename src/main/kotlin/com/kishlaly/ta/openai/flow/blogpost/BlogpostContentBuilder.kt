@@ -3,7 +3,6 @@ package com.kishlaly.ta.openai.flow.blogpost
 import com.kishlaly.ta.openai.flow.*
 import java.io.File
 import kotlin.random.Random
-import kotlin.random.nextInt
 
 class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
@@ -26,9 +25,9 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         var content = """
         <p>${processMainContent(main)}</p>
         <p>${processHistoricalContent(history)}</p>
-        ${if (interlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
+        ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
         <p>${processFactsContent(facts)}</p>
-        ${if (interlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
+        ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
     """.trimIndent()
 
         content = postProcessAndCheck(content)
@@ -56,7 +55,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         tocPlan.forEachIndexed { index, item ->
             tocContent.append("<h2>$item</h2>")
 
-            if (insertImages) {
+            if (globalInsertImages) {
                 val images = File(meta.imgSrcFolder).listFiles().toList().shuffled().take(tocPlan.size)
                 var imageURL = "https://${meta.domain}/wp-content/uploads/${meta.imgURI}/${images[index].name}"
                 tocContent.append("<img src='$imageURL' alt='$item'></img>")
@@ -82,7 +81,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                     }
                 }
             tocContent.append(headingContent.toString())
-            if (interlinkage && index % 3 == 0 && linksMade <= interlinksLimit) {
+            if (globalInterlinkage && index % 3 == 0 && linksMade <= interlinksLimit) {
                 tocContent.append("<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>")
                 linksMade++
             }

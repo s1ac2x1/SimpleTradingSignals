@@ -12,18 +12,6 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-// TODO всегда проверять все эти настройки ниже:
-val globalLanguage: Language = Language.EN
-val globalBlogTopic = "cats"
-val insertImages = false
-val insertTags = false
-val domain = "meidum"
-val category = "main"
-val limit = 500
-val imageURI = "2023/03"
-val type = ArticleType.MEDIUM
-val interlinkage = false
-
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
@@ -40,27 +28,30 @@ fun main() {
 
     keywords = readCSV()
 
-    val total = keywords[type]?.size ?: 0
+    // TODO всегда проверять конфиг
+    setupGermanPAA("katze101.com", "category", "Katzen", "2023/03")
+
+    val total = keywords[globalType]?.size ?: 0
     val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(5)
 
-    keywords[type]
+    keywords[globalType]
         //.take(1)
         ?.forEach { keywordSource ->
         val meta = BlogpostContentMeta(
-            type = type,
+            type = globalType,
             keyword = keywordSource.title,
-            category = category,
-            domain = domain,
-            imgURI = imageURI,
-            imgSrcFolder = "openai/${domain}/images_webp"
+            category = globalCategory,
+            domain = globalDomain,
+            imgURI = globalImageURI,
+            imgSrcFolder = "openai/${globalDomain}/images_webp"
         )
 
           // TODO в PAA делать больше контента
             // youtube иногда? что еще?
         executor.submit {
-            resolveDownloader(type)(meta)
+            resolveDownloader(globalType)(meta)
             processed.incrementAndGet()
             println("==== Done $processed/$total ====\n")
         }
@@ -74,6 +65,39 @@ fun main() {
 
 //    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
+}
+
+private fun setupGermanPAA(domain: String, caterogy: String, topic: String, imageURI: String) {
+    globalLanguage = Language.DE
+    globalBlogTopic = topic
+    globalInsertImages = true
+    globalInsertTags = true
+    globalDomain = domain
+    globalCategory = caterogy
+    globalLimit = 500
+    globalImageURI = imageURI
+    globalType = ArticleType.PAA
+    globalInterlinkage = true
+}
+
+private fun setupGermanBIG(domain: String, caterogy: String, topic: String, imageURI: String) {
+    globalLanguage = Language.DE
+    globalBlogTopic = topic
+    globalInsertImages = true
+    globalInsertTags = true
+    globalDomain = domain
+    globalCategory = caterogy
+    globalLimit = 500
+    globalImageURI = imageURI
+    globalType = ArticleType.BIG
+    globalInterlinkage = true
+}
+
+private fun setupMedium(topic: String) {
+    globalLanguage = Language.EN
+    globalBlogTopic = topic
+    globalDomain = "medium"
+    globalType = ArticleType.MEDIUM
 }
 
 private fun buildContent(
@@ -134,12 +158,12 @@ fun readCSV(): MutableMap<ArticleType, List<KeywordSource>> {
     val result = mutableMapOf<ArticleType, List<KeywordSource>>()
         ArticleType.values().forEach { type ->
             try {
-                val keywords = readCsv("openai/$domain/content/$category/${category}_${type.name.lowercase()}.csv")
+                val keywords = readCsv("openai/$globalDomain/content/$globalCategory/${globalCategory}_${type.name.lowercase()}.csv")
                     .distinctBy { it.title }
                     .toList()
                 result.put(type, keywords)
             } catch (e: Exception) {
-                // ignored
+                println("")
             }
         }
     return result
@@ -154,3 +178,14 @@ val htmlStub = """<!DOCTYPE html>
 ###content###
 </body>
 </html>"""
+
+var globalLanguage = Language.EN
+var globalBlogTopic = ""
+var globalInsertImages = false
+var globalInsertTags = false
+var globalDomain = ""
+var globalCategory = ""
+var globalLimit = 500
+var globalImageURI = ""
+var globalType = ArticleType.MEDIUM
+var globalInterlinkage = false
