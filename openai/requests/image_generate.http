@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "фотографический портрет собаки",
+  "prompt": "Zeige ein Bild eines Hundebesitzers, der seinen Hund nach dem Gassi gehen füttert, während er lächelnd auf den glücklichen Hund schaut. In a style of a black and white pencil artwork",
   "n": 3,
   "size": "512x512",
   "user": "vladimir@kishlaly.com"
