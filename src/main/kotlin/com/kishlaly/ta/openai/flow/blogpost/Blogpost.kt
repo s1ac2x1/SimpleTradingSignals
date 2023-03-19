@@ -19,7 +19,7 @@ val globalBlogTopic = "Katzen"
 val insertImages = true
 val domain = "katze101.com"
 val category = "katzenspielzeug"
-val limit = 300
+val limit = 500
 val imageURI = "2023/03"
 val type = ArticleType.PAA
 val interlinkage = true
@@ -58,6 +58,7 @@ fun main() {
         )
 
           // TODO в PAA делать больше контента
+            // youtube иногда? что еще?
 //        executor.submit {
 //            resolveDownloader(type)(meta)
 //            processed.incrementAndGet()
@@ -85,6 +86,7 @@ private fun buildContent(
     val builder: (meta: BlogpostContentMeta) -> String = when (meta.type) {
         ArticleType.PAA -> { m -> BlogpostContentBuilder(m).buildPAA() }
         ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
+        ArticleType.MEDIUM -> { m -> BlogpostContentBuilder(m).buildMedium() }
     }
     xml.append(meta, resolveTagsIntent(meta.type), builder)
     if (saveTempHTML) {
@@ -104,6 +106,7 @@ fun resolveDownloader(type: ArticleType): (BlogpostContentMeta) -> Unit {
     return when (type) {
         ArticleType.PAA -> { meta -> run { BlogpostDownloader(meta).downloadPAA() } }
         ArticleType.BIG -> { meta -> run { BlogpostDownloader(meta).downloadBigPost() } }
+        ArticleType.MEDIUM -> { meta -> run { BlogpostDownloader(meta).downloadMedium() } }
     }
 }
 

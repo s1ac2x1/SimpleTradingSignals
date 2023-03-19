@@ -36,6 +36,10 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         return content
     }
 
+    fun buildMedium(): String {
+        return ""
+    }
+
     fun buildLongPost(): String {
         val srcFolder = meta.resolveKeywordFolder()
 
@@ -181,6 +185,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         }
         return result.toString()
     }
+
 }
 
 fun main() {
