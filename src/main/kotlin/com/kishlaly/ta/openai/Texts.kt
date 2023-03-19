@@ -44,6 +44,7 @@ fun getCompletion(completionRequest: CompletionRequest): String {
 
 data class CompletionRequest(
     val model: String = "text-davinci-003",
+
     val prompt: String,
 
     @SerializedName("max_tokens")
@@ -56,6 +57,7 @@ data class CompletionRequest(
     val frequencyPenalty: Double = 0.8,
 
     val temperature: Double = 0.7,
+
     val user: String = "vladimir@kishlaly.com"
 )
 
