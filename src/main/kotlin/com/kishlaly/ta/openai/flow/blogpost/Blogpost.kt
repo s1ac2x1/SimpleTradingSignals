@@ -29,7 +29,8 @@ fun main() {
     keywords = readCSV()
 
     // TODO всегда проверять конфиг
-    setupGermanPAA("katze101.com", "category", "Katzen", "2023/03")
+    //setupGermanPAA("katze101.com", "category", "Katzen", "2023/03")
+    setupMedium("cats")
 
     val total = keywords[globalType]?.size ?: 0
     val processed = AtomicInteger(0)
@@ -96,6 +97,7 @@ private fun setupGermanBIG(domain: String, caterogy: String, topic: String, imag
 private fun setupMedium(topic: String) {
     globalLanguage = Language.EN
     globalBlogTopic = topic
+    globalCategory = "main"
     globalDomain = "medium"
     globalType = ArticleType.MEDIUM
 }
