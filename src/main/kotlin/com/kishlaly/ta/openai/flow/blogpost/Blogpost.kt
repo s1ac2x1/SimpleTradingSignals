@@ -18,7 +18,7 @@ val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
 val insertImages = true
 val domain = "katze101.com"
-val category = "katzenrassen"
+val category = "katzenspielzeug"
 val limit = 300
 val imageURI = "2023/03"
 val type = ArticleType.PAA
@@ -57,12 +57,14 @@ fun main() {
             imgSrcFolder = "openai/${domain}/images_webp"
         )
 
+          // TODO в PAA делать больше контента
 //        executor.submit {
 //            resolveDownloader(type)(meta)
 //            processed.incrementAndGet()
 //            println("==== Done $processed/$total ====\n")
 //        }
 
+      // TODO gibtdiverseArtenvonTunnelndieIhnererKatzegroßefreudenSchenkenkann
        buildContent(xml, meta, keywordSource, false)
     }
 
