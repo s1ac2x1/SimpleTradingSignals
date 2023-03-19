@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-    setupGermanPAA("katze101.com", "category", "Katzen", "2023/03")
+    setupGermanPAA("katze101.com", "katzenspielzeug", "Katzen", "2023/03")
     //setupMedium("cats")
 
     firstFilterCSV()
