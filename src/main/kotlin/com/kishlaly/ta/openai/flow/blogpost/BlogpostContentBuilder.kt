@@ -225,13 +225,16 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
 
 fun main() {
     val text = """
-Kratzen ist eine alte Tradition, die vor Tausenden von Jahren begann. Die Menschen haben Katzen schon immer als treue Begleiter angesehen und sie wurden als heilige Tiere verehrt. Kratzen war ein Zeichen der Zuneigung und Wertschätzung für Katzen, das sich auf die spirituelle Bindung zwischen Mensch und Tier bezog. 
+Es gibt viele verschiedene Spielzeuge, die Katzen lieben. Die besten Spielzeuge für Katzen sind solche, die ihren natürlichen Instinkten entsprechen und sie dazu anregen, zu spielen und zu jagen. Einige der besten Spielzeuge für Katzen sind Daumenkätzchen, Federangeln, Kratzbäume und Tunnel. 
 
-In der Antike glaubten die Ägypter, dass Katzen eine Verbindung zu den Göttern hatten und dass Kratzen ihnen Glück bringen konnte. In dieser Zeit wurden Katzen auch oft in Grabstätten gefunden, was auf ihre besondere Rolle in der Gesellschaft hinweist. 
+Daumenkätzchen sind ein beliebtes Spielzeug für Katzen. Sie ähneln kleinen Mäusen oder Vögeln und können von Ihrer Katze gejagt werden. Diese Spielzeuge können in vielen verschiedenen Farben erworben werden und haben oft eine lange Schnur am Ende, so dass Sie mit Ihrer Katze spielen können. 
 
-Im Mittelalter begannen die Menschen, Kratzbäume zu bauen, um ihren Katzen mehr Freiheit zu geben und sie vor Gefahren zu schützen. Diese Bäume waren mit verschiedenen Materialien gebaut und konnten mit Schmuck verziert werden. 
+Federangeln sind auch ein sehr beliebtes Spielzeug für Katzen. Diese Art von Angel hat eine lange Feder an der Spitze des Stabs befestigt, so dass es möglich ist, damit zu "angeln". Dieses interessante Spiel hilft Ihrer Katze nicht nur dabei, fit zu bleiben und Spaß zu haben - es ermöglicht ihr auch den natürlichen Instinkt des Jägers auszuleben! 
 
-Heutzutage ist Kratzverhalten immer noch sehr beliebt bei den meisten Katzensorten. Es ist eine natürliche Art des Spielens für sie und es gibt viele verschiedene Arten von Kratzbäumen, die Ihnen helfen können, Ihrer Katze mehr Komfort zu bieten.    """.trimIndent()
+Kratzbäume sind unverzichtbar für jede Wohnung mit einer oder mehreren Katzen. Kratzbäume bietet Ihnener Katzendie Möglichkeit, ihr natürliches Verhalten auszuleben - Klettern! Es gibt viele verschiedene Arten von Kratzbäumen: Einige haben Sisal-Stangenseile als Kletterstangenn; andere verfügen über mehrere Etagen mit Hütten oder Höhlenn; wieder andere bietendesigns in Form von Bäumen oder Strandthemen usw.. 
+
+Tunnel sind weitere großartige OptionenfürKatzenspielwaren . Tunnel ermöglichen es IhnererKatzedas natürliche Verhalten des VersteckensundHinterherspringensauszuübenunddieKatzespieltmitdemVersteck-und-Suche-SpielaufintelligenteWeise. Es gibtdiverseArtenvonTunnelndieIhnererKatzegroßefreudenSchenkenkann:vomPopup-Karton bis hinzu speziell entwickeltePlastiktunnelndieaufeinemBodeneingebautwerdensollelnoderanWandseilegehangtwerdenkönne .
+""".trimIndent()
     val chunks =  chunked(text)
     println(chunks)
 }
