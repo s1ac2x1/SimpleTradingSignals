@@ -31,10 +31,12 @@ class BlogpostXMLBuilder() {
             xml.append("</featuredImage>")
         }
 
-        xml.append("<tags>")
-        val tags = File("$postFolder/${tagsIntent}_1").readText()
-        xml.append(tags)
-        xml.append("</tags>")
+        if (insertTags) {
+            xml.append("<tags>")
+            val tags = File("$postFolder/${tagsIntent}_1").readText()
+            xml.append(tags)
+            xml.append("</tags>")
+        }
 
         xml.append("</post>")
 

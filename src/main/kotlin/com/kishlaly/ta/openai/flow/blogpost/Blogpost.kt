@@ -3,7 +3,6 @@ package com.kishlaly.ta.openai.flow.blogpost
 import com.kishlaly.ta.openai.KeywordSource
 import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Language
-import com.kishlaly.ta.openai.flow.filterCSV
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.readCsv
 import java.io.File
@@ -17,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 val globalLanguage: Language = Language.DE
 val globalBlogTopic = "Katzen"
 val insertImages = true
+val insertTags = false
 val domain = "katze101.com"
 val category = "katzenspielzeug"
 val limit = 500
@@ -100,6 +100,7 @@ private fun buildContent(
 fun resolveTagsIntent(type: ArticleType) = when (type) {
     ArticleType.PAA -> Intent.TAGS_PAA
     ArticleType.BIG -> Intent.TAGS
+    ArticleType.MEDIUM -> Intent.TAGS
 }
 
 fun resolveDownloader(type: ArticleType): (BlogpostContentMeta) -> Unit {
