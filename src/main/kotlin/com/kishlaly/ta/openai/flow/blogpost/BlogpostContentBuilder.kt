@@ -65,12 +65,9 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             tocContent.append(headingContent.toString())
         }
 
-        val conclusion = File("$srcFolder/${Intent.CONCLUSION}_1").readText()
-
         var content = """
         <p>$introduction</p>
         $tocContent
-        <p>$conclusion</p>
     """.trimIndent()
 
         content = postProcessAndCheck(content)
