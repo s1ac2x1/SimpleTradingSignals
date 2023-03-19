@@ -28,7 +28,6 @@ fun main() {
 
     keywords = readCSV()
 
-    // TODO всегда проверять конфиг
     //setupGermanPAA("katze101.com", "category", "Katzen", "2023/03")
     setupMedium("cats")
 
