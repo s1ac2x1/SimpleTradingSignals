@@ -39,15 +39,15 @@ fun main() {
         )
 
           // TODO в PAA делать больше контента
-            // youtube иногда? что еще?
-        executor.submit {
-            resolveDownloader(globalType)(meta)
-            processed.incrementAndGet()
-            println("==== Done $processed/$total ====\n")
-        }
+//        executor.submit {
+//            resolveDownloader(globalType)(meta)
+//            processed.incrementAndGet()
+//            println("==== Done $processed/$total ====\n")
+//        }
 
-      // TODO gibtdiverseArtenvonTunnelndieIhnererKatzegroßefreudenSchenkenkann
-//       buildContent(xml, meta, keywordSource, false)
+        // TODO gibtdiverseArtenvonTunnelndieIhnererKatzegroßefreudenSchenkenkann
+        // TODO youtube иногда? что еще?
+       buildContent(xml, meta, keywordSource, true)
     }
 
     executor.shutdown()
