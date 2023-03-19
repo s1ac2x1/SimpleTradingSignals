@@ -7,6 +7,7 @@ import com.kishlaly.ta.utils.FileUtils
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import org.checkerframework.checker.units.qual.Temperature
 import java.util.concurrent.TimeUnit
 
 fun getCompletion(completionRequest: CompletionRequest): String {
@@ -44,12 +45,17 @@ fun getCompletion(completionRequest: CompletionRequest): String {
 data class CompletionRequest(
     val model: String = "text-davinci-003",
     val prompt: String,
+
     @SerializedName("max_tokens")
     val maxTokens: Int = 2048,
+
     @SerializedName("top_p")
     val topP: Double = 0.5,
+
     @SerializedName("frequency_penalty")
     val frequencyPenalty: Double = 0.8,
+
+    val temperature: Double = 0.7,
     val user: String = "vladimir@kishlaly.com"
 )
 
@@ -58,7 +64,9 @@ data class EditRequest(
     val input: String,
     val instruction: String,
     val n: Int = 1,
+
     @SerializedName("top_p")
     val topP: Double = 0.5,
+
     val user: String = "vladimir@kishlaly.com"
 )
