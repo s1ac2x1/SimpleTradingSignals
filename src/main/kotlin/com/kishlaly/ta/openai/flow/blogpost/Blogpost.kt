@@ -13,16 +13,16 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
 // TODO всегда проверять все эти настройки ниже:
-val globalLanguage: Language = Language.DE
-val globalBlogTopic = "Katzen"
-val insertImages = true
+val globalLanguage: Language = Language.EN
+val globalBlogTopic = "cats"
+val insertImages = false
 val insertTags = false
-val domain = "katze101.com"
-val category = "katzenspielzeug"
+val domain = "meidum"
+val category = "main"
 val limit = 500
 val imageURI = "2023/03"
-val type = ArticleType.PAA
-val interlinkage = true
+val type = ArticleType.MEDIUM
+val interlinkage = false
 
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
@@ -59,20 +59,20 @@ fun main() {
 
           // TODO в PAA делать больше контента
             // youtube иногда? что еще?
-//        executor.submit {
-//            resolveDownloader(type)(meta)
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            resolveDownloader(type)(meta)
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
       // TODO gibtdiverseArtenvonTunnelndieIhnererKatzegroßefreudenSchenkenkann
-       buildContent(xml, meta, keywordSource, false)
+//       buildContent(xml, meta, keywordSource, false)
     }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+//    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
@@ -132,16 +132,16 @@ fun copyFilesToDirectory(files: List<File>, destinationDirectory: File) {
 
 fun readCSV(): MutableMap<ArticleType, List<KeywordSource>> {
     val result = mutableMapOf<ArticleType, List<KeywordSource>>()
-    try {
         ArticleType.values().forEach { type ->
-            val keywords = readCsv("openai/$domain/content/$category/${category}_${type.name.lowercase()}.csv")
-                .distinctBy { it.title }
-                .toList()
-            result.put(type, keywords)
+            try {
+                val keywords = readCsv("openai/$domain/content/$category/${category}_${type.name.lowercase()}.csv")
+                    .distinctBy { it.title }
+                    .toList()
+                result.put(type, keywords)
+            } catch (e: Exception) {
+                // ignored
+            }
         }
-    } catch (e: Exception) {
-        // ignore
-    }
     return result
 }
 
