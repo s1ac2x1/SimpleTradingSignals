@@ -138,6 +138,12 @@ enum class Intent(val map: Map<Language, String>) {
             Language.EN to "",
         )
     ),
+    FEATURED_IMAGE_TASK(
+        mapOf(
+            Language.DE to "Create a prompt that gives an illustrator a task to depict a picture for blog article about \"###param###\"",
+            Language.EN to "Create a prompt that gives an illustrator a task to depict a picture for blog article about \"###param###\"",
+        )
+    ),
     FEATURED_IMAGE(
         mapOf(
             Language.DE to "",

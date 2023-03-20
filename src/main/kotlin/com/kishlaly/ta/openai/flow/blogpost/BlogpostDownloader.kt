@@ -7,7 +7,8 @@ import kotlin.random.Random
 
 class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
-    private val stepFolder = "openai/${meta.domain}/content/${meta.category}/${meta.type.name.lowercase()}/${meta.keyword.toFileName()}"
+    private val stepFolder =
+        "openai/${meta.domain}/content/${meta.category}/${meta.type.name.lowercase()}/${meta.keyword.toFileName()}"
 
     fun downloadBigPost() {
         if (isAlreadyDownloaded()) return
@@ -113,6 +114,16 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
+    private fun featuredImageTask() {
+        val intent = Intent.FEATURED_IMAGE_TASK
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            postProcessings = listOf(trimmed),
+        )
+    }
+
     private fun featuredImage() {
         var prompt = Combiner.combine(
             listOf(
@@ -129,6 +140,18 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf("${prompt} in the style pencil artwork"),
             customImageName = "${meta.keyword.toFileName()}_${System.currentTimeMillis()}",
             imagesCount = 5
+        )
+    }
+
+    private fun featuredImagesByTask(count: Int) {
+        val prompt = readText(Intent.FEATURED_IMAGE_TASK)
+        Step(
+            intent = Intent.FEATURED_IMAGE,
+            folder = stepFolder,
+            type = Type.IMAGE,
+            input = listOf("${prompt} In a style of a black and white pencil artwork"),
+            customImageName = "${meta.keyword.toFileName()}_${System.currentTimeMillis()}",
+            imagesCount = count
         )
     }
 

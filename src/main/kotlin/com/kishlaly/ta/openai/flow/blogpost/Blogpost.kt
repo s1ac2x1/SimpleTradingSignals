@@ -16,8 +16,8 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-    //setupGermanPAA("katze101.com", "katzenspielzeug", "Katzen", "2023/03")
-    setupMedium("cats")
+    setupGermanPAA("katze101.com", "katzenfutter-und-ernährung", "Katzen", "2023/03")
+    //setupMedium("cats")
 
     firstFilterCSV()
     keywords = readCSV()
@@ -27,7 +27,7 @@ fun main() {
     val executor = Executors.newFixedThreadPool(5)
 
     keywords[globalType]
-        //.take(1)
+        ?.take(1)
         ?.forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = globalType,
@@ -39,14 +39,14 @@ fun main() {
         )
 
           // TODO в PAA делать больше контента
-//        executor.submit {
-//            resolveDownloader(globalType)(meta)
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            resolveDownloader(globalType)(meta)
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
         // TODO youtube иногда? что еще?
-       buildContent(xml, meta, keywordSource, true)
+//       buildContent(xml, meta, keywordSource, true)
     }
 
     executor.shutdown()

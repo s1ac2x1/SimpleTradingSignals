@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "Create an illustration that depicts a family of three generations (grandparents, parents, and children) discussing the different theories of attachment. In a style of a comics artwork",
+  "prompt": "Illustrate a picture of a dog happily eating either rice or potatoes, with a thought bubble above its head that reads \"Was ist besser für mich?\". In a style of a pencil artwork",
   "n": 3,
   "size": "512x512",
   "user": "vladimir@kishlaly.com"
