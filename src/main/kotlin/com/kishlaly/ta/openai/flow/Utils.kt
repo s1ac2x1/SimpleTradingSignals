@@ -10,7 +10,7 @@ import kotlin.random.Random
 fun timeoutRetry(
     client: OkHttpClient,
     request: Request,
-    retries: Int = 3
+    retries: Int = 10
 ): String? {
     var response: Response? = null
     var attempts = 0
@@ -20,8 +20,8 @@ fun timeoutRetry(
             response = client.newCall(request).execute()
         } catch (e: IOException) {
             attempts++
-            println("Attempt $attempts failed. Retrying in 10 seconds")
-            Thread.sleep(10 * 1000)
+            println("Attempt $attempts failed. Retrying in 30 seconds")
+            Thread.sleep(30 * 1000)
         }
     }
 

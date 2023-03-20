@@ -38,7 +38,7 @@ fun main() {
             imgSrcFolder = "openai/${globalDomain}/images_webp"
         )
 
-          // TODO в PAA делать больше контента
+            // TODO в PAA делать больше контента
         executor.submit {
             resolveDownloader(globalType)(meta)
             processed.incrementAndGet()
