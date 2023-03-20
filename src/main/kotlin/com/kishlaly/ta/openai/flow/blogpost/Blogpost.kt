@@ -38,15 +38,13 @@ fun main() {
             imgSrcFolder = "openai/${globalDomain}/images_webp"
         )
 
-            // TODO в PAA делать больше контента
-        executor.submit {
-            resolveDownloader(globalType)(meta)
-            processed.incrementAndGet()
-            println("==== Done $processed/$total ====\n")
-        }
+//        executor.submit {
+//            resolveDownloader(globalType)(meta)
+//            processed.incrementAndGet()
+//            println("==== Done $processed/$total ====\n")
+//        }
 
-        // TODO youtube иногда? что еще?
-//       buildContent(xml, meta, keywordSource, true)
+       buildContent(xml, meta, keywordSource, true)
     }
 
     executor.shutdown()
