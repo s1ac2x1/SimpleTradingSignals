@@ -18,7 +18,6 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
         }
 
-        val intro = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
         val main = File("$srcFolder/${Intent.MAIN}_1").readText()
         val history = File("$srcFolder/${Intent.HISTORY}_1").readText()
         val facts = File("$srcFolder/${Intent.FACTS}_1").readText()
@@ -27,7 +26,6 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val randomAddition = File("$srcFolder/${Intent.RANDOM_ADDITION}_1").readText()
 
         var content = """
-        <p>${processMainContent(intro)}</p>
         <p>${processMainContent(main)}</p>
         <p>${processHistoricalContent(history)}</p>
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
