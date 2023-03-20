@@ -28,8 +28,14 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun downloadPAA() {
         if (isAlreadyDownloaded()) return
 
+        introduction()
+        mainSection()
         historySection()
         factsSection()
+        oppositeOpinionQuestion()
+        oppositeOpinionText()
+        conclusion()
+        randomAddition()
         tagsShort()
     }
 
