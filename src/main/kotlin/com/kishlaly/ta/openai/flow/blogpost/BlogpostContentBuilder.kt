@@ -26,23 +26,28 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val conclusion = File("$srcFolder/${Intent.CONCLUSION}_1").readText()
 
         val historyContent = """
-            <h2>${getHistorySubtitle()}<h2>
+            <h2>${getHistorySubtitle()}</h2>
             <p>${formatWith_B_U_I(history)}</p>
         """.trimIndent()
 
         val factsContent = """
-            <h2>${getFactsSubtitle()}<h2>
+            <h2>${getFactsSubtitle()}</h2>
             <p>${formatWith_UL(facts)}</p>
         """.trimIndent()
 
         val anotherOpinion = """
-            <h2>${getAnotherOpitonSubtitle()}<h2>
+            <h2>${getAnotherOpitonSubtitle()}</h2>
             <p>${formatWith_B_U_I(oppositeQuestionText)}</p>
         """.trimIndent()
 
         val personalExperience = """
-            <h2>${getPersonalExperienceSubtitle()}<h2>
+            <h2>${getPersonalExperienceSubtitle()}</h2>
             <p>${formatWith_B_U_I(randomAddition)}</p>            
+        """.trimIndent()
+
+        val conclusionPart = """
+            <h2>${getConclusionSubtitle()}</h2>
+            <p>${formatWith_B(conclusion)}</p>
         """.trimIndent()
 
         val contentParts = mutableSetOf(historyContent, factsContent, anotherOpinion, personalExperience)
@@ -55,7 +60,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         ${removeRandomElement(contentParts)}
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
         ${removeRandomElement(contentParts)}
-        <p>${formatWith_B(conclusion)}</p>
+        
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
     """.trimIndent()
 

@@ -236,6 +236,54 @@ val personalExperienceSubtitlesDE = listOf(
     "Persönliche Erkenntnisse"
 )
 
+val conclusionSubtitlesEN = listOf(
+    "Conclusion",
+    "Key Takeaways",
+    "Final Thoughts",
+    "Wrap-up",
+    "In summary",
+    "Closing Remarks",
+    "Lessons Learned",
+    "The Bottom Line",
+    "Food for Thought",
+    "The Takeaway",
+    "Main Points",
+    "Final Reflections",
+    "Summary",
+    "Recap",
+    "Closing Notes",
+    "Key Insights",
+    "Key Messages",
+    "Implications and Recommendations",
+    "Future Considerations",
+    "Lessons to Remember",
+    "Takeaways"
+)
+
+val conclusionSubtitlesDE = listOf(
+    "Schlussfolgerung",
+    "Wichtige Erkenntnisse",
+    "Letzte Gedanken",
+    "Zusammenfassung",
+    "In Kurzform",
+    "Schließende Bemerkungen",
+    "Gelernte Lektionen",
+    "Das Wichtigste",
+    "Zum Nachdenken anregen",
+    "Die Kernbotschaft",
+    "Hauptpunkte",
+    "Abschließende Gedanken",
+    "Zusammenfassung",
+    "Rückblick",
+    "Abschließende Hinweise",
+    "Wichtige Erkenntnisse",
+    "Wichtige Botschaften",
+    "Folgerungen und Empfehlungen",
+    "Zukünftige Überlegungen",
+    "Lektionen zum Erinnern",
+    "Wichtige Punkte"
+)
+
 fun getReadAlsoTitle() = when (globalLanguage) {
         Language.DE -> "Lesen Sie auch:"
         Language.EN -> "Read also:"
@@ -259,6 +307,11 @@ fun getAnotherOpitonSubtitle() = when (globalLanguage) {
 fun getPersonalExperienceSubtitle() = when (globalLanguage) {
         Language.DE -> personalExperienceSubtitlesDE.shuffled().random()
         Language.EN -> personalExperienceOpitionSubtitlesEN.shuffled().random()
+    }
+
+fun getConclusionSubtitle() = when (globalLanguage) {
+        Language.DE -> conclusionSubtitlesDE.shuffled().random()
+        Language.EN -> conclusionOpitionSubtitlesEN.shuffled().random()
     }
 
 fun getPromptsMarkers(): List<String> {
