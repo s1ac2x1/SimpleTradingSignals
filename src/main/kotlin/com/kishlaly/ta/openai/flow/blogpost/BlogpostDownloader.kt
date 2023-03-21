@@ -11,8 +11,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         "openai/${meta.domain}/content/${meta.category}/${meta.type.name.lowercase()}/${meta.keyword.toFileName()}"
 
     fun downloadBigPost() {
-        if (isAlreadyDownloaded()) return
-
         introduction()
         tableOfContentsPlan()
         tableOfContentsTexts_history()
@@ -26,8 +24,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     fun downloadPAA() {
-        if (isAlreadyDownloaded()) return
-
         mainSection()
         historySection()
         factsSection()
@@ -39,22 +35,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     fun downloadMedium() {
-        if (isAlreadyDownloaded()) return
-
         introduction()
         tableOfContentsPlan()
         tableOfContentsTexts_main()
         conclusion()
-    }
-
-    private fun isAlreadyDownloaded(): Boolean {
-        val folder = File(stepFolder)
-        if (folder.exists()) {
-            println("Content exists for \"${meta.keyword}\". Skipping...")
-            return true
-        }
-        folder.mkdir()
-        return false
     }
 
     private fun factsSection() {
