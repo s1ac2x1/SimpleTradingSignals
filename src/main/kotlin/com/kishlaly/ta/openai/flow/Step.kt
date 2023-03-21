@@ -311,7 +311,7 @@ fun getPersonalExperienceSubtitle() = when (globalLanguage) {
 
 fun getConclusionSubtitle() = when (globalLanguage) {
         Language.DE -> conclusionSubtitlesDE.shuffled().random()
-        Language.EN -> conclusionOpitionSubtitlesEN.shuffled().random()
+        Language.EN -> conclusionSubtitlesEN.shuffled().random()
     }
 
 fun getPromptsMarkers(): List<String> {

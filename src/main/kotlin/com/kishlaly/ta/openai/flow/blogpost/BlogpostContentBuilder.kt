@@ -18,49 +18,49 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
         }
 
-        val main = File("$srcFolder/${Intent.MAIN}_1").readText()
-        val history = File("$srcFolder/${Intent.HISTORY}_1").readText()
-        val facts = File("$srcFolder/${Intent.FACTS}_1").readText()
-        val oppositeQuestionText = File("$srcFolder/${Intent.OPPOSITE_OPINION_TEXT}_1").readText()
-        val randomAddition = File("$srcFolder/${Intent.RANDOM_ADDITION}_1").readText()
-        val conclusion = File("$srcFolder/${Intent.CONCLUSION}_1").readText()
+        val mainSrc = File("$srcFolder/${Intent.MAIN}_1").readText()
+        val historySrc = File("$srcFolder/${Intent.HISTORY}_1").readText()
+        val factsSrc = File("$srcFolder/${Intent.FACTS}_1").readText()
+        val oppositeQuestionTextSrc = File("$srcFolder/${Intent.OPPOSITE_OPINION_TEXT}_1").readText()
+        val randomAdditionSrc = File("$srcFolder/${Intent.RANDOM_ADDITION}_1").readText()
+        val conclusionSrc = File("$srcFolder/${Intent.CONCLUSION}_1").readText()
 
         val historyContent = """
             <h2>${getHistorySubtitle()}</h2>
-            <p>${formatWith_B_U_I(history)}</p>
+            <p>${formatWith_B_U_I(historySrc)}</p>
         """.trimIndent()
 
         val factsContent = """
             <h2>${getFactsSubtitle()}</h2>
-            <p>${formatWith_UL(facts)}</p>
+            <p>${formatWith_UL(factsSrc)}</p>
         """.trimIndent()
 
-        val anotherOpinion = """
+        val anotherOpinionContent = """
             <h2>${getAnotherOpitonSubtitle()}</h2>
-            <p>${formatWith_B_U_I(oppositeQuestionText)}</p>
+            <p>${formatWith_B_U_I(oppositeQuestionTextSrc)}</p>
         """.trimIndent()
 
-        val personalExperience = """
+        val personalExperienceContent = """
             <h2>${getPersonalExperienceSubtitle()}</h2>
-            <p>${formatWith_B_U_I(randomAddition)}</p>            
+            <p>${formatWith_B_U_I(randomAdditionSrc)}</p>            
         """.trimIndent()
 
-        val conclusionPart = """
+        val conclusionContent = """
             <h2>${getConclusionSubtitle()}</h2>
-            <p>${formatWith_B(conclusion)}</p>
+            <p>${formatWith_B(conclusionSrc)}</p>
         """.trimIndent()
 
-        val contentParts = mutableSetOf(historyContent, factsContent, anotherOpinion, personalExperience)
+        val contentParts = mutableSetOf(historyContent, factsContent, anotherOpinionContent, personalExperienceContent)
 
         var content = """
-        <p>${formatWith_B(main)}</p>
+        <p>${formatWith_B(mainSrc)}</p>
         ${removeRandomElement(contentParts)}
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
         ${removeRandomElement(contentParts)}
         ${removeRandomElement(contentParts)}
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
         ${removeRandomElement(contentParts)}
-        
+        $conclusionContent
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
     """.trimIndent()
 
@@ -190,6 +190,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         var content1 = content
         content1 = finalRegex.replace(content1, "")
         content1 = content1.replace("!.", "!")
+        content1 = content1.replace("!", ".")
         content1 = content1.replace("?", "? ")
         content1 = content1.replace(". ,", ".,")
         content1 = content1.replace("  ", " ")
@@ -197,6 +198,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content1 = content1.replace(" .", ".")
         content1 = content1.replace(": - ", ": ")
         content1 = content1.replace(". - ", ". ")
+        content1 = content1.replace(": -", ": ")
         content1 = removeNumberedLists2(content1)
         content1 = content1.replace("•", "<br>•")
 
