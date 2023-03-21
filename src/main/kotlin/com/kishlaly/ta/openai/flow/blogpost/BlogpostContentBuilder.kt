@@ -25,6 +25,16 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val conclusion = File("$srcFolder/${Intent.CONCLUSION}_1").readText()
         val randomAddition = File("$srcFolder/${Intent.RANDOM_ADDITION}_1").readText()
 
+        val historyContent = """
+            <h2>${getHistorySubtitle()}<h2>
+            <p>${processHistoricalContent(history)}</p>
+        """.trimIndent()
+
+        val factsContent = """
+            <h2>${getFactsSubtitle()}<h2>
+            <p>${processFactsContent(facts)}</p>
+        """.trimIndent()
+
         var content = """
         <p>${processMainContent(main)}</p>
         <p>${processHistoricalContent(history)}</p>

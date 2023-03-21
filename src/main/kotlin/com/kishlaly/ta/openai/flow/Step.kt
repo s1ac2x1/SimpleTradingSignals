@@ -17,9 +17,82 @@ enum class Type {
     IMAGE
 }
 
+val historySubtitlesEN = listOf(
+    "History",
+    "Historical Background",
+    "A Look Back",
+    "A Brief History",
+    "Historical Evolution",
+    "Understanding Origins",
+    "The Historical Context",
+    "Historical Perspective"
+)
+
+val historySubtitlesDE = listOf(
+    "Historischer Hintergrund",
+    "Ein Rückblick",
+    "Eine kurze Geschichte",
+    "Historische Evolution",
+    "Ursprünge verstehen",
+    "Der historische Kontext",
+    "Historischer Blickwinkel"
+)
+
+val factsSubtitlesEN = listOf(
+    "Facts",
+    "Key Facts",
+    "Little-Known Facts",
+    "Facts and Figures",
+    "Beyond the Myths and Rumors",
+    "Interesting Insights",
+    "The Lesser-Known Side",
+    "The Facts You Need to Know",
+    "Revealing the Facts",
+    "The Incredible Facts",
+    "Separating Fact from Fiction",
+    "The Real Story Behind",
+    "Mind-Blowing Facts",
+    "Myths vs. Facts",
+    "The Unbelievable Facts",
+    "Uncovering the Facts",
+    "Surprising Facts and Stats",
+    "The Essential Facts"
+)
+
+val factsSubtitlesDE = listOf(
+    "Fakten",
+    "Wichtige Fakten",
+    "Wenig bekannte Fakten",
+    "Fakten und Zahlen",
+    "Jenseits von Mythen und Gerüchten",
+    "Interessante Einblicke",
+    "Die weniger bekannte Seite",
+    "Die Fakten, die Sie kennen müssen",
+    "Die Fakten enthüllen",
+    "Die unglaublichen Fakten",
+    "Tatsachen von Fiktion trennen",
+    "Die wahre Geschichte dahinter",
+    "Unglaubliche Fakten",
+    "Mythen vs. Fakten",
+    "Die unglaublichen Fakten",
+    "Die Fakten aufdecken",
+    "Überraschende Fakten und Statistiken",
+    "Die wesentlichen Fakten"
+)
+
 fun getReadAlsoTitle() = when (globalLanguage) {
         Language.DE -> "Lesen Sie auch:"
         Language.EN -> "Read also:"
+    }
+
+fun getHistorySubtitle() = when (globalLanguage) {
+        Language.DE -> historySubtitlesDE.shuffled().random()
+        Language.EN -> historySubtitlesEN.shuffled().random()
+    }
+
+fun getFactsSubtitle() = when (globalLanguage) {
+        Language.DE -> factsSubtitlesDE.shuffled().random()
+        Language.EN -> factsSubtitlesEN.shuffled().random()
     }
 
 fun getPromptsMarkers(): List<String> {
