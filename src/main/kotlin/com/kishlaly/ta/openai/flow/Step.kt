@@ -3,6 +3,7 @@ package com.kishlaly.ta.openai.flow
 import com.kishlaly.ta.openai.*
 import com.kishlaly.ta.openai.flow.blogpost.globalBlogTopic
 import com.kishlaly.ta.openai.flow.blogpost.globalLanguage
+import com.kishlaly.ta.openai.flow.blogpost.globalType
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -514,7 +515,7 @@ class Step(
             if (useTone) {
                 finalPrompt = "$prompt ${getWritingTone()}"
             }
-            println("[$type][$intent]")
+            println("[$globalType][$type][$intent]")
             when (type) {
                 Type.TEXT -> {
 
