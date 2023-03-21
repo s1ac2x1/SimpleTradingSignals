@@ -21,7 +21,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         oppositeOpinionQuestion()
         oppositeOpinionText()
         tags()
-        conclusion()
+        conclusion(Intent.INTRODUCTION)
         randomAddition()
     }
 
@@ -33,7 +33,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         factsSection()
         oppositeOpinionQuestion()
         oppositeOpinionText()
-        conclusion()
+        conclusion(Intent.MAIN)
         randomAddition()
         tagsShort()
     }
@@ -44,7 +44,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         introduction()
         tableOfContentsPlan()
         tableOfContentsTexts_main()
-        conclusion()
+        conclusion(Intent.INTRODUCTION)
     }
 
     private fun factsSection() {
@@ -95,10 +95,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    private fun conclusion() {
-        val introduction = readText(Intent.INTRODUCTION)
+    private fun conclusion(from: Intent) {
+        val toMakeConclusionFrom = readText(from)
         val oppositeOpinion = readText(Intent.OPPOSITE_OPINION_TEXT)
-        val prompt = lineBreaksRegex.replace(introduction, "") + " " + lineBreaksRegex.replace(oppositeOpinion, "")
+        val prompt = lineBreaksRegex.replace(toMakeConclusionFrom, "") + " " + lineBreaksRegex.replace(oppositeOpinion, "")
         val intent = Intent.CONCLUSION
         Step(
             intent = intent,
