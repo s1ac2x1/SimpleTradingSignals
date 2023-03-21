@@ -27,7 +27,8 @@ fun main() {
     val executor = Executors.newFixedThreadPool(5)
 
     keywords[globalType]
-        //?.take(1)
+        ?.shuffled()
+        ?.take(1)
         ?.forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = globalType,
