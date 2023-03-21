@@ -3,6 +3,7 @@ package com.kishlaly.ta.openai.flow
 import com.kishlaly.ta.openai.*
 import com.kishlaly.ta.openai.flow.blogpost.globalBlogTopic
 import com.kishlaly.ta.openai.flow.blogpost.globalLanguage
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.random.Random
@@ -516,6 +517,13 @@ class Step(
             println("[$type][$intent]")
             when (type) {
                 Type.TEXT -> {
+
+                    val outputFileName = "${intent}_${index + 1}"
+                    if (File("$folder/$outputFileName").exists()) {
+                        println("$folder/$outputFileName exists. Skipping...")
+                        return@forEachIndexed
+                    }
+
                     var completion = ""
 
                     try {
@@ -534,7 +542,7 @@ class Step(
                         }
                     }
 
-                    val outputFileName = "${intent}_${index + 1}"
+
                     Files.write(
                         Paths.get("$folder/$outputFileName"),
                         completion.toByteArray()

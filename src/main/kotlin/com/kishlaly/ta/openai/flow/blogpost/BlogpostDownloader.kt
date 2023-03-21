@@ -11,6 +11,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         "openai/${meta.domain}/content/${meta.category}/${meta.type.name.lowercase()}/${meta.keyword.toFileName()}"
 
     fun downloadBigPost() {
+        File(stepFolder).mkdir()
+
         introduction()
         tableOfContentsPlan()
         tableOfContentsTexts_history()
@@ -24,6 +26,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     fun downloadPAA() {
+        File(stepFolder).mkdir()
+
         mainSection()
         historySection()
         factsSection()
@@ -35,6 +39,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     fun downloadMedium() {
+        File(stepFolder).mkdir()
+
         introduction()
         tableOfContentsPlan()
         tableOfContentsTexts_main()
