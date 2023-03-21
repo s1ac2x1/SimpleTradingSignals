@@ -45,15 +45,17 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             <p>${formatWith_B_U_I(randomAddition)}</p>            
         """.trimIndent()
 
+        val contentParts = mutableSetOf(historyContent, factsContent, anotherOpinion, personalExperience)
+
         var content = """
         <p>${formatWith_B(main)}</p>
-        <p>${formatWith_B_U_I(history)}</p>
+        ${removeRandomElement(contentParts)}
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
-        <p>${formatWith_UL(facts)}</p>
-        <p>${formatWith_B_U_I(oppositeQuestionText)}</p>
+        ${removeRandomElement(contentParts)}
+        ${removeRandomElement(contentParts)}
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
+        ${removeRandomElement(contentParts)}
         <p>${formatWith_B(conclusion)}</p>
-        <p>${formatWith_B(randomAddition)}</p>
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
     """.trimIndent()
 
@@ -168,6 +170,15 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content = postProcessAndCheck(content)
 
         return content
+    }
+
+    private fun removeRandomElement(set: MutableSet<String>): String {
+        if (set.isEmpty()) {
+            return ""
+        }
+        val randomElement = set.random()
+        set.remove(randomElement)
+        return randomElement
     }
 
     private fun postProcessAndCheck(content: String): String {
