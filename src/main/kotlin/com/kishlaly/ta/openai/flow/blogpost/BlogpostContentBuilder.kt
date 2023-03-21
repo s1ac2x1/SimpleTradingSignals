@@ -22,28 +22,38 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val history = File("$srcFolder/${Intent.HISTORY}_1").readText()
         val facts = File("$srcFolder/${Intent.FACTS}_1").readText()
         val oppositeQuestionText = File("$srcFolder/${Intent.OPPOSITE_OPINION_TEXT}_1").readText()
-        val conclusion = File("$srcFolder/${Intent.CONCLUSION}_1").readText()
         val randomAddition = File("$srcFolder/${Intent.RANDOM_ADDITION}_1").readText()
+        val conclusion = File("$srcFolder/${Intent.CONCLUSION}_1").readText()
 
         val historyContent = """
             <h2>${getHistorySubtitle()}<h2>
-            <p>${processHistoricalContent(history)}</p>
+            <p>${formatWith_B_U_I(history)}</p>
         """.trimIndent()
 
         val factsContent = """
             <h2>${getFactsSubtitle()}<h2>
-            <p>${processFactsContent(facts)}</p>
+            <p>${formatWith_UL(facts)}</p>
+        """.trimIndent()
+
+        val anotherOpinion = """
+            <h2>${getAnotherOpitonSubtitle()}<h2>
+            <p>${formatWith_B_U_I(oppositeQuestionText)}</p>
+        """.trimIndent()
+
+        val personalExperience = """
+            <h2>${getPersonalExperienceSubtitle()}<h2>
+            <p>${formatWith_B_U_I(randomAddition)}</p>            
         """.trimIndent()
 
         var content = """
-        <p>${processMainContent(main)}</p>
-        <p>${processHistoricalContent(history)}</p>
+        <p>${formatWith_B(main)}</p>
+        <p>${formatWith_B_U_I(history)}</p>
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
-        <p>${processFactsContent(facts)}</p>
-        <p>${processHistoricalContent(oppositeQuestionText)}</p>
+        <p>${formatWith_UL(facts)}</p>
+        <p>${formatWith_B_U_I(oppositeQuestionText)}</p>
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
-        <p>${processMainContent(conclusion)}</p>
-        <p>${processMainContent(randomAddition)}</p>
+        <p>${formatWith_B(conclusion)}</p>
+        <p>${formatWith_B(randomAddition)}</p>
         ${if (globalInterlinkage) "<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>" else ""}
     """.trimIndent()
 
@@ -76,7 +86,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                             .find { file -> file.name.contains("${intent.name}_${index + 1}") }
                             ?.readText() ?: ""
                     if (intent == Intent.CONTENT_PART_2_MAIN) {
-                        headingContent.append(processMainContent(part))
+                        headingContent.append(formatWith_B(part))
                     }
                 }
             tocContent.append(headingContent.toString())
@@ -122,14 +132,14 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                             .find { file -> file.name.contains("${intent.name}_${index + 1}") }
                             ?.readText() ?: ""
                     if (intent == Intent.CONTENT_PART_1_HISTORY) {
-                        val historicalContent = processHistoricalContent(part)
+                        val historicalContent = formatWith_B_U_I(part)
                         headingContent.append(historicalContent)
                     }
                     if (intent == Intent.CONTENT_PART_2_MAIN) {
-                        headingContent.append(processMainContent(part))
+                        headingContent.append(formatWith_B(part))
                     }
                     if (intent == Intent.CONTENT_PART_3_FACTS) {
-                        val factsContent = processFactsContent(part)
+                        val factsContent = formatWith_UL(part)
                         headingContent.append(factsContent)
                     }
                 }
@@ -183,7 +193,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         return content1
     }
 
-    private fun processFactsContent(part: String): String {
+    private fun formatWith_UL(part: String): String {
         val result = StringBuilder()
         val oneVariant = listOf(1, 3)
         val twoVariant = listOf(2, 4)
@@ -198,7 +208,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         return result.toString()
     }
 
-    private fun processHistoricalContent(part: String): String {
+    private fun formatWith_B_U_I(part: String): String {
         val result = StringBuilder()
         var markedB = 0
         val markedBMax = Random.nextInt(2)
@@ -223,7 +233,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         return result.toString()
     }
 
-    private fun processMainContent(part: String): String {
+    private fun formatWith_B(part: String): String {
         val result = StringBuilder()
         var markedB = 0
         val markedBMax = Random.nextInt(2)

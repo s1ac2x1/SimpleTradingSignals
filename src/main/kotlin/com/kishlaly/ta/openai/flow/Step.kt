@@ -25,7 +25,15 @@ val historySubtitlesEN = listOf(
     "Historical Evolution",
     "Understanding Origins",
     "The Historical Context",
-    "Historical Perspective"
+    "Historical Perspective",
+    "Exploring the Past",
+    "The Historical Setting",
+    "In Retrospect",
+    "A Condensed History",
+    "The Evolution of History",
+    "Tracing Origins",
+    "The Context of History",
+    "A Historical Viewpoint"
 )
 
 val historySubtitlesDE = listOf(
@@ -35,7 +43,15 @@ val historySubtitlesDE = listOf(
     "Historische Evolution",
     "Ursprünge verstehen",
     "Der historische Kontext",
-    "Historischer Blickwinkel"
+    "Historischer Blickwinkel",
+    "Die Erkundung der Vergangenheit",
+    "Der historische Hintergrund",
+    "Im Rückblick",
+    "Eine zusammengefasste Geschichte",
+    "Die Entwicklung der Geschichte",
+    "Die Spurensuche nach Ursprüngen",
+    "Der Kontext der Geschichte",
+    "Eine historische Perspektive"
 )
 
 val factsSubtitlesEN = listOf(
@@ -80,6 +96,146 @@ val factsSubtitlesDE = listOf(
     "Die wesentlichen Fakten"
 )
 
+val anotherOpitionSubtitlesEN = listOf(
+    "Alternative Views",
+    "The Other Side of the Story",
+    "What Others Are Saying About",
+    "Exploring Different Opinions",
+    "Another Angle",
+    "Challenging Assumptions",
+    "Exploring Different Perspectives",
+    "Diving into Different Opinion",
+    "The Alternative Opinion",
+    "What Else You Should Know",
+    "The Other Side",
+    "The Unpopular Opinion",
+    "Why Some Disagree: Alternative Opinions",
+    "The Flip Side",
+    "Alternative Perspectives",
+    "Examining Opposing Views",
+    "Different Voices",
+    "Exploring Multiple Points of View",
+    "An Unconventional Take",
+    "Challenging Common Beliefs",
+    "Exploring Different Angles",
+    "Delving into Alternative Opinions",
+    "A Different Perspective",
+    "Important Considerations",
+    "Considering Another Perspective",
+    "Unpopular Ideas",
+    "Disagreeing with the Mainstream View",
+    "Another Way of Looking at It"
+)
+
+val anotherOpitionSubtitlesDE = listOf(
+    "Alternative Ansichten",
+    "Die andere Seite der Geschichte",
+    "Was andere sagen über",
+    "Unterschiedliche Meinungen erkunden",
+    "Eine andere Perspektive",
+    "Annahmen herausfordern",
+    "Unterschiedliche Perspektiven erkunden",
+    "Vertiefung in unterschiedliche Meinungen",
+    "Die alternative Meinung",
+    "Was Sie sonst noch wissen sollten",
+    "Die andere Seite",
+    "Die unbeliebte Meinung",
+    "Warum manche anderer Meinung sind: alternative Meinungen",
+    "Die Kehrseite der Medaille",
+    "Alternative Perspektiven",
+    "Untersuchung gegensätzlicher Ansichten",
+    "Verschiedene Standpunkte",
+    "Erkundung mehrerer Blickwinkel",
+    "Eine unkonventionelle Sichtweise",
+    "Herausforderung gängiger Überzeugungen",
+    "Erkundung unterschiedlicher Ansätze",
+    "Eintauchen in alternative Meinungen",
+    "Eine andere Perspektive",
+    "Wichtige Überlegungen",
+    "Berücksichtigung einer anderen Perspektive",
+    "Unbeliebte Ideen",
+    "Widerspruch zur gängigen Meinung",
+    "Eine andere Art der Betrachtung"
+)
+
+val personalExperienceOpitionSubtitlesEN = listOf(
+    "My Thoughts",
+    "In My Opinion",
+    "My Personal Perspective",
+    "From My Perspective",
+    "A Personal Look",
+    "How I See It",
+    "My Interpretation",
+    "The Way I See It",
+    "A Subjective View",
+    "My Feelings About That",
+    "My Position",
+    "My Experience",
+    "Reflecting on My Experience",
+    "My Personal Story",
+    "An Inside Look",
+    "My Point of View",
+    "A Personal Reflection",
+    "The Lessons I Learned",
+    "My Reflections",
+    "In My View",
+    "My Unique Perspective",
+    "Through My Eyes",
+    "A Personal Examination",
+    "My Take on It",
+    "My Understanding",
+    "My Personal Outlook",
+    "My Emotional Response",
+    "Where I Stand",
+    "My Encounter",
+    "Looking Back on My Experience",
+    "My Personal Account",
+    "A Behind-the-Scenes Look",
+    "My Personal Insight",
+    "A Personal Assessment",
+    "My Considerations",
+    "Personal Takeaways"
+)
+
+val personalExperienceSubtitlesDE = listOf(
+    "Meine Gedanken",
+    "In meiner Meinung",
+    "Meine persönliche Perspektive",
+    "Aus meiner Perspektive",
+    "Ein persönlicher Blick",
+    "Wie ich es sehe",
+    "Meine Interpretation",
+    "Die Art und Weise, wie ich es sehe",
+    "Eine subjektive Sichtweise",
+    "Meine Gefühle dazu",
+    "Meine Position",
+    "Meine Erfahrung",
+    "Rückblick auf meine Erfahrung",
+    "Meine persönliche Geschichte",
+    "Ein Blick hinter die Kulissen",
+    "Mein Standpunkt",
+    "Eine persönliche Reflexion",
+    "Die Lektionen, die ich gelernt habe",
+    "Meine Betrachtungen",
+    "In meiner Ansicht",
+    "Meine einzigartige Perspektive",
+    "Durch meine Augen",
+    "Eine persönliche Untersuchung",
+    "Meine Meinung dazu",
+    "Mein Verständnis",
+    "Mein persönlicher Ausblick",
+    "Meine emotionale Reaktion",
+    "Wo ich stehe",
+    "Meine Begegnung",
+    "Rückblick auf meine Erfahrung",
+    "Mein persönlicher Bericht",
+    "Ein Blick hinter die Kulissen",
+    "Meine persönliche Einsicht",
+    "Eine persönliche Bewertung",
+    "Meine Überlegungen",
+    "Persönliche Erkenntnisse"
+)
+
 fun getReadAlsoTitle() = when (globalLanguage) {
         Language.DE -> "Lesen Sie auch:"
         Language.EN -> "Read also:"
@@ -93,6 +249,16 @@ fun getHistorySubtitle() = when (globalLanguage) {
 fun getFactsSubtitle() = when (globalLanguage) {
         Language.DE -> factsSubtitlesDE.shuffled().random()
         Language.EN -> factsSubtitlesEN.shuffled().random()
+    }
+
+fun getAnotherOpitonSubtitle() = when (globalLanguage) {
+        Language.DE -> anotherOpitionSubtitlesDE.shuffled().random()
+        Language.EN -> anotherOpitionSubtitlesEN.shuffled().random()
+    }
+
+fun getPersonalExperienceSubtitle() = when (globalLanguage) {
+        Language.DE -> personalExperienceSubtitlesDE.shuffled().random()
+        Language.EN -> personalExperienceOpitionSubtitlesEN.shuffled().random()
     }
 
 fun getPromptsMarkers(): List<String> {
