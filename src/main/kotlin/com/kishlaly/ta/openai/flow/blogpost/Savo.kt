@@ -1,9 +1,8 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
-import com.kishlaly.ta.openai.DELIMITER
+import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import com.kishlaly.ta.openai.KeywordSource
 import com.kishlaly.ta.openai.flow.Language
-import java.io.File
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
@@ -58,16 +57,27 @@ fun main() {
 
 }
 
+fun parseCsvFileWithLibrary(fileName: String): List<List<String>> {
+     val result: MutableList<List<String>> = mutableListOf()
+     CsvReader().open(fileName) {
+          readAllWithHeader().forEach { row ->
+               val values = row.values.map { it.toString() }
+               result.add(values)
+          }
+     }
+     return result
+}
+
 fun parseKeywords(): MutableMap<ArticleType, List<KeywordSource>> {
      val result = mutableMapOf<ArticleType, List<KeywordSource>>()
      ArticleType.values().forEach { type ->
           try {
-               val keywords = File("openai/$globalDomain/content/$globalCategory/${globalCategory}_${type.name.lowercase()}.csv").readLines().map { line ->
-                    val split = line.split('Ъ')
-                    val title = split[0]
-                    val prompt = if (split.size > 2) split[2] else ""
-                    KeywordSource(title, prompt)
-               }.distinctBy { it.keyword }.toList()
+               val keywords = parseCsvFileWithLibrary("openai/$globalDomain/content/$globalCategory/${globalCategory}_${type.name.lowercase()}.csv")
+                    .map { list ->
+                         val title = list[0]
+                         val prompt = if (list.size > 2) list[2] else ""
+                         KeywordSource(title, prompt)
+                    }.distinctBy { it.keyword }.toList()
                result.put(type, keywords)
           } catch (e: Exception) {
                println("")
