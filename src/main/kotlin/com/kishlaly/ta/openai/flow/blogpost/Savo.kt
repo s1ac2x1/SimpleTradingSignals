@@ -1,8 +1,9 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
-import com.github.doyaaaaaken.kotlincsv.client.CsvReader
 import com.kishlaly.ta.openai.KeywordSource
 import com.kishlaly.ta.openai.flow.Language
+import org.apache.poi.ss.usermodel.WorkbookFactory
+import java.io.File
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
@@ -57,14 +58,18 @@ fun main() {
 
 }
 
-fun parseCsvFileWithLibrary(fileName: String): List<List<String>> {
+fun parseXlsxFile(fileName: String): List<List<String>> {
      val result: MutableList<List<String>> = mutableListOf()
-     CsvReader().open(fileName) {
-          readAllWithHeader().forEach { row ->
-               val values = row.values.map { it.toString() }
-               result.add(values)
+     val workbook = WorkbookFactory.create(File(fileName))
+     val sheet = workbook.getSheetAt(0)
+     for (row in sheet) {
+          val values: MutableList<String> = mutableListOf()
+          for (cell in row) {
+               values.add(cell.toString())
           }
+          result.add(values)
      }
+     workbook.close()
      return result
 }
 
@@ -72,7 +77,7 @@ fun parseKeywords(): MutableMap<ArticleType, List<KeywordSource>> {
      val result = mutableMapOf<ArticleType, List<KeywordSource>>()
      ArticleType.values().forEach { type ->
           try {
-               val keywords = parseCsvFileWithLibrary("openai/$globalDomain/content/$globalCategory/${globalCategory}_${type.name.lowercase()}.csv")
+               val keywords = parseXlsxFile("openai/$globalDomain/content/$globalCategory/HOSTING-Medium.xlsx")
                     .map { list ->
                          val title = list[0]
                          val prompt = if (list.size > 2) list[2] else ""
