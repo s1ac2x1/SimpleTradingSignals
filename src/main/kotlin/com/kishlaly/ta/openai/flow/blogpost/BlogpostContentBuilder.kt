@@ -138,11 +138,11 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         }
 
         val cta = File("$srcFolder/${Intent.EXTERNAL_PROMPT}_1").readLines()
-        val disclosure = if (meta.keywordSource.text.isNotEmpty()) "<i>${disclosureGlobal}</i>" else ""
+        val disclosure = if (meta.keywordSource.text.isNotEmpty()) "<p><i>${disclosureGlobal}</i></p>" else ""
 
         var content = """
+        $disclosure
         <p>${formatWith_B(introduction)}</p>
-        <p>$disclosure</p>
         $tocContent
         <h2>${getConclusionSubtitle()}</h2>
         <p>$cta</p>
