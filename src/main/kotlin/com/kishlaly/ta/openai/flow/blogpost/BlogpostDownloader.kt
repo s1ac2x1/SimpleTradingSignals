@@ -273,7 +273,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsPlanSavo() {
-        val intent = Intent.TOC_PLAN
+        val intent = Intent.TOC_PLAN_SAVO
         Step(
             intent = intent,
             folder = stepFolder,
