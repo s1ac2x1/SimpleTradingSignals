@@ -23,7 +23,7 @@ var DELIMITER = ";"
 
 data class KeywordSource(
     @field:JsonProperty("PAA Title") val keyword: String,
-    @field:JsonProperty("Text") val text: String
+    @field:JsonProperty("Text") val text: String = ""
 ) {
     constructor() : this("", "")
 }

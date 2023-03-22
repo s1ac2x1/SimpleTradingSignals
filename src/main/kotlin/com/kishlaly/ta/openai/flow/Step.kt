@@ -19,6 +19,8 @@ enum class Type {
     IMAGE
 }
 
+val disclosureGlobal = "Disclosure: This article may contain affiliate links, which means that if you click on one of the product links, I may receive a commission."
+
 val historySubtitlesEN = listOf(
     "History",
     "Historical Background",

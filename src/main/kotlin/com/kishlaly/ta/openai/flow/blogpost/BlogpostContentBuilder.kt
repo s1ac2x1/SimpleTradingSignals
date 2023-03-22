@@ -117,10 +117,8 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         }
 
         val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
-        val tocPlan = File("$srcFolder/${Intent.TOC_PLAN}_1").readLines()
+        val tocPlan = File("$srcFolder/${Intent.TOC_PLAN_SAVO}_1").readLines()
 
-        val interlinksLimit = Random.nextInt(5) + 2
-        var linksMade = 0
         val tocContent = StringBuilder()
         tocPlan.forEachIndexed { index, item ->
             tocContent.append("<h2>$item</h2>")
@@ -133,15 +131,21 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
                             .find { file -> file.name.contains("${intent.name}_${index + 1}") }
                             ?.readText() ?: ""
                     if (intent == Intent.CONTENT_PART_2_MAIN) {
-                        headingContent.append(formatWith_B(part))
+                        headingContent.append(if (Random.nextBoolean()) formatWith_B_U_I(part) else formatWith_UL(part))
                     }
                 }
             tocContent.append(headingContent.toString())
         }
 
+        val cta = File("$srcFolder/${Intent.EXTERNAL_PROMPT}_1").readLines()
+        val disclosure = if (meta.keywordSource.text.isNotEmpty()) "<i>${disclosureGlobal}</i>" else ""
+
         var content = """
-        <p>$introduction</p>
+        <p>${formatWith_B(introduction)}</p>
+        <p>$disclosure</p>
         $tocContent
+        <h2>${getConclusionSubtitle()}</h2>
+        <p>$cta</p>
     """.trimIndent()
 
         content = postProcessAndCheck(content)

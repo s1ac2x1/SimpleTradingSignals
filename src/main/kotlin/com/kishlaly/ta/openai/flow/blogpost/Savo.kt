@@ -50,7 +50,7 @@ fun main() {
         }
 
                // перелинковка плагином? тогда можно шедулить на будущее?
-//               buildContent(xml, meta, keywordSource, false)
+//               buildContent(xml, meta, keywordSource, true)
           }
 
      executor.shutdown()

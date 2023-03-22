@@ -50,10 +50,12 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun downloadSavo() {
         File(stepFolder).mkdir()
 
-        introduction()
-        tableOfContentsPlanSavo()
-        tableOfContentsTextsSavo_main()
-        savoCTA()
+//        introduction()
+//        tableOfContentsPlanSavo()
+//        tableOfContentsTextsSavo_main()
+        if (meta.keywordSource.text.isNotEmpty()) {
+            savoCTA()
+        }
     }
 
     private fun factsSection() {
@@ -299,8 +301,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             intent = intent,
             folder = stepFolder,
             input = listOf(meta.keywordSource.text.replace("###title###", meta.keywordSource.keyword)),
-            postProcessings = listOf(trimmed),
-            useTone = true,
+            postProcessings = listOf(trimmed)
         )
     }
 
