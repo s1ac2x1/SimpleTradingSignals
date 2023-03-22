@@ -63,7 +63,7 @@ fun parseKeywords(): MutableMap<ArticleType, List<KeywordSource>> {
      ArticleType.values().forEach { type ->
           try {
                val keywords = File("openai/$globalDomain/content/$globalCategory/${globalCategory}_${type.name.lowercase()}.csv").readLines().map { line ->
-                    val split = line.split(DELIMITER)
+                    val split = line.split('Ъ')
                     val title = split[0]
                     val prompt = if (split.size > 2) split[2] else ""
                     KeywordSource(title, prompt)

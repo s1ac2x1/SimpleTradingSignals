@@ -50,9 +50,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     fun downloadSavo() {
         File(stepFolder).mkdir()
 
-//        introduction()
-//        tableOfContentsPlanSavo()
-//        tableOfContentsTextsSavo_main()
+        introduction()
+        tableOfContentsPlanSavo()
+        tableOfContentsTextsSavo_main()
         if (meta.keywordSource.text.isNotEmpty()) {
             savoCTA()
         }
