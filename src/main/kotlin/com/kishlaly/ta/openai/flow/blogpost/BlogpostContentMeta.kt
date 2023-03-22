@@ -1,5 +1,6 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
+import com.kishlaly.ta.openai.KeywordSource
 import com.kishlaly.ta.openai.flow.toFileName
 
 enum class ArticleType {
@@ -10,13 +11,13 @@ enum class ArticleType {
 }
 
 data class BlogpostContentMeta(
-    val keyword: String,
+    val keywordSource: KeywordSource,
     val category: String,
     val type: ArticleType,
     val domain: String,
     val imgURI: String,
     val imgSrcFolder: String) {
 
-    fun resolveKeywordFolder() = "openai/$domain/content/$category/${type.name.lowercase()}/${keyword.toFileName()}"
+    fun resolveKeywordFolder() = "openai/$domain/content/$category/${type.name.lowercase()}/${keywordSource.keyword.toFileName()}"
 
 }

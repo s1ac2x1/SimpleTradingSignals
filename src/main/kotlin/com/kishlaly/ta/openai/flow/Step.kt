@@ -360,10 +360,22 @@ enum class Intent(val map: Map<Language, String>) {
             Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a detailed introduction to this article."
         )
     ),
+    EXTERNAL_PROMPT(
+        mapOf(
+            Language.DE to "",
+            Language.EN to ""
+        )
+    ),
     TOC_PLAN(
         mapOf(
             Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 10 to 15 short subheadings."
+        )
+    ),
+    TOC_PLAN_SAVO(
+        mapOf(
+            Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 4 bis 7 kurzen Unterüberschriften.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 4 to 7 short subheadings."
         )
     ),
     CONTENT_PART_1_HISTORY(

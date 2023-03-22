@@ -32,7 +32,7 @@ fun main() {
         ?.forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = globalType,
-            keyword = keywordSource.title,
+            keywordSource = keywordSource,
             category = globalCategory,
             domain = globalDomain,
             imgURI = globalImageURI,
@@ -42,8 +42,6 @@ fun main() {
             // если часть вопросов переделать в утвердительные? и где-то можно добавить цифры
             // external links? наверно в конце парочку нужно
 
-            // добавлять абзац в начале про рекламу для Саво
-
 //        executor.submit {
 //            resolveDownloader(globalType)(meta)
 //            processed.incrementAndGet()
@@ -51,13 +49,13 @@ fun main() {
 //        }
 
             // перелинковка плагином? тогда можно шедулить на будущее?
-       buildContent(xml, meta, keywordSource, false)
+//       buildContent(xml, meta, keywordSource, false)
     }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+//    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
@@ -101,7 +99,7 @@ fun buildContent(
     keywordSource: KeywordSource,
     saveTempHTML: Boolean
 ) {
-    println("Building ${meta.type} for [${keywordSource.title}]")
+    println("Building ${meta.type} for [${keywordSource.keyword}]")
     val builder: (meta: BlogpostContentMeta) -> String = when (meta.type) {
         ArticleType.PAA -> { m -> BlogpostContentBuilder(m).buildPAA() }
         ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
@@ -111,7 +109,7 @@ fun buildContent(
     xml.append(meta, resolveTagsIntent(meta.type), builder)
     if (saveTempHTML) {
     Files.write(
-        Paths.get("openai/${meta.domain}/temp/${keywordSource.title.toFileName()}.html"),
+        Paths.get("openai/${meta.domain}/temp/${keywordSource.keyword.toFileName()}.html"),
         htmlStub.replace("###content###", builder(meta)).toByteArray()
     )
     }
@@ -157,7 +155,7 @@ fun readCSV(): MutableMap<ArticleType, List<KeywordSource>> {
         ArticleType.values().forEach { type ->
             try {
                 val keywords = readCsv("openai/$globalDomain/content/$globalCategory/${globalCategory}_${type.name.lowercase()}.csv")
-                    .distinctBy { it.title }
+                    .distinctBy { it.keyword }
                     .toList()
                 result.put(type, keywords)
             } catch (e: Exception) {

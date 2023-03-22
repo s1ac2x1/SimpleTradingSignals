@@ -22,7 +22,7 @@ var date = ""
 var DELIMITER = ";"
 
 data class KeywordSource(
-    @field:JsonProperty("PAA Title") val title: String,
+    @field:JsonProperty("PAA Title") val keyword: String,
     @field:JsonProperty("Text") val text: String
 ) {
     constructor() : this("", "")
@@ -63,7 +63,7 @@ fun createSingleImportFile(fileName: String) {
 fun generateBlogArticles(inputFileName: String, prompt: String) {
     val paas = try {
         readCsv("openai/$inputFileName.csv")
-            .distinctBy { it.title }
+            .distinctBy { it.keyword }
             //.distinctBy { it.text }
             .toList()
     } catch (e: Exception) {
@@ -89,7 +89,7 @@ private fun createPostTag(keywordSourceData: KeywordSource, prompt: String) {
     val xml = StringBuilder()
 
     var promptReplaced = prompt
-        .replace("###title###", keywordSourceData.title)
+        .replace("###title###", keywordSourceData.keyword)
         .replace("###context###", keywordSourceData.text)
 
     val completion = getCompletion(CompletionRequest(prompt = promptReplaced))
@@ -99,7 +99,7 @@ private fun createPostTag(keywordSourceData: KeywordSource, prompt: String) {
     xml.append("<post>")
 
     xml.append("<title>")
-    xml.append(keywordSourceData.title)
+    xml.append(keywordSourceData.keyword)
     xml.append("</title>")
 
     xml.append("<content>")
@@ -112,9 +112,9 @@ private fun createPostTag(keywordSourceData: KeywordSource, prompt: String) {
 
     xml.append("</post>")
 
-    val safeTitle = keywordSourceData.title.toFileName()
+    val safeTitle = keywordSourceData.keyword.toFileName()
     Files.write(Paths.get("openai/output/text/$safeTitle-post.xml"), xml.toString().toByteArray())
-    println("Ready: ${keywordSourceData.title}")
+    println("Ready: ${keywordSourceData.keyword}")
 }
 
 //fun main() {

@@ -8,7 +8,7 @@ import kotlin.random.Random
 class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
     private val stepFolder =
-        "openai/${meta.domain}/content/${meta.category}/${meta.type.name.lowercase()}/${meta.keyword.toFileName()}"
+        "openai/${meta.domain}/content/${meta.category}/${meta.type.name.lowercase()}/${meta.keywordSource.keyword.toFileName()}"
 
     fun downloadBigPost() {
         File(stepFolder).mkdir()
@@ -51,9 +51,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         File(stepFolder).mkdir()
 
         introduction()
-        tableOfContentsPlan()
-        tableOfContentsTexts_main()
-        conclusion(Intent.INTRODUCTION)
+        tableOfContentsPlanSavo()
+        tableOfContentsTextsSavo_main()
+        savoCTA()
     }
 
     private fun factsSection() {
@@ -61,7 +61,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = intent,
             folder = stepFolder,
-            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(trimmed),
             useTone = true,
         )
@@ -72,7 +72,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = intent,
             folder = stepFolder,
-            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(trimmed),
             useTone = true,
         )
@@ -83,7 +83,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = intent,
             folder = stepFolder,
-            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(trimmed),
             useTone = true,
         )
@@ -123,7 +123,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = intent,
             folder = stepFolder,
-            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(trimmed),
         )
     }
@@ -142,7 +142,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             type = Type.IMAGE,
             input = listOf("${prompt} in the style pencil artwork"),
-            customImageName = "${meta.keyword.toFileName()}_${System.currentTimeMillis()}",
+            customImageName = "${meta.keywordSource.keyword.toFileName()}_${System.currentTimeMillis()}",
             imagesCount = 5
         )
     }
@@ -154,7 +154,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             type = Type.IMAGE,
             input = listOf("${prompt} In a style of a black and white pencil artwork"),
-            customImageName = "${meta.keyword.toFileName()}_${System.currentTimeMillis()}",
+            customImageName = "${meta.keywordSource.keyword.toFileName()}_${System.currentTimeMillis()}",
             imagesCount = count
         )
     }
@@ -209,7 +209,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = intent,
             folder = stepFolder,
-            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(removeQuotes, removeDots, trimmed),
         )
     }
@@ -238,6 +238,18 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
+    private fun tableOfContentsTextsSavo_main() {
+        val intent = Intent.CONTENT_PART_2_MAIN
+        val prompt = readLines(Intent.TOC_PLAN_SAVO).map { intent.get(globalLanguage, it) }
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = prompt,
+            postProcessings = listOf(trimmed),
+            useTone = true,
+        )
+    }
+
     private fun tableOfContentsTexts_history() {
         val intent = Intent.CONTENT_PART_1_HISTORY
         val prompt = readLines(Intent.TOC_PLAN).map { intent.get(globalLanguage, it) }
@@ -255,7 +267,17 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = intent,
             folder = stepFolder,
-            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
+            postProcessings = listOf(removeNumericList, filterBadTOC, removeQuestionMarks, trimmed)
+        )
+    }
+
+    private fun tableOfContentsPlanSavo() {
+        val intent = Intent.TOC_PLAN
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(removeNumericList, filterBadTOC, removeQuestionMarks, trimmed)
         )
     }
@@ -265,7 +287,18 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = intent,
             folder = stepFolder,
-            input = listOf(intent.get(globalLanguage, meta.keyword)),
+            input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
+            postProcessings = listOf(trimmed),
+            useTone = true,
+        )
+    }
+
+    private fun savoCTA() {
+        val intent = Intent.EXTERNAL_PROMPT
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = listOf(meta.keywordSource.text.replace("###title###", meta.keywordSource.keyword)),
             postProcessings = listOf(trimmed),
             useTone = true,
         )

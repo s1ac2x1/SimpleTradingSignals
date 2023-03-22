@@ -12,11 +12,11 @@ import java.io.FileWriter
 fun firstFilterCSV() {
     val filePath = "openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}.csv"
     val rawContent = readCsv(filePath)
-    var filteredContent = rawContent.distinctBy { it.title }
+    var filteredContent = rawContent.distinctBy { it.keyword }
     if (filteredContent.size > globalLimit) {
         filteredContent = filteredContent.shuffled().take(globalLimit)
     }
-    val lines = filteredContent.map { "${it.title};" }
+    val lines = filteredContent.map { "${it.keyword};" }
     saveToFile(filePath, lines)
     println("Filtered ${rawContent.size - filteredContent.size} duplicates")
 }

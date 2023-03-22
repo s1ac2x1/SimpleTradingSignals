@@ -5,6 +5,7 @@ import com.kishlaly.ta.openai.KeywordSource
 import com.kishlaly.ta.openai.flow.Language
 import java.io.File
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
 
@@ -33,7 +34,7 @@ fun main() {
           ?.forEach { keywordSource ->
                val meta = BlogpostContentMeta(
                     type = globalType,
-                    keyword = keywordSource.title,
+                    keywordSource = keywordSource,
                     category = globalCategory,
                     domain = globalDomain,
                     imgURI = globalImageURI,
@@ -52,6 +53,9 @@ fun main() {
 //               buildContent(xml, meta, keywordSource, false)
           }
 
+     executor.shutdown()
+     executor.awaitTermination(2, TimeUnit.HOURS)
+
 }
 
 fun parseKeywords(): MutableMap<ArticleType, List<KeywordSource>> {
@@ -63,7 +67,7 @@ fun parseKeywords(): MutableMap<ArticleType, List<KeywordSource>> {
                     val title = split[0]
                     val prompt = if (split.size > 2) split[2] else ""
                     KeywordSource(title, prompt)
-               }.distinctBy { it.title }.toList()
+               }.distinctBy { it.keyword }.toList()
                result.put(type, keywords)
           } catch (e: Exception) {
                println("")
