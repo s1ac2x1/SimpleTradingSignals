@@ -137,18 +137,15 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             tocContent.append(headingContent.toString())
         }
 
-        val cta = File("$srcFolder/${Intent.EXTERNAL_PROMPT}_1").readLines()
+        val cta = File("$srcFolder/${Intent.EXTERNAL_PROMPT}_1").readText()
         val disclosure = if (meta.keywordSource.text.isNotEmpty()) "<p><i>${disclosureGlobal}</i></p>" else ""
 
         var content = """
         $disclosure
         <p>${formatWith_B(introduction)}</p>
         $tocContent
-        <h2>${getConclusionSubtitle()}</h2>
         <p>$cta</p>
     """.trimIndent()
-
-        content = postProcessAndCheck(content)
 
         return content
     }

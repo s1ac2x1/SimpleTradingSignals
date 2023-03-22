@@ -300,7 +300,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         Step(
             intent = intent,
             folder = stepFolder,
-            input = listOf(meta.keywordSource.text.replace("###title###", meta.keywordSource.keyword)),
+            input = listOf(meta.keywordSource.text
+                .replace("TITLE", meta.keywordSource.keyword)
+                .replace("Please make a table of the advantages of these hosting companies (without html code)", "")
+            ),
             postProcessings = listOf(trimmed)
         )
     }

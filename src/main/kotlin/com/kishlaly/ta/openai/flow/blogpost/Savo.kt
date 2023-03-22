@@ -43,14 +43,14 @@ fun main() {
 
                // добавлять абзац в начале про рекламу для Саво
 
-        executor.submit {
-            resolveDownloader(globalType)(meta)
-            processed.incrementAndGet()
-            println("==== Done $processed/$total ====\n")
-        }
+//        executor.submit {
+//            resolveDownloader(globalType)(meta)
+//            processed.incrementAndGet()
+//            println("==== Done $processed/$total ====\n")
+//        }
 
                // перелинковка плагином? тогда можно шедулить на будущее?
-//               buildContent(xml, meta, keywordSource, true)
+               buildContent(xml, meta, keywordSource, true)
           }
 
      executor.shutdown()
