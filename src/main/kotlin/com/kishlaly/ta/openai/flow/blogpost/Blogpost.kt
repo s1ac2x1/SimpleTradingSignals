@@ -27,8 +27,8 @@ fun main() {
     val executor = Executors.newFixedThreadPool(5)
 
     keywords[globalType]
-        //?.shuffled()
-        //?.take(1)
+        ?.shuffled()
+        ?.take(1)
         ?.forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = globalType,
@@ -40,7 +40,6 @@ fun main() {
         )
 
             // если часть вопросов переделать в утвердительные? и где-то можно добавить цифры
-            // external links? наверно в конце парочку нужно
 
 //        executor.submit {
 //            resolveDownloader(globalType)(meta)
@@ -48,8 +47,8 @@ fun main() {
 //            println("==== Done $processed/$total ====\n")
 //        }
 
-            // перелинковка плагином? тогда можно шедулить на будущее?
-//       buildContent(xml, meta, keywordSource, false)
+            // что с перелинковкой?
+       buildContent(xml, meta, keywordSource, true)
     }
 
     executor.shutdown()
@@ -108,10 +107,11 @@ fun buildContent(
     }
     xml.append(meta, resolveTagsIntent(meta.type), builder)
     if (saveTempHTML) {
-    Files.write(
-        Paths.get("openai/${meta.domain}/temp/${keywordSource.keyword.toFileName()}.html"),
-        htmlStub.replace("###content###", builder(meta)).toByteArray()
-    )
+        File("openai/${meta.domain}/temp/").mkdir()
+        Files.write(
+            Paths.get("openai/${meta.domain}/temp/${keywordSource.keyword.toFileName()}.html"),
+            htmlStub.replace("###content###", builder(meta)).toByteArray()
+        )
     }
 }
 
