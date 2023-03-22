@@ -47,6 +47,15 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         conclusion(Intent.INTRODUCTION)
     }
 
+    fun downloadSavo() {
+        File(stepFolder).mkdir()
+
+        introduction()
+        tableOfContentsPlan()
+        tableOfContentsTexts_main()
+        conclusion(Intent.INTRODUCTION)
+    }
+
     private fun factsSection() {
         val intent = Intent.FACTS
         Step(

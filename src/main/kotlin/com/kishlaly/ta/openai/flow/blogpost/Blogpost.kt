@@ -39,19 +39,25 @@ fun main() {
             imgSrcFolder = "openai/${globalDomain}/images_webp"
         )
 
-        executor.submit {
-            resolveDownloader(globalType)(meta)
-            processed.incrementAndGet()
-            println("==== Done $processed/$total ====\n")
-        }
+            // если часть вопросов переделать в утвердительные? и где-то можно добавить цифры
+            // external links? наверно в конце парочку нужно
 
-//       buildContent(xml, meta, keywordSource, true)
+            // добавлять абзац в начале про рекламу для Саво
+
+//        executor.submit {
+//            resolveDownloader(globalType)(meta)
+//            processed.incrementAndGet()
+//            println("==== Done $processed/$total ====\n")
+//        }
+
+            // перелинковка плагином? тогда можно шедулить на будущее?
+       buildContent(xml, meta, keywordSource, false)
     }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-//    Files.write(Paths.get("openai/$domain/content/$category/${category}_${type.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
@@ -89,7 +95,7 @@ private fun setupMedium(topic: String) {
     globalType = ArticleType.MEDIUM
 }
 
-private fun buildContent(
+fun buildContent(
     xml: BlogpostXMLBuilder,
     meta: BlogpostContentMeta,
     keywordSource: KeywordSource,
@@ -100,6 +106,7 @@ private fun buildContent(
         ArticleType.PAA -> { m -> BlogpostContentBuilder(m).buildPAA() }
         ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
         ArticleType.MEDIUM -> { m -> BlogpostContentBuilder(m).buildMedium() }
+        ArticleType.SAVO -> { m -> BlogpostContentBuilder(m).buildSavo() }
     }
     xml.append(meta, resolveTagsIntent(meta.type), builder)
     if (saveTempHTML) {
@@ -114,6 +121,7 @@ fun resolveTagsIntent(type: ArticleType) = when (type) {
     ArticleType.PAA -> Intent.TAGS_PAA
     ArticleType.BIG -> Intent.TAGS
     ArticleType.MEDIUM -> Intent.TAGS
+    ArticleType.SAVO -> Intent.TAGS
 }
 
 fun resolveDownloader(type: ArticleType): (BlogpostContentMeta) -> Unit {
@@ -121,6 +129,7 @@ fun resolveDownloader(type: ArticleType): (BlogpostContentMeta) -> Unit {
         ArticleType.PAA -> { meta -> run { BlogpostDownloader(meta).downloadPAA() } }
         ArticleType.BIG -> { meta -> run { BlogpostDownloader(meta).downloadBigPost() } }
         ArticleType.MEDIUM -> { meta -> run { BlogpostDownloader(meta).downloadMedium() } }
+        ArticleType.SAVO -> { meta -> run { BlogpostDownloader(meta).downloadSavo() } }
     }
 }
 
@@ -174,7 +183,7 @@ var globalInsertImages = false
 var globalInsertTags = false
 var globalDomain = ""
 var globalCategory = ""
-var globalLimit = 500
+var globalLimit = 350
 var globalImageURI = ""
 var globalType = ArticleType.MEDIUM
 var globalInterlinkage = false

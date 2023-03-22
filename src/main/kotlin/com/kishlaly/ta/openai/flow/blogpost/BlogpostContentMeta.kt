@@ -5,7 +5,8 @@ import com.kishlaly.ta.openai.flow.toFileName
 enum class ArticleType {
     PAA,
     BIG,
-    MEDIUM
+    MEDIUM,
+    SAVO
 }
 
 data class BlogpostContentMeta(

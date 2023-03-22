@@ -109,6 +109,46 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         return content
     }
 
+    fun buildSavo(): String {
+        val srcFolder = meta.resolveKeywordFolder()
+
+        if (!File("$srcFolder").exists()) {
+            throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
+        }
+
+        val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
+        val tocPlan = File("$srcFolder/${Intent.TOC_PLAN}_1").readLines()
+
+        val interlinksLimit = Random.nextInt(5) + 2
+        var linksMade = 0
+        val tocContent = StringBuilder()
+        tocPlan.forEachIndexed { index, item ->
+            tocContent.append("<h2>$item</h2>")
+
+            val headingContent = StringBuilder()
+            listOf(Intent.CONTENT_PART_2_MAIN).shuffled()
+                .forEach { intent ->
+                    val part =
+                        File("$srcFolder").listFiles()
+                            .find { file -> file.name.contains("${intent.name}_${index + 1}") }
+                            ?.readText() ?: ""
+                    if (intent == Intent.CONTENT_PART_2_MAIN) {
+                        headingContent.append(formatWith_B(part))
+                    }
+                }
+            tocContent.append(headingContent.toString())
+        }
+
+        var content = """
+        <p>$introduction</p>
+        $tocContent
+    """.trimIndent()
+
+        content = postProcessAndCheck(content)
+
+        return content
+    }
+
     fun buildLongPost(): String {
         val srcFolder = meta.resolveKeywordFolder()
 
