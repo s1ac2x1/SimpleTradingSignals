@@ -7,19 +7,30 @@ fun main() {
     File("polly.txt").readLines().chunked(20)
         .take(1)
         .forEach { chunk ->
-            val request = StringBuilder("aws polly synthesize-speech --output-format mp3 --voice-id Hans --text-type ssml --text '<speak>")
             chunk.forEach { line ->
+                val command = mutableListOf<String>()
+                //
+                command.add("aws")
+                command.add("polly")
+                command.add("synthesize-speech")
+                command.add("--output-format")
+                command.add("mp3")
+                command.add("--voice-id")
+                command.add("Tatyana")
+                command.add("--text-type")
+                command.add("ssml")
+                command.add("--text")
                 val split = line.split("###")
-                request.append("<lang xml:lang=\"ru-RU\">${split[1]}</lang><break time=\"1000ms\"/>")
-                request.append("<lang xml:lang=\"de-DE\">${split[0]}</lang><break time=\"2500ms\"/>")
+                command.add("<speak><lang xml:lang=\"ru-RU\">${split[1]}</lang><break time=\"1000ms\"/></speak>")
+                command.add("random_ru_${count++}.mp3")
+                runAwsPollyCommand(command)
+                Thread.sleep(100)
             }
-            request.append("</speak>' random_${count++}.mp3")
-            runAwsPollyCommand(request.toString())
     }
 }
 
-fun runAwsPollyCommand(command: String) {
-    val processBuilder = ProcessBuilder(*command.split(" ").toTypedArray())
+fun runAwsPollyCommand(command: List<String>) {
+    val processBuilder = ProcessBuilder(*command.toTypedArray())
     processBuilder.redirectErrorStream(true)
     processBuilder.directory(File(System.getProperty("user.dir")))
 
