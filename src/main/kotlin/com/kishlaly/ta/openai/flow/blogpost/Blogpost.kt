@@ -39,8 +39,6 @@ fun main() {
             imgSrcFolder = "openai/${globalDomain}/images_webp"
         )
 
-            // если часть вопросов переделать в утвердительные? и где-то можно добавить цифры
-
         executor.submit {
             resolveDownloader(globalType)(meta)
             processed.incrementAndGet()
