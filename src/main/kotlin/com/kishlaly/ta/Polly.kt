@@ -9,7 +9,10 @@ fun main() {
         .forEach { chunk ->
             chunk.forEach { line ->
                 generate(line, count, "Tatyana", "ru-RU", 1, "ru")
-                Thread.sleep(300)
+                Thread.sleep(100)
+                count = 1
+                generate(line, count, "Hans", "de-DE", 0, "de")
+                Thread.sleep(100)
             }
     }
 }
