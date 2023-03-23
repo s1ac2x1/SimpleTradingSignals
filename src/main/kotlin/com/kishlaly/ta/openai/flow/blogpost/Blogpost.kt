@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-    setupGermanPAA("katze101.com", "katzenfutter-und-ernährung", "Katzen", "2023/03")
+    setupGermanPAA("katze101.com", "Katzenzubehör", "Katzen", "2023/03")
     //setupMedium("cats")
 
     firstFilterCSV()
@@ -27,8 +27,8 @@ fun main() {
     val executor = Executors.newFixedThreadPool(5)
 
     keywords[globalType]
-        ?.shuffled()
-        ?.take(1)
+        //?.shuffled()
+        //?.take(1)
         ?.forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = globalType,
@@ -41,14 +41,13 @@ fun main() {
 
             // если часть вопросов переделать в утвердительные? и где-то можно добавить цифры
 
-//        executor.submit {
-//            resolveDownloader(globalType)(meta)
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            resolveDownloader(globalType)(meta)
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
-            // что с перелинковкой?
-       buildContent(xml, meta, keywordSource, true)
+//       buildContent(xml, meta, keywordSource, true)
     }
 
     executor.shutdown()
