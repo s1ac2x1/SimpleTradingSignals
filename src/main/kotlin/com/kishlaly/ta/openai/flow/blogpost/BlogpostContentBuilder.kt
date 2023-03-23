@@ -137,7 +137,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             tocContent.append(headingContent.toString())
         }
 
-        val cta = File("$srcFolder/${Intent.EXTERNAL_PROMPT}_1").readText()
+        val cta = File("$srcFolder/${Intent.EXTERNAL_PROMPT}_1").readLines().filter { it.trim().length > 5 }.joinToString("<br><br>")
         val disclosure = if (meta.keywordSource.text.isNotEmpty()) "<p><i>${disclosureGlobal}</i></p>" else ""
 
         var content = """

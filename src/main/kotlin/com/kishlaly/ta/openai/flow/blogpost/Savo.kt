@@ -49,9 +49,8 @@ fun main() {
 //            println("==== Done $processed/$total ====\n")
 //        }
 
-               // перелинковка плагином? тогда можно шедулить на будущее?
-               buildContent(xml, meta, keywordSource, true)
-          }
+          buildContent(xml, meta, keywordSource, true)
+     }
 
      executor.shutdown()
      executor.awaitTermination(2, TimeUnit.HOURS)
