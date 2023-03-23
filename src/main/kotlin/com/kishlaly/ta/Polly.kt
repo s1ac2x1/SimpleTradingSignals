@@ -11,9 +11,9 @@ fun main() {
             chunk.forEach { line ->
                 generate(line, count, "Tatyana", "ru-RU", 1, "ru", mainName)
                 Thread.sleep(100)
-                count = 1
                 generate(line, count, "Hans", "de-DE", 0, "de", mainName)
                 Thread.sleep(100)
+                count++
             }
     }
 }
@@ -31,7 +31,8 @@ private fun generate(line: String, count: Int, voice: String, lang: String, line
     command.add("ssml")
     command.add("--text")
     val split = line.split("###")
-    command.add("<speak><lang xml:lang=\"$lang\">${split[lineIndex]}</lang><break time=\"1000ms\"/></speak>")
+    val pause = if (prefix.equals("de")) 2500 else 1000
+    command.add("<speak><lang xml:lang=\"$lang\">${split[lineIndex]}</lang><break time=\"${pause}ms\"/></speak>")
     command.add("polly/${mainName}_${prefix}_${count}.mp3")
     runAwsPollyCommand(command)
 }
