@@ -5,7 +5,7 @@ import java.io.File
 fun main() {
     val mainName = "random"
     var count = 1
-    File("polly.txt").readLines().chunked(20)
+    File("polly.txt").readLines().chunked(3)
         .take(1)
         .forEach { chunk ->
             chunk.forEach { line ->
@@ -19,7 +19,6 @@ fun main() {
 }
 
 private fun generate(line: String, count: Int, voice: String, lang: String, lineIndex: Int, prefix: String, mainName: String) {
-    var count1 = count
     val command = mutableListOf<String>()
     command.add("aws")
     command.add("polly")
@@ -33,7 +32,7 @@ private fun generate(line: String, count: Int, voice: String, lang: String, line
     command.add("--text")
     val split = line.split("###")
     command.add("<speak><lang xml:lang=\"$lang\">${split[lineIndex]}</lang><break time=\"1000ms\"/></speak>")
-    command.add("polly/${mainName}_${prefix}_${count1++}.mp3")
+    command.add("polly/${mainName}_${prefix}_${count}.mp3")
     runAwsPollyCommand(command)
 }
 
