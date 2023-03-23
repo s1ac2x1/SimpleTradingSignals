@@ -9,7 +9,6 @@ fun main() {
         .forEach { chunk ->
             chunk.forEach { line ->
                 val command = mutableListOf<String>()
-                //
                 command.add("aws")
                 command.add("polly")
                 command.add("synthesize-speech")
@@ -24,7 +23,7 @@ fun main() {
                 command.add("<speak><lang xml:lang=\"ru-RU\">${split[1]}</lang><break time=\"1000ms\"/></speak>")
                 command.add("random_ru_${count++}.mp3")
                 runAwsPollyCommand(command)
-                Thread.sleep(100)
+                Thread.sleep(300)
             }
     }
 }
