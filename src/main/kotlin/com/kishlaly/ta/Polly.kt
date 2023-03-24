@@ -34,7 +34,7 @@ fun main() {
         .forEach { line ->
             executor.submit {
                 val unique = UUID.randomUUID().toString()
-                println("Processing ${count.getAndIncrement()}/${phrases.size}")
+                println("Processing ${count.getAndIncrement()}/${phrases.size}: ${line.split(delimiter)[dePhraseIndex - 1]}")
                 generate(line, unique, "Tatyana", "ru-RU", ruPhraseIndex - 1, "ru", outputFileName)
                 generate(line, unique, "Hans", "de-DE", dePhraseIndex - 1, "de", outputFileName)
                 merge(
@@ -74,7 +74,7 @@ private fun generate(
     command.add("--text")
     val split = line.split(delimiter)
     val pause = if (prefix.equals("de")) 2000 else 1000
-    command.add("<speak><lang xml:lang=\"$lang\">${split[lineIndex]}</lang><break time=\"${pause}ms\"/></speak>")
+    command.add("<speak><lang xml:lang=\"$lang\">${split[lineIndex]}.</lang><break time=\"${pause}ms\"/></speak>")
     command.add("$srcFolder/$outputFolder/${mainName}_${prefix}_${suffix}.mp3")
     runAwsPollyCommand(command)
 }
