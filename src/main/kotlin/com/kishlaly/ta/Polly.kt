@@ -31,7 +31,7 @@ fun main() {
                 generate(line, unique, "Tatyana", "ru-RU", ruPhraseIndex - 1, "ru", outputFileName)
                 generate(line, unique, "Hans", "de-DE", dePhraseIndex - 1, "de", outputFileName)
                 merge(
-                    listOf("$srcFolder/${outputFileName}_ru_${unique}.mp3", "$srcFolder/${outputFileName}_de_${unique}.mp3")
+                    listOf("$srcFolder/${outputFileName}_ru_${unique}.mp3", "$srcFolder/${outputFileName}_de_${unique}.mp3"),
                     "$srcFolder/${outputFileName}_full_${unique}.mp3",
                 )
             }
