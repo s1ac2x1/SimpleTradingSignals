@@ -19,13 +19,16 @@ val outputFileName = srcFile.replace(".txt", "")
 val ruPhraseIndex = 2
 val dePhraseIndex = 1
 
+// TODO подготовить потом импорт для квизлета
+
 fun main() {
     var count = AtomicInteger(1)
     val phrases = File("$srcFolder/$srcFile").readLines()
     val executor = Executors.newFixedThreadPool(10)
     File("$srcFolder/$outputFolder").mkdir()
     phrases
-        .distinct()
+        .distinct() // нужно фильтровать по немецкому слову
+        // так же выносить отедльно слова, которые имеют два delimiter'а
         .shuffled()
         .take(5)
         .forEach { line ->

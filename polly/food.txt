@@ -1,0 +1,165 @@
+das Essen ### еда
+die Gesundheit ### здоровье
+die Bewegung, Bewegungen ### движение
+das Training, Trainings ### тренировка
+die Sportart, Sportarten ### вид спорта
+die Fitness ### фитнес
+das Gewicht, Gewichte ### вес
+die Diät, Diäten ### диета
+die Kalorie, Kalorien ### калория
+das Fett, Fette ### жир
+das Obst ### фрукты
+das Gemüse ### овощи
+das Eiweiß ### белок
+der Schlaf ### сон
+die Entspannung ### расслабление
+der Körper ### тело
+der Knochen, Knochen ### кость
+das Herz, Herzen ### сердце
+der Blutdruck, Blutdrücke ### кровяное давление
+der Atem ### дыхание
+der Stress ### стресс
+die Sucht, Süchte ### зависимость
+das Rauchen ### курение
+die Krankheit, Krankheiten ### болезнь
+die Impfung, Impfungen ### вакцинация
+der Arzt, Ärzte ### врач
+die Medizin ### медицина
+die Apotheke, Apotheken ### аптека
+die Operation, Operationen ### операция
+die Rehabilitation ### реабилитация
+die Hygiene ### гигиена
+die Sauberkeit ### чистота
+der Abfall, Abfälle ### отходы
+das Recycling ### переработка
+der Umweltschutz ### охрана окружающей среды
+die Nachhaltigkeit ### устойчивость
+die Erholung ### отдых
+die Ausdauer ### выносливость
+die Muskelkraft ### мышечная сила
+der Stoffwechsel ### обмен веществ
+die Verdauung ### пищеварение
+die Blutzucker ### уровень сахара в крови
+die Blutfettwerte ### уровень жиров в крови
+das Vitamin, Vitamine ### витамины
+das Mineral, Mineralien ### минералы
+das Nahrungsergänzungsmittel, - ### пищевые добавки
+die Nahrungsmittelunverträglichkeit, -en ### непереносимость пищи
+die Allergie, Allergien ### аллергия
+der Allergen, Allergene ### аллерген
+die Glutenunverträglichkeit ### непереносимость глютена
+die Laktoseintoleranz ### непереносимость лактозы
+die Ernährungsweise, -n ### способ питания
+die vegetarische Ernährung ### вегетарианское питание
+die vegane Ernährung ### веганское питание
+die Vollwertkost ### полезное питание
+die Fastenzeit, -en ### время поста
+das Fasten ### пост
+die Essstörung, -en ### расстройство пищевого поведения
+die Beweglichkeit ### подвижность
+die Dehnübung, -en ### растяжка
+der Gleichgewichtssinn ### равновесие
+die Rückenmuskulatur ### мышцы спины
+die Bauchmuskulatur ### мышцы живота
+die Beinmuskulatur ### мышцы ног
+die Brustmuskulatur ### мышцы груди
+die Schultermuskulatur ### мышцы плеч
+die Ausrede, -n ### оправдание, отговорка
+der Sportmuffel, - ### человек, который не любит спорт
+der Trainingspartner, - ### партнер по тренировкам
+das Fitnessstudio, -s ### фитнес-студия
+das Laufband, Laufbänder ### беговая дорожка
+der Hometrainer, - ### тренажер для домашней тренировки
+das Gewichtheben ### тяжелая атлетика
+die Leichtathletik ### легкая атлетика
+der Wettkampf, Wettkämpfe ### соревнование
+der Rekord, Rekorde ### рекорд
+die Banane, Bananen ### банан
+der Apfel, Äpfel ### яблоко
+die Birne, Birnen ### груша
+die Traube, Trauben ### виноград
+die Orange, Orangen ### апельсин
+die Zitrone, Zitronen ### лимон
+die Erdbeere, Erdbeeren ### клубника
+die Himbeere, Himbeeren ### малина
+die Blaubeere, Blaubeeren ### голубика
+die Brombeere, Brombeeren ### ежевика
+die Karotte, Karotten ### морковь
+die Gurke, Gurken ### огурец
+die Tomate, Tomaten ### помидор
+der Paprika, Paprikas ### перец
+die Zwiebel, Zwiebeln ### лук
+der Knoblauch ### чеснок
+der Ingwer ### имбирь
+die Kartoffel, Kartoffeln ### картофель
+der Reis ### рис
+die Nudel, Nudeln ### макароны
+das Brot, Brote ### хлеб
+die Butter ### масло сливочное
+das Olivenöl ### оливковое масло
+der Käse, Käse ### сыр
+die Milch ### молоко
+das Ei, Eier ### яйцо
+das Huhn, Hühner ### курица
+das Rindfleisch ### говядина
+der Fisch, Fische ### рыба
+die Avocado, Avocados ### авокадо
+die Mango, Mangos ### манго
+die Ananas, Ananas ### ананас
+die Kiwi, Kiwis ### киви
+die Feige, Feigen ### инжир
+die Dattel, Datteln ### финик
+der Granatapfel, Granatäpfel ### гранат
+die Walnuss, Walnüsse ### грецкий орех
+die Mandel, Mandeln ### миндаль
+die Haselnuss, Haselnüsse ### фундук
+die Erdnuss, Erdnüsse ### арахис
+die Cashewnuss, Cashewnüsse ### кешью
+die Pistazie, Pistazien ### фисташки
+die Rosine, Rosinen ### изюм
+der Honig ### мед
+die Marmelade, Marmeladen ### джем
+der Joghurt, Joghurts ### йогурт
+die Quark, Quarks ### творог
+die Haferflocken ### овсяные хлопья
+die Cornflakes ### кукурузные хлопья
+die Schokolade, Schokoladen ### шоколад
+die Gummibärchen ### мармеладные мишки
+die Chips ### чипсы
+das Popcorn ### попкорн
+die Limonade, Limonaden ### лимонад
+das Bier, Biere ### пиво
+der Wein, Weine ### вино
+der Sekt, Sekte ### шампанское
+der Cocktail, Cocktails ### коктейль
+das Mineralwasser ### минеральная вода
+trainieren ### тренироваться
+laufen ### бегать
+joggen ### бегать трусцой
+spazieren gehen ### гулять
+schwimmen ### плавать
+radfahren ### кататься на велосипеде
+wandern ### ходить в походы
+klettern ### заниматься скалолазанием
+tanzen ### танцевать
+dehnen ### растягиваться
+atmen ### дышать
+entspannen ### расслабляться
+meditieren ### медитировать
+schlafen ### спать
+essen ### есть
+trinken ### пить
+verzichten ### отказываться
+abnehmen ### худеть
+zunehmen ### набирать вес
+sich ernähren ### питаться
+aufwärmen ### разминаться
+dehnen ### растягиваться
+trainieren ### тренировать
+trainieren lassen ### тренировать (кого-то)
+sich bewegen ### двигаться
+sich ausruhen ### отдыхать
+sich erholen ### восстанавливаться
+sich entspannen ### расслабляться
+sich fit halten ### сохранять форму
+sich gesund ernähren ### питаться здоровой пищей

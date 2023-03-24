@@ -1,0 +1,101 @@
+die Kultur, Kulturen ### культура
+das Kino, Kinos ### кино
+die Musik ### музыка
+die Literatur, Literaturen ### литература
+das Theater, Theater ### театр
+das Museum, Museen ### музей
+die Kunst, Künste ### искусство
+der Film, Filme ### фильм
+das Konzert, Konzerte ### концерт
+der Roman, Romane ### роман
+das Gedicht, Gedichte ### стихотворение
+der Maler, Maler ### художник
+die Skulptur, Skulpturen ### скульптура
+das Gemälde, Gemälde ### картина
+der Schriftsteller, Schriftsteller ### писатель
+die Oper, Opern ### опера
+der Tanz, Tänze ### танец
+das Ballett, Ballette ### балет
+die Ausstellung, Ausstellungen ### выставка
+die Fotografie ### фотография
+das Festival, Festivals ### фестиваль
+der Schauspieler, Schauspieler ### актер
+die Schauspielerin, Schauspielerinnen ### актриса
+die Szene, Szenen ### сцена
+das Orchester, Orchester ### оркестр
+die Komödie, Komödien ### комедия
+die Tragödie, Tragödien ### трагедия
+der Regisseur, Regisseure ### режиссер
+die Biografie, Biografien ### биография
+die Architektur ### архитектура
+das Hörspiel, Hörspiele ### радиопьеса
+der Romanautor, Romanautoren ### автор романа
+der Dichter, Dichter ### поэт
+der Dramatiker, Dramatiker ### драматург
+die Novelle, Novellen ### повесть
+der Essay, Essays ### эссе
+die Erzählung, Erzählungen ### рассказ
+die Lyrik ### лирика
+die Prosa ### проза
+der Kritiker, Kritiker ### критик
+die Kritik ### критика
+die Poesie ### поэзия
+die Inszenierung, Inszenierungen ### постановка
+die Premiere, Premieren ### премьера
+das Bühnenbild, Bühnenbilder ### декорации
+das Drehbuch, Drehbücher ### сценарий
+die Filmrolle, Filmrollen ### роль в фильме
+der Kurzfilm, Kurzfilme ### короткометражный фильм
+der Dokumentarfilm, Dokumentarfilme ### документальный фильм
+die Animation, Animationen ### анимация
+die Filmproduktion, Filmproduktionen ### киностудия
+der Filmeditor, Filmeditoren ### монтажер
+die Kameraführung ### операторская работа
+die Hauptrolle, Hauptrollen ### главная роль
+die Nebenrolle, Nebenrollen ### второстепенная роль
+der Statist, Statisten ### статист
+die Choreografie, Choreografien ### хореография
+die Komposition, Kompositionen ### композиция
+der Komponist, Komponisten ### композитор
+die Sinfonie, Sinfonien ### симфония
+das Lied, Lieder ### песня
+die Ballade, Balladen ### баллада
+das Musical, Musicals ### мюзикл
+die Operette, Operetten ### оперетта
+die Musikrichtung, Musikrichtungen ### музыкальное направление
+das Instrument, Instrumente ### музыкальный инструмент
+die Geige, Geigen ### скрипка
+das Klavier, Klaviere ### пианино
+die Gitarre, Gitarren ### гитара
+die Auszeichnung, Auszeichnungen ### награда
+der Preis, Preise ### премия
+der Künstler, Künstler ### артист
+die Galerie, Galerien ### галерея
+das Plakat, Plakate ### афиша
+die Illustration, Illustrationen ### иллюстрация
+die Grafik, Grafiken ### графика
+der Stil, Stile ### стиль
+die Ästhetik ### эстетика
+das Kunstwerk, Kunstwerke ### произведение искусства
+die Veranstaltung, Veranstaltungen ### мероприятие
+das Konzert, Konzerte ### концерт
+die Ausstellung, Ausstellungen ### выставка
+das Sportereignis, Sportereignisse ### спортивное событие
+das Festival, Festivals ### фестиваль
+das Ticket, Tickets ### билет
+die Bühne, Bühnen ### сцена
+der Zuschauer, Zuschauer ### зритель
+die Eintrittskarte, Eintrittskarten ### входной билет
+das Stadion, Stadien ### стадион
+die Messe, Messen ### ярмарка
+das Theater, Theater ### театр
+der Künstler, Künstler ### художник
+die Aufführung, Aufführungen ### представление
+der Vortrag, Vorträge ### лекция
+der Wettbewerb, Wettbewerbe ### соревнование
+das Publikum, - ### публика
+die Ermäßigung, Ermäßigungen ### скидка
+der Aussteller, Aussteller ### экспонент
+die Vernissage, Vernissagen ### вернисаж
+das Programm, Programme ### программа
+der Fan, Fans ### фанат

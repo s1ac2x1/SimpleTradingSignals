@@ -1,0 +1,77 @@
+das Abitur ### аттестат зрелости
+die Ausbildung, Ausbildungen ### образование, подготовка
+der Bachelor, - ### бакалавр
+die Bibliothek, Bibliotheken ### библиотека
+die Bildung ### образование
+die Deutschprüfung, Deutschprüfungen ### экзамен по немецкому
+die Einschreibung, Einschreibungen ### зачисление
+die Fachhochschule, Fachhochschulen ### высшее учебное заведение
+die Fakultät, Fakultäten ### факультет
+die Hochschule, Hochschulen ### высшее учебное заведение
+das Institut, Institute ### институт
+die Klausur, Klausuren ### контрольная работа
+die Lehrveranstaltung, Lehrveranstaltungen ### учебное занятие
+der Master, - ### магистр
+die Note, Noten ### оценка
+die Präsentation, Präsentationen ### презентация
+das Praktikum, Praktika ### практика
+der Professor, -en ### профессор
+die Schule, Schulen ### школа
+das Seminar, Seminare ### семинар
+die Sprache, Sprachen ### язык
+das Studienfach, Studienfächer ### специальность
+die Studiengebühr, Studiengebühren ### плата за обучение
+das Studium, Studien ### учеба, обучение
+die Universität, Universitäten ### университет
+der Unterricht ### уроки, занятия
+die Vorlesung, Vorlesungen ### лекция
+der Wissenschaftler, - ### ученый
+die Zulassung, Zulassungen ### допуск, разрешение
+das Curriculum, Curricula ### учебный план
+die Dozentin, Dozentinnen ### преподавательница
+das Examen, Examen ### экзамен
+der Kurs, Kurse ### курс
+die Leistung, Leistungen ### успех, результат
+die Masterarbeit, Masterarbeiten ### магистерская диссертация
+die Prüfungsordnung, Prüfungsordnungen ### правила проведения экзаменов
+der Schulabschluss, Schulabschlüsse ### окончание школы
+die Schülerin, Schülerinnen ### ученица
+die Seminararbeit, Seminararbeiten ### семинарская работа
+die Stufe, Stufen ### ступень обучения
+die Unterlagen ### документы, материалы
+der Unterrichtsplan, Unterrichtspläne ### учебный план
+die Wissenschaft, Wissenschaften ### наука
+die Zeugnis, Zeugnisse ### аттестат
+der Ausbilder, - ### тренер, инструктор
+die Berufsschule, Berufsschulen ### профессиональное учебное заведение
+das Diplom, Diplome ### диплом
+die Erziehung, Erziehungen ### воспитание
+die Facharbeit, Facharbeiten ### научно-исследовательская работа
+die Klassenarbeit, Klassenarbeiten ### классная работа
+der Lehrplan, Lehrpläne ### учебный план
+der Schüler, - ### ученик
+die Schulform, Schulformen ### тип школы
+die Schulzeit ### школьное время
+die Studienzeit ### время обучения в ВУЗе
+der Tutor, Tutoren ### наставник
+die Unterrichtssprache, Unterrichtssprachen ### язык преподавания
+der Workshop, Workshops ### мастер-класс
+die Zensur, Zensuren ### оценка, рейтинг
+die Ausbildungsdauer ### продолжительность обучения
+der Bildungsgang, Bildungsgänge ### образовательная траектория
+die Bildungsreform, Bildungsreformen ### реформа образования
+das E-Learning ### дистанционное обучение
+die Erstsemesterin, Erstsemesterinnen ### первокурсница
+die Exmatrikulation, Exmatrikulationen ### отчисление
+der Fernunterricht ### дистанционное обучение
+die Fortbildung, Fortbildungen ### дополнительное обучение
+die Lehrmethode, Lehrmethoden ### методика преподавания
+die Prüfungsvorbereitung, Prüfungsvorbereitungen ### подготовка к экзамену
+das Schulfach, Schulfächer ### школьный предмет
+die Semesterferien ### каникулы между семестрами
+der Seminarraum, Seminarräume ### аудитория для семинаров
+die Studiengebührenbefreiung, Studiengebührenbefreiungen ### освобождение от платы за обучение
+die Studienleistung, Studienleistungen ### учебные достижения
+die Studienordnung, Studienordnungen ### учебный порядок
+der Studienplatz, Studienplätze ### место в ВУЗе
+die Zulassungsbeschränkung, Zulassungsbeschränkungen ### ограничение при приёме на обучение

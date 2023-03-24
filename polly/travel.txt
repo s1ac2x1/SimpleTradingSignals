@@ -1,0 +1,89 @@
+die Reise, Reisen ### поездка, путешествие
+das Hotel, Hotels ### отель
+der Urlaub, Urlaube ### отпуск
+die Sehenswürdigkeit, Sehenswürdigkeiten ### достопримечательность
+der Strand, Strände ### пляж
+die Stadt, Städte ### город
+das Land, Länder ### страна
+der Flughafen, Flughäfen ### аэропорт
+der Bahnhof, Bahnhöfe ### железнодорожный вокзал
+das Restaurant, Restaurants ### ресторан
+der Rucksack, Rucksäcke ### рюкзак
+die Karte, Karten ### карта
+das Museum, Museen ### музей
+die Unterkunft, Unterkünfte ### жилье
+der Reiseführer, Reiseführer ### путеводитель
+das Ticket, Tickets ### билет
+der Tourist, Touristen ### турист
+das Gepäck ### багаж
+die Reservierung, Reservierungen ### бронирование
+der Reiseveranstalter, Reiseveranstalter ### туроператор
+das Souvenir, Souvenirs ### сувенир
+der Ausflug, Ausflüge ### экскурсия
+die Wanderung, Wanderungen ### пеший поход
+die Reiseroute, Reiserouten ### маршрут путешествия
+die Versicherung, Versicherungen ### страховка
+das Visum, Visa ### виза
+die Pauschalreise, Pauschalreisen ### пакетный тур
+der Mietwagen, Mietwagen ### арендованный автомобиль
+die Kreuzfahrt, Kreuzfahrten ### круиз
+der Pass, Pässe ### паспорт
+das Abenteuer, Abenteuer ### приключение
+der Campingplatz, Campingplätze ### кемпинг
+die Jugendherberge, Jugendherbergen ### молодежный хостел
+die Reiseagentur, Reiseagenturen ### турагентство
+der Nationalpark, Nationalparks ### национальный парк
+die Eintrittskarte, Eintrittskarten ### входной билет
+das Denkmal, Denkmäler ### памятник
+die Besichtigung, Besichtigungen ### осмотр, экскурсия
+die Führung, Führungen ### гид, экскурсовод
+das Schloss, Schlösser ### замок
+die Kultur ### культура
+das Fest, Feste ### праздник, фестиваль
+der Park, Parks ### парк
+die Natur ### природа
+die Insel, Inseln ### остров
+das Tal, Täler ### долина
+die Reiseapotheke, Reiseapotheken ### аптечка для путешествий
+der Berg, Berge ### гора
+die Ferienwohnung, Ferienwohnungen ### квартира для отдыха
+das Schengen-Abkommen ### Шенгенское соглашение
+der Reisepass, Reisepässe ### загранпаспорт
+die Sicherheit ### безопасность
+das Zelt, Zelte ### палатка
+die Verpflegung ### питание
+die Tour, Touren ### тур, поход
+der Zug, Züge ### поезд
+das Boot, Boote ### лодка
+der Fahrschein, Fahrscheine ### проездной билет
+das Taxi, Taxis ### такси
+der Parkplatz, Parkplätze ### парковка
+die Reisekosten ### расходы на путешествие
+die Altstadt, Altstädte ### старый город
+die Brücke, Brücken ### мост
+das Schengen-Visum, Schengen-Visa ### шенгенская виза
+die Reisewarnung, Reisewarnungen ### предупреждение для путешественников
+der Reiseblog, Reiseblogs ### блог о путешествиях
+der Fahrradverleih, Fahrradverleihe ### прокат велосипедов
+die Sprachreise, Sprachreisen ### языковой тур
+das Reiseziel, Reiseziele ### пункт назначения
+die Raststätte, Raststätten ### столовая на трассе
+die Autobahn, Autobahnen ### автомагистраль
+der Reiseadapter, Reiseadapter ### адаптер для путешествий
+die Pension, Pensionen ### пансион
+das Fremdenverkehrsamt, Fremdenverkehrsämter ### туристический информационный центр
+die Stadtführung, Stadtführungen ### экскурсия по городу
+das Trinkgeld ### чаевые
+der Einheimische, Einheimischen ### местный житель
+die Entspannung ### отдых, расслабление
+die Erholung ### восстановление, отдых
+das Nachtleben ### ночная жизнь
+die Umgebung ### окрестности
+der Zoll, Zölle ### таможня
+das Reisetagebuch, Reisetagebücher ### дневник путешествия
+die Seilbahn, Seilbahnen ### канатная дорога
+der Fahrplan, Fahrpläne ### расписание
+die Ankunft, Ankünfte ### прибытие
+die Abreise, Abreisen ### отъезд
+der Zwischenstopp, Zwischenstopps ### остановка, промежуточная станция
+der Reiseleiter, Reiseleiter ### гид, руководитель группы

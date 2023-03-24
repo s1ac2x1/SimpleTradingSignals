@@ -1,0 +1,60 @@
+die Arbeit, Arbeiten ### работа
+der Beruf, Berufe ### профессия
+der Arbeitsplatz, Arbeitsplätze ### рабочее место
+die Firma, Firmen ### фирма, компания
+der Arbeitnehmer, Arbeitnehmer ### работник
+der Arbeitgeber, Arbeitgeber ### работодатель
+die Vollzeit ### полный рабочий день
+die Teilzeit ### неполный рабочий день
+der Lohn, Löhne ### зарплата
+das Gehalt, Gehälter ### оклад, зарплата
+die Überstunde, Überstunden ### сверхурочные часы
+die Pause, Pausen ### перерыв
+der Kollege, Kollegen ### коллега
+der Chef, Chefs ### начальник, руководитель
+die Besprechung, Besprechungen ### совещание, встреча
+die Verantwortung ### ответственность
+die Aufgabe, Aufgaben ### задача, обязанность
+der Vertrag, Verträge ### контракт, договор
+die Probezeit ### испытательный срок
+die Kündigung, Kündigungen ### увольнение
+die Beförderung, Beförderungen ### повышение
+das Büro, Büros ### офис
+die Werkstatt, Werkstätten ### мастерская
+das Krankenhaus, Krankenhäuser ### больница
+der Arzt, Ärzte ### врач
+der Ingenieur, Ingenieure ### инженер
+der Lehrer, Lehrer ### учитель
+die Sekretärin, Sekretärinnen ### секретарь
+der Anwalt, Anwälte ### адвокат
+die Ausbildung ### образование, подготовка
+der Kunde, Kunden ### клиент
+die Führungskraft, Führungskräfte ### руководитель
+der Praktikant, Praktikanten ### стажер
+die Stelle, Stellen ### вакансия
+die Bewerbung, Bewerbungen ### заявление, резюме
+der Mitarbeiter, Mitarbeiter ### сотрудник
+die Karriere ### карьера
+das Vorstellungsgespräch, Vorstellungsgespräche ### собеседование
+die Arbeitslosigkeit ### безработица
+der Handwerker, Handwerker ### рабочий, мастер
+die Personalabteilung ### отдел кадров
+die Werkzeug, Werkzeuge ### инструмент
+das Team, Teams ### команда
+der Projektleiter, Projektleiter ### руководитель проекта
+die Schicht, Schichten ### смена
+die Schichtarbeit ### работа по сменам
+der Verkäufer, Verkäufer ### продавец
+die Geschäftsreise, Geschäftsreisen ### командировка
+der Urlaub, Urlaube ### отпуск
+das Homeoffice ### удаленная работа
+die Selbstständigkeit ### самозанятость
+das Unternehmen, Unternehmen ### предприятие
+der Erfolg, Erfolge ### успех
+die Weiterbildung ### повышение квалификации
+die Fortbildung ### дополнительное образование
+die Umschulung ### переквалификация
+das Praktikum, Praktika ### стажировка
+die Tätigkeit, Tätigkeiten ### деятельность, занятость
+der Bankangestellte, Bankangestellten ### банковский служащий
+die Werkzeugmaschine, Werkzeugmaschinen ### станок

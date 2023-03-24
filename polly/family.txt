@@ -1,0 +1,48 @@
+das Alter, возраст
+die Familie, семья
+der Vater, отец
+die Mutter, мать
+die Eltern (Pl.), родители
+der Bruder, брат
+die Schwester, сестра
+der Sohn, сын
+die Tochter, дочь
+der Ehemann, муж
+die Ehefrau, жена
+der Freund, друг
+die Freundin, подруга
+das Hobby, хобби
+die Interessen (Pl.), интересы
+das Lesen, чтение
+das Reisen, путешествие
+das Wandern, поход
+das Schwimmen, плавание
+das Tanzen, танцы
+das Musik hören, прослушивание музыки
+das Filme schauen, просмотр фильмов
+das Kochen, готовка
+das Backen, выпечка
+das Sport treiben, занятие спортом
+das Joggen, бег
+das Fitnessstudio, тренажерный зал
+das Yoga, йога
+das Malen, рисование
+das Fotografieren, фотографирование
+das Haustier, домашнее животное
+der Geburtstag, день рождения
+die Nationalität, национальность
+der Wohnort, место жительства
+der Beruf, профессия
+die Ausbildung, образование
+die Sprachkenntnisse, знание языков
+die Freizeitaktivitäten (Pl.), досуговые занятия
+der Lieblingssport, любимый вид спорта
+die Lieblingsmusik, любимая музыка
+der Familienstand, семейное положение
+der Lebenslauf, резюме
+die Hobbys (Pl.), хобби
+das Lieblingsbuch, любимая книга
+das Lieblingsessen, любимая еда
+das Lieblingsgetränk, любимый напиток
+die Freunde (Pl.), друзья
+die Bekannten (Pl.), знакомые
