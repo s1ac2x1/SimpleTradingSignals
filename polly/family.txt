@@ -1,48 +1,48 @@
-das Alter, возраст
-die Familie, семья
-der Vater, отец
-die Mutter, мать
-die Eltern (Pl.), родители
-der Bruder, брат
-die Schwester, сестра
-der Sohn, сын
-die Tochter, дочь
-der Ehemann, муж
-die Ehefrau, жена
-der Freund, друг
-die Freundin, подруга
-das Hobby, хобби
-die Interessen (Pl.), интересы
-das Lesen, чтение
-das Reisen, путешествие
-das Wandern, поход
-das Schwimmen, плавание
-das Tanzen, танцы
-das Musik hören, прослушивание музыки
-das Filme schauen, просмотр фильмов
-das Kochen, готовка
-das Backen, выпечка
-das Sport treiben, занятие спортом
-das Joggen, бег
-das Fitnessstudio, тренажерный зал
-das Yoga, йога
-das Malen, рисование
-das Fotografieren, фотографирование
-das Haustier, домашнее животное
-der Geburtstag, день рождения
-die Nationalität, национальность
-der Wohnort, место жительства
-der Beruf, профессия
-die Ausbildung, образование
-die Sprachkenntnisse, знание языков
-die Freizeitaktivitäten (Pl.), досуговые занятия
-der Lieblingssport, любимый вид спорта
-die Lieblingsmusik, любимая музыка
-der Familienstand, семейное положение
-der Lebenslauf, резюме
-die Hobbys (Pl.), хобби
-das Lieblingsbuch, любимая книга
-das Lieblingsessen, любимая еда
-das Lieblingsgetränk, любимый напиток
-die Freunde (Pl.), друзья
-die Bekannten (Pl.), знакомые
+das Alter ### возраст
+die Familie, Familien ### семья
+der Vater, Väter ### отец
+die Mutter, Mütter ### мать
+die Eltern ### родители
+der Bruder, Brüder ### брат
+die Schwester, Schwestern ### сестра
+der Sohn, Söhne ### сын
+die Tochter, Töchter ### дочь
+der Ehemann, Ehemänner ### муж
+die Ehefrau, Ehefrauen ### жена
+der Freund, Freunde ### друг
+die Freundin, Freundinnen ### подруга
+das Hobby, Hobbys ### хобби
+die Interessen ### интересы
+das Lesen ### чтение
+das Reisen ### путешествие
+das Wandern ### поход
+das Schwimmen ### плавание
+das Tanzen ### танцы
+das Musik hören ### прослушивание музыки
+das Filme schauen ### просмотр фильмов
+das Kochen ### готовка
+das Backen ### выпечка
+das Sport treiben ### занятие спортом
+das Joggen ### бег
+das Fitnessstudio ### тренажерный зал
+das Yoga ### йога
+das Malen ### рисование
+das Fotografieren ### фотографирование
+das Haustier, Haustiere ### домашнее животное
+der Geburtstag, Geburtstage ### день рождения
+die Nationalität, Nationalitäten ### национальность
+der Wohnort, Wohnorte ### место жительства
+der Beruf, Berufe ### профессия
+die Ausbildung, Ausbildungen ### образование
+die Sprachkenntnisse ### знание языков
+die Freizeitaktivitäten ### досуговые занятия
+der Lieblingssport, Lieblingssportarten ### любимый вид спорта
+die Lieblingsmusik ### любимая музыка
+der Familienstand, Familienstände ### семейное положение
+der Lebenslauf, Lebensläufe ### резюме
+die Hobbys ### хобби
+das Lieblingsbuch, Lieblingsbücher ### любимая книга
+das Lieblingsessen ### любимая еда
+das Lieblingsgetränk, Lieblingsgetränke ### любимый напиток
+die Freunde ### друзья
+die Bekannten ### знакомые
