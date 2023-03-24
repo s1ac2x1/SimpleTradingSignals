@@ -1,0 +1,196 @@
+hier, здесь
+da, там
+dort, туда
+oben, вверху
+unten, внизу
+drinnen, внутри
+draußen, снаружи
+links, слева
+rechts, справа
+vorne, спереди
+hinten, сзади
+innen, внутри
+außen, снаружи
+daneben, рядом
+darunter, под
+darüber, над
+davor, перед
+dahinter, за
+irgendwo, где-то
+nirgendwo, нигде
+überall, везде
+links oben, вверху слева
+rechts oben, вверху справа
+links unten, внизу слева
+rechts unten, внизу справа
+mittig, посередине
+seitlich, сбоку
+obendrauf, сверху
+unten drunter, снизу
+quer, поперек
+abseits, в стороне
+abwärts, вниз
+aufwärts, вверх
+seitwärts, вбок
+weit weg, далеко
+in der Nähe, поблизости
+am Horizont, на горизонте
+zwischen, между
+unterwegs, в пути
+auf der rechten Seite, справа
+auf der linken Seite, слева
+in der Mitte, посередине
+am Ende, в конце
+am Anfang, в начале
+in der Ecke, в углу
+auf dem Boden, на земле
+jetzt - сейчас
+gestern - вчера
+heute - сегодня
+morgen - завтра
+bald - скоро
+immer - всегда
+oft - часто
+manchmal - иногда
+selten - редко
+nie - никогда
+bereits - уже
+noch - еще
+dann - тогда
+später - позже
+früh - рано
+spät - поздно
+abends - вечером
+nachts - ночью
+tagsüber - днем
+jetzt gerade - сейчас, прямо сейчас
+gerade eben - только что
+demnächst - в ближайшее время
+kürzlich - недавно
+häufig - часто
+gelegentlich - время от времени
+ständig - постоянно
+allmählich - постепенно
+gleichzeitig - одновременно
+irgendwann - когда-нибудь
+vollständig - полностью
+unmittelbar - непосредственно
+regelmäßig - регулярно
+gezielt - целенаправленно
+spontan - спонтанно
+augenblicklich - мгновенно
+umgehend - немедленно
+derzeit - в настоящее время
+inzwischen - тем временем
+fortwährend - беспрерывно
+gezwungenermaßen - вынужденно
+bewusst - сознательно
+unbewusst - бессознательно
+pausenlos - без перерыва
+allzeit - всегда, постоянно
+bisweilen - порой
+oft genug - достаточно часто
+übermorgen - послезавтра
+vorgestern - позавчера
+zuletzt - в последний раз
+endlich - наконец
+täglich - ежедневно
+wöchentlich - еженедельно
+monatlich - ежемесячно
+jährlich - ежегодно
+öfter - чаще
+seltener - реже
+niemals - никогда
+baldmöglichst - как можно скорее
+bevorstehend - предстоящий
+irgendwann einmal - когда-нибудь
+zeitweise - время от времени
+schließlich - в конце концов
+demnach - следовательно
+derweil - между тем
+dereinst - когда-нибудь
+dauerhaft - постоянно
+seit langem - давно уже
+längst - давно
+binnen kurzem - в ближайшее время
+allmählich - постепенно
+unterdessen - тем временем
+gegenwärtig - в настоящее время
+fortlaufend - непрерывно
+vorher - заранее
+später einmal - когда-нибудь позже
+momentan - в данный момент
+hoffentlich - надеюсь
+eigentlich - на самом деле
+derzeitige - нынешний
+zeitgleich - одновременно
+inzwischen - тем временем
+parallel - параллельно
+tatsächlich - фактически
+unter Umständen - в некоторых случаях
+oft genug - достаточно часто
+in nächster Zeit - в ближайшее время
+in letzter Zeit - в последнее время
+in Echtzeit - в режиме реального времени
+zeitig - рано
+nach und nach - постепенно
+unter Umständen - в некоторых случаях
+mitunter - иногда
+innerhalb kurzer Zeit - в течение короткого времени
+in naher Zukunft - в ближайшем будущем
+mit der Zeit - со временем
+in der Zwischenzeit - тем временем
+vor langer Zeit - давно
+in Eile - в спешке
+auf lange Sicht - на долгосрочной основе
+im Voraus - заранее
+von Zeit zu Zeit - время от времени
+in jedem Fall - в любом случае
+von Anfang an - с самого начала
+in letzter Minute - в последнюю минуту
+zu jeder Zeit - в любое время
+seit jeher - всегда
+von Zeit zu Zeit - время от времени
+bislang - до сих пор
+bis heute - до сегодняшнего дня
+bis dato - до настоящего момента
+in der Zukunft - в будущем
+in der Vergangenheit - в прошлом
+einst - когда-то
+einmalig - единственный раз
+jüngst - недавно
+künftig - будущий
+tagtäglich - каждый день
+wochenweise - еженедельно
+stundenlang - на протяжении нескольких часов
+in Kürze - скоро
+fortwährend - непрерывно
+unaufhörlich - непрерывно
+immer wieder - снова и снова
+immerfort - постоянно
+in der Tat - фактически
+niemals zuvor - никогда раньше
+endlos - бесконечно
+ständig - постоянно
+pausenlos - без перерыва
+zeitlos - вечно
+jederzeit - в любое время
+kürzlich erst - совсем недавно
+permanent - постоянно
+wiederholt - повторяющийся
+zukünftig - будущий
+vergangen - прошедший
+nunmehr - теперь
+in wenigen Minuten - через несколько минут
+unverzüglich - немедленно
+in der nächsten Stunde - в ближайший час
+in der Gegenwart - в настоящем
+in naher Zukunft - в ближайшем будущем
+in ferner Zukunft - в далеком будущем
+nachträglich - после того как уже произошло
+früher oder später - рано или поздно
+demnächst - в ближайшее время
+in wenigen Tagen - через несколько дней
+in ein paar Stunden - через несколько часов
+seit einiger Zeit - некоторое время
+vor Kurzem - недавно

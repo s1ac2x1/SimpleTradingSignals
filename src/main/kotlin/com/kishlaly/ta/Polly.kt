@@ -14,14 +14,16 @@ fun main() {
     var count = AtomicInteger(1)
     val srcFolder = "polly"
     val srcFile = "polly.txt"
-    val files = File("$srcFolder/$srcFile").readLines()
+    val phrases = File("$srcFolder/$srcFile").readLines()
     val executor = Executors.newFixedThreadPool(10)
-    files
+    phrases
+        .distinct()
+        .shuffled()
         //.take(20)
         .forEach { line ->
             executor.submit {
                 val unique = UUID.randomUUID().toString()
-                println("Processing ${count.getAndIncrement()}/${files.size}")
+                println("Processing ${count.getAndIncrement()}/${phrases.size}")
                 generate(line, unique, "Tatyana", "ru-RU", 1, "ru", mainName)
                 generate(line, unique, "Hans", "de-DE", 0, "de", mainName)
                 combineMp3Files(
