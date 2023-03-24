@@ -1,0 +1,31 @@
+der Kopf, die Köpfe ### голова
+der Hals, die Hälse ### шея, горло
+die Schulter, -n ### плечо
+die Brust, die Brüste ### грудная клетка
+der Arm, -e ### рука
+der Bauch, die Bäuche ### живот
+der Ellbogen ### локоть
+die Hüfte, -n ### бедро
+die Taille, -n ### талия
+das Handgelenk, -e ### запястье
+die Hand, die Hände ### кисть руки
+das Bein, -e ### нога
+das Knie ### колено
+der Fuss, die Füsse ### ступня
+die Stirn, -en ### лоб
+die Augenbraue, n ### бровь
+die Nase, -n ### нос
+die Wange, -n ### щека
+das Auge, -n ### глаз
+das Ohr, -en ### ухо
+der Mund, die Münder ### рот
+der kleine Finger ### мизинец
+der Ringfinger ### безымянный палец
+der Mittelfinger ### средний палец
+der Zeigefinger ### указательный палец
+die Daumen ### большой палец
+die Wade, -n ### икра ноги
+das Schienbein ### голень
+der Knöchel ### лодыжка
+die Zehe, -n ### палец ноги
+die Ferse, -n ### пятка

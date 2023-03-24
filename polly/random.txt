@@ -1,3 +1,1289 @@
+die Kerze, -n ### свеча
+verbrennen ### сжигать, сгорать
+köstlich ### изысканный, лакомый
+sich erkundigen nach ### узнавать, осведомляться
+gewöhnlich ### обычно
+das Vergnügen ### удовольствие
+die Feier, -n ### праздник
+aus etw bestehen ### состоять из чего-либо
+auf etw bestehen (D) ### настаивать на чем-либо
+bestehen ### существовать
+der Vorschlag, die Vorschläge ### предложение (eg. коммерческое)
+die Dunkelheit ### темнота
+die Versammlung, -en ### собрание (людей)
+unwohl ### нездорово, некомфортно
+erscheinen ### появляться, возникать
+geraten ### попасть, очутиться
+schwerfallen ### тяжело даваться
+leichtfallen ### легко даваться
+begegnen (sein) ### встречать (случайно)
+folgen (sein) ### следовать
+geschehen (sein) ### случаться
+gelingen (sein) ### удаваться
+misslingen (sein) ### не удаваться, не получаться
+passieren (sein) ### происходить
+verbringen ### проводить (время), пребывать
+einige ### несколько, некоторый
+ausgezeichnet ### отличный, превосходный
+die Tätigkeit, -en ### деятельность, работа
+längst ### давно, с давних пор
+verlängern ### продлевать, удлинять
+angenehm ### приятный, радостный
+Verzeihung ### простите
+damals ### тогда, в то время
+aufhaben ### иметь на голове, иметь задание
+ausrichten ### передавать (сообщение, привет)
+ablegen ### сдавать экзамен
+per ### по
+die Vorlesung, -en ### лекция
+deswegen ### поэтому, по этой причине
+jeder ### каждый
+jener ### тот
+ewig ### вечный, вечно
+die Arznei, -en ### лекарство
+drehen ### крутить, поворачивать
+der Wettkampf, die Wettkämpfe ### соревнование
+statt ### вместо, взамен
+städtisch ### городской
+schüchtern ### робкий, застенчивый
+geistreich ### умный, остроумный
+zierlich ### изящный, грациозный
+vernünftig ### разумный, здравомыслящий
+arm ### бедный
+die Leistung, -en ### достижение, результат
+die Lage, -n ### положение, ситуация
+stattfinden ### состояться, иметь место, происходить
+radieren ### стирать (написанное)
+schaden ### вредить, наносить ущерб
+der Schriftsteller ### писатель
+der Krieg ### война
+fürchten ### бояться, опасаться
+streng ### строгий, суровый
+der Inhalt, -e ### содержание, смысл
+wachsen ### расти, произрастать
+erfahren ### узнавать, разузнавать
+der Dolmetscher ### устный переводчик
+der Pelz, -e ### мех, шкура, шуба
+schließlich ### наконец, все-таки
+häufig ### часто, зачастую
+ungefähr ### около, приблизительно
+spannend ### увлекательный, захватывающий
+windig ### ветренный
+erteilen ### давать (совет, команду и т. п.); отдавать (приказ и т. п.)
+die Herausforderung, -en ### вызов, испытание
+ähnlich ### похожий
+verschenken ### дарить, раздаривать
+selbstbewusst ### уверенный в себе
+die Terminänderung, -en ### изменение срока
+danach ### после этого
+treu ### верный
+klarmachen ### разъяснить
+stattdesen ### вместо
+ausfallen ### выпадать, не состояться
+duftig ### душистый
+der Held, -en ### герой
+klug ### умный, толковый, смышлёный
+gebrauchen ### употреблять, пользоваться
+regnerisch ### дождливый
+die Neuigkeit, -en ### новость
+die Seide, -n ### шелк
+das Redemittel ### выражение, оборот речи
+allerdings ### однако, правда
+das Gedicht, -e ### стихотворение
+der Freundeskreis, -e ### круг друзей
+gleichzeitig ### одновременно
+ängstlich ### боязливый
+schmal ### узкий
+einnehmen ### занимать (пост), принимать (лекарство)
+einsetzen ### применять, использовать
+frech ### дерзкий, наглый
+stürmisch ### бурный
+verwöhnt ### избалованный
+nass ### мокрый
+das Fell, -e ### шерсть, мех
+die Kreide, -n ### мел
+die Freude, -n ### радость, удовольствие
+bilden ### составлять, строить
+die Bildung, -en ### образование, просвещение
+während ### в то время как
+wegen ### из-за
+notwendig ### необходимый
+grausamer ### жестокий
+unweit ### недалеко, поблизости
+bewahren ### охранять, оберегать
+altertümlich ### старинный, древний
+das Denkmal, die Denkmäler ### памятник
+solch ### такой, подобный
+herrlich ### великолепный
+nachsprechen ### повторять за кем-то
+der Mitschüler ### одноклассник
+der Vorteil, -e ### преимущество
+der Nachteil, -e ### недостаток
+das Vorhaben ### намерение, замысел
+vorhaben ### намереваться
+annehmen ### принимать, допускать
+einweihen ### торжественно открывать
+gelten ### быть действительным, иметь силу
+die Wahl, -en ### выбор, избрание, голосование
+festlich ### праздничный, торжественный
+der Ausschnitt, -e ### отрывок, вырезка
+die Einzelheit, -en ### подробность, деталь
+ankündigen ### объявлять, оглашать
+eintreffen ### прибывать
+die Überraschung, -en ### неожиданность, сюрприз
+die Forderung, -en ### требование, претензия
+die Aufforderung, -en ### приглашение, требование, вызов
+bereithalten ### держать наготове
+indem ### тем что
+die Kleinigkeit, -en ### мелочь, пустяк
+jedoch ### однако, тем не менее, всё же
+der Ausnahmefall, die Ausnahmefälle ### исключительный случай
+übrigens ### между прочим, кстати
+riesengroß ### гигантский
+der Kragen, die Kragen ### воротник
+entzückend ### восхитительный
+der Zugriff, -e ### доступ
+verreisen ### уезжать
+bereisen ### объезжать, посещать
+übel nehmen ### обижаться
+neugierig ### любопытный
+der Anlass, die Anlässe ### повод, причина
+dorthin ### туда
+der Schritt, -e ### шаг
+anschließend an A ### вслед за, затем
+mitteilen ### сообщать, уведомлять
+sorgen ### беспокоиться, заботиться
+die Anrede, -n ### обращение в письме
+vielfach ### многократно
+dienstfrei ### выходной
+zahlreich ### многочисленный
+die Teilnahme ### участие
+die Wanderung, -en ### поход
+traumhaft ### сказочный, упоительный
+der Begriff, -e ### понятие, представление
+loben ### хвалить, одобрять
+erwähnen ### упоминать
+hingegen ### наоборот, напротив
+die Nachricht, -en ### известие
+die Reihenfolge, -n ### последовательность, очередность
+der Ausdruck, die Ausdrücke ### выражение, оборот речи
+der Laut, -e ### звук
+verbessern ### исправлять, улучшать
+nützlich ### полезный
+normalerweise ### обычно, как правило
+nachschlagen ### проверить, уточнить
+berichten ### сообщать, докладывать
+hauptsächlich ### главным образом, преимущественно
+mehrmals ### несколько раз, неоднократно
+auswendig ### наизусть, на память
+die Auswahl ### выбор, ассортимент
+sich aufhalten ### пребывать, находиться
+besichtigen ### осматривать
+der Vorort, -e ### пригород
+monoton ### монотонный
+vereinbaren ### согласовывать, договариваться
+übergeben ### передавать
+deutlich ### отчетливый, ясный
+gießen ### отливать, лить, поливать
+die Verkaufsabteilung, -en ### отдел продаж
+die Sitte, -n ### нрав
+der Brauch, die Bräuche ### обычай, традиция
+das Gebiet, -e ### область, район
+der Geist, -er ### дух, душа
+die Bequemlichkeit, -en ### удобство
+stolz sein auf ### гордиться чем-либо
+beziehungsweise ### вернее говоря, соответственно
+die Begegnung, -en ### встреча
+verzichten auf ### отказываться от
+verlassen auf ### положиться на кого-либо
+zweifeln an ### сомневаться
+der Richter ### судья
+die Aufrichtigkeit, -en ### искренность, откровенность
+der Zeuge, -n ### свидетель, очевидец
+abhängen von ### зависеть от
+die Verhandlung, -en ### переговоры
+halten für ### считаться чем-либо, принимать за
+das Unterfangen ### затея, предприятие
+zufällig ### случайно
+daher ### оттуда, поэтому
+die Zusage, -n ### согласие
+die Erinnerung, -en ### воспоминание
+nötig ### нужный, необходимый
+flüstern ### шептать
+der Gedanke, -n ### мысль, идея
+drüben ### там, на той стороне
+erfüllen ### выполнять, исполнять, наполнять
+der Aufsatz, die Aufsätze ### сочинение, статья
+schwach ### слабый, хилый
+verleihen ### давать напрокат, присуждать
+der Knabe, -n ### мальчик
+der Hirt, -en ### пастух
+der Narr, -en ### дурак, шут
+angeführt ### указанный, цитируемый
+die Heldentat, -en ### подвиг
+bewundernswert ### достойный восхищения
+beseelt ### одушевленный
+verneinen ### отрицать
+beweisen ### доказывать, аргументировать
+entziffern ### расшифровывать
+zusagen ### соглашаться
+versprechen ### обещать
+ablehnen ### отклонять, отвергать
+dazwischenkommen ### вмешиваться, препятствовать
+die Eröffnung, -en ### открытие
+der Einzug, die Einzüge ### въезд, взимание
+einziehen ### въезжать (в квартиру)
+zusammenstellen ### составлять, собирать
+bewundern ### восхищаться
+der Flieger ### летчик, пилот
+widmen ### посвящать
+der Staat, -en ### государство, держава
+schmücken ### украшать, наряжать
+die Einrichtung, -en ### обстановка (комнаты), оборудование (чего-либо)
+die Beförderung, -en ### перевозка, транспортировка, повышение по службе
+die Anschrift, -en ### почтовый адрес
+die Empfängeranschrift, -en ### адрес получателя
+die Absenderanschrift, -en ### адрес отправителя
+die Angehörige, -n ### представитель, член, родственник
+der Sportler ### атлет, спортсмен
+das Schicksal, -e ### судьба, участь
+die Hinsicht, -en ### отношение, точка зрения
+forschen ### исследовать, изучать
+der Forscher ### исследователь, научный сотрудник
+das Ufer ### берег, побережье
+der Jäger ### охотник, егерь
+der Anwalt, die Anwälte ### адвокат
+vorstellen ### представлять, знакомить
+die Messe, -n ### ярмарка, выставка
+darstellen ### представлять, изображать
+der Alltag, -e ### будний день
+anfangen ### начинать
+erkennen ### узнавать, распознавать
+der Zweck, -e ### цель, назначение
+geeignet sein für ### быть пригодным
+der Teilnehmer ### участник
+überlegen ### обдумывать
+nun ### теперь, отныне
+jammern ### громко плакать, вопить
+wertvoll ### ценный, драгоценный
+ausleihen ### брать напрокат, одалживать
+verschicken ### отправлять, посылать
+stören ### мешать, беспокоить
+bürsten ### чистить щёткой, расчесываться
+der Junggeselle, -n ### холостяк
+die Kantine, -n ### столовая, буфет (на предприятии)
+der Wirt ### хозяин
+das Zelt, -e ### палатка, шатер
+besonderer (e, s) ### особый (отдельный, частный)
+plötzlich ### внезапно
+die Abkürzung, -en ### сокращение
+der Beitrag, die Beiträge ### вклад, взнос, доля
+der Abschnitt, -e ### отрезок, часть
+die Brezel ### крендель
+das Karussell, -s ### карусель
+der Lebkuchen ### пряник
+das Volk, die Völker ### народ
+das Zeichen ### знак, символ, сигнал
+anders ### иначе
+das Publikum ### публика, зрители
+erleben ### переживать, испытывать
+recherchieren ### расследовать, собирать материалы
+schaffen ### создавать, творить, делать
+beeindrucken ### производить впечатление
+stumm ### немой, молчаливый
+taub ### глухой
+tot ### мертвый
+blass ### бледный
+glatt ### гладкий
+krumm ### кривой, искривленный
+mager ### худощавый
+munter ### бодрый, резвый
+dankbar ### благодарный, признательный
+mutig ### смелый, храбрый
+bewusst sein ### осознавать
+zunehmen ### увеличиваться (в размере)
+sich lohnen ### иметь смысл, стоить
+hinlegen ### класть, ложиться
+herkommen ### подходить
+ausschauen ### высматривать
+abfahren ### отъезжать, уезжать, отправляться
+abreisen ### уезжать (точная дата)
+anreisen ### приезжать, прибывать
+anbringen ### устанавливать, прикреплять
+vermutlich ### предположительно
+pendeln ### качаться, колебаться, курсировать
+erkunden ### разведывать, разузнавать
+bloß ### только, лишь, голый
+losmüssen ### должен идти
+die Vorsilbe, -n ### приставка
+hinfahren ### отвозить
+heutig ### сегодняшний, современный
+gestrig ### вчерашний, устаревший
+morgig ### завтрашний
+quer ### поперек
+der Reisetag, -e ### день отъезда
+die Störung, -en ### нарушение, сбой, помеха
+die Mitternacht ### полночь
+unterwegs ### по пути, в дороге
+erschrocken ### испуганный, в ужасе
+bevorzugen ### предпочитать
+das Gesicht, -er ### лицо, облик
+der Schnurrbart ### усы
+der Sprachträger ### носитель языка
+die Sammlung, -en ### собрание, коллекция
+die Ereignis, -se ### событие, проишествие
+die Aufführung, -en ### постановка
+die Absicht, -en ### намерение, умысел
+unbekannt ### неизвестный, незнакомый, неведомый
+das Gemälde ### картина
+errichten ### сооружать, устанавливать
+der Aufenthalt, -e ### пребывание, нахождение
+der Eindruck, die Eindrücke ### впечатление, след
+absteigen ### спускаться, слезать, останавливаться (где-то)
+das Gebirge ### горы, горная цепь
+durchgeführt werden ### проводиться, предприниматься
+durchnässen ### промочить, промокать
+zerstören ### разрушать, уничтожать
+aufregend ### волнующий, захватывающий
+vollbringen ### совершать, выполнять
+der Mond, -e ### луна, спутник
+bräunen ### загорать
+der Ärger ### гнев
+die Unruhe, -n ### беспокойство
+der Rundfunk ### радиовещание
+das Stück, -e ### кусок, часть, пьеса, спектакль
+verwandeln ### превращать, преобразовывать
+vorführen ### показывать, демонстрировать
+hierher ### сюда
+veranstalten ### устраивать, организовывать
+die Unterbrechung, -en ### перерыв
+unterbrechen ### прерывать, приостанавливать
+aufführen ### ставить, исполнить (на сцене)
+ausfüllen ### заполнять, наполнять
+gründen ### основывать, учреждать
+erledigen ### сделать, выполнить
+erwarten ### ожидать
+jährlich ### ежегодно
+bedeutend ### значительный, выдающийся
+ernennen ### назначать (на должность)
+anführen ### приводить пример
+stickig ### душный, спертый
+herausgeben ### издавать, выпускать
+durchführen ### проводить, осуществлять
+zerbrechen ### ломать, разбивать
+begießen ### поливать
+beseitigen ### устранять, ликвидировать
+verwirklichen ### осуществлять, претворять в жизнь
+der Schaden, die Schäden ### вред, ущерб
+besprechen ### обсуждать, дискутировать
+der Verlag, -e ### издательство
+der Nachtisch ### десерт
+die Türschwelle, -n ### порог (двери)
+empfangen ### принимать (человека), встречать
+der Vertreter ### заместитель, представитель
+aufnehmen ### принимать (кого-то куда-то)
+beobachten ### наблюдать, следить
+die Menschenmenge, -n ### толпа
+herbeirufen ### созывать
+verlegen ### переводить, переносить
+verzögern ### задерживать, замедлять
+erwachen ### просыпаться, пробуждаться
+Sport treiben ### заниматься спортом
+die Kur, -en ### лечение
+auftreiben ### достать, раздобыть
+eineinhalb ### полтора
+der Tagesablauf, die Tagesabläufe ### распорядок дня
+beschließen ### решать, принимать решение
+versäumen ### пропускать, опаздывать
+die Gelegenheit, -en ### удобный случай
+versuchen ### пробовать, пытаться
+hinaufsteigen ### подниматься наверх
+empfinden ### ощущать, испытывать
+zittern ### дрожать, трястись
+die Aufregung, -en ### волнение, беспокойство
+behaupten ### утверждать, отстаивать
+bedauern ### жалеть, сожалеть
+beschuldigen ### обвинять
+überzeugen ### убеждать
+wehen ### дуть, веять
+unerwünscht ### нежелательный
+hineingehen ### войти, входить
+gleichgültig ### равнодушный, безразличный
+lügen ### лгать, врать
+erobern ### завоевать, покорить
+berechenbar ### предсказуемый
+einordnen ### классифицировать , распределять
+vermeiden ### избегать, уклоняться
+vorgehen ### действовать, поступать
+erlauben ### разрешать, позволять
+die Rücksicht ### внимание, уважение, тактичность
+überwinden ### преодолевать
+aufstellen ### устанавливать, расставлять
+der Vorgang, die Vorgänge ### процесс
+vortragen ### делать доклад, излагать
+umschreiben ### переписывать, описывать
+schweigen ### молчать
+knarren ### трещать, скрипеть
+abweisen ### отклонять, отвергать
+weisen ### показывать, указывать
+beleuchten ### освещать
+treten ### наступать, ступать
+vorübergehen ### проходить, миновать
+hinterlassen ### оставлять после себя
+einzig ### единственный
+aufziehen ### поднимать, надвигаться
+reißen ### рвать, отрывать
+zerreißen ### разрывать
+übrig sein ### остаться
+die Belohnung, -en ### награда, вознаграждение
+zufrieren ### замерзать
+landen ### приземляться
+niedrig ### низкий
+böse ### злой, сердитый
+eilen ### спешить, торопиться
+bevorstehen ### предстоять
+ständig ### постоянный
+loswerden ### избавляться
+wozu ### для чего, зачем
+enthalten ### содержать (в себе)
+beliebt ### любимый
+verweisen ### ссылаться, указывать
+dennoch ### все же
+einstufen ### распределять по категориям
+hinnehmen ### терпеть, мириться
+verpassen ### упускать
+die Hitze ### жара
+allzu ### слишком, чересчур
+die Gesellschaft, -en ### общество, компания
+versorgen ### снабжать, обеспечивать, ухаживать (заботиться)
+zuständig ### ответственный
+rauskommen ### выходить, получаться
+berufstätig ### работающий, занятый на работе
+übernehmen ### перенимать, брать на себя
+betreuen ### заботиться, ухаживать, обслуживать
+überlassen ### уступить, предоставить (кому-то сделать самому)
+äußerst ### крайне, весьма
+sorgfältig ### тщательный
+der Fortschritt, -e ### успех, прогресс
+insgesamt ### в общей сложности
+staunen ### удивляться, дивиться
+überqueren ### пересекать, переходить, переплывать
+vereinzelt ### местами
+wechselhaft ### переменчивый
+verehrt ### почитаемый
+zusätzlich ### дополнительно
+die Regierung, -en ### правительство, правление
+bisher ### до этого, до сих пор
+unterstützen ### поддерживать, оказывать помощь
+fördern ### способствовать, содействовать
+die Verteilung, -en ### распределение
+die Wirkung, -en ### действие, воздействие
+basteln ### мастерить
+mitteilen ### сообщать, уведомлять
+die Abrechnung, -en ### отчисление, рассчет
+vorauszahlen ### оплачивать наперед
+ausgeben ### расходовать, тратить (деньги)
+entzündungshemmend ### противовоспалительный
+anwenden ### употреблять, применять
+uneingeschränkt ### неограниченный
+die Erhöhung, -en ### повышение
+die Senkung, -en ### снижение, понижение
+fristgerecht ### в срок, своевременно
+kündigen ### расторгать, увольняться
+fehlen ### отсутствовать, недоставать
+die Bescheinigung, -en ### удостоверение
+der Empfang, die Empfänge ### приём, встреча
+wegen ### из-за, ради
+der Anschluss, die Anschlüsse ### подключение, пересадка (на другой траспорт)
+die Vertretung, -en ### представительство, замещение
+der Höchstwert ### максимальное значение
+die Stärke, -n ### сила, мощь
+tatsächlich ### фактически, на самом деле
+der Kellner ### официант
+pflegen ### ухаживать, иметь обыкновение что-то делать
+ländlicher Raum ### сельская местность
+heutzutage ### в наши дни, в наше время
+der Aufenthalt, -e ### пребывание, остановка
+die Rückkehr ### возвращение, возврат
+ab heute ### на сегодняшний день
+einsam ### одинокий
+hintereinander ### друг за другом
+hüpfen ### скакать
+dazwischen ### между тем
+lediglich ### лишь, только, исключительно
+anderthalb, eineinhalb ### полтора
+gestalten ### оформлять, придавать вид
+von Anfang an ### с самого начала
+vergeben ### предоставлять
+vorsehen ### предусматривать, планировать
+bewerten ### оценивать, расценивать
+zuständig ### ответственный
+einbringen ### вносить вклад
+die Weise, -n ### способ, манера
+die Stimme, -n ### голос
+wiederum ### в свою очередь
+fangen ### ловить, поймать
+die Aufnahme, -n ### получение, прием
+teilweise ### отчасти
+aufwändig ### дорогостоящий, расточительный
+schreien ### кричать, орать
+ernsthaft ### серьёзный, существенный, важный
+dasselbe ### то же самое
+werfen ### бросать, кидать, метать, швырять, выбрасывать (во всех значениях)
+jedenfalls ### во всяком случае, в любом случае
+eines Tages ### однажды
+vergehen ### проходить, протекать (о времени)
+das Heu ### сено
+sich hinlegen ### ложиться
+ahnen ### предчувствовать, подозревать
+die Brieftasche, -n ### бумажник
+auffallen ### обращать на себя внимание, бросаться в глаза
+fehlen ### недоставатъ, нехватать
+einstecken ### сунуть, засунуть
+hervor ### наружу
+überlegen ### обдумывать
+sicherlich ### скорее всего, несомненно
+herausfinden ### обнаруживать, выяснять
+unabhängig ### независимый, самостоятельный
+der Abfall, die Abfälle ### отходы, мусор
+erwärmen ### согревать
+erzeugen ### производить, изготовлять
+entstehen ### возникать, происходить, образовываться
+versorgen ### снабжать, обеспечивать
+die Verfügung, -en ### постановление, распоряжение
+gering ### малый, незначительный
+der Bedarf (an D) ### потребность, спрос
+benötigen ### нуждаться
+der Hügel ### холм, пригорок
+umfassen ### охватывать, содержать в себе
+vereinfachen ### упрощать, облегчать
+verfügbar ### имеющийся в наличии
+die Unterkunft, die Unterkünfte ### размещение, жилье
+Berufstätige ### работающий
+erhältlich ### доступный
+eintreffen ### прибывать, сбываться
+gelegentlich ### от случая к случаю
+auseinander ### врозь, отдельно
+umgehen ### обращаться, обходиться (с кем-либо)
+anfordern ### требовать, запрашивать
+berücksichtigen ### принимать во внимание, учитывать
+erläutern ### пояснять, объяснять
+sich bemühen ### стараться
+die Absage, -n ### отказ
+die Zusage, -n ### согласие
+die Anfrage, -n ### запрос, опрос, считывание данных
+aufbewahren ### хранить, сохранять
+bewahren ### охранять, оберегать
+hinweisen ### указывать, обращать внимание
+verpflichten ### обязывать
+nachgehen ### следовать, отставать (о часах)
+verrechnen ### перечислить
+sich verrechnen ### обсчитаться (ошибиться в расчетах)
+ausschließlich ### исключительный
+vertreten ### заменять, замещать (кого-либо)
+rechtlich ### законный, правовой
+beraten ### помогать советом
+sorgfältig ### тщательный
+beheben ### устранять, ликвидировать
+die Auskunft, die Auskünfte ### справка
+zuverlässig ### надежный, верный
+jeweils ### каждый раз
+ansonsten ### иначе, в противном случае
+seinerzeit ### в свое время
+vorher ### раньше, прежде
+sogleich ### немедленно, тотчас
+indessen ### тем временем
+abbiegen ### поворачивать, сгибать
+aufnehmen ### начинать
+aufhalten ### задерживать
+die Aufforderung, en ### требование
+auffordern (zum Tanzen) ### приглашать
+der Anspruch, Ansprüche ### требование, право
+annehmen ### принимать, брать
+ängstlich ### боязливый
+die Angst, Ängste ### страх
+die Angabe, n ### сообщение, информация
+akzeptieren ### признавать
+abmachen ### снимать
+abhängig ### зависимый
+die Abbildung, en ### изображение
+ausbilden ### обучать
+ausschließlich ### исключительный
+aussuchen ### выбирать
+erstatten ### возмещать
+der Aufenthalt, e ### пребывание
+mitteilen ### сообщать
+feststellen ### констатировать
+kleben ### клеить
+je ### по, когда-нибудь
+interkulturell ### межкультурный
+insgesamt ### в целом (в общей сложности,
+у нас бы́ло всего́ 200 е́вро)
+innen ### внутрь, внутри
+der Humor ### юмор
+höflich ### вежливый
+hinstellen ### ставить
+herkommen ### подойти, происходить (wo kommen Sie her?отку́да вы ро́дом?)
+der Haushalt, e ### домашнее хозяйство, бюджет
+häufig ### частый
+gründlich ### основательный
+der Grill, s ### гриль
+glatt ### гладкий, скользкий
+gespannt ### полный нетерпения (любопытства)
+das Gesetz, e ### закон
+die Gesellschaft, en ### общество, компания
+genehmigen ### разрешать (утверждать)
+das Gegenteil ### противоположность
+die Geburt, en ### рождение
+die Gaststätte, n ### ресторан
+fördern ### способствовать
+fordern ### требовать
+fliehen ### бежать (убежать, избежать)
+der Fleck, en ### пятно
+fest ### твердый, постоянный
+das Fahrzeug, e ### транспортное средство
+ernst ### серьезный
+ernähren ### кормить, содержать
+erledigen ### выполнять
+erhalten ### получать, сохранять
+das Ereignis, se ### событие, происшествие
+entwickeln ### развивать
+die Entfernung, en ### расстояние
+entfernt ### дальний
+enden ### кончаться
+sich eintreten ### вступать
+sich einstellen auf (+ Akk) ### настраиваться
+sich einsetzen (+ Akk) ### прилагать усилия
+einzeln ### отдельный
+einschalten ### включать
+das Einkommen ### доход
+ehren ### уважать
+die Ehre ### честь
+der Einfluss, Einflüsse ### влияние,авторитет
+dieselbe ### та же самая
+der Dienst, e ### служба (работа)
+desto ### тем
+davor ### перед этим
+dauernd ### продолжительный
+darum ### об этом, вокруг
+die Darstellung, en ### изображение
+daran ### к этому, к тому
+der Cousin, s ### кузен
+die Chance, n ### шанс
+der Bogen ### дуга
+der Boden, Böden ### земля, пол (дно)
+die Beziehung, en ### связь, отношение
+die Bevölkerung, en ### население
+bestimmen ### устанавливать, располагать
+besprechen ### обсуждать
+besorgen ### покупать, исполнять
+besitzen ### владеть
+besetzen ### занимать
+die Beschäftigung, en ### работа, занятие
+bereits ### уже
+berechnen ### вычислять
+sich benehmen ### вести себя
+der Beitrag, Beiträge ### доля, часть (взнос)
+behindern ### препятствовать
+behalten ### оставлять, запоминать
+der Bahnsteig, e ### перрон
+schützen ### защищать
+der Schritt, e ### шаг
+der Schmuck (Sg) ### украшение (украшения)
+das Schild, er ### табличка, этикетка
+schick ### шикарный
+die Scheidung, en ### развод
+die Scheibe, n ### стекло, шайба
+die Rücksicht (Sg) ### внимание, уважение
+riechen ### пахнуть, нюхать
+der Rest, e ### остаток
+reifen ### созревать, зреть
+regieren ### править, управлять
+regeln ### регулировать
+das Publikum (Sg) ### публика
+das Prozent, e ### процент
+das Plastik (Sg) ### пластик, пластмасса
+der Plan, Pläne ### план, график
+der Pkw, s ### легковая машина
+die Pflanze, n ### растение
+perfekt ### совершенный, окончательный
+die Partei, en ### партия
+das Papier, e ### бумага
+östlich ### восточный, восточнее
+der Osten ### восток
+ordentlich ### аккуратный, приличный,порядочный
+das Netz, e ### сеть, паутина
+nämlich ### а именно, так как
+nah(e) ### близкий, возле
+nachholen ### наверстывать, забирать
+nachdenken ### думать
+der Mut (Sg) ### смелость
+der Mülleimer ### мусорное ведро
+der Motor, en ### мотор
+monatlich ### месячный
+mitmachen ### участвовать
+mitarbeiten ### сотрудничать
+die Million, en ### миллион
+die Mehrheit, en ### большинство
+lösen ### снимать, решать
+löschen ### тушить, утолять
+der Lohn, Löhne ### зарплата
+die Leistung, en ### достижение, работа, результат
+der Lastwagen, Lastwägen ### грузовик
+das Kraftfahrzeug, e ### автомобиль
+die Kosmetik, Kosmetika ### косметика
+die Konsequenz, en ### упорство, последствие
+komplett ### полный
+klassisch ### классический, типичный
+bewegen ### двигать, передвигать
+betragen ### составлять
+bestrafen ### наказывать, штрафовать
+die Bescheinigung, en ### удостоверение, квитанция
+benötigen ### нуждаться
+bemerken ### замечать
+beliebt ### любимый, популярный
+behaupten ### утверждать, отстаивать
+begleiten ### провожать, сопровождать
+beantragen ### подавать заявление, ходатайствовать
+außen ### вне, снаружи
+der Auftrag, Aufträge ### поручение, задание, заказ
+aufregen ### волновать
+die Aufnahme, n ### поручение, прием, поступление, запись
+auffallen ### обращать на себя внимание, бросаться в глаза
+aufeinander ### друг друга, друг за другом, друг на друге
+die Arbeitslosigkeit ### безработица
+die Erlaubnis, se ### разрешение
+anwenden ### применять
+die Ansicht, en ### взгляд, мнение
+das Abgas, se ### выхлопной газ
+abbauen ### сокращать, добывать, устранять
+fressen ### жрать, есть (о животных)
+die Fortsetzung, en ### продолжение
+fortsetzen ### продолжать
+fassen ### хватать, поднимать, держаться
+das Fach, Fächer ### полка, область, предмет
+extrem ### крайний
+die Existenz, en ### существование
+die Eröffnung, en ### открытие, сообщение
+erhöhen ### повышать
+die Entwicklung, en ### развитие, разработка
+entschließen ### решать, решаться
+entlassen ### увольнять, освобождать
+die Eisenbahn, en ### железная дорога
+die Einzelheit, en ### подробность, деталь
+einschreiben ### записывать, вписывать
+einhehmen ### получать, принимать, занимать
+die Einnahme, n ### приход, поступление, прием
+die Einführung, en ### введение, вступление
+derselbe ### тот же самый
+daneben ### возле, рядом, в отличие от
+das Dach, Dächer ### крыша
+das Blut ### кровь
+blass ### бледный, блеклый
+loben ### хвалить
+landen ### приземляться
+laden ### приглашать, грузить
+die Krise, n ### кризис
+der Kreislauf ### циркуляция, кровообращение
+die Kraft, Kräfte ### сила
+knapp ### скудный, ограниченный
+die Kindheit ### детство
+das Kennzeichen ### симптом, номерной знак
+der Karneval, s ### карнавал
+inzwischen ### между тем, тем временем
+die Hoffnung, en ### надежда
+der Hit, s ### хит
+herausfinden ### выяснять, выпутываться
+heizen ### топить
+das Gift, e ### яд, отрава
+das Gewürz, e ### приправа
+das Geschehen ### событие
+geeignet ### подходящий
+die Oper, n ### опера, оперный театр
+nützlich ### полезный
+notwendig ### необходимый
+nötig ### нужный
+nebenbei ### между прочим
+das Nahrungsmittel ### продукт питания
+die Müllabfuhr ### вывоз мусора
+mischen ### смешивать
+meist ### чаще всего
+meinetwegen ### по-моему, по мне так
+die Schicht, en ### смена, слой
+der Schein, e ### купюра, банкнота, сияние, блеск
+schätzen ### ценить, оценивать
+die Saison, s ### сезон
+die Reihe, n ### ряд
+protestieren ### протестовать
+der Pudding, e ### пудинг
+produzieren ### производить
+das Personal ### персонал
+die Zahnbürste, n ### зубная щетка
+wohl ### хорошо
+werktags ### по рабочим дням
+wenden ### переворачивать, вращать
+die Währung, en ### валюта
+der Sessel ### кресло
+sich vornehmen etw zu tun ### браться за что-то
+das Vitamin, e ### витамин
+verwechseln ### перепутать
+vernünftig ### разумный
+verlassen ### покидать, полагаться
+das Verhältnis, se ### отношения, условия, соотношение
+verbringen ### проводить
+verbrauchen ### потреблять, расходовать
+umtauschen ### обменять
+herum ### вокруг, около
+das Tal, Täler ### долина
+streiken ### бастовать
+die Stellung, en ### положение
+stammen ### происходить, быть родом
+ständig ### постоянный
+sparsam ### бережливый, экономный
+sowieso ### в любом случае
+errichten ### сооружать
+hinkommen ### прибыть
+der Briefkasten, -kästen ### почтовый ящик
+keuchen ### задыхаться
+ratlos ### растерянный, беспомощный
+rennen ### бежать, мчаться
+unzählig ### бесчисленный
+erleichtern ### облегчать
+umfassen ### охватывать
+sperren ### перегораживать, закрывать
+gefährden ### угрожать, подвергать опасности
+freizügig ### свободный, щедрый
+die Auflösung, en ### распад, разрешение (например, экрана)
+der Schlüssel ### ключ
+verurteilen ### осуждать, приговаривать
+eher ### раньше
+aufmerksam ### внимательный
+aufgeben ### отказываться, сдавать
+weiterhin ### в будущем, кроме того
+der Absturz, Abstürze ### падение
+allerdings ### однако
+gelingen ### удаваться
+vereinbar ### совместимый
+die Methode, n ### метод
+wertvoll ### ценный
+alleinerziehende Mutter ### мать-одиночка
+schick ### шикарный
+der Single, s ### одинокий человек
+der Ingenieur, e ### инженер
+die Vorliebe, n ### предпочтение
+das Tuch, Tücher ### платок
+der Regensschirm, e ### зонт
+gestreift ### полосатый
+der Kasten, Kästen ### ящик, сундук
+löchrig ### дырявый
+einfallen ### приходить, вторгаться
+das Gras, Gräser ### трава
+aufhängen ### повесить
+der Einzug, Einzüge ### въезд
+möblieren ### меблировать
+sonnig ### солнечный
+farbig ### цветной
+schriftlich ### письменный
+mündlich ### устный
+die Person, en ### человек
+das Geldstück, e ### монета
+die Angewohnheit, en ### привычка
+die Bekanntschaft, en ### знакомство
+die Anzeige, n ### объявление, иск
+die Ahnung, en ### знание
+anständig ### приличный
+zuverlässig ### надежный
+der Lippenstift, e ### губная помада
+wundervoll ### чудесный
+schminken ### красить
+sich schminken ### краситься
+ein Schreiner ### столяр
+neugierig ### любопытный
+vermögend ### самостоятельный
+gebildet ### образованный
+humorvoll ### остроумный
+warmherzig ### сердечный
+unabhängig ### независимый
+zärtlich ### нежный
+seriös ### солидный
+die Zuschrift, en ### письмо
+das Hindernis, se ### препятствие
+selbstbewusst ### самоуверенный
+die Beziehung, en ### связь, отношения
+der Mut ### смелость
+das Niveau, s ### уровень
+zart ### нежный
+der Ratschlag, Ratschläge ### совет
+das Brett, Bretter ### доска
+der Kreis, -e ### круг (круг лиц)
+zusehen ### наблюдать, смотреть
+sich unterhalten ### беседовать, развлекаться
+der Kamm, Kämme ### расческа
+verwöhnen ### баловать
+die Schürze, n ### фартук
+abhören ### прослушивать, подслушивать
+stürzen ### падать
+abschreiben ### списать
+das Unentschieden ### ничья
+sich vorstellen ### представляться
+sich amüsieren ### развлекаться
+sich verabreden ### договариваться
+sich anziehen ### одеваться
+unterhalten ### содержать, поддерживать, развлекать
+demnächst ### скоро
+besetzen ### занимать, распределять
+beschäftigen ### занимать
+aufräumen ### убирать
+abwischen ### вытирать
+knüpfen (Kontakte knüpfen) ### завязывать
+ehrenamtlich ### добровольный
+der Senior, en ### пожилой человек
+darunter ### под этим, под тем
+sinken ### снижаться, опускаться
+steigen ### подниматься
+ständig ### постоянный
+aussteigen ### выходить
+umsteigen ### пересаживаться
+einsteigen ### садиться в транспорт
+ausziehen ### съезжать, раздевать
+sich ausziehen ### раздеваться
+verärgern ### разозлить
+wütend ### бешеный
+die Verabredung, en ### встреча, договоренность
+aufgeregt ### взволнованный
+die Weile ### некоторое время
+sich engagieren ### участвовать
+entwickeln ### развивать
+sich entwickeln ### развиваться
+damals ### тогда
+der Sieger ### победитель
+die Abteilung, en ### отделение, отдел
+abänderungsfähig ### способный к изменениям
+insgesamt ### в целом
+siegen ### побеждать
+vermissen ### скучать, недосчитываться
+der Portier, s ### швейцар
+ernähren ### содержать, кормить
+locken ### заманивать,завивать
+die Tätigkeit, en ### деятельность
+die Verwaltung, en ### управление, администрация
+die Unterlag, en ### документ, подстилка
+tabellarisch ### в виде таблицы (схемы)
+die Pleite, n ### банкротство
+vermitteln ### передавать, посредничать
+krabbeln ### ползать
+unterstützen ### поддерживать
+das Lager ### лагерь, склад, запас
+ungewöhnlich ### необычный
+ungefähr ### приблизительный, около
+eben nur ### только
+unterwegs ### по дороге
+die Fortbildung, en ### повышение квалификации
+der Kram ### дела, барахло
+reden ### говорить
+erledigen ### выполнять, обрабатывать
+die Medien (pl) ### сми
+der Anhang, Anhänge ### дополнение
+der Blog (мн. ч. не известно) ### блог
+der Chat, s ### чат, беседа
+die E-Mail, s ### электронная почта
+die Festplatte, n ### жесткий диск
+das Internet ### интернет
+das Radio, s ### радио
+die SMS (мн. ч. не известно) ### смс
+das Telefon, e ### телефон
+der USB-Stick (мн. ч. не известно) ### флешка
+die Zeitschrift, en ### журнал
+abschicken ### отправлять (отсылать)
+anschalten ### включать
+ausschalten ### выключать
+empfangen ### принимать
+googeln ### гуглить
+mailen ### посылать по электронной почте
+umschalten ### переключать
+zappen ### переключать
+die Mailbox, en ### электронный почтовый ящик
+das Netz, e ### сеть, паутина
+aufziehen ### открывать, заводить, организовывать
+der Alltag, e ### будний день
+der Wecker ### будильник
+dabei ### при этом, при том
+der Fax (мн. ч. не известно) ### факс
+runterladen ### скачать
+erreichen ### достигать
+der Schreiner ### столяр
+das Lichtbild, er ### фото
+unterbrechen ### прерывать
+erfahren ### узнавать, испытывать
+abschließen ### запирать, заканчивать, кончаться
+zusätzlich ### дополнительный
+achtziger Jahre ### восьмидесятые годы
+die Öffentlichkeit ### общественность, публичность
+verhindern ### препятствовать, предотвращать
+darum ### вокруг, об этом, поэтому
+die Liveübertragung, en ### прямая трансляция
+die Meile, n ### миля
+miterleben ### пережить
+das Ereignis, se ### событие, происшествие
+der Ablauf, Abläufe ### ход, процесс
+der Tagesablauf, Tagesabläufe ### режим дня
+der Satellit, en ### спутник
+zwar ### хотя, а именно
+die Zwangsarbeit, en ### принудительная работа
+die Regierung, en ### правительство
+schauen, schaute, geschaut ### смотреть
+ehemalig ### бывший
+erlebten ### переживать, видеть, дожить
+senden, sandte, gesandt ### посылать
+der Eintritt, e ### вход, поступление, наступление
+ein Zuschauer ### зритель
+ausstrahlen ### излучать, передавать
+flimmern ### сверкать, мигать
+der Durchschnitt, e ### разрез, среднее
+die Rundfunkgebühr ### абонентная плата за радио
+populär ### популярный
+das Endspiel, e ### финальная игра
+übrigens ### между прочим
+die Turnhalle, n ### спортзал
+die Gaststätte, n ### ресторан
+der Rundfunk ### радиовещание
+die Reihenfolge, n ### последовательность
+undenkbar ### невообразимый
+der konsum ### потребление
+der Bundestag ### федеральное собрание, парламент
+der Bund, Bünde ### союз
+die Bundesregierung ### федеральное правительство
+die Bundestagswahl, en ### выборы в бундестаг
+der Präsident, en ### президент
+der Abgeordnete, n ### депутат
+die Landesregierung, en ### правительство земли (провинции)
+der Ministerpräsident, en ### премьер-министр
+die Gemeinde, n ### община
+der Stadtrat, Stadträte ### муниципалитет
+der Gemeinderat, Gemeinderäte ### совет общины (коммунальный совет)
+der Bürgermeister, ### бургомистр
+das Wappen, - ### герб
+die Partei, en ### партия
+die Opposition, en ### оппозиция
+umgekehrt ### наоборот, обратный
+die Einheit, en ### единство
+das Parlament, e ### парламент
+das Gesetz, e ### закон (законопроект)
+die Macht, Mächte ### власть
+das Wahlplakat, e ### предвыборный плакат
+die Berechtigung, en ### право
+die Staatsausgaben ### государственные расходы
+die Gerechtigkeit ### справедливость
+die Gewerkschaft, en ### профсоюз
+bisher ### до сих пор
+christlich ### христианский
+der Einfluss, Einflüsse ### влияние (воздействие), авторитет
+der Schutz ### защита
+die Mehrheit, en ### большинство
+der Adler ### орел
+der Ruf, e ### крик, репутация
+nie zuvor ### никогда прежде
+der Handel ### торговля
+der Bundesverband, Bundesverbände ### федеральный союз
+ausgeben ### расходовать, выдавать
+der Versandhandel ### посылочная торговля
+anbieten ### предлагать
+der Ratschlag, Ratschläge ### совет
+wovor ### перед чем
+der Neffe, n ### племянник
+annehmen ### принимать, брать, предпологать
+deswegen ### поэтому
+reich ### богатый, богато
+die Umfrage, n ### опрос
+bedauern ### жалеть, сожалеть
+der Vorschlag, Vorschläge ### предложение
+furchtbar ### ужасный, страшный
+höflich ### вежливый, вежливо
+die Verzeihung ### прощение
+trennbar ### отделимый
+verbringen ### проводить
+der Laptop, s ### ноутбук
+gemeinsam ### общий, вместе
+der Gutschein, e ### чек, талон
+das Gepäck ### багаж
+verreisen ### уезжать, уехать
+behalten ### оставлять, запоминать
+stellen ### ставить, составлять
+schreiten, schritt, geschritten ### шагать
+übernehmen, übernahm, übernommen ### брать, перенимать (брать на себя)
+anschauen ### смотреть, посмотреть
+schaden ### вредить
+hassen ### ненавидеть
+böse ### плохой, злой
+geduldig ### терпеливый
+die Bedingung, en ### условие, обстоятельство
+die Praxis, Praxen ### практика
+die Verabredung, en ### встреча
+der Pinsel ### кисть (для рисования)
+lächeln ### улыбаться
+das Lächeln ### улыбка
+blond ### светловолосый
+die Wand, Wände ### стена
+der Kittel ### халат
+der Pharmazeut, en ### фармацевт
+der Plan, Pläne ### план
+der Zahn, Zähne ### зуб
+äußern ### выражать, высказываться
+meine Meinung nach ### по моему мнению
+ich denke, dass ### я думаю, что
+der Betrieb, e ### предприятие
+die Reifeprüfung, en ### экзамен на аттестат зрелости
+das Praktikum, a ### практика, практическое занятие
+das Projekt, e ### проект
+die Tabelle, n ### таблица
+die Schulpflicht, en ### обязательное обучение
+unterscheiden, unterschied, unterschieden ### отличать, отличаться
+die Sonderschule, n ### специальная школа для детей-инвалидов
+höchstens ### максимум
+die Aufnahmeprüfung, en ### вступительные экзамены
+die Art, en ### вид, сорт, способ
+das Ziel, e ### цель, мишень
+konjugieren ### спрягать
+dieselbe ### то же самое
+die Note, n ### оценка, нота
+das Fach, Fächer ### полка, область, предмет
+aussagen ### высказать
+die Pflicht, en ### долг, обязанность
+die Altersstufe, n ### возрастная группа
+fördern ### способствовать
+das Gespräch, e ### разговор, беседа
+bestimmen ### устанавливать, распоряжаться
+voneinander ### друг от друга
+die Beziehung, en ### связь, отношение
+aufheben, hob auf, aufgehoben ###
+der Treffpunkt, e ### место встречи
+die Einrichtung, en ### обстановка, устройство, учреждение
+die Betreuung ### забота
+aufnehmen ### получать, начинать
+bevorzugt ### предпочитаемый
+betreuen ### заботиться
+das Konzept, e ### план, концепт
+erarbeiten ### сделать, продвинуться
+der Erzieher ### воспитатель
+flexibel ### гибкий, скользящий
+vielfältig ### разносторонний
+das Bedürfnis, se ### потребность
+die Initiative, n ### инициатива
+das Schaffen ### творчество
+schaffen, schuf, geschaffen ### создавать
+seitdem ### с тех пор
+der Bedarf ### спрос
+zuordnen ### относить (кого-л. к какой-л. группе)
+der Rechtsanspruch, Rechtsansprüche ### законное право
+der Anspruch, Ansprüche ### право
+unterschiedlich ### разный
+die Ermäßigung, en ### скидка, льгота
+abhängig ### зависимый
+die Unterschied ### разница
+behindern ### мешать
+fordern ### требовать, вызывать
+die Gleichheit ### равенство
+desto ### тем
+scheitern ### терпеть
+die Kosten ### расходы
+der Beitrag, Beiträge ### часть, доля
+die Kommune, n ### община
+berechnen ### вычислять
+der Zuschuss, Zuschüsse ### пособие, надбавка
+der Verein, e ### общество, союз
+bereiten ### готовить (подготавливать)
+das Kompositum, Komposita ### сложное слово
+der Sessel ### кресло
+das Sofa, s ### диван
+der Vorhang, Vorhänge ### штора
+die Stehlampe, n ### торшер
+der Herd, e ### плита
+das Messer ### нож
+der Löffel ### ложка
+die Badewanne, n ### ванна
+das Waschbecken ### умывальник
+der Toaster ### тостер
+die Dusche, n ### душ
+das Bett, en ### кровать, постель
+der Tisch, e ### стол
+der Stuhl, Stühle ### стул
+das Geschirr, e ### посуда
+das Besteck, e ### столовый прибор
+ausziehen ### съезжать
+die Mitteilung, en ### сообщение
+die Wohnungsverwaltung, en ### жилконтора
+halten ### держать, сохранять
+stabil ### стабильный
+die Reparatur, en ### ремонт
+die Maßnahme, n ### мера, мероприятие
+erhöhen ### повышать
+anpassen ### приспосабливать, подгонять (об одежде)
+betragen ### составлять
+hinzu ### к тому же, кроме того
+die Pauschale, n ### общая сумма
+die Erhöhung, en ### повышение
+die Überweisung, en ### перевод (денег на счет)
+entsprechend ### соответственно
+die Hälfte, n ### половина
+beim (плюс Д.) ### при
+die Anlage, n ### сооружение, приложение
+tapezieren ### оклеивать
+einrichten ### обставлять
+berichten ### докладывать
+erst ### сначала, только
+versuchen ### пробовать, пытаться
+klappen ### хлопать, ладиться
+verraten ### выдавать, предавать
+gewöhnen ### приучать, привыкать
+liegen, lag, gelegen ### лежать
+legen, legte, gelegt ### ложиться
+sitzen, saß, gesessen ### сидеть
+setzen, setzte, gesetzt ### садиться, сажать
+hängen, hing, gehangen ### висеть
+hängen, hängte, gehängt ### вешать
+einen Platten haben ### проколоть шину
+die Tankstelle, n ### заправочная станция
+das Parkhaus, Parkhäuser ### платная стоянка
+der Parkschein, e ### парковочный талон
+der Bahnsteig, e ### перрон
+die Bahn, en ### дорога
+der Fahrplan, Fahrpläne ### расписание движения транспорта
+der Strafzettel ### парковочный талон
+der Radweg, e ### велосипедная дорожка
+tanken ### заправляться, заправлять
+bremsen ### тормозить, останавливать
+abbiegen ### поворачивать
+anhalten ### останавливать (ся)
+die Straßenbahn, en ### трамвай
+daran ### к этому, к тому
+entfernen ### удалять, удаляться
+zwar ### хотя, а именно
+der Reifen ### шина
+der Fußgänger ### пешеход
+die Fußgängerzone, n ### пешеходная зона
+der Zug, Züge ### поезд
+vorbeikommen ### проходить мимо
+nachschlagen ### проверять
+mehrfach ### многократный
+sich verhalten ### вести себя
+beobachten ### наблюдать
+vorbei ### мимо
+worauf ### чего
+häufig ### часто
+das Fahrzeug, e ### транспортное средство
+erschweren ### осложнять, затруднять
+die Sicht ### видимость, точка зрения
+betreten ### ступать, войти
+unachtsam ### невнимательный
+das Verkehrszeichen ### дорожный знак
+darauf ### на этом (на том), затем, поэтому
+betreiben ### заниматься
+herrschen ### господствовать
+das Kraftfahrzeug, e ### автомашина
+der Lastwagen, Lastwägen ### грузовик
+die Umwelt ### окружающая среда
+die Umleitung, en ### объезд
+unabhängig ### независимый
 soweit ich mich erinnern kann ### насколько я помню
 Ich sehe das anders ### я вижу это по-другому
 ich sehe mich gezwungen ### я вынужден
@@ -86,7 +1372,7 @@ darunter ### среди них, в том числе
 einiges zu wünschen übrig lassen ### оставлять желать лучшего
 jmd fehlten ### отсутствовать, недоставать
 Arbeitsbedingung ### условия труда
-anrichten ### причинить, натворить (бед и т п)
+anrichten ### причинить, натворить (бед и т. п.)
 unter Umständen ### при определенных обстоятельствах
 die Umsetzung ### воплощение, внедрение, реализация, осуществление
 nach wie vor ### по-прежнему
