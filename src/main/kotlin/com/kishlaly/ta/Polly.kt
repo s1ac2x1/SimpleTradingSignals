@@ -9,17 +9,17 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-val delimiter = " ### "
+val delimiter = ", "
 val srcFolder = "polly"
 val outputFolder = "output"
-val srcFile = "home.txt"
+val srcFile = "adjectives_with_prepositions.txt"
 val outputFileName = srcFile.replace(".txt", "")
 
 // какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
-val ruPhraseIndex = 2
-val dePhraseIndex = 1
+val ruPhraseIndex = 1
+val dePhraseIndex = 2
 
-// TODO подготовить потом импорт для квизлета
+// TODO потом импорт в квизлет
 
 fun main() {
     var count = AtomicInteger(1)

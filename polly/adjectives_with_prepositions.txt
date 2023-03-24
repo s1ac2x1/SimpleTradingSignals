@@ -1,275 +1,275 @@
-близкий к, nah bei D
-большой для, groß für A
-важный для, wichtig für A
-внутренний для, innerhalb für A
-возле, in der Nähe von D
-вокруг, um A
+близкий к чему-либо, nah bei
+большой для, groß für
+важный для, wichtig für
+внутренний для, innerhalb für
+возле, iner Nähe von
+вокруг, um
 выше, über D
-готовый к, bereit für A
-дальний от, weit weg von D
-доступный к, zugänglich für A
+готовый к чему-либо, bereit für
+дальний от, weit weg von
+доступный к чему-либо, zugänglich für
 другой от, anders als A
-закрытый для, geschlossen für A
-занятый для, beschäftigt für A
-заинтересованный в, interessiert an D
-замечательный для, wunderbar für A
-значимый для, bedeutsam für A
-известный как, bekannt als N
-изумительный в, erstaunlich in D
-интересный для, interessant für A
-красивый для, schön für A
-легкий для, leicht für A
-маленький для, klein für A
-напротив, gegenüber von D
-насыщенный чем-то, gesättigt mit D
-недалеко от, nicht weit von D
-независимый от, unabhängig von D
-незаменимый для, unersetzlich für A
-ненавистный к, verhasst gegenüber D
-новый для, neu für A
-нужный для, nötig für A
-обеспокоенный чем-то, besorgt um A
-общий с, gemeinsam mit D
-огромный для, riesig für A
-одинаковый с, gleich wie D
-около, in der Nähe von D
-опасный для, gefährlich für A
-осведомленный о, informiert über A
-полезный для, nützlich für A
-прекрасный для, herrlich für A
-приятный для, angenehm für A
-простой для, einfach für A
-противоположный к, entgegengesetzt zu D
-свободный от, frei von D
-сильный в, stark in D
-счастливый с, glücklich mit D
-трудный для, schwierig für A
-уверенный в, sicher in D
-хороший для, gut für A
-ценный для, wertvoll für A
-чистый от, sauber von D
-шумный из-за, laut wegen G
-абсолютный в, absolut in D
-активный в, aktiv in D
-бедный в, arm an D
-безопасный для, sicher für A
-безразличный к, gleichgültig gegenüber D
-беспокойный о, besorgt über A
+закрытый для, geschlossen für
+занятый для, beschäftigt für
+заинтересованный в чем-то, interessiert an D
+замечательный для, wunderbar für
+значимый для, bedeutsam für
+известный к чему-либоак, bekannt als
+изумительный в чем-то, erstaunlich in
+интересный для, interessant für
+красивый для, schön für
+легкий для, leicht für
+маленький для, klein für
+напротив, gegenüber von
+насыщенный чем-то, gesättigt mit
+недалеко от, nicht weit von
+независимый от, unabhängig von
+незаменимый для, unersetzlich für
+ненавистный к чему-либо, verhasst gegenüber
+новый для, neu für
+нужный для, nötig für
+обеспокоенный чем-то, besorgt um
+общий с чем-то, gemeinsam mit
+огромный для, riesig für
+одинаковый с чем-то, gleich wie D
+около, iner Nähe von
+опасный для, gefährlich für
+осведомленный о, informiert über
+полезный для, nützlich für
+прекрасный для, herrlich für
+приятный для, angenehm für
+простой для, einfach für
+противоположный к чему-либо, entgegengesetzt zu
+свободный от, frei von
+сильный в чем-то, stark in
+счастливый с чем-то, glücklich mit
+трудный для, schwierig für
+уверенный в чем-то, sicher in
+хороший для, gut für
+ценный для, wertvoll für
+чистый от, sauber von
+шумный из-за, laut wegen
+абсолютный в чем-то, absolut in
+активный в чем-то, aktiv in
+бедный в чем-то, arm an D
+безопасный для, sicher für
+безразличный к чему-либо, gleichgültig gegenüber
+беспокойный о, besorgt über
 богатый на, reich an D
 больной на, krank an D
-веселый с, fröhlich mit D
-вкусный для, lecker für A
-возможный для, möglich für A
-временный для, vorübergehend für A
+веселый с чем-то, fröhlich mit
+вкусный для, lecker für
+возможный для, möglich für
+временный для, vorübergehend für
 высокий на, hoch auf D
-глубокий в, tief in D
-двойной в, doppelt in D
-дешевый для, billig für A
-добрый к, nett zu D
+глубокий в чем-то, tief in
+двойной в чем-то, doppelt in
+дешевый для, billig für
+добрый к чему-либо, nett zu
 долгий на, lang auf D
-дорогой для, teuer für A
-доступный для, erreichbar für A
-замкнутый в, geschlossen in D
-заполненный чем-то, gefüllt mit D
-запрещенный для, verboten für A
-застенчивый перед, schüchtern vor D
-значительный для, bedeutend für A
-избыточный для, überschüssig für A
-известный о, bekannt über A
-изумленный чем-то, erstaunt über A
-интеллектуальный в, intellektuell in D
-круглый в, rund in D
+дорогой для, teuer für
+доступный для, erreichbar für
+замкнутый в чем-то, geschlossen in
+заполненный чем-то, gefüllt mit
+запрещенный для, verboten für
+застенчивый перед, schüchtern vor
+значительный для, bedeutend für
+избыточный для, überschüssig für
+известный о, bekannt über
+изумленный чем-то, erstaunt über
+интеллектуальный в чем-то, intellektuell in
+круглый в чем-то, rund in
 легкий на, leicht auf D
-малый для, gering für A
-наклонный к, geneigt zu D
-наличный в, vorhanden in D
+малый для, gering für
+наклонный к чему-либо, geneigt zu
+наличный в чем-то, vorhanden in
 напряженный из-за, angespannt wegen G
-невероятный в, unglaublich in D
-негативный к, negativ zu D
-недостаточный для, unzureichend für A
-ненужный для, unnötig für A
-необходимый для, erforderlich für A
-неправильный в, falsch in D
-несчастный с, unglücklich mit D
-обширный в, umfangreich in D
-одинокий без, einsam ohne A
+невероятный в чем-то, unglaublich in
+негативный к чему-либо, negativ zu
+недостаточный для, unzureichend für
+ненужный для, unnötig für
+необходимый для, erforderlich für
+неправильный в чем-то, falsch in
+несчастный с чем-то, unglücklich mit
+обширный в чем-то, umfangreich in
+одинокий без, einsam ohne
 опасный из-за, gefährlich wegen G
-очень близкий к, eng verbunden mit D
-перспективный для, aussichtsreich für A
-полный чего-то, voll von D
-понятный для, verständlich für A
-приятный к, angenehm zu D
-прозрачный для, durchsichtig für A
-радостный о, glücklich über A
-различный от, unterschiedlich von D
-реалистичный в, realistisch in D
+очень близкий к чему-либо, eng verbunden mit
+перспективный для, aussichtsreich für
+полный чего-то, voll von
+понятный для, verständlich für
+приятный к чему-либо, angenehm zu
+прозрачный для, durchsichtig für
+радостный о, glücklich über
+различный от, unterschiedlich von
+реалистичный в чем-то, realistisch in
 светлый на, hell auf D
-сильный для, stark für A
+сильный для, stark für
 сильный на, stark auf D
-слабый в, schwach in D
-сложный для, komplex für A
+слабый в чем-то, schwach in
+сложный для, komplex für
 смешанный из-за, gemischt wegen G
-современный в, modern in D
-согласный с, einverstanden mit D
-сомнительный в, zweifelhaft in D
-сочный в, saftig in D
-спокойный в, ruhig in D
-средний в, durchschnittlich in D
-страшный для, schrecklich für A
-странный для, seltsam für A
-счастливый для, glücklich für A
+современный в чем-то, modern in
+согласный с чем-то, einverstanden mit
+сомнительный в чем-то, zweifelhaft in
+сочный в чем-то, saftig in
+спокойный в чем-то, ruhig in
+средний в чем-то, durchschnittlich in
+страшный для, schrecklich für
+странный для, seltsam für
+счастливый для, glücklich für
 теплый на, warm auf D
-толстый в, dick in D
-точный в, genau in D
-удобный для, bequem für A
+толстый в чем-то, dick in
+точный в чем-то, genau in
+удобный для, bequem für
 узкий на, eng auf D
-умный в, klug in D
-утренний в, am Morgen in D
+умный в чем-то, klug in
+утренний в чем-то, am Morgen in
 холодный на, kalt auf D
-целевой для, zielgerichtet für A
-частный в, privat in D
-чистый для, rein für A
+целевой для, zielgerichtet für
+частный в чем-то, privat in
+чистый для, rein für
 шероховатый на, rau auf D
-шумный в, laut in D
-эмоциональный в, emotional in D
-южный от, südlich von D
-ясный для, klar für A
-языковой для, sprachlich für A
+шумный в чем-то, laut in
+эмоциональный в чем-то, emotional in
+южный от, südlich von
+ясный для, klar für
+языковой для, sprachlich für
 жаркий на, heiß auf D
-задумчивый о, nachdenklich über A
+задумчивый о, nachdenklich über
 злой на, böse auf D
-знакомый с, vertraut mit D
-квадратный в, quadratisch in D
+знакомый с чем-то, vertraut mit
+квадратный в чем-то, quadratisch in
 короткий на, kurz auf D
-легальный в, legal in D
+легальный в чем-то, legal in
 мокрый на, nass auf D
-надежный для, zuverlässig für A
-незначительный для, unbedeutend für A
-немногочисленный в, selten in D
-неприятный для, unangenehm für A
+надежный для, zuverlässig für
+незначительный для, unbedeutend für
+немногочисленный в чем-то, selten in
+неприятный для, unangenehm für
 белый на, weiß auf D
-бережливый с, sparsam mit D
-бесплатный для, kostenlos für A
+бережливый с чем-то, sparsam mit
+бесплатный для, kostenlos für
 беспокойный о, unruhig wegen G
-благодарный за, dankbar für A
-болезненный для, schmerzhaft für A
+благодарный за, dankbar für
+болезненный для, schmerzhaft für
 большой на, groß auf D
-быстрый в, schnell in D
-великий в, großartig in D
-верный в, treu in D
-взрослый в, erwachsen in D
-вкусный с, schmackhaft mit D
-внешний для, außerhalb für A
+быстрый в чем-то, schnell in
+великий в чем-то, großartig in
+верный в чем-то, treu in
+взрослый в чем-то, erwachsen in
+вкусный с чем-то, schmackhaft mit
+внешний для, außerhalb für
 возбужденный из-за, aufgeregt wegen G
-враждебный к, feindlich gegenüber D
-вредный для, schädlich für A
-высокий для, hoch für A
-глупый в, dumm in D
+враждебный к чему-либо, feindlich gegenüber
+вредный для, schädlich für
+высокий для, hoch für
+глупый в чем-то, dumm in
 гневный на, wütend auf D
-громкий в, laut in D
+громкий в чем-то, laut in
 добрый на, gut auf D
-долгожданный для, lang erwartet für A
-дурацкий в, albern in D
-единый в, einzig in D
-жаркий в, leidenschaftlich in D
-желанный для, gewünscht für A
-загадочный для, mysteriös für A
-запутанный в, verwirrt in D
-запятнанный чем-то, befleckt mit D
+долгожданный для, lang erwartet für
+дурацкий в чем-то, albern in
+единый в чем-то, einzig in
+жаркий в чем-то, leidenschaftlich in
+желанный для, gewünscht für
+загадочный для, mysteriös für
+запутанный в чем-то, verwirrt in
+запятнанный чем-то, befleckt mit
 злой на, böse auf D
-значимый для, wichtig für A
-знатный в, bekannt in D
-избыточный в, überflüssig in D
-излюбленный для, bevorzugt für A
-изумленный чем-то, erstaunt über A
-индивидуальный в, individuell in D
-интересный к, interessant für D
-классический в, klassisch in D
+значимый для, wichtig für
+знатный в чем-то, bekannt in
+избыточный в чем-то, überflüssig in
+излюбленный для, bevorzugt für
+изумленный чем-то, erstaunt über
+индивидуальный в чем-то, individuell in
+интересный к чему-либо, interessant für D
+классический в чем-то, klassisch in
 кожаный на, aus Leder auf D
-корыстный в, egoistisch in D
+корыстный в чем-то, egoistisch in
 красивый на, schön auf D
 круглый на, rund auf D
 легкий на подъем, leicht aufzusteigen auf A
-ленивый в, faul in D
-лестный к, schmeichelhaft zu D
-лишний для, überflüssig für A
-любимый для, geliebt für A
+ленивый в чем-то, faul in
+лестный к чему-либо, schmeichelhaft zu
+лишний для, überflüssig für
+любимый для, geliebt für
 маленький на, klein auf D
-медленный в, langsam in D
-местный в, örtlich in D
-милый к, süß zu D
-минимальный для, minimal für A
-мрачный в, düster in D
+медленный в чем-то, langsam in
+местный в чем-то, örtlich in
+милый к чему-либо, süß zu
+минимальный для, minimal für
+мрачный в чем-то, düster in
 напуганный чем-то, verängstigt wegen G
-населенный, bewohnt von D
-насыщенный, gesättigt mit D
+населенный, bewohnt von
+насыщенный, gesättigt mit
 невероятный на, unglaublich auf D
-нежный к, zärtlich zu D
+нежный к чему-либо, zärtlich zu
 некрасивый на, hässlich auf D
-неприятный к, unangenehm zu D
-несовместимый с, unvereinbar mit D
+неприятный к чему-либо, unangenehm zu
+несовместимый с чем-то, unvereinbar mit
 нетерпеливый на, ungeduldig auf D
-неуклюжий в, ungeschickt in D
-новый для, neu für A
+неуклюжий в чем-то, ungeschickt in
+новый для, neu für
 обиженный на, beleidigt auf D
 обширный на, umfangreich auf D
-одинокий в, einsam in D
-оживленный чем-то, belebt mit D
-опытный в, erfahren in D
-особенный для, besonders für A
-ответственный за, verantwortlich für A
-отдаленный от, entfernt von D
-открытый для, offen für A
-отличный от, ausgezeichnet von D
-очевидный для, offensichtlich für A
-параллельный с, parallel zu D
-подходящий для, passend für A
-похожий на, ähnlich zu D
-правильный в, richtig in D
+одинокий в чем-то, einsam in
+оживленный чем-то, belebt mit
+опытный в чем-то, erfahren in
+особенный для, besonders für
+ответственный за, verantwortlich für
+отдаленный от, entfernt von
+открытый для, offen für
+отличный от, ausgezeichnet von
+очевидный для, offensichtlich für
+параллельный с чем-то, parallel zu
+подходящий для, passend für
+похожий на, ähnlich zu
+правильный в чем-то, richtig in
 прекрасный на, wunderbar auf D
 приятный на, angenehm auf D
 прохладный на, kühl auf D
 раздраженный из-за, gereizt wegen G
-различный для, unterschiedlich für A
-расслабленный в, entspannt in D
+различный для, unterschiedlich für
+расслабленный в чем-то, entspannt in
 расстроенный из-за, enttäuscht wegen G
 реактивный на, reaktiv auf D
 свежий на, frisch auf D
-свободный в, frei in D
-сердечный к, herzlich zu D
-сильный против, stark gegenüber D
-скучный для, langweilig für A
+свободный в чем-то, frei in
+сердечный к чему-либо, herzlich zu
+сильный против, stark gegenüber
+скучный для, langweilig für
 слабый на, schwach auf D
-совершенный в, perfekt in D
+совершенный в чем-то, perfekt in
 соленый на, salzig auf D
-способный к, fähig zu D
-старый для, alt für A
-страстный к, leidenschaftlich zu D
-строгий в, streng in D
+способный к чему-либо, fähig zu
+старый для, alt für
+страстный к чему-либо, leidenschaftlich zu
+строгий в чем-то, streng in
 сумасшедший на, verrückt auf D
 сухой на, trocken auf D
 твердый на, hart auf D
-темный в, dunkel in D
-терпеливый с, geduldig mit D
-толковый в, vernünftig in D
+темный в чем-то, dunkel in
+терпеливый с чем-то, geduldig mit
+толковый в чем-то, vernünftig in
 тощий на, dünn auf D
-трудный в, schwer in D
-убедительный в, überzeugend in D
+трудный в чем-то, schwer in
+убедительный в чем-то, überzeugend in
 удивительный на, erstaunlich auf D
-ужасный для, schrecklich für A
-умелый в, geschickt in D
+ужасный для, schrecklich für
+умелый в чем-то, geschickt in
 умный на, klug auf D
 унылый на, traurig auf D
-уставший от, müde von D
-холодный в, kalt in D
-целый в, ganz in D
+уставший от, müde von
+холодный в чем-то, kalt in
+целый в чем-то, ganz in
 черный на, schwarz auf D
-честный в, ehrlich in D
-чудесный в, wunderbar in D
+честный в чем-то, ehrlich in
+чудесный в чем-то, wunderbar in
 шерстяной на, aus Wolle auf D
 шумный на, laut auf D
-шутливый в, humorvoll in D
+шутливый в чем-то, humorvoll in
 экзотический из-за, exotisch wegen G
-энергичный в, energisch in D
-эффективный в, effektiv in D
+энергичный в чем-то, energisch in
+эффективный в чем-то, effektiv in
 яркий на, leuchtend auf D
