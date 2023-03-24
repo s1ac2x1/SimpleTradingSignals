@@ -13,8 +13,10 @@ val delimiter = "###"
 val srcFolder = "polly"
 val srcFile = "random.txt"
 val outputFileName = srcFile.replace("txt", "mp3")
-val ruPhraseIndex = 1 // говорить - sprechen
-val dePhraseIndex = 2 // sprechen - говорить
+
+// какой язык идет первым в файле, например: "говорить - sprechen"
+val ruPhraseIndex = 1
+val dePhraseIndex = 2
 
 fun main() {
     var count = AtomicInteger(1)
