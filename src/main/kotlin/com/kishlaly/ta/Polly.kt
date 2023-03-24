@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger
 val delimiter = " ### "
 val srcFolder = "polly"
 val outputFolder = "output"
-val srcFile = "culture.txt"
+val srcFile = "nomen_verbs.txt"
 val outputFileName = srcFile.replace(".txt", "")
 
 // какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
@@ -24,14 +24,14 @@ val dePhraseIndex = 1
 fun main() {
     var count = AtomicInteger(1)
     val phrases = File("$srcFolder/$srcFile").readLines()
-    val executor = Executors.newFixedThreadPool(15)
+    val executor = Executors.newFixedThreadPool(1)
     File("$srcFolder/$outputFolder").mkdir()
     val filteredPhrases = phrases
         .filter { it.trim().isNotEmpty() }
         .distinctBy { it.split(delimiter)[dePhraseIndex - 1] }.toList()
     println("\nFiltered ${phrases.size - filteredPhrases.size} duplicates\n")
     filteredPhrases
-        //.take(5)
+        .take(4)
         .forEach { line ->
             executor.submit {
                 val unique = UUID.randomUUID().toString()
