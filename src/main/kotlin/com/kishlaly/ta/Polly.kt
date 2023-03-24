@@ -26,10 +26,9 @@ fun main() {
     val phrases = File("$srcFolder/$srcFile").readLines()
     val executor = Executors.newFixedThreadPool(10)
     File("$srcFolder/$outputFolder").mkdir()
-    val deWords = mutableSetOf<String>()
     val filteredPhrases = phrases
         .filter { it.trim().isNotEmpty() }
-        .filter { deWords.add(it.split(delimiter)[dePhraseIndex - 1]) }.toList()
+        .distinctBy { it.split(delimiter)[dePhraseIndex - 1] }.toList()
     println("\nFiltered ${phrases.size - filteredPhrases.size} duplicates\n")
     filteredPhrases
         //.take(5)
