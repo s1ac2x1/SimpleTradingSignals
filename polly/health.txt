@@ -1,0 +1,80 @@
+der Arzt, Ärzte ### врач
+die Ärztin, Ärztinnen ### врач-женщина
+das Krankenhaus, Krankenhäuser ### больница
+die Sprechstunde ### приемное время
+der Termin ### запись на прием
+die Apotheke ### аптека
+das Medikament, Medikamente ### лекарство
+die Krankheit, Krankheiten ### болезнь
+der Schmerz, Schmerzen ### боль
+die Krankenversicherung ### медицинская страховка
+die Untersuchung, Untersuchungen ### обследование
+der Facharzt, Fachärzte ### специалист
+die Diagnose, Diagnosen ### диагноз
+das Rezept, Rezepte ### рецепт
+die Therapie, Therapien ### терапия
+die Impfung, Impfungen ### прививка
+der Notarzt, Notärzte ### врач скорой помощи
+die Notaufnahme ### отделение скорой помощи
+die Operation, Operationen ### операция
+der Chirurg, Chirurgen ### хирург
+die Allergie, Allergien ### аллергия
+die Grippe ### грипп
+die Erkältung, Erkältungen ### простуда
+das Fieber ### жар, высокая температура
+der Husten ### кашель
+die Kopfschmerzen (Pl.) ### головная боль
+die Bauchschmerzen (Pl.) ### боль в животе
+der Durchfall ### понос
+die Übelkeit ### тошнота
+der Hautausschlag, Hautausschläge ### сыпь
+die Ambulanz, Ambulanzen ### амбулатория
+der Anästhesist, Anästhesisten ### анестезиолог
+das Antibiotikum, Antibiotika ### антибиотик
+der Augenarzt, Augenärzte ### окулист
+die Blutprobe, Blutproben ### анализ крови
+der Blutdruck ### кровяное давление
+die Chirurgie ### хирургия
+der Dermatologe, Dermatologen ### дерматолог
+die Entzündung, Entzündungen ### воспаление
+die Erste Hilfe ### первая помощь
+der Frauenarzt, Frauenärzte ### гинеколог
+die Geburt, Geburten ### роды
+das Gips ### гипс
+die Gynäkologie ### гинекология
+der Hausarzt, Hausärzte ### терапевт
+das Herz ### сердце
+die Infektion, Infektionen ### инфекция
+der Internist, Internisten ### внутренний врач
+die Kardiologie ### кардиология
+der Kardiologe, Kardiologen ### кардиолог
+das Krankenbett, Krankenbetten ### больничная койка
+der Krankenpfleger, Krankenpfleger ### медбрат
+die Krankenschwester, Krankenschwestern ### медсестра
+die Lunge, Lungen ### легкое
+der Neurologe, Neurologen ### невролог
+die Onkologie ### онкология
+der Orthopäde, Orthopäden ### ортопед
+die Pädiatrie ### педиатрия
+der Patient, Patienten ### пациент
+die Patientin, Patientinnen ### пациентка
+das Röntgenbild, Röntgenbilder ### рентгеновский снимок
+die Physiotherapie ### физиотерапия
+das Stethoskop, Stethoskope ### стетоскоп
+die Spritze, Spritzen ### инъекция
+der Ultraschall ### ультразвук
+der Urologe, Urologen ### уролог
+das Virus, Viren ### вирус
+die Wunde, Wunden ### рана
+der Zahnarzt, Zahnärzte ### стоматолог
+der Verband, Verbände ### повязка, бинт
+die Salbe, Salben ### мазь
+die Infusion, Infusionen ### капельница
+der Schnupfen ### насморк
+der Heilpraktiker, Heilpraktiker ### натуропат
+die Radiologie ### радиология
+der Radiologe, Radiologen ### радиолог
+die Psychiatrie ### психиатрия
+der Psychiater, Psychiater ### психиатр
+die Neurologie ### неврология
+das Schmerzmittel, Schmerzmittel ### обезболивающее

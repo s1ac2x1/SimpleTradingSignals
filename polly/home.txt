@@ -1,0 +1,77 @@
+die Tasse, Tassen ### чашка
+der Löffel, Löffel ### ложка
+das Messer, Messer ### нож
+die Gabel, Gabeln ### вилка
+der Teller, Teller ### тарелка
+das Glas, Gläser ### стакан
+der Topf, Töpfe ### кастрюля
+die Pfanne, Pfannen ### сковорода
+der Schrank, Schränke ### шкаф
+das Regal, Regale ### полка
+die Waschmaschine, Waschmaschinen ### стиральная машина
+der Staubsauger, Staubsauger ### пылесос
+das Bügeleisen, Bügeleisen ### утюг
+der Kühlschrank, Kühlschränke ### холодильник
+die Mikrowelle, Mikrowellen ### микроволновка
+der Teppich, Teppiche ### ковер
+der Vorhang, Vorhänge ### занавеска
+das Sofa, Sofas ### диван
+der Sessel, Sessel ### кресло
+der Tisch, Tische ### стол
+das Bett, Betten ### кровать
+die Lampe, Lampen ### лампа
+der Spiegel, Spiegel ### зеркало
+die Kommode, Kommoden ### комод
+das Kissen, Kissen ### подушка
+die Decke, Decken ### одеяло
+das Handtuch, Handtücher ### полотенце
+die Garderobe, Garderoben ### гардероб
+das Geschirr ### посуда
+die Seife, Seifen ### мыло
+die Zahnbürste, Zahnbürsten ### зубная щетка
+der Föhn, Föhne ### фен
+der Toaster, Toaster ### тостер
+das Besteck, Bestecke ### столовый прибор
+die Dose, Dosen ### банка
+der Eimer, Eimer ### ведро
+das Sieb, Siebe ### сито
+der Mülleimer, Mülleimer ### мусорное ведро
+die Kerze, Kerzen ### свеча
+die Schere, Scheren ### ножницы
+der Besen, Besen ### метла
+der Hocker, Hocker ### табуретка
+die Waage, Waagen ### весы
+der Wecker, Wecker ### будильник
+die Duschvorhang, Duschvorhänge ### занавеска для душа
+das Bild, Bilder ### картина
+der Kleiderbügel, Kleiderbügel ### вешалка для одежды
+die Pflanze, Pflanzen ### растение
+der Korkenzieher, Korkenzieher ### штопор
+die Kaffeemaschine, Kaffeemaschinen ### кофеварка
+der Wasserkocher, Wasserkocher ### чайник
+die Schüssel, Schüsseln ### миска
+der Haken, Haken ### крючок
+die Fernbedienung, Fernbedienungen ### пульт дистанционного управления
+die Deckenlampe, Deckenlampen ### потолочный светильник
+die Tischdecke, Tischdecken ### скатерть
+die Vase, Vasen ### ваза
+der Nachttisch, Nachttische ### тумбочка
+der Schminktisch, Schminktische ### туалетный столик
+die Badewanne, Badewannen ### ванна
+das Bidet, Bidets ### биде
+die Toilettenbürste, Toilettenbürsten ### щетка для унитаза
+der Duschgel, Duschgele ### гель для душа
+die Schmuckkästchen, Schmuckkästchen ### шкатулка для украшений
+der Kleiderschrank, Kleiderschränke ### платяной шкаф
+das Kopfkissen, Kopfkissen ### подушка для головы
+der Teekessel, Teekessel ### чайник
+das Küchentuch, Küchentücher ### кухонное полотенце
+die Tischlampe, Tischlampen ### настольная лампа
+die Wanduhr, Wanduhren ### настенные часы
+das Schuhregal, Schuhregale ### обувная полка
+die Seifenschale, Seifenschalen ### мыльница
+das Fensterbrett, Fensterbretter ### подоконник
+die Steckdose, Steckdosen ### розетка
+der Lichtschalter, Lichtschalter ### выключатель света
+der Wäschekorb, Wäschekörbe ### корзина для белья
+das Bücherregal, Bücherregale ### книжная полка

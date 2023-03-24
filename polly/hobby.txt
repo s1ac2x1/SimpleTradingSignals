@@ -1,0 +1,77 @@
+das Hobby, Hobbys ### хобби
+die Freizeit ### досуг
+das Spiel, Spiele ### игра
+der Film, Filme ### фильм
+das Theater, Theater ### театр
+die Musik ### музыка
+der Sport ### спорт
+das Konzert, Konzerte ### концерт
+die Ausstellung, Ausstellungen ### выставка
+das Kino, Kinos ### кино
+die Party, Partys ### вечеринка
+das Buch, Bücher ### книга
+das Museum, Museen ### музей
+der Tanz, Tänze ### танец
+das Schach ### шахматы
+spielen ### играть
+tanzen ### танцевать
+lesen ### читать
+malen ### рисовать
+fotografieren ### фотографировать
+kochen ### готовить
+basteln ### мастерить
+sammeln ### коллекционировать
+musizieren ### музицировать
+schwimmen ### плавать
+ins Kino gehen ### идти в кино
+ein Buch lesen ### читать книгу
+Musik hören ### слушать музыку
+Sport treiben ### заниматься спортом
+einen Film sehen ### смотреть фильм
+Zeit mit Freunden verbringen ### проводить время с друзьями
+ein Museum besuchen ### посетить музей
+auf ein Konzert gehen ### идти на концерт
+das Brettspiel, Brettspiele ### настольная игра
+die Videospiele ### видеоигры
+das Puzzle, Puzzles ### пазл
+die Freizeitaktivität, Freizeitaktivitäten ### досуговая активность
+das Lesen ### чтение
+der Urlaub, Urlaube ### отпуск
+die Reise, Reisen ### путешествие
+das Schwimmbad, Schwimmbäder ### бассейн
+der Park, Parks ### парк
+die Natur ### природа
+das Fahrrad, Fahrräder ### велосипед
+die Wanderung, Wanderungen ### пеший поход
+der Ausflug, Ausflüge ### экскурсия
+die Zeichnung, Zeichnungen ### рисунок
+die Fotografie ### фотография
+das Instrument, Instrumente ### музыкальный инструмент
+der Sportverein, Sportvereine ### спортивный клуб
+die Tischtennis ### настольный теннис
+der Volleyball ### волейбол
+das Fitnessstudio, Fitnessstudios ### фитнес-центр
+die Gymnastik ### гимнастика
+der Skisport ### лыжный спорт
+der Fußball ### футбол
+die Eisdiele, Eisdielen ### кафе мороженого
+joggen ### бегать
+radfahren ### кататься на велосипеде
+wandern ### ходить в поход
+turnen ### заниматься гимнастикой
+fischen ### рыбачить
+skaten ### кататься на роликах
+zeichnen ### рисовать
+gärtnern ### заниматься садоводством
+stricken ### вязать
+backen ### печь
+Karten spielen ### играть в карты
+Fahrrad fahren ### кататься на велосипеде
+im Park spazieren gehen ### гулять в парке
+eine Radtour machen ### совершать велосипедную прогулку
+in der Natur entspannen ### отдыхать на природе
+ein Picknick machen ### устраивать пикник
+ins Theater gehen ### ходить в театр
+eine Sprache lernen ### изучать язык
+im Schwimmbad schwimmen ### плавать в бассейне
+ein Instrument spielen ### играть на музыкальном инструменте
