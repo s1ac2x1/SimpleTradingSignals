@@ -16,8 +16,8 @@ val srcFile = "adverbs.txt"
 val outputFileName = srcFile.replace(".txt", "")
 
 // какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
-val ruPhraseIndex = 1
-val dePhraseIndex = 2
+val ruPhraseIndex = 2
+val dePhraseIndex = 1
 
 // TODO потом импорт в квизлет
 
@@ -27,16 +27,11 @@ fun main() {
     val executor = Executors.newFixedThreadPool(10)
     File("$srcFolder/$outputFolder").mkdir()
     val deWords = mutableSetOf<String>()
-    var duplicates = 0
-    phrases
+    val filteredPhrases = phrases
         .filter { it.trim().isNotEmpty() }
-        .filter {
-            val notDuplicate = deWords.add(it.split(delimiter)[dePhraseIndex - 1])
-            if (!notDuplicate) {
-                duplicates++
-            }
-            notDuplicate
-        }
+        .filter { deWords.add(it.split(delimiter)[dePhraseIndex - 1]) }.toList()
+    println("\nFiltered ${phrases.size - filteredPhrases.size} duplicates\n")
+    filteredPhrases
         //.take(5)
         .forEach { line ->
             executor.submit {
@@ -50,7 +45,6 @@ fun main() {
                 )
             }
         }
-    println("\n Filtered duplicates: $duplicates")
     executor.shutdown()
     executor.awaitTermination(1, TimeUnit.HOURS)
     merge(File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/$outputFolder/${outputFileName}.mp3")
