@@ -1,0 +1,30 @@
+die Umwelt ### окружающая среда
+die Nachhaltigkeit ### устойчивость
+der Klimawandel ### изменение климата
+die Luftverschmutzung ### загрязнение воздуха
+die Abfallentsorgung ### утилизация отходов
+das Recycling ### переработка
+die erneuerbaren Energien (Pl.) ### возобновляемые источники энергии
+der Naturschutz ### охрана природы
+die Artenvielfalt ### биоразнообразие
+die Ökobilanz, Ökobilanzen ### экологический баланс
+das Biosphärenreservat, Biosphärenreservate ### биосферный заповедник
+die Klimaschutzmaßnahme, Klimaschutzmaßnahmen ### меры по защите климата
+die Emission, Emissionen ### выброс
+der ökologische Fußabdruck, ökologische Fußabdrücke ### экологический след
+das Ökosystem, Ökosysteme ### экосистема
+der Smog ### смог
+die CO2-Emission, CO2-Emissionen ### выбросы углекислого газа
+die Umweltverschmutzung, Umweltverschmutzungen ### загрязнение окружающей среды
+die Wasserverschmutzung, Wasserverschmutzungen ### загрязнение воды
+die Erderwärmung ### глобальное потепление
+die Umweltbelastung, Umweltbelastungen ### нагрузка на окружающую среду
+die Naturkatastrophe, Naturkatastrophen ### природная катастрофа
+das Ozonloch, Ozonlöcher ### озоновая дыра
+die Nachhaltigkeitsstrategie, Nachhaltigkeitsstrategien ### стратегия устойчивого развития
+die Öko-Bewegung, Öko-Bewegungen ### экологическое движение
+die Umweltschutzorganisation, Umweltschutzorganisationen ### организация по охране окружающей среды
+der Ökostrom ### экологически чистая энергия
+der Umweltschutz ### охрана окружающей среды
+die umweltfreundliche Alternative, umweltfreundliche Alternativen ### экологически чистая альтернатива
+die Biodiversität ### биоразнообразие

@@ -87,3 +87,31 @@ die Ankunft, Ankünfte ### прибытие
 die Abreise, Abreisen ### отъезд
 der Zwischenstopp, Zwischenstopps ### остановка, промежуточная станция
 der Reiseleiter, Reiseleiter ### гид, руководитель группы
+der Urlaub, Urlaube ### отпуск
+die Reise, Reisen ### путешествие
+das Hotel, Hotels ### отель
+der Flug, Flüge ### полет
+die Buchung, Buchungen ### бронирование
+der Reisepass, Reisepässe ### заграничный паспорт
+die Sehenswürdigkeit, Sehenswürdigkeiten ### достопримечательность
+die Unterkunft, Unterkünfte ### жилье
+die Stadtbesichtigung, Stadtbesichtigungen ### осмотр города
+das Gepäck (Sg.) ### багаж
+der Reiseführer, Reiseführer ### путеводитель
+die Fahrkarte, Fahrkarten ### билет на транспорт
+die Abreise, Abreisen ### отъезд
+die Ankunft, Ankünfte ### прибытие
+die Stadtrundfahrt, Stadtrundfahrten ### экскурсия по городу
+der Mietwagen, Mietwagen ### арендованная машина
+das Visum, Visa ### виза
+der Reiseveranstalter, Reiseveranstalter ### туроператор
+die Landkarte, Landkarten ### карта
+die Fluglinie, Fluglinien ### авиакомпания
+die Übernachtung, Übernachtungen ### ночлег
+die Reservierung, Reservierungen ### резервирование
+die Route, Routen ### маршрут
+der Ausflug, Ausflüge ### экскурсия
+die Fähre, Fähren ### паром
+die Verpflegung (Sg.) ### питание
+die Grenze, Grenzen ### граница
+das Ziel, Ziele ### цель
