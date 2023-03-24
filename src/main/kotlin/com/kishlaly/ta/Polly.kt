@@ -13,11 +13,11 @@ val delimiter = "###"
 val srcFolder = "polly"
 val outputFolder = "output"
 val srcFile = "random.txt"
-val outputFileName = srcFile.replace("txt", "mp3")
+val outputFileName = srcFile.replace(".txt", "")
 
-// какой язык идет первым в файле, например: "говорить - sprechen"
-val ruPhraseIndex = 1
-val dePhraseIndex = 2
+// какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
+val ruPhraseIndex = 2
+val dePhraseIndex = 1
 
 fun main() {
     var count = AtomicInteger(1)
@@ -42,7 +42,7 @@ fun main() {
         }
     executor.shutdown()
     executor.awaitTermination(1, TimeUnit.HOURS)
-    merge(File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/$outputFolder/${outputFileName.uppercase()}.mp3")
+    merge(File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/$outputFolder/${outputFileName}.mp3")
     File("$srcFolder/$outputFolder").listFiles()
         .filter { it.name.contains("_ru_") || it.name.contains("_de_") || it.name.contains("_full_") }
         .forEach { it.delete() }
