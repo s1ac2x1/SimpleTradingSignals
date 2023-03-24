@@ -9,10 +9,10 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-val delimiter = "###"
+val delimiter = " ### "
 val srcFolder = "polly"
 val outputFolder = "output"
-val srcFile = "random.txt"
+val srcFile = "home.txt"
 val outputFileName = srcFile.replace(".txt", "")
 
 // какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
@@ -26,9 +26,9 @@ fun main() {
     val phrases = File("$srcFolder/$srcFile").readLines()
     val executor = Executors.newFixedThreadPool(10)
     File("$srcFolder/$outputFolder").mkdir()
+    val deWords = mutableSetOf<String>()
     phrases
-        .distinct() // нужно фильтровать по немецкому слову
-        // так же выносить отедльно слова, которые имеют два delimiter'а
+        .filter { deWords.add(it.split(delimiter)[dePhraseIndex - 1]) }
         .shuffled()
         .take(5)
         .forEach { line ->
