@@ -1,574 +1,574 @@
-hier, здесь
-da, там
-dort, туда
-oben, вверху
-unten, внизу
-drinnen, внутри
-draußen, снаружи
-links, слева
-rechts, справа
-vorne, спереди
-hinten, сзади
-innen, внутри
-außen, снаружи
-daneben, рядом
-darunter, под
-darüber, над
-davor, перед
-dahinter, за
-irgendwo, где-то
-nirgendwo, нигде
-überall, везде
-links oben, вверху слева
-rechts oben, вверху справа
-links unten, внизу слева
-rechts unten, внизу справа
-mittig, посередине
-seitlich, сбоку
-obendrauf, сверху
-unten drunter, снизу
-quer, поперек
-abseits, в стороне
-abwärts, вниз
-aufwärts, вверх
-seitwärts, вбок
-weit weg, далеко
-in der Nähe, поблизости
-am Horizont, на горизонте
-zwischen, между
-unterwegs, в пути
-auf der rechten Seite, справа
-auf der linken Seite, слева
-in der Mitte, посередине
-am Ende, в конце
-am Anfang, в начале
-in der Ecke, в углу
-auf dem Boden, на земле
-jetzt - сейчас
-gestern - вчера
-heute - сегодня
-morgen - завтра
-bald - скоро
-immer - всегда
-oft - часто
-manchmal - иногда
-selten - редко
-nie - никогда
-bereits - уже
-noch - еще
-dann - тогда
-später - позже
-früh - рано
-spät - поздно
-abends - вечером
-nachts - ночью
-tagsüber - днем
-jetzt gerade - сейчас, прямо сейчас
-gerade eben - только что
-demnächst - в ближайшее время
-kürzlich - недавно
-häufig - часто
-gelegentlich - время от времени
-ständig - постоянно
-allmählich - постепенно
-gleichzeitig - одновременно
-irgendwann - когда-нибудь
-vollständig - полностью
-unmittelbar - непосредственно
-regelmäßig - регулярно
-gezielt - целенаправленно
-spontan - спонтанно
-augenblicklich - мгновенно
-umgehend - немедленно
-derzeit - в настоящее время
-inzwischen - тем временем
-fortwährend - беспрерывно
-gezwungenermaßen - вынужденно
-bewusst - сознательно
-unbewusst - бессознательно
-pausenlos - без перерыва
-allzeit - всегда, постоянно
-bisweilen - порой
-oft genug - достаточно часто
-übermorgen - послезавтра
-vorgestern - позавчера
-zuletzt - в последний раз
-endlich - наконец
-täglich - ежедневно
-wöchentlich - еженедельно
-monatlich - ежемесячно
-jährlich - ежегодно
-öfter - чаще
-seltener - реже
-niemals - никогда
-baldmöglichst - как можно скорее
-bevorstehend - предстоящий
-irgendwann einmal - когда-нибудь
-zeitweise - время от времени
-schließlich - в конце концов
-demnach - следовательно
-derweil - между тем
-dereinst - когда-нибудь
-dauerhaft - постоянно
-seit langem - давно уже
-längst - давно
-binnen kurzem - в ближайшее время
-allmählich - постепенно
-unterdessen - тем временем
-gegenwärtig - в настоящее время
-fortlaufend - непрерывно
-vorher - заранее
-später einmal - когда-нибудь позже
-momentan - в данный момент
-hoffentlich - надеюсь
-eigentlich - на самом деле
-derzeitige - нынешний
-zeitgleich - одновременно
-inzwischen - тем временем
-parallel - параллельно
-tatsächlich - фактически
-unter Umständen - в некоторых случаях
-oft genug - достаточно часто
-in nächster Zeit - в ближайшее время
-in letzter Zeit - в последнее время
-in Echtzeit - в режиме реального времени
-zeitig - рано
-nach und nach - постепенно
-unter Umständen - в некоторых случаях
-mitunter - иногда
-innerhalb kurzer Zeit - в течение короткого времени
-in naher Zukunft - в ближайшем будущем
-mit der Zeit - со временем
-in der Zwischenzeit - тем временем
-vor langer Zeit - давно
-in Eile - в спешке
-auf lange Sicht - на долгосрочной основе
-im Voraus - заранее
-von Zeit zu Zeit - время от времени
-in jedem Fall - в любом случае
-von Anfang an - с самого начала
-in letzter Minute - в последнюю минуту
-zu jeder Zeit - в любое время
-seit jeher - всегда
-von Zeit zu Zeit - время от времени
-bislang - до сих пор
-bis heute - до сегодняшнего дня
-bis dato - до настоящего момента
-in der Zukunft - в будущем
-in der Vergangenheit - в прошлом
-einst - когда-то
-einmalig - единственный раз
-jüngst - недавно
-künftig - будущий
-tagtäglich - каждый день
-wochenweise - еженедельно
-stundenlang - на протяжении нескольких часов
-in Kürze - скоро
-fortwährend - непрерывно
-unaufhörlich - непрерывно
-immer wieder - снова и снова
-immerfort - постоянно
-in der Tat - фактически
-niemals zuvor - никогда раньше
-endlos - бесконечно
-ständig - постоянно
-pausenlos - без перерыва
-zeitlos - вечно
-jederzeit - в любое время
-kürzlich erst - совсем недавно
-permanent - постоянно
-wiederholt - повторяющийся
-zukünftig - будущий
-vergangen - прошедший
-nunmehr - теперь
-in wenigen Minuten - через несколько минут
-unverzüglich - немедленно
-in der nächsten Stunde - в ближайший час
-in der Gegenwart - в настоящем
-in naher Zukunft - в ближайшем будущем
-in ferner Zukunft - в далеком будущем
-nachträglich - после того как уже произошло
-früher oder später - рано или поздно
-demnächst - в ближайшее время
-in wenigen Tagen - через несколько дней
-in ein paar Stunden - через несколько часов
-seit einiger Zeit - некоторое время
-vor Kurzem - недавно
-schnell, быстро
-langsam, медленно
-gut, хорошо
-schlecht, плохо
-gerne, охотно
-ungern, неохотно
-oft, часто
-selten, редко
-manchmal, иногда
-nie, никогда
-bald, скоро
-später, позже
-früh, рано
-spät, поздно
-heute, сегодня
-gestern, вчера
-morgen, завтра
-sofort, немедленно
-wirklich, действительно
-hoffentlich, надеюсь
-leider, к сожалению
-glücklicherweise, к счастью
-eventuell, возможно
-wahrscheinlich, вероятно
-sicher, уверенно
-vielleicht, может быть
-endlich, наконец
-tatsächlich, фактически
-komplett, полностью
-fast, почти
-direkt, прямо
-indirekt, косвенно
-sorgfältig, тщательно
-leicht, легко
-schwer, тяжело
-genug, достаточно
-nicht genug, недостаточно
-still, тихо
-laut, громко
-oben, сверху
-unten, снизу
-vorne, спереди
-hinten, сзади
-innen, внутри
-außen, снаружи
-überall, везде
-nirgendwo, нигде
-gemeinsam, вместе
-einzeln, по-отдельности
-vorher, заранее
-nachher, потом
-davor, перед этим
-danach, после этого
-irgendwann, когда-нибудь
-heute Abend, сегодня вечером
-jeden Tag, каждый день
-ziemlich, довольно
-allmählich, постепенно
-plötzlich, вдруг
-gleichzeitig, одновременно
-automatisch, автоматически
-manuell, вручную
-öffentlich, публично
-privat, приватно
-komplett, полностью
-teilweise, частично
-absichtlich, намеренно
-unabsichtlich, нечаянно
-wahrhaftig, истинно
-unwahr, ложно
-angenehm, приятно
-unangenehm, неприятно
-klar, ясно
-unklar, неясно
-üblicherweise, обычно
-ungewöhnlich, необычно
-notwendigerweise, необходимо
-unnötig, ненужно
-vollständig, полностью
-unvollständig, неполный
-bestimmt, определенно
-unbestimmt, неопределенно
-fröhlich, весело
-traurig, грустно
-unvermeidlich, неизбежно
-vermeidbar, избежимо
-langfristig, долгосрочно
-kurzfristig, краткосрочно
-eindeutig, однозначно
-mehrdeutig, многозначно
-ausreichend, достаточно
-unzureichend, недостаточно
-bewusst, сознательно
-unbewusst, бессознательно
-entschieden, решительно
-unentschieden, нерешительно
-genauso, так же
-anders, иначе
-intensiv, интенсивно
-oberflächlich, поверхностно
-persönlich, лично
-unpersönlich, безлично
-häufig, часто
-selten, редко
-schwierig, трудно
-einfach, легко
-sinnvoll, имеет смысл
-sinnlos, бессмысленно
-traditionell, традиционно
-unkonventionell, нестандартно
-vorläufig, предварительно
-endgültig, окончательно
-geduldig, терпеливо
-ungeduldig, нетерпеливо
-mühelos, без труда
-mühsam, трудно
-normalerweise, обычно
-unnormal, необычно
-ruhig, спокойно
-unruhig, беспокойно
-sehr - очень
-wirklich - действительно
-oft - часто
-gerade - прямо
-fast - почти
-besonders - особенно
-schon - уже
-gern - с удовольствием
-nur - только
-vielleicht - возможно
-sogar - даже
-meistens - большей частью
-ziemlich - довольно
-eben - просто
-irgendwie - как-то
-natürlich - конечно
-ein wenig - немного
-etwa - приблизительно
-manchmal - иногда
-wirklich - правда
-fast immer - почти всегда
-ungefähr - около
-bereits - уже
-zusammen - вместе
-zunächst - сначала
-endlich - наконец
-trotzdem - тем не менее
-ständig - постоянно
-deshalb - поэтому
-zuletzt - в конце концов
-sehr - очень
-wirklich - действительно
-oft - часто
-gerade - прямо
-fast - почти
-besonders - особенно
-schon - уже
-gern - с удовольствием
-nur - только
-vielleicht - возможно
-sogar - даже
-meistens - большей частью
-ziemlich - довольно
-eben - просто
-irgendwie - как-то
-natürlich - конечно
-ein wenig - немного
-etwa - приблизительно
-manchmal - иногда
-wirklich - правда
-fast immer - почти всегда
-ungefähr - около
-bereits - уже
-zusammen - вместе
-zunächst - сначала
-endlich - наконец
-trotzdem - тем не менее
-ständig - постоянно
-deshalb - поэтому
-zuletzt - в конце концов
-sehr - очень
-wirklich - действительно
-oft - часто
-gerade - прямо
-fast - почти
-besonders - особенно
-schon - уже
-gern - с удовольствием
-nur - только
-vielleicht - возможно
-sogar - даже
-meistens - большей частью
-ziemlich - довольно
-eben - просто
-irgendwie - как-то
-natürlich - конечно
-ein wenig - немного
-etwa - приблизительно
-manchmal - иногда
-wirklich - правда
-fast immer - почти всегда
-ungefähr - около
-bereits - уже
-zusammen - вместе
-zunächst - сначала
-endlich - наконец
-trotzdem - тем не менее
-ständig - постоянно
-deshalb - поэтому
-zuletzt - в конце концов
-grundsätzlich - в принципе
-ausnahmsweise - исключительно
-inzwischen - тем временем
-tatsächlich - фактически
-immerhin - в любом случае
-ausschließlich - исключительно
-unbedingt - обязательно
-angeblich - якобы
-augenscheinlich - на вид
-tatsächlich - действительно
-vollständig - полностью
-heutzutage - в наше время
-häufiger - чаще
-seltsamerweise - к странному счастью
-gleichzeitig - одновременно
-möglicherweise - возможно
-darüber hinaus - кроме того
-vermutlich - предположительно
-keineswegs - ни в коем случае
-allerlei - самый разный
-dennoch - всё же
-vorerst - пока что
-notgedrungen - вынужденно
-demnächst - скоро
-bisher - до сих пор
-überall - везде
-fortwährend - непрерывно
-zeitweise - временами
-gleichsam - как бы
-nachträglich - позднее
-konsequent - последовательно
-parallel - параллельно
-separat - отдельно
-spontan - спонтанно
-fraglos - бесспорно
-gelegentlich - иногда
-eindeutig - однозначно
-zumindest - по меньшей мере
-einwandfrei - безупречно
-stattdessen - вместо этого
-scheinbar - видимо
-denkbar - возможно
-keinesfalls - никак не
-ansonsten - в остальном
-unmittelbar - непосредственно
-durchaus - вполне
-überhaupt - вообще
-niemals - никогда
-seitlich - сбоку
-gleichgültig - безразлично
-geradezu - прямо-таки
-zufällig - случайно
-nahezu - практически
-bestimmt - определенно
-möglicherweise - возможно
-anfangs - в начале
-künftig - в будущем
-mittlerweile - тем временем
-zunehmend - всё более
-nahegelegen - близлежащий
-anscheinend - по-видимому
-ausgezeichnet - отлично
-bedauerlicherweise - к сожалению
-begrenzt - ограниченно
-derzeit - в настоящее время
-dringend - срочно
-einzig - единственный
-entschieden - решительно
-erheblich - значительно
-freilich - конечно
-gelegentlich - время от времени
-gleichermaßen - одинаково
-gründlich - тщательно
-hauptsächlich - главным образом
-immerzu - все время
-indessen - тем не менее
-jährlich - ежегодно
-jeweils - соответственно
-keck - нахально
-konkret - конкретно
-kurzerhand - коротко говоря
-lediglich - только
-leidlich - сносно
-mehrmals - несколько раз
-nirgends - нигде
-rasant - стремительно
-schließlich - наконец
-sicherlich - безусловно
-umgehend - немедленно
-unverzüglich - незамедлительно
-genug - достаточно
-oft - часто
-selten - редко
-fast - почти
-nur - только
-sogar - даже
-wirklich - действительно
-einfach - просто
-besonders - особенно
-überhaupt - вообще
-lediglich - только, всего лишь
-ausnahmsweise - исключительно
-durchaus - совершенно, абсолютно
-mindestens - по крайней мере
-höchstens - максимум
-etwa - около
-ungefähr - приблизительно
-fast immer - почти всегда
-ständig - постоянно
-oft genug - достаточно часто
-ganz sicher, совершенно точно
-vielleicht, возможно
-natürlich, конечно
-gerade, именно
-genau, точно
-überhaupt, вообще
-zusammen, вместе
-allein, один
-einfach, просто
-schon, уже
-gleich, сейчас
-eigentlich, вообще-то
-mindestens, по крайней мере
-wirklich, действительно
-tatsächlich, фактически
-jedenfalls, в любом случае
-zumindest, по крайней мере
-einmal, однажды
-häufig, часто
-selten, редко
-vielmehr, скорее
-durchaus, вполне
-wenigstens, по меньшей мере
-immerhin, тем не менее
-vor allem, прежде всего
-überwiegend, в основном
-ungefähr, примерно
-grundsätzlich, в принципе
-darüber hinaus, кроме того
-somit, следовательно
-offensichtlich, очевидно
-folglich, в результате
-zweifellos, без сомнения
-deshalb, поэтому
-stattdessen, вместо этого
-dabei, при этом
-insbesondere, в особенности
-anders, иначе
-irgendwie, как-то
-ebenfalls, также
-eben, вот
-anstatt, вместо
-unter anderem, среди прочего
-darum, поэтому
-nichtsdestotrotz, тем не менее
-sowieso, в любом случае
-wohl, вероятно
-dazu, кроме того
-entsprechend, соответственно
-immer wieder, снова и снова
-trotzdem, тем не менее
-weniger, меньше
-mehr, больше
-gegebenenfalls, при необходимости
-beinahe, почти
-gerne, с удовольствием
-dagegen, впрочем
-andererseits, с другой стороны
+hier ### здесь
+da ### там
+dort ### туда
+oben ### вверху
+unten ### внизу
+drinnen ### внутри
+draußen ### снаружи
+links ### слева
+rechts ### справа
+vorne ### спереди
+hinten ### сзади
+innen ### внутри
+außen ### снаружи
+daneben ### рядом
+darunter ### под
+darüber ### над
+davor ### перед
+dahinter ### за
+irgendwo ### где-то
+nirgendwo ### нигде
+überall ### везде
+links oben ### вверху слева
+rechts oben ### вверху справа
+links unten ### внизу слева
+rechts unten ### внизу справа
+mittig ### посередине
+seitlich ### сбоку
+obendrauf ### сверху
+unten drunter ### снизу
+quer ### поперек
+abseits ### в стороне
+abwärts ### вниз
+aufwärts ### вверх
+seitwärts ### вбок
+weit weg ### далеко
+in der Nähe ### поблизости
+am Horizont ### на горизонте
+zwischen ### между
+unterwegs ### в пути
+auf der rechten Seite ### справа
+auf der linken Seite ### слева
+in der Mitte ### посередине
+am Ende ### в конце
+am Anfang ### в начале
+in der Ecke ### в углу
+auf dem Boden ### на земле
+jetzt ### сейчас
+gestern ### вчера
+heute ### сегодня
+morgen ### завтра
+bald ### скоро
+immer ### всегда
+oft ### часто
+manchmal ### иногда
+selten ### редко
+nie ### никогда
+bereits ### уже
+noch ### еще
+dann ### тогда
+später ### позже
+früh ### рано
+spät ### поздно
+abends ### вечером
+nachts ### ночью
+tagsüber ### днем
+jetzt gerade ### сейчас ### прямо сейчас
+gerade eben ### только что
+demnächst ### в ближайшее время
+kürzlich ### недавно
+häufig ### часто
+gelegentlich ### время от времени
+ständig ### постоянно
+allmählich ### постепенно
+gleichzeitig ### одновременно
+irgendwann ### когда-нибудь
+vollständig ### полностью
+unmittelbar ### непосредственно
+regelmäßig ### регулярно
+gezielt ### целенаправленно
+spontan ### спонтанно
+augenblicklich ### мгновенно
+umgehend ### немедленно
+derzeit ### в настоящее время
+inzwischen ### тем временем
+fortwährend ### беспрерывно
+gezwungenermaßen ### вынужденно
+bewusst ### сознательно
+unbewusst ### бессознательно
+pausenlos ### без перерыва
+allzeit ### всегда ### постоянно
+bisweilen ### порой
+oft genug ### достаточно часто
+übermorgen ### послезавтра
+vorgestern ### позавчера
+zuletzt ### в последний раз
+endlich ### наконец
+täglich ### ежедневно
+wöchentlich ### еженедельно
+monatlich ### ежемесячно
+jährlich ### ежегодно
+öfter ### чаще
+seltener ### реже
+niemals ### никогда
+baldmöglichst ### как можно скорее
+bevorstehend ### предстоящий
+irgendwann einmal ### когда-нибудь
+zeitweise ### время от времени
+schließlich ### в конце концов
+demnach ### следовательно
+derweil ### между тем
+dereinst ### когда-нибудь
+dauerhaft ### постоянно
+seit langem ### давно уже
+längst ### давно
+binnen kurzem ### в ближайшее время
+allmählich ### постепенно
+unterdessen ### тем временем
+gegenwärtig ### в настоящее время
+fortlaufend ### непрерывно
+vorher ### заранее
+später einmal ### когда-нибудь позже
+momentan ### в данный момент
+hoffentlich ### надеюсь
+eigentlich ### на самом деле
+derzeitige ### нынешний
+zeitgleich ### одновременно
+inzwischen ### тем временем
+parallel ### параллельно
+tatsächlich ### фактически
+unter Umständen ### в некоторых случаях
+oft genug ### достаточно часто
+in nächster Zeit ### в ближайшее время
+in letzter Zeit ### в последнее время
+in Echtzeit ### в режиме реального времени
+zeitig ### рано
+nach und nach ### постепенно
+unter Umständen ### в некоторых случаях
+mitunter ### иногда
+innerhalb kurzer Zeit ### в течение короткого времени
+in naher Zukunft ### в ближайшем будущем
+mit der Zeit ### со временем
+in der Zwischenzeit ### тем временем
+vor langer Zeit ### давно
+in Eile ### в спешке
+auf lange Sicht ### на долгосрочной основе
+im Voraus ### заранее
+von Zeit zu Zeit ### время от времени
+in jedem Fall ### в любом случае
+von Anfang an ### с самого начала
+in letzter Minute ### в последнюю минуту
+zu jeder Zeit ### в любое время
+seit jeher ### всегда
+von Zeit zu Zeit ### время от времени
+bislang ### до сих пор
+bis heute ### до сегодняшнего дня
+bis dato ### до настоящего момента
+in der Zukunft ### в будущем
+in der Vergangenheit ### в прошлом
+einst ### когда-то
+einmalig ### единственный раз
+jüngst ### недавно
+künftig ### будущий
+tagtäglich ### каждый день
+wochenweise ### еженедельно
+stundenlang ### на протяжении нескольких часов
+in Kürze ### скоро
+fortwährend ### непрерывно
+unaufhörlich ### непрерывно
+immer wieder ### снова и снова
+immerfort ### постоянно
+in der Tat ### фактически
+niemals zuvor ### никогда раньше
+endlos ### бесконечно
+ständig ### постоянно
+pausenlos ### без перерыва
+zeitlos ### вечно
+jederzeit ### в любое время
+kürzlich erst ### совсем недавно
+permanent ### постоянно
+wiederholt ### повторяющийся
+zukünftig ### будущий
+vergangen ### прошедший
+nunmehr ### теперь
+in wenigen Minuten ### через несколько минут
+unverzüglich ### немедленно
+in der nächsten Stunde ### в ближайший час
+in der Gegenwart ### в настоящем
+in naher Zukunft ### в ближайшем будущем
+in ferner Zukunft ### в далеком будущем
+nachträglich ### после того как уже произошло
+früher oder später ### рано или поздно
+demnächst ### в ближайшее время
+in wenigen Tagen ### через несколько дней
+in ein paar Stunden ### через несколько часов
+seit einiger Zeit ### некоторое время
+vor Kurzem ### недавно
+schnell ### быстро
+langsam ### медленно
+gut ### хорошо
+schlecht ### плохо
+gerne ### охотно
+ungern ### неохотно
+oft ### часто
+selten ### редко
+manchmal ### иногда
+nie ### никогда
+bald ### скоро
+später ### позже
+früh ### рано
+spät ### поздно
+heute ### сегодня
+gestern ### вчера
+morgen ### завтра
+sofort ### немедленно
+wirklich ### действительно
+hoffentlich ### надеюсь
+leider ### к сожалению
+glücklicherweise ### к счастью
+eventuell ### возможно
+wahrscheinlich ### вероятно
+sicher ### уверенно
+vielleicht ### может быть
+endlich ### наконец
+tatsächlich ### фактически
+komplett ### полностью
+fast ### почти
+direkt ### прямо
+indirekt ### косвенно
+sorgfältig ### тщательно
+leicht ### легко
+schwer ### тяжело
+genug ### достаточно
+nicht genug ### недостаточно
+still ### тихо
+laut ### громко
+oben ### сверху
+unten ### снизу
+vorne ### спереди
+hinten ### сзади
+innen ### внутри
+außen ### снаружи
+überall ### везде
+nirgendwo ### нигде
+gemeinsam ### вместе
+einzeln ### по-отдельности
+vorher ### заранее
+nachher ### потом
+davor ### перед этим
+danach ### после этого
+irgendwann ### когда-нибудь
+heute Abend ### сегодня вечером
+jeden Tag ### каждый день
+ziemlich ### довольно
+allmählich ### постепенно
+plötzlich ### вдруг
+gleichzeitig ### одновременно
+automatisch ### автоматически
+manuell ### вручную
+öffentlich ### публично
+privat ### приватно
+komplett ### полностью
+teilweise ### частично
+absichtlich ### намеренно
+unabsichtlich ### нечаянно
+wahrhaftig ### истинно
+unwahr ### ложно
+angenehm ### приятно
+unangenehm ### неприятно
+klar ### ясно
+unklar ### неясно
+üblicherweise ### обычно
+ungewöhnlich ### необычно
+notwendigerweise ### необходимо
+unnötig ### ненужно
+vollständig ### полностью
+unvollständig ### неполный
+bestimmt ### определенно
+unbestimmt ### неопределенно
+fröhlich ### весело
+traurig ### грустно
+unvermeidlich ### неизбежно
+vermeidbar ### избежимо
+langfristig ### долгосрочно
+kurzfristig ### краткосрочно
+eindeutig ### однозначно
+mehrdeutig ### многозначно
+ausreichend ### достаточно
+unzureichend ### недостаточно
+bewusst ### сознательно
+unbewusst ### бессознательно
+entschieden ### решительно
+unentschieden ### нерешительно
+genauso ### так же
+anders ### иначе
+intensiv ### интенсивно
+oberflächlich ### поверхностно
+persönlich ### лично
+unpersönlich ### безлично
+häufig ### часто
+selten ### редко
+schwierig ### трудно
+einfach ### легко
+sinnvoll ### имеет смысл
+sinnlos ### бессмысленно
+traditionell ### традиционно
+unkonventionell ### нестандартно
+vorläufig ### предварительно
+endgültig ### окончательно
+geduldig ### терпеливо
+ungeduldig ### нетерпеливо
+mühelos ### без труда
+mühsam ### трудно
+normalerweise ### обычно
+unnormal ### необычно
+ruhig ### спокойно
+unruhig ### беспокойно
+sehr ### очень
+wirklich ### действительно
+oft ### часто
+gerade ### прямо
+fast ### почти
+besonders ### особенно
+schon ### уже
+gern ### с удовольствием
+nur ### только
+vielleicht ### возможно
+sogar ### даже
+meistens ### большей частью
+ziemlich ### довольно
+eben ### просто
+irgendwie ### как-то
+natürlich ### конечно
+ein wenig ### немного
+etwa ### приблизительно
+manchmal ### иногда
+wirklich ### правда
+fast immer ### почти всегда
+ungefähr ### около
+bereits ### уже
+zusammen ### вместе
+zunächst ### сначала
+endlich ### наконец
+trotzdem ### тем не менее
+ständig ### постоянно
+deshalb ### поэтому
+zuletzt ### в конце концов
+sehr ### очень
+wirklich ### действительно
+oft ### часто
+gerade ### прямо
+fast ### почти
+besonders ### особенно
+schon ### уже
+gern ### с удовольствием
+nur ### только
+vielleicht ### возможно
+sogar ### даже
+meistens ### большей частью
+ziemlich ### довольно
+eben ### просто
+irgendwie ### как-то
+natürlich ### конечно
+ein wenig ### немного
+etwa ### приблизительно
+manchmal ### иногда
+wirklich ### правда
+fast immer ### почти всегда
+ungefähr ### около
+bereits ### уже
+zusammen ### вместе
+zunächst ### сначала
+endlich ### наконец
+trotzdem ### тем не менее
+ständig ### постоянно
+deshalb ### поэтому
+zuletzt ### в конце концов
+sehr ### очень
+wirklich ### действительно
+oft ### часто
+gerade ### прямо
+fast ### почти
+besonders ### особенно
+schon ### уже
+gern ### с удовольствием
+nur ### только
+vielleicht ### возможно
+sogar ### даже
+meistens ### большей частью
+ziemlich ### довольно
+eben ### просто
+irgendwie ### как-то
+natürlich ### конечно
+ein wenig ### немного
+etwa ### приблизительно
+manchmal ### иногда
+wirklich ### правда
+fast immer ### почти всегда
+ungefähr ### около
+bereits ### уже
+zusammen ### вместе
+zunächst ### сначала
+endlich ### наконец
+trotzdem ### тем не менее
+ständig ### постоянно
+deshalb ### поэтому
+zuletzt ### в конце концов
+grundsätzlich ### в принципе
+ausnahmsweise ### исключительно
+inzwischen ### тем временем
+tatsächlich ### фактически
+immerhin ### в любом случае
+ausschließlich ### исключительно
+unbedingt ### обязательно
+angeblich ### якобы
+augenscheinlich ### на вид
+tatsächlich ### действительно
+vollständig ### полностью
+heutzutage ### в наше время
+häufiger ### чаще
+seltsamerweise ### к странному счастью
+gleichzeitig ### одновременно
+möglicherweise ### возможно
+darüber hinaus ### кроме того
+vermutlich ### предположительно
+keineswegs ### ни в коем случае
+allerlei ### самый разный
+dennoch ### всё же
+vorerst ### пока что
+notgedrungen ### вынужденно
+demnächst ### скоро
+bisher ### до сих пор
+überall ### везде
+fortwährend ### непрерывно
+zeitweise ### временами
+gleichsam ### как бы
+nachträglich ### позднее
+konsequent ### последовательно
+parallel ### параллельно
+separat ### отдельно
+spontan ### спонтанно
+fraglos ### бесспорно
+gelegentlich ### иногда
+eindeutig ### однозначно
+zumindest ### по меньшей мере
+einwandfrei ### безупречно
+stattdessen ### вместо этого
+scheinbar ### видимо
+denkbar ### возможно
+keinesfalls ### никак не
+ansonsten ### в остальном
+unmittelbar ### непосредственно
+durchaus ### вполне
+überhaupt ### вообще
+niemals ### никогда
+seitlich ### сбоку
+gleichgültig ### безразлично
+geradezu ### прямо-таки
+zufällig ### случайно
+nahezu ### практически
+bestimmt ### определенно
+möglicherweise ### возможно
+anfangs ### в начале
+künftig ### в будущем
+mittlerweile ### тем временем
+zunehmend ### всё более
+nahegelegen ### близлежащий
+anscheinend ### по-видимому
+ausgezeichnet ### отлично
+bedauerlicherweise ### к сожалению
+begrenzt ### ограниченно
+derzeit ### в настоящее время
+dringend ### срочно
+einzig ### единственный
+entschieden ### решительно
+erheblich ### значительно
+freilich ### конечно
+gelegentlich ### время от времени
+gleichermaßen ### одинаково
+gründlich ### тщательно
+hauptsächlich ### главным образом
+immerzu ### все время
+indessen ### тем не менее
+jährlich ### ежегодно
+jeweils ### соответственно
+keck ### нахально
+konkret ### конкретно
+kurzerhand ### коротко говоря
+lediglich ### только
+leidlich ### сносно
+mehrmals ### несколько раз
+nirgends ### нигде
+rasant ### стремительно
+schließlich ### наконец
+sicherlich ### безусловно
+umgehend ### немедленно
+unverzüglich ### незамедлительно
+genug ### достаточно
+oft ### часто
+selten ### редко
+fast ### почти
+nur ### только
+sogar ### даже
+wirklich ### действительно
+einfach ### просто
+besonders ### особенно
+überhaupt ### вообще
+lediglich ### только ### всего лишь
+ausnahmsweise ### исключительно
+durchaus ### совершенно ### абсолютно
+mindestens ### по крайней мере
+höchstens ### максимум
+etwa ### около
+ungefähr ### приблизительно
+fast immer ### почти всегда
+ständig ### постоянно
+oft genug ### достаточно часто
+ganz sicher ### совершенно точно
+vielleicht ### возможно
+natürlich ### конечно
+gerade ### именно
+genau ### точно
+überhaupt ### вообще
+zusammen ### вместе
+allein ### один
+einfach ### просто
+schon ### уже
+gleich ### сейчас
+eigentlich ### вообще-то
+mindestens ### по крайней мере
+wirklich ### действительно
+tatsächlich ### фактически
+jedenfalls ### в любом случае
+zumindest ### по крайней мере
+einmal ### однажды
+häufig ### часто
+selten ### редко
+vielmehr ### скорее
+durchaus ### вполне
+wenigstens ### по меньшей мере
+immerhin ### тем не менее
+vor allem ### прежде всего
+überwiegend ### в основном
+ungefähr ### примерно
+grundsätzlich ### в принципе
+darüber hinaus ### кроме того
+somit ### следовательно
+offensichtlich ### очевидно
+folglich ### в результате
+zweifellos ### без сомнения
+deshalb ### поэтому
+stattdessen ### вместо этого
+dabei ### при этом
+insbesondere ### в особенности
+anders ### иначе
+irgendwie ### как-то
+ebenfalls ### также
+eben ### вот
+anstatt ### вместо
+unter anderem ### среди прочего
+darum ### поэтому
+nichtsdestotrotz ### тем не менее
+sowieso ### в любом случае
+wohl ### вероятно
+dazu ### кроме того
+entsprechend ### соответственно
+immer wieder ### снова и снова
+trotzdem ### тем не менее
+weniger ### меньше
+mehr ### больше
+gegebenenfalls ### при необходимости
+beinahe ### почти
+gerne ### с удовольствием
+dagegen ### впрочем
+andererseits ### с другой стороны
