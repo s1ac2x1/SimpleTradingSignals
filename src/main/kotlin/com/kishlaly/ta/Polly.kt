@@ -24,7 +24,7 @@ val dePhraseIndex = 1
 fun main() {
     var count = AtomicInteger(1)
     val phrases = File("$srcFolder/$srcFile").readLines()
-    val executor = Executors.newFixedThreadPool(10)
+    val executor = Executors.newFixedThreadPool(15)
     File("$srcFolder/$outputFolder").mkdir()
     val filteredPhrases = phrases
         .filter { it.trim().isNotEmpty() }
