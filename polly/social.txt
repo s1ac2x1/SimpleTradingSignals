@@ -1,0 +1,65 @@
+die Umwelt ### окружающая среда
+der Klimawandel ### изменение климата
+die Energiequelle, Energiequellen ### источник энергии
+der Umweltschutz ### охрана окружающей среды
+die Erneuerbare Energie ### возобновляемая энергия
+die Luftverschmutzung ### загрязнение воздуха
+die Mülltrennung ### разделение мусора
+die Nachhaltigkeit ### устойчивость
+die Ozonschicht ### озоновый слой
+der Treibhauseffekt ### парниковый эффект
+das Naturschutzgebiet, Naturschutzgebiete ### природоохранная зона
+der Tierschutz ### защита животных
+die Umweltverschmutzung ### загрязнение окружающей среды
+die Wasserqualität ### качество воды
+der Atomausstieg ### отказ от атомной энергии
+der Gleichberechtigung ### равноправие
+die Integration ### интеграция
+die Diskriminierung ### дискриминация
+die Menschenrechte ### права человека
+die Sozialhilfe ### социальная помощь
+die Arbeitslosigkeit ### безработица
+die Armut ### бедность
+der Reichtum ### богатство
+die Bildung ### образование
+die Gesundheitsversorgung ### медицинское обеспечение
+die Flüchtlingskrise ### беженская кризис
+der Frieden ### мир
+der Krieg ### война
+die Demokratie ### демократия
+die Globalisierung ### глобализация
+die Plastikverschmutzung ### загрязнение пластиком
+die Erderwärmung ### глобальное потепление
+der Abfall, Abfälle ### отходы
+das Recycling ### переработка
+die Biodiversität ### биоразнообразие
+der Schadstoff, Schadstoffe ### вредное вещество
+die Energiewende ### энергетический переход
+das Elektroauto, Elektroautos ### электромобиль
+der Umweltaktivist, Umweltaktivisten ### экологический активист
+die Umweltbewegung ### экологическое движение
+die Verkehrswende ### транспортный переход
+der Ökologische Fußabdruck ### экологический след
+die Fair-Trade ### справедливая торговля
+der Naturschützer, Naturschützer ### натуралист
+der Artenschutz ### охрана видов
+der Welthunger ### голод в мире
+die Bevölkerung ### население
+die Überbevölkerung ### перенаселение
+die Bildungspolitik ### политика в области образования
+die Umweltbildung ### экологическое образование
+die Sozialpolitik ### социальная политика
+die Klimapolitik ### климатическая политика
+die Meinungsfreiheit ### свобода слова
+die Gleichstellung ### равенство
+die Soziale Gerechtigkeit ### социальное справедливость
+die Frauenrechte ### права женщин
+der Rassismus ### расизм
+der Sozialstaat, Sozialstaaten ### социальное государство
+die Obdachlosigkeit ### бездомность
+die Bildungschancen ### возможности образования
+der Wohlstand ### благосостояние
+die Steuerpolitik ### налоговая политика
+der Wohnungsmarkt, Wohnungsmärkte ### рынок жилья
+die Soziale Sicherheit ### социальная защита
+die Altersvorsorge ### пенсионное обеспечение
