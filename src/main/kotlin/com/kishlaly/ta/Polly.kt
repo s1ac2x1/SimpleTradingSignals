@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 val delimiter = "###"
 val srcFolder = "polly"
+val outputFolder = "output"
 val srcFile = "random.txt"
 val outputFileName = srcFile.replace("txt", "mp3")
 
@@ -22,10 +23,11 @@ fun main() {
     var count = AtomicInteger(1)
     val phrases = File("$srcFolder/$srcFile").readLines()
     val executor = Executors.newFixedThreadPool(10)
+    File("$srcFolder/$outputFolder").mkdir()
     phrases
         .distinct()
         .shuffled()
-        //.take(20)
+        .take(5)
         .forEach { line ->
             executor.submit {
                 val unique = UUID.randomUUID().toString()
@@ -33,15 +35,15 @@ fun main() {
                 generate(line, unique, "Tatyana", "ru-RU", ruPhraseIndex - 1, "ru", outputFileName)
                 generate(line, unique, "Hans", "de-DE", dePhraseIndex - 1, "de", outputFileName)
                 merge(
-                    listOf("$srcFolder/${outputFileName}_ru_${unique}.mp3", "$srcFolder/${outputFileName}_de_${unique}.mp3"),
-                    "$srcFolder/${outputFileName}_full_${unique}.mp3",
+                    listOf("$srcFolder/$outputFolder/${outputFileName}_ru_${unique}.mp3", "$srcFolder/$outputFolder/${outputFileName}_de_${unique}.mp3"),
+                    "$srcFolder/$outputFolder/${outputFileName}_full_${unique}.mp3",
                 )
             }
         }
     executor.shutdown()
     executor.awaitTermination(1, TimeUnit.HOURS)
-    merge(File("$srcFolder/").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/${outputFileName.uppercase()}.mp3")
-    File("$srcFolder/").listFiles().filter { it.name.contains("_ru_") || it.name.contains("_ru_") }.forEach { it.delete() }
+    merge(File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/$outputFolder/${outputFileName.uppercase()}.mp3")
+    File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_ru_") || it.name.contains("_ru_") }.forEach { it.delete() }
 }
 
 @Synchronized
@@ -68,7 +70,7 @@ private fun generate(
     val split = line.split(delimiter)
     val pause = if (prefix.equals("de")) 2000 else 1000
     command.add("<speak><lang xml:lang=\"$lang\">${split[lineIndex]}</lang><break time=\"${pause}ms\"/></speak>")
-    command.add("polly/${mainName}_${prefix}_${suffix}.mp3")
+    command.add("$srcFolder/$outputFolder/${mainName}_${prefix}_${suffix}.mp3")
     runAwsPollyCommand(command)
 }
 
