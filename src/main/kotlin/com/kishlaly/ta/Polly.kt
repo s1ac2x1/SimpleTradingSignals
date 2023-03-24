@@ -43,7 +43,9 @@ fun main() {
     executor.shutdown()
     executor.awaitTermination(1, TimeUnit.HOURS)
     merge(File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/$outputFolder/${outputFileName.uppercase()}.mp3")
-    File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_ru_") || it.name.contains("_ru_") }.forEach { it.delete() }
+    File("$srcFolder/$outputFolder").listFiles()
+        .filter { it.name.contains("_ru_") || it.name.contains("_de_") }
+        .forEach { it.delete() }
 }
 
 @Synchronized
