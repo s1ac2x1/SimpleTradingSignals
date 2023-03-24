@@ -24,14 +24,15 @@ val dePhraseIndex = 1
 fun main() {
     var count = AtomicInteger(1)
     val phrases = File("$srcFolder/$srcFile").readLines()
-    val executor = Executors.newFixedThreadPool(1)
+    val executor = Executors.newFixedThreadPool(15)
     File("$srcFolder/$outputFolder").mkdir()
     val filteredPhrases = phrases
         .filter { it.trim().isNotEmpty() }
+        .filter { it.length < 100 }
         .distinctBy { it.split(delimiter)[dePhraseIndex - 1] }.toList()
     println("\nFiltered ${phrases.size - filteredPhrases.size} duplicates\n")
     filteredPhrases
-        .take(4)
+        //.take(4)
         .forEach { line ->
             executor.submit {
                 val unique = UUID.randomUUID().toString()
