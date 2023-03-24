@@ -35,7 +35,7 @@ fun main() {
         .forEach { line ->
             executor.submit {
                 val unique = UUID.randomUUID().toString()
-                println("Processing ${count.getAndIncrement()}/${phrases.size}: ${line.split(delimiter)[dePhraseIndex - 1]}")
+                println("Processing ${count.getAndIncrement()}/${filteredPhrases.size}: ${line.split(delimiter)[dePhraseIndex - 1]}")
                 generate(line, unique, "Tatyana", "ru-RU", ruPhraseIndex - 1, "ru", outputFileName)
                 generate(line, unique, "Hans", "de-DE", dePhraseIndex - 1, "de", outputFileName)
                 merge(
