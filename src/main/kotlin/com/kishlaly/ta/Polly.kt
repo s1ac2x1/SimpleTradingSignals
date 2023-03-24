@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger
 val delimiter = ", "
 val srcFolder = "polly"
 val outputFolder = "output"
-val srcFile = "adjectives_with_prepositions.txt"
+val srcFile = "verbs_with_prepositions.txt"
 val outputFileName = srcFile.replace(".txt", "")
 
 // какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
@@ -28,8 +28,8 @@ fun main() {
     File("$srcFolder/$outputFolder").mkdir()
     val deWords = mutableSetOf<String>()
     phrases
+        .filter { it.trim().isNotEmpty() }
         .filter { deWords.add(it.split(delimiter)[dePhraseIndex - 1]) }
-        .shuffled()
         .take(5)
         .forEach { line ->
             executor.submit {

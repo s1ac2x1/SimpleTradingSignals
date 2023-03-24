@@ -1,328 +1,781 @@
 иметь дело с, sich beschäftigen mit
+иметь дело с проектом, sich mit dem Projekt beschäftigen
 ждать на, warten auf A
+ждать на автобус, auf den Bus warten
+
 войти в, eintreten in A
-выйти из, aussteigen aus D
+войти в здание, in das Gebäude eintreten
+
+выйти из, aussteigen aus
+выйти из поезда, aus dem Zug aussteigen
+
 говорить о, sprechen über
+говорить о задаче, über die Aufgabe sprechen
+
 думать об, nachdenken über
+думать об экономике, über die Wirtschaft nachdenken
+
 заботиться о, sich kümmern um
+заботиться о растении, sich um die Pflanze kümmern
+
 зависеть от, abhängen von
+зависеть от погоды, von dem Wetter abhängen
+
 заканчиваться на, enden auf D
+слово заканчивается на "г", das Wort endet auf "g"
+
 заниматься чем-либо, sich beschäftigen mit
+заниматься спортом, sich mit dem Sport beschäftigen
+
 зарабатывать на жизнь, seinen Lebensunterhalt verdienen mit
+зарабатывать на жизнь фотографией, seinen Lebensunterhalt mit Fotografie verdienen
+
 звонить по телефону, telefonieren mit
+звонить по телефону другу, mit einem Freund telefonieren
+
 знать о, wissen über
+знать о культуре, über die Kultur wissen
+
 интересоваться чем-либо, sich interessieren für
+интересоваться искусством, sich für Kunst interessieren
+
 использовать что-то, verwenden A
+использовать инструмент, ein Werkzeug verwenden
+
 касаться чего-либо, betreffen A
+касаться темы, ein Thema betreffen
+
 клеить что-то, kleben an D
+клеить плакат к стене, einen Poster an die Wand kleben
+
 колебаться между, schwanken zwischen D
+колебаться между двумя работами, zwischen zwei Jobs schwanken
+
 комментировать что-то, kommentieren A
+комментировать статью, einen Artikel kommentieren
+
 кончать что-то, beenden A
+кончать работу над проектом, die Arbeit an einem Projekt beenden
+
 копировать что-то, kopieren von
+копировать данные с компьютера, Daten von einem Computer kopieren
+
 кормить кого-то, füttern A
+кормить кота, eine Katze füttern
+
 летать на самолете, fliegen mit
+летать на самолете в Париж, mit dem Flugzeug nach Paris fliegen
+
 мечтать о, träumen von
+мечтать о путешествии, von einer Reise träumen
+
 нуждаться в, brauchen A
+нуждаться в помощи, Hilfe brauchen
+
 обсуждать что-то, diskutieren über
+обсуждать политику, über Politik diskutieren
+
 одеваться в, sich kleiden in A
+одеваться в костюм, sich in einen Anzug kleiden
+
 ожидать чего-либо, erwarten A
+ожидать ответа, eine Antwort erwarten
+
 опаздывать на, sich verspäten zu
+опаздывать на встречу, sich zu einem Treffen verspäten
+
 отвечать на, antworten auf A
+отвечать на вопрос, auf eine Frage antworten
+
 привыкать к, sich gewöhnen an A
+привыкать к новому городу, sich an eine neue Stadt gewöhnen
+
 проходить через, durchlaufen A
+проходить через контроль, eine Kontrolle durchlaufen
+
 работать над, arbeiten an D
+работать над проектом, an einem Projekt arbeiten
+
 смотреть на, schauen auf A
+смотреть на картину, auf ein Bild schauen
+
 снимать с себя, ausziehen A
+снимать с себя пальто, ein Mantel ausziehen
+
 сообщать о, berichten über
+сообщать о новостях, über die Nachrichten berichten
+
 спрашивать о, fragen nach
+спрашивать о дороге, nach dem Weg fragen
+
 страдать от, leiden an D
+страдать от аллергии, an einer Allergie leiden
+
 терпеть неудачу в, scheitern in D
+терпеть неудачу в экзамене, in einer Prüfung scheitern
+
 требовать что-то, fordern A
+требовать возмещения, eine Entschädigung fordern
+
 удивляться чему-то, sich wundern über
+удивляться погоде, sich über das Wetter wundern
+
 уезжать на, fahren nach
+уезжать на каникулы, in den Urlaub fahren
+
 учиться на, studieren an D
+учиться на медика, an einer medizinischen Fakultät studieren
+
 ходить по, gehen auf D
+ходить по льду, auf dem Eis gehen
+
 ценить что-то, schätzen A
+ценить дружбу, Freundschaft schätzen
+
 читать о, lesen über
+читать о научных открытиях, über wissenschaftliche Entdeckungen lesen
+
 шутить о, scherzen über
+шутить о погоде, über das Wetter scherzen
+
 беспокоиться о, sich sorgen um
+беспокоиться о здоровье, sich um die Gesundheit sorgen
+
 ввозить что-то, einführen nach
+ввозить товары, Waren nach Deutschland einführen
+
 вводить что-то, einführen in A
+вводить правило, eine Regel in ein System einführen
+
 включать что-то, einschalten A
+включать свет, das Licht einschalten
+
 выключать что-то, ausschalten A
+выключать телевизор, den Fernseher ausschalten
+
 выходить за, heiraten A
+выходить за муж, einen Mann heiraten
+
 говорить с, sprechen mit
+говорить с другом, mit einem Freund sprechen
+
 добавлять что-то, hinzufügen A
+добавлять сахар, Zucker hinzufügen
+
 добавляться к, sich hinzufügen zu
+добавляться к группе, sich zu einer Gruppe hinzufügen
+
 добавляться в, sich einfügen in A
+добавляться в список, sich in eine Liste einfügen
+
 заезжать в, hineinfahren in A
+заезжать в город, in die Stadt hineinfahren
+
 защищаться от, sich verteidigen gegen A
+защищаться от обвинений, sich gegen Vorwürfe verteidigen
+
 избегать, vermeiden A
+избегать ошибок, Fehler vermeiden
+
 изучать что-то, studieren A
+изучать историю, Geschichte studieren
+
 инвестировать в, investieren in A
+инвестировать в акции, in Aktien investieren
+
 кормить что-то, füttern mit
+кормить кошку кормом, die Katze mit Futter füttern
+
 летать через, fliegen über
+летать через горы, über die Berge fliegen
+
 навещать кого-то, besuchen A
+навещать бабушку, die Großmutter besuchen
+
 навязывать что-то, aufdrängen A
+навязывать мнение, eine Meinung aufdrängen
+
 направлять что-то, lenken in A
+направлять свет, das Licht in eine Richtung lenken
+
 направляться к, zusteuern auf A
+направляться к цели, auf ein Ziel zusteuern
+
 напугать кого-то, erschrecken A
+напугать ребенка, ein Kind erschrecken
+
 наступать на, treten auf A
+наступать на газ, auf das Gaspedal treten
+
 начинать с, beginnen mit
+начинать с основ, mit den Grundlagen beginnen
+
 объяснять что-то, erklären A
+объяснять проблему, ein Problem erklären
+
 объясняться по, sich erklären durch A
-ограничивать что-то, beschränken auf A
+объясняться по причине, sich durch einen Grund erklären
+
 оживлять что-то, beleben A
+оживлять вечеринку, eine Party beleben
+
 освобождаться от, sich befreien von
+освобождаться от страха, sich von Angst befreien
+
 осуществлять что-то, durchführen A
+осуществлять эксперимент, ein Experiment durchführen
+
 отвлекаться от, sich ablenken von
+отвлекаться от работы, sich von der Arbeit ablenken
+
 отказываться от, verzichten auf A
+отказываться от курения, auf das Rauchen verzichten
+
 отправляться на, sich begeben auf A
+отправляться на путешествие, sich auf eine Reise begeben
+
 отражаться в, sich spiegeln in D
+отражаться в зеркале, sich in einem Spiegel spiegeln
+
 отстаивать что-то, verteidigen A
+отстаивать свою точку зрения, seine Ansicht verteidigen
+
 переписываться с, korrespondieren mit
+переписываться с другом, mit einem Freund korrespondieren
+
 повторять за, wiederholen nach
+повторять за учителем, dem Lehrer nachsprechen
+
 получать от, bekommen von
+получать подарок от друга, ein Geschenk von einem Freund bekommen
+
 предпочитать что-то, bevorzugen A
+предпочитать кофе чаю, Kaffee Tee bevorzugen
+
 преуспевать в, erfolgreich sein in D
+преуспевать в бизнесе, im Geschäft erfolgreich sein
+
 разделять что-то, teilen mit
+разделять печенье с другом, Kekse mit einem Freund teilen
+
 распространяться на, sich erstrecken auf A
+распространяться на большую территорию, sich auf ein großes Gebiet erstrecken
+
 сближаться с, sich annähern an A
+сближаться с коллегой, sich einem Kollegen annähern
+
 сбрасывать что-то, abwerfen A
+сбрасывать лишний вес, überschüssiges Gewicht abwerfen
+
 считаться с, rechnen mit
+считаться с возможными рисками, mit möglichen Risiken rechnen
+
 уважать что-то, respektieren A
+уважать чужое мнение, die Meinung anderer respektieren
+
 уговаривать кого-то на, überreden zu
+уговаривать друга на поход, einen Freund zu einer Wanderung überreden
+
 упражняться в, üben in D
+упражняться в пении, im Singen üben
+
 ускорять что-то, beschleunigen A
+ускорять процесс, den Prozess beschleunigen
+
 устраиваться на, sich einstellen auf A
+устраиваться на новую работу, sich auf eine neue Arbeit einstellen
+
 формировать что-то, formen A
+формировать мнение, eine Meinung formen
+
 характеризовать что-то, charakterisieren A
+характеризовать произведение искусства, ein Kunstwerk charakterisieren
+
 читать вслух, vorlesen A
+читать стихотворение вслух, ein Gedicht laut vorlesen
+
 вдохновляться чем-то, sich inspirieren lassen von
+вдохновляться природой, sich von der Natur inspirieren lassen
+
 везти что-то, mitnehmen A
+везти зонт, einen Regenschirm mitnehmen
+
 верить в, glauben an A
+верить в себя, an sich selbst glauben
+
 влиять на, beeinflussen A
+влиять на решение, eine Entscheidung beeinflussen
+
 воображать что-то, sich vorstellen A
+воображать сцену, sich eine Szene vorstellen
+
 возить кого-то, mitnehmen A
+возить друга на машине, einen Freund im Auto mitnehmen
+
 выделять что-то, herausstellen A
+выделять главное, das Wichtigste herausstellen
+
 вызывать что-то, hervorrufen A
+вызывать воспоминания, Erinnerungen hervorrufen
+
 выходить за пределы, übersteigen A
-говорить по-английски, sprechen Englisch
+выходить за пределы бюджета, das Budget übersteigen
+
 давать на, geben auf A
+давать на благотворительность, für wohltätige Zwecke geben
+
 действовать в соответствии с, handeln entsprechend D
+действовать в соответствии с правилами, nach den Regeln handeln
+
 добиваться чего-то, erreichen A
+добиваться успеха, Erfolg erreichen
+
 доказывать что-то, beweisen A
+доказывать свою точку зрения, seinen Standpunkt beweisen
+
 допускать что-то, zulassen A
+допускать ошибки, Fehler zulassen
+
 жить в, leben in D
+жить в Германии, in Deutschland leben
+
 заканчивать что-то, fertigstellen A
+заканчивать проект, ein Projekt fertigstellen
+
 зарабатывать деньги на, verdienen Geld mit
+зарабатывать деньги на продаже художественных произведений, Geld verdienen mit dem Verkauf von Kunstwerken
+
 затрагивать что-то, berühren A
+затрагивать важные темы, wichtige Themen berühren
+
 знать о, Bescheid wissen über
+знать о местных новостях, über lokale Nachrichten Bescheid wissen
+
 извиняться за, sich entschuldigen für
+извиняться за опоздание, sich für die Verspätung entschuldigen
+
 интересоваться чем-то, sich auskennen in D
+интересоваться историей, sich in Geschichte auskennen
+
 кончать с, fertig sein mit
+кончать с работой, mit der Arbeit fertig sein
+
 критиковать что-то, kritisieren A
+критиковать решение, eine Entscheidung kritisieren
+
 лететь в, fliegen nach
+лететь в Рим, nach Rom fliegen
+
 наводить порядок в, Ordnung schaffen in D
+наводить порядок в комнате, in einem Zimmer Ordnung schaffen
+
 накапливать что-то, ansammeln A
+накапливать знания, Wissen ansammeln
+
 налагать что-то на, auferlegen A
+налагать обязанности на кого-то, jemandem Pflichten auferlegen
+
 напоминать о, erinnern an A
+напоминать о встрече, an ein Treffen erinnern
+
 направлять на, lenken auf A
+направлять внимание на проблему, die Aufmerksamkeit auf ein Problem lenken
+
 направляться в, zusteuern in A
+направляться в город, in die Stadt zusteuern
+
 напугать кого-то, Angst machen A
+напугать ребенка, einem Kind Angst machen
+
 насмехаться над, sich lustig machen über
+насмехаться над ошибками, sich über Fehler lustig machen
+
 настаивать на, bestehen auf D
+настаивать на своем, auf seinem Standpunkt bestehen
+
 недооценивать что-то, unterschätzen A
+недооценивать трудности, Schwierigkeiten unterschätzen
+
 обдумывать что-то, überdenken A
+обдумывать решение, eine Entscheidung überdenken
+
 объединять что-то, vereinen A
+объединять усилия, Anstrengungen vereinen
+
 объясняться по поводу, sich erklären wegen G
+объясняться по поводу задержки, sich wegen der Verspätung erklären
+
 одобрять что-то, gutheißen A
+одобрять предложение, einen Vorschlag gutheißen
+
 оказываться в, sich befinden in D
+оказываться в затруднительном положении, sich in einer schwierigen Situation befinden
+
 оперировать чем-то, operieren mit
+оперировать данными, mit Daten operieren
+
 описывать что-то, beschreiben A
+описывать чувства, die Gefühle beschreiben
 отбирать что-то у, wegnehmen von
+отбирать игрушки у детей, Spielzeug von Kindern wegnehmen
 отказывать в чем-то, verweigern A
+отказывать в помощи, Hilfe verweigern
 отличаться от, sich unterscheiden von
+отличаться от других, sich von anderen unterscheiden
 отрабатывать что-то, sich abarbeiten an D
+отрабатывать проект, sich am Projekt abarbeiten
 передавать что-то, weitergeben A
+передавать знания, Wissen weitergeben
 подходить к, passen zu
+подходить к стилю, zum Stil passen
 пожаловаться на, sich beschweren über
+пожаловаться на шум, sich über den Lärm beschweren
 полагаться на, sich verlassen auf A
-получать что-то из, beziehen aus D
+полагаться на опыт, sich auf Erfahrung verlassen
+получать что-то из, beziehen aus
+получать информацию из книг, Informationen aus Büchern beziehen
 помнить о, denken an A
+помнить о дне рождения, an den Geburtstag denken
 посещать что-то, besuchen A
+посещать выставку, eine Ausstellung besuchen
 предупреждать о, warnen vor D
+предупреждать о плохой погоде, vor schlechtem Wetter warnen
 прибегать к, greifen zu
+прибегать к лекарствам, zu Medikamenten greifen
 приготовлять что-то, zubereiten A
+приготовлять еду, Essen zubereiten
 принадлежать к, gehören zu
+принадлежать к определенной группе, zu einer bestimmten Gruppe gehören
 приносить что-то, bringen A
+приносить подарки, Geschenke bringen
 продолжать что-то, fortsetzen A
+продолжать обучение, die Ausbildung fortsetzen
 продолжаться в, andauern in D
+продолжаться в течение дня, den ganzen Tag andauern
 продумывать что-то, durchdenken A
+продумывать план действий, einen Aktionsplan durchdenken
 проявлять что-то, zeigen A
+проявлять терпение, Geduld zeigen
 разделяться на, sich teilen in A
+разделяться на две группы, sich in zwei Gruppen teilen
 различаться в, sich unterscheiden in D
+различаться в мнениях, sich in Meinungen unterscheiden
 располагаться в, sich befinden in D
+располагаться в центре города, sich im Zentrum der Stadt befinden
 рассказывать о, erzählen von
+рассказывать о поездке, von der Reise erzählen
 решать что-то, entscheiden A
+решать проблему, ein Problem entscheiden
 сближаться с, sich annähern an A
+сближаться с новыми знакомыми, sich neuen Bekannten annähern
 сдавать что-то, abgeben A
+сдавать экзамен, eine Prüfung abgeben
 сдерживать что-то, zurückhalten A
+сдерживать гнев, Wut zurückhalten
 смеяться над, lachen über
+смеяться над шуткой, über einen Witz lachen
 советоваться с, sich beraten mit
+советоваться с экспертом, sich mit einem Experten beraten
 создавать что-то, schaffen A
+создавать новые проекты, neue Projekte schaffen
 содержать в, enthalten in D
+содержать в себе секрет, einen Geheimnis enthalten
 способствовать чему-то, beitragen zu
+способствовать росту экономики, zum Wachstum der Wirtschaft beitragen
 считаться с, rechnen mit
+считаться с мнением других, mit der Meinung anderer rechnen
 требовать от, fordern von
+требовать от сотрудников большей ответственности, von den Mitarbeitern mehr Verantwortung fordern
 убеждать кого-то в, überzeugen von
+убеждать кого-то в своей правоте, jemanden von seiner Richtigkeit überzeugen
 уважать кого-то, respektieren A
+уважать старших, die Älteren respektieren
 угрожать чему-то, drohen mit
+угрожать увольнением, mit Kündigung drohen
 удалиться от, sich entfernen von
+удалиться от шума, sich vom Lärm entfernen
 улыбаться на, lächeln auf A
+улыбаться на встречу, auf eine Begegnung lächeln
 управлять чем-то, leiten A
+управлять компанией, ein Unternehmen leiten
 участвовать в, teilnehmen an D
+участвовать в конференции, an einer Konferenz teilnehmen
 фокусироваться на, fokussieren auf A
-хвастаться чем-то, angeben mit
+фокусироваться на цели, sich auf das Ziel fokussieren
 ценить кого-то, schätzen A
+ценить наставления опытных коллег, die Anweisungen erfahrener Kollegen schätzen
+
 чувствовать к, fühlen zu
+чувствовать к кому-то симпатию, Sympathie für jemanden fühlen
+
 читать вслух, laut lesen A
+читать вслух стихи, Gedichte laut lesen
+
 шутить над, scherzen über
+шутить над ситуацией, über eine Situation scherzen
+
 беречь что-то, schonen A
+беречь природу, die Natur schonen
+
 вдохновлять кого-то на, inspirieren zu
+вдохновлять на творчество, zur Kreativität inspirieren
+
 включать в себя, umfassen A
+включать в себя основные принципы, die Grundprinzipien umfassen
+
 возиться с, sich beschäftigen mit
+возиться с машиной, sich mit dem Auto beschäftigen
 выполнять что-то, ausführen A
+выполнять задание, eine Aufgabe ausführen
 выражаться о, sich ausdrücken über
+выражаться о своих чувствах, sich über seine Gefühle ausdrücken
 говорить правду о, die Wahrheit sagen über
+говорить правду о прошлом, die Wahrheit über die Vergangenheit sagen
 гордиться чем-то, stolz sein auf A
+гордиться своей семьей, stolz auf seine Familie sein
 действовать против, handeln gegen A
+действовать против закона, gegen das Gesetz handeln
 держать что-то в тайне от, verheimlichen vor D
+держать свои чувства в тайне от других, seine Gefühle vor anderen verheimlichen
 деться в, passen in A
+деться в старые джинсы, in alte Jeans passen
 доверять кому-то, vertrauen A
+доверять своим друзьям, seinen Freunden vertrauen
 доминировать над, dominieren über
+доминировать над рынком, über den Markt dominieren
 жить на, leben von
+жить на зарплату, von seinem Gehalt leben
 завоевывать что-то, erobern A
+завоевывать новые территории, neue Gebiete erobern
 завязывать что-то, anknüpfen an A
+завязывать разговор на интересующую тему, an ein interessantes Thema anknüpfen
 задерживаться в, verweilen in D
+задерживаться в гостях, bei einem Besuch verweilen
 закончить с, abschließen mit
+закончить с работой, mit der Arbeit abschließen
 записывать что-то, aufzeichnen A
+записывать лекцию, eine Vorlesung aufzeichnen
 заполнять что-то, ausfüllen A
+заполнять анкету, einen Fragebogen ausfüllen
 запрещать что-то, verbieten A
+запрещать курение, das Rauchen verbieten
 защищать что-то, schützen A
+защищать природу, die Natur schützen
 избавляться от, sich befreien von
+избавляться от вредной привычки, sich von einer schlechten Gewohnheit befreien
 изучать чей-то подход к, sich aneignen D
+изучать подход к проблемам, sich einen Ansatz zur Lösung von Problemen aneignen
 интересоваться кем-то, sich interessieren für
+интересоваться искусством, sich für Kunst interessieren
 красоваться чем-то, prahlen mit
-лечиться от, sich behandeln lassen von
+красоваться своими достижениями, mit seinen Leistungen prahlen
+
+лечиться от, sich von etwas behandeln lassen
+лечиться от болезни, sich von einer Krankheit behandeln lassen
 наблюдать за, beobachten A
+наблюдать за птицами, Vögel beobachten
 накладывать что-то, auflegen A
+накладывать повязку на рану, einen Verband auf eine Wunde auflegen
 напоминать что-то, mahnen A
+напоминать о важности здоровья, an die Bedeutung von Gesundheit mahnen
 направлять взгляд на, blicken auf A
+направлять взгляд на красивый пейзаж, auf eine schöne Landschaft blicken
 обращаться к, sich wenden an A
+обращаться к специалистам за помощью, sich an Fachleute um Hilfe wenden
 обучать кого-то чему-то, unterrichten A
+обучать кого-то новому языку, jemanden in einer neuen Sprache unterrichten
 одобрять кого-то, befürworten A
+одобрять решение, eine Entscheidung befürworten
 освобождать что-то от, befreien von
+освобождать ум от мыслей, den Geist von Gedanken befreien
 осуществляться через, erfolgen über
+доставка осуществляется через курьерскую службу, die Lieferung erfolgt über einen Kurierdienst
 ответственный за, verantwortlich für
+ответственный за безопасность, verantwortlich für die Sicherheit
 отвергать что-то, ablehnen A
+отвергать предложение, ein Angebot ablehnen
 отклонять что-то, ablehnen A
+отклонять заявку, eine Bewerbung ablehnen
 открывать что-то, öffnen A
+открывать дверь, eine Tür öffnen
 отличаться от, abweichen von
+отличаться от других, sich von anderen unterscheiden
 отражаться на, sich auswirken auf A
+неблагоприятные условия отражаются на здоровье, ungünstige Bedingungen wirken sich auf die Gesundheit aus
 отрываться от, sich absetzen von
+отрываться от привычных мест, sich von vertrauten Orten absetzen
 отсылать что-то, senden A
+отсылать посылку, ein Paket senden
 передавать что-то, übertragen A
+передавать информацию, Informationen übertragen
 переживать за, sich Sorgen machen um
+переживать за своих близких, sich um seine Lieben Sorgen machen
 поддерживать что-то, unterstützen A
-подписываться на, abonnieren A
-подчиняться кому-то, sich unterordnen D
-полагать, думать о, halten von
-пользоваться чем-то, benutzen A
-помогать кому-то, helfen D
+поддерживать здоровый образ жизни, einen gesunden Lebensstil unterstützen
+
 понимать что-то, verstehen A
+понимать иностранный язык, eine Fremdsprache verstehen
 поражать что-то, beeindrucken A
+поражать своей скоростью, mit seiner Geschwindigkeit beeindrucken
 порекомендовать что-то, empfehlen A
+порекомендовать хороший ресторан, ein gutes Restaurant empfehlen
 поручать что-то кому-то, übertragen auf A
+поручать задачу новому сотруднику, eine Aufgabe einem neuen Mitarbeiter übertragen
 потреблять что-то, konsumieren A
+потреблять здоровую пищу, gesunde Nahrungsmittel konsumieren
 похвастаться чем-то, sich rühmen mit
+похвастаться своими достижениями, mit seinen Leistungen prahlen
 походить на, ähneln D
+походить на своего брата, seinem Bruder ähneln
 править чем-то, regieren A
+править страной, ein Land regieren
 превращать что-то в, verwandeln in A
+превращать пустыню в оазис, eine Wüste in eine Oase verwandeln
 предупреждать о, benachrichtigen über
+предупреждать о пожаре, über einen Brand benachrichtigen
 прекращать что-то, beenden A
+прекращать деятельность компании, die Aktivitäten eines Unternehmens beenden
 прибывать в, ankommen in D
+прибывать в аэропорт, am Flughafen ankommen
 приводить к, führen zu
+небрежность приводит к несчастным случаям, Fahrlässigkeit führt zu Unfällen
 призывать к, aufrufen zu
+призывать к миру, zum Frieden aufrufen
 принимать участие в, teilnehmen an D
+принимать участие в соревнованиях, an einem Wettkampf teilnehmen
 приспосабливаться к, sich anpassen an A
+приспосабливаться к новой работе, sich an eine neue Arbeit anpassen
 присутствовать на, anwesend sein bei D
+присутствовать на встрече, bei einem Treffen anwesend sein
 притягивать что-то, anziehen A
+притягивать внимание, Aufmerksamkeit anziehen
 приходить в голову, einfallen D
+приходить в голову идея, eine Idee einfallen
 продавать что-то, verkaufen A
+продавать товары онлайн, Waren online verkaufen
 проверять что-то, überprüfen A
-продумывать как, überlegen wie D
-противодействовать чему-то, entgegenwirken D
-разбираться в, sich auskennen in D
+проверять правильность ответов, die Richtigkeit der Antworten
+
 разводить что-то, züchten A
+разводить животных, Tiere züchten
 раскрывать что-то, offenlegen A
+раскрывать секрет, ein Geheimnis offenlegen
 раскрываться в, sich entfalten in D
+раскрываться в искусстве, sich in der Kunst entfalten
 рассматривать что-то, betrachten A
+рассматривать картины в музее, Gemälde im Museum betrachten
 сближаться по, sich annähern durch A
+сближаться по интересам, sich durch gemeinsame Interessen annähern
 сжигать что-то, verbrennen A
+сжигать мусор, Müll verbrennen
 совершать что-то, vollziehen A
+совершать преступление, ein Verbrechen vollziehen
 соглашаться на, einwilligen in A
+соглашаться на компромисс, einem Kompromiss einwilligen
 сокращать что-то, kürzen A
+сокращать расходы, Ausgaben kürzen
 сохранять что-то, bewahren A
+сохранять памятники культуры, Kulturerbe bewahren
 справляться с, zurechtkommen mit
+справляться с трудностями, mit Schwierigkeiten zurechtkommen
 ссориться с, streiten mit
+ссориться с друзьями, mit Freunden streiten
 стирать что-то, löschen A
+стирать файлы с компьютера, Dateien vom Computer löschen
 требовать что-то, verlangen A
+требовать ответа, eine Antwort verlangen
 увеличивать что-то, vergrößern A
+увеличивать прибыль, Gewinn vergrößern
 узнавать о, erfahren von
+узнавать о новостях, von Nachrichten erfahren
 учитывать что-то, berücksichtigen A
+учитывать потребности клиентов, die Bedürfnisse der Kunden berücksichtigen
 улучшать что-то, verbessern A
+улучшать качество жизни, die Lebensqualität verbessern
 умирать от, sterben an D
+умирать от болезни, an einer Krankheit sterben
 уничтожать что-то, zerstören A
+уничтожать вирусы, Viren zerstören
 упоминать о, erwähnen A
+упоминать о планах, Pläne erwähnen
 успокоить кого-то, beruhigen A
+успокоить ребенка, ein Kind beruhigen
 устанавливать что-то, installieren A
+устанавливать программное обеспечение, Software installieren
+
 уступать кому-то, nachgeben D
+уступать свое место в автобусе, jemandem seinen Platz im Bus nachgeben
 участвовать в, mitwirken bei D
+участвовать в конференции, bei einer Konferenz mitwirken
 фокусироваться на, sich konzentrieren auf A
+фокусироваться на работе, sich auf die Arbeit konzentrieren
 формировать что-то, formen A
+формировать свое мнение, seine Meinung formen
 хватать за, greifen nach
+хватать за книгу, nach einem Buch greifen
 ценить что-то, wertschätzen A
+ценить время, die Zeit wertschätzen
 чувствовать себя, sich fühlen A
+чувствовать себя комфортно, sich wohl fühlen
 шутить о, scherzen über
+шутить о жизни, über das Leben scherzen
 выдавать себя за, sich ausgeben für
+выдавать себя за эксперта, sich als Experte ausgeben
 влиять на, wirken auf A
+влиять на решение, auf die Entscheidung wirken
 возмущаться чем-то, sich empören über
+возмущаться ценами, sich über die Preise empören
 восхищаться кем-то/чем-то, bewundern A
+восхищаться красотой природы, die Schönheit der Natur bewundern
 выбирать что-то, auswählen A
-говорить по-русски, sprechen Russisch
+выбирать подарок, ein Geschenk auswählen
 доводить что-то до, bringen A
+доводить дело до конца, eine Angelegenheit zu Ende bringen
 доказывать кому-то что-то, beweisen D
+доказывать свою точку зрения, seine Sichtweise beweisen
 желать кому-то чего-то, wünschen D
+желать счастья другу, einem Freund Glück wünschen
 заботиться о, sich kümmern um
+заботиться о здоровье, sich um die Gesundheit kümmern
 заводить дело, anfangen mit
+заводить бизнес, ein Geschäft anfangen
 завязывать с кем-то, Schluss machen mit
+завязывать отношения с партнером, mit einem Partner Schluss machen
 завязывать что-то на, binden an A
+завязывать шарф на шее, einen Schal um den Hals binden
 задумываться о, nachdenken über
+задумываться о будущем, über die Zukunft nachdenken
 заинтересовывать кого-то, interessieren A
+заинтересовывать людей, Menschen interessieren
 запоминать что-то, merken A
+запоминать иностранные слова, sich Fremdwörter merken
 запрещать кому-то что-то, verbieten D
+запрещать детям сладкое, Kindern Süßigkeiten verbieten
 заслуживать чего-то, verdienen A
+заслуживать похвалы, Lob verdienen
 заявлять что-то, erklären A
+заявлять свою позицию, seine Position erklären
 звучать как, klingen wie D
+звучать как иностранец, wie ein Ausländer klingen
 избегать чего-то, vermeiden A
+избегать конфликтов, Konflikte vermeiden
 изменять что-то, ändern A
+изменять свою жизнь, sein Leben ändern
 изучать что-то, erforschen A
+изучать новые технологии, neue Technologien erforschen
 интересоваться чем-то, sich interessieren für
+интересоваться искусством, sich für Kunst interessieren
 колебаться между, schwanken zwischen D
+колебаться между двумя вариантами, zwischen zwei Optionen schwanken
 компенсировать что-то, kompensieren A
+компенсировать ущерб, Schaden kompensieren
 контролировать что-то, kontrollieren A
+контролировать бюджет, das Budget kontrollieren
 косить под, vorgeben zu sein A
+косить под эксперта, sich als Experte ausgeben
 кричать на, schreien auf A
+кричать на друга, einen Freund anschreien
 любить что-то, mögen A
+любить животных, Tiere mögen
 мешать чему-то, stören A
+мешать работе, der Arbeit im Weg stehen
