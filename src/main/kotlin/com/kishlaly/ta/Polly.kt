@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger
 val delimiter = " ### "
 val srcFolder = "polly"
 val outputFolder = "output"
-val srcFile = "adjectives_with_prepositions.txt"
+val srcFile = "adverbs.txt"
 val outputFileName = srcFile.replace(".txt", "")
 
 // какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
@@ -27,9 +27,16 @@ fun main() {
     val executor = Executors.newFixedThreadPool(10)
     File("$srcFolder/$outputFolder").mkdir()
     val deWords = mutableSetOf<String>()
+    var duplicates = 0
     phrases
         .filter { it.trim().isNotEmpty() }
-        .filter { deWords.add(it.split(delimiter)[dePhraseIndex - 1]) }
+        .filter {
+            val notDuplicate = deWords.add(it.split(delimiter)[dePhraseIndex - 1])
+            if (!notDuplicate) {
+                duplicates++
+            }
+            notDuplicate
+        }
         //.take(5)
         .forEach { line ->
             executor.submit {
@@ -43,6 +50,7 @@ fun main() {
                 )
             }
         }
+    println("\n Filtered duplicates: $duplicates")
     executor.shutdown()
     executor.awaitTermination(1, TimeUnit.HOURS)
     merge(File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/$outputFolder/${outputFileName}.mp3")
