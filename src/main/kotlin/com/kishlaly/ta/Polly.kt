@@ -4,31 +4,61 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 
 fun main() {
     val mainName = "random"
-    var count = 1
-    File("polly.txt").readLines().chunked(1)
-        .take(1)
-        .forEach { chunk ->
-            chunk.forEach { line ->
-                generate(line, count, "Tatyana", "ru-RU", 1, "ru", mainName)
-                Thread.sleep(100)
-                generate(line, count, "Hans", "de-DE", 0, "de", mainName)
-                Thread.sleep(100)
+    var count = AtomicInteger(1)
+    val srcFolder = "polly"
+    val srcFile = "polly.txt"
+    val files = File("$srcFolder/$srcFile").readLines()
+    val executor = Executors.newFixedThreadPool(10)
+    files
+        //.take(20)
+        .forEach { line ->
+            executor.submit {
+                val unique = UUID.randomUUID().toString()
+                println("Processing ${count.getAndIncrement()}/${files.size}")
+                generate(line, unique, "Tatyana", "ru-RU", 1, "ru", mainName)
+                generate(line, unique, "Hans", "de-DE", 0, "de", mainName)
                 combineMp3Files(
-                    "polly/${mainName}_ru_${count}.mp3",
-                    "polly/${mainName}_de_${count}.mp3",
-                    "polly/${mainName}_full_${count}.mp3",
+                    "$srcFolder/${mainName}_ru_${unique}.mp3",
+                    "$srcFolder/${mainName}_de_${unique}.mp3",
+                    "$srcFolder/${mainName}_full_${unique}.mp3",
                 )
-                count++
             }
         }
+    executor.shutdown()
+    executor.awaitTermination(1, TimeUnit.HOURS)
+    merge(File("$srcFolder/").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/${mainName.uppercase()}.mp3")
+    File("$srcFolder/").listFiles().filter { it.name.contains("_ru_") || it.name.contains("_ru_") }.forEach { it.delete() }
 }
 
+@Synchronized
+fun merge(inputFiles: List<String>, outputFile: String) {
+    try {
+        val outputStream = FileOutputStream(File(outputFile))
+
+        inputFiles.forEach { inputFile ->
+            FileInputStream(File(inputFile)).use { inputStream ->
+                val fileBytes = inputStream.readBytes()
+                outputStream.write(fileBytes)
+            }
+        }
+
+        outputStream.close()
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+}
+
+@Synchronized
 private fun generate(
     line: String,
-    count: Int,
+    suffix: String,
     voice: String,
     lang: String,
     lineIndex: Int,
@@ -47,12 +77,13 @@ private fun generate(
     command.add("ssml")
     command.add("--text")
     val split = line.split("###")
-    val pause = if (prefix.equals("de")) 2500 else 1000
+    val pause = if (prefix.equals("de")) 2000 else 1000
     command.add("<speak><lang xml:lang=\"$lang\">${split[lineIndex]}</lang><break time=\"${pause}ms\"/></speak>")
-    command.add("polly/${mainName}_${prefix}_${count}.mp3")
+    command.add("polly/${mainName}_${prefix}_${suffix}.mp3")
     runAwsPollyCommand(command)
 }
 
+@Synchronized
 fun runAwsPollyCommand(command: List<String>) {
     val processBuilder = ProcessBuilder(*command.toTypedArray())
     processBuilder.redirectErrorStream(true)
@@ -63,12 +94,12 @@ fun runAwsPollyCommand(command: List<String>) {
     val exitCode = process.waitFor()
 
     if (exitCode == 0) {
-        println("Command executed successfully:\n$output")
     } else {
         println("Error executing command:\n$output")
     }
 }
 
+@Synchronized
 fun combineMp3Files(inputFile1: String, inputFile2: String, outputFile: String) {
     try {
         val inputStream1 = FileInputStream(File(inputFile1))
@@ -76,11 +107,9 @@ fun combineMp3Files(inputFile1: String, inputFile2: String, outputFile: String) 
 
         val outputStream = FileOutputStream(File(outputFile))
 
-        // Read the contents of the input files
         val file1Bytes = inputStream1.readBytes()
         val file2Bytes = inputStream2.readBytes()
 
-        // Combine the two files
         outputStream.write(file1Bytes)
         outputStream.write(file2Bytes)
 
