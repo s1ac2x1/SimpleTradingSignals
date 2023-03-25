@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger
 val delimiter = " ### "
 val srcFolder = "polly"
 val outputFolder = "output"
-val srcFile = "b2_phrases.txt"
+val srcFile = "nomen_verbs.txt"
 val outputFileName = srcFile.replace(".txt", "")
 
 // какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
@@ -28,31 +28,31 @@ fun main() {
     File("$srcFolder/$outputFolder").mkdir()
     val filteredPhrases = phrases
         .filter { it.trim().isNotEmpty() }
-        //.filter { it.length < 100 }
+        .filter { it.length < 100 }
         .distinctBy { it.split(delimiter)[dePhraseIndex - 1] }.toList()
     println("\nFiltered ${phrases.size - filteredPhrases.size} duplicates\n")
     File("$srcFolder/$srcFile").writeBytes(filteredPhrases.joinToString("\n").toByteArray())
-    filteredPhrases
-        //.shuffled()
-        //.take(4)
-        .forEach { line ->
-            executor.submit {
-                val unique = UUID.randomUUID().toString()
-                println("Processing ${count.getAndIncrement()}/${filteredPhrases.size}: ${line.split(delimiter)[dePhraseIndex - 1]}")
-                generate(line, unique, "Tatyana", "ru-RU", ruPhraseIndex - 1, "ru", outputFileName)
-                generate(line, unique, "Hans", "de-DE", dePhraseIndex - 1, "de", outputFileName)
-                merge(
-                    listOf("$srcFolder/$outputFolder/${outputFileName}_ru_${unique}.mp3", "$srcFolder/$outputFolder/${outputFileName}_de_${unique}.mp3"),
-                    "$srcFolder/$outputFolder/${outputFileName}_full_${unique}.mp3",
-                )
-            }
-        }
-    executor.shutdown()
-    executor.awaitTermination(1, TimeUnit.HOURS)
-    merge(File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/$outputFolder/${outputFileName}.mp3")
-    File("$srcFolder/$outputFolder").listFiles()
-        .filter { it.name.contains("_ru_") || it.name.contains("_de_") || it.name.contains("_full_") }
-        .forEach { it.delete() }
+//    filteredPhrases
+//        //.shuffled()
+//        //.take(4)
+//        .forEach { line ->
+//            executor.submit {
+//                val unique = UUID.randomUUID().toString()
+//                println("Processing ${count.getAndIncrement()}/${filteredPhrases.size}: ${line.split(delimiter)[dePhraseIndex - 1]}")
+//                generate(line, unique, "Tatyana", "ru-RU", ruPhraseIndex - 1, "ru", outputFileName)
+//                generate(line, unique, "Hans", "de-DE", dePhraseIndex - 1, "de", outputFileName)
+//                merge(
+//                    listOf("$srcFolder/$outputFolder/${outputFileName}_ru_${unique}.mp3", "$srcFolder/$outputFolder/${outputFileName}_de_${unique}.mp3"),
+//                    "$srcFolder/$outputFolder/${outputFileName}_full_${unique}.mp3",
+//                )
+//            }
+//        }
+//    executor.shutdown()
+//    executor.awaitTermination(1, TimeUnit.HOURS)
+//    merge(File("$srcFolder/$outputFolder").listFiles().filter { it.name.contains("_full_") }.map { it.absolutePath }.toList(), "$srcFolder/$outputFolder/${outputFileName}.mp3")
+//    File("$srcFolder/$outputFolder").listFiles()
+//        .filter { it.name.contains("_ru_") || it.name.contains("_de_") || it.name.contains("_full_") }
+//        .forEach { it.delete() }
 }
 
 @Synchronized
