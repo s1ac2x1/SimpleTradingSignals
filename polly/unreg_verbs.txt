@@ -1,0 +1,235 @@
+sein, war, gewesen ### быть
+haben, hatte, gehabt ### иметь
+werden, wurde, geworden ### становиться
+können, konnte, gekonnt ### мочь, уметь
+müssen, musste, gemusst ### должен, обязан
+wissen, wusste, gewusst ### знать
+wollen, wollte, gewollt ### хотеть
+dürfen, durfte, gedurft ### иметь право, разрешать
+mögen, mochte, gemocht ### нравиться, любить
+sollen, sollte, gesollt ### следует, должен
+gehen, ging, gegangen ### идти
+kommen, kam, gekommen ### приходить
+laufen, lief, gelaufen ### бежать, идти
+sehen, sah, gesehen ### видеть
+nehmen, nahm, genommen ### брать
+geben, gab, gegeben ### давать
+fahren, fuhr, gefahren ### ехать
+essen, aß, gegessen ### есть
+trinken, trank, getrunken ### пить
+schlafen, schlief, geschlafen ### спать
+finden, fand, gefunden ### находить
+denken, dachte, gedacht ### думать
+lesen, las, gelesen ### читать
+sprechen, sprach, gesprochen ### говорить
+schreiben, schrieb, geschrieben ### писать
+fliegen, flog, geflogen ### летать
+schwimmen, schwamm, geschwommen ### плавать
+singen, sang, gesungen ### петь
+sitzen, saß, gesessen ### сидеть
+stehen, stand, gestanden ### стоять
+fallen, fiel, gefallen ### падать
+halten, hielt, gehalten ### держать, останавливаться
+hängen, hing, gehangen ### висеть
+springen, sprang, gesprungen ### прыгать
+tragen, trug, getragen ### носить
+treffen, traf, getroffen ### встречать
+verlieren, verlor, verloren ### терять
+vergessen, vergaß, vergessen ### забывать
+waschen, wusch, gewaschen ### мыть, стирать
+ziehen, zog, gezogen ### тянуть, переезжать
+beginnen, begann, begonnen ### начинать
+gewinnen, gewann, gewonnen ### выигрывать
+bringen, brachte, gebracht ### приносить
+beißen, biss, gebissen ### кусать
+biegen, bog, gebogen ### гнуть
+binden, band, gebunden ### связывать
+blasen, blies, geblasen ### дуть
+bleiben, blieb, geblieben ### оставаться
+brechen, brach, gebrochen ### ломать, разбивать
+empfehlen, empfahl, empfohlen ### рекомендовать
+erschrecken, erschrak, erschrocken ### пугать, испугаться
+fangen, fing, gefangen ### ловить, поймать
+gelten, galt, gegolten ### считаться, быть действительным
+graben, grub, gegraben ### копать
+heben, hob, gehoben ### поднимать
+heißen, hieß, geheißen ### называться
+leiden, litt, gelitten ### страдать
+leihen, lieh, geliehen ### одалживать, одалживать
+meiden, mied, gemieden ### избегать
+messen, maß, gemessen ### измерять
+reißen, riss, gerissen ### рвать
+reiten, ritt, geritten ### верхом
+riechen, roch, gerochen ### пахнуть, нюхать
+saufen, soff, gesoffen ### пить (алкоголь)
+schaffen, schuf, geschaffen ### создавать, сотворять
+scheinen, schien, geschienen ### казаться, сиять
+schieben, schob, geschoben ### толкать, двигать
+schießen, schoss, geschossen ### стрелять
+schmelzen, schmolz, geschmolzen ### таять
+schneiden, schnitt, geschnitten ### резать, нарезать
+schweigen, schwieg, geschwiegen ### молчать
+schwören, schwor, geschworen ### клясться
+stechen, stach, gestochen ### колоть, уколоть
+stehlen, stahl, gestohlen ### красть
+stinken, stank, gestunken ### вонять, пахнуть неприятно
+streichen, strich, gestrichen ### красить, мазать
+streiten, stritt, gestritten ### ссориться, спорить
+trinken, trank, getrunken ### пить
+versprechen, versprach, versprochen ### обещать
+verzeihen, verzieh, verziehen ### прощать
+wachsen, wuchs, gewachsen ### расти
+weichen, wich, gewichen ### уступать, отступать
+weisen, wies, gewiesen ### указывать, показывать
+werfen, warf, geworfen ### бросать
+wiegen, wog, gewogen ### взвешивать, весить
+zerreissen, zerriss, zerrissen ### разрывать на части
+zerschlagen, zerschlug, zerschlagen ### разбивать, разрушать
+zwingen, zwang, gezwungen ### вынуждать, принуждать
+backen, buk, gebacken ### печь
+befehlen, befahl, befohlen ### приказывать, командовать
+betragen, betrug, betragen ### составлять, равняться
+bewegen, bewog, bewogen ### двигать, воздействовать
+braten, briet, gebraten ### жарить
+dreschen, drosch, gedroschen ### молотить
+fechten, focht, gefochten ### фехтовать
+flechten, flocht, geflochten ### плести
+frieren, fror, gefroren ### мерзнуть
+gedeihen, gedieh, gediehen ### процветать, преуспевать
+genesen, genas, genesen ### выздоравливать
+geschehen, geschah, geschehen ### происходить, случаться
+gleichen, glich, geglichen ### быть похожим, равняться
+gleiten, glitt, geglitten ### скользить
+heben, hob, gehoben ### поднимать, усиливать
+klingen, klang, geklungen ### звучать
+kneifen, kniff, gekniffen ### щипать, ущипнуть
+laden, lud, geladen ### грузить, заряжать
+lügen, log, gelogen ### лгать
+mahlen, mahlte, gemahlen ### молоть, перемалывать
+meiden, mied, gemieden ### избегать
+pflegen, pflog, gepflogen ### ухаживать, заботиться
+quellen, quoll, gequollen ### источать, раздуваться
+rufen, rief, gerufen ### звать, вызывать
+saugen, sog, gesogen ### сосать, втягивать
+scheren, schor, geschoren ### стричь, сбривать
+schlüpfen, schlüpfte, geschlüpft ### просачиваться, вылупляться
+schreiten, schritt, geschritten ### шагать, продвигаться
+sinken, sank, gesunken ### опускаться, тонуть
+spalten, spaltete, gespalten ### раскалывать, разделять
+stoßen, stieß, gestoßen ### толкать, сталкивать
+treten, trat, getreten ### ступать, наступать
+verderben, verdarb, verdorben ### портиться, губить
+verzeihen, verzieh, verziehen ### прощать, извинять
+wenden, wandte, gewandt ### поворачивать, обращаться
+winden, wand, gewunden ### изгибаться, виться
+zerbrechen, zerbrach, zerbrochen ### разбивать, ломать
+zertreten, zertrat, zertreten ### раздавить, разминать
+ziehen, zog, gezogen ### тянуть, вытягивать
+züchten, züchtete, gezüchtet ### разводить, выращивать
+zwingen, zwang, gezwungen ### вынуждать, принуждать
+bergen, barg, geborgen ### спасать, укрывать
+bewerben, bewarb, beworben ### подавать заявление, просить
+dreschen, drosch, gedroschen ### молотить, избивать
+dringen, drang, gedrungen ### проникать, надавливать
+erkiesen, erkor, erkoren ### выбирать, избирать
+erschrecken, erschrak, erschrocken ### пугать, испугаться
+fressen, fraß, gefressen ### (о животных) есть
+frieren, fror, gefroren ### замерзать, мёрзнуть
+genießen, genoss, genossen ### наслаждаться, пользоваться
+geschehen, geschah, geschehen ### происходить, случаться
+gleiten, glitt, geglitten ### скользить, парить
+greifen, griff, gegriffen ### хватать, схватывать
+hauen, haute/hieb, gehauen ### рубить, колотить
+heischen, heischte, geheischt ### требовать, настаивать
+kehren, kehrte, gekehrt ### возвращаться, поворачивать
+kriechen, kroch, gekrochen ### ползать, красться
+meiden, mied, gemieden ### избегать, уклоняться
+melken, molk, gemolken ### доить, выдавливать
+reiben, rieb, gerieben ### тереть, натирать
+sausen, sauste, gesaust ### свистеть, мчаться
+schallen, scholl, geschollen ### звучать, греметь
+scheren, schor, geschoren ### стричь, сбривать
+schlafen, schlief, geschlafen ### спать
+schlagen, schlug, geschlagen ### бить, ударять
+schleichen, schlich, geschlichen ### красться, ползать
+schließen, schloss, geschlossen ### закрывать, запирать
+schmeißen, schmiss, geschmissen ### бросать, кидать
+schnauben, schnaubte, geschnaubt ### фыркать, ворчать
+schreiben, schrieb, geschrieben ### писать
+schreiten, schritt, geschritten ### шагать, идти
+schüren, schürte, geschürt ### разжигать, подстёгивать
+schwimmen, schwamm, geschwommen ### плавать
+segnen, segnete, gesegnet ### благословлять, освящать
+senden, sandte/sendete, gesandt/gesendet ### отправлять, посылать
+sieden, sott/siedete, gesotten/gesiedet ### кипятить, варить
+sinken, sank, gesunken ### тонуть, опускаться
+sorgen, sorgte, gesorgt ### заботиться, ухаживать
+spinnen, spann, gesponnen ### прясть, фантазировать
+sprengen, sprengte, gesprengt ### взрывать, разрушать
+sprießen, spross, gesprossen ### прорастать, расти
+stehlen, stahl, gestohlen ### красть, воровать
+sterben, starb, gestorben ### умирать
+stieben, stob, gestoben ### сыпаться, разлетаться
+stinken, stank, gestunken ### вонять, пахнуть неприятно
+stoßen, stieß, gestoßen ### толкать, сталкивать
+streichen, strich, gestrichen ### красить, мазать
+streiten, stritt, gestritten ### ссориться, спорить
+tragen, trug, getragen ### носить, нести
+treffen, traf, getroffen ### встречать, сталкиваться
+treiben, trieb, getrieben ### гнать, двигать
+trinken, trank, getrunken ### пить
+tun, tat, getan ### делать
+übertreiben, übertrieb, übertrieben ### преувеличивать
+umziehen, umzog, umzogen ### переезжать, переодеваться
+unterbrechen, unterbrach, unterbrochen ### прерывать, перебивать
+verbergen, verbarg, verborgen ### скрывать, прятать
+verderben, verdarb, verdorben ### портить, губить
+vergessen, vergaß, vergessen ### забывать
+verlassen, verließ, verlassen ### покидать, оставлять
+verlieren, verlor, verloren ### терять, проигрывать
+verschlingen, verschlang, verschlungen ### поглощать, проглатывать
+versprechen, versprach, versprochen ### обещать
+wachsen, wuchs, gewachsen ### расти, увеличиваться
+waschen, wusch, gewaschen ### мыть, стирать
+weichen, wich, gewichen ### уступать, отступать
+weisen, wies, gewiesen ### указывать, демонстрировать
+werben, warb, geworben ### рекламировать, вербовать
+werfen, warf, geworfen ### бросать, кидать
+wiedergeben, wiedergab, wiedergegeben ### возвращать, передавать
+ziehen, zog, gezogen ### тянуть, вытягивать
+zwingen, zwang, gezwungen ### вынуждать, принуждать
+zerreissen, zerriss, zerrissen ### разрывать, рвать
+erbleichen, erblasste, erblasst ### бледнеть, становиться бледным
+erschlaffen, erschlaffte, erschlafft ### ослабевать, расслабляться
+entfliehen, entfloh, entflohen ### убегать, избегать
+enthalten, enthielt, enthalten ### содержать, включать
+entstehen, entstand, entstanden ### возникать, образовываться
+erlöschen, erlosch, erloschen ### гаснуть, угасать
+ertrinken, ertrank, ertrunken ### тонуть, утопать
+erwachsen, erwuchs, erwachsen ### вырастать, становиться взрослым
+erziehen, erzog, erzogen ### воспитывать, обучать
+übergehen, überging, übergegangen ### переходить, игнорировать
+übernehmen, übernahm, übernommen ### принимать, брать на себя
+übersetzen, übersetzte, übersetzt ### переводить, транслировать
+übertreten, übertrat, übertreten ### переступать, нарушать
+übervorteilen, übervorteilte, übervorteilt ### обманывать, эксплуатировать
+unterfangen, unterfing, unterfangen ### приступать, начинать
+untergraben, untergrub, untergraben ### подрывать, ослаблять
+unterschreiben, unterschrieb, unterschrieben ### подписывать, подтверждать подписью
+unterstellen, unterstellte, unterstellt ### подозревать, предполагать
+zerbrechen, zerbrach, zerbrochen ### разбивать, ломать
+zerfließen, zerfloss, zerflossen ### растекаться, растворяться
+zerren, zerrte, gezerrt ### тянуть с силой, рвать
+zerschneiden, zerschnitt, zerschnitten ### разрезать, разделить
+zerspringen, zersprang, zersprungen ### разлетаться, разбиваться
+zerstreuen, zerstreute, zerstreut ### рассеивать, разбрасывать
+zerteilen, zerteilte, zerteilt ### делить, разбивать на части
+anfangen, fing an, angefangen ### начинать, затевать
+ankommen, kam an, angekommen ### прибывать, приезжать
+anrufen, rief an, angerufen ### звонить, вызывать
+aufstehen, stand auf, aufgestanden ### вставать, подниматься
+aussteigen, stieg aus, ausgestiegen ### выходить, сходить (из транспорта)
+auswählen, wählte aus, ausgewählt ### выбирать, отбирать
+beitragen, trug bei, beigetragen ### вносить вклад, способствовать
+bekommen, bekam, bekommen ### получать, становиться
+brennen, brannte, gebrannt ### гореть, жечь
