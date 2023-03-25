@@ -12,14 +12,15 @@ import java.util.concurrent.atomic.AtomicInteger
 val delimiter = " ### "
 val srcFolder = "polly"
 val outputFolder = "output"
-val srcFile = "verbs_with_prepositions.txt"
+val srcFile = "random.txt"
 val outputFileName = srcFile.replace(".txt", "")
 
 // какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
-val ruPhraseIndex = 1
-val dePhraseIndex = 2
+val ruPhraseIndex = 2
+val dePhraseIndex = 1
 
-// verbs_with_prepositions, work, random
+// неправильные глаголы штук 150
+// 50 разговорных фраз на разные 30 разных тем
 
 // TODO потом импорт в квизлет
 
