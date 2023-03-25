@@ -1,0 +1,611 @@
+Meine Eltern haben sich vor einem Jahr scheiden lassen. ### Мои родители развелись год назад.
+Meine Schwester und ihr Freund haben sich verlobt. ### Моя сестра и её парень обручились.
+Ich habe einen engen Kontakt zu meinen Großeltern. ### У меня очень тесные отношения с моими бабушкой и дедушкой.
+Mein Bruder und ich streiten uns manchmal, aber wir versöhnen uns immer schnell wieder. ### Мой брат и я иногда ссоримся, но всегда быстро миримся.
+Meine Cousine hat letztes Jahr geheiratet und ist jetzt schwanger. ### Моя кузина поженилась в прошлом году и теперь беременна.
+Meine Familie und ich machen jedes Jahr einen gemeinsamen Urlaub. ### Моя семья и я каждый год проводим вместе отпуск.
+Mein Opa ist vor kurzem gestorben und ich vermisse ihn sehr. ### Мой дедушка недавно умер, и я очень скучаю по нему.
+Mein Vater und ich haben dieselben Hobbys und unternehmen oft etwas zusammen. ### У моего отца и меня одни и те же увлечения, и мы часто что-то делаем вместе.
+Ich habe viele Geschwister, deshalb ist bei uns immer etwas los zu Hause. ### У меня много братьев и сестер, поэтому у нас дома всегда что-то происходит.
+Meine Eltern sind seit 30 Jahren verheiratet und immer noch glücklich zusammen. ### Мои родители женаты уже 30 лет и все еще счастливы вместе.
+Mein Partner und ich haben beschlossen, zusammenzuziehen. ### Мой партнер и я решили жить вместе.
+Meine beste Freundin und ich kennen uns schon seit der Grundschule. ### Моя лучшая подруга и я знакомы с начальной школы.
+Ich habe viele Verwandte im Ausland, deshalb verreise ich oft. ### У меня много родственников за границей, поэтому я часто путешествую.
+Meine Eltern haben mir immer viel Freiheit gegeben und ich bin ihnen dafür dankbar. ### Мои родители всегда давали мне много свободы, и я им за это благодарен.
+Meine Großeltern leben leider nicht mehr, aber ich denke oft an sie. ### Мои бабушка и дедушка уже не живут, но я часто думаю о них.
+Ich habe gerade eine neue Beziehung angefangen und bin sehr glücklich. ### Я начал новые отношения и очень счастлив.
+Meine Eltern haben mir immer viel Liebe gegeben und ich weiß das zu schätzen. ### Мои родители всегда давали мне много любви, и я это ценю.
+Ich habe mich mit meinem besten Freund gestritten, aber wir haben uns wieder versöhnt. ### Я поссорился со своим лучшим другом, но мы помирились.
+Meine Eltern haben mir beigebracht, immer ehrlich zu sein. ### Мои родители научили меня всегда быть честным.
+Ich habe ein sehr enges Verhältnis zu meinem Haustier und kann mir ein Leben ohne es nicht vorstellen. ### У меня очень тесные отношения с моим домашним животным, и я не могу представить жизнь без него.
+Meine Schwester und ich haben dieselben Interessen und verbringen oft Zeit zusammen. ### У моей сестры и меня одни и те же интересы, и мы часто проводим время вместе.
+Meine Eltern haben mir immer beigebracht, mich um andere zu kümmern. ### Мои родители всегда научили меня заботиться о других людях.
+Meine Familie und ich feiern jedes Jahr gemeinsam Weihnachten. ### Моя семья и я каждый год вместе отмечаем Рождество.
+Mein bester Freund und ich haben uns schon in der Kindheit kennengelernt. ### Мой лучший друг и я познакомились еще в детстве.
+Meine Eltern haben immer darauf geachtet, dass ich eine gute Schulbildung bekomme. ### Мои родители всегда следили за тем, чтобы я получил хорошее образование.
+Meine Geschwister und ich haben uns früher oft gestritten, aber jetzt verstehen wir uns viel besser. ### Мы с братьями и сестрами раньше часто ссорились, но теперь лучше друг друга понимаем.
+Ich habe einen sehr guten Draht zu meiner Tante, sie ist wie eine zweite Mutter für mich. ### У меня очень хорошие отношения с моей тетей, она как вторая мама для меня.
+Meine Eltern haben sich immer für meine Interessen interessiert und mich unterstützt. ### Мои родители всегда интересовались моими интересами и поддерживали меня.
+Ich habe viele Verwandte, die im Ausland leben, deshalb muss ich oft reisen. ### У меня много родственников, которые живут за границей, поэтому я часто путешествую.
+Meine Familie und ich haben gemeinsam einen großen Hund, den wir alle sehr lieben. ### У нас в семье есть большая собака, которую мы все очень любим.
+Mein Partner und ich haben vor, in naher Zukunft zu heiraten. ### Мой партнер и я планируем пожениться в ближайшем будущем.
+Meine Eltern haben immer darauf geachtet, dass ich meine Hausaufgaben mache. ### Мои родители всегда следили за тем, чтобы я делал домашнее задание.
+Meine beste Freundin und ich haben uns in der Schule kennengelernt und sind seitdem unzertrennlich. ### Моя лучшая подруга и я познакомились в школе и с тех пор неразлучны.
+Mein Partner und ich haben uns vor einem Jahr kennengelernt und sind seitdem glücklich zusammen. ### Мой партнер и я познакомились год назад и с тех пор счастливы вместе.
+Meine Eltern haben mir immer viel Vertrauen entgegengebracht und mich ermutigt. ### Мои родители всегда проявляли ко мне много доверия и поддерживали меня.
+Meine Schwester und ich haben dieselben Freunde und treffen uns oft gemeinsam. ### У моей сестры и меня одни и те же друзья, и мы часто проводим время вместе.
+Meine Eltern haben mich immer ermutigt, meine eigenen Entscheidungen zu treffen. ### Мои родители всегда поддерживали меня в моих собственных решениях.
+Meine beste Freundin und ich haben dieselben Hobbys und unternehmen oft etwas zusammen. ### Моя лучшая подруга и я увлекаемся одними и теми же хобби, и мы часто что-то делаем вместе.
+Meine Eltern haben mir immer viel Liebe und Geborgenheit gegeben. ### Мои родители всегда давали мне много любви и заботы.
+Mein Partner und ich haben uns auf einer Party kennengelernt und uns sofort verliebt. ### Мой партнер и я познакомились на вечеринке и сразу влюбились.
+Meine Schwester arbeitet als Ärztin in einer Klinik. ### Моя сестра работает врачом в клинике.
+Der Chef hat beschlossen, die Firma zu expandieren. ### Руководитель принял решение расширить фирму.
+Mein Vater arbeitet als Ingenieur bei einem großen Automobilhersteller. ### Мой отец работает инженером в крупном автопроизводителе.
+Ich habe mich für den Beruf des Architekten entschieden, weil ich mich für Design und Konstruktion interessiere. ### Я выбрал профессию архитектора, потому что интересуюсь дизайном и конструкцией.
+Unser Unternehmen ist auf die Entwicklung von Software spezialisiert. ### Наша компания специализируется на разработке программного обеспечения.
+Als Lehrer muss man viel Geduld haben und eine gute Kommunikationsfähigkeit besitzen. ### Как учитель нужно иметь много терпения и обладать хорошей коммуникативной способностью.
+Ich arbeite als freiberuflicher Journalist und schreibe für verschiedene Zeitungen und Magazine. ### Я работаю фрилансером-журналистом и пишу для разных газет и журналов.
+Die Arbeit im Krankenhaus kann sehr stressig sein, aber es ist auch eine sehr erfüllende Arbeit. ### Работа в больнице может быть очень напряженной, но это также очень удовлетворительная работа.
+Als Verkäuferin muss man freundlich und hilfsbereit sein, um Kunden zufriedenzustellen. ### Как продавец нужно быть дружелюбным и готовым помочь, чтобы удовлетворить клиентов.
+Die Anforderungen an die Arbeitssicherheit müssen in jeder Branche streng eingehalten werden. ### Требования к безопасности труда должны строго соблюдаться в каждой отрасли.
+Um erfolgreich zu sein, müssen Unternehmen auf die Bedürfnisse der Kunden eingehen. ### Чтобы быть успешными, компании должны отвечать потребностям клиентов.
+Als Programmierer muss man in der Lage sein, komplexe Codes zu schreiben. ### Как программист нужно уметь писать сложные коды.
+Der Geschäftsführer hat beschlossen, eine neue Marketingstrategie umzusetzen. ### Директор решил воплотить новую маркетинговую стратегию.
+Meine Mutter ist Lehrerin und unterrichtet in einer Grundschule. ### Моя мама учительница и преподает в начальной школе.
+Ich arbeite als Dolmetscher und übersetze zwischen Englisch und Deutsch. ### Я работаю переводчиком и перевожу между английским и немецким языками.
+In der Bankbranche muss man mit sensiblen Informationen umgehen können. ### В банковской отрасли нужно уметь работать с конфиденциальной информацией.
+Meine Kollegin ist eine hervorragende Verhandlerin und hat uns bei Vertragsverhandlungen sehr geholfen. ### Моя коллега отличная переговорщица и помогла нам в переговорах по контракту.
+Als Kellner muss man multitaskingfähig sein und in der Lage sein, unter Druck zu arbeiten. ### Как официант нужно уметь выполнять несколько задач одновременно и работать под давлением.
+Der Bauingenieur hat das Projekt erfolgreich abgeschlossen und das Gebäude pünktlich fertiggestellt. ### Инженер-строитель успешно завершил проект и своевременно завершил строительство здания.
+In der Modeindustrie muss man stets auf dem neuesten Stand bleiben und Trends vorhersagen können. ### В модной индустрии нужно всегда быть в курсе последних тенденций и уметь предсказывать тренды.
+Mein Bruder hat eine Ausbildung zum Elektriker gemacht und arbeitet jetzt für ein Energieunternehmen. ### Мой брат прошел обучение на электрика и теперь работает в энергетической компании.
+Der Projektleiter ist für die Koordination der Aufgaben und den reibungslosen Ablauf des Projekts verantwortlich. ### Руководитель проекта отвечает за координацию задач и бесперебойное выполнение проекта.
+Die Arbeit im sozialen Bereich erfordert Einfühlungsvermögen und Empathie. ### Работа в социальной сфере требует умения поставить себя на место других и эмпатии.
+Die meisten Unternehmen haben ein Ziel, Gewinne zu erwirtschaften. ### Большинство компаний имеют цель получать прибыль.
+Der IT-Bereich ist ein schnell wachsender Sektor, der ständig neue Technologien entwickelt. ### ИТ-отрасль - быстрорастущий сектор, который постоянно развивает новые технологии.
+Mein Freund ist Koch und arbeitet in einem Restaurant. Er ist sehr kreativ und experimentiert gerne mit neuen Rezepten. ### Мой друг повар и работает в ресторане. Он очень креативный и любит экспериментировать с новыми рецептами.
+In der Werbebranche geht es darum, Produkte und Dienstleistungen zu bewerben und zu verkaufen. ### В рекламной отрасли речь идет о том, чтобы продвигать и продавать продукты и услуги.
+Meine Schwägerin ist Designerin und entwirft Kleidung für eine Modemarke. ### Моя сестра по браку дизайнер и разрабатывает одежду для модного бренда.
+Der Beruf des Polizisten erfordert Mut, Entschlossenheit und einen starken Sinn für Gerechtigkeit. ### Профессия полицейского требует мужества, решительности и сильного чувства справедливости.
+Ein erfolgreicher Manager muss strategisch denken und in der Lage sein, ein Team zu führen. ### Успешный менеджер должен мыслить стратегически и уметь руководить командой.
+Die Arbeit als Journalist erfordert Recherche- und Schreibfähigkeiten sowie eine kritische Denkweise. ### Работа журналиста требует умения искать информацию и писать, а также критического мышления.
+In der Finanzbranche geht es um Geld, Investitionen und Risiken. ### В финансовой отрасли речь идет о деньгах, инвестициях и рисках.
+Als Psychologe muss man Verständnis und Empathie für die Probleme seiner Patienten haben. ### Как психолог нужно понимать и сочувствовать проблемам своих пациентов.
+Die Automobilindustrie ist ein wichtiger Wirtschaftszweig, der Millionen von Menschen beschäftigt. ### Автомобильная отрасль - важное направление экономики, которое занято миллионами людей.
+Mein Onkel ist Pilot und fliegt für eine internationale Fluggesellschaft. ### Мой дядя летает пилотом на международной авиакомпании.
+Die Arbeit im Tourismussektor kann sehr abwechslungsreich sein und bietet viele Möglichkeiten, andere Länder und Kulturen kennenzulernen. ### Работа в туристической сфере может быть очень разнообразной и предоставляет множество возможностей познакомиться с другими странами и культурами.
+Der Beruf des Archäologen erfordert Geduld, Ausdauer und ein tiefes Verständnis der Geschichte. ### Профессия археолога требует терпения, выносливости и глубокого понимания истории.
+In der Filmindustrie arbeiten viele verschiedene Berufe, wie Schauspieler, Regisseure, Kameraleute und Drehbuchautoren. ### В киноиндустрии работают множество разных профессий, таких как актеры, режиссеры, операторы и сценаристы.
+Der Beruf des Schriftstellers erfordert Kreativität, Vorstellungskraft und ein Talent für das Schreiben. ### Профессия писателя требует креативности, воображения и таланта к письму.
+Die Arbeit im Umweltschutzsektor ist wichtig, um die Natur und die Umwelt zu schützen und zu erhalten. ### Работа в сфере охраны окружающей среды важна для защиты и сохранения природы и окружающей среды.
+Ich suche eine Wohnung in der Innenstadt. ### Я ищу квартиру в центре города.
+Meine Eltern haben vor kurzem ein Haus gekauft. ### Мои родители недавно купили дом.
+Die Miete für diese Wohnung ist zu hoch. ### Аренда за эту квартиру слишком высокая.
+Ich möchte gerne eine Eigentumswohnung kaufen. ### Я хотел бы купить квартиру в собственности.
+In meiner Nachbarschaft gibt es viele alte Gebäude. ### В моем районе много старых зданий.
+Die Wohnung ist möbliert. ### Квартира меблирована.
+Ich habe eine Wohnung mit Balkon gefunden. ### Я нашел квартиру с балконом.
+Die Lage des Hauses ist sehr schön. ### Расположение дома очень красивое.
+Wir haben eine neue Küche in unserer Wohnung installiert. ### Мы установили новую кухню в нашей квартире.
+Das Haus verfügt über einen großen Garten. ### У дома есть большой сад.
+Meine WG besteht aus vier Zimmern und einer gemeinsamen Küche. ### Моя коммунальная квартира состоит из четырех комнат и общей кухни.
+Die Wohnungen in dieser Gegend sind sehr teuer. ### Квартиры в этом районе очень дорогие.
+Ich möchte in eine größere Wohnung umziehen. ### Я хотел бы переехать в более большую квартиру.
+Unser Haus hat einen Kamin im Wohnzimmer. ### В нашем доме есть камин в гостиной.
+Die Wohnung hat keinen Aufzug. ### В квартире нет лифта.
+Ich habe eine Wohnung in der Nähe des Parks gefunden. ### Я нашел квартиру рядом с парком.
+Der Vermieter verlangt eine Kaution. ### Арендодатель требует залоговый платеж.
+Die Wohnung hat einen schönen Ausblick auf den Fluss. ### В квартире красивый вид на реку.
+Ich muss dringend eine neue Wohnung finden. ### Мне срочно нужно найти новую квартиру.
+Unser Haus hat ein großes Schwimmbad im Garten. ### В нашем доме есть большой бассейн в саду.
+Die Wohnung ist renovierungsbedürftig. ### Квартира нуждается в ремонте.
+Ich wohne in einem Hochhaus im fünften Stock. ### Я живу в многоэтажном доме на пятом этаже.
+Die Wohnung hat zwei Schlafzimmer und ein Wohnzimmer. ### В квартире две спальни и гостиная.
+Die Heizung in meinem Haus funktioniert nicht richtig. ### Отопление в моем доме не работает должным образом.
+Ich möchte ein Haus am See kaufen. ### Я хотел бы купить дом на берегу озера.
+Der Balkon der Wohnung ist nach Süden ausgerichtet. ### Балкон квартиры ориентирован на юг.
+Wir haben eine Wohnung mit einer großen Terrasse gefunden. ### Мы нашли квартиру с большой террасой.
+Die Wohnung hat eine offene Küche. ### В квартире открытая кухня.
+Die Miete für mein Zimmer beträgt 300 Euro pro Monat. ### Аренда за мою комнату составляет 300 евро в месяц.
+Das Haus hat einen Keller für zusätzlichen Stauraum. ### У дома есть подвал для дополнительного хранения вещей.
+Ich suche eine Wohnung mit einem Balkon und einem Aufzug. ### Я ищу квартиру с балконом и лифтом.
+Das Haus hat einen großen Garten mit vielen Bäumen. ### У дома большой сад с множеством деревьев.
+Meine Wohnung ist in der Nähe von Geschäften und Restaurants. ### Моя квартира находится недалеко от магазинов и ресторанов.
+Das Haus wurde vor fünf Jahren gebaut. ### Дом был построен пять лет назад.
+Ich suche eine Wohnung in einer ruhigen Gegend. ### Я ищу квартиру в тихом районе.
+Meine Wohnung hat einen schönen Blick auf die Berge. ### Из моей квартиры открывается красивый вид на горы.
+Das Haus hat drei Stockwerke und einen Keller. ### Дом имеет три этажа и подвал.
+Die Wohnung hat eine Einbauküche. ### В квартире встроенная кухня.
+Die Miete für diese Wohnung ist günstig. ### Аренда за эту квартиру недорогая.
+Ich wohne in einer Wohnung mit einem großen Wohnzimmer. ### Я живу в квартире с большой гостиной.
+Im Sommer reisen viele Menschen ans Meer, um sich zu erholen. ### Летом многие люди едут на море, чтобы отдохнуть.
+Ich finde es schön, wenn man neue Kulturen auf Reisen kennenlernen kann. ### Я нахожу это красивым, когда на путешествиях можно познакомиться с новыми культурами.
+Die Unterkunft in einem Hostel ist oft günstiger als in einem Hotel. ### Проживание в хостеле часто бывает дешевле, чем в гостинице.
+Ich habe gehört, dass die Landschaft in den Alpen atemberaubend ist. ### Я слышал, что пейзажи в Альпах захватывающие.
+Man sollte vor der Abreise immer eine Reiseversicherung abschließen. ### Всегда стоит оформить страховку перед отъездом.
+Die Sehenswürdigkeiten in Paris sind weltweit bekannt. ### Достопримечательности Парижа всемирно известны.
+Ich liebe es, lokale Gerichte während meiner Reisen auszuprobieren. ### Я люблю пробовать местную кухню во время своих путешествий.
+Es ist wichtig, die Kultur und Sitten des Reiselandes zu respektieren. ### Важно уважать культуру и традиции страны, в которую вы путешествуете.
+Die meisten Fluggesellschaften erlauben nur ein begrenztes Gewicht für das Handgepäck. ### Большинство авиакомпаний разрешают ограниченный вес ручной клади.
+Wenn man ins Ausland reist, sollte man immer eine Kopie des Reisepasses dabei haben. ### Путешествуя за границу, всегда стоит иметь копию паспорта при себе.
+Ich habe gehört, dass die Strände auf den Malediven traumhaft schön sein sollen. ### Я слышал, что пляжи на Мальдивах должны быть великолепными.
+Auf einer Stadtrundfahrt kann man viele interessante Sehenswürdigkeiten entdecken. ### На экскурсии по городу можно открыть для себя множество интересных достопримечательностей.
+Das Hotelzimmer hatte einen wunderschönen Blick auf die Berge. ### В номере отеля был прекрасный вид на горы.
+Ich finde es toll, dass man mit dem Zug durch ganz Europa reisen kann. ### Мне кажется здорово, что можно путешествовать на поезде по всей Европе.
+Das Freilichtmuseum gibt einen Einblick in das Leben der Menschen vergangener Zeiten. ### Музей под открытым небом даёт представление о жизни людей прошлых времен.
+Die Atmosphäre auf dem Marktplatz in Marrakesch ist unvergleichlich. ### Атмосфера на рыночной площади в Марракеше неповторима.
+Ich empfehle, die Reise frühzeitig zu buchen, um günstigere Preise zu bekommen. ### Я рекомендую забронировать путешествие заранее, чтобы получить более выгодные цены.
+Die Fahrt mit dem Schiff auf dem Rhein war ein unvergessliches Erlebnis. ### Поездка на корабле по Рейну была незабываемым впечатлением.
+Die Besichtigung der Pyramiden von Gizeh gehört zu den Höhepunkten einer Ägyptenreise. ### Посещение пирамид Гизы является одним из главных моментов поездки в Египет.
+Beim Backpacking lernt man schnell neue Leute kennen und hat viel Freiheit. ### При путешествии с рюкзаком вы быстро знакомитесь с новыми людьми и имеете много свободы.
+Der Flughafen hat einen eigenen Bahnhof, von dem aus man schnell in die Innenstadt kommt. ### Аэропорт имеет собственную железнодорожную станцию, с которой быстро можно добраться в центр города.
+Im Reiseführer findet man viele nützliche Informationen über Sehenswürdigkeiten und lokale Gebräuche. ### В путеводителе можно найти много полезной информации о достопримечательностях и местных обычаях.
+Eine Wanderung durch die Berge kann anstrengend sein, aber die Aussicht ist es wert. ### Поход по горам может быть утомительным, но вид стоит того.
+Ich habe mich für eine geführte Tour durch die Altstadt von Rom entschieden. ### Я выбрал экскурсию с гидом по старому городу Рима.
+Das Nationalmuseum hat eine beeindruckende Sammlung von Kunstwerken und Artefakten. ### Национальный музей имеет впечатляющую коллекцию художественных произведений и артефактов.
+Eine Fahrradtour durch die Weinberge ist eine beliebte Aktivität in der Region. ### Велосипедная прогулка по виноградникам является популярным занятием в регионе.
+Ich habe eine Städtereise nach Barcelona gebucht, um die berühmten Bauwerke von Gaudí zu sehen. ### Я забронировал городскую поездку в Барселону, чтобы увидеть знаменитые сооружения Гауди.
+Die Fahrt mit dem Cable Car in San Francisco ist ein Highlight für viele Touristen. ### Поездка на канатной дороге в Сан-Франциско является главным моментом для многих туристов.
+In vielen europäischen Städten gibt es kostenfreie Stadtführungen zu Fuß. ### Во многих европейских городах есть бесплатные экскурсии пешком.
+Ein Besuch im Freizeitpark ist ein tolles Erlebnis für die ganze Familie. ### Посещение парка развлечений - отличное приключение для всей семьи.
+Die Oper ist eine wichtige Form der musikalischen Kunst. ### Опера является важной формой музыкального искусства.
+Das Gemälde von Van Gogh ist eines der bekanntesten der Welt. ### Картина Винсента ван Гога является одной из самых известных в мире.
+In Deutschland gibt es viele Festivals für klassische Musik. ### В Германии много фестивалей классической музыки.
+Der Roman von Goethe "Die Leiden des jungen Werthers" ist ein Meisterwerk der deutschen Literatur. ### Роман Гёте "Страдания юного Вертера" является шедевром немецкой литературы.
+Die Schauspielerin hat eine beeindruckende Leistung in dem Stück gezeigt. ### Актриса продемонстрировала впечатляющую игру в пьесе.
+Die Skulptur des Künstlers ist sehr ausdrucksstark. ### Скульптура художника очень выразительна.
+Die Ballettaufführung war sehr anmutig und präzise. ### Балетное представление было очень изящным и точным.
+Der Regisseur hat einen sehr interessanten Film gedreht. ### Режиссер снял очень интересный фильм.
+Das Museum hat eine beeindruckende Sammlung von antiken Artefakten. ### Музей имеет впечатляющую коллекцию древних артефактов.
+Der Komponist hat eine wunderschöne Melodie geschrieben. ### Композитор написал прекрасную мелодию.
+Das Theaterstück hat ein sehr unerwartetes Ende. ### Пьеса имеет очень неожиданное окончание.
+Der Maler hat viele berühmte Werke geschaffen. ### Художник создал много известных произведений.
+Der Dirigent hat das Orchester perfekt geleitet. ### Дирижер идеально руководил оркестром.
+Die Ausstellung zeigt eine interessante Sammlung moderner Kunst. ### Выставка показывает интересную коллекцию современного искусства.
+Der Film gewann viele Preise bei internationalen Filmfestivals. ### Фильм выиграл много наград на международных кинофестивалях.
+Die Schriftstellerin hat ein Buch über ihre Erfahrungen als Immigrantin geschrieben. ### Писательница написала книгу о своих опытах как иммигрантка.
+Der Komponist hat seine Inspiration aus der Natur gezogen. ### Композитор черпал свое вдохновение из природы.
+Das Theaterstück handelt von einer schwierigen familiären Beziehung. ### Пьеса рассказывает о сложных семейных отношениях.
+Der Bildhauer hat eine sehr realistische Statue geschaffen. ### Скульптор создал очень реалистичную статую.
+Die Band spielt eine Mischung aus Jazz und Rock. ### Группа играет смесь из джаза и рока.
+Die Operette ist eine leichtere Form der Oper. ### Оперетта является более легкой формой оперы.
+Der Maler ist bekannt für seine abstrakten Werke. ### Художник известен своими абстрактными произведениями.
+Der Komponist hat eine zeitgenössische Musikkomposition geschrieben. ### Композитор написал современную музыкальную композицию.
+Der Schriftsteller hat viele berühmte Bücher über die menschliche Psyche geschrieben. ### Писатель написал много известных книг о человеческой психологии.
+Das Konzert findet in der Philharmonie statt. ### Концерт состоится в филармонии.
+Der Regisseur hat den Film auf eine sehr kreative Weise inszeniert. ### Режиссер поставил фильм очень креативно.
+Die Ausstellung zeigt eine retrospektive Auswahl der Werke des Künstlers. ### Выставка показывает ретроспективный выбор работ художника.
+Der Schauspieler hat eine wichtige Rolle in dem Drama gespielt. ### Актер сыграл важную роль в драме.
+Der Choreograf hat eine Tanzperformance kreiert, die das Publikum begeisterte. ### Хореограф создал танцевальное выступление, которое восхитило публику.
+Das Gedicht des Dichters drückt eine tiefe Emotion aus. ### Стих поэта выражает глубокую эмоцию.
+Die Universität bietet eine breite Palette an Studiengängen an. ### Университет предлагает широкий спектр образовательных программ.
+Der Unterricht beginnt um acht Uhr morgens und dauert bis zum Nachmittag. ### Уроки начинаются в восемь утра и продолжаются до вечера.
+In der Schule lernen die Schüler verschiedene Fächer wie Mathematik, Geschichte und Sprachen. ### В школе ученики изучают различные предметы, такие как математика, история и языки.
+Ich möchte gerne mein Wissen in diesem Bereich vertiefen. ### Я хочу углубить свои знания в этой области.
+Nach dem Abitur hat sie beschlossen, im Ausland zu studieren. ### После окончания школы она решила учиться за границей.
+Die Studenten müssen am Ende des Semesters eine Prüfung ablegen. ### Студенты должны сдавать экзамен в конце семестра.
+Ich habe vor, ein Fernstudium zu absolvieren, um meine Karriere voranzutreiben. ### Я собираюсь пройти дистанционное обучение, чтобы продвинуть свою карьеру.
+Die Lehrer verwenden verschiedene Methoden, um den Schülern zu helfen, die Sprache zu erlernen. ### Учителя используют различные методы, чтобы помочь ученикам изучать язык.
+Das Bildungssystem in Deutschland ist sehr effektiv und hat einen hervorragenden Ruf. ### Система образования в Германии очень эффективна и имеет превосходную репутацию.
+Um an dieser Universität aufgenommen zu werden, müssen Sie bestimmte Zulassungsvoraussetzungen erfüllen. ### Чтобы быть принятым в этот университет, вы должны соответствовать определенным требованиям по приему.
+Die Studenten können ihre Kenntnisse durch praktische Übungen vertiefen. ### Студенты могут углубить свои знания практическими упражнениями.
+Die Schüler müssen ihre Hausaufgaben pünktlich abgeben, um gute Noten zu erhalten. ### Ученики должны сдавать свои домашние задания вовремя, чтобы получить хорошие оценки.
+Die Universität bietet verschiedene Austauschprogramme an, um den Studenten internationale Erfahrungen zu ermöglichen. ### Университет предлагает различные программы обмена, чтобы студенты могли получить международный опыт.
+Die Lehrer motivieren die Schüler, ihr Bestes zu geben und ihre Ziele zu erreichen. ### Учителя мотивируют учеников давать лучшее и достигать своих целей.
+Das Studium an einer privaten Hochschule kann teurer sein als an einer öffentlichen. ### Учеба в частном вузе может быть дороже, чем в государственном.
+Die Schüler können in der Bibliothek Bücher ausleihen, um ihre Hausaufgaben zu machen. ### Ученики могут брать книги в библиотеке, чтобы делать свои домашние задания.
+Die Lehrer passen den Unterricht an die Bedürfnisse der Schüler an. ### Учителя адаптируют уроки к потребностям учеников.
+Das Abitur ist eine wichtige Voraussetzung, um an einer Universität studieren zu können. ### Абитуриентская аттестация является важным условием для поступления в университет.
+Der Campus bietet verschiedene Einrichtungen wie eine Mensa, ein Fitnessstudio und einen Sportplatz. ### На кампусе есть различные учреждения, такие как столовая, спортзал и спортивная площадка.
+Die Schüler können ihre Sprachkenntnisse durch eine Sprachreise ins Ausland verbessern. ### Ученики могут улучшить свои языковые знания, отправившись на языковую поездку за границу.
+Die Schüler müssen eine mündliche Prüfung ablegen, um ihre Sprachkenntnisse zu demonstrieren. ### Ученики должны сдать устный экзамен, чтобы продемонстрировать свои языковые навыки.
+Die Universität bietet auch Online-Kurse für Fernstudierende an. ### Университет также предлагает онлайн-курсы для дистанционного обучения.
+Der Lehrplan umfasst theoretische und praktische Lerninhalte. ### Учебный план включает в себя теоретические и практические материалы.
+Um sich für ein Stipendium zu bewerben, müssen die Studenten einen bestimmten Notendurchschnitt haben. ### Чтобы подать заявку на стипендию, студенты должны иметь определенное среднее значение оценок.
+Der Unterricht in kleinen Gruppen ermöglicht eine individuellere Betreuung der Schüler. ### Обучение в малых группах позволяет более индивидуально заботиться о учениках.
+Die Prüfung besteht aus schriftlichen und mündlichen Teilen. ### Экзамен состоит из письменной и устной части.
+Die Schüler müssen eine Abschlussarbeit schreiben, um ihren Abschluss zu erhalten. ### Ученики должны написать дипломную работу, чтобы получить свой диплом.
+Die Universität bietet verschiedene Austauschprogramme mit Partneruniversitäten im Ausland an. ### Университет предлагает различные программы обмена с партнерскими университетами за границей.
+Die Schüler können sich für zusätzliche Kurse anmelden, um ihr Wissen in einem bestimmten Bereich zu vertiefen. ### Ученики могут записаться на дополнительные курсы, чтобы углубить свои знания в определенной области.
+Die Lehrer verwenden moderne Technologien wie interaktive Whiteboards, um den Unterricht zu gestalten. ### Учителя используют современные технологии, такие как интерактивные доски, чтобы проводить уроки.
+Eine gesunde Ernährung und ausreichend Bewegung sind wichtig für die Gesundheit. ### Здоровое питание и достаточная физическая активность важны для здоровья.
+Ich habe mich beim Sport verletzt und muss jetzt zum Arzt. ### Я получил травму во время спорта и теперь должен пойти к врачу.
+Mein Arzt hat mir Antibiotika verschrieben, um meine Infektion zu behandeln. ### Мой врач выписал мне антибиотики для лечения инфекции.
+Ich habe Halsschmerzen und kann kaum schlucken. ### У меня болит горло, и я едва могу глотать.
+Mein Vater hat Diabetes und muss Insulin spritzen. ### Мой отец страдает от диабета и вынужден колоть инсулин.
+Rauchen kann zu verschiedenen Gesundheitsproblemen führen, wie z.B. Lungenkrebs. ### Курение может привести к различным проблемам со здоровьем, таким как рак легких.
+Ich habe mir den Arm gebrochen und trage jetzt einen Gips. ### Я сломал руку и сейчас ношу гипс.
+Eine regelmäßige Vorsorgeuntersuchung kann helfen, Krankheiten frühzeitig zu erkennen. ### Регулярное прохождение профилактических обследований может помочь выявить заболевания на ранних стадиях.
+Ich habe Kopfschmerzen und nehme deshalb Schmerztabletten. ### У меня болит голова, и поэтому я принимаю обезболивающее.
+Impfungen können dazu beitragen, dass bestimmte Krankheiten ausgerottet werden. ### Вакцинация может способствовать уничтожению некоторых болезней.
+Meine Augen tun weh und ich habe Schwierigkeiten, zu sehen. ### Мои глаза болят, и я испытываю трудности с видением.
+Ich habe eine Allergie gegen Nüsse und muss immer vorsichtig sein, was ich esse. ### У меня аллергия на орехи, и я всегда должен быть осторожен в выборе еды.
+Mein Zahn tut weh und ich brauche eine Zahnfüllung. ### У меня болит зуб, и мне нужен пломбировочный материал.
+Die Krankenschwester hat mir Blut abgenommen, um es zu untersuchen. ### Медсестра взяла у меня кровь для анализа.
+Ich habe Probleme mit dem Magen und muss eine Magenspiegelung machen lassen. ### У меня проблемы с желудком, и мне нужно сделать гастроскопию.
+Eine ausreichende Hygiene kann dazu beitragen, Krankheiten zu vermeiden. ### Достаточная гигиена может помочь избежать заболеваний.
+Mein Arzt hat mir empfohlen, mehr Wasser zu trinken, um meine Nieren gesund zu halten. ### Мой врач порекомендовал мне пить больше воды, чтобы сохранить здоровье почек.
+Ich habe mich bei der Arbeit verbrannt und brauche eine Salbe, um die Wunde zu heilen. ### Я обжегся на работе и мне нужен мазь, чтобы залечить рану.
+Es ist wichtig, regelmäßig die Zähne zu putzen, um Karies zu vermeiden. ### Важно регулярно чистить зубы, чтобы избежать кариеса.
+Ich habe eine Grippe und muss im Bett bleiben, bis ich mich besser fühle. ### У меня грипп, и я должен оставаться в постели, пока не почувствую себя лучше.
+Mein Blutdruck ist zu hoch und ich muss Medikamente nehmen, um ihn zu senken. ### Мое кровяное давление слишком высокое, и мне нужно принимать лекарства, чтобы его снизить.
+Ich bin gegen Grippe geimpft, um mich vor der Krankheit zu schützen. ### Я привит против гриппа, чтобы защитить себя от болезни.
+Ich habe mich an einer Scherbe geschnitten und brauche eine Wundversorgung. ### Я порезался осколком и мне нужна обработка раны.
+Mein Bruder hat Asthma und muss regelmäßig einen Inhalator benutzen. ### У моего брата астма, и он должен регулярно использовать ингалятор.
+Eine ausreichende Schlafmenge kann zur Verbesserung der körperlichen und geistigen Gesundheit beitragen. ### Достаточное количество сна может способствовать улучшению физического и психического здоровья.
+Ich habe Rückenschmerzen und muss Physiotherapie machen, um meine Muskeln zu stärken. ### У меня болит спина, и мне нужно заниматься физиотерапией, чтобы укрепить мышцы.
+Ich habe eine Erkältung und muss viel Tee trinken, um meine Symptome zu lindern. ### У меня простуда, и мне нужно пить много чая, чтобы снять симптомы.
+Es ist wichtig, beim Radfahren einen Helm zu tragen, um Kopfverletzungen zu vermeiden. ### Важно носить шлем при катании на велосипеде, чтобы избежать травм головы.
+Mein Ohr tut weh, und ich denke, ich habe eine Ohrenentzündung. ### У меня болит ухо, и я думаю, что у меня воспаление уха.
+Eine ausgewogene Ernährung mit viel Gemüse und Obst kann dazu beitragen, Krankheiten vorzubeugen. ### Сбалансированное питание с большим количеством овощей и фруктов может помочь предотвратить заболевания.
+Viele Menschen gehen ins Fitnessstudio, um Muskeln aufzubauen und fit zu bleiben. ### Многие люди ходят в тренажерный зал, чтобы наращивать мышцы и быть в форме.
+Ich jogge jeden Morgen im Park, um meinen Körper fit zu halten. ### Я бегаю каждое утро в парке, чтобы поддерживать свое тело в форме.
+Der Schiedsrichter hat eine gelbe Karte gezeigt, weil der Spieler eine Regel gebrochen hat. ### Судья показал желтую карточку, потому что игрок нарушил правило.
+Beim Fußballspielen solltest du immer Schienbeinschoner tragen, um Verletzungen zu vermeiden. ### Во время игры в футбол ты всегда должен носить голенищи, чтобы избежать травм.
+Yoga ist eine Sportart, die Körper und Geist entspannt. ### Йога - это вид спорта, который успокаивает тело и разум.
+Der Marathon ist eine der anspruchsvollsten Laufveranstaltungen der Welt. ### Марафон - одно из самых требовательных беговых событий в мире.
+Tennis ist ein beliebter Sport, der sowohl Einzel- als auch Doppelspieler anzieht. ### Теннис - популярный вид спорта, который привлекает как игроков, играющих один на один, так и команды.
+Mein Fitnessstudio bietet viele verschiedene Kurse an, wie zum Beispiel Pilates und Zumba. ### Мой тренажерный зал предлагает множество различных курсов, таких как Пилатес и Зумба.
+Schwimmen ist eine großartige Möglichkeit, um fit zu bleiben und gleichzeitig den Körper zu entspannen. ### Плавание - отличный способ поддерживать форму и расслаблять тело.
+Ich bin ein großer Fan von Basketball und schaue gerne die Spiele meiner Lieblingsmannschaft. ### Я большой поклонник баскетбола и люблю смотреть игры моей любимой команды.
+Radfahren ist eine umweltfreundliche und gesunde Art der Fortbewegung. ### Езда на велосипеде - экологичный и здоровый способ передвижения.
+Beim Boxen müssen die Sportler hart trainieren, um ihre Technik zu perfektionieren. ### В боксе спортсмены должны усердно тренироваться, чтобы совершенствовать свою технику.
+Viele Menschen betreiben Krafttraining, um ihre Muskelkraft und Ausdauer zu verbessern. ### Многие люди занимаются силовыми тренировками, чтобы улучшить свою мышечную силу и выносливость.
+Das Skifahren erfordert eine gute Kondition und Technik, um sicher und schnell die Pisten hinunterzufahren. ### Лыжный спорт требует хорошей формы и техники, чтобы быстро и безопасно спускаться с горы.
+Einige Leute bevorzugen Mannschaftssportarten wie Fußball oder Basketball, während andere lieber individuelle Sportarten wie Schwimmen oder Laufen ausüben. ### Некоторые люди предпочитают командные виды спорта, такие как футбол или баскетбол, в то время как другие предпочитают индивидуальные виды спорта, такие как плавание или бег.
+Skaten ist ein beliebter Freizeitsport, der sowohl drinnen als auch draußen ausgeübt werden kann. ### Катание на скейте - популярный вид досуга, который можно заниматься как в помещении, так и на улице.
+Einige Menschen nehmen an Fitnesswettkämpfen teil, um ihre körperliche Fitness und Stärke zu demonstrieren. ### Некоторые люди участвуют в соревнованиях по фитнесу, чтобы продемонстрировать свою физическую подготовку и силу.
+Das Aufwärmen vor dem Sport ist wichtig, um Verletzungen zu vermeiden und die Leistung zu verbessern. ### Разминка перед спортом важна для предотвращения травм и улучшения результатов.
+Yoga ist nicht nur gut für den Körper, sondern auch für den Geist und kann helfen, Stress abzubauen. ### Йога полезна не только для тела, но и для души, она может помочь снять стресс.
+Einige Menschen nehmen an Wettkämpfen im Triathlon teil, bei denen sie schwimmen, radfahren und laufen müssen. ### Некоторые люди участвуют в соревнованиях по триатлону, где им приходится плавать, кататься на велосипеде и бегать.
+Die meisten Fitnessstudios bieten Personal Training an, um individuelle Bedürfnisse und Ziele der Kunden zu berücksichtigen. ### Большинство тренажерных залов предлагают персональное обучение, чтобы учитывать индивидуальные потребности и цели клиентов.
+Der Sprint ist eine Disziplin im Leichtathletik, die eine kurze, aber schnelle Laufstrecke erfordert. ### Спринт - это дисциплина легкой атлетики, которая требует короткой, но быстрой беговой дистанции.
+Pilates ist eine Form des Trainings, die den Körper kräftigt und die Flexibilität erhöht. ### Пилатес - это форма тренировки, которая укрепляет тело и повышает гибкость.
+Einige Menschen bevorzugen Outdoor-Sportarten wie Wandern oder Klettern, um die Natur zu genießen und gleichzeitig aktiv zu bleiben. ### Некоторые люди предпочитают занятия спортом на открытом воздухе, такие как походы или альпинизм, чтобы наслаждаться природой и оставаться активными.
+Der Basketballkorb ist 3,05 Meter hoch und hat einen Durchmesser von 45 Zentimetern. ### Корзина в баскетболе высотой 3,05 метра и диаметром 45 сантиметров.
+Joggen ist eine einfache, aber effektive Möglichkeit, um Ausdauer und körperliche Fitness zu verbessern. ### Бег является простым, но эффективным способом улучшения выносливости и физической формы.
+Das Spinning ist ein beliebtes Indoor-Radfahren-Training, das in Gruppen durchgeführt wird. ### Спиннинг - популярная групповая тренировка на велотренажере в помещении.
+Die Olympischen Spiele sind ein internationales Sportereignis, bei dem Athleten aus der ganzen Welt in verschiedenen Disziplinen antreten. ### Олимпийские игры - это международное спортивное событие, на котором спортсмены со всего мира соревнуются в различных дисциплинах.
+Die richtige Ernährung ist wichtig, um die Leistung beim Sport zu verbessern und den Körper mit ausreichend Nährstoffen zu versorgen. ### Правильное питание важно для улучшения результатов в спорте и обеспечения тела достаточным количеством питательных веществ.
+Ich esse gerne Pizza mit extra Käse. ### Я люблю пиццу с дополнительным сыром.
+Heute Abend koche ich ein leckeres Hähnchencurry. ### Сегодня вечером я готовлю вкусное куриное карри.
+Ich habe gestern ein neues Rezept für Gemüsepfanne ausprobiert. ### Вчера я попробовал новый рецепт овощной сковороды.
+Mein Lieblingsgericht ist Lasagne mit Hackfleisch. ### Мое любимое блюдо - лазанья с фаршем.
+In Italien esse ich immer Spaghetti Carbonara. ### В Италии я всегда ем спагетти карбонара.
+Ich trinke gerne frisch gepressten Orangensaft zum Frühstück. ### Я люблю пить свежевыжатый апельсиновый сок на завтрак.
+Heute Mittag gehe ich mit meinen Kollegen in ein chinesisches Restaurant. ### Сегодня в обед я пойду со своими коллегами в китайский ресторан.
+Für das Abendessen habe ich eine Quiche mit Spinat und Feta vorbereitet. ### На ужин я приготовил кушанье с шпинатом и фета.
+Ich esse kein Fleisch, deshalb bestelle ich immer vegetarische Gerichte. ### Я не ем мясо, поэтому всегда заказываю вегетарианские блюда.
+Meine Oma macht den besten Apfelkuchen der Welt. ### Моя бабушка делает лучший в мире яблочный пирог.
+Ich esse gerne Sushi mit Lachs und Avocado. ### Я люблю суши с лососем и авокадо.
+Wir haben gestern ein BBQ mit Freunden im Garten veranstaltet. ### Вчера мы устроили барбекю с друзьями в саду.
+Ich trinke gerne Tee mit Honig und Zitrone bei Erkältungen. ### Я люблю пить чай с медом и лимоном при простуде.
+In Deutschland isst man oft Bratwurst mit Sauerkraut. ### В Германии часто едят жареные сосиски с квашеной капустой.
+Ich esse keine Milchprodukte, deshalb trinke ich Sojamilch. ### Я не ем молочные продукты, поэтому пью соевое молоко.
+Meine Mutter macht die besten Pfannkuchen mit Ahornsirup. ### Моя мама делает лучшие блины с кленовым сиропом.
+Ich mag es, abends eine Tasse heiße Schokolade zu trinken. ### Мне нравится пить горячий шоколад вечером.
+Ich koche gerne mit frischen Kräutern wie Basilikum und Petersilie. ### Я люблю готовить с свежими травами, такими как базилик и петрушка.
+Ich esse nur Bio-Lebensmittel, weil ich auf meine Gesundheit achte. ### Я ем только органические продукты, потому что следлю за своим здоровьем.
+In Spanien gibt es leckere Tapas wie Patatas Bravas und Chorizo. ### В Испании есть вкусные закуски, такие как жареный картофель и колбаса чоризо.
+Ich esse gerne Scharfes, aber manchmal ist es zu viel für mich. ### Я люблю острое, но иногда это слишком для меня.
+Ich trinke immer Wasser zum Essen, um den Durst zu löschen. ### Я всегда пью воду во время еды, чтобы утолить жажду.
+In Frankreich isst man oft Croissants zum Frühstück. ### Во Франции часто едят круассаны на завтрак.
+Ich esse keine Schalentiere, weil ich allergisch bin. ### Я не ем морепродукты, потому что у меня аллергия.
+Mein Lieblingsgetränk ist ein Margarita-Cocktail mit Salzrand. ### Мой любимый напиток - коктейль Маргарита с соленой каймой.
+Ich koche oft Pasta mit Tomatensoße und Basilikum. ### Я часто готовлю пасту с томатным соусом и базиликом.
+Ich esse gerne japanische Ramen-Suppe mit Ei und Fleisch. ### Я люблю японскую суп Рамэн с яйцом и мясом.
+In Griechenland gibt es köstlichen Tzatziki-Dip mit Gurken und Knoblauch. ### В Греции есть вкусный соус Цацыки с огурцами и чесноком.
+Ich probiere gerne neue Gerichte aus verschiedenen Ländern. ### Я люблю пробовать новые блюда из разных стран.
+Ich esse immer ein Stück dunkle Schokolade als Nachtisch. ### Я всегда ем кусочек темного шоколада в качестве десерта.
+Mode ist für viele Menschen ein wichtiger Ausdruck ihrer Persönlichkeit. ### Мода для многих людей является важным выражением их личности.
+Die meisten Menschen achten darauf, dass ihre Kleidung bequem und praktisch ist. ### Большинство людей обращают внимание на то, чтобы их одежда была удобной и практичной.
+Für manche Menschen ist Mode eine Möglichkeit, ihre Individualität auszudrücken. ### Для некоторых людей мода - это способ выразить свою индивидуальность.
+Einige Menschen achten bei der Auswahl ihrer Kleidung besonders auf Qualität und Material. ### Некоторые люди обращают особое внимание на качество и материал при выборе одежды.
+Viele Menschen folgen den neuesten Modetrends, um mit der Zeit zu gehen. ### Многие люди следуют последним модным тенденциям, чтобы быть в тренде.
+Es gibt jedoch auch Menschen, die sich bewusst gegen Modetrends entscheiden und ihren eigenen Stil kreieren möchten. ### Однако есть и люди, которые сознательно отказываются от модных тенденций и хотят создать свой собственный стиль.
+In großen Städten ist die Mode oft sehr wichtig und ein wichtiger Bestandteil der Kultur. ### В крупных городах мода часто является очень важным и неотъемлемым элементом культуры.
+Einige Menschen geben viel Geld für Kleidung aus, während andere versuchen, günstige Angebote zu finden. ### Некоторые люди тратят много денег на одежду, тогда как другие пытаются найти выгодные предложения.
+Der persönliche Stil kann sich im Laufe der Zeit ändern, da sich auch der Geschmack ändert. ### Личный стиль может меняться со временем, поскольку меняется и вкус.
+Viele Menschen haben eine Vorliebe für bestimmte Marken und suchen gezielt nach Kleidung dieser Marken. ### Многие люди имеют предпочтение к определенным брендам и специально ищут одежду этих брендов.
+Die meisten Menschen tragen Kleidung, die ihrem Beruf oder ihren täglichen Aktivitäten entspricht. ### Большинство людей носят одежду, соответствующую их профессии или повседневным активностям.
+Für manche Menschen ist die Wahl der Kleidung eine Art Ritual, um sich auf den Tag vorzubereiten. ### Для некоторых людей выбор одежды является своего рода ритуалом, чтобы подготовиться к дню.
+Mode kann auch als Ausdruck von Status und Reichtum dienen. ### Мода также может служить выражением статуса и богатства.
+Viele Menschen lassen sich bei der Wahl ihrer Kleidung von Prominenten oder Vorbildern inspirieren. ### Многие люди получают вдохновение для выбора своей одежды от знаменитостей или кумиров.
+Einige Menschen bevorzugen bestimmte Farben oder Muster in ihrer Kleidung, um ihre Persönlichkeit auszudrücken. ### Некоторые люди предпочитают определенные цвета или узоры в своей одежде, чтобы выразить свою личность.
+In manchen Berufen ist eine bestimmte Kleiderordnung vorgeschrieben, um Professionalität auszudrücken. ### В некоторых профессиях требуется определенный дресс-код, чтобы выразить профессионализм.
+Accessoires wie Schmuck oder Taschen können das Aussehen und den Stil einer Person komplett verändern. ### Аксессуары, такие как украшения или сумки, могут полностью изменить внешний вид и стиль человека.
+Die Wahl der Kleidung kann auch von kulturellen oder religiösen Überzeugungen beeinflusst werden. ### Выбор одежды может также быть повлиян культурными или религиозными убеждениями.
+Manche Menschen bevorzugen Vintage-Kleidung oder Second-Hand-Mode, um Nachhaltigkeit und Umweltschutz zu fördern. ### Некоторые люди предпочитают винтажную одежду или одежду бывшего пользования, чтобы способствовать устойчивости и экологической безопасности.
+Die Wahl der Kleidung kann auch davon abhängen, ob man sich in der Öffentlichkeit oder im privaten Umfeld befindet. ### Выбор одежды также может зависеть от того, находитесь ли вы в общественном месте или в частной обстановке.
+Die U-Bahn ist pünktlich angekommen. ### Метро прибыло вовремя.
+Vor dem Überqueren der Straße sollten Fußgänger auf den Verkehr achten. ### Перед переходом дороги пешеходам следует обратить внимание на транспорт.
+Der Fahrer hat das Stoppschild übersehen und ist weitergefahren. ### Водитель не заметил знак стоп и продолжил движение.
+Der Flug wurde aufgrund von schlechtem Wetter gestrichen. ### Рейс был отменен из-за плохой погоды.
+Ich habe einen neuen Fahrradhelm gekauft, um sicherer zu fahren. ### Я купил новый велошлем, чтобы ездить безопаснее.
+Der Busfahrer hat uns geraten, unsere Taschen und Rucksäcke auf den Boden zu stellen, um die Fahrt zu erleichtern. ### Водитель автобуса посоветовал нам поставить наши сумки и рюкзаки на пол, чтобы сделать поездку более комфортной.
+Die Autobahn ist wegen eines Unfalls gesperrt. ### Автострада закрыта из-за аварии.
+Ich bin mit dem Zug gefahren und habe ein Ticket für die 2. Klasse gekauft. ### Я ехал на поезде и купил билет на 2-й класс.
+Die Parkplätze in der Innenstadt sind immer sehr knapp. ### Парковочные места в центре города всегда очень ограничены.
+Der LKW hat den Tunnel nicht passieren können, weil er zu groß war. ### Грузовик не смог проехать через туннель, потому что был слишком большим.
+Ich bin gestern mit dem Fahrrad zur Arbeit gefahren. ### Вчера я поехал на работу на велосипеде.
+Der Zug hat eine Verspätung von 30 Minuten. ### Поезд задерживается на 30 минут.
+Ich muss meinen Führerschein erneuern lassen. ### Мне нужно обновить мои права.
+Der Flughafen hat einen kostenlosen Shuttlebus zum Parkplatz. ### Аэропорт предоставляет бесплатный шаттл-бас на парковку.
+Der Radweg ist sehr gut ausgeschildert. ### Велодорожка очень хорошо обозначена.
+Ich bin letzte Nacht mit dem Nachtbus nach Hause gefahren. ### Я ехал на ночном автобусе домой прошлой ночью.
+Ich habe meinen Wagen in einer Parkgarage abgestellt. ### Я припарковал свой автомобиль в парковочной гараже.
+Der Flugzeugmotor hat ein lautes Geräusch gemacht. ### Двигатель самолета издавал громкий звук.
+Die Straße ist wegen Bauarbeiten gesperrt. ### Дорога закрыта из-за строительных работ.
+Der Reisebus fährt direkt zum Hotel. ### Автобус для туристов едет прямо к отелю.
+Die Straßenbahn fährt alle 10 Minuten. ### Трамвай ходит каждые 10 минут.
+Die Maut für die Autobahn wird bald erhöht. ### Скоро повысят плату за проезд по автостраде.
+Ich habe gestern eine Fahrt mit dem Motorrad gemacht. ### Вчера я совершил поездку на мотоцикле.
+Der Zugbegleiter kontrolliert die Tickets im Zug. ### Контролер проверяет билеты в поезде.
+Das Schiff legt um 14 Uhr am Hafen ab. ### Корабль отправляется из порта в 14:00.
+Die Fahrbahn ist nass und rutschig. ### Дорожное покрытие мокрое и скользкое.
+Das Auto hat einen platten Reifen. ### У машины спущен один из шин.
+Die Bahnsteige sind durch Rolltreppen und Aufzüge zugänglich. ### Платформы доступны через эскалаторы и лифты.
+Die Tankstelle hat rund um die Uhr geöffnet. ### Автозаправка открыта круглосуточно.
+Der LKW ist auf der Autobahn liegengeblieben. ### Грузовик остался лежать на автостраде.
+Die Luftverschmutzung in Großstädten ist ein großes Problem. ### В городах загрязнение воздуха является большой проблемой.
+Viele Tiere sind vom Aussterben bedroht. ### Многие животные находятся под угрозой исчезновения.
+Die Abholzung des Regenwaldes ist eine der größten Umweltkatastrophen unserer Zeit. ### Вырубка лесов тропической зоны является одним из крупнейших экологических катастроф нашего времени.
+Recycling ist eine einfache Möglichkeit, Abfall zu reduzieren und die Umwelt zu schonen. ### Переработка - это простой способ уменьшить отходы и защитить окружающую среду.
+Der Klimawandel hat Auswirkungen auf die ganze Welt. ### Изменение климата оказывает влияние на весь мир.
+Der Wasserverbrauch sollte reduziert werden, um Ressourcen zu schonen. ### Потребление воды следует сократить, чтобы сохранить ресурсы.
+Die Umweltverschmutzung beeinflusst die Gesundheit von Mensch und Tier. ### Загрязнение окружающей среды влияет на здоровье человека и животных.
+Die Nutzung erneuerbarer Energien ist eine Möglichkeit, die Umweltbelastung zu verringern. ### Использование возобновляемых источников энергии - это способ уменьшить нагрузку на окружающую среду.
+Die Zerstörung von natürlichen Lebensräumen hat schwerwiegende Folgen für die Artenvielfalt. ### Уничтожение естественных сред обитания имеет серьезные последствия для биоразнообразия.
+Die Erderwärmung hat dazu geführt, dass viele Gletscher schmelzen. ### Глобальное потепление привело к тому, что многие ледники тают.
+Plastikmüll im Meer ist eine Gefahr für die Meeresbewohner und die Umwelt. ### Пластиковые отходы в море представляют опасность для жителей моря и окружающей среды.
+Der Einsatz von Pestiziden und Herbiziden hat negative Auswirkungen auf die Umwelt. ### Использование пестицидов и гербицидов оказывает негативное воздействие на окружающую среду.
+Der Raubbau an natürlichen Ressourcen hat zur Übernutzung und Verschlechterung von Ökosystemen geführt. ### Безрассудное использование природных ресурсов привело к истощению и ухудшению экосистем.
+Die Luftqualität in den Städten hat sich in den letzten Jahren verschlechtert. ### Качество воздуха в городах в последние годы ухудшилось.
+Die Abfalltrennung ist ein wichtiger Schritt zur Reduzierung von Müll und zum Schutz der Umwelt. ### Разделение отходов - это важный шаг для сокращения мусора и защиты окружающей среды.
+Der Verbrauch von fossilen Brennstoffen ist einer der Hauptursachen für den Klimawandel. ### Потребление ископаемого топлива является одной из основных причин изменения климата.
+Der Schutz von Wäldern und anderen natürlichen Lebensräumen ist wichtig für den Erhalt der Artenvielfalt. ### Защита лесов и других естественных сред обитания важна для сохранения биоразнообразия.
+Der Ausbau erneuerbarer Energien ist eine Möglichkeit, die Abhängigkeit von fossilen Brennstoffen zu verringern. ### Расширение использования возобновляемых источников энергии - это способ сократить зависимость от ископаемого топлива.
+Der steigende Meeresspiegel ist eine Folge des Klimawandels und stellt eine Bedrohung für Küstengebiete dar. ### Подъем уровня моря - это последствие изменения климата и представляет угрозу для прибрежных районов.
+Der Schutz von Biodiversität und Ökosystemen ist eine Aufgabe, die alle Länder gemeinsam angehen müssen. ### Защита биоразнообразия и экосистем - это задача, которую все страны должны решать совместно.
+Die Verschmutzung von Gewässern durch Industrieabfälle und Abwässer ist ein großes Umweltproblem. ### Загрязнение водоемов промышленными отходами и сточными водами - это большая проблема для окружающей среды.
+Die Nutzung von Elektroautos kann dazu beitragen, den Ausstoß von Treibhausgasen zu reduzieren. ### Использование электромобилей может помочь снизить выбросы парниковых газов.
+Die Überfischung von Meeren und Flüssen gefährdet viele Fischarten und das ökologische Gleichgewicht. ### Избыточная рыбалка в морях и реках угрожает многим видам рыб и экологическому балансу.
+Der Klimawandel beeinflusst nicht nur die Umwelt, sondern auch die Wirtschaft und die Gesellschaft. ### Изменение климата влияет не только на окружающую среду, но и на экономику и общество.
+Die Förderung erneuerbarer Energien sollte stärker unterstützt werden, um den Umstieg auf saubere Energiequellen zu beschleunigen. ### Поддержка использования возобновляемых источников энергии должна быть усилена, чтобы ускорить переход на чистые источники энергии.
+Die globale Erwärmung hat zur Verschiebung von Klimazonen und zum Anstieg von Extremwetterereignissen geführt. ### Глобальное потепление привело к изменению климатических зон и увеличению экстремальных погодных явлений.
+Der Verlust von natürlichen Lebensräumen durch den Bau von Infrastruktur und menschliche Siedlungen bedroht viele Tier- und Pflanzenarten. ### Потеря естественных сред обитания из-за строительства инфраструктуры и населенных пунктов угрожает многим видам животных и растений.
+Die Müllverbrennung ist eine umstrittene Methode zur Entsorgung von Abfall, da sie schädliche Emissionen freisetzt. ### Сжигание мусора - это спорный способ утилизации отходов, так как оно выделяет вредные выбросы.
+Die Verschmutzung von Böden durch Chemikalien und Schwermetalle kann die Qualität von Lebensmitteln beeinträchtigen und die Gesundheit gefährden. ### Загрязнение почвы химикатами и тяжелыми металлами может повлиять на качество продуктов питания и угрожать здоровью.
+Armut und Obdachlosigkeit sind in vielen Städten ein großes Problem. ### Бедность и бездомность являются большой проблемой во многих городах.
+In Deutschland gibt es eine hohe Jugendarbeitslosigkeit. ### В Германии высокий уровень безработицы среди молодежи.
+Viele Menschen leiden unter Einsamkeit und sozialer Isolation. ### Многие люди страдают от одиночества и социальной изоляции.
+Die Kluft zwischen Arm und Reich wird immer größer. ### Разрыв между бедными и богатыми становится все больше.
+Gewalt in der Familie ist ein ernstes Problem, das oft tabuisiert wird. ### Насилие в семье является серьезной проблемой, которая часто табуируется.
+Die Integration von Migranten stellt die Gesellschaft vor große Herausforderungen. ### Интеграция мигрантов представляет для общества большие вызовы.
+Alkohol- und Drogenmissbrauch sind weitverbreitete Probleme in vielen Ländern. ### Злоупотребление алкоголем и наркотиками - широко распространенная проблема во многих странах.
+Diskriminierung aufgrund von Hautfarbe, Religion oder Geschlecht ist ein ernstes gesellschaftliches Problem. ### Дискриминация на основе цвета кожи, религии или пола - серьезная социальная проблема.
+Umweltprobleme wie Klimawandel und Umweltverschmutzung betreffen uns alle. ### Проблемы окружающей среды, такие как изменение климата и загрязнение окружающей среды, затрагивают нас всех.
+Eine alternde Gesellschaft stellt uns vor neue Herausforderungen. ### Стареющее общество ставит перед нами новые вызовы.
+Die Arbeitsbedingungen vieler Menschen sind oft prekär und unsicher. ### Рабочие условия многих людей часто являются ненадежными и неустойчивыми.
+Die Bildungschancen sind in vielen Ländern ungleich verteilt. ### Возможности получения образования неравномерно распределены во многих странах.
+Korruption und Bestechung sind in vielen Ländern ein großes Problem. ### Коррупция и взяточничество являются большой проблемой во многих странах.
+Die Digitalisierung verändert die Arbeitswelt und wirft neue Fragen auf. ### Цифровизация меняет мир труда и ставит новые вопросы.
+Die Wohnungsnot in vielen Städten verschärft sich zunehmend. ### Проблема жилищного дефицита во многих городах усугубляется.
+Die wirtschaftliche Globalisierung führt zu sozialen Ungleichheiten und Herausforderungen. ### Экономическая глобализация приводит к социальным неравенствам и вызовам.
+Die Arbeitslosigkeit von älteren Arbeitnehmern ist ein großes Problem. ### Безработица среди пожилых работников является большой проблемой.
+Mobbing am Arbeitsplatz hat oft schwerwiegende Folgen für die betroffenen Personen. ### Школьный буллинг имеет часто серьезные последствия для затронутых лиц.
+Menschenrechtsverletzungen sind leider noch immer an der Tagesordnung. ### Нарушения прав человека до сих пор на повестке дня.
+Die Vereinbarkeit von Beruf und Familie ist ein wichtiges Thema, das noch immer nicht ausreichend angegangen wird. ### Сочетание работы и семьи является важной темой, которая до сих пор не решена должным образом.
+Die Obdachlosigkeit von Flüchtlingen ist ein wachsendes Problem. ### Бездомность беженцев - растущая проблема.
+Der demographische Wandel führt zu einer Überalterung der Gesellschaft. ### Демографические изменения приводят к старению общества.
+Die Gleichberechtigung von Frauen und Männern ist noch immer nicht überall verwirklicht. ### Равноправие мужчин и женщин до сих пор не везде реализовано.
+Die Zunahme von psychischen Erkrankungen stellt das Gesundheitssystem vor neue Herausforderungen. ### Рост числа психических заболеваний ставит перед системой здравоохранения новые задачи.
+Die soziale Absicherung von Rentnern ist in vielen Ländern ein umstrittenes Thema. ### Социальное обеспечение пенсионеров является спорным вопросом во многих странах.
+Die Ausbeutung von Arbeitskräften in Entwicklungsländern ist ein ethisches Problem. ### Эксплуатация рабочей силы в развивающихся странах является этической проблемой.
+Die Zunahme von Hass und Intoleranz in der Gesellschaft ist besorgniserregend. ### Рост ненависти и нетерпимости в обществе вызывает беспокойство.
+Der Klimawandel hat Auswirkungen auf die gesamte Gesellschaft und Umwelt. ### Изменение климата оказывает влияние на всю общественную жизнь и окружающую среду.
+Die Integration von Menschen mit Behinderung in die Gesellschaft ist noch immer nicht ausreichend. ### Интеграция людей с ограниченными возможностями в общество до сих пор не является достаточной.
+Die mangelnde Chancengleichheit in Bildung und Beruf führt zu sozialen Ungleichheiten. ### Недостаток равных возможностей в образовании и трудоустройстве приводит к социальным неравенствам.
+Viele Menschen nutzen heutzutage mobile Geräte wie Smartphones und Tablets, um ins Internet zu gehen. ### Многие люди сегодня используют мобильные устройства, такие как смартфоны и планшеты, чтобы выйти в Интернет.
+Die meisten Computer verfügen über eine Maus und eine Tastatur, um die Benutzerinteraktion zu erleichtern. ### Большинство компьютеров имеют мышь и клавиатуру для облегчения взаимодействия пользователя.
+Die Cloud-Technologie ermöglicht es Benutzern, Daten in entfernten Servern zu speichern und darauf zuzugreifen. ### Технология облачных вычислений позволяет пользователям хранить данные на удаленных серверах и получать к ним доступ.
+Die Entwicklung von künstlicher Intelligenz hat zu zahlreichen Anwendungen geführt, die die Arbeitsabläufe verbessern und effizienter gestalten. ### Развитие искусственного интеллекта привело к множеству приложений, которые улучшают рабочие процессы и делают их более эффективными.
+Die Verschlüsselung von Daten ist ein wichtiger Schutzmechanismus gegen unbefugten Zugriff und Diebstahl. ### Шифрование данных является важным механизмом защиты от несанкционированного доступа и кражи.
+Ein Betriebssystem ist die grundlegende Software, die auf einem Computer installiert wird und die Steuerung aller Hardware- und Softwarekomponenten übernimmt. ### Операционная система является базовым программным обеспечением, устанавливаемым на компьютер, и управляет всеми аппаратными и программными компонентами.
+Die Entwickler von Software müssen sicherstellen, dass ihre Produkte sicher und zuverlässig sind, um Benutzerdaten zu schützen und einen reibungslosen Betrieb zu gewährleisten. ### Разработчики программного обеспечения должны гарантировать, что их продукты безопасны и надежны, чтобы защитить пользовательские данные и обеспечить бесперебойную работу.
+Die Verbreitung von Computern und Internet hat zu einem globalen Wandel in der Art und Weise geführt, wie Menschen miteinander kommunizieren und zusammenarbeiten. ### Распространение компьютеров и Интернета привело к глобальным изменениям в способе, которым люди общаются и сотрудничают.
+Das Internet der Dinge (IoT) ermöglicht es Geräten, miteinander zu kommunizieren und Informationen auszutauschen, um die Benutzererfahrung zu verbessern. ### Интернет вещей (IoT) позволяет устройствам обмениваться информацией и взаимодействовать друг с другом для улучшения опыта пользователей.
+Ein Computer-Virus ist ein Schadprogramm, das sich auf einem Computer ausbreiten und Daten beschädigen oder stehlen kann. ### Компьютерный вирус - это вредоносная программа, которая может распространяться на компьютере и повреждать или красть данные.
+Ein Browser ist eine Software, mit der Benutzer im Internet surfen und auf Webseiten zugreifen können. ### Браузер - это программа, с помощью которой пользователи могут просматривать Интернет и получать доступ к веб-страницам.
+Ein Backup ist eine Sicherungskopie von Daten, die erstellt wird, um diese im Falle eines Datenverlustes wiederherstellen zu können. ### Резервное копирование - это резервное копирование данных, создаваемое для возможности их восстановления в случае потери данных.
+Ein WLAN ist ein kabelloses Netzwerk, das es Benutzern ermöglicht, drahtlos auf das Internet zuzugreifen und miteinander zu kommunizieren. ### WLAN - это беспроводная сеть, которая позволяет пользователям беспроводно получать доступ в Интернет и общаться друг с другом.
+Eine Datenbank ist eine strukturierte Sammlung von Daten, die organisiert und abgerufen werden kann, um Informationen zu speichern und zu verwalten. ### База данных - это структурированная коллекция данных, которые могут быть организованы и получены для хранения и управления информацией.
+Ein Betriebssystem-Update ist eine Aktualisierung der Software auf einem Computer, um Fehler zu beheben und neue Funktionen hinzuzufügen. ### Обновление операционной системы - это обновление программного обеспечения на компьютере для исправления ошибок и добавления новых функций.
+Ein Passwort ist eine geheime Kombination aus Zahlen, Buchstaben und Symbolen, die verwendet wird, um den Zugriff auf ein Gerät oder eine Anwendung zu schützen. ### Пароль - это секретная комбинация из цифр, букв и символов, используемая для защиты доступа к устройству или приложению.
+Ein Scanner ist ein Gerät, das Bilder oder Texte digitalisiert und in ein Computerformat umwandelt. ### Сканер - это устройство, которое преобразует изображения или тексты в цифровой формат для компьютера.
+Social-Media-Plattformen wie Facebook und Twitter ermöglichen es Benutzern, miteinander zu kommunizieren und Inhalte zu teilen. ### Социальные платформы, такие как Facebook и Twitter, позволяют пользователям общаться друг с другом и делиться контентом.
+Ein Cloud-Speicher ist ein Service, der es Benutzern ermöglicht, Daten auf entfernten Servern zu speichern und darauf zuzugreifen. ### Облачное хранилище - это сервис, который позволяет пользователям хранить данные на удаленных серверах и получать к ним доступ.
+Ein Computerprogramm ist eine Reihe von Anweisungen, die auf einem Computer ausgeführt werden, um bestimmte Aufgaben auszuführen. ### Компьютерная программа - это набор инструкций, которые выполняются на компьютере, чтобы выполнить определенные задачи.
+Ein Betriebssystem-Absturz ist ein unerwartetes Beenden des Betriebssystems auf einem Computer, das zu Datenverlust führen kann. ### Аварийное завершение операционной системы - это неожиданное завершение работы операционной системы на компьютере, которое может привести к потере данных.
+Ein Touchscreen ist ein Bildschirm, auf dem Benutzer durch Berührung interagieren können, anstatt eine Maus oder Tastatur zu verwenden. ### Сенсорный экран - это экран, на котором пользователи могут взаимодействовать прикосновением, а не использовать мышь или клавиатуру.
+Ein Hacker ist eine Person, die versucht, unbefugten Zugriff auf ein Computersystem oder ein Netzwerk zu erlangen. ### Хакер - это человек, который пытается получить несанкционированный доступ к компьютерной системе или сети.
+Das Unternehmen plant, in den nächsten Jahren in neue Märkte zu expandieren. ### Компания планирует расшириться на новые рынки в следующие годы.
+Der Gewinn des Unternehmens hat sich in diesem Quartal verdoppelt. ### Прибыль компании удвоилась в этом квартале.
+Der Kunde hat eine Beschwerde über das Produkt eingereicht. ### Клиент подал жалобу на продукт.
+Die Bank bietet verschiedene Finanzprodukte wie Kredite und Sparbücher an. ### Банк предлагает различные финансовые продукты, такие как кредиты и сберегательные книжки.
+Das Unternehmen hat eine neue Marketingstrategie entwickelt, um mehr Kunden zu gewinnen. ### Компания разработала новую маркетинговую стратегию, чтобы привлечь больше клиентов.
+Der Börsenkurs ist gestiegen, was für Aktionäre positiv ist. ### Курс на бирже вырос, что положительно для акционеров.
+Das Unternehmen hat angekündigt, dass es Mitarbeiter entlassen wird. ### Компания объявила о том, что она будет увольнять сотрудников.
+Der Wettbewerb in der Branche ist sehr hoch. ### Конкуренция в отрасли очень высокая.
+Die Firma hat ein neues Produkt auf den Markt gebracht. ### Фирма выпустила на рынок новый продукт.
+Die Inflation hat in den letzten Monaten zugenommen. ### Инфляция за последние несколько месяцев возросла.
+Der CEO hat in einer Pressekonferenz die neuesten Unternehmensergebnisse vorgestellt. ### Генеральный директор представил на пресс-конференции последние результаты компании.
+Das Unternehmen hat beschlossen, in erneuerbare Energien zu investieren. ### Компания решила инвестировать в возобновляемые источники энергии.
+Der Umsatz des Unternehmens ist im letzten Jahr um 20% gestiegen. ### Оборот компании вырос на 20% в прошлом году.
+Die Geschäftsleitung hat beschlossen, das Personal zu reduzieren, um Kosten zu sparen. ### Руководство компании решило сократить персонал, чтобы сэкономить расходы.
+Die Firma hat einen Vertrag mit einem neuen Lieferanten abgeschlossen. ### Компания заключила контракт с новым поставщиком.
+Der Kunde hat das Produkt zurückgegeben, weil es defekt war. ### Клиент вернул продукт, потому что он был бракованным.
+Das Unternehmen hat eine Fusion mit einem anderen Unternehmen angekündigt. ### Компания объявила о слиянии с другой компанией.
+Die Bank hat den Kreditantrag des Kunden abgelehnt. ### Банк отказал в заявке на кредит клиента.
+Die Geschäftsleitung hat beschlossen, das Unternehmen zu verkaufen. ### Руководство компании решило продать компанию.
+Die Börse hat heute geschlossen, weil ein Feiertag ist. ### Биржа сегодня закрыта, потому что есть праздник.
+Die Firma hat eine Fusion mit einem Konkurrenten abgelehnt. ### Компания отказалась от слияния с конкурентом.
+Der Aufsichtsrat hat beschlossen, den Vorstandsvorsitzenden abzusetzen. ### Совет директоров решил отстранить главного исполнительного директора.
+Die Bank hat ihren Kunden eine höhere Verzinsung für Einlagen angeboten. ### Банк предложил своим клиентам более высокую процентную ставку на вклады.
+Das Unternehmen hat in eine neue Produktionsstätte investiert. ### Компания инвестировала в новый производственный объект.
+Der Kunde hat eine Bestellung storniert, bevor sie versandt wurde. ### Клиент отменил заказ, до его отправки.
+Das Unternehmen hat ein neues Patent angemeldet. ### Компания подала заявку на новое патентное свидетельство.
+Die Bank hat den Kreditrahmen für das Unternehmen erhöht. ### Банк увеличил кредитный лимит для компании.
+Der Geschäftsführer hat beschlossen, neue Mitarbeiter einzustellen. ### Управляющий решил нанять новых сотрудников.
+Das Unternehmen hat ein Angebot für eine Übernahme erhalten. ### Компания получила предложение о поглощении.
+Der Kunde hat das Angebot des Unternehmens akzeptiert und einen Vertrag unterschrieben. ### Клиент принял предложение компании и подписал контракт.
+Die Berliner Mauer fiel im Jahr 1989 und markierte das Ende des Kalten Krieges. ### Берлинская стена упала в 1989 году и ознаменовала конец Холодной войны.
+Das Schloss Neuschwanstein ist eine bekannte Touristenattraktion in Bayern. ### Замок Нойшванштайн является известной туристической достопримечательностью в Баварии.
+Goethes Faust ist ein Klassiker der deutschen Literatur. ### "Фауст" Гёте - классика немецкой литературы.
+Die Römer haben viele Spuren in Deutschland hinterlassen, zum Beispiel das Kastell Saalburg. ### Римляне оставили много следов в Германии, например, кастелл Зальбург.
+Die Brüder Grimm haben viele bekannte Märchen gesammelt und veröffentlicht. ### Братья Гримм собрали и опубликовали много известных сказок.
+Das Oktoberfest in München zieht jedes Jahr Millionen von Besuchern aus der ganzen Welt an. ### Октоберфест в Мюнхене каждый год привлекает миллионы посетителей со всего мира.
+Die Berliner Philharmoniker sind eines der bekanntesten Orchester der Welt. ### Берлинские филармоники - один из самых известных оркестров в мире.
+Die Berliner Museumsinsel beherbergt einige der wichtigsten Museen Deutschlands. ### Музейный остров в Берлине содержит некоторые из важнейших музеев Германии.
+Die Lutherbibel war eine wichtige Übersetzung der Bibel ins Deutsche. ### Лютеровский перевод Библии был важным переводом Библии на немецкий язык.
+Der Kölner Dom ist eines der bekanntesten Wahrzeichen Deutschlands. ### Кёльнский собор - один из самых известных символов Германии.
+Die Deutsche Wiedervereinigung im Jahr 1990 war ein historisches Ereignis. ### Объединение Германии в 1990 году было историческим событием.
+Das Brandenburger Tor in Berlin ist ein wichtiges Symbol für die deutsche Geschichte. ### Бранденбургские ворота в Берлине - важный символ немецкой истории.
+Die Bayreuther Festspiele sind ein bekanntes Festival für Wagner-Opern. ### Байройтские фестивали - известный фестиваль опер Рихарда Вагнера.
+Der Krieg hat viele Spuren in der deutschen Geschichte hinterlassen. ### Война оставила много следов в немецкой истории.
+Das Oktoberfest geht auf eine königliche Hochzeit zurück, die im Jahr 1810 stattfand. ### Октоберфест относится к королевской свадьбе, которая состоялась в 1810 году.
+Die deutschen Expressionisten haben die moderne Kunst im 20. Jahrhundert geprägt. ### Немецкие экспрессионисты сформировали современное искусство в 20 веке.
+Das Schloss Sanssouci war die Sommerresidenz von Friedrich dem Großen. ### Замок Санссуси был летней резиденцией Фридриха Великого.
+Die Nürnberger Prozesse waren eine wichtige Phase der deutschen Geschichte nach dem Zweiten Weltkrieg. ### Нюрнбергские процессы были важным этапом немецкой истории после Второй мировой войны.
+Die UNESCO hat viele deutsche Stätten zum Weltkulturerbe erklärt, wie zum Beispiel die Wartburg. ### ЮНЕСКО объявила многие немецкие достопримечательности объектами Всемирного культурного наследия, такие как Вартбург.
+Die Frankfurter Buchmesse ist eine wichtige Veranstaltung für die Verlagsbranche. ### Франкфуртская книжная ярмарка является важным мероприятием для издательской отрасли.
+Der Deutsche Orden spielte eine wichtige Rolle in der Geschichte des Baltikums. ### Немецкий орден сыграл важную роль в истории Прибалтики.
+Die Weimarer Republik war eine entscheidende Phase der deutschen Geschichte zwischen den beiden Weltkriegen. ### Веймарская республика была решающим периодом немецкой истории между двумя мировыми войнами.
+Die Kunstwerke von Albrecht Dürer sind weltberühmt. ### Шедевры Альбрехта Дюрера известны во всем мире.
+Die Festung Königstein in Sachsen war ein wichtiger Militärstützpunkt im 18. Jahrhundert. ### Крепость Кёнигштайн в Саксонии была важной военной базой в 18 веке.
+Der Bau des Kölner Doms dauerte mehrere Jahrhunderte. ### Строительство Кёльнского собора продолжалось несколько столетий.
+Die Deutsche Nationalbibliothek sammelt und archiviert alle in Deutschland veröffentlichten Bücher. ### Немецкая Национальная библиотека собирает и архивирует все книги, изданные в Германии.
+Das Brandenburger Tor war während der Teilung Deutschlands ein Symbol für die Trennung. ### Бранденбургские ворота были символом разделения Германии в период ее разделения.
+Der Niederwalddenkmal in Hessen erinnert an den Sieg Deutschlands im Deutsch-Französischen Krieg. ### Памятник Нидервальд в Гессене напоминает о победе Германии во Франко-прусской войне.
+Die Wartburg war ein wichtiger Ort der deutschen Reformationsbewegung. ### Вартбург был важным местом немецкого реформационного движения.
+Die Kulturhauptstadt Europas ist eine jährliche Auszeichnung für europäische Städte, die eine reiche Kulturtradition aufweisen. ### Культурная столица Европы - ежегодная награда для европейских городов с богатой культурной традицией.
+Die Regierung plant, die Steuern zu erhöhen. ### Правительство планирует повысить налоги.
+Viele Menschen sind mit der aktuellen Politik unzufrieden. ### Многие люди не удовлетворены текущей политикой.
+Die Oppositionspartei hat einen neuen Vorschlag zur Verbesserung des Bildungssystems gemacht. ### Оппозиционная партия выдвинула новое предложение по улучшению системы образования.
+Der Ministerpräsident hat seinen Rücktritt angekündigt. ### Президент-министр объявил о своей отставке.
+Die Partei hat eine neue Initiative zur Förderung erneuerbarer Energien gestartet. ### Партия начала новую инициативу по стимулированию использования возобновляемых источников энергии.
+Die Regierung hat beschlossen, die Grenzen zu öffnen, um Flüchtlingen zu helfen. ### Правительство решило открыть границы для помощи беженцам.
+Der Präsident hat ein neues Gesetz zur Bekämpfung von Korruption unterzeichnet. ### Президент подписал новый закон об борьбе с коррупцией.
+Die Opposition fordert ein neues Referendum über den Austritt aus der EU. ### Оппозиция требует нового референдума о выходе из ЕС.
+Die Regierung hat beschlossen, den öffentlichen Verkehr zu verbessern. ### Правительство решило улучшить общественный транспорт.
+Der Bundeskanzler hat in seiner Rede die Bedeutung der internationalen Zusammenarbeit betont. ### Канцлер в своем выступлении подчеркнул значение международного сотрудничества.
+Die Regierung hat eine Initiative zur Verbesserung der Gesundheitsversorgung gestartet. ### Правительство начало инициативу по улучшению медицинской помощи.
+Die Parteien haben koalitionsbildende Gespräche begonnen. ### Партии начали переговоры о создании коалиции.
+Der Minister hat seine Pläne zur Modernisierung des Straßennetzes vorgestellt. ### Министр представил свои планы по модернизации дорожной инфраструктуры.
+Die Regierung hat beschlossen, das Rentenalter zu erhöhen. ### Правительство решило повысить пенсионный возраст.
+Der Präsident hat eine Rede zur Lage der Nation gehalten. ### Президент произнес речь о положении в стране.
+Die Opposition fordert mehr Investitionen in die Bildung. ### Оппозиция требует больше инвестиций в образование.
+Die Regierung hat eine Gesetzesvorlage zur Verringerung von CO2-Emissionen vorgelegt. ### Правительство представило законопроект о снижении выбросов CO2.
+Der Ministerpräsident hat sich mit dem Premierminister des Nachbarlandes getroffen. ### Президент-министр встретился с премьер-министром соседней страны.
+Die Partei hat ihre Position zur Gleichstellung der Geschlechter klargestellt. ### Партия прояснила свою позицию по вопросу равенства полов.
+Die Regierung hat beschlossen, die Ausgaben für den Umweltschutz zu erhöhen. ### Правительство решило увеличить расходы на охрану окружающей среды.
+Die Partei hat eine Petition für die Abschaffung der Studiengebühren gestartet. ### Партия начала петицию за отмену платы за обучение в университете.
+Die Regierung hat eine Reform des Gesundheitssystems angekündigt. ### Правительство объявило о реформе здравоохранения.
+Der Minister hat ein neues Gesetz zur Regulierung der Wirtschaft vorgestellt. ### Министр представил новый закон о регулировании экономики.
+Die Opposition fordert mehr Transparenz in der politischen Entscheidungsfindung. ### Оппозиция требует большей прозрачности в принятии политических решений.
+Die Regierung hat beschlossen, den öffentlichen Dienst zu reformieren. ### Правительство решило провести реформу государственной службы.
+Der Bundeskanzler hat in seiner Ansprache die Bedeutung der Bildung betont. ### Канцлер в своей речи подчеркнул значение образования.
+Die Partei hat einen neuen Vorschlag zur Integration von Migranten vorgelegt. ### Партия представила новое предложение по интеграции мигрантов.
+Die Regierung hat beschlossen, den Mindestlohn zu erhöhen. ### Правительство решило повысить минимальную зарплату.
+Die Opposition kritisiert die Regierungspolitik in Bezug auf den Klimaschutz. ### Оппозиция критикует политику правительства в отношении защиты климата.
+Der Ministerpräsident hat einen Plan zur Förderung des Tourismus vorgestellt. ### Президент-министр представил план по стимулированию туризма.
+Viele Menschen glauben an Gott und beten in der Kirche. ### Многие люди верят в Бога и молятся в церкви.
+Die buddhistische Religion hat ihren Ursprung in Indien. ### Религия буддизма имеет свои корни в Индии.
+Der Buddhismus lehrt, dass das Leben voller Leid ist und dass man durch Meditation Erlösung finden kann. ### Буддизм учит, что жизнь полна страданий и что через медитацию можно найти искупление.
+Der Hinduismus ist eine polytheistische Religion mit vielen Göttern. ### Индуизм является многобожественной религией с множеством богов.
+Im Christentum ist Jesus Christus der Sohn Gottes und der Erlöser der Welt. ### В христианстве Иисус Христос является Сыном Божьим и Искупителем мира.
+Der Koran ist das heilige Buch des Islam und enthält die Offenbarungen Gottes an den Propheten Mohammed. ### Коран является священной книгой ислама и содержит откровения Бога пророку Мухаммеду.
+Die jüdische Religion basiert auf der hebräischen Bibel, die auch als Tanach bezeichnet wird. ### Еврейская религия основана на еврейской Библии, которая также называется Танах.
+Die Philosophie beschäftigt sich mit Fragen über das Leben und die Welt und sucht nach Antworten durch rationale Überlegungen. ### Философия занимается вопросами о жизни и мире и ищет ответы через рациональные рассуждения.
+Aristoteles war ein bekannter Philosoph im antiken Griechenland und ein Schüler von Plato. ### Аристотель был известным философом в древней Греции и учеником Платона.
+Die Aufklärung war eine Epoche der Philosophie im 18. Jahrhundert, die sich für Vernunft und Wissenschaft einsetzte. ### Просвещение было эпохой философии в 18 веке, которая выступала за разум и науку.
+Der Existentialismus ist eine philosophische Strömung, die sich mit der Existenz des Menschen und seiner Freiheit befasst. ### Экзистенциализм - это философское течение, которое занимается существованием человека и его свободой.
+Der Glaube an das Schicksal ist ein wichtiger Bestandteil vieler Religionen. ### Вера в судьбу является важной составляющей многих религий.
+Die Idee der Wiedergeburt ist in einigen Religionen wie dem Hinduismus und dem Buddhismus verbreitet. ### Идея перерождения распространена в некоторых религиях, таких как индуизм и буддизм.
+Die drei großen monotheistischen Religionen sind das Judentum, das Christentum und der Islam. ### Три большие монотеистические религии - это иудаизм, христианство и ислам.
+Der Humanismus ist eine philosophische Strömung, die den Fokus auf den Menschen und seine Potenziale legt. ### Гуманизм - это философское течение, которое ставит фокус на человека и его потенциалы.
+Die östliche Philosophie, wie beispielsweise der Taoismus und der Konfuzianismus, unterscheidet sich von der westlichen Philosophie durch ihre Betonung der Harmonie und des Gleichgewichts. ### Восточная философия, такая как таоизм и конфуцианство, отличается от западной философии своим акцентом на гармонию и баланс.
+Der Begriff der Erleuchtung ist zentral für viele spirituelle Praktiken und Religionen. ### Понятие просветления центрально для многих духовных практик и религий.
+Der Begriff des Gottesbeweises beschäftigt sich mit der Frage, ob die Existenz Gottes durch logische Argumente bewiesen werden kann. ### Понятие богооткровения занимается вопросом, может ли существование Бога быть доказано логическими аргументами.
+Die griechische Philosophie hat einen großen Einfluss auf die westliche Philosophie und Kultur ausgeübt. ### Греческая философия оказала большое влияние на западную философию и культуру.
+Der Begriff des Ethos beschäftigt sich mit moralischen Werten und Normen in einer Gesellschaft. ### Понятие этоса занимается моральными ценностями и нормами в обществе.
+Der Utilitarismus ist eine philosophische Strömung, die das Glück des größten Teils der Gesellschaft zum Ziel hat. ### Утилитаризм - это философское течение, которое имеет целью счастье большинства общества.
+Der Glaube an die Unsterblichkeit der Seele ist ein wichtiger Bestandteil vieler Religionen. ### Вера в бессмертие души является важной составляющей многих религий.
+Der Zen-Buddhismus legt den Fokus auf Meditation und Achtsamkeit. ### Зен-буддизм ставит акцент на медитацию и внимательность.
+Der Dualismus ist eine philosophische Strömung, die zwischen Materie und Geist unterscheidet. ### Дуализм - это философское течение, которое делает различие между материей и духом.
+Die Vorstellung von Karma ist in vielen asiatischen Religionen wie dem Hinduismus und dem Buddhismus verbreitet. ### Представление о карме распространено во многих азиатских религиях, таких как индуизм и буддизм.
+Die Existenz Gottes ist ein zentraler Glaubenssatz in vielen Religionen. ### Существование Бога является центральным догматом многих религий.
+Der Begriff der Toleranz bezieht sich auf die Akzeptanz von Unterschieden in Glauben, Meinungen und Lebensweisen. ### Понятие терпимости относится к принятию различий в вере, мнениях и образе жизни.
+Die Stoiker waren eine philosophische Schule im antiken Griechenland, die sich auf die Selbstbeherrschung und das Erreichen von Gelassenheit konzentrierte. ### Стоики были философской школой в древней Греции, которая сосредоточилась на самоконтроле и достижении спокойствия.
+Der Agnostizismus bezieht sich auf die Haltung, dass es unmöglich ist, die Existenz oder Nichtexistenz von Gott zu beweisen. ### Агностицизм относится к отношению, что невозможно доказать существование или несуществование Бога.
+Die goldene Regel besagt, dass man andere so behandeln sollte, wie man selbst behandelt werden möchte. ### Золотое правило заключается в том, что других нужно относиться так, как хотели бы, чтобы с ними обращались.
+Der Begriff des Sündenfalls bezieht sich auf die biblische Erzählung, in der Adam und Eva vom Baum der Erkenntnis aßen und aus dem Garten Eden vertrieben wurden. ### Понятие о падении человека относится к библейскому рассказу, в котором Адам и Ева съели плод познания и были изгнаны из Эдемского сада.
+Die Idee der Gerechtigkeit ist in vielen Religionen und Philosophien ein wichtiger Grundsatz. ### Идея справедливости является важным принципом во многих религиях и философиях.
+Die Idee der Selbstverwirklichung ist ein zentraler Bestandteil der humanistischen Psychologie. ### Идея самореализации является центральной частью гуманистической психологии.
+Der Taoismus betont die Bedeutung von Harmonie und Natürlichkeit. ### Таоизм подчеркивает важность гармонии и естественности.
+Die Idee der Nächstenliebe ist ein wichtiger Bestandteil vieler Religionen, darunter auch das Christentum. ### Идея любви к ближнему является важной составляющей многих религий, в том числе и христианства.
+Der Begriff der Freiheit ist ein zentrales Thema in der politischen Philosophie. ### Понятие свободы является центральной темой в политической философии.
+Die Idee der Schöpfungsgeschichte findet sich in vielen Religionen und Mythologien. ### Идея истории создания встречается во многих религиях и мифологиях.
+Der Konflikt zwischen Glauben und Wissenschaft ist ein Thema, das in vielen philosophischen und religiösen Debatten diskutiert wird. ### Конфликт между верой и наукой - это тема, которая обсуждается во многих философских и религиозных дебатах.
+Die Idee der Aufopferung ist ein wichtiger Bestandteil vieler religiöser Rituale und Bräuche. ### Идея жертвоприношения является важной составляющей многих религиозных ритуалов и обычаев.
+Der Begriff der Wahrheit ist ein zentrales Thema in vielen philosophischen Debatten und Überlegungen. ### Понятие истины является центральной темой во многих философских дебатах и рассуждениях.
+Die Forschung im Bereich der künstlichen Intelligenz nimmt immer weiter zu. ### Исследования в области искусственного интеллекта продолжают расти.
+Die Raumfahrttechnologie hat in den letzten Jahren bedeutende Fortschritte gemacht. ### Технология космических полетов в последние годы сделала значительные успехи.
+In der Medizin werden immer wieder neue Entdeckungen gemacht. ### В медицине постоянно делаются новые открытия.
+Die Erfindung des Internets hat die Welt revolutioniert. ### Изобретение интернета революционизировало мир.
+In der Chemie geht es um die Untersuchung von Stoffen und ihren Eigenschaften. ### Химия занимается исследованием веществ и их свойств.
+Die Automobilindustrie ist ein wichtiger Wirtschaftszweig. ### Автомобильная промышленность является важным отраслевым направлением экономики.
+In der Elektrotechnik werden elektrische Systeme und Geräte entwickelt und gebaut. ### В области электротехники разрабатываются и создаются электрические системы и устройства.
+Die Nanotechnologie befasst sich mit Strukturen und Materialien auf nanoskaliger Ebene. ### Нанотехнология занимается структурами и материалами на наномасштабном уровне.
+Die Robotertechnik hat in der Industrie viele Arbeitsprozesse automatisiert. ### Робототехника автоматизировала многие процессы в промышленности.
+Die Physik beschäftigt sich mit der Erforschung der Natur und ihren Gesetzmäßigkeiten. ### Физика занимается изучением природы и ее закономерностей.
+Der Fortschritt in der Biotechnologie hat zu vielen neuen Anwendungen geführt. ### Прогресс в биотехнологии привел к множеству новых приложений.
+Die Entwicklung erneuerbarer Energien ist wichtig für den Klimaschutz. ### Развитие возобновляемых источников энергии важно для защиты климата.
+Die Telekommunikation ermöglicht uns, weltweit in Verbindung zu bleiben. ### Телекоммуникации позволяют нам оставаться на связи по всему миру.
+Die Wissenschaftler arbeiten an der Entdeckung neuer Arzneimittel. ### Ученые работают над открытием новых лекарств.
+Die Elektronik hat die Art und Weise verändert, wie wir kommunizieren und arbeiten. ### Электроника изменила способ, которым мы общаемся и работаем.
+Die Ingenieure haben den Bau von Brücken und Gebäuden revolutioniert. ### Инженеры революционировали строительство мостов и зданий.
+Die Weltraumforschung hat uns viele Erkenntnisse über unser Universum gebracht. ### Исследования космоса принесли нам много знаний о нашей вселенной.
+Die Informationstechnologie hat die Art und Weise verändert, wie wir Daten verarbeiten und speichern. ### Информационные технологии изменили способ обработки и хранения данных.
+Die Optik befasst sich mit der Erforschung von Licht und dessen Eigenschaften. ### Оптика занимается изучением света и его свойств.
+Die Geologie untersucht die Entstehung und Struktur der Erde. ### Геология исследует происхождение и структуру Земли.
+Die Genetik ist eine wichtige Disziplin in der Biologie. ### Генетика является важной дисциплиной в биологии.
+Die Luft- und Raumfahrttechnik hat die Erkundung des Weltalls ermöglicht. ### Аэрокосмическая техника позволила исследовать космос.
+Die Chemie spielt eine wichtige Rolle bei der Herstellung von Produkten. ### Химия играет важную роль в производстве продуктов.
+Die Robotik hat in der Medizin zu neuen Anwendungen geführt. ### Робототехника привела к появлению новых применений в медицине.
+Die Mechanik beschäftigt sich mit der Bewegung von Körpern und deren Kräften. ### Механика занимается движением тел и их силами.
+Die Nanotechnologie hat das Potenzial, viele technologische Probleme zu lösen. ### Нанотехнология имеет потенциал решить многие технологические проблемы.
+Die Energieerzeugung aus erneuerbaren Quellen ist eine wichtige Zukunftsaufgabe. ### Генерация энергии из возобновляемых источников является важной задачей будущего.
+Die Materialwissenschaften sind entscheidend für die Entwicklung neuer Produkte. ### Материаловедение играет решающую роль в разработке новых продуктов.
+Die Informatik hat die Entwicklung von künstlicher Intelligenz ermöglicht. ### Информатика позволила развить искусственный интеллект.
+Die Elektromobilität wird in Zukunft eine immer wichtigere Rolle spielen. ### Электромобильность будет играть все более важную роль в будущем.
+Die Biologie beschäftigt sich mit dem Studium von Lebewesen und ihrer Umwelt. ### Биология занимается изучением живых организмов и их окружения.
+Die Astrophysik untersucht die Eigenschaften und Entstehung von Himmelskörpern. ### Астрофизика изучает свойства и происхождение небесных тел.
+Die Elektrizität ist eine fundamentale Energiequelle für viele Technologien. ### Электричество является фундаментальным источником энергии для многих технологий.
+Die Ingenieurwissenschaften sind wichtig für die Entwicklung neuer Technologien. ### Инженерные науки важны для разработки новых технологий.
+Die Raumfahrt hat zu vielen technologischen Fortschritten geführt. ### Космические исследования привели к многим технологическим достижениям.
+Die Kernphysik beschäftigt sich mit der Struktur und Eigenschaften von Atomkernen. ### Ядерная физика занимается структурой и свойствами атомных ядер.
+Die Innenarchitektur und das Design spielen eine wichtige Rolle in der Industrie. ### Дизайн и интерьерная архитектура играют важную роль в промышленности.
+Die Materialwissenschaften erforschen die Eigenschaften und Verwendung von Materialien. ### Материаловедение изучает свойства и применение материалов.
+Die Astronomie befasst sich mit der Erforschung des Universums und seiner Bestandteile. ### Астрономия занимается изучением вселенной и ее составляющих.
+Die Medizin ist ein wichtiger Bereich der Wissenschaft, der unser Leben verbessern kann. ### Медицина является важной областью науки, которая может улучшить нашу жизнь.
+Die Mathematik ist eine grundlegende Disziplin, die in vielen Bereichen der Wissenschaft angewendet wird. ### Математика является фундаментальной дисциплиной, которая применяется во многих областях науки.
+Die Computerwissenschaften sind wichtig für die Entwicklung von Software und Hardware. ### Компьютерные науки важны для разработки программного и аппаратного обеспечения.
+Die Umwelttechnologie beschäftigt sich mit der Entwicklung von Lösungen für Umweltprobleme. ### Технология окружающей среды занимается разработкой решений для проблем окружающей среды.
+Die Pharmakologie befasst sich mit der Erforschung von Arzneimitteln und ihrer Wirkung auf den Körper. ### Фармакология занимается изучением лекарств и их воздействия на организм.
+Die Geoinformatik befasst sich mit der Verarbeitung und Analyse von Geodaten. ### Геоинформатика занимается обработкой и анализом геоданных.
+Die Mechatronik verbindet Mechanik, Elektronik und Informatik für die Entwicklung von Automatisierungssystemen. ### Мехатроника соединяет механику, электронику и информатику для разработки систем автоматизации.
+Die Telemedizin ermöglicht die Fernbehandlung von Patienten und die Überwachung von Gesundheitsdaten. ### Телемедицина позволяет дистанционное лечение пациентов и мониторинг медицинских данных.
+Die Physiologie befasst sich mit der Funktion von Organen und Systemen im Körper. ### Физиология занимается функцией органов и систем в организме.
+Die Verfahrenstechnik befasst sich mit der Entwicklung von Verfahren zur Herstellung von Produkten. ### Технология производств занимается разработкой процессов для производства продуктов.
+Die Agrarwissenschaften beschäftigen sich mit der Produktion von Nahrungsmitteln und der Landwirtschaft. ### Сельскохозяйственные науки занимаются производством продуктов питания и сельским хозяйством.
