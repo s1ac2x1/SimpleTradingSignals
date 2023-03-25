@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger
 val delimiter = " ### "
 val srcFolder = "polly"
 val outputFolder = "output"
-val srcFile = "random.txt"
+val srcFile = "sentenses.txt"
 val outputFileName = srcFile.replace(".txt", "")
 
 // какой язык идет первым в файле, например: "говорить - sprechen" или "sprechen - говорить"
@@ -20,7 +20,8 @@ val ruPhraseIndex = 2
 val dePhraseIndex = 1
 
 // неправильные глаголы штук 150
-// 50 разговорных фраз на разные 30 разных тем
+// sentenses
+// слова склейки типа "не говоря про" geschweige denn
 
 // TODO потом импорт в квизлет
 
@@ -31,10 +32,11 @@ fun main() {
     File("$srcFolder/$outputFolder").mkdir()
     val filteredPhrases = phrases
         .filter { it.trim().isNotEmpty() }
-        .filter { it.length < 100 }
+        //.filter { it.length < 100 }
         .distinctBy { it.split(delimiter)[dePhraseIndex - 1] }.toList()
     println("\nFiltered ${phrases.size - filteredPhrases.size} duplicates\n")
     filteredPhrases
+        .shuffled()
         //.take(4)
         .forEach { line ->
             executor.submit {
