@@ -38,7 +38,6 @@ auf die Nerven gehen ### действовать на нервы
 Sein ständiges Jammern geht mir wirklich auf die Nerven ### Его постоянное нытье действительно действует мне на нервы
 im Hinblick auf ### в связи с
 Im Hinblick auf die bevorstehende Prüfung sollten wir mehr Zeit für das Lernen aufwenden ### В связи с предстоящим экзаменом, нам следует уделить больше времени на учебу
-in Kauf nehmen ### принимать на себя (тот или иной риск или трудность)
 Um seine Träume zu verwirklichen, musste er viele Risiken in Kauf nehmen ### Чтобы осуществить свои мечты, ему пришлось принимать на себя множество рисков и трудностей
 in Anlehnung an ### на основании, опираясь на
 In Anlehnung an die Ergebnisse der Studie haben wir unsere Strategie angepasst ### На основании результатов исследования, мы скорректировали нашу стратегию
@@ -52,7 +51,6 @@ auf den Punkt bringen ### выразить коротко и ясно
 Er konnte seine Idee klar und auf den Punkt bringen ### Он смог выразить свою идею коротко и ясно
 in den Griff bekommen ### управлять ситуацией
 Trotz der Schwierigkeiten gelang es ihr, die Situation in den Griff zu bekommen ### Несмотря на трудности, ей удалось взять ситуацию под контроль
-in Kauf nehmen ### мириться с чем-либо
 Manchmal muss man kleine Unannehmlichkeiten in Kauf nehmen, um größere Vorteile zu erzielen ### Иногда приходится мириться с небольшими неудобствами ради больших выгод
 auf den ersten Blick ### с первого взгляда
 Auf den ersten Blick scheint diese Aufgabe einfach zu sein, aber sie erfordert tatsächlich viel Denkarbeit ### С первого взгляда эта задача кажется простой, но на самом деле требует много мыслительной работы
@@ -90,7 +88,6 @@ in die Schranken weisen ### укротить, привести в порядок
 Der Lehrer musste den störenden Schüler in die Schranken weisen ### Учитель должен был укротить беспокоящегося ученика и привести его в порядок
 im Vorfeld ### заранее
 Im Vorfeld der Veranstaltung wurden alle notwendigen Vorbereitungen getroffen ### Заранее до мероприятия были проведены все необходимые подготовительные работы
-in Kauf nehmen ### пожертвовать
 Um seine Karriere voranzutreiben, musste er seine Freizeit in Kauf nehmen ### Чтобы продвигать свою карьеру, ему пришлось пожертвовать своим свободным временем
 auf den Arm nehmen ### разыграть, обмануть
 Seine Freunde nahmen ihn auf den Arm, indem sie ihm eine falsche Nachricht schickten ### Его друзья разыграли его, отправив ему ложное сообщение
@@ -102,7 +99,6 @@ in die Enge treiben ### загнать в угол
 Mit seinen Fragen trieb er den Lügner in die Enge ### Своими вопросами он загнал лжеца в угол
 auf den Grund gehen ### выяснить причину
 Wir müssen dem Problem auf den Grund gehen, um eine Lösung zu finden ### Мы должны выяснить причину проблемы, чтобы найти решение
-in der Regel ### как правило
 In der Regel essen wir abends um 19 Uhr ### Как правило, мы едим вечером в 19 часов
 im Auge behalten ### следить за чем-либо
 Wir sollten die Entwicklungen im Markt genau im Auge behalten ### Мы должны тщательно следить за развитием рынка
@@ -112,286 +108,173 @@ in den Ruhestand gehen ### уйти на пенсию
 Nach 40 Jahren harter Arbeit ging er endlich in den Ruhestand ### После 40 лет тяжелой работы он, наконец, ушел на пенсию
 auf die Probe stellen ### проверить на прочность
 Ich werde dich auf die Probe stellen, um sicherzustellen, dass du die Aufgabe erfüllen kannst ### Я проверю тебя на прочность, чтобы убедиться, что ты можешь выполнить задание
-
 in die Offensive gehen ### перейти в наступление
 Das Team ging in die Offensive und übernahm die Kontrolle über das Spiel ### Команда перешла в наступление и захватила контроль над игрой
-
 im Kreis drehen ### ходить вокруг да около
 Ich hasse es, wenn Leute im Kreis drehen und nicht zum Punkt kommen ### Я ненавижу, когда люди ходят вокруг да около и не доходят до сути
-
 auf die leichte Schulter nehmen ### не воспринимать всерьез
 Er nahm die Warnung vor der Gefahr auf die leichte Schulter und setzte sich somit einem großen Risiko aus ### Он не воспринял предупреждение о возможной опасности всерьез и, таким образом, подверг себя большому риску
-
 in den Wahnsinn treiben ### свести с ума
 Die ständigen Geräusche trieben ihn in den Wahnsinn ### Постоянные шумы свели его с ума
-
 auf der Überholspur sein ### находиться в режиме ускорения
 Seitdem er seine eigene Firma gegründet hat, ist er auf der Überholspur und arbeitet hart, um erfolgreich zu sein ### С тех пор, как он основал свою собственную компанию, он находится в режиме ускорения и усердно работает, чтобы быть успешным
-
 in den Fokus rücken ### быть в центре внимания
 In der Debatte rückte das Thema Klimawandel in den Fokus ### В дебатах тема изменения климата стала в центре внимания
-
 in die Karten schauen lassen ### раскрыть свои карты
 Er war so nervös, dass er versehentlich in die Karten schauen ließ und seinen Plan enthüllte ### Он был настолько нервным, что случайно раскрыл свои карты и раскрыл свой план
-
 auf Nummer sicher gehen ### играть на безопасность
 Ich gehe lieber auf Nummer sicher und bereite mich auf alle möglichen Szenarien vor ### Я предпочитаю играть на безопасности и готовиться к возможным сценариям
-
 auf den Trichter kommen ### догадаться
 Ich bin endlich auf den Trichter gekommen, wie das Puzzle gelöst werden kann ### Я, наконец, догадался, как можно решить эту головоломку
 aufs Ganze gehen ### идти на все или ничего
 Er beschloss, aufs Ganze zu gehen und sein eigenes Unternehmen zu gründen ### Он решил идти на все или ничего и создать свою собственную компанию
 in den Augen haben ### иметь в виду
 Was hast du damit in den Augen? ### Что ты имеешь в виду?
-
 in den Griff kriegen ### справиться, под контролем
 Er hat endlich seine Sucht in den Griff bekommen ### Он, наконец, справился со своей зависимостью
-
 auf die Sprünge helfen ### помочь начать что-то новое
 Mein Freund half mir auf die Sprünge, als ich anfing, Deutsch zu lernen ### Мой друг помог мне начать изучать немецкий язык
-
 im Dunkeln tappen ### быть в неведении
 Die Polizei tappt immer noch im Dunkeln, was den Verbleib des Vermissten betrifft ### Полиция до сих пор находится в неведении относительно местонахождения пропавшего
-
 in Schwung bringen ### придать движение
 Der neue Trainer brachte das Team wieder in Schwung und sie gewannen ihr nächstes Spiel ### Новый тренер вдохнул жизнь в команду, и они выиграли свой следующий матч
-
 in den Schlaf wiegen ### успокаивать, усыплять
 Die sanfte Musik wiegt das Baby in den Schlaf ### Мягкая музыка успокаивает ребенка и усыпляет его
-
 auf den Kopf hauen ### потратить много денег
 Er hat das ganze Geld auf den Kopf gehauen und hat jetzt Schulden ### Он потратил все деньги напрасно и теперь задолжал
-
 auf der Stelle treten ### не двигаться с места
 Wir können nicht auf der Stelle treten, wir müssen jetzt handeln ### Мы не можем оставаться на месте, мы должны действовать сейчас
-
 in die gleiche Richtung gehen ### идти в одном направлении
 Unsere Ziele mögen unterschiedlich sein, aber wir müssen in die gleiche Richtung gehen, um Erfolg zu haben ### Наши цели могут отличаться, но нам необходимо двигаться в одном направлении, чтобы достичь успеха
-
 im Keim ersticken ### задавить в зародыше
 Wir müssen die Probleme im Keim ersticken, bevor sie sich verschlimmern ### Мы должны убивать проблемы в зародыше, прежде чем они ухудшатся
-
 auf dem Prüfstand stehen ### находиться на испытаниях
 Das neue Produkt steht auf dem Prüfstand, um zu sehen, ob es den Anforderungen entspricht ### Новый продукт находится на испытаниях, чтобы узнать, соответствует ли он требованиям
-
 in den Wind schreiben ### отбросить, забыть
 Wir können nicht einfach unsere Verantwortung in den Wind schreiben ### Мы не можем просто забыть нашу ответственность
-
 in das Bild passen ### соответствовать общей картине
 Diese Details passen nicht in das Bild des Falls ### Эти детали не соответствуют общей картины дела
-
 auf großem Fuß leben ### жить на широкую ногу
 Seitdem er eine große Erbschaft gemacht hat, lebt er auf großem Fuß und gibt viel Geld für teure Autos und exotische Reisen aus ### С тех пор, как он получил большое наследство, он живет на широкую ногу и тратит много денег на дорогие машины и экзотические путешествия
-
 in die Knie zwingen ### вынудить сдаться
 Die Übermacht der feindlichen Armee zwang die Verteidiger schließlich in die Knie und sie mussten sich ergeben ### Перевес противника вынудил защитников наконец сдаться и они были вынуждены капитулировать
-
 auf der gleichen Wellenlänge sein ### иметь схожие взгляды
 Meine Freundin und ich sind auf der gleichen Wellenlänge, wenn es um unseren Geschmack in Musik und Filmen geht ### Моя подруга и я имеем схожие взгляды, когда речь идет о нашем вкусе в музыке и фильмах
-
-in den sauren Apfel beißen ### пережить что-то неприятное
 Ich weiß, dass es schwer ist, aber du musst in den sauren Apfel beißen und zur Arbeit gehen, auch wenn du dich heute nicht gut fühlst ### Я знаю, что это трудно, но ты должен пережить этот неприятный момент и пойти на работу, даже если тебе сегодня плохо
-
 in der Versenkung verschwinden ### исчезнуть
 Nachdem ihr Buch ein Misserfolg war, verschwand die Autorin in der Versenkung und wurde nie wieder gehört ### После того, как ее книга провалилась, автор исчезла и больше никогда не была услышана
-
 aufs Spiel setzen ### поставить на карту
 Er setzte alles aufs Spiel, um seine Firma zu retten, aber leider ging seine Wette nicht auf ### Он поставил все на карту, чтобы спасти свою компанию, но, к сожалению, его ставка не сработала
-
-in die Schranken weisen ### дать понять, что не так
 Der Chef musste den Mitarbeiter in die Schranken weisen, weil er ständig zu spät zur Arbeit kam ### Руководитель был вынужден дать понять своему сотруднику, что такое поведение неприемлемо, потому что он постоянно опаздывал на работу
-
 in den Himmel loben ### хвалить до небес
 Der Schauspieler wurde von der Kritik in den Himmel gelobt für seine herausragende Leistung in dem Film ### Актера восхваляли критики за его выдающуюся игру в фильме
-
 auf den Tisch bringen ### поднимать на обсуждение
 Wir müssen dieses Thema endlich auf den Tisch bringen und eine Lösung finden ### Мы должны, наконец, поднять эту тему на обсуждение и найти решение
-
 in die Hand nehmen ### браться за что-то
 Ich werde die Sache in die Hand nehmen und sicherstellen, dass alles pünktlich erledigt wird ### Я возьму это на себя и обеспечу своевременное выполнение всего
-
-in die Tat umsetzen ### превратить в действительность
 Es ist an der Zeit, unsere Pläne in die Tat umzusetzen und unser eigenes Unternehmen zu gründen ### Пришло время воплотить наши планы в жизнь и основать свою собственную компанию
-
-auf die Nerven gehen ### действовать на нервы
 Seine ständigen Beschwerden gehen mir auf die Nerven und ich kann einfach nicht mehr damit umgehen ### Его постоянные жалобы действуют мне на нервы и я больше не могу справляться с этим
-
-in den Fokus rücken ### стать в центре внимания
 Die neuen politischen Entwicklungen rücken die Beziehungen zwischen den beiden Ländern in den Fokus ### Новые политические события привлекают внимание к отношениям между двумя странами
-
-in den Hintergrund treten ### отойти на второй план
 In Anbetracht der aktuellen Ereignisse müssen einige Themen in den Hintergrund treten ### В свете текущих событий некоторые вопросы должны отойти на второй план
-
 auf Augenhöhe sein ### быть на равных
 Wir müssen sicherstellen, dass wir auf Augenhöhe mit unseren Mitbewerbern sind, um wettbewerbsfähig zu bleiben ### Мы должны обеспечить, чтобы мы были на равных с нашими конкурентами, чтобы оставаться конкурентоспособными
-
 in der Lage sein ### быть в состоянии
 Ich bin in der Lage, meine Aufgaben pünktlich und effektiv zu erledigen ### Я способен выполнять свои задачи своевременно и эффективно.
-
 in die Schuhe schieben ### возложить вину
 Er versuchte, die Schuld auf mich zu schieben, aber ich konnte beweisen, dass ich nichts damit zu tun hatte ### Он пытался возложить вину на меня, но я смог доказать, что у меня с этим ничего общего нет
-
 auf den Plan rufen ### вызывать на помощь
 Wir müssen dringend mehr Rettungskräfte auf den Plan rufen, um den Verletzten zu helfen ### Нам срочно нужно вызвать на помощь больше спасательных служб, чтобы помочь пострадавшим
-
 im Auftrag von ### по поручению
 Ich reise im Auftrag meiner Firma nach China, um Geschäftsbeziehungen aufzubauen ### Я еду в Китай по поручению своей компании, чтобы налаживать деловые отношения
-
 in den Wind sprechen ### говорить напрасно
 Es ist Zeit, auf die Warnungen der Wissenschaftler zu hören, bevor es zu spät ist, statt sie in den Wind zu sprechen ### Пора прислушаться к предупреждениям ученых, пока не стало поздно, вместо того, чтобы говорить напрасно
-
 auf keinen grünen Zweig kommen ### не добиваться успеха
 Er versuchte, die Aufgabe zu lösen, aber er kam auf keinen grünen Zweig und gab schließlich auf ### Он пытался решить задачу, но не смог добиться успеха и, наконец, сдался
-
 in den Arm nehmen ### обнять
 Ich werde dich in den Arm nehmen und dich trösten, wenn du dich schlecht fühlst ### Я обниму тебя и утешу, когда тебе плохо
-
 in den Tag hineinleben ### жить в один день
 Sie hat keine Pläne für die Zukunft und lebt einfach in den Tag hinein ### У нее нет планов на будущее, и она просто живет в один день
-
 auf die lange Bank schieben ### откладывать на потом
 Er hat immer noch nicht mit seiner Arbeit begonnen und schiebt alles auf die lange Bank ### Он до сих пор не начал работать и откладывает все на потом.
-
 in die Bresche springen ### выступить на помощь
 Als der Vorstandsvorsitzende krank wurde, sprang sein Stellvertreter in die Bresche und führte das Unternehmen weiter ### Когда главный исполнительный директор заболел, его заместитель выступил на помощь и продолжил управлять компанией
-
 in der Hinsicht ### что касается
 In der Hinsicht ist er sehr zuverlässig und kann immer auf ihn zählen ### В этом отношении он очень надежный и всегда на него можно положиться
-
 auf dem Holzweg sein ### идти по неправильному пути
 Ich denke, du bist auf dem Holzweg, wenn du denkst, dass das die beste Lösung ist ### Я думаю, что ты идешь по неправильному пути, если считаешь, что это лучшее решение
-
 in den Hinterhalt locken ### подстерегать
 Die Banditen lockten die Reisenden in den Hinterhalt und überfielen sie ### Бандиты подстерегли путешественников и напали на них
-
 in Worte fassen ### выразить словами
 Es ist schwer, die Schönheit dieser Landschaft in Worte zu fassen ### Трудно выразить словами красоту этого пейзажа
-
 in die Karten spielen ### раскрывать планы
 Er hat versehentlich seine Pläne offenbart und somit seinem Gegner in die Karten gespielt ### Он случайно раскрыл свои планы и тем самым помог своему противнику
-
 auf den Geschmack kommen ### начать наслаждаться чем-то
 Ich hatte nie gedacht, dass ich Yoga mögen würde, aber nach ein paar Kursen bin ich wirklich auf den Geschmack gekommen ### Я никогда не думал, что полюблю йогу, но после нескольких занятий я действительно начал наслаждаться ею
-
 in die Knie gehen ### сдаться, падать на колени
 Trotz seiner Verletzung weigerte sich der Sportler, in die Knie zu gehen, und kämpfte bis zum Ende ### Несмотря на свою травму, спортсмен отказался сдаваться и боролся до конца
-
 in den Tag starten ### начинать новый день
 Ich mag es, früh aufzustehen und den Tag mit einer Tasse Kaffee zu starten ### Мне нравится вставать рано и начинать день с чашечки кофе
-
-auf der Hut sein ### быть начеку
 Sei auf der Hut vor Betrügern, die versuchen könnten, dich um dein Geld zu bringen ### Будь начеку перед мошенниками, которые могут попытаться обмануть тебя и забрать твои деньги
-
 in die Höhe schnellen ### резко увеличиваться
 Die Preise für Immobilien sind in den letzten Jahren in die Höhe geschnellt ### Цены на недвижимость за последние годы резко увеличились
-
-in den Ruhestand gehen ### выйти на пенсию
 Mein Großvater ist nach 40 Jahren Arbeit in den Ruhestand gegangen ### Мой дедушка вышел на пенсию после 40 лет работы
-
 auf Eis legen ### заморозить
 Wir müssen das Projekt vorübergehend auf Eis legen, da wir nicht genug Ressourcen haben, um es weiterzuführen ### Мы должны временно заморозить проект, так как у нас нет достаточно ресурсов, чтобы продолжить его
-
-in den Wahnsinn treiben ### сводить с ума
 Das ständige Gerede meiner Kollegin treibt mich in den Wahnsinn ### Бесконечные разговоры моей коллеги сводят меня с ума
-
 auf den neuesten Stand bringen ### обновить
 Ich muss meine Software auf den neuesten Stand bringen, um die neuesten Funktionen nutzen zu können ### Я должен обновить мое программное обеспечение, чтобы использовать последние функции
-
 in die Tonne klopfen ### выбросить
 Ich musste das Essen in die Tonne klopfen, da es verdorben war ### Я вынужден был выбросить еду, так как она испортилась.
-
 in den Fokus stellen ### сосредоточить внимание
 Wir müssen uns auf unsere Ziele konzentrieren und sie in den Fokus stellen, um erfolgreich zu sein ### Мы должны сосредоточиться на наших целях и поставить их в центр внимания, чтобы достичь успеха
-
 in Tränen ausbrechen ### разрыдаться
 Als sie die traurige Nachricht hörte, brach sie in Tränen aus ### Когда она услышала печальную новость, она разрыдалась
-
 auf den Punkt kommen ### перейти к существу дела
 Lass uns auf den Punkt kommen und besprechen, was wir wirklich tun müssen ### Давай перейдем к существу дела и обсудим, что мы действительно должны сделать
-
-in den Griff bekommen ### управлять ситуацией
 Wir müssen diese schwierige Situation in den Griff bekommen, um unseren Kunden weiterhin den besten Service bieten zu können ### Мы должны управлять этой сложной ситуацией, чтобы продолжать предоставлять нашим клиентам лучший сервис
-
 in den Sand setzen ### провалиться
 Leider hat unser Plan, das neue Produkt auf den Markt zu bringen, nicht funktioniert und ist in den Sand gesetzt ### К сожалению, наш план выпуска нового продукта на рынок не сработал и провалился
-
 auf den Plan treten ### появляться на сцене
 Als der berühmte Schauspieler auf den Plan trat, applaudierten die Zuschauer lautstark ### Когда на сцену вышел известный актер, зрители громко аплодировали
-
 in die Röhre gucken ### остаться ни с чем
 Er hatte große Hoffnungen, den Job zu bekommen, aber am Ende hat er die Stelle nicht bekommen und ist in die Röhre geguckt ### Он был очень надеялся получить эту работу, но в конце концов он не получил ее и остался ни с чем
-
 auf dem Dampfer sein ### быть на правильном пути
 Wir haben hart gearbeitet und sind endlich auf dem Dampfer, um unser Ziel zu erreichen ### Мы усердно работали и наконец на правильном пути, чтобы достичь нашей цели
-
 in den Schatten stellen ### затмевать
 Die Leistung des jungen Athleten stellt die der älteren Sportler in den Schatten ### Выступление молодого спортсмена затмевает выступления более старших спортсменов
-
 in der Rolle sein ### находиться в роли
 Ich fühle mich wie in der Rolle des Beobachters, während alle anderen handeln ### Я чувствую себя как будто я нахожусь в роли наблюдателя, в то время как все остальные действуют
-
 auf dem Laufenden sein ### быть в курсе
 Ich muss auf dem Laufenden bleiben, was die neuesten Entwicklungen in meinem Beruf betrifft ### Я должен быть в курсе последних новостей в моей профессии
-
-in den Schlaf wiegen ### усыплять
 Die sanfte Melodie hat das Baby in den Schlaf gewiegt ### Нежная мелодия усыпила ребенка
-
-in die Offensive gehen ### перейти в наступление
 Wir müssen in die Offensive gehen, um den Feind zu besiegen ### Мы должны перейти в наступление, чтобы победить врага
-
-auf Nummer sicher gehen ### страховаться
 Ich werde auf Nummer sicher gehen und eine zusätzliche Kopie meiner Arbeit machen ### Я возьму все меры предосторожности и сделаю дополнительную копию своей работы
-
 in das eigene Fleisch schneiden ### причинить вред себе
 Indem sie ihre wichtigsten Mitarbeiter entließ, hat sich das Unternehmen selbst ins eigene Fleisch geschnitten ### Увольняя своих ключевых сотрудников, компания причинила вред сама себе
-
 in den Händen halten ### держать в руках
 Der Juwelier hat ein wertvolles Schmuckstück in den Händen gehalten ### Ювелир держал в своих руках ценное ювелирное изделие
-
 auf den Teppich rufen ### назначить встречу
 Lassen Sie uns die Details persönlich besprechen. Ich werde Sie auf den Teppich rufen und wir können alles besprechen ### Давайте обсудим детали лично. Я назначу встречу и мы можем все обсудить
-
 in die Länge ziehen ### тянуть в длину
 Der Vortrag war interessant, aber der Sprecher hat ihn zu sehr in die Länge gezogen ### Лекция была интересной, но докладчик слишком долго ее растянул
-
-in die Karten schauen lassen ### разоблачить
 Ein Enthüllungsbericht hat die Korruption in der Regierung offengelegt und die Wahrheit ans Licht gebracht ### Расследование разоблачило коррупцию в правительстве и выявило правду
-
-auf Augenhöhe sein ### находиться на одном уровне
 Wir müssen sicherstellen, dass wir auf Augenhöhe mit unseren Konkurrenten bleiben, um wettbewerbsfähig zu bleiben ### Мы должны убедиться, что находимся на одном уровне с нашими конкурентами, чтобы оставаться конкурентоспособными
-
 in die Luft sprengen ### взорвать
 Die Terroristen planten, das Gebäude in die Luft zu sprengen ### Террористы планировали взорвать здание
-
-in den Fokus rücken ### сфокусироваться
 Die Präsentation sollte sich auf die wichtigsten Punkte konzentrieren und diese in den Fokus rücken ### Презентация должна сосредоточиться на главных моментах и сфокусироваться на них
-
 auf den letzten Drücker ### на последней минуте
 Ich habe meine Arbeit auf den letzten Drücker erledigt und war sehr gestresst ### Я закончил свою работу на последней минуте и был очень напряжен
-
 in der Realität ### в реальности
 In der Theorie klingt das Konzept gut, aber in der Realität gibt es viele Herausforderungen, die berücksichtigt werden müssen ### В теории концепция звучит хорошо, но на практике есть много проблем, которые нужно учитывать.
-
-in den Bann ziehen ### зачаровать
 Die Magie des Ortes hat mich sofort in ihren Bann gezogen ### Магия этого места сразу зачаровала меня
-
-auf die Palme bringen ### разозлить
 Das ständige Gerede von meinem Kollegen bringt mich auf die Palme ### Постоянный разговор моего коллеги раздражает меня до предела
-
 in die Augen blicken ### взглянуть в глаза
 Ich konnte ihm nicht in die Augen blicken, als er mir die Wahrheit sagte ### Я не мог взглянуть ему в глаза, когда он сказал мне правду
-
 in der Tat ### фактически
 In der Tat ist es viel schwieriger, als es auf den ersten Blick aussieht ### Фактически это гораздо сложнее, чем кажется на первый взгляд
-
-auf die Probe stellen ### проверить
 Ich werde meine Fähigkeiten auf die Probe stellen und an diesem Wettbewerb teilnehmen ### Я проверю свои способности, участвуя в этом конкурсе
-
 in den Wind stoßen ### проигнорировать
 Ich habe ihm gesagt, dass er vorsichtig sein soll, aber er hat meinen Rat in den Wind gestoßen ### Я сказал ему, что он должен быть осторожным, но он проигнорировал мой совет
-
 in den roten Zahlen sein ### находиться в убытке
 Das Unternehmen war in den roten Zahlen und musste drastische Maßnahmen ergreifen, um wieder profitabel zu werden ### Компания находилась в убытке и должна была принимать радикальные меры, чтобы стать снова прибыльной
-
-auf den Punkt bringen ### выразить коротко и ясно
 Lass mich das auf den Punkt bringen - wir haben ein Problem, das dringend gelöst werden muss ### Позволь мне сказать это коротко и ясно - у нас есть проблема, которую нужно срочно решить.

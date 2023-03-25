@@ -58,28 +58,17 @@ das Praktikum, Praktika ### стажировка
 die Tätigkeit, Tätigkeiten ### деятельность, занятость
 der Bankangestellte, Bankangestellten ### банковский служащий
 die Werkzeugmaschine, Werkzeugmaschinen ### станок
-die Bewerbung, Bewerbungen ### заявление, резюме
 der Lebenslauf, Lebensläufe ### резюме
-das Vorstellungsgespräch, Vorstellungsgespräche ### собеседование
 die Stellenanzeige, Stellenanzeigen ### объявление о вакансии
-die Arbeitslosigkeit ### безработица
 die Anforderung, Anforderungen ### требование
 die Berufserfahrung, Berufserfahrungen ### опыт работы
-die Vollzeit ### полная занятость
-die Teilzeit ### неполная занятость
 die Arbeitsstelle, Arbeitsstellen ### место работы
-der Arbeitgeber, Arbeitgeber ### работодатель
-der Arbeitnehmer, Arbeitnehmer ### работник
 die Ausbildung, Ausbildungen ### обучение, образование
 die Kenntnis, Kenntnisse ### знание
 die Fähigkeit, Fähigkeiten ### умение
-das Praktikum, Praktika ### практика, стажировка
 die Gehaltsvorstellung, Gehaltsvorstellungen ### ожидания по зарплате
-die Kündigung, Kündigungen ### увольнение
 die Probezeit, Probezeiten ### испытательный срок
-der Vertrag, Verträge ### договор, контракт
 die Arbeitsbedingungen ### условия работы
-die Karriere ### карьера
 die Weiterbildung, Weiterbildungen ### дополнительное образование
 die Bewerbungsunterlagen ### документы для подачи заявления
 der Bewerbungsprozess, Bewerbungsprozesse ### процесс подачи заявления

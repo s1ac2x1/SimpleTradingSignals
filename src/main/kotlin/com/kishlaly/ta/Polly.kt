@@ -19,9 +19,6 @@ val outputFileName = srcFile.replace(".txt", "")
 val ruPhraseIndex = 2
 val dePhraseIndex = 1
 
-// неправильные глаголы штук 150
-// слова склейки типа "не говоря про" geschweige denn
-
 // TODO потом импорт в квизлет
 
 fun main() {
@@ -34,6 +31,7 @@ fun main() {
         //.filter { it.length < 100 }
         .distinctBy { it.split(delimiter)[dePhraseIndex - 1] }.toList()
     println("\nFiltered ${phrases.size - filteredPhrases.size} duplicates\n")
+    File("$srcFolder/$srcFile").writeBytes(filteredPhrases.joinToString("\n").toByteArray())
     filteredPhrases
         //.shuffled()
         //.take(4)
