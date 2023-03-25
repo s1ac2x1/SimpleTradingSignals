@@ -19,8 +19,6 @@ val outputFileName = srcFile.replace(".txt", "")
 val ruPhraseIndex = 2
 val dePhraseIndex = 1
 
-// TODO потом импорт в квизлет
-
 fun main() {
     var count = AtomicInteger(1)
     val phrases = File("$srcFolder/$srcFile").readLines()
