@@ -242,6 +242,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         content1 = content1.replace(": -", ": ")
         content1 = removeNumberedLists2(content1)
         content1 = content1.replace("•", "<br>•")
+        content1 = content1.replace("\uFEFF", "")
 
         getPromptsMarkers().forEach {
             if (content1.contains(it)) {

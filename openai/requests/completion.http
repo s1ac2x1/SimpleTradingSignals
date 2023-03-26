@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "model": "text-davinci-003",
-  "prompt": "I'm writing an article about \"Which type of hosting is fastest?\". Write a list of 4 to 7 short subheadings. At the end of the article, I will place an advertisement, so these subheadings should smoothly lead to this, revealing the main topic.",
+  "prompt": "Ich habe mehrere Blogartikel in der Kategorie \"Katzenzubehör\". Die Kategorie sollte eine Seite mit einer Beschreibung haben – worüber ich sprechen werde, welche Themen behandelt werden sollen. Schreiben Sie diese Beschreibung",
   "max_tokens": 2048,
   "temperature": 0.7,
   "top_p": 0.5,
