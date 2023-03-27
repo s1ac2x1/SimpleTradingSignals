@@ -323,7 +323,7 @@ fun getPromptsMarkers(): List<String> {
         Language.DE -> listOf(
             "Ich schreibe einen Artikel über",
             "Schreiben Sie eine ausführliche Einführung zu diesem Artikel",
-            "Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften",
+            "Schreiben Sie eine Liste mit",
             "Schreiben Sie eine lange historische Notiz zu diesem Thema",
             "Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema",
             "Begründen Sie Ihre Antwort mit einigen Beispielen",
@@ -340,7 +340,7 @@ fun getPromptsMarkers(): List<String> {
             "I am writing an article about",
             "The title of the article is:",
             "Write a detailed introduction to this article",
-            "Write a list of 10 to 15 short subheadings",
+            "Write a list of",
             "Write a long historical note on this topic",
             "Write a detailed expert answer on this topic",
             "Justify your answer with some examples",
@@ -370,8 +370,8 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     TOC_PLAN(
         mapOf(
-            Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften.",
-            Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 10 to 15 short subheadings."
+            Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 5 bis 7 kurzen Unterüberschriften.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 5 to 7 short subheadings."
         )
     ),
     TOC_PLAN_SAVO(
