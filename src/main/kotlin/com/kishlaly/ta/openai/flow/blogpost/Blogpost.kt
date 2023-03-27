@@ -16,7 +16,8 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-    setupGermanPAA("katze101.com", "Katzenzubehör", "Katzen", "2023/03")
+    setupGermanPAA("hund101.com", "Hundefutter-und-Ernährung", "Hunde", "2023/03")
+    //setupGermanBIG("hund101.com", "Hundebezogene-Reisen", "Hunde", "2023/03")
     //setupMedium("cats")
 
     firstFilterCSV()
@@ -26,9 +27,11 @@ fun main() {
     val xml = BlogpostXMLBuilder()
     val executor = Executors.newFixedThreadPool(5)
 
+    // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
+
     keywords[globalType]
-        ?.shuffled()
-        ?.take(1)
+        //?.shuffled()
+        //?.take(1)
         ?.forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = globalType,
@@ -62,7 +65,6 @@ private fun setupGermanPAA(domain: String, caterogy: String, topic: String, imag
     globalInsertTags = true
     globalDomain = domain
     globalCategory = caterogy
-    globalLimit = 500
     globalImageURI = imageURI
     globalType = ArticleType.PAA
     globalInterlinkage = true
@@ -75,7 +77,6 @@ private fun setupGermanBIG(domain: String, caterogy: String, topic: String, imag
     globalInsertTags = true
     globalDomain = domain
     globalCategory = caterogy
-    globalLimit = 500
     globalImageURI = imageURI
     globalType = ArticleType.BIG
     globalInterlinkage = true
