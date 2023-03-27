@@ -57,30 +57,30 @@ import kotlin.random.Random
 //    println(getRandomWPURL("openai/output/images", "katze101.com", "2023/02"))
 //}
 
-//fun main() {
-//    val domain = "katze101.com"
-//    val breeds = File("openai/$domain/breeds").readLines()
-//    val ages = File("openai/$domain/age").readLines()
-//    val moods = File("openai/$domain/mood").readLines()
-//    val actions = File("openai/$domain/actions").readLines()
-//
-//        val tasks = mutableListOf<ImageGenerateTask>()
-//    (1..3).forEach {
-//        val breed = breeds.random()
-//        val age = ages.random()
-//        val mood = moods.random()
-//        val action = actions.random()
-//        val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
-//        tasks.add(ImageGenerateTask(
-//            //keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
-//            keyword = "a close up, studio photographic portrait of a white woman 30 years old who wearing dress, taking a cat on the hands and smiling. In the style pencil artwork",
-//            outputFolderName = "openai/$domain/images",
-//            outputFileName = "$domain-${System.nanoTime()}",
-//            n = 1
-//        ))
-//    }
-//    ImagesProcessor.generateMultithreaded(tasks, 5)
-//}
+fun main() {
+    val domain = "hund101.com"
+    val breeds = File("openai/$domain/breeds").readLines()
+    val ages = File("openai/$domain/age").readLines()
+    val moods = File("openai/$domain/mood").readLines()
+    val actions = File("openai/$domain/actions").readLines()
+
+        val tasks = mutableListOf<ImageGenerateTask>()
+    (1..3).forEach {
+        val breed = breeds.random()
+        val age = ages.random()
+        val mood = moods.random()
+        val action = actions.random()
+        val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
+        tasks.add(ImageGenerateTask(
+            //keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
+            keyword = "a close up, studio photographic portrait of a white woman 30 years old who wearing dress, taking a cat on the hands and smiling. In the style pencil artwork",
+            outputFolderName = "openai/$domain/images",
+            outputFileName = "$domain-${System.nanoTime()}",
+            n = 1
+        ))
+    }
+    ImagesProcessor.generateMultithreaded(tasks, 5)
+}
 
 //fun main() {
 //    File("openai/katze101/images").listFiles().forEach { file ->
@@ -115,11 +115,11 @@ import kotlin.random.Random
 //    ImagesProcessor.edit(listOf(editTask))
 //}
 
-fun main() {
-    val variationTask = ImageVariationTask("openai", "cat.png")
-
-    ImagesProcessor.variation(listOf(variationTask))
-}
+//fun main() {
+//    val variationTask = ImageVariationTask("openai", "cat.png")
+//
+//    ImagesProcessor.variation(listOf(variationTask))
+//}
 
 
 fun convertPngToWebp(pngPath: String, webpPath: String) {

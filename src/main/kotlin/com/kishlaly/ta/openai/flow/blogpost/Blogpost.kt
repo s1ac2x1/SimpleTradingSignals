@@ -27,8 +27,8 @@ fun main() {
     val executor = Executors.newFixedThreadPool(5)
 
     keywords[globalType]
-        //?.shuffled()
-        //?.take(1)
+        ?.shuffled()
+        ?.take(1)
         ?.forEach { keywordSource ->
         val meta = BlogpostContentMeta(
             type = globalType,
@@ -39,19 +39,19 @@ fun main() {
             imgSrcFolder = "openai/${globalDomain}/images_webp"
         )
 
-//        executor.submit {
-//            resolveDownloader(globalType)(meta)
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            resolveDownloader(globalType)(meta)
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
-       buildContent(xml, meta, keywordSource, true)
+//       buildContent(xml, meta, keywordSource, true)
     }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+//    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
