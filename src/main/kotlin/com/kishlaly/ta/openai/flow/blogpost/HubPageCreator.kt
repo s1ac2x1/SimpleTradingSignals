@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets
 
 fun main() {
     val domain = "katze101.com"
-    val category = "katzenrassen"
+    val category = "Katzenzubehör"
     val links = StringBuilder()
     File("openai/$domain/content/$category/${category}_paa.csv")
         .readLines()
