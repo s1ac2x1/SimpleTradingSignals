@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-    setupGermanPAA("hund101.com", "Hundefutter-und-Ernährung", "Hunde", "2023/03")
+    setupGermanPAA("hund101.com", "Hundegesundheit-und-Pflege", "Hunde", "2023/03")
     //setupGermanBIG("hund101.com", "Hundebezogene-Reisen", "Hunde", "2023/03")
     //setupMedium("cats")
 
