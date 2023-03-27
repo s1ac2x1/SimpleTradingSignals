@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-    setupGermanPAA("hund101.com", "Hundegesundheit-und-Pflege", "Hunde", "2023/03")
+    setupGermanPAA("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
     //setupGermanBIG("hund101.com", "Hundebezogene-Reisen", "Hunde", "2023/03")
     //setupMedium("cats")
 
@@ -25,7 +25,7 @@ fun main() {
     val total = keywords[globalType]?.size ?: 0
     val processed = AtomicInteger(0)
     val xml = BlogpostXMLBuilder()
-    val executor = Executors.newFixedThreadPool(5)
+    val executor = Executors.newFixedThreadPool(25)
 
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
 
