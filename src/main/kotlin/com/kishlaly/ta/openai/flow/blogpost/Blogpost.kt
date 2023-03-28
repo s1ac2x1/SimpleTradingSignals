@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-    setupGermanBIG("hund101.com", "Hundeerziehung", "Hunde", "2023/03")
+    setupGermanBIG("hund101.com", "Hundegesundheit-und-Pflege", "Hunde", "2023/03")
     //setupMedium("cats")
 
     firstFilterCSV()
@@ -27,8 +27,6 @@ fun main() {
     val executor = Executors.newFixedThreadPool(25)
 
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
-
-    // TODO при склейке статей нужно бросать ошибку, если где-то не хватает куска
 
     keywords[globalType]
         //?.shuffled()
@@ -68,7 +66,6 @@ private fun setupGermanPAA(domain: String, caterogy: String, topic: String, imag
     globalCategory = caterogy
     globalImageURI = imageURI
     globalType = ArticleType.PAA
-    globalInterlinkage = true
 }
 
 private fun setupGermanBIG(domain: String, caterogy: String, topic: String, imageURI: String) {
@@ -80,7 +77,6 @@ private fun setupGermanBIG(domain: String, caterogy: String, topic: String, imag
     globalCategory = caterogy
     globalImageURI = imageURI
     globalType = ArticleType.BIG
-    globalInterlinkage = true
 }
 
 private fun setupMedium(topic: String) {
