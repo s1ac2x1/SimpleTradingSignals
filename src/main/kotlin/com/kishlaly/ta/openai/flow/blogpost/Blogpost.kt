@@ -16,8 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-    setupGermanPAA("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
-    //setupGermanBIG("hund101.com", "Hundebezogene-Reisen", "Hunde", "2023/03")
+    setupGermanBIG("hund101.com", "Hundeerziehung", "Hunde", "2023/03")
     //setupMedium("cats")
 
     firstFilterCSV()
@@ -28,6 +27,8 @@ fun main() {
     val executor = Executors.newFixedThreadPool(25)
 
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
+
+    // TODO при склейке статей нужно бросать ошибку, если где-то не хватает куска
 
     keywords[globalType]
         //?.shuffled()
