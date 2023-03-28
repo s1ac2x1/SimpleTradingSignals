@@ -17,7 +17,7 @@ var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
     //setupGermanBIG("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
-    //setupGermanPAA("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
+    setupGermanPAA("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
     //setupMedium("cats")
 
     firstFilterCSV()
@@ -42,19 +42,19 @@ fun main() {
             imgSrcFolder = "openai/${globalDomain}/images_webp"
         )
 
-//        executor.submit {
-//            resolveDownloader(globalType)(meta)
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            resolveDownloader(globalType)(meta)
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
-       buildContent(xml, meta, keywordSource, false)
+//       buildContent(xml, meta, keywordSource, false)
     }
 
     executor.shutdown()
     executor.awaitTermination(2, TimeUnit.HOURS)
 
-    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+//    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
 }
 
