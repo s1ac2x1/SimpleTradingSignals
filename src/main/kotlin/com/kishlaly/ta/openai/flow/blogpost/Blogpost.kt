@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
 fun main() {
-    setupGermanBIG("hund101.com", "Hunderassen-und-Zucht", "Hunde", "2023/03")
+    setupGermanBIG("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
     //setupMedium("cats")
 
     firstFilterCSV()
