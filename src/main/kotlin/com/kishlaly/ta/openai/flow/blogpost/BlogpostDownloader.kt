@@ -279,7 +279,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsTexts_own_experience(tocIntent: Intent) {
-        val intent = Intent.TOC_PART_HISTORY
+        val intent = Intent.TOC_PART_OWN_EXPERIENCE
         val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
