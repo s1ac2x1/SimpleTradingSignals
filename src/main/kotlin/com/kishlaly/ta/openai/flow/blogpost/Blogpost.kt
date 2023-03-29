@@ -48,8 +48,8 @@ fun main() {
     val types = listOf(ArticleType.PAA)
 
     //generateStructure(domain, categories, types)
-    //estimateCosts(0.1)
     onlyOne.set(true)
+    //estimateCosts(0.1)
 
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
     categories.forEach { category ->
@@ -85,9 +85,8 @@ private fun download() {
                 imgURI = globalImageURI,
                 imgSrcFolder = "openai/${globalDomain}/images_webp"
             )
-            if (!onlyOne.get() || (onlyOne.get() && !onlyOneProcessed.get())) {
+            if (!onlyOne.get() || (onlyOne.get() && onlyOneProcessed.compareAndSet(false, true))) {
                 executor.submit {
-                    onlyOneProcessed.compareAndSet(false, true)
                     resolveDownloader(globalType)(meta)
                     processed.incrementAndGet()
                     println("==== Done $processed/${toBeProcessed.get()} ====\n")
