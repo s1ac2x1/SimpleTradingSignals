@@ -63,8 +63,8 @@ fun main() {
             globalImageURI = imagesOnHosting
             globalType = type
 
-            //download()
-            build()
+            download()
+            //build(true)
         }
     }
 
@@ -95,7 +95,7 @@ private fun download() {
         }
 }
 
-private fun build() {
+private fun build(saveTempHTML: Boolean) {
     val xml = BlogpostXMLBuilder()
     keywords = readCSV()
     toBeProcessed.addAndGet(keywords[globalType]?.size ?: 0)
@@ -109,7 +109,7 @@ private fun build() {
                 imgURI = globalImageURI,
                 imgSrcFolder = "openai/${globalDomain}/images_webp"
             )
-            buildContent(xml, meta, keywordSource, false)
+            buildContent(xml, meta, keywordSource, saveTempHTML)
         }
     Files.write(
         Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"),
@@ -235,7 +235,7 @@ fun buildContent(
 
 fun resolveTagsIntent(type: ArticleType) = when (type) {
     ArticleType.PAA -> Intent.TAGS_PAA
-    ArticleType.PAA_2 -> Intent.TAGS_PAA
+    ArticleType.PAA_2 -> Intent.TAGS
     ArticleType.BIG -> Intent.TAGS
     ArticleType.MEDIUM -> Intent.TAGS
     ArticleType.SAVO -> Intent.TAGS

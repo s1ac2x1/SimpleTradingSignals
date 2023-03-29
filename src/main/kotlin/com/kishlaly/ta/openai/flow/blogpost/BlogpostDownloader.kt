@@ -48,7 +48,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         tableOfContentsTexts(Intent.TOC_SHORT, Intent.TOC_PART_OWN_EXPERIENCE)
 
         tags()
-        conclusion(Intent.INTRODUCTION)
+        conclusionSimple(Intent.INTRODUCTION)
     }
 
     fun downloadMedium() {
@@ -123,6 +123,19 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         val toMakeConclusionFrom = readText(from)
         val oppositeOpinion = readText(Intent.OPPOSITE_OPINION_TEXT)
         val prompt = lineBreaksRegex.replace(toMakeConclusionFrom, "") + " " + lineBreaksRegex.replace(oppositeOpinion, "")
+        val intent = Intent.CONCLUSION
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = listOf(intent.get(globalLanguage, prompt)),
+            postProcessings = listOf(trimmed),
+            useTone = true,
+        )
+    }
+
+    private fun conclusionSimple(from: Intent) {
+        val toMakeConclusionFrom = readText(from)
+        val prompt = lineBreaksRegex.replace(toMakeConclusionFrom, "")
         val intent = Intent.CONCLUSION
         Step(
             intent = intent,
