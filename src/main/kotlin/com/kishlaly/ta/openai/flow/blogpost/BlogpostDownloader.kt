@@ -45,7 +45,6 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         tableOfContentsPlanShort()
         tableOfContentsTexts(Intent.TOC_SHORT, Intent.TOC_PART_MAIN)
-        tableOfContentsTexts(Intent.TOC_SHORT, Intent.TOC_PART_FACTS)
         tableOfContentsTexts(Intent.TOC_SHORT, Intent.TOC_PART_OWN_EXPERIENCE)
 
         tags()

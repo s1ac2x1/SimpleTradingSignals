@@ -6,9 +6,9 @@ import com.kishlaly.ta.openai.flow.Language
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.readCsv
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
+import java.io.IOException
+import java.nio.file.*
+import java.nio.file.attribute.BasicFileAttributes
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
@@ -48,8 +48,8 @@ fun main() {
     val types = listOf(ArticleType.PAA_2)
 
     //generateStructure(domain, categories, types)
-    onlyOne.set(true)
-    //estimateCosts(0.1)
+    //onlyOne.set(true)
+    //println(estimateCosts(domain, 0.11))
 
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
     categories.forEach { category ->
@@ -63,8 +63,8 @@ fun main() {
             globalImageURI = imagesOnHosting
             globalType = type
 
-            download()
-            //build()
+            //download()
+            build()
         }
     }
 
@@ -117,8 +117,31 @@ private fun build() {
     )
 }
 
-private fun estimateCosts(domain: String, categories: List<String>, types: List<ArticleType>) {
+private fun estimateCosts(domain: String, costPerArticle: Double): String {
+    var lines = 0
+    findFiles(Paths.get("openai/$domain/content/"), "csv").forEach { path ->
+        lines += path.toFile().readLines().size
+    }
+    return "$lines articles = $${lines * costPerArticle}"
+}
 
+fun findFiles(folder: Path, extension: String): List<Path> {
+    val txtFiles = mutableListOf<Path>()
+
+    Files.walkFileTree(folder, setOf(FileVisitOption.FOLLOW_LINKS), Int.MAX_VALUE, object : SimpleFileVisitor<Path>() {
+        override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {
+            if (file.toString().endsWith(".${extension}")) {
+                txtFiles.add(file)
+            }
+            return FileVisitResult.CONTINUE
+        }
+
+        override fun visitFileFailed(file: Path, exc: IOException): FileVisitResult {
+            return FileVisitResult.CONTINUE
+        }
+    })
+
+    return txtFiles
 }
 
 private fun generateStructure(domain: String, categories: List<String>, types: List<ArticleType>) {
