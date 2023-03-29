@@ -69,6 +69,10 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         return content
     }
 
+    fun buildPAA2(): String {
+        return ""
+    }
+
     fun buildMedium(): String {
         val srcFolder = meta.resolveKeywordFolder()
 

@@ -92,7 +92,6 @@ private fun download() {
                     println("==== Done $processed/${toBeProcessed.get()} ====\n")
                 }
             }
-//       buildContent(xml, meta, keywordSource, false)
         }
 }
 
@@ -201,6 +200,7 @@ fun buildContent(
     println("Building ${meta.type} for [${keywordSource.keyword}]")
     val builder: (meta: BlogpostContentMeta) -> String = when (meta.type) {
         ArticleType.PAA -> { m -> BlogpostContentBuilder(m).buildPAA() }
+        ArticleType.PAA2 -> { m -> BlogpostContentBuilder(m).buildPAA2() }
         ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
         ArticleType.MEDIUM -> { m -> BlogpostContentBuilder(m).buildMedium() }
         ArticleType.SAVO -> { m -> BlogpostContentBuilder(m).buildSavo() }
@@ -217,6 +217,7 @@ fun buildContent(
 
 fun resolveTagsIntent(type: ArticleType) = when (type) {
     ArticleType.PAA -> Intent.TAGS_PAA
+    ArticleType.PAA2 -> Intent.TAGS_PAA
     ArticleType.BIG -> Intent.TAGS
     ArticleType.MEDIUM -> Intent.TAGS
     ArticleType.SAVO -> Intent.TAGS
@@ -225,6 +226,7 @@ fun resolveTagsIntent(type: ArticleType) = when (type) {
 fun resolveDownloader(type: ArticleType): (BlogpostContentMeta) -> Unit {
     return when (type) {
         ArticleType.PAA -> { meta -> run { BlogpostDownloader(meta).downloadPAA() } }
+        ArticleType.PAA2 -> { meta -> run { BlogpostDownloader(meta).downloadPAA2() } }
         ArticleType.BIG -> { meta -> run { BlogpostDownloader(meta).downloadBigPost() } }
         ArticleType.MEDIUM -> { meta -> run { BlogpostDownloader(meta).downloadMedium() } }
         ArticleType.SAVO -> { meta -> run { BlogpostDownloader(meta).downloadSavo() } }

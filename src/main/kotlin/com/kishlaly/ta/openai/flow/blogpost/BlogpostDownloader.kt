@@ -16,7 +16,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         introduction()
         tableOfContentsPlan()
         tableOfContentsTexts_history()
-        tableOfContentsTexts_main()
+        tableOfContentsTexts_main(Intent.TOC_PLAN)
         tableOfContentsTexts_facts()
         oppositeOpinionQuestion()
         oppositeOpinionText()
@@ -38,12 +38,27 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         tagsShort()
     }
 
+    fun downloadPAA2() {
+        File(stepFolder).mkdir()
+
+        introduction()
+
+        tableOfContentsPlanShort()
+        tableOfContentsTexts_main(Intent.TOC_PLAN_SHORT)
+        tableOfContentsTexts_facts()
+        tableOfContentsTexts_own_experience()
+
+        tags()
+        conclusion(Intent.INTRODUCTION)
+        randomAddition()
+    }
+
     fun downloadMedium() {
         File(stepFolder).mkdir()
 
         introduction()
         tableOfContentsPlan()
-        tableOfContentsTexts_main()
+        tableOfContentsTexts_main(Intent.TOC_PLAN)
         conclusion(Intent.INTRODUCTION)
     }
 
@@ -228,9 +243,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    private fun tableOfContentsTexts_main() {
+    private fun tableOfContentsTexts_main(tocIntent: Intent) {
         val intent = Intent.CONTENT_PART_2_MAIN
-        val prompt = readLines(Intent.TOC_PLAN).map { intent.get(globalLanguage, it) }
+        val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
             folder = stepFolder,
@@ -264,8 +279,30 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
+    private fun tableOfContentsTexts_own_experience() {
+        val intent = Intent.CONTENT_PART_1_HISTORY
+        val prompt = readLines(Intent.TOC_PLAN).map { intent.get(globalLanguage, it) }
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = prompt,
+            postProcessings = listOf(trimmed),
+            useTone = true,
+        )
+    }
+
     private fun tableOfContentsPlan() {
         val intent = Intent.TOC_PLAN
+        Step(
+            intent = intent,
+            folder = stepFolder,
+            input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
+            postProcessings = listOf(removeNumericList, filterBadTOC, removeQuestionMarks, trimmed)
+        )
+    }
+
+    private fun tableOfContentsPlanShort() {
+        val intent = Intent.TOC_PLAN_SHORT
         Step(
             intent = intent,
             folder = stepFolder,

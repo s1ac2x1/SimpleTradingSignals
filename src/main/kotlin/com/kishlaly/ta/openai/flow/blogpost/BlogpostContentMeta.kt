@@ -5,6 +5,7 @@ import com.kishlaly.ta.openai.flow.toFileName
 
 enum class ArticleType {
     PAA,
+    PAA2,
     BIG,
     MEDIUM,
     SAVO
