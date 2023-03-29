@@ -306,3 +306,4 @@ var globalLimit = 1000
 var globalImageURI = ""
 var globalType = ArticleType.MEDIUM
 var globalInterlinkage = false
+var globalUseTone = true

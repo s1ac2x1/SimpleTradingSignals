@@ -20,13 +20,14 @@ fun main() {
      globalImageURI = ""
      globalType = ArticleType.SAVO
      globalInterlinkage = false
+     globalUseTone = false
 
      keywords = parseKeywords()
 
      val total = keywords[globalType]?.size ?: 0
      val processed = AtomicInteger(0)
      val xml = BlogpostXMLBuilder()
-     val executor = Executors.newFixedThreadPool(25)
+     val executor = Executors.newFixedThreadPool(10)
 
      keywords[globalType]
           //?.shuffled()
@@ -43,13 +44,13 @@ fun main() {
 
                // добавлять абзац в начале про рекламу для Саво
 
-//        executor.submit {
-//            resolveDownloader(globalType)(meta)
-//            processed.incrementAndGet()
-//            println("==== Done $processed/$total ====\n")
-//        }
+        executor.submit {
+            resolveDownloader(globalType)(meta)
+            processed.incrementAndGet()
+            println("==== Done $processed/$total ====\n")
+        }
 
-          buildContent(xml, meta, keywordSource, true)
+//          buildContent(xml, meta, keywordSource, true)
      }
 
      executor.shutdown()

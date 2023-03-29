@@ -78,7 +78,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(trimmed),
-            useTone = true,
+            useTone = globalUseTone,
         )
     }
 
@@ -89,7 +89,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(trimmed),
-            useTone = true,
+            useTone = globalUseTone,
         )
     }
 
@@ -100,7 +100,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(trimmed),
-            useTone = true,
+            useTone = globalUseTone,
         )
     }
 
@@ -115,7 +115,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             input = listOf(finalPrompt),
             folder = stepFolder,
             postProcessings = listOf(trimmed),
-            useTone = true,
+            useTone = globalUseTone,
         )
     }
 
@@ -129,7 +129,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf(intent.get(globalLanguage, prompt)),
             postProcessings = listOf(trimmed),
-            useTone = true,
+            useTone = globalUseTone,
         )
     }
 
@@ -142,7 +142,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf(intent.get(globalLanguage, prompt)),
             postProcessings = listOf(trimmed),
-            useTone = true,
+            useTone = globalUseTone,
         )
     }
 
@@ -228,7 +228,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf(intent.get(globalLanguage, prompt)),
             postProcessings = listOf(trimmed),
-            useTone = true,
+            useTone = globalUseTone,
         )
     }
 
@@ -249,7 +249,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = prompt,
             postProcessings = listOf(trimmed),
-            useTone = true,
+            useTone = globalUseTone,
         )
     }
 
@@ -290,7 +290,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
             folder = stepFolder,
             input = listOf(intent.get(globalLanguage, meta.keywordSource.keyword)),
             postProcessings = listOf(trimmed),
-            useTone = true,
+            useTone = globalUseTone,
         )
     }
 
