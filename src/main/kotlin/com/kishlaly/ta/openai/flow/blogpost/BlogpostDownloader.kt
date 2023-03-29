@@ -15,9 +15,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
         tableOfContentsPlan()
-        tableOfContentsTexts_history()
+        tableOfContentsTexts_history(Intent.TOC)
         tableOfContentsTexts_main(Intent.TOC)
-        tableOfContentsTexts_facts()
+        tableOfContentsTexts_facts(Intent.TOC)
         oppositeOpinionQuestion()
         oppositeOpinionText()
         tags()
@@ -45,8 +45,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         tableOfContentsPlanShort()
         tableOfContentsTexts_main(Intent.TOC_SHORT)
-        tableOfContentsTexts_facts()
-        tableOfContentsTexts_own_experience()
+        tableOfContentsTexts_facts(Intent.TOC_SHORT)
+        tableOfContentsTexts_own_experience(Intent.TOC_SHORT)
 
         tags()
         conclusion(Intent.INTRODUCTION)
@@ -230,9 +230,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    private fun tableOfContentsTexts_facts() {
+    private fun tableOfContentsTexts_facts(tocIntent: Intent) {
         val intent = Intent.TOC_PART_FACTS
-        val prompt = readLines(Intent.TOC).map { intent.get(globalLanguage, it) }
+        val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
             folder = stepFolder,
@@ -266,9 +266,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    private fun tableOfContentsTexts_history() {
+    private fun tableOfContentsTexts_history(tocIntent: Intent) {
         val intent = Intent.TOC_PART_HISTORY
-        val prompt = readLines(Intent.TOC).map { intent.get(globalLanguage, it) }
+        val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
             folder = stepFolder,
@@ -278,9 +278,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    private fun tableOfContentsTexts_own_experience() {
+    private fun tableOfContentsTexts_own_experience(tocIntent: Intent) {
         val intent = Intent.TOC_PART_HISTORY
-        val prompt = readLines(Intent.TOC).map { intent.get(globalLanguage, it) }
+        val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
             folder = stepFolder,

@@ -376,8 +376,8 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     TOC_SHORT(
         mapOf(
-            Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 5 bis 7 kurzen Unterüberschriften.",
-            Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 5 to 7 short subheadings."
+            Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 3 bis 4 kurzen Unterüberschriften.",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 3 to 4 short subheadings."
         )
     ),
     TOC_SAVO(
