@@ -11,13 +11,16 @@ import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 val executor = Executors.newFixedThreadPool(25)
 val processed = AtomicInteger(0)
 val toBeProcessed = AtomicInteger(0)
-var onlyOne = false
+
+var onlyOne = AtomicBoolean(false)
+var onlyOneProcessed = AtomicBoolean(false)
 
 // Перед созданием контента нового сайта
 //    сгенерить картинки
@@ -46,7 +49,7 @@ fun main() {
 
     //generateStructure(domain, categories, types)
     //estimateCosts(0.1)
-    onlyOne = true
+    onlyOne.set(true)
 
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
     categories.forEach { category ->
@@ -82,13 +85,13 @@ private fun download() {
                 imgURI = globalImageURI,
                 imgSrcFolder = "openai/${globalDomain}/images_webp"
             )
-            if (onlyOne && processed.get() >= 1) {
-                return
-            }
-            executor.submit {
-                resolveDownloader(globalType)(meta)
-                processed.incrementAndGet()
-                println("==== Done $processed/${toBeProcessed.get()} ====\n")
+            if (!onlyOne.get() || (onlyOne.get() && !onlyOneProcessed.get())) {
+                executor.submit {
+                    onlyOneProcessed.compareAndSet(false, true)
+                    resolveDownloader(globalType)(meta)
+                    processed.incrementAndGet()
+                    println("==== Done $processed/${toBeProcessed.get()} ====\n")
+                }
             }
 //       buildContent(xml, meta, keywordSource, false)
         }
