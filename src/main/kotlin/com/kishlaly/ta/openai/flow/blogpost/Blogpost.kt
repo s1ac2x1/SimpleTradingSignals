@@ -56,7 +56,7 @@ fun main() {
             globalInsertImages = true
             globalInsertTags = true
             globalDomain = domain
-            globalCategory = category
+            globalCategory = category.replace(" ", "-")
             globalImageURI = imagesOnHosting
             globalType = type
 
