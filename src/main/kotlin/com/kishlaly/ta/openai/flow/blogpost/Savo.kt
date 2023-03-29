@@ -31,7 +31,7 @@ fun main() {
 
      keywords[globalType]
           //?.shuffled()
-          //?.take(1)
+          ?.take(120)
           ?.forEach { keywordSource ->
                val meta = BlogpostContentMeta(
                     type = globalType,
