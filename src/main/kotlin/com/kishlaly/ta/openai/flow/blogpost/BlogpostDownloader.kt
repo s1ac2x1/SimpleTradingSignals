@@ -15,9 +15,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
         tableOfContentsPlan()
-        tableOfContentsTexts_history(Intent.TOC)
-        tableOfContentsTexts_main(Intent.TOC)
-        tableOfContentsTexts_facts(Intent.TOC)
+        tableOfContentsTexts(Intent.TOC, Intent.TOC_PART_HISTORY)
+        tableOfContentsTexts(Intent.TOC, Intent.TOC_PART_MAIN)
+        tableOfContentsTexts(Intent.TOC, Intent.TOC_PART_FACTS)
         oppositeOpinionQuestion()
         oppositeOpinionText()
         tags()
@@ -44,9 +44,9 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         introduction()
 
         tableOfContentsPlanShort()
-        tableOfContentsTexts_main(Intent.TOC_SHORT)
-        tableOfContentsTexts_facts(Intent.TOC_SHORT)
-        tableOfContentsTexts_own_experience(Intent.TOC_SHORT)
+        tableOfContentsTexts(Intent.TOC_SHORT, Intent.TOC_PART_MAIN)
+        tableOfContentsTexts(Intent.TOC_SHORT, Intent.TOC_PART_FACTS)
+        tableOfContentsTexts(Intent.TOC_SHORT, Intent.TOC_PART_OWN_EXPERIENCE)
 
         tags()
         conclusion(Intent.INTRODUCTION)
@@ -57,7 +57,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
         tableOfContentsPlan()
-        tableOfContentsTexts_main(Intent.TOC)
+        tableOfContentsTexts(Intent.TOC, Intent.TOC_PART_MAIN)
         conclusion(Intent.INTRODUCTION)
     }
 
@@ -66,7 +66,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
         tableOfContentsPlanSavo()
-        tableOfContentsTextsSavo_main()
+        tableOfContentsTexts(Intent.TOC_SAVO, Intent.TOC_PART_MAIN)
         if (meta.keywordSource.text.isNotEmpty()) {
             savoCTA()
         }
@@ -230,59 +230,10 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         )
     }
 
-    private fun tableOfContentsTexts_facts(tocIntent: Intent) {
-        val intent = Intent.TOC_PART_FACTS
-        val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
+    private fun tableOfContentsTexts(tocIntent: Intent, contentIntent: Intent) {
+        val prompt = readLines(tocIntent).map { contentIntent.get(globalLanguage, it) }
         Step(
-            intent = intent,
-            folder = stepFolder,
-            input = prompt,
-            postProcessings = listOf(trimmed),
-            useTone = true,
-        )
-    }
-
-    private fun tableOfContentsTexts_main(tocIntent: Intent) {
-        val intent = Intent.TOC_PART_MAIN
-        val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
-        Step(
-            intent = intent,
-            folder = stepFolder,
-            input = prompt,
-            postProcessings = listOf(trimmed),
-            useTone = true,
-        )
-    }
-
-    private fun tableOfContentsTextsSavo_main() {
-        val intent = Intent.TOC_PART_MAIN
-        val prompt = readLines(Intent.TOC_SAVO).map { intent.get(globalLanguage, it) }
-        Step(
-            intent = intent,
-            folder = stepFolder,
-            input = prompt,
-            postProcessings = listOf(trimmed),
-            useTone = true,
-        )
-    }
-
-    private fun tableOfContentsTexts_history(tocIntent: Intent) {
-        val intent = Intent.TOC_PART_HISTORY
-        val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
-        Step(
-            intent = intent,
-            folder = stepFolder,
-            input = prompt,
-            postProcessings = listOf(trimmed),
-            useTone = true,
-        )
-    }
-
-    private fun tableOfContentsTexts_own_experience(tocIntent: Intent) {
-        val intent = Intent.TOC_PART_OWN_EXPERIENCE
-        val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
-        Step(
-            intent = intent,
+            intent = contentIntent,
             folder = stepFolder,
             input = prompt,
             postProcessings = listOf(trimmed),
