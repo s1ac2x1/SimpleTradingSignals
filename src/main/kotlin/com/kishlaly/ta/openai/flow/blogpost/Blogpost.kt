@@ -17,6 +17,7 @@ var keywords = mapOf<ArticleType, List<KeywordSource>>()
 val executor = Executors.newFixedThreadPool(25)
 val processed = AtomicInteger(0)
 val toBeProcessed = AtomicInteger(0)
+var onlyOne = false
 
 // Перед созданием контента нового сайта
 //    сгенерить картинки
@@ -45,6 +46,7 @@ fun main() {
 
     //generateStructure(domain, categories, types)
     //estimateCosts(0.1)
+    onlyOne = true
 
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
     categories.forEach { category ->
@@ -58,7 +60,7 @@ fun main() {
             globalImageURI = imagesOnHosting
             globalType = type
 
-            download(DownloadType.SINGLE)
+            download()
             //build()
         }
     }
@@ -67,12 +69,10 @@ fun main() {
     executor.awaitTermination(3, TimeUnit.HOURS)
 }
 
-private fun download(downloadType: DownloadType) {
+private fun download() {
     keywords = readCSV()
     toBeProcessed.addAndGet(keywords[globalType]?.size ?: 0)
     keywords[globalType]
-        //?.shuffled()
-        ?.take(if (downloadType == DownloadType.SINGLE) 1 else 99999)
         ?.forEach { keywordSource ->
             val meta = BlogpostContentMeta(
                 type = globalType,
@@ -82,6 +82,9 @@ private fun download(downloadType: DownloadType) {
                 imgURI = globalImageURI,
                 imgSrcFolder = "openai/${globalDomain}/images_webp"
             )
+            if (onlyOne && processed.get() >= 1) {
+                return
+            }
             executor.submit {
                 resolveDownloader(globalType)(meta)
                 processed.incrementAndGet()
