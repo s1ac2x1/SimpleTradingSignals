@@ -16,7 +16,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         introduction()
         tableOfContentsPlan()
         tableOfContentsTexts_history()
-        tableOfContentsTexts_main(Intent.TOC_PLAN)
+        tableOfContentsTexts_main(Intent.TOC)
         tableOfContentsTexts_facts()
         oppositeOpinionQuestion()
         oppositeOpinionText()
@@ -44,13 +44,12 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         introduction()
 
         tableOfContentsPlanShort()
-        tableOfContentsTexts_main(Intent.TOC_PLAN_SHORT)
+        tableOfContentsTexts_main(Intent.TOC_SHORT)
         tableOfContentsTexts_facts()
         tableOfContentsTexts_own_experience()
 
         tags()
         conclusion(Intent.INTRODUCTION)
-        randomAddition()
     }
 
     fun downloadMedium() {
@@ -58,7 +57,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
 
         introduction()
         tableOfContentsPlan()
-        tableOfContentsTexts_main(Intent.TOC_PLAN)
+        tableOfContentsTexts_main(Intent.TOC)
         conclusion(Intent.INTRODUCTION)
     }
 
@@ -177,7 +176,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun imagesForToC() {
-        val prompts = readLines(Intent.TOC_PLAN)
+        val prompts = readLines(Intent.TOC)
         Step(
             intent = Intent.TOC_IMAGES,
             folder = stepFolder,
@@ -232,8 +231,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsTexts_facts() {
-        val intent = Intent.CONTENT_PART_3_FACTS
-        val prompt = readLines(Intent.TOC_PLAN).map { intent.get(globalLanguage, it) }
+        val intent = Intent.TOC_PART_FACTS
+        val prompt = readLines(Intent.TOC).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
             folder = stepFolder,
@@ -244,7 +243,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsTexts_main(tocIntent: Intent) {
-        val intent = Intent.CONTENT_PART_2_MAIN
+        val intent = Intent.TOC_PART_MAIN
         val prompt = readLines(tocIntent).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
@@ -256,8 +255,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsTextsSavo_main() {
-        val intent = Intent.CONTENT_PART_2_MAIN
-        val prompt = readLines(Intent.TOC_PLAN_SAVO).map { intent.get(globalLanguage, it) }
+        val intent = Intent.TOC_PART_MAIN
+        val prompt = readLines(Intent.TOC_SAVO).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
             folder = stepFolder,
@@ -268,8 +267,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsTexts_history() {
-        val intent = Intent.CONTENT_PART_1_HISTORY
-        val prompt = readLines(Intent.TOC_PLAN).map { intent.get(globalLanguage, it) }
+        val intent = Intent.TOC_PART_HISTORY
+        val prompt = readLines(Intent.TOC).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
             folder = stepFolder,
@@ -280,8 +279,8 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsTexts_own_experience() {
-        val intent = Intent.CONTENT_PART_1_HISTORY
-        val prompt = readLines(Intent.TOC_PLAN).map { intent.get(globalLanguage, it) }
+        val intent = Intent.TOC_PART_HISTORY
+        val prompt = readLines(Intent.TOC).map { intent.get(globalLanguage, it) }
         Step(
             intent = intent,
             folder = stepFolder,
@@ -292,7 +291,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsPlan() {
-        val intent = Intent.TOC_PLAN
+        val intent = Intent.TOC
         Step(
             intent = intent,
             folder = stepFolder,
@@ -302,7 +301,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsPlanShort() {
-        val intent = Intent.TOC_PLAN_SHORT
+        val intent = Intent.TOC_SHORT
         Step(
             intent = intent,
             folder = stepFolder,
@@ -312,7 +311,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     private fun tableOfContentsPlanSavo() {
-        val intent = Intent.TOC_PLAN_SAVO
+        val intent = Intent.TOC_SAVO
         Step(
             intent = intent,
             folder = stepFolder,

@@ -368,28 +368,34 @@ enum class Intent(val map: Map<Language, String>) {
             Language.EN to ""
         )
     ),
-    TOC_PLAN(
+    TOC(
         mapOf(
             Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 10 to 15 short subheadings."
         )
     ),
-    TOC_PLAN_SHORT(
+    TOC_SHORT(
         mapOf(
             Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 5 bis 7 kurzen Unterüberschriften.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 5 to 7 short subheadings."
         )
     ),
-    TOC_PLAN_SAVO(
+    TOC_SAVO(
         mapOf(
             Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 4 bis 7 kurzen Unterüberschriften.",
             Language.EN to "I'm writing an article about \"${globalBlogTopic}\". Write a list of 5 to 7 short subheadings. At the end of the article, I will place an advertisement, so these subheadings should smoothly lead to this, revealing the main topic."
         )
     ),
-    CONTENT_PART_1_HISTORY(
+    TOC_PART_HISTORY(
         mapOf(
             Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine lange historische Notiz zu diesem Thema: \"###param###\".",
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write a long historical note on this topic: \"###param###\"."
+        )
+    ),
+    TOC_PART_OWN_EXPERIENCE(
+        mapOf(
+            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreibe eine ausführliche antwort zum thema \"###param###\", als ob du oder jemand aus deinem umfeld schon mal so eine situation hattest und wie du damit umgegangen bist bzw. nicht umgegangen bist",
+            Language.EN to "I am writing an article about ${globalBlogTopic}. Write a detailed answer on the topic \"###param###\", as if you or someone from your environment has already had such a situation and how you dealt with it or not dealt with it."
         )
     ),
     HISTORY(
@@ -398,7 +404,7 @@ enum class Intent(val map: Map<Language, String>) {
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write a long historical note on this topic: \"###param###\"."
         )
     ),
-    CONTENT_PART_2_MAIN(
+    TOC_PART_MAIN(
         mapOf(
             Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"###param###\". Begründen Sie Ihre Antwort mit einigen Beispielen.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write a detailed expert answer on this topic: \"###param###\". Justify your answer with some examples."
@@ -410,7 +416,7 @@ enum class Intent(val map: Map<Language, String>) {
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write a detailed expert answer on this topic: \"###param###\". Justify your answer with some examples."
         )
     ),
-    CONTENT_PART_3_FACTS(
+    TOC_PART_FACTS(
         mapOf(
             Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write interesting facts about this topic: \"###param###\". Format the text in the form of paragraphs without numbers."

@@ -81,7 +81,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         }
 
         val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
-        val tocPlan = File("$srcFolder/${Intent.TOC_PLAN}_1").readLines()
+        val tocPlan = File("$srcFolder/${Intent.TOC}_1").readLines()
 
         val interlinksLimit = Random.nextInt(5) + 2
         var linksMade = 0
@@ -90,13 +90,13 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             tocContent.append("<h2>$item</h2>")
 
             val headingContent = StringBuilder()
-            listOf(Intent.CONTENT_PART_2_MAIN).shuffled()
+            listOf(Intent.TOC_PART_MAIN).shuffled()
                 .forEach { intent ->
                     val part =
                         File("$srcFolder").listFiles()
                             .find { file -> file.name.contains("${intent.name}_${index + 1}") }
                             ?.readText() ?: ""
-                    if (intent == Intent.CONTENT_PART_2_MAIN) {
+                    if (intent == Intent.TOC_PART_MAIN) {
                         headingContent.append(formatWith_B(part))
                     }
                 }
@@ -121,20 +121,20 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         }
 
         val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
-        val tocPlan = File("$srcFolder/${Intent.TOC_PLAN_SAVO}_1").readLines()
+        val tocPlan = File("$srcFolder/${Intent.TOC_SAVO}_1").readLines()
 
         val tocContent = StringBuilder()
         tocPlan.forEachIndexed { index, item ->
             tocContent.append("<h2>$item</h2>")
 
             val headingContent = StringBuilder()
-            listOf(Intent.CONTENT_PART_2_MAIN).shuffled()
+            listOf(Intent.TOC_PART_MAIN).shuffled()
                 .forEach { intent ->
                     val part =
                         File("$srcFolder").listFiles()
                             .find { file -> file.name.contains("${intent.name}_${index + 1}") }
                             ?.readText() ?: ""
-                    if (intent == Intent.CONTENT_PART_2_MAIN) {
+                    if (intent == Intent.TOC_PART_MAIN) {
                         headingContent.append(if (Random.nextBoolean()) formatWith_B_U_I(part) else formatWith_UL(part))
                     }
                 }
@@ -162,7 +162,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         }
 
         val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
-        val tocPlan = File("$srcFolder/${Intent.TOC_PLAN}_1").readLines()
+        val tocPlan = File("$srcFolder/${Intent.TOC}_1").readLines()
 
         val interlinksLimit = Random.nextInt(5) + 2
         var linksMade = 0
@@ -177,20 +177,20 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             }
 
             val headingContent = StringBuilder()
-            listOf(Intent.CONTENT_PART_1_HISTORY, Intent.CONTENT_PART_2_MAIN, Intent.CONTENT_PART_3_FACTS).shuffled()
+            listOf(Intent.TOC_PART_HISTORY, Intent.TOC_PART_MAIN, Intent.TOC_PART_FACTS).shuffled()
                 .forEach { intent ->
                     val part =
                         File("$srcFolder").listFiles()
                             .find { file -> file.name.contains("${intent.name}_${index + 1}") }
                             ?.readText() ?: ""
-                    if (intent == Intent.CONTENT_PART_1_HISTORY) {
+                    if (intent == Intent.TOC_PART_HISTORY) {
                         val historicalContent = formatWith_B_U_I(part)
                         headingContent.append(historicalContent)
                     }
-                    if (intent == Intent.CONTENT_PART_2_MAIN) {
+                    if (intent == Intent.TOC_PART_MAIN) {
                         headingContent.append(formatWith_B(part))
                     }
-                    if (intent == Intent.CONTENT_PART_3_FACTS) {
+                    if (intent == Intent.TOC_PART_FACTS) {
                         val factsContent = formatWith_UL(part)
                         headingContent.append(factsContent)
                     }
