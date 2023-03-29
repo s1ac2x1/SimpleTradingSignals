@@ -26,11 +26,11 @@ fun main() {
      val total = keywords[globalType]?.size ?: 0
      val processed = AtomicInteger(0)
      val xml = BlogpostXMLBuilder()
-     val executor = Executors.newFixedThreadPool(5)
+     val executor = Executors.newFixedThreadPool(25)
 
      keywords[globalType]
           //?.shuffled()
-          ?.take(1)
+          //?.take(1)
           ?.forEach { keywordSource ->
                val meta = BlogpostContentMeta(
                     type = globalType,

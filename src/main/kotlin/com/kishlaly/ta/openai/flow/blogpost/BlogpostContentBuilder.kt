@@ -137,14 +137,15 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
             tocContent.append(headingContent.toString())
         }
 
-        val cta = File("$srcFolder/${Intent.EXTERNAL_PROMPT}_1").readLines().filter { it.trim().length > 5 }.joinToString("<br><br>")
+        val ctaFile = File("$srcFolder/${Intent.EXTERNAL_PROMPT}_1")
+        val cta = if (ctaFile.exists()) "<p>" + ctaFile.readLines().filter { it.trim().length > 5 }.joinToString("<br><br>") + "</p>" else ""
         val disclosure = if (meta.keywordSource.text.isNotEmpty()) "<p><i>${disclosureGlobal}</i></p>" else ""
 
         var content = """
         $disclosure
         <p>${formatWith_B(introduction)}</p>
         $tocContent
-        <p>$cta</p>
+        $cta
     """.trimIndent()
 
         return content
