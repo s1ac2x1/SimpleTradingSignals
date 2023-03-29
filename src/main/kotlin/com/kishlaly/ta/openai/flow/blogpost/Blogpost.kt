@@ -96,7 +96,24 @@ private fun download() {
 
 private fun build() {
     val xml = BlogpostXMLBuilder()
-    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+    keywords = readCSV()
+    toBeProcessed.addAndGet(keywords[globalType]?.size ?: 0)
+    keywords[globalType]
+        ?.forEach { keywordSource ->
+            val meta = BlogpostContentMeta(
+                type = globalType,
+                keywordSource = keywordSource,
+                category = globalCategory,
+                domain = globalDomain,
+                imgURI = globalImageURI,
+                imgSrcFolder = "openai/${globalDomain}/images_webp"
+            )
+            buildContent(xml, meta, keywordSource, false)
+        }
+    Files.write(
+        Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"),
+        xml.build().toString().toByteArray()
+    )
 }
 
 private fun estimateCosts(domain: String, categories: List<String>, types: List<ArticleType>) {
