@@ -3,59 +3,113 @@ package com.kishlaly.ta.openai.flow.blogpost
 import com.kishlaly.ta.openai.KeywordSource
 import com.kishlaly.ta.openai.flow.Intent
 import com.kishlaly.ta.openai.flow.Language
-import com.kishlaly.ta.openai.flow.firstFilterCSV
 import com.kishlaly.ta.openai.flow.toFileName
 import com.kishlaly.ta.openai.readCsv
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.atomic.AtomicInteger
+import java.nio.file.StandardCopyOption
 
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
 
+// Перед созданием контента нового сайта
+//    сгенерить картинки
+//    перевести их в webp
+//    сгенерить структуру папок (generateStructure)
+//    обработать csv на предмет дублей и тд
+//    запустить генерацию контента сразу по всем категориям
+
 fun main() {
+    val domain = "beziehung101.com"
+    val categories = listOf(
+        "Kommunikation in Beziehungen",
+        "Konfliktlösung in Beziehungen",
+        "Bindungstheorie und Bindungsstile",
+        "Intimität und Vertrauen",
+        "Emotionale Intelligenz",
+        "Grenzen setzen und einhalten",
+        "Paartherapie und Eheberatung",
+        "Elternschaft und Erziehung",
+        "Sexualität und Beziehungen"
+    )
+
     //setupGermanBIG("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
-    setupGermanPAA("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
+    //setupGermanPAA("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
     //setupMedium("cats")
 
-    firstFilterCSV()
-    keywords = readCSV()
-    val total = keywords[globalType]?.size ?: 0
-    val processed = AtomicInteger(0)
-    val xml = BlogpostXMLBuilder()
-    val executor = Executors.newFixedThreadPool(25)
+    generateStructure(domain, categories, listOf(ArticleType.PAA))
 
-    // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
+//    firstFilterCSV()
+//    keywords = readCSV()
+//    val total = keywords[globalType]?.size ?: 0
+//    val processed = AtomicInteger(0)
+//    val xml = BlogpostXMLBuilder()
+//    val executor = Executors.newFixedThreadPool(25)
+//
+//    // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
+//
+//    keywords[globalType]
+//        //?.shuffled()
+//        //?.take(1)
+//        ?.forEach { keywordSource ->
+//            val meta = BlogpostContentMeta(
+//                type = globalType,
+//                keywordSource = keywordSource,
+//                category = globalCategory,
+//                domain = globalDomain,
+//                imgURI = globalImageURI,
+//                imgSrcFolder = "openai/${globalDomain}/images_webp"
+//            )
+//
+//            executor.submit {
+//                resolveDownloader(globalType)(meta)
+//                processed.incrementAndGet()
+//                println("==== Done $processed/$total ====\n")
+//            }
+//
+////       buildContent(xml, meta, keywordSource, false)
+//        }
+//
+//    executor.shutdown()
+//    executor.awaitTermination(2, TimeUnit.HOURS)
+//
+////    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
 
-    keywords[globalType]
-        //?.shuffled()
-        //?.take(1)
-        ?.forEach { keywordSource ->
-        val meta = BlogpostContentMeta(
-            type = globalType,
-            keywordSource = keywordSource,
-            category = globalCategory,
-            domain = globalDomain,
-            imgURI = globalImageURI,
-            imgSrcFolder = "openai/${globalDomain}/images_webp"
-        )
+}
 
-        executor.submit {
-            resolveDownloader(globalType)(meta)
-            processed.incrementAndGet()
-            println("==== Done $processed/$total ====\n")
+private fun generateStructure(domain: String, categories: List<String>, types: List<ArticleType>) {
+    File("openai/$domain").mkdir()
+    File("openai/$domain/content").mkdir()
+    File("openai/$domain/temp").mkdir()
+    File("openai/$domain/images").mkdir()
+    File("openai/$domain/images_webp").mkdir()
+    categories.forEach { cateroryRaw ->
+        val category = cateroryRaw.replace(" ", "-")
+        File("openai/$domain/content/$category").mkdir()
+        types.forEach { type ->
+            File("openai/$domain/content/$category/${type.name.lowercase()}").mkdir()
+            File("openai/$domain/raw").listFiles().forEach { raw ->
+                if (raw.name.lowercase().contains(category.lowercase())) {
+                    val srcFile = "openai/$domain/content/$category/${category}_${type.name.lowercase()}.csv"
+                    Files.copy(Paths.get(raw.absolutePath), Paths.get(srcFile), StandardCopyOption.REPLACE_EXISTING)
+                    var src = File(srcFile).readLines()
+                    if (src.isNotEmpty()) {
+                        if (src[0].contains("PAA Title")) {
+                            src = src.drop(1)
+                        }
+                        val formattedSrc = src
+                            .map { it.replace(",", ";") }
+                            .map { it.split(";")[0] }
+                            .distinct()
+                            .take(globalLimit)
+                            .map { "${it};" }
+                            .joinToString(System.lineSeparator())
+                        File(srcFile).writeBytes(formattedSrc.toByteArray())
+                    }
+                }
+            }
         }
-
-//       buildContent(xml, meta, keywordSource, false)
     }
-
-    executor.shutdown()
-    executor.awaitTermination(2, TimeUnit.HOURS)
-
-//    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
-
 }
 
 private fun setupGermanPAA(domain: String, caterogy: String, topic: String, imageURI: String) {
@@ -148,16 +202,17 @@ fun copyFilesToDirectory(files: List<File>, destinationDirectory: File) {
 
 fun readCSV(): MutableMap<ArticleType, List<KeywordSource>> {
     val result = mutableMapOf<ArticleType, List<KeywordSource>>()
-        ArticleType.values().forEach { type ->
-            try {
-                val keywords = readCsv("openai/$globalDomain/content/$globalCategory/${globalCategory}_${type.name.lowercase()}.csv")
+    ArticleType.values().forEach { type ->
+        try {
+            val keywords =
+                readCsv("openai/$globalDomain/content/$globalCategory/${globalCategory}_${type.name.lowercase()}.csv")
                     .distinctBy { it.keyword }
                     .toList()
-                result.put(type, keywords)
-            } catch (e: Exception) {
-                println("")
-            }
+            result.put(type, keywords)
+        } catch (e: Exception) {
+            println("")
         }
+    }
     return result
 }
 
@@ -177,7 +232,7 @@ var globalInsertImages = false
 var globalInsertTags = false
 var globalDomain = ""
 var globalCategory = ""
-var globalLimit = 500
+var globalLimit = 1000
 var globalImageURI = ""
 var globalType = ArticleType.MEDIUM
 var globalInterlinkage = false
