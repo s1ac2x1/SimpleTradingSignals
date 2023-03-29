@@ -58,32 +58,33 @@ import kotlin.random.Random
 //}
 
 //fun main() {
-//    val domain = "hund101.com"
-//    val breeds = File("openai/$domain/breeds").readLines()
-//    val ages = File("openai/$domain/age").readLines()
-//    val moods = File("openai/$domain/mood").readLines()
-//    val actions = File("openai/$domain/actions").readLines()
+//    val domain = "beziehung101.com"
+////    val breeds = File("openai/$domain/breeds").readLines()
+////    val ages = File("openai/$domain/age").readLines()
+////    val moods = File("openai/$domain/mood").readLines()
+////    val actions = File("openai/$domain/actions").readLines()
 //
 //        val tasks = mutableListOf<ImageGenerateTask>()
 //    (1..50).forEach {
-//        val breed = breeds.random()
-//        val age = ages.random()
-//        val mood = moods.random()
-//        val action = actions.random()
-//        val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
+////        val breed = breeds.random()
+////        val age = ages.random()
+////        val mood = moods.random()
+////        val action = actions.random()
+////        val actionOrMood = if (Random.nextBoolean()) "looks ${mood}" else action
 //        tasks.add(ImageGenerateTask(
-//            keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
-//            //keyword = "a close up, studio photographic portrait of a white woman 30 years old who wearing dress, taking a cat on the hands and smiling. In the style pencil artwork",
+//            //keyword = "a close up, studio photographic portrait of a ${breed} ${age} that ${actionOrMood}." + if (Random.nextBoolean()) " In the style pencil artwork" else "",
+//            keyword = "Create a heartwarming illustration of diverse people of different ages, ethnicities, and abilities coming together in a picturesque park setting. Show them connecting through various activities like sharing a meal at a picnic, laughing together, playing games, and walking arm in arm. Include details like a beautiful sunset, blooming flowers, and lush greenery, as well as subtle touches of affection like hugs, hand-holding, and warm smiles.",
+//            //keyword = "Generate images that illustrate the different ways couples can show affection, such as hugging, kissing, cuddling, and holding hands. The images should be warm and romantic. In the style pencil artwork",
 //            outputFolderName = "openai/$domain/images",
 //            outputFileName = "$domain-${System.nanoTime()}",
 //            n = 1
 //        ))
 //    }
-//    ImagesProcessor.generateMultithreaded(tasks, 5)
+//    ImagesProcessor.generateMultithreaded(tasks, 10)
 //}
 
 fun main() {
-    val domain = "hund101.com"
+    val domain = "beziehung101.com"
     File("openai/$domain/images").listFiles().forEach { file ->
         convertPngToWebp(file.absolutePath, "openai/$domain/images_webp/${file.nameWithoutExtension}.webp")
     }
