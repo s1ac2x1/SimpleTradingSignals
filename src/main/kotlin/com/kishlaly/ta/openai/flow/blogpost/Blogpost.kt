@@ -9,8 +9,14 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
+val executor = Executors.newFixedThreadPool(25)
+val processed = AtomicInteger(0)
+val toBeProcessed = AtomicInteger(0)
 
 // Перед созданием контента нового сайта
 //    сгенерить картинки
@@ -20,6 +26,9 @@ var keywords = mapOf<ArticleType, List<KeywordSource>>()
 //    запустить генерацию контента сразу по всем категориям
 
 fun main() {
+    val language = Language.DE
+    val siteTopic = "Beziehungen"
+    val imagesOnHosting = "2023/03"
     val domain = "beziehung101.com"
     val categories = listOf(
         "Kommunikation in Beziehungen",
@@ -32,48 +41,62 @@ fun main() {
         "Elternschaft und Erziehung",
         "Sexualität und Beziehungen"
     )
+    val types = listOf(ArticleType.PAA)
 
-    //setupGermanBIG("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
-    //setupGermanPAA("hund101.com", "Hundesport-und-Aktivitäten", "Hunde", "2023/03")
-    //setupMedium("cats")
+    //generateStructure(domain, categories, types)
+    //estimateCosts(0.1)
 
-    generateStructure(domain, categories, listOf(ArticleType.PAA))
+    // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
+    categories.forEach { category ->
+        types.forEach { type ->
+            globalLanguage = language
+            globalBlogTopic = siteTopic
+            globalInsertImages = true
+            globalInsertTags = true
+            globalDomain = domain
+            globalCategory = category
+            globalImageURI = imagesOnHosting
+            globalType = type
 
-//    firstFilterCSV()
-//    keywords = readCSV()
-//    val total = keywords[globalType]?.size ?: 0
-//    val processed = AtomicInteger(0)
-//    val xml = BlogpostXMLBuilder()
-//    val executor = Executors.newFixedThreadPool(25)
-//
-//    // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
-//
-//    keywords[globalType]
-//        //?.shuffled()
-//        //?.take(1)
-//        ?.forEach { keywordSource ->
-//            val meta = BlogpostContentMeta(
-//                type = globalType,
-//                keywordSource = keywordSource,
-//                category = globalCategory,
-//                domain = globalDomain,
-//                imgURI = globalImageURI,
-//                imgSrcFolder = "openai/${globalDomain}/images_webp"
-//            )
-//
-//            executor.submit {
-//                resolveDownloader(globalType)(meta)
-//                processed.incrementAndGet()
-//                println("==== Done $processed/$total ====\n")
-//            }
-//
-////       buildContent(xml, meta, keywordSource, false)
-//        }
-//
-//    executor.shutdown()
-//    executor.awaitTermination(2, TimeUnit.HOURS)
-//
-////    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+            download(DownloadType.SINGLE)
+            //build()
+        }
+    }
+
+    executor.shutdown()
+    executor.awaitTermination(3, TimeUnit.HOURS)
+}
+
+private fun download(downloadType: DownloadType) {
+    keywords = readCSV()
+    toBeProcessed.addAndGet(keywords[globalType]?.size ?: 0)
+    keywords[globalType]
+        //?.shuffled()
+        ?.take(if (downloadType == DownloadType.SINGLE) 1 else 99999)
+        ?.forEach { keywordSource ->
+            val meta = BlogpostContentMeta(
+                type = globalType,
+                keywordSource = keywordSource,
+                category = globalCategory,
+                domain = globalDomain,
+                imgURI = globalImageURI,
+                imgSrcFolder = "openai/${globalDomain}/images_webp"
+            )
+            executor.submit {
+                resolveDownloader(globalType)(meta)
+                processed.incrementAndGet()
+                println("==== Done $processed/${toBeProcessed.get()} ====\n")
+            }
+//       buildContent(xml, meta, keywordSource, false)
+        }
+}
+
+private fun build() {
+    val xml = BlogpostXMLBuilder()
+    Files.write(Paths.get("openai/$globalDomain/content/$globalCategory/${globalCategory}_${globalType.name.lowercase()}_posts.xml"), xml.build().toString().toByteArray())
+}
+
+private fun estimateCosts(domain: String, categories: List<String>, types: List<ArticleType>) {
 
 }
 
@@ -140,6 +163,11 @@ private fun setupMedium(topic: String) {
     globalCategory = "main"
     globalDomain = "medium"
     globalType = ArticleType.MEDIUM
+}
+
+enum class DownloadType {
+    ALL,
+    SINGLE
 }
 
 fun buildContent(
