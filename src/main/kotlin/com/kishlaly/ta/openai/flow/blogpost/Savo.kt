@@ -27,7 +27,7 @@ fun main() {
      val total = keywords[globalType]?.size ?: 0
      val processed = AtomicInteger(0)
      val xml = BlogpostXMLBuilder()
-     val executor = Executors.newFixedThreadPool(10)
+     val executor = Executors.newFixedThreadPool(25)
 
      keywords[globalType]
           //?.shuffled()
