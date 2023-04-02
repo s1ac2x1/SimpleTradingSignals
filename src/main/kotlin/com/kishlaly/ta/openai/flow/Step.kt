@@ -541,7 +541,6 @@ class Step(
             if (useTone) {
                 finalPrompt = "$prompt ${getWritingTone()}"
             }
-            println("[$globalType][$type][$intent]")
             when (type) {
                 Type.TEXT -> {
 
@@ -554,6 +553,7 @@ class Step(
                         }
                     }
 
+                    println("[$globalType][$type][$intent]")
                     var completion = ""
 
                     try {
