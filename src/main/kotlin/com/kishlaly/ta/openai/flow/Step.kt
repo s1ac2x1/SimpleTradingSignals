@@ -549,7 +549,7 @@ class Step(
                     if (File("$folder/$outputFileName").exists()) {
                         val content = File("$folder/$outputFileName").readText().trim()
                         if (content.isNotEmpty() && content.length > 50) {
-                            println("$folder/$outputFileName exists. Skipping...")
+                            //println("$folder/$outputFileName exists. Skipping...")
                             return@forEachIndexed
                         }
                     }

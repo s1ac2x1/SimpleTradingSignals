@@ -68,6 +68,9 @@ fun main() {
         }
     }
 
+    // TODO статистика по словам после загрузки с группировкой по Intent, чтобы вычислить недозагруженные
+    // и сводная статистика по готовым статьям (длина)
+
     executor.shutdown()
     executor.awaitTermination(3, TimeUnit.HOURS)
 }
