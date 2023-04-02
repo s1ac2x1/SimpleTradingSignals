@@ -442,8 +442,8 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     TAGS(
         mapOf(
-            Language.DE to "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit 5 Schlüsselwörtern: \"###param###\"",
-            Language.EN to "From this text, create a comma-separated list of 5 keywords: \"###param###\""
+            Language.DE to "Erstellen Sie aus diesem Text eine durch Kommas getrennte Liste mit Schlüsselwörtern (bis 5): \"###param###\"",
+            Language.EN to "From this text, create a comma-separated list of keywords (up to 5): \"###param###\""
         )
     ),
     TAGS_PAA(

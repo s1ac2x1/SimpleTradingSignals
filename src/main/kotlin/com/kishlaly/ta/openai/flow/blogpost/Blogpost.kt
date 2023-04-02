@@ -51,6 +51,8 @@ fun main() {
     //onlyOne.set(true)
     //println(estimateCosts(domain, 0.11))
 
+    val articleSizes = mutableMapOf<String, Int>()
+
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
     categories.forEach { category ->
         types.forEach { type ->
@@ -63,8 +65,9 @@ fun main() {
             globalImageURI = imagesOnHosting
             globalType = type
 
-            download()
-            //build(true)
+            //download()
+            build(false)
+            //calculateSizes(articleSizes)
         }
     }
 
@@ -73,6 +76,21 @@ fun main() {
 
     executor.shutdown()
     executor.awaitTermination(3, TimeUnit.HOURS)
+}
+
+fun calculateSizes(articleSizes: MutableMap<String, Int>) {
+    keywords = readCSV()
+    keywords[globalType]
+        ?.forEach { keywordSource ->
+            val meta = BlogpostContentMeta(
+                type = globalType,
+                keywordSource = keywordSource,
+                category = globalCategory,
+                domain = globalDomain,
+                imgURI = globalImageURI,
+                imgSrcFolder = "openai/${globalDomain}/images_webp"
+            )
+        }
 }
 
 private fun download() {
