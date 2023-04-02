@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
-val executor = Executors.newFixedThreadPool(10) // don't exceed 10
+val executor = Executors.newFixedThreadPool(20)
 val processed = AtomicInteger(0)
 val toBeProcessed = AtomicInteger(0)
 

@@ -547,7 +547,8 @@ class Step(
 
                     val outputFileName = "${intent}_${index + 1}"
                     if (File("$folder/$outputFileName").exists()) {
-                        if (File("$folder/$outputFileName").readText().trim().isNotEmpty()) {
+                        val content = File("$folder/$outputFileName").readText().trim()
+                        if (content.isNotEmpty() && content.length > 50) {
                             println("$folder/$outputFileName exists. Skipping...")
                             return@forEachIndexed
                         }
