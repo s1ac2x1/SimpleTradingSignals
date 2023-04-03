@@ -1,6 +1,7 @@
 package com.kishlaly.ta.openai.flow.blogpost
 
 import com.kishlaly.ta.openai.flow.Intent
+import com.kishlaly.ta.openai.flow.readTextOrEmpty
 import java.io.File
 
 class BlogpostXMLBuilder() {
@@ -33,7 +34,7 @@ class BlogpostXMLBuilder() {
 
         if (globalInsertTags) {
             xml.append("<tags>")
-            val tags = File("$postFolder/${tagsIntent}_1").readText()
+            val tags = File("$postFolder/${tagsIntent}_1").readTextOrEmpty()
             xml.append(tags)
             xml.append("</tags>")
         }

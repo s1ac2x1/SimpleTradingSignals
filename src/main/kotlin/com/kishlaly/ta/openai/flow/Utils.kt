@@ -4,6 +4,7 @@ import com.kishlaly.ta.openai.filenameRegex
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import java.io.File
 import java.io.IOException
 import kotlin.random.Random
 
@@ -186,3 +187,5 @@ fun wrapOneSenenceInTag(sentences: List<String>, tag: String): String {
 fun makeList(sentences: List<String>): String {
     return "<ul>" + sentences.map { "<li>$it</li>" }.joinToString("") + "</ul>"
 }
+
+fun File.readTextOrEmpty() = if (exists()) readText() else ""
