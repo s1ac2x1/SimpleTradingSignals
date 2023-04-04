@@ -30,20 +30,12 @@ var onlyOneProcessed = AtomicBoolean(false)
 //    запустить генерацию контента сразу по всем категориям
 
 fun main() {
-    val language = Language.DE
-    val siteTopic = "Beziehungen"
+    val language = Language.EN
+    val siteTopic = "cats"
     val imagesOnHosting = "2023/03"
-    val domain = "beziehung101.com"
+    val domain = "medium"
     val categories = listOf(
-        "Kommunikation in Beziehungen",
-        "Konfliktlösung in Beziehungen",
-        "Bindungstheorie und Bindungsstile",
-        "Intimität und Vertrauen",
-        "Emotionale Intelligenz",
-        "Grenzen setzen und einhalten",
-        "Paartherapie und Eheberatung",
-        "Elternschaft und Erziehung",
-        "Sexualität und Beziehungen"
+        "main"
     )
     val types = listOf(ArticleType.PAA_2)
 
@@ -65,14 +57,10 @@ fun main() {
             globalImageURI = imagesOnHosting
             globalType = type
 
-            //download()
-            build(false)
-            //calculateSizes(articleSizes)
+            download()
+            //build(false)
         }
     }
-
-    // TODO статистика по словам после загрузки с группировкой по Intent, чтобы вычислить недозагруженные
-    // и сводная статистика по готовым статьям (длина)
 
     executor.shutdown()
     executor.awaitTermination(3, TimeUnit.HOURS)

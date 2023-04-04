@@ -69,45 +69,45 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         return content
     }
 
-    fun buildMedium(): String {
-        val srcFolder = meta.resolveKeywordFolder()
-
-        if (!File("$srcFolder").exists()) {
-            throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
-        }
-
-        val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
-        val tocPlan = File("$srcFolder/${Intent.TOC}_1").readLines()
-
-        val interlinksLimit = Random.nextInt(5) + 2
-        var linksMade = 0
-        val tocContent = StringBuilder()
-        tocPlan.forEachIndexed { index, item ->
-            tocContent.append("<h2>$item</h2>")
-
-            val headingContent = StringBuilder()
-            listOf(Intent.TOC_PART_MAIN).shuffled()
-                .forEach { intent ->
-                    val part =
-                        File("$srcFolder").listFiles()
-                            .find { file -> file.name.contains("${intent.name}_${index + 1}") }
-                            ?.readText() ?: ""
-                    if (intent == Intent.TOC_PART_MAIN) {
-                        headingContent.append(formatWith_B(part))
-                    }
-                }
-            tocContent.append(headingContent.toString())
-        }
-
-        var content = """
-        <p>$introduction</p>
-        $tocContent
-    """.trimIndent()
-
-        content = postProcessAndCheck(content)
-
-        return content
-    }
+//    fun buildMedium(): String {
+//        val srcFolder = meta.resolveKeywordFolder()
+//
+//        if (!File("$srcFolder").exists()) {
+//            throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
+//        }
+//
+//        val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
+//        val tocPlan = File("$srcFolder/${Intent.TOC}_1").readLines()
+//
+//        val interlinksLimit = Random.nextInt(5) + 2
+//        var linksMade = 0
+//        val tocContent = StringBuilder()
+//        tocPlan.forEachIndexed { index, item ->
+//            tocContent.append("<h2>$item</h2>")
+//
+//            val headingContent = StringBuilder()
+//            listOf(Intent.TOC_PART_MAIN).shuffled()
+//                .forEach { intent ->
+//                    val part =
+//                        File("$srcFolder").listFiles()
+//                            .find { file -> file.name.contains("${intent.name}_${index + 1}") }
+//                            ?.readText() ?: ""
+//                    if (intent == Intent.TOC_PART_MAIN) {
+//                        headingContent.append(formatWith_B(part))
+//                    }
+//                }
+//            tocContent.append(headingContent.toString())
+//        }
+//
+//        var content = """
+//        <p>$introduction</p>
+//        $tocContent
+//    """.trimIndent()
+//
+//        content = postProcessAndCheck(content)
+//
+//        return content
+//    }
 
     fun buildSavo(): String {
         val srcFolder = meta.resolveKeywordFolder()
@@ -220,6 +220,63 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
     }
 
     fun buildPAA2(): String {
+        val srcFolder = meta.resolveKeywordFolder()
+
+        if (!File("$srcFolder").exists()) {
+            throw RuntimeException("Nothing to build, $srcFolder doesn't exist")
+        }
+
+        val introduction = File("$srcFolder/${Intent.INTRODUCTION}_1").readText()
+        val tocPlan = File("$srcFolder/${Intent.TOC_SHORT}_1").readLines()
+
+        val interlinksLimit = Random.nextInt(5) + 2
+        var linksMade = 0
+        val tocContent = StringBuilder()
+        tocPlan.forEachIndexed { index, item ->
+            tocContent.append("<h2>$item</h2>")
+
+            if (globalInsertImages) {
+                val images = File(meta.imgSrcFolder).listFiles().toList().shuffled().take(tocPlan.size)
+                var imageURL = "https://${meta.domain}/wp-content/uploads/${meta.imgURI}/${images[index].name}"
+                tocContent.append("<img src='$imageURL' alt='$item'></img>")
+            }
+
+            val headingContent = StringBuilder()
+            listOf(Intent.TOC_PART_MAIN, Intent.TOC_PART_OWN_EXPERIENCE)
+                .forEach { intent ->
+                    val part =
+                        File("$srcFolder").listFiles()
+                            .find { file -> file.name.contains("${intent.name}_${index + 1}") }
+                            ?.readText() ?: ""
+                    if (intent == Intent.TOC_PART_MAIN) {
+                        headingContent.append(formatWith_B_U_I(part))
+                    }
+                    if (intent == Intent.TOC_PART_OWN_EXPERIENCE) {
+                        val factsContent = formatWith_UL(part)
+                        headingContent.append(factsContent)
+                    }
+                }
+            tocContent.append(headingContent.toString())
+            if (globalInterlinkage && index % 3 == 0 && linksMade <= interlinksLimit) {
+                tocContent.append("<p><b>${getRandomInterlink(ArticleType.PAA)}</b></p>")
+                linksMade++
+            }
+        }
+
+        val conclusion = File("$srcFolder/${Intent.CONCLUSION}_1").readText()
+
+        var content = """
+        <p>$introduction</p>
+        $tocContent
+        <p>$conclusion</p>
+    """.trimIndent()
+
+        content = postProcessAndCheck(content)
+
+        return content
+    }
+
+    fun buildMedium(): String {
         val srcFolder = meta.resolveKeywordFolder()
 
         if (!File("$srcFolder").exists()) {

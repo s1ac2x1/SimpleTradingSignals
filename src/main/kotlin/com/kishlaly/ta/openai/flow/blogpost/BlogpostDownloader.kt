@@ -52,12 +52,22 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
     }
 
     fun downloadMedium() {
+//        File(stepFolder).mkdir()
+//
+//        introduction()
+//        tableOfContentsPlan()
+//        tableOfContentsTexts(Intent.TOC, Intent.TOC_PART_MAIN)
+//        conclusion(Intent.INTRODUCTION)
         File(stepFolder).mkdir()
 
         introduction()
-        tableOfContentsPlan()
-        tableOfContentsTexts(Intent.TOC, Intent.TOC_PART_MAIN)
-        conclusion(Intent.INTRODUCTION)
+
+        tableOfContentsPlanShort()
+        tableOfContentsTexts(Intent.TOC_SHORT, Intent.TOC_PART_MAIN)
+        tableOfContentsTexts(Intent.TOC_SHORT, Intent.TOC_PART_OWN_EXPERIENCE)
+
+        tags()
+        conclusionSimple(Intent.INTRODUCTION)
     }
 
     fun downloadSavo() {
