@@ -37,7 +37,7 @@ fun main() {
     val categories = listOf(
         "main"
     )
-    val types = listOf(ArticleType.PAA_2)
+    val types = listOf(ArticleType.MEDIUM)
 
     //generateStructure(domain, categories, types)
     //onlyOne.set(true)
@@ -50,15 +50,15 @@ fun main() {
         types.forEach { type ->
             globalLanguage = language
             globalBlogTopic = siteTopic
-            globalInsertImages = true
-            globalInsertTags = true
+            //globalInsertImages = true
+            //globalInsertTags = true
             globalDomain = domain
             globalCategory = category.replace(" ", "-")
             globalImageURI = imagesOnHosting
             globalType = type
 
-            download()
-            //build(false)
+            //download()
+            build(true)
         }
     }
 
