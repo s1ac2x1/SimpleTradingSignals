@@ -51,24 +51,24 @@ fun main() {
     val articleSizes = mutableMapOf<String, Int>()
 
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
-//    categories.forEach { category ->
-//        types.forEach { type ->
-//            globalLanguage = language
-//            globalBlogTopic = siteTopic
-//            //globalInsertImages = true
-//            //globalInsertTags = true
-//            globalDomain = domain
-//            globalCategory = category.replace(" ", "-")
-//            globalImageURI = imagesOnHosting
-//            globalType = type
-//
-//            download()
-//            //build(true)
-//        }
-//    }
-//
-//    executor.shutdown()
-//    executor.awaitTermination(3, TimeUnit.HOURS)
+    categories.forEach { category ->
+        types.forEach { type ->
+            globalLanguage = language
+            globalBlogTopic = siteTopic
+            //globalInsertImages = true
+            //globalInsertTags = true
+            globalDomain = domain
+            globalCategory = category.replace(" ", "-")
+            globalImageURI = imagesOnHosting
+            globalType = type
+
+            download()
+            //build(true)
+        }
+    }
+
+    executor.shutdown()
+    executor.awaitTermination(3, TimeUnit.HOURS)
 }
 
 fun calculateSizes(articleSizes: MutableMap<String, Int>) {
