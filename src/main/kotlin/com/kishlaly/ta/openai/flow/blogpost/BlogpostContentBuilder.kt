@@ -203,7 +203,7 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         val oppositeOpinionText = File("$srcFolder/${Intent.OPPOSITE_OPINION_TEXT}_1").readText()
 
         val conclusion = File("$srcFolder/${Intent.CONCLUSION}_1").readText()
-        val randomAddition = File("$srcFolder/${Intent.RANDOM_ADDITION}_1").readText()
+        //val randomAddition = File("$srcFolder/${Intent.RANDOM_ADDITION}_1").readText()
 
         var content = """
         <p>$introduction</p>
@@ -211,7 +211,6 @@ class BlogpostContentBuilder(val meta: BlogpostContentMeta) {
         <h2>$oppositeOpitionSubtitle</h2>
         <p>$oppositeOpinionText</p>
         <p>$conclusion</p>
-        <p>$randomAddition</p>
     """.trimIndent()
 
         content = postProcessAndCheck(content)

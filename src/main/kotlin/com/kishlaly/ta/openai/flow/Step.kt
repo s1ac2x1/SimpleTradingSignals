@@ -1,6 +1,7 @@
 package com.kishlaly.ta.openai.flow
 
 import com.kishlaly.ta.openai.*
+import com.kishlaly.ta.openai.flow.blogpost.globalBlogCategory
 import com.kishlaly.ta.openai.flow.blogpost.globalBlogTopic
 import com.kishlaly.ta.openai.flow.blogpost.globalLanguage
 import com.kishlaly.ta.openai.flow.blogpost.globalType
@@ -358,7 +359,7 @@ fun getPromptsMarkers(): List<String> {
 enum class Intent(val map: Map<Language, String>) {
     INTRODUCTION(
         mapOf(
-            Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Der Titel des Artikels lautet: \"###param###\". Schreiben Sie eine ausführliche Einführung zu diesem Artikel.",
+            Language.DE to "Ich schreibe einen Artikel für einen Blog über ${globalBlogTopic}. Die Blog-Kategorie heißt \"${globalBlogCategory}\". Der Titel des Artikels lautet: \"###param###\". Schreiben Sie eine ausführliche Einführung zu diesem Artikel.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a detailed introduction to this article."
         )
     ),
@@ -370,7 +371,7 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     TOC(
         mapOf(
-            Language.DE to "Ich schreibe einen Artikel über ${globalBlogTopic}. Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 10 bis 15 kurzen Unterüberschriften.",
+            Language.DE to "Ich schreibe einen Artikel für einen Blog über ${globalBlogTopic}. Die Blog-Kategorie heißt \"${globalBlogCategory}\". Das Thema ist: \"###param###\". Schreiben Sie eine Liste mit 8 bis 10 kurzen Unterüberschriften.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. The title of the article is: \"###param###\". Write a list of 10 to 15 short subheadings."
         )
     ),
@@ -388,7 +389,7 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     TOC_PART_HISTORY(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine lange historische Notiz zu diesem Thema: \"###param###\".",
+            Language.DE to "Ich schreibe einen Artikel für einen Blog über ${globalBlogTopic}. Die Blog-Kategorie heißt \"${globalBlogCategory}\". Schreiben Sie eine lange historische Notiz zu diesem Thema: \"###param###\".",
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write a long historical note on this topic: \"###param###\"."
         )
     ),
@@ -406,7 +407,7 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     TOC_PART_MAIN(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"###param###\". Begründen Sie Ihre Antwort mit einigen Beispielen.",
+            Language.DE to "Ich schreibe einen Artikel für einen Blog über ${globalBlogTopic}. Die Blog-Kategorie heißt \"${globalBlogCategory}\". Schreiben Sie eine ausführliche Expertenantwort auf dieses Thema: \"###param###\". Begründen Sie Ihre Antwort mit einigen Beispielen.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write a detailed expert answer on this topic: \"###param###\". Justify your answer with some examples."
         )
     ),
@@ -418,7 +419,7 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     TOC_PART_FACTS(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen.",
+            Language.DE to "Ich schreibe einen Artikel für einen Blog über ${globalBlogTopic}. Die Blog-Kategorie heißt \"${globalBlogCategory}\". Schreiben Sie interessante Fakten über dieses Thema: \"###param###\". Formatieren Sie den Text in Form von Absätzen ohne Zahlen.",
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write interesting facts about this topic: \"###param###\". Format the text in the form of paragraphs without numbers."
         )
     ),
@@ -436,7 +437,7 @@ enum class Intent(val map: Map<Language, String>) {
     ),
     OPPOSITE_OPINION_TEXT(
         mapOf(
-            Language.DE to "Ich schreibe einen Blog über ${globalBlogTopic}. Schreiben Sie drei Absätze zu diesem Thema: \"###param###\".",
+            Language.DE to "Ich schreibe einen Artikel für einen Blog über ${globalBlogTopic}. Die Blog-Kategorie heißt \"${globalBlogCategory}\". Schreiben Sie drei Absätze zu diesem Thema: \"###param###\".",
             Language.EN to "I am writing an article about ${globalBlogTopic}. Write three paragraphs on this topic: \"###param###\"."
         )
     ),

@@ -22,7 +22,7 @@ class BlogpostDownloader(val meta: BlogpostContentMeta) {
         oppositeOpinionText()
         tags()
         conclusion(Intent.INTRODUCTION)
-        randomAddition()
+        //randomAddition()
     }
 
     fun downloadPAA() {

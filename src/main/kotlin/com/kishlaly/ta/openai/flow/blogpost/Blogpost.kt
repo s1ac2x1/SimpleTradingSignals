@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
-val executor = Executors.newFixedThreadPool(5)
+val executor = Executors.newFixedThreadPool(20)
 val processed = AtomicInteger(0)
 val toBeProcessed = AtomicInteger(0)
 
@@ -55,6 +55,7 @@ fun main() {
         types.forEach { type ->
             globalLanguage = language
             globalBlogTopic = siteTopic
+            globalBlogCategory = category.replace("-", " ")
             //globalInsertImages = true
             //globalInsertTags = true
             globalDomain = domain
@@ -62,8 +63,8 @@ fun main() {
             globalImageURI = imagesOnHosting
             globalType = type
 
-            download()
-            //build(true)
+            //download()
+            build(true)
         }
     }
 
@@ -312,6 +313,7 @@ val htmlStub = """<!DOCTYPE html>
 
 var globalLanguage = Language.EN
 var globalBlogTopic = ""
+var globalBlogCategory = ""
 var globalInsertImages = false
 var globalInsertTags = false
 var globalDomain = ""
