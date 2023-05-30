@@ -3,7 +3,7 @@ Authorization: Bearer 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
 Content-Type: application/json
 
 {
-  "prompt": "Illustrate a picture of a dog happily eating either rice or potatoes, with a thought bubble above its head that reads \"Was ist besser für mich?\". In a style of a pencil artwork",
+  "prompt": "a close look of a sly cat that smiles. In a style of comics art work",
   "n": 3,
   "size": "512x512",
   "user": "vladimir@kishlaly.com"

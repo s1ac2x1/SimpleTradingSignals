@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
-val executor = Executors.newFixedThreadPool(20)
+val executor = Executors.newFixedThreadPool(5)
 val processed = AtomicInteger(0)
 val toBeProcessed = AtomicInteger(0)
 
@@ -30,14 +30,19 @@ var onlyOneProcessed = AtomicBoolean(false)
 //    запустить генерацию контента сразу по всем категориям
 
 fun main() {
-    val language = Language.EN
-    val siteTopic = "cats"
+    val language = Language.DE
+    val siteTopic = "Rückenschmerzen"
     val imagesOnHosting = "2023/03"
-    val domain = "medium"
+    val domain = "rueckenschmerzen101.com"
     val categories = listOf(
-        "main"
+        "alternative-therapien",
+//        "ernaehrung-und-rueckenschmerzen",
+//        "medizinische-behandlungen",
+//        "praevention-von-rueckenschmerzen",
+//        "uebungen-und-physiotherapie",
+//        "ursachen-fuer-rueckenschmerzen",
     )
-    val types = listOf(ArticleType.MEDIUM)
+    val types = listOf(ArticleType.BIG)
 
     //generateStructure(domain, categories, types)
     //onlyOne.set(true)
@@ -46,24 +51,24 @@ fun main() {
     val articleSizes = mutableMapOf<String, Int>()
 
     // TODO прогонять еще раз в конце, чтобы подгрузилось то, что в первый раз не смогло по разным причинам
-    categories.forEach { category ->
-        types.forEach { type ->
-            globalLanguage = language
-            globalBlogTopic = siteTopic
-            //globalInsertImages = true
-            //globalInsertTags = true
-            globalDomain = domain
-            globalCategory = category.replace(" ", "-")
-            globalImageURI = imagesOnHosting
-            globalType = type
-
-            //download()
-            build(true)
-        }
-    }
-
-    executor.shutdown()
-    executor.awaitTermination(3, TimeUnit.HOURS)
+//    categories.forEach { category ->
+//        types.forEach { type ->
+//            globalLanguage = language
+//            globalBlogTopic = siteTopic
+//            //globalInsertImages = true
+//            //globalInsertTags = true
+//            globalDomain = domain
+//            globalCategory = category.replace(" ", "-")
+//            globalImageURI = imagesOnHosting
+//            globalType = type
+//
+//            download()
+//            //build(true)
+//        }
+//    }
+//
+//    executor.shutdown()
+//    executor.awaitTermination(3, TimeUnit.HOURS)
 }
 
 fun calculateSizes(articleSizes: MutableMap<String, Int>) {

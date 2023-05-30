@@ -22,8 +22,8 @@ import javax.imageio.ImageWriteParam.MODE_EXPLICIT
 import kotlin.random.Random
 
 
-//fun main() {
-//    val tasks = (1..5).map {
+fun main() {
+    val tasks = (1..5).map {
 //        var prompt = Combiner.combine(
 //            listOf(
 //                "openai/katze101/breeds",
@@ -32,10 +32,11 @@ import kotlin.random.Random
 //                "openai/katze101/places",
 //            )
 //        )
-//        ImageGenerateTask("${prompt}in the style pencil artwork", "openai/output/images", "featured_${System.nanoTime()}.png", 1)
-//    }
-//    ImagesProcessor.generate(tasks)
-//}
+        //ImageGenerateTask("${prompt}in the style pencil artwork", "openai/output/images", "featured_${System.nanoTime()}.png", 1)
+        ImageGenerateTask("a sly cat that smiles and sitting on the litter box. In a style of comics art work", "openai/output/images", "featured_${System.nanoTime()}.png", 1)
+    }
+    ImagesProcessor.generate(tasks)
+}
 
 //fun main() {
 //    val inputFileName = "katzenpflege"
@@ -83,12 +84,12 @@ import kotlin.random.Random
 //    ImagesProcessor.generateMultithreaded(tasks, 10)
 //}
 
-fun main() {
-    val domain = "beziehung101.com"
-    File("openai/$domain/images").listFiles().forEach { file ->
-        convertPngToWebp(file.absolutePath, "openai/$domain/images_webp/${file.nameWithoutExtension}.webp")
-    }
-}
+//fun main() {
+//    val domain = "beziehung101.com"
+//    File("openai/$domain/images").listFiles().forEach { file ->
+//        convertPngToWebp(file.absolutePath, "openai/$domain/images_webp/${file.nameWithoutExtension}.webp")
+//    }
+//}
 
 //fun main() {
 //    val keyword = "Welche Art von Spielzeug hilft, das Kratzverhalten zu reduzieren"
