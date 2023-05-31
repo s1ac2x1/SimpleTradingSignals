@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 
 var keywords = mapOf<ArticleType, List<KeywordSource>>()
-val executor = Executors.newFixedThreadPool(20)
+val executor = Executors.newFixedThreadPool(100)
 val processed = AtomicInteger(0)
 val toBeProcessed = AtomicInteger(0)
 
@@ -35,9 +35,9 @@ fun main() {
     val imagesOnHosting = "2023/03"
     val domain = "rueckenschmerzen101.com"
     val categories = listOf(
-        "alternative-therapien",
+//        "alternative-therapien",
 //        "ernaehrung-und-rueckenschmerzen",
-//        "medizinische-behandlungen",
+        "medizinische-behandlungen", // ???
 //        "praevention-von-rueckenschmerzen",
 //        "uebungen-und-physiotherapie",
 //        "ursachen-fuer-rueckenschmerzen",
@@ -46,7 +46,7 @@ fun main() {
 
     //generateStructure(domain, categories, types)
     //onlyOne.set(true)
-    //println(estimateCosts(domain, 0.11))
+    //println(estimateCosts(domain, 0.45))
 
     val articleSizes = mutableMapOf<String, Int>()
 
@@ -63,8 +63,8 @@ fun main() {
             globalImageURI = imagesOnHosting
             globalType = type
 
-            //download()
-            build(true)
+            download()
+            //build(true)
         }
     }
 
