@@ -35,12 +35,12 @@ fun main() {
     val imagesOnHosting = "2023/03"
     val domain = "rueckenschmerzen101.com"
     val categories = listOf(
-//        "alternative-therapien",
-//        "ernaehrung-und-rueckenschmerzen",
-//        "medizinische-behandlungen",
-//        "praevention-von-rueckenschmerzen",
+        "alternative-therapien",
+        "ernaehrung-und-rueckenschmerzen",
+        "medizinische-behandlungen",
+        "praevention-von-rueckenschmerzen",
         "uebungen-und-physiotherapie",
-//        "ursachen-fuer-rueckenschmerzen",
+        "ursachen-fuer-rueckenschmerzen",
     )
     val types = listOf(ArticleType.BIG)
 
@@ -63,8 +63,8 @@ fun main() {
             globalImageURI = imagesOnHosting
             globalType = type
 
-            download()
-            //build(true)
+            //download()
+            build(false)
         }
     }
 
@@ -236,7 +236,6 @@ fun buildContent(
         ArticleType.PAA_2 -> { m -> BlogpostContentBuilder(m).buildPAA2() }
         ArticleType.BIG -> { m -> BlogpostContentBuilder(m).buildLongPost() }
         ArticleType.MEDIUM -> { m -> BlogpostContentBuilder(m).buildMedium() }
-        ArticleType.SAVO -> { m -> BlogpostContentBuilder(m).buildSavo() }
     }
     xml.append(meta, resolveTagsIntent(meta.type), builder)
     if (saveTempHTML) {
@@ -253,7 +252,6 @@ fun resolveTagsIntent(type: ArticleType) = when (type) {
     ArticleType.PAA_2 -> Intent.TAGS
     ArticleType.BIG -> Intent.TAGS
     ArticleType.MEDIUM -> Intent.TAGS
-    ArticleType.SAVO -> Intent.TAGS
 }
 
 fun resolveDownloader(type: ArticleType): (BlogpostContentMeta) -> Unit {
@@ -262,7 +260,6 @@ fun resolveDownloader(type: ArticleType): (BlogpostContentMeta) -> Unit {
         ArticleType.PAA_2 -> { meta -> run { BlogpostDownloader(meta).downloadPAA2() } }
         ArticleType.BIG -> { meta -> run { BlogpostDownloader(meta).downloadBigPost() } }
         ArticleType.MEDIUM -> { meta -> run { BlogpostDownloader(meta).downloadMedium() } }
-        ArticleType.SAVO -> { meta -> run { BlogpostDownloader(meta).downloadSavo() } }
     }
 }
 

@@ -7,8 +7,7 @@ enum class ArticleType {
     PAA,
     PAA_2,
     BIG,
-    MEDIUM,
-    SAVO
+    MEDIUM
 }
 
 data class BlogpostContentMeta(
