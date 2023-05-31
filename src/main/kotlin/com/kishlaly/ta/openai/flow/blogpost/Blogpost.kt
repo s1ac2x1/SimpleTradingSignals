@@ -37,9 +37,9 @@ fun main() {
     val categories = listOf(
 //        "alternative-therapien",
 //        "ernaehrung-und-rueckenschmerzen",
-        "medizinische-behandlungen", // ???
+//        "medizinische-behandlungen",
 //        "praevention-von-rueckenschmerzen",
-//        "uebungen-und-physiotherapie",
+        "uebungen-und-physiotherapie",
 //        "ursachen-fuer-rueckenschmerzen",
     )
     val types = listOf(ArticleType.BIG)
