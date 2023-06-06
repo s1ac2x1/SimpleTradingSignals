@@ -1,0 +1,22 @@
+# curl --request POST
+#  --url https://api.openai.com/v1/audio/transcriptions
+#  --header 'Authorization: Bearer TOKEN'
+#  --header 'Content-Type: multipart/form-data'
+#  --form file=@/path/to/file/openai.mp3
+#  --form model=whisper-1
+POST https://api.openai.com/v1/audio/transcriptions
+Authorization: Bearer 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
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="out.mp3"
+
+< /Users/volodymyr/Downloads/1.mp3
+--WebAppBoundary
+Content-Disposition: form-data; name="model"
+
+whisper-1
+--WebAppBoundary--
+
+###
+
