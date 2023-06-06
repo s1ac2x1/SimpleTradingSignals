@@ -8,7 +8,7 @@ import java.util.*
 
 
 fun main() {
-    val lines = File("costs.CSV").readLines()
+    val lines = File("20230531-1237417785-umsatz.CSV").readLines()
     val grouped = lines.groupBy { line ->
         line.split(";")[5]
     }

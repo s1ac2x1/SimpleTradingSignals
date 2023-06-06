@@ -57,7 +57,7 @@ fun main() {
             globalBlogTopic = siteTopic
             globalBlogCategory = category.replace("-", " ")
             //globalInsertImages = true
-            //globalInsertTags = true
+            globalInsertTags = true
             globalDomain = domain
             globalCategory = category.replace(" ", "-")
             globalImageURI = imagesOnHosting
