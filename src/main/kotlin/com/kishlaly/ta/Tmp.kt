@@ -1,19 +1,28 @@
 package com.kishlaly.ta
 
-import com.kishlaly.ta.openai.flow.chunked
-import com.kishlaly.ta.openai.flow.encodeURL
 import java.io.File
 
 fun main() {
-    val lines = mutableListOf<String>()
-    File("temp.txt").readLines().forEach { line ->
-        if (line.contains("http")) {
-            lines.add(line)
+    val name = "Was vom Heizungsgesetz übrig ist"
+    val inputFile = File("test.html")
+    val outputFile = File("/Users/volodymyr/Downloads/${name}.html")
+
+    if (!inputFile.exists()) {
+        println("Input file does not exist.")
+        return
+    }
+
+    val text = inputFile.readText()
+    val sentences = text.split(".")
+    var newContent = ""
+
+    for ((index, sentence) in sentences.withIndex()) {
+        newContent += sentence.trim() + ". "
+        if ((index + 1) % 3 == 0) {
+            newContent += "<br><br>"
         }
     }
-    lines.forEach {
-        if (it.length < 100) {
-            println(it)
-        }
-    }
+
+    outputFile.writeText(newContent)
+    println("The content was written to the output file successfully.")
 }
