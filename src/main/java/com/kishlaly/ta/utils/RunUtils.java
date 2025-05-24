@@ -54,7 +54,7 @@ public class RunUtils {
                 THREE_DISPLAYS_BUY,
                 strategy,
                 new StopLossFixedPrice(0.27),
-                new TakeProfitAdaptiveKeltnerTop(80));
+                new TakeProfitFixedKeltnerTop(80));
 
     }
 

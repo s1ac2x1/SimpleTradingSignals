@@ -36,7 +36,7 @@ public enum TaskType {
                 put(2, DAY);
             }},
             new HashMap<Integer, Indicator[]>() {{
-                put(1, new Indicator[]{EMA26, MACD});
+                put(1, new Indicator[]{EMA26, EMA50, EMA200, MACD});
                 put(2, new Indicator[]{EMA13, MACD, STOCH, KELTNER, BOLLINGER, EFI});
             }},
             AbstractTask::check

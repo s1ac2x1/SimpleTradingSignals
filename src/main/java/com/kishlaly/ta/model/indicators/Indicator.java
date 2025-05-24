@@ -1,6 +1,8 @@
 package com.kishlaly.ta.model.indicators;
 
 public enum Indicator {
+    EMA200, // close
+    EMA50, // close
     EMA26, // close
     EMA13, // close
     MACD, // 12 26 9 close

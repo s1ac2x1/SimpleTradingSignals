@@ -169,6 +169,10 @@ public class CacheReader {
                 return IndicatorUtils.buildEMA(symbol, quotes, 13);
             case EMA26:
                 return IndicatorUtils.buildEMA(symbol, quotes, 26);
+            case EMA50:
+                return IndicatorUtils.buildEMA(symbol, quotes, 50);
+            case EMA200:
+                return IndicatorUtils.buildEMA(symbol, quotes, 200);
             case STOCH:
                 return IndicatorUtils.buildStochastic(symbol, quotes);
             case KELTNER:

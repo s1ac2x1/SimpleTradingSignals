@@ -14,6 +14,7 @@ public class ThreeDisplays_Buy_1 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
+//            add(new Long_ScreenOne_SoftTrendCheck());
             add(new Long_ScreenOne_StrictTrendCheck());
             add(new Long_ScreenOne_LastBarHigher());
             add(new Long_ScreenOne_EMA_ThreeAscending());
