@@ -23,10 +23,10 @@ public class Main {
         Context.source = new SymbolsSource[]{
                 SymbolsSource.SP500
         };
-        singleSymbol("AAPL"); // for single test
+        singleSymbol("A"); // for single test
         Context.symbols = getSymbols();
         //buildCache(Context.basicTimeframes, false);
-        RunUtils.testOneStrategy_(new ThreeDisplays_Buy_4());
+        RunUtils.testOneStrategy_(new ThreeDisplays_Buy_1());
 
     }
 }

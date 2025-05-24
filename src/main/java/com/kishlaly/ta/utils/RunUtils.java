@@ -2,6 +2,7 @@ package com.kishlaly.ta.utils;
 
 import com.kishlaly.ta.analyze.tasks.blocks.groups.*;
 import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitAdaptiveKeltnerTop;
 import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.Timeframe;
 
@@ -53,7 +54,7 @@ public class RunUtils {
                 THREE_DISPLAYS_BUY,
                 strategy,
                 new StopLossFixedPrice(0.27),
-                new TakeProfitFixedKeltnerTop(80));
+                new TakeProfitAdaptiveKeltnerTop(80));
 
     }
 

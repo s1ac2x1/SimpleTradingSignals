@@ -2,7 +2,7 @@ package com.kishlaly.ta.analyze.tasks.blocks.groups;
 
 import com.kishlaly.ta.analyze.tasks.blocks.TaskBlock;
 import com.kishlaly.ta.analyze.tasks.blocks.commons.ScreenBasicValidation;
-import com.kishlaly.ta.analyze.tasks.blocks.one.Long_ScreenOne_SoftTrendCheck;
+import com.kishlaly.ta.analyze.tasks.blocks.one.*;
 import com.kishlaly.ta.analyze.tasks.blocks.two.*;
 
 import java.util.ArrayList;
@@ -14,7 +14,10 @@ public class ThreeDisplays_Buy_1 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-            add(new Long_ScreenOne_SoftTrendCheck());
+            add(new Long_ScreenOne_StrictTrendCheck());
+            add(new Long_ScreenOne_LastBarHigher());
+            add(new Long_ScreenOne_EMA_ThreeAscending());
+            add(new Long_ScreenOne_MACD_LastAscending());
 
             add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending());
             add(new Long_ScreenTwo_Stoch_D_ThreeAscending());
