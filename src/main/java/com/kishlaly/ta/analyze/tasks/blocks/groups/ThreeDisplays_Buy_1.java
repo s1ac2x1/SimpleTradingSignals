@@ -28,10 +28,10 @@ public class ThreeDisplays_Buy_1 implements BlocksGroup {
             // Внутри бычьего режима выбираем дневной тренд-чек
             if (Context.EMA50_OVER_EMA200) {
                 add(new Long_ScreenTwo_EMA26_Grows());
-                add(new Long_ScreenTwo_ClosePrice_Above_EMA26());  // тут нужны дневные котировки
+                add(new Long_ScreenTwo_ClosePrice_Above_EMA26());
             } else {
                 // в остальных случаях (медвежье + боковик) - жёсткий фильтр Элдера
-                add(new Long_ScreenOne_StrictTrendCheck());  // тут нужны дневные котировки
+                add(new Long_ScreenTwo_StrictTrendCheck());
                 add(new Long_ScreenOne_EMA_ThreeAscending()); // тут нужны дневные котировки
             }
 
