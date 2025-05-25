@@ -17,6 +17,7 @@ public class IndicatorsInMemoryCache {
     private static ConcurrentHashMap<EMAKey, List<EMA>> ema = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<MACDKey, List<MACD>> macd = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<KeltnerKEY, List<Keltner>> keltner = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<ADXKEY, List<ADX>> adx = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<ATRKey, List<ATR>> atr = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<StochKey, List<Stoch>> stoch = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<BollingerKey, List<Bollinger>> bollinger = new ConcurrentHashMap<>();
@@ -36,6 +37,10 @@ public class IndicatorsInMemoryCache {
 
     public static void putATR(String symbol, Timeframe timeframe, int period, List<ATR> data) {
         atr.put(new ATRKey(symbol, timeframe, period), data);
+    }
+
+    public static void putADX(String symbol, Timeframe timeframe, int period, List<ADX> data) {
+        adx.put(new ADXKEY(symbol, timeframe, period), data);
     }
 
     public static void putStoch(String symbol, Timeframe timeframe, List<Stoch> data) {
@@ -83,6 +88,18 @@ public class IndicatorsInMemoryCache {
             List<Keltner> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<Keltner>>() {
             }.getType());
             Collections.sort(copy, Comparator.comparing(Keltner::getTimestamp));
+            return copy;
+        }
+        return Collections.emptyList();
+    }
+
+    public static List<ADX> getADX(String symbol, Timeframe timeframe, int period) {
+        List<ADX> cached = adx.getOrDefault(new ADXKEY(symbol, timeframe, period), Collections.emptyList());
+        if (!cached.isEmpty()) {
+            String json = gson.toJson(cached);
+            List<ADX> copy = gson.fromJson(json, new com.google.common.reflect.TypeToken<List<ADX>>() {
+            }.getType());
+            Collections.sort(copy, Comparator.comparing(ADX::getTimestamp));
             return copy;
         }
         return Collections.emptyList();

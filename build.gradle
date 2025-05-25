@@ -10,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.ta4j', name: 'ta4j-parent', version: '0.14', ext: 'pom'
-    implementation group: 'org.ta4j', name: 'ta4j-core', version: '0.14'
+    implementation group: 'org.ta4j', name: 'ta4j-parent', version: '0.15', ext: 'pom'
+    implementation group: 'org.ta4j', name: 'ta4j-core', version: '0.15'
     implementation group: 'com.squareup.okhttp', name: 'okhttp', version: '2.7.5'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.9'
     implementation group: 'com.google.guava', name: 'guava', version: '31.0.1-jre'

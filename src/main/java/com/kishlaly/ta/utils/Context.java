@@ -66,5 +66,6 @@ public class Context {
     public static final String SINGLE_TXT = "single.txt";
     public static final String MASS_TXT = "mass.txt";
     public static final int MIN_POSSIBLE_QUOTES = 11;
+    public static boolean EMA50_OVER_EMA200 = false;
 
 }

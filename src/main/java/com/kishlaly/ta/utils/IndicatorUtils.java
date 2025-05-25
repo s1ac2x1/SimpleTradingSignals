@@ -8,6 +8,7 @@ import com.kishlaly.ta.model.indicators.*;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeries;
 import org.ta4j.core.indicators.*;
+import org.ta4j.core.indicators.adx.ADXIndicator;
 import org.ta4j.core.indicators.bollinger.BollingerBandsLowerIndicator;
 import org.ta4j.core.indicators.bollinger.BollingerBandsMiddleIndicator;
 import org.ta4j.core.indicators.bollinger.BollingerBandsUpperIndicator;
@@ -113,6 +114,25 @@ public class IndicatorUtils {
             result = trimToDate(result);
             Collections.sort(result, Comparator.comparing(ATR::getTimestamp));
             IndicatorsInMemoryCache.putATR(symbol, Context.timeframe, barCount, result);
+            return result;
+        }
+    }
+
+    public static List<ADX> buildADX(String symbol, List<Quote> quotes, int barCount) {
+        List<ADX> cached = IndicatorsInMemoryCache.getADX(symbol, Context.timeframe, barCount);
+        if (!cached.isEmpty()) {
+            return cached;
+        } else {
+            List<ADX> result = new ArrayList<>();
+            BarSeries barSeries = Bars.build(quotes);
+            ADXIndicator adxIndicator = new ADXIndicator(barSeries, barCount, barCount);
+            for (int i = 0; i < quotes.size(); i++) {
+                result.add(new ADX(quotes.get(i).getTimestamp(), adxIndicator.getValue(i).doubleValue()));
+            }
+            result = result.stream().filter(ADX::valuesPresent).collect(Collectors.toList());
+            result = trimToDate(result);
+            Collections.sort(result, Comparator.comparing(ADX::getTimestamp));
+            IndicatorsInMemoryCache.putADX(symbol, Context.timeframe, barCount, result);
             return result;
         }
     }

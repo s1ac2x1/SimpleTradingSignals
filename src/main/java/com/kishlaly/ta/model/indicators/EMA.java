@@ -5,6 +5,7 @@ import com.kishlaly.ta.model.EntityWithDate;
 import static com.kishlaly.ta.utils.Dates.getBarTimeInMyZone;
 import static com.kishlaly.ta.utils.Dates.getTimeInExchangeZone;
 
+
 public class EMA extends EntityWithDate {
 
     private Double value;

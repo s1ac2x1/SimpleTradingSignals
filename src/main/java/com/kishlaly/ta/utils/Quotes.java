@@ -116,6 +116,10 @@ public class Quotes {
         return quote.getLow() <= emaValue && quote.getHigh() >= emaValue;
     }
 
+    public static boolean isQuoteClosePriceAboveEMA(Quote quote, double emaValue) {
+        return quote.getClose() > emaValue;
+    }
+
     public static boolean isQuoteBelowEMA(Quote quote, double emaValue) {
         return quote.getLow() < emaValue && quote.getHigh() < emaValue;
     }
