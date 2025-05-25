@@ -15,27 +15,28 @@ public class ThreeDisplays_Buy_1 implements BlocksGroup {
         return new ArrayList<TaskBlock>() {{
             add(new ScreenBasicValidation());
 
-// эти 5 только для безопасности на медвежьих рынках:
-//            add(new Long_ScreenOne_SoftTrendCheck());
-//            add(new Long_ScreenOne_StrictTrendCheck());
-//            add(new Long_ScreenOne_LastBarHigher());
-//            add(new Long_ScreenOne_EMA_ThreeAscending());
-//            add(new Long_ScreenOne_MACD_LastAscending());
+            // для безопасности на медвежьих рынках:
+            add(new Long_ScreenOne_SoftTrendCheck());
+            add(new Long_ScreenOne_StrictTrendCheck());
+            add(new Long_ScreenOne_LastBarHigher());
+            add(new Long_ScreenOne_EMA_ThreeAscending());
+            add(new Long_ScreenOne_MACD_LastAscending());
 
             // тут только сохраняем значение в контекст, сама проверка всегда ОК
             add(new Long_ScreenOne_EMA50_Over_EMA200());
 
-            // Внутри бычьего режима выбираем дневной тренд-чек
-            if (Context.EMA50_OVER_EMA200) {
-                add(new Long_ScreenTwo_EMA26_Grows());
-                add(new Long_ScreenTwo_ClosePrice_Above_EMA26());
-            } else {
-                // в остальных случаях (медвежье + боковик) - жёсткий фильтр Элдера
-                add(new Long_ScreenTwo_StrictTrendCheck());
-                add(new Long_ScreenOne_EMA_ThreeAscending()); // тут нужны дневные котировки
-            }
+//            // Внутри бычьего режима выбираем дневной тренд-чек
+//            if (Context.EMA50_OVER_EMA200) {
+//                add(new Long_ScreenTwo_EMA26_Grows());
+//                add(new Long_ScreenTwo_ClosePrice_Above_EMA26());
+//                add(new Long_ScreenTwo_ADX_AdaptiveAbove(14, 50, 1.2));
+//            } else {
+//                // в остальных случаях (медвежье + боковик) - жёсткий фильтр Элдера
+//                add(new Long_ScreenTwo_StrictTrendCheck());
+//                add(new Long_ScreenOne_EMA_ThreeAscending()); // тут нужны дневные котировки
+//            }
 
-            // дальше работаем с дневными котировками только
+            // фильтруем дальше
             add(new Long_ScreenTwo_MACD_ThreeBelowZeroAndAscending());
             add(new Long_ScreenTwo_Stoch_D_ThreeAscending());
             add(new Long_ScreenTwo_Stoch_D_K_ThreeAscendingFromOversold());

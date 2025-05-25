@@ -1,14 +1,14 @@
 package com.kishlaly.ta;
 
 import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_1;
-import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_2;
-import com.kishlaly.ta.analyze.tasks.blocks.groups.ThreeDisplays_Buy_4;
+import com.kishlaly.ta.analyze.testing.sl.StopLossFixedPrice;
+import com.kishlaly.ta.analyze.testing.tp.TakeProfitFixedKeltnerTop;
 import com.kishlaly.ta.model.SymbolsSource;
 import com.kishlaly.ta.model.Timeframe;
 import com.kishlaly.ta.utils.Context;
-import com.kishlaly.ta.utils.RunUtils;
 
-import static com.kishlaly.ta.cache.CacheBuilder.buildCache;
+import static com.kishlaly.ta.analyze.TaskType.THREE_DISPLAYS_BUY;
+import static com.kishlaly.ta.analyze.testing.TaskTester.testOneStrategy;
 import static com.kishlaly.ta.cache.CacheReader.getSymbols;
 import static com.kishlaly.ta.utils.RunUtils.singleSymbol;
 
@@ -26,7 +26,12 @@ public class Main {
         singleSymbol("A"); // for single test
         Context.symbols = getSymbols();
         //buildCache(Context.basicTimeframes, false);
-        RunUtils.testOneStrategy_(new ThreeDisplays_Buy_1());
+        testOneStrategy(
+                Context.basicTimeframes,
+                THREE_DISPLAYS_BUY,
+                new ThreeDisplays_Buy_1(),
+                new StopLossFixedPrice(0.27),
+                new TakeProfitFixedKeltnerTop(80));
 
     }
 }

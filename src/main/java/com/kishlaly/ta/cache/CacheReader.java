@@ -181,6 +181,8 @@ public class CacheReader {
                 return IndicatorUtils.buildBollingerBands(symbol, quotes);
             case EFI:
                 return IndicatorUtils.buildEFI(symbol, quotes);
+            case ADX:
+                return IndicatorUtils.buildADX(symbol, quotes, 14);
             default:
                 return Collections.emptyList();
         }
